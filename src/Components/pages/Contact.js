@@ -1,0 +1,69 @@
+import React from 'react';
+
+export default function Contact() {
+    return (
+        
+            <main className="main">
+                <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
+                    <div className="container">
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li className="breadcrumb-item"><a href="#">Pages</a></li>
+                            <li className="breadcrumb-item active" aria-current="page">Contact us 2</li>
+                        </ol>
+                    </div>
+                </nav>
+
+                <div className="page-content">
+                    <div id="map" className="mb-5"></div>
+
+
+
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-4">
+                                <div className="contact-box text-center">
+                                    <h3>Office</h3>
+
+                                    <address>1 New York Plaza, New York, <br/>NY 10004, USA</address>
+                                </div>
+                            </div>
+
+                            <div className="col-md-4">
+                                <div className="contact-box text-center">
+                                    <h3>Start a Conversation</h3>
+
+                                    <div><a href="mailto:#">info@Molla.com</a></div>
+                                    <div><a href="tel:#">+1 987-876-6543</a>, <a href="tel:#">+1 987-976-1234</a></div>
+                                </div>
+                            </div>
+
+                            <div className="col-md-4">
+                                <div className="contact-box text-center">
+                                    <h3>Social</h3>
+
+                                    <div className="social-icons social-icons-color justify-content-center">
+                                        <a href="#" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                                        <a href="#" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                                        <a href="#" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                                        <a href="#" className="social-icon social-youtube" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
+                                        <a href="#" className="social-icon social-pinterest" title="Pinterest" target="_blank"><i className="icon-pinterest"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr className="mt-3 mb-5 mt-md-1"/>
+
+
+
+                        
+                    </div>
+
+
+                    
+                </div>
+                <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
+            </main>
+    )
+}
