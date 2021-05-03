@@ -2,6 +2,7 @@ import React, {useContext, useEffect}from 'react';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const News = observer(() =>{
     const {product} = useContext(Context)
@@ -30,7 +31,8 @@ const News = observer(() =>{
                             
                             
                             {product.blog.map((blog, index) =>
-                            <div className="entry-item lifestyle shopping col-sm-6" key={index}  onClick={() =>history.push()}>
+                            <div className="entry-item lifestyle shopping col-sm-6" key={index}  >
+                                <Link to={{pathname: '/single/'+ blog.id}}>
                                 <article className="entry entry-grid text-center">
                                     <figure className="entry-media">
                                         <a href="single.html">
@@ -64,6 +66,7 @@ const News = observer(() =>{
                                         </div>
                                     </div>
                                 </article>
+                                </Link>
                             </div>)}
                         </div>
 

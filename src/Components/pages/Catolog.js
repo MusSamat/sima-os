@@ -1,19 +1,18 @@
 import { observer } from 'mobx-react-lite';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Context } from '../../index';
-import { useHistory } from 'react-router';
-import { PRODUCT_ROUTE } from '../../utils/Const';
+import { Link } from 'react-router-dom';
 
 
 const  Catolog = observer(() => {
     const {product} = useContext(Context)
-    const history = useHistory()
+
+    
     
     useEffect(() => {
         
         product.fetchTodo()
-        console.log(history)
-      }, []);
+      }, [product]); 
     return (
         <div>
              <main className="main">
@@ -55,42 +54,47 @@ const  Catolog = observer(() => {
 
                                 <div className="products mb-3">
                                     <div className="row justify-content-center">
+                                        
                                         {product.products.map((prod, index) => 
-                                        <div className="col-6 col-md-4 col-lg-4 col-xl-3" key={index} onClick={() => history.push(PRODUCT_ROUTE + '/' + prod.id)}>
-                                            <div className="product product-7 text-center">
-                                                
-                                                    <figure className="product-media">
-                                                        
-                                                            <img src={`${process.env.REACT_APP_BASE_URL}${prod.images[2]}`} alt="Product image" className="product-image"/>
-                                                        
-                                                        
+                                        
+                                            <div className="col-6 col-md-4 col-lg-4 col-xl-3"  >
+                                                <div className="product product-7 text-center">
+                                                    <Link to={{pathname: '/product/'+prod.id}} key={index}>
+                                                        <figure className="product-media" >
+                                                            
+                                                                <img src={`${process.env.REACT_APP_BASE_URL}${prod.images[0]}`} alt="Product image" className="product-image"/>
+                                                            
+                                                            
 
-                                                        <div className="product-action-vertical">
-                                                            <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                                            <a href="popup/quickView.html" className="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                                            <a href="#" className="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                                                        </div>
+                                                            <div className="product-action-vertical">
+                                                                <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                                                <a href="popup/quickView.html" className="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                                                                <a href="#" className="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                                            </div>
 
-                                                        <div className="product-action">
-                                                            <a href="#" className="btn-product btn-cart"><span>add to cart</span></a>
-                                                        </div>
-                                                    </figure>
+                                                            <div className="product-action">
+                                                                <a href="#" className="btn-product btn-cart"><span>add to cart</span></a>
+                                                            </div>
+                                                        </figure>
+                                                        
                                                     
-                                                
 
-                                                <div className="product-body">
-                                                    <h3 className="product-title"><a href="product.html">{prod.title}</a></h3>
-                                                    <div className="product-price">
-                                                        {prod.price}
+                                                    <div className="product-body">
+                                                        <h3 className="product-title"><a href="product.html">{prod.title}</a></h3>
+                                                        <div className="product-price">
+                                                            {prod.price}
+                                                        </div>
+                                                        <div className="ratings-container">
+                                                            <span className="ratings-text">{prod.size}</span>
+                                                        </div>
+                                                        
                                                     </div>
-                                                    <div className="ratings-container">
-                                                        <span className="ratings-text">{prod.size}</span>
-                                                    </div>
-                                                    
+                                                    </Link>
                                                 </div>
                                             </div>
-                                        </div>
-                                        )}  
+                                         
+                                        )} 
+                                        
                                     </div>
                                 </div>
 

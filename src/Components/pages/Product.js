@@ -1,14 +1,16 @@
 import { observer } from 'mobx-react-lite';
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect} from 'react';
 import { Context } from '../../index';
 
-const Product = observer(() => {
+const Product = observer(({match}) => {
     const {product} = useContext(Context)
+    const id = match.params.id
 
+    
+    
     useEffect(() => {
-        
-        product.getData()
-        console.log(product.getData())
+        product.getData(id)
+        // product.addProduct(product.index)
       }, [])
     return (
         <div>
@@ -39,12 +41,12 @@ const Product = observer(() => {
                     <div className="container">
                         <div className="product-details-top mb-2">
                             
-                            {product.products.map((item, index)=>
-                                <div className="row" key={index}>
+                            {/* {product.loadest.map((item, index)=> */}
+                                <div className="row">
                                     <div className="col-md-6">
                                         <div className="product-gallery">
                                             <figure className="product-main-image">
-                                                <img id="product-zoom" src={`${process.env.REACT_APP_BASE_URL}${item.images[2]}`} data-zoom-image="assets/images/products/single/extended/3-big.jpg" alt="product image"/>
+                                                <img id="product-zoom" src={`${process.env.REACT_APP_BASE_URL}${product.product?.images[0]}`} data-zoom-image="assets/images/products/single/extended/3-big.jpg" alt="product image"/>
 
                                                 <a href="#" id="btn-product-gallery" className="btn-product-gallery">
                                                     <i className="icon-arrows"></i>
@@ -52,21 +54,11 @@ const Product = observer(() => {
                                             </figure>
 
                                         <div id="product-zoom-gallery" className="product-image-gallery">
-                                            <a className="product-gallery-item" href="#" data-image="assets/images/products/single/extended/1.jpg" data-zoom-image="assets/images/products/single/extended/1-big.jpg">
-                                                <img src="assets/images/products/single/extended/1-small.jpg" alt="product side"/>
-                                            </a>
-
-                                            <a className="product-gallery-item" href="#" data-image="assets/images/products/single/extended/2.jpg" data-zoom-image="assets/images/products/single/extended/2-big.jpg">
-                                                <img src="assets/images/products/single/extended/2-small.jpg" alt="product cross"/>
-                                            </a>
-
-                                            <a className="product-gallery-item active" href="#" data-image="assets/images/products/single/extended/3.jpg" data-zoom-image="assets/images/products/single/extended/3-big.jpg">
-                                                <img src="assets/images/products/single/extended/3-small.jpg" alt="product with model"/>
-                                            </a>
-
-                                            <a className="product-gallery-item" href="#" data-image="assets/images/products/single/extended/4.jpg" data-zoom-image="assets/images/products/single/extended/4-big.jpg">
-                                                <img src="assets/images/products/single/extended/4-small.jpg" alt="product back"/>
-                                            </a>
+                                            {product.images.map((img, index) =>
+                                                <a className="product-gallery-item" key={index} href="#" data-image="assets/images/products/single/extended/1.jpg" data-zoom-image="assets/images/products/single/extended/1-big.jpg">
+                                                    <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
+                                                </a>
+                                            )}
 
                                         </div>
                                     </div>
@@ -74,7 +66,7 @@ const Product = observer(() => {
 
                                 <div className="col-md-6">
                                     <div className="product-details">
-                                        <h1 className="product-title">Yellow tie strap block heel sandals</h1>
+                                        <h1 className="product-title">{product.product.title}</h1>
 
                                         <div className="ratings-container">
                                             <div className="ratings">
@@ -84,11 +76,11 @@ const Product = observer(() => {
                                         </div>
 
                                         <div className="product-price">
-                                            $70.00
+                                            {product.product.price}
                                         </div>
 
                                         <div className="product-content">
-                                            <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus. </p>
+                                            <p>{product.product.description} </p>
                                         </div>
 
                                         <div className="details-filter-row details-row-size">
@@ -106,11 +98,10 @@ const Product = observer(() => {
                                             <label for="size">Size:</label>
                                             <div className="select-custom">
                                                 <select name="size" id="size" className="form-control">
-                                                    <option value="#" selected="selected">Select a size</option>
-                                                    <option value="s">Small</option>
-                                                    <option value="m">Medium</option>
-                                                    <option value="l">Large</option>
-                                                    <option value="xl">Extra Large</option>
+                                                    {product.size.map((size, index)=>
+                                                        <option key={index} value="#" selected="selected">{size}</option>
+                                                    )}
+                                                    
                                                 </select>
                                             </div>
 
@@ -125,7 +116,7 @@ const Product = observer(() => {
                                         </div>
 
                                         <div className="product-details-action">
-                                            <a href="#" className="btn-product btn-cart"><span>add to cart</span></a>
+                                            <a href="#" className="btn-product btn-cart"><span >add to cart</span></a>
 
                                             <div className="details-action-wrapper">
                                                 <a href="#" className="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
@@ -152,11 +143,12 @@ const Product = observer(() => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>)}
+                            </div>
+                            {/* )} */}
                         </div>
                     </div>
 
-                    <div className="product-details-tab product-details-extended">
+                    {/* <div className="product-details-tab product-details-extended">
                         <div className="container">
                             <ul className="nav nav-pills justify-content-center" role="tablist">
                                 <li className="nav-item">
@@ -323,7 +315,7 @@ const Product = observer(() => {
                         </div>
                     </div>
 
-                    
+                    <h1></h1> */}
                     </div>
 
 

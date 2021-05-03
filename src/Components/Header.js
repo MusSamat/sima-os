@@ -1,12 +1,48 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
-import {ABOUT_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE } from "../utils/Const";
+import {ABOUT_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE } from "../utils/Const";
+import "../App.css";
 
 
 function Header() {
   return (
       <div className="App" >
+            
+
+
              <header className="header" style={{position: "fixed", marginTop: "0px", marginLeft: "0px", zIndex: "999"}}>
+             <div className="header-top">
+                 <div className="container eki">
+                    <div className="header-left">
+                        <div className="header-dropdown">
+                            
+                            <div className="header lefft">
+                            <a href="#">Bishkeke</a>
+                                
+                            </div>
+                        </div><br/>
+
+                        <div className="header">
+                            <a href="#">+996709999915</a>
+                        </div>
+                    </div>
+
+                    <div className="header-right">
+                        <ul className="top-menu">
+                            <li>
+                                <a href="#">Links</a>
+                                <ul>
+                                    <li><NavLink className="sf-with" to={LOGIN_ROUTE}><i className="icon-user"></i>Login</NavLink></li>
+                                    {/* <li><a href="#signin-modal" data-toggle="modal"></a></li> */}
+                                    <li><a href="contact.html">info@Molla.com</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+
+
                 <div className="header-bottom sticky-header">
                   <div className="container">
                     <div className="header-left">
@@ -14,33 +50,36 @@ function Header() {
                             {/* <span classNameNmae="sr-only">Toggle mobile menu</span> */}
                             <i className="icon-bars"></i>
                         </button>
-                        
-                        <a href="index.html" className="logo">
+                        <NavLink className="logo" to={HOME_ROUTE}>
+                            <h3 style={{marginTop: "18px"}}>SIMA</h3>
+                        </NavLink>
+                        {/* <a href="index.html" className="logo">
                             <img src="assets/images/demos/demo-8/logo.png" alt="Molla Logo" width="82" height="20"/>
-                        </a>
+                            <h3 style={{marginTop: "18px"}}>SIMA</h3>
+                        </a> */}
                     </div>
                     <div className="header-center">
                         <nav className="main-nav">
                             <ul className="menu sf-arrows">
-                                <li className="megamenu-container active">
-                                    <NavLink className="sf-with-ul" to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
+                                <li className="megamenu-container">
+                                    <NavLink className="sf-with" to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
                                 </li>
-                                <li>
-                                    <NavLink className="sf-with-ul" to={CATALOG_ROUTE}>КАТАЛОГ</NavLink>
+                                <li className="megamenu-container ">
+                                    <NavLink className="sf-with" to={CATALOG_ROUTE}>КАТАЛОГ</NavLink>
                                 </li>
-                                <li>
-                                    <NavLink className="sf-with-ul" to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
+                                <li className="megamenu-container ">
+                                    <NavLink className="sf-with" to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
                                 </li>
-                                <li>
-                                    <NavLink className="sf-with-ul" to={CONTACT_ROUTE}>КОНТАКТЫ</NavLink>
+                                <li className="megamenu-container ">
+                                    <NavLink className="sf-with" to={CONTACT_ROUTE}>КОНТАКТЫ</NavLink>
 
                                 </li>
-                                <li>
-                                    <NavLink className="sf-with-ul" to={NEWS_ROUTE}>НОВОСТИ</NavLink>
+                                <li className="megamenu-container ">
+                                    <NavLink className="sf-with" to={NEWS_ROUTE}>НОВОСТИ</NavLink>
 
-                                </li>
-                                <li>
-                                    <NavLink className="sf-with-ul" to={ABOUT_ROUTE}>О КОМПАНИЯ</NavLink>
+                                </li >
+                                <li className="megamenu-container ">
+                                    <NavLink className="sf-with" to={ABOUT_ROUTE}>О КОМПАНИЯ</NavLink>
 
                                 </li>
                             </ul>

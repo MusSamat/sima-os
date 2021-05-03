@@ -1,6 +1,15 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite';
+import React, {useContext, useEffect} from 'react'
+import { Context } from '../../index';
 
-export default function Cart() {
+ const Cart = observer(() => {
+    const {product} = useContext(Context)
+
+    // useEffect(() => {
+        
+    //     product.addProduct()
+
+    //   }, [])
     return (
         <div>
             <main class="main">
@@ -155,4 +164,6 @@ export default function Cart() {
                 <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
         </div>
     )
-}
+})
+
+export default Cart;

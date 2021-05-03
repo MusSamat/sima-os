@@ -1,6 +1,26 @@
-.App {
+.App1 {
     text-align: center;
     background-image: url("https://www.adweek.com/wp-content/uploads/2020/03/behr-zoom-background-1-2020.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+  }
+
+  .eki {
+    display: flex;
+    justify-content: space-between;
+  }
+  .lefft{
+    margin-right: 15px;
+  }
+
+  .icon-box-content1 {
+    border-radius: 50%;
+    background: black;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    size: 16px;
   }
