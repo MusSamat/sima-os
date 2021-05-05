@@ -10,16 +10,19 @@ export default class ProductStore {
         this.images = []
         this.size = []
         this.count = 0
+        this.category = []
 
         makeAutoObservable(this)
     }
 
-    async fetchTodo() {
-    await  axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`)
+     fetchTodo() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`)
             .then(res => {
                
                 this.products = [ ...res.data]
                 this.products = this.products
+                this.category = this.products.category
+                console.log(this.products)
             })
             .catch((e)=>{
                 console.error(e)
@@ -37,12 +40,14 @@ export default class ProductStore {
 
     getData(id) {
         console.log(id)
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/` + id)
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/` + id)
             .then(response => {
                 this.product = response.data
-                console.log(this.product)
                 this.images = this.product.images
                 this.size = this.product.size
+                this.category = this.product.category
+
+                
 
             })
             .catch((e)=>{

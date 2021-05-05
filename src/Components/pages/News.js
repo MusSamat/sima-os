@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import "../../App.css";
 
 const News = observer(() =>{
     const {product} = useContext(Context)
@@ -32,41 +33,50 @@ const News = observer(() =>{
                             
                             {product.blog.map((blog, index) =>
                             <div className="entry-item lifestyle shopping col-sm-6" key={index}  >
-                                <Link to={{pathname: '/single/'+ blog.id}}>
+                                
                                 <article className="entry entry-grid text-center">
-                                    <figure className="entry-media">
-                                        <a href="single.html">
-                                            <img src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
-                                        </a>
+                                    <figure  className="entry-media">
+                                            <img className="news_image" src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
                                     </figure>
 
                                     <div className="entry-body">
-                                        <div className="entry-meta">
-                                            <span className="entry-author">
-                                                by <a href="#"></a>
-                                            </span>
-                                            <span className="meta-separator">|</span>
-                                            <a href="#">Nov 22, 2018</a>
-                                            <span className="meta-separator">|</span>
-                                            <a href="#">2 Comments</a>
-                                        </div>
+                                        
 
-                                        <h2 className="entry-title">
-                                            <a href="single.html">{blog.title}</a>
-                                        </h2>
+                                        <h6 className="entry-title">
+                                           {blog.title}
+                                        </h6>
 
                                         <div className="entry-cats">
-                                            in <a href="#">Lifestyle</a>,
-                                            <a href="#">Shopping</a>
+                                            admin <a> в категорию </a>,
+                                            <a href="#">Новости</a>
                                         </div>
 
-                                        <div className="entry-content">
-                                            <p>{blog.description}</p>
-                                            <a href="single.html" className="read-more">Continue Reading</a>
+                                        <div className="entry-content" >
+                                            <p style={{textAlign: "left"}}>{blog.description}</p>
+                                            <div className="entry-meta" style={{display: "flex"}}>
+                                                <span className="entry-author">
+                                                Добавленно <a href="#"></a>
+                                                </span>
+                                                <span className="meta-separator">|</span>
+                                                <a href="#">Apr 28, 2021</a>
+                                                <span className="meta-separator">|</span>
+                                                <a href="#"></a>
+                                                admin <a> в категорию </a>,
+                                                <a href="#">Новости</a>
+                                            </div>
+                                            <Link to={{pathname: '/single/'+ blog.id}}>
+                                                <div className="col-12 ">
+                                                    <div className="btn-wrap">
+                                                        <button style={{}} className="btn btn-outline-dark btn-round">подробнее</button>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </Link>
                                         </div>
+                                       
                                     </div>
                                 </article>
-                                </Link>
+                                
                             </div>)}
                         </div>
 

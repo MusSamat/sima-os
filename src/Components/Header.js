@@ -5,6 +5,7 @@ import "../App.css";
 
 
 function Header() {
+    
   return (
       <div className="App" >
             
@@ -17,7 +18,7 @@ function Header() {
                         <div className="header-dropdown">
                             
                             <div className="header lefft">
-                            <a href="#">Bishkeke</a>
+                            <a href="#">Bishkek</a>
                                 
                             </div>
                         </div><br/>
@@ -79,7 +80,7 @@ function Header() {
 
                                 </li >
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" to={ABOUT_ROUTE}>О КОМПАНИЯ</NavLink>
+                                    <NavLink className="sf-with" to={ABOUT_ROUTE}>О КОМПАНИИ</NavLink>
 
                                 </li>
                             </ul>

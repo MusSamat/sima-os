@@ -3,93 +3,76 @@ import React from 'react'
 export default function Footer() {
     return (
         <div>
-            <footer class="footer footer-2">
-                <div class="footer-middle">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12 col-lg-6">
-                                <div class="widget widget-about">
-                                    <img src="assets/images/demos/demo-8/logo-footer.png" class="footer-logo" alt="Footer Logo" width="82" height="25"/>
-                                    <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
+            <footer className="footer footer-2">
+                <div className="footer-middle">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-12 col-lg-4">
+                                <div className="widget widget-about">
+                                    <h4 className="widget-title">ДОБРО ПОЖАЛОВАТЬ</h4>
+                                    <h2 className="widget-title">SIMA</h2>
+                                    {/* <img src="assets/images/demos/demo-8/logo-footer.png" className="footer-logo" alt="Footer Logo" width="82" height="25"/> */}
+                                    <h6 className="widget-list">Кыргызстан, 720011 г. Бишкек,</h6>
+                                    <h6 className="widget-list"> ул. Абдрахманова 219</h6>
                                     
-                                    <div class="widget-about-info">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-4">
-                                                <span class="widget-about-title">Got Question? Call us 24/7</span>
-                                                <a href="tel:123456789">+0123 456 789</a>
-                                            </div>
-                                            <div class="col-sm-6 col-md-8">
-                                                <span class="widget-about-title">Payment Method</span>
-                                                <figure class="footer-payments">
-                                                    <img src="assets/images/payments.png" alt="Payment methods" width="272" height="20"/>
-                                                </figure>
+                                    <div className="widget-about-info">
+                                        <div className="row">
+                                            <div className="col-sm-6 col-md-4">
+                                                <a href="tel:+996709999915">+996709999915</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 col-lg-2">
-                                <div class="widget">
-                                    <h4 class="widget-title">Information</h4>
+                            <div className="col-sm-12 col-lg-4">
+                                <div className="widget">
+                                    <h4 className="widget-title">НАШИ НОВОСТИ</h4>
 
-                                    <ul class="widget-list">
-                                        <li><a href="about.html">About Molla</a></li>
-                                        <li><a href="#">How to shop on Molla</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="contact.html">Contact us</a></li>
-                                        <li><a href="login.html">Log in</a></li>
+                                    <ul className="widget-list">
+                                        <li style={{ fontSize: "16px"}}><a href="about.html">Оплата не выходя из дома.</a></li>
+                                        <li style={{ fontSize: "16px"}}><a href="#">Почему клиенты выбирают нас</a></li>
+                                        <li style={{ fontSize: "16px"}}><a href="faq.html">Удобная мобильная версия.</a></li>
+                                        <li style={{ fontSize: "16px"}}><a href="contact.html">«Предприятие лидер Евразийского Союза Государств»</a></li>
+                                        <li style={{ fontSize: "16px"}}><a href="login.html">«Diva style» на выставках Текстильлегпром</a></li>
                                     </ul>
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 col-lg-2">
-                                <div class="widget">
-                                    <h4 class="widget-title">Customer Service</h4>
+                            <div className="col-sm-12 col-lg-4">
+                                <div className="widget">
+                                    <h4 className="widget-title">МЕНЮ</h4>
 
-                                    <ul class="widget-list">
-                                        <li><a href="#">Payment Methods</a></li>
-                                        <li><a href="#">Money-back guarantee!</a></li>
-                                        <li><a href="#">Returns</a></li>
-                                        <li><a href="#">Shipping</a></li>
-                                        <li><a href="#">Terms and conditions</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
+                                    <ul className="widget-list">
+                                        <li style={{fontSize: "16px"}}><a href="#">Главная</a></li>
+                                        <li style={{ fontSize: "16px"}}><a href="#">Каталог</a></li>
+                                        <li style={{ fontSize: "16px"}}><a href="#">Доставка</a></li>
+                                        <li style={{ fontSize: "16px"}}><a href="#">Контакты</a></li>
+                                        <li style={{fontSize: "16px"}}><a href="#">Новости</a></li>
+                                        <li style={{ fontSize: "16px"}}><a href="#">О компании</a></li>
                                     </ul>
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 col-lg-2">
-                                <div class="widget">
-                                    <h4 class="widget-title">My Account</h4>
-
-                                    <ul class="widget-list">
-                                        <li><a href="#">Sign In</a></li>
-                                        <li><a href="cart.html">View Cart</a></li>
-                                        <li><a href="#">My Wishlist</a></li>
-                                        <li><a href="#">Track My Order</a></li>
-                                        <li><a href="#">Help</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
 
-                <div class="footer-bottom">
-                    <div class="container">
-                        <p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p>
-                        <ul class="footer-menu">
-                            <li><a href="#">Terms Of Use</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                <div className="footer-bottom">
+                    <div className="container">
+                        <p style={{ fontSize: "14px", marginTop:"2px", marginRight: "15px"}}>ШВЕЙНАЯ ФАБРИКА SIMA © 2021</p>
+                        <ul className="footer-menu">
+                            <li style={{ fontSize: "14px"}}><a href="#">РАЗРАБОТКА САЙТА:</a></li>
+                            <li style={{ fontSize: "14px"}}><a href="#">АКМАТАЛИЕВ БАЯСТАН</a></li>
                         </ul>
 
-                        <div class="social-icons social-icons-color">
-                            <span class="social-label">Social Media</span>
-                            <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                            <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                            <a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                            <a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
-                            <a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                        <div className="social-icons social-icons-color">
+                            <a style={{fontSize: "20px"}} href="#" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                            <a style={{fontSize: "20px"}} href="#" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                            <a style={{fontSize: "20px"}} href="#" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                            <a style={{fontSize: "20px"}} href="#" className="social-icon social-youtube" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
+                            
                         </div>
                     </div>
                 </div>

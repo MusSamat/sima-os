@@ -9,8 +9,27 @@ const Product = observer(({match}) => {
     
     
     useEffect(() => {
-        product.getData(id)
+        product.getData(id).then(() => {
+            const scripts = [
+                '/assets/js/jquery.elevateZoom.min.js',
+                '/assets/js/bootstrap-input-spinner.js',
+                '/assets/js/jquery.magnific-popup.min.js',
+                '/assets/js/main.js'
+            ]
+            scripts.forEach(i => {
+                const s = document.createElement('script')
+                s.src = i
+                document.body.appendChild(s)
+            })
+        })
         // product.addProduct(product.index)
+        return () => {
+            const elements = document.getElementsByClassName('zoomContainer')
+            while(elements.length > 0){
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+        }
+
       }, [])
     return (
         <div>
@@ -46,16 +65,16 @@ const Product = observer(({match}) => {
                                     <div className="col-md-6">
                                         <div className="product-gallery">
                                             <figure className="product-main-image">
-                                                <img id="product-zoom" src={`${process.env.REACT_APP_BASE_URL}${product.product?.images[0]}`} data-zoom-image="assets/images/products/single/extended/3-big.jpg" alt="product image"/>
+                                                <img id="product-zoom" src={`${process.env.REACT_APP_BASE_URL}${product.product?.images[0]}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${product.product?.images[0]}`} alt="product image"/>
 
-                                                <a href="#" id="btn-product-gallery" className="btn-product-gallery">
+                                                <a href={`${process.env.REACT_APP_BASE_URL}${product.product?.images[0]}`} id="btn-product-gallery" className="btn-product-gallery">
                                                     <i className="icon-arrows"></i>
                                                 </a>
                                             </figure>
 
                                         <div id="product-zoom-gallery" className="product-image-gallery">
                                             {product.images.map((img, index) =>
-                                                <a className="product-gallery-item" key={index} href="#" data-image="assets/images/products/single/extended/1.jpg" data-zoom-image="assets/images/products/single/extended/1-big.jpg">
+                                                <a className="product-gallery-item" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
                                                     <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
                                                 </a>
                                             )}
@@ -84,18 +103,11 @@ const Product = observer(({match}) => {
                                         </div>
 
                                         <div className="details-filter-row details-row-size">
-                                            <label>Color:</label>
-
-                                            <div className="product-nav product-nav-dots">
-                                                <a href="#" className="active" style={{background: "#eab656;"}}><span className="sr-only">Color name</span></a>
-                                                <a href="#" style={{background: "#333333;"}}><span className="sr-only">Color name</span></a>
-                                                <a href="#" style={{background: "#3a588b;"}}><span className="sr-only">Color name</span></a>
-                                                <a href="#" style={{background: "#caab97;"}}><span className="sr-only">Color name</span></a>
-                                            </div>
+                                            
                                         </div>
 
                                         <div className="details-filter-row details-row-size">
-                                            <label for="size">Size:</label>
+                                            <label for="size">Размер:</label>
                                             <div className="select-custom">
                                                 <select name="size" id="size" className="form-control">
                                                     {product.size.map((size, index)=>
@@ -104,37 +116,33 @@ const Product = observer(({match}) => {
                                                     
                                                 </select>
                                             </div>
-
-                                            <a href="#" className="size-guide"><i className="icon-th-list"></i>size guide</a>
                                         </div>
 
                                         <div className="details-filter-row details-row-size">
-                                            <label for="qty">Qty:</label>
+                                            <label for="qty">КОЛ-ВО:</label>
                                             <div className="product-details-quantity">
                                                 <input type="number" id="qty" className="form-control" value="5" min="1" max="100" step="5" data-decimals="0" required/>
                                             </div>
                                         </div>
 
                                         <div className="product-details-action">
-                                            <a href="#" className="btn-product btn-cart"><span >add to cart</span></a>
+                                            <a href="#" className="btn-product btn-cart"><span >В КОРЗИНУ</span></a>
 
                                             <div className="details-action-wrapper">
-                                                <a href="#" className="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
-                                                <a href="#" className="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a>
+                                                <a style={{fontSize: "30px"}} href="#" className="btn-product btn-wishlist" title="Wishlist"></a>
                                             </div>
                                         </div>
 
                                         <div className="product-details-footer">
                                             <div className="product-cat">
-                                                <span>Category:</span>
-                                                <a href="#">Women</a>,
-                                                <a href="#">Shoes</a>,
-                                                <a href="#">Sandals</a>,
-                                                <a href="#">Yellow</a>
+                                                <span>Категория :</span>
+                                                <a href="#">МАГАЗИН /</a>
+                                                <a href="#">{product.product.category} / </a>
+                                                <a href="#">{product.product.title}</a>
                                             </div>
 
                                             <div className="social-icons social-icons-sm">
-                                                <span className="social-label">Share:</span>
+                                                <span className="social-label">ПОДЕЛИТЬСЯ:</span>
                                                 <a href="#" className="social-icon" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
                                                 <a href="#" className="social-icon" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
                                                 <a href="#" className="social-icon" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>

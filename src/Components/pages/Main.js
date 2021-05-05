@@ -45,15 +45,16 @@ export default function Main() {
                 
                 <div className="mb-7"></div>
                 <div className="container">
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center" style={{paddingLeft: "60px"}}>
                             <div className="col-lg-3 col-sm-6">
                                 <div className="icon-box text-center1">
                                     
                                     <div className="icon-box-content1">
-                                        
-                                        <Clock format={'HH:mm:ss'} ticking={true} timezone={'Asia/Bishkek'} />
+                                    <div className="clock">
+                                        <Clock format={'HH:mm'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}}  ticking={true} timezone={'Asia/Bishkek'} />
+                                        </div>
                                     </div>
-                                    <h4>Bishkek</h4>
+                                    <h4 className="city">Bishkek</h4>
                                 </div>
                                 
                             </div>
@@ -62,11 +63,11 @@ export default function Main() {
                                 <div className="icon-box text-center1">
                                     
                                     <div className="icon-box-content1">
-                                        
-                                        <Clock format={'HH:mm:ss'} ticking={true} timezone={'Europe/Moscow'} />
-                                        
+                                    <div className="clock">
+                                        <Clock format={'HH:mm'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}}  ticking={true} timezone={'Europe/Moscow'} />
+                                        </div>
                                     </div>
-                                    <h4>Moscow</h4>
+                                    <h4 className="city">Moscow</h4>
                                 </div>
                             </div>
 
@@ -74,20 +75,23 @@ export default function Main() {
                                 <div className="icon-box text-center1">
                                     
                                     <div className="icon-box-content1">
-                                       
-                                        <Clock format={'HH:mm:ss'} ticking={true} timezone={'Asia/Tashkent'} />
-                                       
-                                    </div> <h4>Tashkent</h4>
+                                        <div className="clock">
+                                            <Clock  format={'HH:mm'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}}  ticking={true} timezone={'Asia/Tashkent'} />
+                                        </div>
+                                    </div>
+                                     <h4 className="city">Tashkent</h4>
                                 </div>
                             </div>
 
-                            <div className="col-lg-3 col-sm-6">
+                            <div sty className="col-lg-3 col-sm-6">
                                 <div className="icon-box text-center1">
                                     
                                     <div className="icon-box-content1">
-                                        <Clock format={'HH:mm:ss'} ticking={true} timezone={'Asia/Yekaterinburg'} />
-                                        
-                                    </div><h4>Yekaterinburg</h4>
+                                    <div className="clock">
+                                        <Clock format={'HH:mm'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}} ticking={true} timezone={'Asia/Yekaterinburg'} />
+                                        </div>
+                                    </div>
+                                    <h4 className="city">Samara</h4>
                                 </div>
                             </div>
                         </div>

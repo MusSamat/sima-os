@@ -57,31 +57,38 @@ export default function Contact() {
                         <div className="row">
                             <div className="col-md-4">
                                 <div className="contact-box text-center">
-                                    <h3>Office</h3>
+                                    <h5>Адрес:</h5>
 
-                                    <address>1 New York Plaza, New York, <br/>NY 10004, USA</address>
+                                    <address>Кыргызстан,  720016 г. Бишкек, <br/>ул. Абдрахманова 219</address>
+
+                                    <h5>Рынок «Дордой»</h5>
+                                    <p>9 проход конт. 893/12</p>
+                                    <p>+996 (312) 90 75 46</p>
                                 </div>
                             </div>
 
                             <div className="col-md-4">
                                 <div className="contact-box text-center">
-                                    <h3>Start a Conversation</h3>
+                                    <h5>Руководитель:</h5>
 
-                                    <div><a href="mailto:#">info@Molla.com</a></div>
-                                    <div><a href="tel:#">+1 987-876-6543</a>, <a href="tel:#">+1 987-976-1234</a></div>
+                                    <div><a href="mailto:#">+996 (553)32 05 32</a></div>
+                                    <div><a href="tel:#">W/app:+ 996 (772) 32 06 32</a>, <a href="tel:#"></a></div>
+                                    <h5>Менеджер:</h5>
+                                    <div><a href="mailto:#">+ 996 (700) 50 60 46</a></div>
+                                    <div><a href="tel:#">W/app: +996 (557) 63 33 35</a>, <a href="tel:#"></a></div>
                                 </div>
                             </div>
 
                             <div className="col-md-4">
                                 <div className="contact-box text-center">
-                                    <h3>Social</h3>
+                                    <h5>Социальное</h5>
 
-                                    <div className="social-icons social-icons-color justify-content-center">
-                                        <a href="#" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
-                                        <a href="#" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                                        <a href="#" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                                        <a href="#" className="social-icon social-youtube" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
-                                        <a href="#" className="social-icon social-pinterest" title="Pinterest" target="_blank"><i className="icon-pinterest"></i></a>
+                                    <div  className="social-icons social-icons-color justify-content-center">
+                                        <a style={{fontSize: "25px"}} href="#" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                                        <a style={{fontSize: "25px"}} href="#" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                                        <a style={{fontSize: "25px"}} href="#" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                                        <a style={{fontSize: "25px"}} href="#" className="social-icon social-youtube" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -4,15 +4,37 @@ import { Context } from '../../index';
 import { Link } from 'react-router-dom';
 
 
+
+
+
 const  Catolog = observer(() => {
     const {product} = useContext(Context)
-
     
     
     useEffect(() => {
         
-        product.fetchTodo()
-      }, [product]); 
+        product.fetchTodo().then(() => {
+            const scripts = [
+                '/assets/js/jquery.elevateZoom.min.js',
+                '/assets/js/bootstrap-input-spinner.js',
+                '/assets/js/jquery.magnific-popup.min.js',
+                '/assets/js/main.js',
+                '/assets/js/bootstrap-input-spinner.js',
+                '/assets/js/owl.carousel.min.js',
+                '/assets/js/superfish.min.js',
+                '/assets/js/jquery.waypoints.min.js',
+                '/assets/js/jquery.hoverIntent.min.js',
+                '/assets/js/bootstrap.bundle.min.js',
+                '/assets/js/jquery.min.js',
+            ]
+            scripts.forEach(i => {
+                const s = document.createElement('script')
+                s.src = i
+                document.body.appendChild(s)
+            })
+        })
+    
+      }, []); 
     return (
         <div>
              <main className="main">
@@ -33,19 +55,18 @@ const  Catolog = observer(() => {
                                 <div className="toolbox">
                                     <div className="toolbox-left">
                                         <div className="toolbox-info">
-                                            Showing <span>9 of 56</span> Products
-                                            <div>{process.env.REACT_APP_BASE_URL}</div>
+                                            ПРОСМОТР: <span>24 / 48 / 96 / ВСЕ</span> 
                                         </div>
                                     </div>
 
                                     <div className="toolbox-right">
                                         <div className="toolbox-sort">
-                                            <label for="sortby">Sort by:</label>
+                                            <label for="sortby"></label>
                                             <div className="select-custom">
                                                 <select name="sortby" id="sortby" className="form-control">
-                                                    <option value="popularity" selected="selected">Most Popular</option>
-                                                    <option value="rating">Most Rated</option>
-                                                    <option value="date">Date</option>
+                                                    <option value="popularity" selected="selected">ОТ ПОСЛЕДНЕГО</option>
+                                                    <option value="rating">ПО РЕЙТИНГУ</option>
+                                                    <option value="date">ПО ВОЗРАСТАНИЮ</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -73,19 +94,21 @@ const  Catolog = observer(() => {
                                                             </div>
 
                                                             <div className="product-action">
-                                                                <a href="#" className="btn-product btn-cart"><span>add to cart</span></a>
+                                                                <a href="#" className="btn-product btn-cart"><span>В КОРЗИНУ</span></a>
                                                             </div>
                                                         </figure>
                                                         
                                                     
 
                                                     <div className="product-body">
-                                                        <h3 className="product-title"><a href="product.html">{prod.title}</a></h3>
-                                                        <div className="product-price">
-                                                            {prod.price}
+                                                        <div style={{display: "flex", justifyContent: "space-between"}}>
+                                                            <h3 className="product-title"><a href="product.html">{prod.title}</a></h3>
+                                                            <div className="product-price">
+                                                                {prod.price} $
+                                                            </div>
                                                         </div>
                                                         <div className="ratings-container">
-                                                            <span className="ratings-text">{prod.size}</span>
+                                                            <span className="ratings-text"></span>
                                                         </div>
                                                         
                                                     </div>
@@ -121,14 +144,34 @@ const  Catolog = observer(() => {
                             <aside className="col-lg-3 order-lg-first">
                                 <div className="sidebar sidebar-shop">
                                     <div className="widget widget-clean">
-                                        <label>Filters:</label>
-                                        <a href="#" className="sidebar-filter-clear">Clean All</a>
+
+                                        
+                                        <div className="widget widget-collapsible">
+                                            <h3 className="widget-title">
+                                                <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                                                    ФИЛЬТР ПО ЦЕНЕ
+                                                </a>
+                                            </h3>
+
+                                            <div className="collapse show" id="widget-5">
+                                                <div className="widget-body">
+                                                    <div className="filter-price">
+                                                        <div className="filter-price-text">
+                                                            
+                                                            <span id="filter-price-range"></span>
+                                                        </div>
+
+                                                        <div id="price-slider"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="widget widget-collapsible">
                                         <h3 className="widget-title">
                                             <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
-                                                Category
+                                                Категория
                                             </a>
                                         </h3>
 
@@ -138,16 +181,16 @@ const  Catolog = observer(() => {
                                                     <div className="filter-item">
                                                         <div className="custom-control custom-checkbox">
                                                             <input type="checkbox" className="custom-control-input" id="cat-1"/>
-                                                            <label className="custom-control-label" for="cat-1">Dresses</label>
+                                                            <label className="custom-control-label" for="cat-1">ВЕСНА (2020)</label>
                                                         </div>
-                                                        <span className="item-count">3</span>
+                                                        <span className="item-count">(12)</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="widget widget-collapsible">
+                                    {/* <div className="widget widget-collapsible">
                                         <h3 className="widget-title">
                                             <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
                                                 Brand
@@ -166,7 +209,53 @@ const  Catolog = observer(() => {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div> */}
+                                    <div className="widget widget-collapsible">
+                                        <div className="collapse show" id="widget-4">
+                                            <div className="widget-body">
+                                                <div className="filter-items">
+                                                    
+
+                                                    
+
+                                                    
+
+                                                    <div className="filter-item">
+                                                        <div className="custom-control custom-checkbox">
+                                                            <input type="checkbox" className="custom-control-input" id="brand-7"/>
+                                                            <label className="custom-control-label" for="brand-7">Nike</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    <div className="widget widget-collapsible">
+                                        <h3 className="widget-title">
+                                            <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                                                Price
+                                            </a>
+                                        </h3>
+
+                                        <div className="collapse show" id="widget-5">
+                                            <div className="widget-body">
+                                                <div className="filter-price">
+                                                    <div className="filter-price-text">
+                                                        Price Range:
+                                                        <span id="filter-price-range">$0-$1000</span>
+                                                    </div>
+
+                                                    <div id="price-slider"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
 
                                     <div className="widget widget-collapsible">
                                         <h3 className="widget-title">
@@ -188,6 +277,12 @@ const  Catolog = observer(() => {
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div>
+                                        
+                                    </div>
+
+
                                 </div>
                             </aside>
                         </div>

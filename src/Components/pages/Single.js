@@ -38,13 +38,13 @@ const Single = observer(({match}) => {
 
                                     <div className="entry-body">
                                         <div className="entry-meta">
-                                            <span className="entry-author">
+                                            {/* <span className="entry-author">
                                                 by <a href="#">John Doe</a>
                                             </span>
                                             <span className="meta-separator">|</span>
                                             <a href="#">Nov 22, 2018</a>
                                             <span className="meta-separator">|</span>
-                                            <a href="#">2 Comments</a>
+                                            <a href="#">2 Comments</a> */}
                                         </div>
 
                                         <h2 className="entry-title">
@@ -52,8 +52,8 @@ const Single = observer(({match}) => {
                                         </h2>
 
                                         <div className="entry-cats">
-                                            in <a href="#">Lifestyle</a>,
-                                            <a href="#">Shopping</a>
+                                            {/* in <a href="#">Lifestyle</a>,
+                                            <a href="#">Shopping</a> */}
                                         </div>
 
                                         <div className="entry-content editor-content">
@@ -63,7 +63,7 @@ const Single = observer(({match}) => {
 
                                             <div className="pb-1"></div>
 
-                                            <img src="" alt="image" className="float-left"/>
+                                            {/* <img src="" alt="image" className="float-left"/> */}
 
                                             
 
@@ -77,7 +77,11 @@ const Single = observer(({match}) => {
                                 </article>
 
                                 
-                                <div className="related-posts">
+                                
+                                
+                                
+                                
+                                {/* <div className="related-posts">
                                     <h3 className="title">Related Posts</h3>
 
                                     <div className="owl-carousel owl-simple" data-toggle="owl" 
@@ -196,9 +200,9 @@ const Single = observer(({match}) => {
                                             </div>
                                         </article>
                                     </div>
-                                </div>
+                                </div> */}
 
-                                <div className="comments">
+                                {/* <div className="comments">
                                     <h3 className="title">3 Comments</h3>
 
                                     <ul>
@@ -270,8 +274,8 @@ const Single = observer(({match}) => {
                                             </div>
                                         </li>
                                     </ul>
-                                </div>
-                                <div className="reply">
+                                </div> */}
+                                {/* <div className="reply">
                                     <div className="heading">
                                         <h3 className="title">Leave A Reply</h3>
                                         <p className="title-desc">Your email address will not be published. Required fields are marked *</p>
@@ -298,7 +302,7 @@ const Single = observer(({match}) => {
                                             <i className="icon-long-arrow-right"></i>
                                         </button>
                                     </form>
-                                </div>
+                                </div> */}
                             </div>
 
                             

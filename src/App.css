@@ -21,6 +21,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: aliceblue;
+    color: #fff;
     size: 16px;
   }
+  .city{
+    margin-left: 20px;
+  }
+  .clock{
+    width: 120px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+  }
+
+  .entry-media{
+    float: none;
+    height: none;
+  }
+
+  .news_image{
+    height: 400px !important;
+    width: 100%;
+  }
+  .btn-round{
+    width: 400px;
+    font-size: 25px;
+    height: 35px;
+  }
+  .btn-round:hover{
+    color: #fff;
+    background-color: teal;
+  }
+  
