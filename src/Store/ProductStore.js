@@ -11,6 +11,10 @@ export default class ProductStore {
         this.size = []
         this.count = 0
         this.category = []
+        this.allProducts = []
+        this.discount = []
+        
+        
 
         makeAutoObservable(this)
     }
@@ -18,11 +22,8 @@ export default class ProductStore {
      fetchTodo() {
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`)
             .then(res => {
-               
                 this.products = [ ...res.data]
-                this.products = this.products
-                this.category = this.products.category
-                console.log(this.products)
+                this.allProducts = this.products
             })
             .catch((e)=>{
                 console.error(e)
@@ -31,12 +32,24 @@ export default class ProductStore {
             
     }
 
-    // addProduct = (id) =>{
-    //     this.product = [...this.product]
-    //     this.product[id] = this.product[id] + 1 || 1;
-    //     this.product = this.product
-    //     this.count = this.count + 1
-    // }
+    
+    getCategory() {
+        console.log(this.category )
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/category`)
+            .then(res => {
+                this.category = [...res.data]
+                console.log(this.category )
+            })
+    }
+
+    changeFilter(title){
+        this.products = this.allProducts.filter(item => item.category === title)
+    }
+
+    countTitle(title){
+        return this.allProducts.filter(item => item.category === title).length
+        
+    }
 
     getData(id) {
         console.log(id)
@@ -45,7 +58,7 @@ export default class ProductStore {
                 this.product = response.data
                 this.images = this.product.images
                 this.size = this.product.size
-                this.category = this.product.category
+                // this.category = this.product.category
 
                 
 
@@ -72,6 +85,25 @@ export default class ProductStore {
              .then(res => {
                  this.blog = [ ...res.data]
                  this.blog = this.blog
+                 console.log(res)
+
+             })
+             .catch((e)=>{
+                 console.error(e)
+             })      
+     }
+
+
+     async discountTodo() {
+        await  axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`)
+             .then(res => {
+                 this.discount = [ ...res.data]
+                 this.discount = this.discount
+                 this.images = this.product.images
+                 
+                //  console.log(this.discount)
+                //  this.discount.price * this.discount.percent / 100
+                
                  console.log(res)
 
              })

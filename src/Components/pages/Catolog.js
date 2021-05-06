@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect} from 'react';
 import { Context } from '../../index';
 import { Link } from 'react-router-dom';
+import "../../App.css"
 
 
 
@@ -33,6 +34,11 @@ const  Catolog = observer(() => {
                 document.body.appendChild(s)
             })
         })
+        product.getCategory()
+        product.changeFilter()
+        product.discountTodo()
+
+        console.log(product.category)
     
       }, []); 
     return (
@@ -55,7 +61,7 @@ const  Catolog = observer(() => {
                                 <div className="toolbox">
                                     <div className="toolbox-left">
                                         <div className="toolbox-info">
-                                            ПРОСМОТР: <span>24 / 48 / 96 / ВСЕ</span> 
+                                            ПРОСМОТР: <span>24 / 48 / 96 / <span className="clickvse" onClick={()=>product.fetchTodo()}>ВСЕ</span></span> 
                                         </div>
                                     </div>
 
@@ -85,7 +91,7 @@ const  Catolog = observer(() => {
                                                             
                                                                 <img src={`${process.env.REACT_APP_BASE_URL}${prod.images[0]}`} alt="Product image" className="product-image"/>
                                                             
-                                                            
+                                                                <span className="onsale"></span>
 
                                                             <div className="product-action-vertical">
                                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -148,7 +154,7 @@ const  Catolog = observer(() => {
                                         
                                         <div className="widget widget-collapsible">
                                             <h3 className="widget-title">
-                                                <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                                                <a data-toggle="collapse" role="button" aria-expanded="true" aria-controls="widget-5">
                                                     ФИЛЬТР ПО ЦЕНЕ
                                                 </a>
                                             </h3>
@@ -175,15 +181,22 @@ const  Catolog = observer(() => {
                                             </a>
                                         </h3>
 
-                                        <div className="collapse show" id="widget-1">
+                                        <div className="collapse show" >
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
-                                                        <div className="custom-control custom-checkbox">
-                                                            <input type="checkbox" className="custom-control-input" id="cat-1"/>
-                                                            <label className="custom-control-label" for="cat-1">ВЕСНА (2020)</label>
-                                                        </div>
-                                                        <span className="item-count">(12)</span>
+                                                    <label onClick={()=>product.fetchTodo()} className="custom-control-label vse" >ВСЕ</label>
+                                                        {product.category.map((c, index) =>
+                                                            
+                                                                <div  key={index} className="custom-control custom-checkbox">
+                                                                    {/* <input type="checkbox" className="custom-control-input" id="cat-1" value=""/> */}
+                                                                    <label onClick={() => product.changeFilter(c.title)} className="custom-control-label" > {c.title} {c.year}</label>
+                                                                    <span className="item-count">({product.countTitle(c.title)})</span>
+                                                                </div>
+                                                                
+                                                            
+                                                        )}
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -210,27 +223,7 @@ const  Catolog = observer(() => {
                                             </div>
                                         </div>
                                     </div> */}
-                                    <div className="widget widget-collapsible">
-                                        <div className="collapse show" id="widget-4">
-                                            <div className="widget-body">
-                                                <div className="filter-items">
-                                                    
-
-                                                    
-
-                                                    
-
-                                                    <div className="filter-item">
-                                                        <div className="custom-control custom-checkbox">
-                                                            <input type="checkbox" className="custom-control-input" id="brand-7"/>
-                                                            <label className="custom-control-label" for="brand-7">Nike</label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
 
                                     <div className="widget widget-collapsible">
                                         <h3 className="widget-title">
@@ -239,7 +232,7 @@ const  Catolog = observer(() => {
                                             </a>
                                         </h3>
 
-                                        <div className="collapse show" id="widget-5">
+                                        <div className="collapse show" >
                                             <div className="widget-body">
                                                 <div className="filter-price">
                                                     <div className="filter-price-text">
@@ -254,33 +247,28 @@ const  Catolog = observer(() => {
                                     </div>
 
 
-
-
-
-                                    <div className="widget widget-collapsible">
-                                        <h3 className="widget-title">
-                                            <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
-                                                Price
-                                            </a>
-                                        </h3>
-
-                                        <div className="collapse show" id="widget-5">
-                                            <div className="widget-body">
-                                                <div className="filter-price">
-                                                    <div className="filter-price-text">
-                                                        Price Range:
-                                                        <span id="filter-price-range"></span>
-                                                    </div>
-
-                                                    <div id="price-slider"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
+                                    <div className="cat-blocks-container">
                                         
-                                    </div>
+                                            <p>ТОВАРЫ СО СКИДКОЙ</p><br/>
+                                            {product.discount.map((discout, index)=>
+                                                <div key={index} className="row">
+                                                    <div  className="col-6 ">
+                                                        <a className="cat-block">
+                                                            <figure>
+                                                                <span>
+                                                                    <img className="images-s" src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]}`} alt="Category image"/>
+                                                                </span>
+                                                            </figure>
+                                                        </a>
+                                                    </div>
+                                                    <div  className="col-5 ">
+                                                        <h3 className="product-title"><a >{discout.title}</a></h3>
+                                                        <p style={{textDecoration:"line-through"}}>{discout.price}</p>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    
 
 
                                 </div>

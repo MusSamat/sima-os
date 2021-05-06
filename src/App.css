@@ -54,4 +54,51 @@
     color: #fff;
     background-color: teal;
   }
-  
+
+  .clickvse{
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .custom-control-label::before{
+    display: none;
+  }
+  .custom-control-label:hover{
+    color: blue;
+  }
+  .vse{
+    padding-left: 5.4rem;
+  }
+  .custom-control-label{
+    margin-left: -5.2rem;
+  }
+  .widget-collapsible .widget-title a::after{
+    display: none;
+  }
+
+  .product-image{
+    position: relative;
+  }
+  .onsale{
+    z-index: 2;
+    top: 6px;
+    left: auto;
+    right: 6px;
+    font-size: 1.2em;
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    min-height: 0;
+    line-height: 1.5em;
+    padding: 13px 0;
+    transform: none;
+    width: auto!important;
+    overflow: visible!important;
+    border-radius: 70px;
+    background: #5d4f84;
+  }
+
+  .images-s{
+    height: 180px;
+  }
