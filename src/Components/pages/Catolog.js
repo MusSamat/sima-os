@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom';
 import "../../App.css"
 
 
-
-
-
 const  Catolog = observer(() => {
     const {product} = useContext(Context)
+
+
     
     
     useEffect(() => {
@@ -37,8 +36,11 @@ const  Catolog = observer(() => {
         product.getCategory()
         product.changeFilter()
         product.discountTodo()
-
-        console.log(product.category)
+        
+        // percentData = (a1, b1) =>{
+        //     return a1 -  (a1 * b1 / 100);
+            
+        //    }
     
       }, []); 
     return (
@@ -251,7 +253,9 @@ const  Catolog = observer(() => {
                                         
                                             <p>ТОВАРЫ СО СКИДКОЙ</p><br/>
                                             {product.discount.map((discout, index)=>
+                                            <Link to={{pathname: '/product/'+ discout.id}}>
                                                 <div key={index} className="row">
+                                                    
                                                     <div  className="col-6 ">
                                                         <a className="cat-block">
                                                             <figure>
@@ -264,8 +268,11 @@ const  Catolog = observer(() => {
                                                     <div  className="col-5 ">
                                                         <h3 className="product-title"><a >{discout.title}</a></h3>
                                                         <p style={{textDecoration:"line-through"}}>{discout.price}</p>
+                                                        <p >{discout.percent}</p>
                                                     </div>
+                                                    
                                                 </div>
+                                                </Link>
                                             )}
                                         </div>
                                     

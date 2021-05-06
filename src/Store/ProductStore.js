@@ -34,11 +34,9 @@ export default class ProductStore {
 
     
     getCategory() {
-        console.log(this.category )
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/category`)
             .then(res => {
                 this.category = [...res.data]
-                console.log(this.category )
             })
     }
 
@@ -93,6 +91,7 @@ export default class ProductStore {
              })      
      }
 
+     
 
      async discountTodo() {
         await  axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`)
@@ -100,12 +99,9 @@ export default class ProductStore {
                  this.discount = [ ...res.data]
                  this.discount = this.discount
                  this.images = this.product.images
-                 
-                //  console.log(this.discount)
-                //  this.discount.price * this.discount.percent / 100
-                
-                 console.log(res)
 
+
+                
              })
              .catch((e)=>{
                  console.error(e)

@@ -18,20 +18,20 @@ function Header() {
                         <div className="header-dropdown">
                             
                             <div className="header lefft">
-                            <a href="#">Bishkek</a>
+                            <a >Bishkek</a>
                                 
                             </div>
                         </div><br/>
 
                         <div className="header">
-                            <a href="#">+996709999915</a>
+                            <a >+996709999915</a>
                         </div>
                     </div>
 
                     <div className="header-right">
                         <ul className="top-menu">
                             <li>
-                                <a href="#">Links</a>
+                                <a >Links</a>
                                 <ul>
                                     <li><NavLink className="sf-with" to={LOGIN_ROUTE}><i className="icon-user"></i>Login</NavLink></li>
                                     {/* <li><a href="#signin-modal" data-toggle="modal"></a></li> */}
@@ -48,16 +48,13 @@ function Header() {
                   <div className="container">
                     <div className="header-left">
                         <button className="mobile-menu-toggler">
-                            {/* <span classNameNmae="sr-only">Toggle mobile menu</span> */}
+                            
                             <i className="icon-bars"></i>
                         </button>
                         <NavLink className="logo" to={HOME_ROUTE}>
                             <h3 style={{marginTop: "18px"}}>SIMA</h3>
                         </NavLink>
-                        {/* <a href="index.html" className="logo">
-                            <img src="assets/images/demos/demo-8/logo.png" alt="Molla Logo" width="82" height="20"/>
-                            <h3 style={{marginTop: "18px"}}>SIMA</h3>
-                        </a> */}
+                        
                     </div>
                     <div className="header-center">
                         <nav className="main-nav">
@@ -89,7 +86,7 @@ function Header() {
 
                     <div className="header-right">
                         <div className="header-search">
-                            <a href="/" className="search-toggle" role="button"><i className="icon-search"></i></a>
+                            <a  className="search-toggle" role="button"><i className="icon-search"></i></a>
                             <form action="#" method="get">
                                 <div className="header-search-wrapper">
                                     <label for="q" className="sr-only">Search</label>
@@ -107,7 +104,7 @@ function Header() {
                         </a> */}
 
                         <div className="dropdown cart-dropdown">
-                            <a href="#" className="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                            <a  className="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <i className="icon-shopping-cart"></i>
                                 <span className="cart-count">8</span>
                                 <span className="cart-txt">$ 164,00</span>
@@ -118,7 +115,7 @@ function Header() {
                                     <div className="product">
                                         <div className="product-cart-details">
                                             <h4 className="product-title">
-                                                <a href="product.html">Beige knitted elastic runner shoes</a>
+                                                <a>Beige knitted elastic runner shoes</a>
                                             </h4>
 
                                             <span className="cart-product-info">
@@ -128,7 +125,7 @@ function Header() {
                                         </div>
 
                                         <figure className="product-image-container">
-                                            <a href="product.html" className="product-image">
+                                            <a  className="product-image">
                                                 <img src="assets/images/products/cart/product-1.jpg" alt="product"/>
                                             </a>
                                         </figure>
@@ -138,7 +135,7 @@ function Header() {
                                     <div className="product">
                                         <div className="product-cart-details">
                                             <h4 className="product-title">
-                                                <a href="product.html">Blue utility pinafore denim dress</a>
+                                                <a >Blue utility pinafore denim dress</a>
                                             </h4>
 
                                             <span className="cart-product-info">
@@ -148,11 +145,11 @@ function Header() {
                                         </div>
 
                                         <figure className="product-image-container">
-                                            <a href="product.html" className="product-image">
+                                            <a  className="product-image">
                                                 <img src="assets/images/products/cart/product-2.jpg" alt="product"/>
                                             </a>
                                         </figure>
-                                        <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close"></i></a>
+                                        <a  className="btn-remove" title="Remove Product"><i className="icon-close"></i></a>
                                     </div>
                                 </div>
 
@@ -164,9 +161,9 @@ function Header() {
 
                                 <div className="dropdown-cart-action" style={{display: "block"}}>
                                     <NavLink className="btn btn-primary" to={CART_ROUTE}>ПРОСМОТР КОРЗИНЫ</NavLink><br/>
-                                    {/* <a href="cart.html" className="btn btn-primary">View Cart</a> */}
+                                    
                                     <NavLink className="btn btn-outline-primary-2" to={CHECKOUT_ROUTE}><span>ОФОРМИТЬ ЗАКАЗ</span><i className="icon-long-arrow-right"></i></NavLink>
-                                    {/* <a href="checkout.html" className="btn btn-outline-primary-2"><span>Checkout</span><i className="icon-long-arrow-right"></i></a> */}
+                                    
                                 </div>
                             </div>
                         </div>
