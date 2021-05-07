@@ -99,7 +99,7 @@ export default class ProductStore {
                  this.discount = [ ...res.data]
                  this.discount = this.discount
                  this.images = this.product.images
-
+                
 
                 
              })

@@ -12,7 +12,9 @@ const  Catolog = observer(() => {
     
     
     useEffect(() => {
-        
+        // percentData = (a1, b1) => {
+        //     return a1 -  (a1 * b1 / 100);
+        // }
         product.fetchTodo().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
@@ -37,12 +39,11 @@ const  Catolog = observer(() => {
         product.changeFilter()
         product.discountTodo()
         
-        // percentData = (a1, b1) =>{
-        //     return a1 -  (a1 * b1 / 100);
-            
-        //    }
+        
     
       }, []); 
+
+
     return (
         <div>
              <main className="main">
@@ -267,8 +268,8 @@ const  Catolog = observer(() => {
                                                     </div>
                                                     <div  className="col-5 ">
                                                         <h3 className="product-title"><a >{discout.title}</a></h3>
-                                                        <p style={{textDecoration:"line-through"}}>{discout.price}</p>
-                                                        <p >{discout.percent}</p>
+                                                        <p style={{textDecoration:"line-through"}}>{discout.price}$</p>
+                                                        <p >{Math.round(discout.price - (discout.price * discout.percent/100))}.00 $</p>
                                                     </div>
                                                     
                                                 </div>
