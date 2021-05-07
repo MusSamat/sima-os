@@ -17,18 +17,21 @@ export default function Mobile() {
                     </form>
                     
                     <nav className="mobile-nav">
-                        <ul className="mobile-menu">
-                            <li className="active">
+                        <ul className="mobile-menu ">
+                            <li className="active ">
                                 {/* <a href="index.html">Home</a> */}
-                                <NavLink  to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
+                                <NavLink  to={HOME_ROUTE}>
+                                    
+                                    ГЛАВНАЯ
+                                </NavLink>
                             </li>
                             <li>
                                 {/* <a href="category.html">Shop</a> */}
-                                <NavLink  to={CATALOG_ROUTE}>КАТАЛОГ</NavLink>
+                                <NavLink className="mobile-menu-close" to={CATALOG_ROUTE}>КАТАЛОГ</NavLink>
                             </li>
                             <li>
                                 {/* <a href="product.html" className="sf-with-ul">Product</a> */}
-                                <NavLink  to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
+                                <NavLink className="mobile-menu-close" to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
                             </li>
                             <li>
                                 {/* <a href="#">Pages</a> */}

@@ -35,7 +35,7 @@ function Header() {
                                 <ul>
                                     <li><NavLink className="sf-with" to={LOGIN_ROUTE}><i className="icon-user"></i>Login</NavLink></li>
                                     {/* <li><a href="#signin-modal" data-toggle="modal"></a></li> */}
-                                    <li><a href="contact.html">info@Molla.com</a></li>
+                                    <li><a href="contact.html">sima@gmail.com</a></li>
                                 </ul>
                             </li>
                         </ul>

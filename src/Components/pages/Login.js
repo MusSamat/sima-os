@@ -1,22 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import axios from "axios";
+import { observer } from 'mobx-react-lite';
+import { Context } from '../../index';
 
-const Login = () => {
+const Login = observer(() => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [username, setUsername] = useState()
+    const {user} = useContext(Context)
+    
 
-    // const registration = async (email, password, name) => {
-    //     const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, email, password, name)
-    //     console.log(response);
-    //     return response
-        
-    // }
+    
+    let isLogin = true;
+
+    const singIn = async() =>{
+        if(isLogin){
+
+        }
+    }
+
     const sing = () => {
         const article = {email, password, username}
         axios.post('http://localhost:8000/api/auth/register', article)
             .then(response => setEmail(response.email))
             .catch(error => console.log(error))
+
+        
     }
     const login = () => {
         const article = {password, username}
@@ -24,12 +33,11 @@ const Login = () => {
             .then(response => setUsername(response.username))
             .then(response => setPassword(response.password))
             .catch(error => console.log(error))
+
+        user.setIsAuth(true)
     }
 
-    useEffect(() => {
-        
-      
-    }, [])
+    
     return (
         <body>
             <div className="page-wrapper">
@@ -187,6 +195,6 @@ const Login = () => {
             <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button>   
         </body>
     )
-}
+})
 
 export default  Login;

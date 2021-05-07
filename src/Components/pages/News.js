@@ -52,7 +52,10 @@ const News = observer(() =>{
                                         </div>
 
                                         <div className="entry-content" >
-                                            <p style={{textAlign: "left"}}>{blog.description}</p>
+                                            <p style={{textAlign: "left"}}>
+                                            <div dangerouslySetInnerHTML={{__html: blog.description}} />
+                                            {console.log(blog)}
+                                            </p>
                                             <div className="entry-meta" style={{display: "flex"}}>
                                                 <span className="entry-author">
                                                 Добавленно <a href="#"></a>

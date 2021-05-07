@@ -4,7 +4,7 @@ import { Context } from '../../index';
 import { Link } from 'react-router-dom';
 import "../../App.css"
 
-
+ 
 const  Catolog = observer(() => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
@@ -115,7 +115,7 @@ const  Catolog = observer(() => {
                                                         <div style={{display: "flex", justifyContent: "space-between"}}>
                                                             <h3 className="product-title"><a href="product.html">{prod.title}</a></h3>
                                                             <div className="product-price">
-                                                                {user.isAuth && prod.price } 
+                                                                {user._isAuth && prod.price } 
                                                             </div>
                                                         </div>
                                                         <div className="ratings-container">

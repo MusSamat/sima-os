@@ -34,7 +34,7 @@ export default function Footer() {
                                         <li style={{ fontSize: "16px"}}><a href="#">Почему клиенты выбирают нас</a></li>
                                         <li style={{ fontSize: "16px"}}><a href="faq.html">Удобная мобильная версия.</a></li>
                                         <li style={{ fontSize: "16px"}}><a href="contact.html">«Предприятие лидер Евразийского Союза Государств»</a></li>
-                                        <li style={{ fontSize: "16px"}}><a href="login.html">«Diva style» на выставках Текстильлегпром</a></li>
+                                        <li style={{ fontSize: "16px"}}><a href="login.html">«SIMA» на выставках Текстильлегпром</a></li>
                                     </ul>
                                 </div>
                             </div>
