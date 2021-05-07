@@ -7,6 +7,8 @@ import "../../App.css"
 
 const  Catolog = observer(() => {
     const {product} = useContext(Context)
+    const {user} = useContext(Context)
+    console.log(user)
 
 
     
@@ -113,7 +115,7 @@ const  Catolog = observer(() => {
                                                         <div style={{display: "flex", justifyContent: "space-between"}}>
                                                             <h3 className="product-title"><a href="product.html">{prod.title}</a></h3>
                                                             <div className="product-price">
-                                                                {prod.price} $
+                                                                {user.isAuth && prod.price } 
                                                             </div>
                                                         </div>
                                                         <div className="ratings-container">
