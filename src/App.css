@@ -46,9 +46,10 @@
     width: 100%;
   }
   .btn-round{
-    width: 400px;
-    font-size: 25px;
+    width: 300px;
+    font-size: 20px;
     height: 35px;
+    padding-top: -25px;
   }
   .btn-round:hover{
     color: #fff;
@@ -78,26 +79,7 @@
   .product-image{
     position: relative;
   }
-  .onsale{
-    z-index: 2;
-    top: 6px;
-    left: auto;
-    right: 6px;
-    font-size: 1.2em;
-    background-image: none;
-    box-shadow: none;
-    text-shadow: none;
-    text-transform: uppercase;
-    font-weight: 400;
-    min-height: 0;
-    line-height: 1.5em;
-    padding: 13px 0;
-    transform: none;
-    width: auto!important;
-    overflow: visible!important;
-    border-radius: 70px;
-    background: #5d4f84;
-  }
+  
 
   .images-s{
     height: 180px;

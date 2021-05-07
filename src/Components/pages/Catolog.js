@@ -115,11 +115,15 @@ const  Catolog = observer(() => {
                                                         <div style={{display: "flex", justifyContent: "space-between"}}>
                                                             <h3 className="product-title"><a href="product.html">{prod.title}</a></h3>
                                                             <div className="product-price">
-                                                                {user._isAuth && prod.price } 
+                                                                {user.isAuth ? prod.price : "" }
+                                                            
                                                             </div>
+                                                             
                                                         </div>
                                                         <div className="ratings-container">
-                                                            <span className="ratings-text"></span>
+
+                                                            <span className="product-price"> </span>
+                                                            Размеры: {prod.size[0]}-{prod.size[1]}
                                                         </div>
                                                         
                                                     </div>
@@ -270,8 +274,8 @@ const  Catolog = observer(() => {
                                                     </div>
                                                     <div  className="col-5 ">
                                                         <h3 className="product-title"><a >{discout.title}</a></h3>
-                                                        <p style={{textDecoration:"line-through"}}>{discout.price}$</p>
-                                                        <p >{Math.round(discout.price - (discout.price * discout.percent/100))}.00 $</p>
+                                                        {user.isAuth ? <><p style={{textDecoration:"line-through"}}>{discout.price}$</p>
+                                                        <p >{Math.round(discout.price - (discout.price * discout.percent/100))}.00 $</p></> : ''}
                                                     </div>
                                                     
                                                 </div>

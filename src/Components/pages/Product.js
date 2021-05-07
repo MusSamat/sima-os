@@ -1,9 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import { Context } from '../../index';
+import { LOGIN_ROUTE } from '../../utils/Const';
 
 const Product = observer(({match}) => {
     const {product} = useContext(Context)
+    const {user} = useContext(Context)
     const id = match.params.id
 
     
@@ -95,7 +98,7 @@ const Product = observer(({match}) => {
                                         </div>
 
                                         <div className="product-price">
-                                            {product.product.price}
+                                            {user.isAuth ? product.product.price : ""}
                                         </div>
 
                                         <div className="product-content">
@@ -106,32 +109,41 @@ const Product = observer(({match}) => {
                                             
                                         </div>
 
-                                        <div className="details-filter-row details-row-size">
-                                            <label for="size">Размер:</label>
-                                            <div className="select-custom">
-                                                <select name="size" id="size" className="form-control">
-                                                    {product.size.map((size, index)=>
-                                                        <option key={index} value="#" selected="selected">{size}</option>
-                                                    )}
-                                                    
-                                                </select>
+                                        {user.isAuth ?<>
+                                            <div className="details-filter-row details-row-size">
+                                                <label for="size">Размер:</label>
+                                                <div className="select-custom">
+                                                    <select name="size" id="size" className="form-control">
+                                                        {product.size.map((size, index)=>
+                                                            <option key={index} value="#" selected="selected">{size}</option>
+                                                        )}
+                                                            
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div className="details-filter-row details-row-size">
-                                            <label for="qty">КОЛ-ВО:</label>
-                                            <div className="product-details-quantity">
-                                                <input type="number" id="qty" className="form-control" value="5" min="1" max="100" step="5" data-decimals="0" required/>
+                                            <div className="details-filter-row details-row-size">
+                                                <label for="qty">КОЛ-ВО:</label>
+                                                <div className="product-details-quantity">
+                                                    <input type="number" id="qty" className="form-control" value="5" min="1" max="100" step="5" data-decimals="0" required/>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div className="product-details-action">
-                                            <a href="#" className="btn-product btn-cart"><span >В КОРЗИНУ</span></a>
+                                            <div className="product-details-action">
+                                                <a href="#" className="btn-product btn-cart"><span >В КОРЗИНУ</span></a>
 
-                                            <div className="details-action-wrapper">
-                                                <a style={{fontSize: "30px"}} href="#" className="btn-product btn-wishlist" title="Wishlist"></a>
+                                                <div className="details-action-wrapper">
+                                                    <a style={{fontSize: "30px"}} href="#" className="btn-product btn-wishlist" title="Wishlist"></a>
+                                                </div>
                                             </div>
+                                        </> :
+                                        <div>
+                                            <p>ЗАРЕГИСТРИРУЙТЕСЬ, ЧТОБЫ ПОСМОТРЕТЬ ЦЕНЫ</p>
+                                            <Link to={LOGIN_ROUTE}>
+                                                <button className="btn-outline-dark btn-round">Регистрация</button>
+                                            </Link>
                                         </div>
+                                        }
 
                                         <div className="product-details-footer">
                                             <div className="product-cat">

@@ -11,13 +11,7 @@ const Login = observer(() => {
     
 
     
-    let isLogin = true;
-
-    const singIn = async() =>{
-        if(isLogin){
-
-        }
-    }
+    
 
     const sing = () => {
         const article = {email, password, username}
@@ -27,7 +21,7 @@ const Login = observer(() => {
 
         
     }
-    const login = () => {
+    const login = (event) => {
         const article = {password, username}
         axios.post('http://localhost:8000/api/auth/login', article)
             .then(response => setUsername(response.username))
@@ -35,6 +29,7 @@ const Login = observer(() => {
             .catch(error => console.log(error))
 
         user.setIsAuth(true)
+        event.preventDefault();
     }
 
     
@@ -49,7 +44,7 @@ const Login = observer(() => {
                                 <div className="form-tab">
                                     <ul className="nav nav-pills nav-fill" role="tablist">
                                         <li className="nav-item">
-                                            <a className="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="false">Авторизация</a>
+                                            <a className="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="false">Логин</a>
                                         </li>
                                         <li className="nav-item">
                                             <a className="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab" aria-controls="register-2" aria-selected="true">Регистрация</a>
@@ -57,7 +52,7 @@ const Login = observer(() => {
                                     </ul>
                                     <div className="tab-content">
                                         <div className="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
-                                            <form action="#">
+                                            <form onSubmit={login}>
                                                 <div className="form-group">
                                                     <label for="singin-email-2">Username or email address *</label>
                                                     <input 
@@ -85,7 +80,7 @@ const Login = observer(() => {
                                                 </div>
 
                                                 <div className="form-footer">
-                                                    <button onClick={() => login()} type="submit" className="btn btn-outline-primary-2">
+                                                    <button  type="submit" className="btn btn-outline-primary-2">
                                                         <span>LOG IN</span>
                                                         <i className="icon-long-arrow-right"></i>
                                                     </button>

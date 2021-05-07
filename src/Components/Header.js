@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import { NavLink } from 'react-router-dom';
 import {ABOUT_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE } from "../utils/Const";
 import "../App.css";
+import { observer } from "mobx-react-lite";
+import { Context } from "../index";
 
 
-function Header() {
+const Header = observer(() => {
+
+    const{user} = useContext(Context)
     
   return (
       <div className="App" >
@@ -33,7 +37,7 @@ function Header() {
                             <li>
                                 <a >Links</a>
                                 <ul>
-                                    <li><NavLink className="sf-with" to={LOGIN_ROUTE}><i className="icon-user"></i>Login</NavLink></li>
+                                    <li><NavLink className="sf-with" to={LOGIN_ROUTE}><i className="icon-user"></i>{user.isAuth ? 'МОЙ АККАУНТ' : 'АВТОРИЗАЦИЯ'}</NavLink></li>
                                     {/* <li><a href="#signin-modal" data-toggle="modal"></a></li> */}
                                     <li><a href="contact.html">sima@gmail.com</a></li>
                                 </ul>
@@ -173,6 +177,6 @@ function Header() {
         </header>
     </div>
   );
-}
+})
 
 export default Header;
