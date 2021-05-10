@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import axios from 'axios';
+import userStore from "./UserStore";
 
 export default class ProductStore {
     constructor(){
@@ -13,6 +14,7 @@ export default class ProductStore {
         this.category = []
         this.allProducts = []
         this.discount = []
+        this.obj = null
         
         
 
@@ -91,6 +93,8 @@ export default class ProductStore {
              })      
      }
 
+
+     
      
 
      async discountTodo() {

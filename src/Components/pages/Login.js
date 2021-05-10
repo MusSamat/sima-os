@@ -30,6 +30,7 @@ const Login = observer(() => {
 
         user.setIsAuth(true)
         event.preventDefault();
+        localStorage.setItem('value', JSON.stringify(article));
     }
 
     

@@ -90,11 +90,18 @@ const Product = observer(({match}) => {
                                     <div className="product-details">
                                         <h1 className="product-title">{product.product.title}</h1>
 
-                                        <div className="ratings-container">
+                                        <div className="ratings-container justify-content-between">
                                             <div className="ratings">
                                                 <div className="ratings-val" style={{width: "80%;"}}></div>
+                                                <a className="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
                                             </div>
-                                            <a className="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
+                                            
+                                            <div className="product-cat">
+                                                <span>Категория :</span>
+                                                <a href="#">МАГАЗИН /</a>
+                                                <a href="#">{product.product.category} / </a>
+                                                <a href="#">{product.product.title}</a>
+                                            </div>
                                         </div>
 
                                         <div className="product-price">
@@ -146,21 +153,61 @@ const Product = observer(({match}) => {
                                         }
 
                                         <div className="product-details-footer">
-                                            <div className="product-cat">
-                                                <span>Категория :</span>
-                                                <a href="#">МАГАЗИН /</a>
-                                                <a href="#">{product.product.category} / </a>
-                                                <a href="#">{product.product.title}</a>
+                                            
+
+                                            
+
+                                            
+                                        </div>
+
+
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <h2 className="title mb-3">Line Style Tabs</h2>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <ul className="nav nav-pills" id="tabs-5" role="tablist">
+                                                    <li className="nav-item">
+                                                        <a className="nav-link active" id="tab-17-tab" data-toggle="tab" href="#tab-17" role="tab" aria-controls="tab-17" aria-selected="true">Описание</a>
+                                                    </li>
+                                                    <li className="nav-item">
+                                                        <a className="nav-link" id="tab-18-tab" data-toggle="tab" href="#tab-18" role="tab" aria-controls="tab-18" aria-selected="false">Детали</a>
+                                                    </li>
+                                                    <li className="nav-item">
+                                                        <a className="nav-link" id="tab-19-tab" data-toggle="tab" href="#tab-19" role="tab" aria-controls="tab-19" aria-selected="false">Отзывы (0)</a>
+                                                    </li>
+                                                </ul>
+                                                <div className="tab-content" id="tab-content-5">
+                                                    <div className="tab-pane fade show active" id="tab-17" role="tabpanel" aria-labelledby="tab-17-tab">
+                                                        <p><strong>Размер:</strong> {product.size.map((size, index)=>
+                                                            <p key={index}>{size[0]}{size.length -1}</p>
+                                                        )}</p>
+                                                        <p><strong>Ткань:</strong> {product.product.cloth}</p>
+                                                        <p>{product.product.description}</p>
+                                                    </div>
+                                                    <div className="tab-pane fade" id="tab-18" role="tabpanel" aria-labelledby="tab-18-tab">
+                                                        <p>Nobis perspiciatis natus cum, sint dolore earum rerum tempora aspernatur numquam velit tempore omnis, delectus repellat facere voluptatibus nemo non fugiat consequatur repellendus! Enim, commodi, veniam ipsa voluptates quis amet.</p>
+                                                    </div>
+                                                    <div className="tab-pane fade" id="tab-19" role="tabpanel" aria-labelledby="tab-19-tab">
+                                                        <p>Perspiciatis quis nobis, adipisci quae aspernatur, nulla suscipit eum. Dolorum, earum. Consectetur pariatur repellat distinctio atque alias excepturi aspernatur nisi accusamus sed molestias ipsa numquam eius, iusto, aliquid, quis aut.</p>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div className="social-icons social-icons-sm">
-                                                <span className="social-label">ПОДЕЛИТЬСЯ:</span>
-                                                <a href="#" className="social-icon" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
-                                                <a href="#" className="social-icon" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                                                <a href="#" className="social-icon" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                                                <a href="#" className="social-icon" title="Pinterest" target="_blank"><i className="icon-pinterest"></i></a>
-                                            </div>
+                                            
+                                            
+                                            
+                                            
+                                            
                                         </div>
+                                        
+                                    </div>
+                                    <div className="social-icons social-icons-sm">
+                                        <span className="social-label">ПОДЕЛИТЬСЯ:</span>
+                                        <a href="#" className="social-icon" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                                        <a href="#" className="social-icon" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                                        <a href="#" className="social-icon" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                                        <a href="#" className="social-icon" title="Pinterest" target="_blank"><i className="icon-pinterest"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -168,174 +215,7 @@ const Product = observer(({match}) => {
                         </div>
                     </div>
 
-                    {/* <div className="product-details-tab product-details-extended">
-                        <div className="container">
-                            <ul className="nav nav-pills justify-content-center" role="tablist">
-                                <li className="nav-item">
-                                    <a className="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Additional information</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div className="tab-content">
-                            <div className="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
-                                <div className="product-desc-content">
-                                    <div className="product-desc-row bg-image"  style={{backgroundImage: "url('assets/images/products/single/extended/bg-1.jpg')"}}>
-                                        <div className="container">
-                                            <div className="row justify-content-end">
-                                                <div className="col-sm-6 col-lg-4">
-                                                    <h2>Product Information</h2>
-                                                    <ul>
-                                                        <li>Faux suede fabric upper</li>
-                                                        <li>Tie strap buckle detail</li>
-                                                        <li>Block heel</li>
-                                                        <li>Open toe</li>
-                                                        <li>Heel Height: 7cm / 2.5 inches</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="product-desc-row bg-image text-white"  style={{backgroundImage: "url('assets/images/products/single/extended/bg-2.jpg')"}}>
-                                        <div className="container">
-                                            <div className="row">
-                                                <div className="col-md-6">
-                                                    <h2>Design</h2>
-                                                    <p>The perfect choice for the summer months. These wedges are perfect for holidays and home, with the thick cross-over strap design and heel strap with an adjustable buckle fastening. Featuring chunky soles with an espadrille and cork-style wedge. </p>
-                                                </div>
-
-                                                <div className="col-md-6">
-                                                    <h2>Fabric & care</h2>
-                                                    <p>As part of our Forever Comfort collection, these wedges have ultimate cushioning with soft padding and flexi soles. Perfect for strolls into the old town on holiday or a casual wander into the village.</p>
-                                                </div>
-                                            </div>
-
-                                            <div className="mb-5"></div>
-
-                                            <img src="assets/images/products/single/extended/sign.png" alt="" className="ml-auto mr-auto"/>
-                                        </div>
-                                    </div>
-
-                                    <div className="product-desc-row bg-image"  style={{backgroundImage: "url('assets/images/products/single/extended/bg-3.jpg')"}}>
-                                        <div className="container">
-                                            <div className="row">
-                                                <div className="col-lg-5">
-                                                    <blockquote>
-                                                        <p>“ Everything is important - <br/>that success is in the details. ”</p>
-
-                                                        <cite>– Steve Jobs</cite>
-                                                    </blockquote>
-                                                    <p>Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
-                                <div className="product-desc-content">
-                                    <div className="container">
-                                        <h3>Information</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. 
-                                            Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor 
-                                            mauris sit amet orci. </p>
-
-                                        <h3>Fabric & care</h3>
-                                        <ul>
-                                            <li>Faux suede fabric</li>
-                                            <li>Gold tone metal hoop handles.</li>
-                                            <li>RI branding</li>
-                                            <li>Snake print trim interior </li>
-                                            <li>Adjustable cross body strap</li>
-                                            <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
-                                        </ul>
-
-                                        <h3>Size</h3>
-                                        <p>one size</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
-                                <div className="product-desc-content">
-                                    <div className="container">
-                                        <h3>Delivery & returns</h3>
-                                        <p>We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our <a href="#">Delivery information</a><br/>
-                                        We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our <a href="#">Returns information</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
-                                <div className="reviews">
-                                    <div className="container">
-                                        <h3>Reviews (2)</h3>
-                                        <div className="review">
-                                            <div className="row no-gutters">
-                                                <div className="col-auto">
-                                                    <h4><a href="#">Samanta J.</a></h4>
-                                                    <div className="ratings-container">
-                                                        <div className="ratings">
-                                                            <div className="ratings-val" style={{width: "80%;"}}></div>
-                                                        </div>
-                                                    </div>
-                                                    <span className="review-date">6 days ago</span>
-                                                </div>
-                                                <div className="col">
-                                                    <h4>Good, perfect size</h4>
-
-                                                    <div className="review-content">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae voluptas!</p>
-                                                    </div>
-
-                                                    <div className="review-action">
-                                                        <a href="#"><i className="icon-thumbs-up"></i>Helpful (2)</a>
-                                                        <a href="#"><i className="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="review">
-                                            <div className="row no-gutters">
-                                                <div className="col-auto">
-                                                    <h4><a href="#">John Doe</a></h4>
-                                                    <div className="ratings-container">
-                                                        <div className="ratings">
-                                                            <div className="ratings-val" style={{width: "100%"}}></div>
-                                                        </div>
-                                                    </div>
-                                                    <span className="review-date">5 days ago</span>
-                                                </div>
-                                                <div className="col">
-                                                    <h4>Very good</h4>
-
-                                                    <div className="review-content">
-                                                        <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas iure illum repellendus, blanditiis perspiciatis beatae!</p>
-                                                    </div>
-
-                                                    <div className="review-action">
-                                                        <a href="#"><i className="icon-thumbs-up"></i>Helpful (0)</a>
-                                                        <a href="#"><i className="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h1></h1> */}
+                    
                     </div>
 
 

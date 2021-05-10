@@ -8,7 +8,7 @@ import "../../App.css"
 const  Catolog = observer(() => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
-    console.log(user)
+    
 
 
     
@@ -40,6 +40,7 @@ const  Catolog = observer(() => {
         product.getCategory()
         product.changeFilter()
         product.discountTodo()
+        // user.getLocal()
         
         
     
