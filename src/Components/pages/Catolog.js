@@ -159,8 +159,23 @@ const  Catolog = observer(() => {
                             </div>
                             <aside className="col-lg-3 order-lg-first">
                                 <div className="sidebar sidebar-shop">
-                                    <div className="widget widget-clean">
 
+                                    <div class="">
+                                        <div class="col-sm-10 col-md-8 col-lg-10">
+                                        
+                                            <form action="#">
+                                                <div className="input-group">
+                                                    <input type="text" className="form-control" placeholder="Поиск..." aria-label="Email Adress" required/><br/>
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="submit"><span>ПОИСК</span><i className="icon-long-arrow-right"></i></button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="widget widget-clean">
+                                    
                                         
                                         <div className="widget widget-collapsible">
                                             <h3 className="widget-title">

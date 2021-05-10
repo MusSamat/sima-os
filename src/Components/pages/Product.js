@@ -179,9 +179,7 @@ const Product = observer(({match}) => {
                                                 </ul>
                                                 <div className="tab-content" id="tab-content-5">
                                                     <div className="tab-pane fade show active" id="tab-17" role="tabpanel" aria-labelledby="tab-17-tab">
-                                                        <p><strong>Размер:</strong> {product.size.map((size, index)=>
-                                                            <p key={index}>{size[0]}{size.length -1}</p>
-                                                        )}</p>
+                                                        <p><strong>Размер: </strong> {product.product.size[0]}-{product.product.size[product.product.size.length -1]} </p>
                                                         <p><strong>Ткань:</strong> {product.product.cloth}</p>
                                                         <p>{product.product.description}</p>
                                                     </div>
@@ -189,7 +187,19 @@ const Product = observer(({match}) => {
                                                         <p>Nobis perspiciatis natus cum, sint dolore earum rerum tempora aspernatur numquam velit tempore omnis, delectus repellat facere voluptatibus nemo non fugiat consequatur repellendus! Enim, commodi, veniam ipsa voluptates quis amet.</p>
                                                     </div>
                                                     <div className="tab-pane fade" id="tab-19" role="tabpanel" aria-labelledby="tab-19-tab">
-                                                        <p>Perspiciatis quis nobis, adipisci quae aspernatur, nulla suscipit eum. Dolorum, earum. Consectetur pariatur repellat distinctio atque alias excepturi aspernatur nisi accusamus sed molestias ipsa numquam eius, iusto, aliquid, quis aut.</p>
+                                                        <strong>БУДЬТЕ ПЕРВЫМ, КТО ОСТАВИЛ ОТЗЫВ НА "{product.product.title}"</strong>
+                                                        <hr></hr>
+                                                        <div className="ratings-container justify-content-between">
+                                                            <p>ВАШ ОТЗЫВ *</p>
+                                                            <div className="ratings" style={{width: "80%;", cursor:"pointer"}}></div>
+                                                        </div>
+                                                        <textarea class="form-control"></textarea>
+                                                        <div className="d-grid gap-2">
+                                                            <button className="btn btn-outline-secondary" type="button">Button</button>
+                                                            
+                                                        </div>
+
+                                                        <p></p>
                                                     </div>
                                                 </div>
                                             </div>

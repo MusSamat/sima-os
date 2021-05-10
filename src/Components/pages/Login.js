@@ -15,7 +15,8 @@ const Login = observer(() => {
 
     const sing = () => {
         const article = {email, password, username}
-        axios.post('http://localhost:8000/api/auth/register', article)
+        
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, article)
             .then(response => setEmail(response.email))
             .catch(error => console.log(error))
 
@@ -23,7 +24,8 @@ const Login = observer(() => {
     }
     const login = (event) => {
         const article = {password, username}
-        axios.post('http://localhost:8000/api/auth/login', article)
+        
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, article)
             .then(response => setUsername(response.username))
             .then(response => setPassword(response.password))
             .catch(error => console.log(error))
