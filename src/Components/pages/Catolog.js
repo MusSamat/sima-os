@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import { Link } from 'react-router-dom';
 import "../../App.css"
@@ -8,9 +8,16 @@ import "../../App.css"
 const  Catolog = observer(() => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
+    const [input, setInput] = useState("")
     
+    
+    const search = (e) => {
+       product.searchFilter(input)
+       e.preventDefault();
+       console.log(input)
+    }
 
-
+    // console.log(search(serachPro, input))
     
     
     useEffect(() => {
@@ -163,11 +170,17 @@ const  Catolog = observer(() => {
                                     <div class="">
                                         <div class="col-sm-10 col-md-8 col-lg-10">
                                         
-                                            <form action="#">
+                                            <form onSubmit={search}>
                                                 <div className="input-group">
-                                                    <input type="text" className="form-control" placeholder="Поиск..." aria-label="Email Adress" required/><br/>
+                                                    <input 
+                                                        type="text" 
+                                                        className="form-control" 
+                                                        placeholder="Поиск..."  
+                                                        value={input}
+                                                        onChange={e => setInput(e.target.value)}
+                                                        required/><hr/>
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-primary" type="submit"><span>ПОИСК</span><i className="icon-long-arrow-right"></i></button>
+                                                        <button class="btn btn-primary" type="submit"><span>ПОИСК</span></button>
                                                     </div>
                                                 </div>
                                             </form>

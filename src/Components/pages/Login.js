@@ -26,13 +26,19 @@ const Login = observer(() => {
         const article = {password, username}
         
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, article)
-            .then(response => setUsername(response.username))
-            .then(response => setPassword(response.password))
-            .catch(error => console.log(error))
+            .then(response => {
+                setPassword(response.password)
+                setUsername(response.username)
+                user.setIsAuth(true)
+            })
+            .catch(error =>{   
+                console.log(error)
+            user.setIsAuth(false)
+        })
 
-        user.setIsAuth(true)
+        
         event.preventDefault();
-        localStorage.setItem('value', JSON.stringify(article));
+        // localStorage.setItem('value', JSON.stringify(article));
     }
 
     

@@ -13,6 +13,7 @@ export default class ProductStore {
         this.count = 0
         this.category = []
         this.allProducts = []
+        this.searchProducts = []
         this.discount = []
         this.obj = null
         
@@ -44,6 +45,10 @@ export default class ProductStore {
 
     changeFilter(title){
         this.products = this.allProducts.filter(item => item.category === title)
+    }
+    searchFilter(input){
+        this.products = this.allProducts.filter(item => item.title.toLowerCase() === input.toLowerCase())
+        console.log(this.products)
     }
 
     countTitle(title){
