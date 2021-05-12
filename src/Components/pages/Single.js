@@ -33,7 +33,7 @@ const Single = observer(({match}) => {
                             <div className="col">
                                 <article className="entry single-entry">
                                     <figure className="entry-media">
-                                        <img src={`${process.env.REACT_APP_BASE_URL}${product.blogItem?.images[0]}`} alt="image desc"/>
+                                        <img style={{backgroundSize: "cover", maxHeight: "600px"}} src={`${process.env.REACT_APP_BASE_URL}${product.blogItem?.images[0]}`} alt="image desc"/>
                                     </figure>
 
                                     <div className="entry-body">

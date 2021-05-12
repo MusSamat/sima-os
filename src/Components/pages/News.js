@@ -70,7 +70,7 @@ const News = observer(() =>{
                                             <Link to={{pathname: '/single/'+ blog.id}}>
                                                 <div className="col-12 ">
                                                     <div className="btn-wrap">
-                                                        <button style={{}} className="btn btn-outline-dark btn-round">подробнее</button>
+                                                        <button style={{}} className="btn btn-outline-dark btn-round news-btn">подробнее</button>
                                                         
                                                     </div>
                                                 </div>

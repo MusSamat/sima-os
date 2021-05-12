@@ -24,9 +24,9 @@ export default function Wishlist() {
                         <table className="table table-wishlist table-mobile">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Stock Status</th>
+                                    <th>ТОВАР</th>
+                                    <th>ЦЕНА</th>
+                                    <th>Состояние на складе</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -48,7 +48,7 @@ export default function Wishlist() {
                                         </div>
                                     </td>
                                     <td className="price-col">$84.00</td>
-                                    <td className="stock-col"><span className="in-stock">In stock</span></td>
+                                    <td className="stock-col"><span className="in-stock">В наличии</span></td>
                                     <td className="action-col">
                                         <div className="dropdown">
                                         <button className="btn btn-block btn-outline-primary-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -79,7 +79,7 @@ export default function Wishlist() {
                                         </div>
                                     </td>
                                     <td className="price-col">$76.00</td>
-                                    <td className="stock-col"><span className="in-stock">In stock</span></td>
+                                    <td className="stock-col"><span className="in-stock">В наличии</span></td>
                                     <td className="action-col">
                                         <button className="btn btn-block btn-outline-primary-2"><i className="icon-cart-plus"></i>Add to Cart</button>
                                     </td>
@@ -100,9 +100,9 @@ export default function Wishlist() {
                                         </div>
                                     </td>
                                     <td className="price-col">$52.00</td>
-                                    <td className="stock-col"><span className="out-of-stock">Out of stock</span></td>
+                                    <td className="stock-col"><span className="out-of-stock">Нет на складе</span></td>
                                     <td className="action-col">
-                                        <button className="btn btn-block btn-outline-primary-2 disabled">Out of Stock</button>
+                                        <button className="btn btn-block btn-outline-primary-2 disabled">Нет на складе</button>
                                     </td>
                                     <td className="remove-col"><button className="btn-remove"><i className="icon-close"></i></button></td>
                                 </tr>
@@ -110,7 +110,7 @@ export default function Wishlist() {
                         </table>
                         <div className="wishlist-share">
                             <div className="social-icons social-icons-sm mb-2">
-                                <label className="social-label">Share on:</label>
+                                <label className="social-label">Поделись:</label>
                                 <a href="#" className="social-icon" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
                                 <a href="#" className="social-icon" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
                                 <a href="#" className="social-icon" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>

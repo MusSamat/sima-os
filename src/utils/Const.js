@@ -12,3 +12,5 @@ export const WISHLIST_ROUTE = '/wishlist'
 export const LOGIN_ROUTE = '/login'
 export const ERROR_ROUTE = '/error'
 export const SINGLE_ROUTE = '/single/:id'
+export const MYACOUNT_ROUTE = '/my-acount'
+

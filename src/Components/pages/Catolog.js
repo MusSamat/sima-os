@@ -16,14 +16,10 @@ const  Catolog = observer(() => {
        e.preventDefault();
        console.log(input)
     }
-
-    // console.log(search(serachPro, input))
     
     
     useEffect(() => {
-        // percentData = (a1, b1) => {
-        //     return a1 -  (a1 * b1 / 100);
-        // }
+        user.getUserData()
         product.fetchTodo().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',

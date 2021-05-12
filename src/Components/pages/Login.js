@@ -1,13 +1,16 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useState, useContext} from 'react';
 import axios from "axios";
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
+import { useHistory } from 'react-router';
+import { MYACOUNT_ROUTE } from '../../utils/Const';
 
 const Login = observer(() => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [username, setUsername] = useState()
     const {user} = useContext(Context)
+    const history = useHistory()
     
 
     
@@ -30,15 +33,17 @@ const Login = observer(() => {
                 setPassword(response.password)
                 setUsername(response.username)
                 user.setIsAuth(true)
+                localStorage.setItem('value', JSON.stringify(response.data));
+                history.push(MYACOUNT_ROUTE)
             })
             .catch(error =>{   
                 console.log(error)
-            user.setIsAuth(false)
+                user.setIsAuth(false)
         })
 
         
         event.preventDefault();
-        // localStorage.setItem('value', JSON.stringify(article));
+        
     }
 
     
@@ -63,12 +68,12 @@ const Login = observer(() => {
                                         <div className="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
                                             <form onSubmit={login}>
                                                 <div className="form-group">
-                                                    <label for="singin-email-2">Username or email address *</label>
                                                     <input 
                                                         type="text" 
                                                         className="form-control" 
                                                         id="singin-email-2" 
                                                         name="singin-email" 
+                                                        placeholder="Имя пользователя или email"
                                                         required
                                                         value={username}
                                                         onChange={e => setUsername(e.target.value)}
@@ -76,12 +81,12 @@ const Login = observer(() => {
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <label for="singin-password-2">Password *</label>
                                                     <input 
                                                         type="password" 
                                                         className="form-control" 
                                                         id="singin-password-2" 
                                                         name="singin-password" 
+                                                        placeholder="Пароль"
                                                         required
                                                         value={password}
                                                         onChange={e => setPassword(e.target.value)}
@@ -90,56 +95,31 @@ const Login = observer(() => {
 
                                                 <div className="form-footer">
                                                     <button  type="submit" className="btn btn-outline-primary-2">
-                                                        <span>LOG IN</span>
-                                                        <i className="icon-long-arrow-right"></i>
+                                                        <span style={{fontSize: "18px"}}>Войти</span>
                                                     </button>
-
-                                                    <div className="custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="signin-remember-2"/>
-                                                        <label className="custom-control-label" for="signin-remember-2">Remember Me</label>
-                                                    </div>
-
-                                                    <a href="#" className="forgot-link">Forgot Your Password?</a>
                                                 </div>
                                             </form>
-                                            <div className="form-choice">
-                                                <p className="text-center">or sign in with</p>
-                                                <div className="row">
-                                                    <div className="col-sm-6">
-                                                        <a href="#" className="btn btn-login btn-g">
-                                                            <i className="icon-google"></i>
-                                                            Login With Google
-                                                        </a>
-                                                    </div>
-                                                    <div className="col-sm-6">
-                                                        <a href="#" className="btn btn-login btn-f">
-                                                            <i className="icon-facebook-f"></i>
-                                                            Login With Facebook
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div className="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
                                             <form action="#">
                                             <div className="form-group">
-                                                    <label for="register-email-2">Name</label>
                                                     <input 
                                                         type="text" 
                                                         className="form-control" 
                                                         name="register-email"
+                                                        placeholder="Имя"
                                                         required
                                                         value={username}
                                                         onChange={e => setUsername(e.target.value)}
                                                     />
                                                 </div>
                                                 <div className="form-group">
-                                                    <label for="register-email-2">Your email address *</label>
                                                     <input 
                                                         type="email" 
                                                         className="form-control" 
                                                         id="register-email-2" 
                                                         name="register-email"
+                                                        placeholder="Ваша электронная почта"
                                                         required
                                                         value={email}
                                                         onChange={e => setEmail(e.target.value)}
@@ -147,12 +127,12 @@ const Login = observer(() => {
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <label for="register-password-2">Password *</label>
                                                     <input 
                                                         type="password" 
                                                         className="form-control" 
                                                         id="register-password-2" 
-                                                        name="register-password" 
+                                                        name="register-password"
+                                                        placeholder="Пароль" 
                                                         required
                                                         value={password}
                                                         onChange={e => setPassword(e.target.value)}
@@ -161,33 +141,11 @@ const Login = observer(() => {
 
                                                 <div className="form-footer">
                                                     <button onClick={()=> sing()} type="submit" className="btn btn-outline-primary-2">
-                                                        <span>SIGN UP</span>
-                                                        <i className="icon-long-arrow-right"></i>
+                                                        <span style={{fontSize: "18px"}}>Регистрация</span>
                                                     </button>
-
-                                                    <div className="custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="register-policy-2" required/>
-                                                        <label className="custom-control-label" for="register-policy-2">I agree to the <a href="#">privacy policy</a> *</label>
-                                                    </div>
                                                 </div>
                                             </form>
-                                            <div className="form-choice">
-                                                <p className="text-center">or sign in with</p>
-                                                <div className="row">
-                                                    <div className="col-sm-6">
-                                                        <a href="#" className="btn btn-login btn-g">
-                                                            <i className="icon-google"></i>
-                                                            Login With Google
-                                                        </a>
-                                                    </div>
-                                                    <div className="col-sm-6">
-                                                        <a href="#" className="btn btn-login  btn-f">
-                                                            <i className="icon-facebook-f"></i>
-                                                            Login With Facebook
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>

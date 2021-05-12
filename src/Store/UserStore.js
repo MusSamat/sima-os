@@ -1,10 +1,12 @@
-import { makeAutoObservable } from "mobx"
+import { makeAutoObservable } from "mobx";
+import axios from "axios"
 
 export default class UserStore {
     constructor(){
         this._isAuth = false
         this._user = {} 
-        this.obj = null
+        this.token = null
+        this.userId = {}
         makeAutoObservable(this)
     }
 
@@ -21,14 +23,31 @@ export default class UserStore {
     get user(){
         return this._user
     }
-    getLocal(){
-        this.obj = JSON.parse(localStorage.getItem('value')) 
-        if(this.obj){
-            this.setIsAuth(true)
-        }
+    
 
-        console.log(this.obj)
+     getUserData(){
+        this.token = JSON.parse(localStorage.getItem('value'))
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/auth/user`,{
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + this.token?.token
+            },
+        })
+        .then(res => {
+            this.userId = res.data
+            this.setIsAuth(true)
+            console.log(this.userId)
+        })
+        .catch((e)=>{
+            console.error(e)
+            this.setIsAuth(false)
+        })
+        
      }
+
+     
+
+     
      
         
 }

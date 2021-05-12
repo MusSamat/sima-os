@@ -1,6 +1,5 @@
 import { makeAutoObservable } from "mobx";
 import axios from 'axios';
-import userStore from "./UserStore";
 
 export default class ProductStore {
     constructor(){

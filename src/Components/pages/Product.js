@@ -11,7 +11,9 @@ const Product = observer(({match}) => {
 
     
     
+    
     useEffect(() => {
+        user.getUserData()
         product.getData(id).then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
@@ -108,10 +110,6 @@ const Product = observer(({match}) => {
                                             {user.isAuth ? product.product.price : ""}
                                         </div>
 
-                                        <div className="product-content">
-                                            <p>{product.product.description} </p>
-                                        </div>
-
                                         <div className="details-filter-row details-row-size">
                                             
                                         </div>
@@ -147,7 +145,7 @@ const Product = observer(({match}) => {
                                         <div>
                                             <p>ЗАРЕГИСТРИРУЙТЕСЬ, ЧТОБЫ ПОСМОТРЕТЬ ЦЕНЫ</p>
                                             <Link to={LOGIN_ROUTE}>
-                                                <button className="btn-outline-dark btn-round">Регистрация</button>
+                                                <button className=" btn-round">Регистрация</button>
                                             </Link>
                                         </div>
                                         }
@@ -162,9 +160,6 @@ const Product = observer(({match}) => {
 
 
                                         <div className="row">
-                                            <div className="col-12">
-                                                <h2 className="title mb-3">Line Style Tabs</h2>
-                                            </div>
                                             <div className="col-md-12">
                                                 <ul className="nav nav-pills" id="tabs-5" role="tablist">
                                                     <li className="nav-item">
@@ -195,7 +190,7 @@ const Product = observer(({match}) => {
                                                         </div>
                                                         <textarea class="form-control"></textarea>
                                                         <div className="d-grid gap-2">
-                                                            <button className="btn btn-outline-secondary" type="button">Button</button>
+                                                            <button className="button-otzyv" type="button">Отправить</button>
                                                             
                                                         </div>
 
