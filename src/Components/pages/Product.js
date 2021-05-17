@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Context } from '../../index';
 import { LOGIN_ROUTE } from '../../utils/Const';
 import axios from "axios";
+import "../../App.css";
 
 const Product = observer(({match}) => {
     const {product} = useContext(Context)
@@ -191,11 +192,11 @@ const Product = observer(({match}) => {
                                             </div>
 
                                             <div className="details-filter-row details-row-size">
-                                                <label for="qty">КОЛ-ВО:</label>
+                                                <label style={{}} for="qty">КОЛ-ВО:</label>
                                                 <div className="product-details-quantity">
-                                                    <button onClick={() => setCount(count - 5)}>-</button>
-                                                    <span>{count}</span>
-                                                    <button onClick={() => setCount(count + 5)}>+</button>
+                                                    <button className="kol" onClick={() => setCount(count - 5)}>-</button>
+                                                    <span style={{margin: "3px", fontWeight:"bold", fontSize: "20px", marginTop: "10px"}}>{count}</span>
+                                                    <button className="kol" onClick={() => setCount(count + 5)}>+</button>
                                                     {/* <input 
                                                         type="number" 
                                                         id="qty" 
@@ -251,8 +252,8 @@ const Product = observer(({match}) => {
                                                 <div className="tab-content" id="tab-content-5">
                                                     <div className="tab-pane fade show active" id="tab-17" role="tabpanel" aria-labelledby="tab-17-tab">
                                                         <p><strong>Размер: </strong> {product.product.size[0]}-{product.product.size[product.product.size.length -1]} </p>
-                                                        <p><strong>Ткань:</strong> {product.product.cloth}</p>
-                                                        <p>{product.product.description}</p>
+                                                        <p ><strong>Ткань:</strong> {product.product.cloth}</p>
+                                                        <p className="p"><strong>Описание:</strong> {product.product.description}</p>
                                                     </div>
                                                     <div className="tab-pane fade" id="tab-18" role="tabpanel" aria-labelledby="tab-18-tab">
                                                         <p>Nobis perspiciatis natus cum, sint dolore earum rerum tempora aspernatur numquam velit tempore omnis, delectus repellat facere voluptatibus nemo non fugiat consequatur repellendus! Enim, commodi, veniam ipsa voluptates quis amet.</p>

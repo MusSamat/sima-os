@@ -69,25 +69,25 @@ const Header = observer(() => {
                     <div className="header-center">
                         <nav className="main-nav">
                             <ul className="menu sf-arrows">
-                                <li className="megamenu-container">
-                                    <NavLink className="sf-with" to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
+                                <li  className="megamenu-container">
+                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" to={CATALOG_ROUTE}>КАТАЛОГ</NavLink>
+                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={CATALOG_ROUTE}>КАТАЛОГ</NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
+                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" to={CONTACT_ROUTE}>КОНТАКТЫ</NavLink>
+                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={CONTACT_ROUTE}>КОНТАКТЫ</NavLink>
 
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" to={NEWS_ROUTE}>НОВОСТИ</NavLink>
+                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={NEWS_ROUTE}>НОВОСТИ</NavLink>
 
                                 </li >
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" to={ABOUT_ROUTE}>О КОМПАНИИ</NavLink>
+                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={ABOUT_ROUTE}>О КОМПАНИИ</NavLink>
 
                                 </li>
                             </ul>

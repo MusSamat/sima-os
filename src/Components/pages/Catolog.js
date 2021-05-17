@@ -89,6 +89,19 @@ const  Catolog = observer(() => {
                                     </div>
                                 </div>
 
+                                <div style={{borderRadius: "40px", background: "#f7f7f7"}} className="cta cta-border mb-5">
+                                    
+                                    <div style={{}} className="row justify-content-center">
+                                        <h4>для запроса каталога следующего сезона, напишите нам на whatsapp</h4>
+                                        <div className="col-6">
+                                            <button className="wahtsapp">+996709999915</button>
+                                        </div>
+                                        <div className="col-6">
+                                            <button className="wahtsapp">+996709999915</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div className="products mb-3">
                                     <div className="row justify-content-center">
                                         
@@ -118,17 +131,17 @@ const  Catolog = observer(() => {
 
                                                     <div className="product-body">
                                                         <div style={{display: "flex", justifyContent: "space-between"}}>
-                                                            <h3 className="product-title"><a href="product.html">{prod.title}</a></h3>
-                                                            <div className="product-price">
-                                                                {user.isAuth ? prod.price : "" }
+                                                            <h3 className="product-title"><a >{prod.title}</a></h3>
+                                                            <div style={{color: "black"}} className="product-price">
+                                                                {user.isAuth ? prod.price : "" } $
                                                             
                                                             </div>
                                                              
                                                         </div>
                                                         <div className="ratings-container">
 
-                                                            <span className="product-price"> </span>
-                                                            Размеры: {prod.size[0]}-{prod.size[1]}
+                                                       <span style={{color: "black", fontSize: "18px"}}>Размеры:</span> <span className="product-price razmer">  {prod.size[0]}-{prod.size[1]} </span>
+                                                           
                                                         </div>
                                                         
                                                     </div>
@@ -164,8 +177,8 @@ const  Catolog = observer(() => {
                             <aside className="col-lg-3 order-lg-first">
                                 <div className="sidebar sidebar-shop">
 
-                                    <div class="">
-                                        <div class="col-sm-10 col-md-8 col-lg-10">
+                                    <div className="">
+                                        <div className="col-sm-10 col-md-8 col-lg-10">
                                         
                                             <form onSubmit={search}>
                                                 <div className="input-group">
@@ -176,8 +189,8 @@ const  Catolog = observer(() => {
                                                         value={input}
                                                         onChange={e => setInput(e.target.value)}
                                                         required/><hr/>
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-primary" type="submit"><span>ПОИСК</span></button>
+                                                    <div className="input-group-append">
+                                                        <button className="btn btn-primary" type="submit"><span>ПОИСК</span></button>
                                                     </div>
                                                 </div>
                                             </form>

@@ -64,7 +64,7 @@ export default function Footer() {
                         <p style={{ fontSize: "14px", marginTop:"2px", marginRight: "15px"}}>ШВЕЙНАЯ ФАБРИКА SIMA © 2021</p>
                         <ul className="footer-menu">
                             <li style={{ fontSize: "14px"}}><a href="#">РАЗРАБОТКА САЙТА:</a></li>
-                            <li style={{ fontSize: "14px"}}><a href="#">АКМАТАЛИЕВ БАЯСТАН</a></li>
+                            <li style={{ fontSize: "14px"}}><a href="#">Давранбеков Кайрат</a></li>
                         </ul>
 
                         <div className="social-icons social-icons-color">
