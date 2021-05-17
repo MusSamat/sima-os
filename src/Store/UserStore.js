@@ -7,6 +7,7 @@ export default class UserStore {
         this._user = {} 
         this.token = null
         this.userId = {}
+        this.carts = []
         makeAutoObservable(this)
     }
 
@@ -36,16 +37,29 @@ export default class UserStore {
         .then(res => {
             this.userId = res.data
             this.setIsAuth(true)
-            console.log(this.userId)
         })
         .catch((e)=>{
-            console.error(e)
             this.setIsAuth(false)
         })
         
      }
 
-     
+     getCartData() {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/carts`, {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + this.token?.token
+            },
+        })
+        .then(res => {
+            this.carts = [ ...res.data]
+            
+            console.log(this.carts)
+        })
+        .catch((e)=>{
+            console.error(e)
+        }) 
+     }
 
      
      

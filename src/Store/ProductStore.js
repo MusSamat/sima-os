@@ -15,6 +15,7 @@ export default class ProductStore {
         this.searchProducts = []
         this.discount = []
         this.obj = null
+        this.carts = []
         
         
 
@@ -56,15 +57,11 @@ export default class ProductStore {
     }
 
     getData(id) {
-        console.log(id)
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/` + id)
             .then(response => {
                 this.product = response.data
                 this.images = this.product.images
                 this.size = this.product.size
-                // this.category = this.product.category
-
-                
 
             })
             .catch((e)=>{
@@ -115,6 +112,8 @@ export default class ProductStore {
                  console.error(e)
              })      
      }
+
+     
 
      
 

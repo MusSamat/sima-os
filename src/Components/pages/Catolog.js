@@ -19,6 +19,7 @@ const  Catolog = observer(() => {
     
     
     useEffect(() => {
+        console.log('catalog')
         user.getUserData()
         product.fetchTodo().then(() => {
             const scripts = [
@@ -103,14 +104,14 @@ const  Catolog = observer(() => {
                                                                 <span className="onsale"></span>
 
                                                             <div className="product-action-vertical">
-                                                                <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                                                {/* <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                                                 <a href="popup/quickView.html" className="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                                                <a href="#" className="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                                                <a href="#" className="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a> */}
                                                             </div>
 
-                                                            <div className="product-action">
+                                                            {/* <div className="product-action">
                                                                 <a href="#" className="btn-product btn-cart"><span>В КОРЗИНУ</span></a>
-                                                            </div>
+                                                            </div> */}
                                                         </figure>
                                                         
                                                     

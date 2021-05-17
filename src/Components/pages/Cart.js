@@ -4,8 +4,11 @@ import { Context } from '../../index';
 
  const Cart = observer(() => {
     const {product} = useContext(Context)
+    const {user} = useContext(Context)
 
     useEffect(() => {
+        console.log(user.carts)
+        user.getCartData()
         product.fetchTodo().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
@@ -48,12 +51,14 @@ import { Context } from '../../index';
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td className="product-col">
+                                                
+                                                {user.carts.map((c, index)=><tr>
+                                                    {console.log(user.carts)}
+                                                    <td key={index} className="product-col">
                                                         <div className="product">
                                                             <figure className="product-media">
                                                                 <a href="#">
-                                                                    <img src="assets/images/products/table/product-1.jpg" alt="Product image"/>
+                                                                    <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0]}`} alt="Product image"/>
                                                                 </a>
                                                             </figure>
 
@@ -65,12 +70,13 @@ import { Context } from '../../index';
                                                     <td className="price-col">$84.00</td>
                                                     <td className="quantity-col">
                                                         <div className="cart-product-quantity">
-                                                            <input type="number" className="form-control" value="15" min="1" max="100" step="5" data-decimals="0" required/>
+                                                            <input type="number" className="form-control" value={c.user} min="1" max="100" step="5" data-decimals="0" required/>
                                                         </div>
                                                     </td>
                                                     <td className="total-col">$84.00</td>
                                                     <td className="remove-col"><button className="btn-remove"><i className="icon-close"></i></button></td>
-                                                </tr>
+                                                </tr>)}
+
                                                 <tr>
                                                     <td className="product-col">
                                                         <div className="product">

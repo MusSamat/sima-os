@@ -1,18 +1,81 @@
 import { observer } from 'mobx-react-lite';
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../index';
 import { LOGIN_ROUTE } from '../../utils/Const';
+import axios from "axios";
 
 const Product = observer(({match}) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
     const id = match.params.id
+    const [count, setCount] = useState(5)
+    console.log(id)
 
     
+    function updateValue(e) {
+        console.log(e.target.value);
+      }
+
+
+    const addWishlist = (e) => {
+        const id = match.params.id
+        const data = JSON.stringify({
+            product: id, 
+            
+            
+        })  
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/wishlist/`, data, 
+        {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+
+        })
+            .then(response => {
+                setCount(count)
+                console.log(response)
+        })
+        .catch(error =>{ 
+            console.log(error)  
+    })
+    e.preventDefault();
+    }
+
+    const addCart = (e) => {
+        console.log(count)
+        const id = match.params.id
+        const data = JSON.stringify({
+            product: id,
+            quantity: count, 
+            
+            
+        })
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/cart-item/`, data, 
+        {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+
+        })
+            .then(response => {
+                setCount(count)
+                console.log(response)
+        })
+        .catch(error =>{ 
+            console.log(error)  
+    })
+    e.preventDefault();
+    }
     
     
     useEffect(() => {
+        const log = document.getElementById('qty');
+        console.log(log)
+         log?.addEventListener('change', updateValue);
+
         user.getUserData()
         product.getData(id).then(() => {
             const scripts = [
@@ -130,15 +193,28 @@ const Product = observer(({match}) => {
                                             <div className="details-filter-row details-row-size">
                                                 <label for="qty">КОЛ-ВО:</label>
                                                 <div className="product-details-quantity">
-                                                    <input type="number" id="qty" className="form-control" value="5" min="1" max="100" step="5" data-decimals="0" required/>
+                                                    <button onClick={() => setCount(count - 5)}>-</button>
+                                                    <span>{count}</span>
+                                                    <button onClick={() => setCount(count + 5)}>+</button>
+                                                    {/* <input 
+                                                        type="number" 
+                                                        id="qty" 
+                                                        className="form-control" 
+                                                        value={count} 
+                                                        min="1" 
+                                                        max="100" 
+                                                        step="5" 
+                                                        data-decimals="0"
+                                                        onChange={e => setCount(e.target.value)} 
+                                                        required/> */}
                                                 </div>
                                             </div>
 
                                             <div className="product-details-action">
-                                                <a href="#" className="btn-product btn-cart"><span >В КОРЗИНУ</span></a>
+                                                <button onClick={addCart} className="btn-product btn-cart"><span >В КОРЗИНУ</span></button>
 
                                                 <div className="details-action-wrapper">
-                                                    <a style={{fontSize: "30px"}} href="#" className="btn-product btn-wishlist" title="Wishlist"></a>
+                                                    <a style={{fontSize: "30px"}} href="" onClick={addWishlist} className="btn-product btn-wishlist" title="Wishlist"></a>
                                                 </div>
                                             </div>
                                         </> :
