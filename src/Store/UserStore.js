@@ -7,7 +7,11 @@ export default class UserStore {
         this._user = {} 
         this.token = null
         this.userId = {}
-        this.carts = []
+        this.userGetId = {}
+        this.carts = {}
+        this.items = []
+        this.wishList = {}
+        this.list = []
         makeAutoObservable(this)
     }
 
@@ -45,21 +49,64 @@ export default class UserStore {
      }
 
      getCartData() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/carts`, {
+        this.userGetId = JSON.parse(localStorage.getItem('value'))
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/carts/` + this.userGetId?.user.id, {
             headers: {
                 'Content-Type':'application/json',
                 'Authorization':'Token ' + this.token?.token
             },
         })
         .then(res => {
-            this.carts = [ ...res.data]
+            this.carts = res.data
+            this.items = this.carts.items 
             
-            console.log(this.carts)
+            console.log(this.items)
+
+            console.log((this.items.product.price*this.items.quantity), "www")
+            
+    console.log()
         })
         .catch((e)=>{
             console.error(e)
         }) 
      }
+
+     getWishlistData() {
+        this.userGetId = JSON.parse(localStorage.getItem('value'))
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/wisher/` + this.userGetId?.user.id, {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + this.token?.token
+            },
+        })
+        .then(res => {
+            this.wishList = res.data
+            this.list = this.wishList.items 
+            
+            
+            
+    console.log()
+        })
+        .catch((e)=>{
+            console.error(e)
+        }) 
+     }
+
+     changeFilter(title){
+        this.products = this.allProducts.filter(item => item.category === title)
+    }
+
+    // totalPrice(){
+    //     let sum = 0 ;
+    //     this.items.reduce((b, a) =>
+    //         sum += b + a.product.price  
+    //      )
+    //      return sum
+    // }
+     
+     
+
+     
 
      
      

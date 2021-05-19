@@ -48,7 +48,6 @@ export default class ProductStore {
     }
     searchFilter(input){
         this.products = this.allProducts.filter(item => item.title.toLowerCase() === input.toLowerCase())
-        console.log(this.products)
     }
 
     countTitle(title){

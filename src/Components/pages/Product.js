@@ -22,9 +22,7 @@ const Product = observer(({match}) => {
     const addWishlist = (e) => {
         const id = match.params.id
         const data = JSON.stringify({
-            product: id, 
-            
-            
+            product: id 
         })  
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/wishlist/`, data, 
         {
@@ -35,8 +33,8 @@ const Product = observer(({match}) => {
 
         })
             .then(response => {
-                setCount(count)
                 console.log(response)
+                user.getWishlistData()
         })
         .catch(error =>{ 
             console.log(error)  
@@ -63,6 +61,7 @@ const Product = observer(({match}) => {
         })
             .then(response => {
                 setCount(count)
+                user.getCartData()
                 console.log(response)
         })
         .catch(error =>{ 
@@ -76,7 +75,8 @@ const Product = observer(({match}) => {
         const log = document.getElementById('qty');
         console.log(log)
          log?.addEventListener('change', updateValue);
-
+         
+         
         user.getUserData()
         product.getData(id).then(() => {
             const scripts = [
@@ -193,21 +193,11 @@ const Product = observer(({match}) => {
 
                                             <div className="details-filter-row details-row-size">
                                                 <label style={{}} for="qty">КОЛ-ВО:</label>
-                                                <div className="product-details-quantity">
+                                                <div >
                                                     <button className="kol" onClick={() => setCount(count - 5)}>-</button>
-                                                    <span style={{margin: "3px", fontWeight:"bold", fontSize: "20px", marginTop: "10px"}}>{count}</span>
+                                                    <span style={{marginLeft: "7px"}} className="kol-input" >{count}</span>
                                                     <button className="kol" onClick={() => setCount(count + 5)}>+</button>
-                                                    {/* <input 
-                                                        type="number" 
-                                                        id="qty" 
-                                                        className="form-control" 
-                                                        value={count} 
-                                                        min="1" 
-                                                        max="100" 
-                                                        step="5" 
-                                                        data-decimals="0"
-                                                        onChange={e => setCount(e.target.value)} 
-                                                        required/> */}
+                                                   
                                                 </div>
                                             </div>
 

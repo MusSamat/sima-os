@@ -88,7 +88,7 @@ export default function Main() {
                                     
                                     <div className="icon-box-content1">
                                     <div className="clock">
-                                        <Clock format={'HH:mm'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}} ticking={true} timezone={'Asia/Yekaterinburg'} />
+                                        <Clock format={'HH:mm:ss'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}} ticking={true} timezone={'Asia/Yekaterinburg'} />
                                         </div>
                                     </div>
                                     <h4 className="city">Samara</h4>

@@ -1,6 +1,37 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite';
+import React, {useContext, useEffect, useState} from 'react';
+import { Context } from '../../index';
+import axios from "axios"
 
-export default function Wishlist() {
+const Wishlist = observer(()=> {
+    const {user} = useContext(Context)
+    
+        
+    const deleteWish = (id) => {
+        
+       
+        const data = JSON.stringify({
+             product: id,  
+        })
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/destroy-wishlist/`, data, {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+        })
+        .then(res => {
+            user.getWishlistData()
+        console.log(res)
+        })
+        .catch((e)=>{
+            console.error(e)
+        }) 
+    }
+
+    useEffect(() => {
+        
+      user.getWishlistData()
+    }, [])
     return (
         <div className="page-wrapper">
             <main className="main">
@@ -33,79 +64,34 @@ export default function Wishlist() {
                             </thead>
 
                             <tbody>
-                                <tr>
+                                {user.list.map((l, index)=>
+                                
+                                <tr key={index}>
                                     <td className="product-col">
                                         <div className="product">
                                             <figure className="product-media">
                                                 <a href="#">
-                                                    <img src="assets/images/products/table/product-1.jpg" alt="Product image"/>
+                                                    <img src={`${process.env.REACT_APP_BASE_URL}${l.product?.images[0]}`} alt="Product image"/>
                                                 </a>
                                             </figure>
 
                                             <h3 className="product-title">
-                                                <a href="#">Beige knitted elastic runner shoes</a>
+                                                <a href="#">{l.product.title}</a>
                                             </h3>
                                         </div>
                                     </td>
-                                    <td className="price-col">$84.00</td>
+                                    <td className="price-col">${l.product.price }</td>
                                     <td className="stock-col"><span className="in-stock">В наличии</span></td>
                                     <td className="action-col">
                                         <div className="dropdown">
                                         <button className="btn btn-block btn-outline-primary-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i className="icon-list-alt"></i>Select Options
+                                            В КОРЗИНУ
                                         </button>
-
-                                        <div className="dropdown-menu">
-                                            <a className="dropdown-item" href="#">First option</a>
-                                            <a className="dropdown-item" href="#">Another option</a>
-                                            <a className="dropdown-item" href="#">The best option</a>
-                                        </div>
                                         </div>
                                     </td>
-                                    <td className="remove-col"><button className="btn-remove"><i className="icon-close"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td className="product-col">
-                                        <div className="product">
-                                            <figure className="product-media">
-                                                <a href="#">
-                                                    <img src="assets/images/products/table/product-2.jpg" alt="Product image"/>
-                                                </a>
-                                            </figure>
-
-                                            <h3 className="product-title">
-                                                <a href="#">Blue utility pinafore denim dress</a>
-                                            </h3>
-                                        </div>
-                                    </td>
-                                    <td className="price-col">$76.00</td>
-                                    <td className="stock-col"><span className="in-stock">В наличии</span></td>
-                                    <td className="action-col">
-                                        <button className="btn btn-block btn-outline-primary-2"><i className="icon-cart-plus"></i>Add to Cart</button>
-                                    </td>
-                                    <td className="remove-col"><button className="btn-remove"><i className="icon-close"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td className="product-col">
-                                        <div className="product">
-                                            <figure className="product-media">
-                                                <a href="#">
-                                                    <img src="assets/images/products/table/product-3.jpg" alt="Product image"/>
-                                                </a>
-                                            </figure>
-
-                                            <h3 className="product-title">
-                                                <a href="#">Orange saddle lock front chain cross body bag</a>
-                                            </h3>
-                                        </div>
-                                    </td>
-                                    <td className="price-col">$52.00</td>
-                                    <td className="stock-col"><span className="out-of-stock">Нет на складе</span></td>
-                                    <td className="action-col">
-                                        <button className="btn btn-block btn-outline-primary-2 disabled">Нет на складе</button>
-                                    </td>
-                                    <td className="remove-col"><button className="btn-remove"><i className="icon-close"></i></button></td>
-                                </tr>
+                                    <td  className="remove-col"><button onClick={() => deleteWish(l.product.id)}  className="btn-remove"><i className="icon-close">{}</i></button></td>
+                                </tr>)}
+                                
                             </tbody>
                         </table>
                         <div className="wishlist-share">
@@ -124,4 +110,6 @@ export default function Wishlist() {
             <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
         </div>
     )
-}
+})
+
+export default Wishlist;

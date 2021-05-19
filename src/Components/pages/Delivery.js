@@ -2,17 +2,59 @@ import React from 'react';
 import fura from "../../assets/fura.png"
 
 export default function Delivery() {
+
+	var M = [
+		 [1, 2, 3, 4, 5],
+		 [6, 7, 8, 9, 10],
+		 [11, 12, 13, 14, 15],
+		 [16, 17, 18, 19, 20]
+		 ];
+		 function spiralPrint(M) {
+		 var topRow = 0,
+		 leftCol = 0,
+	    btmRow = M.length - 1,
+	    rightCol = M[0].length - 1;
+
+		
+	   
+	    while (topRow < btmRow && leftCol < rightCol) {
+	    for (var col = 0; col <= rightCol; col++) {
+	    console.log(M[topRow][col]);
+	    }
+	    topRow++
+	    for (var row = topRow; row <= btmRow; row++) {
+	    console.log(M[row][rightCol]);
+	    }
+	    rightCol--;
+	    if (topRow <= btmRow) {
+	    for (var col = rightCol; col >= 0; col--) {
+	    console.log(M[btmRow][col]);
+	    }
+	    btmRow--;
+	    }
+	    if (leftCol <= rightCol) {
+			for (var row = btmRow; row > topRow; row--) {
+				 console.log(M[row][leftCol]);
+			}
+			leftCol++;
+		}
+		}
+	}
+				 console.log(spiralPrint(M));
+	   
     return (
         <div style={{marginTop: "100px"}} className="page-wrapper">
+			<div className="container">
                 <div className="row">
-                	<div className="col-sm-9">
-                        <h3 style={{marginLeft:"50px", marginTop:"30px",color: "#5d4f84", fontFamily: "Arial", fontZize: "29px"}}>Осуществляем доставку в города России и Казахстана</h3>
+                	<div className=" col-sm-10">
+                        <h3 style={{ marginTop:"30px",color: "#5d4f84", fontFamily: "Arial", fontZize: "29px"}}>Осуществляем доставку в города России и Казахстана</h3>
                 	</div>
 
-                	<div className="col-sm-3">
-                        <img src={fura}/>
+                	<div  className="col-sm-2">
+                        <img  src={fura}/>
                 	</div>
                 </div>
+			</div>
             <div className="trending">
                     <a href="#">
                     <img style={{backgroundSize: "cover", width: "100%"}} src="https://s0.rbk.ru/v6_top_pics/media/img/7/70/755254270044707.jpg" alt="Banner"/>

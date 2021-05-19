@@ -1,14 +1,76 @@
 import { observer } from 'mobx-react-lite';
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { Context } from '../../index';
+import axios from "axios"
+import { NavLink } from 'react-router-dom';
+import { CHECKOUT_ROUTE } from '../../utils/Const';
 
  const Cart = observer(() => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
+    const [quantity, setCount] = useState(5)
+    let sum  = 0;
+
+ 
+
+    const UpdateCart = (e) => {
+        console.log(quantity)
+        const data = JSON.stringify({
+            // product: 
+            quantity: quantity, 
+            
+            
+        })
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/cart-item/`, data, 
+        {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+
+        })
+            .then(response => {
+                setCount(quantity)
+                console.log(response)
+        })
+        .catch(error =>{ 
+            console.log(error)  
+    })
+    e.preventDefault();
+    }
+
+   
+    const deleteCart = (id) => {
+        
+       
+        const data = JSON.stringify({
+             product: id,  
+        })
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/destroy-cart/`, data, {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+        })
+        .then(res => {
+            user.getCartData()
+        console.log(res)
+        })
+        .catch((e)=>{
+            console.error(e)
+        }) 
+    }
+     
+    
+     
 
     useEffect(() => {
-        console.log(user.carts)
+        
+        console.log(user.items[product.title])
+        // user.totalPrice()
+        
         user.getCartData()
+        // summa()
         product.fetchTodo().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
@@ -52,8 +114,11 @@ import { Context } from '../../index';
 
                                             <tbody>
                                                 
-                                                {user.carts.map((c, index)=><tr>
-                                                    {console.log(user.carts)}
+                                                {user.items.map((c, index)=>
+                                                
+                                                
+                                                
+                                                <tr>
                                                     <td key={index} className="product-col">
                                                         <div className="product">
                                                             <figure className="product-media">
@@ -63,43 +128,31 @@ import { Context } from '../../index';
                                                             </figure>
 
                                                             <h3 className="product-title">
-                                                                <a href="#">Beige knitted elastic runner shoes</a>
+                                                                <a href="#">{c.product.title}</a>
                                                             </h3>
                                                         </div>
                                                     </td>
-                                                    <td className="price-col">$84.00</td>
-                                                    <td className="quantity-col">
-                                                        <div className="cart-product-quantity">
-                                                            <input type="number" className="form-control" value={c.user} min="1" max="100" step="5" data-decimals="0" required/>
+                                                    <td className="price-col">${c.product.price}</td>
+                                                    
+                                                    <td >
+                                                        <div >
+                                                            <button  className="kol" onClick={() => setCount(quantity - 5)}>-</button>
+                                                            <span style={{marginLeft: "7px"}} className="kol-input" >{c.quantity}</span>
+                                                            <button className="kol" onClick={() => setCount(quantity + 5)}>+</button>
+                                                        
                                                         </div>
+                                                        
+                                                        
+                                                        {/* <div className="cart-product-quantity">
+                                                        
+                                                            <input type="number" className="form-control" value={c.quantity} min="1" max="100" step="5" data-decimals="0" required/>
+                                                        </div> */}
+                                                        
                                                     </td>
-                                                    <td className="total-col">$84.00</td>
-                                                    <td className="remove-col"><button className="btn-remove"><i className="icon-close"></i></button></td>
+
+                                                    <td className="total-col">${c.product.price * c.quantity}</td>
+                                                    <td className="remove-col"><button onClick={() => deleteCart(c.product.id)} className="btn-remove"><i className="icon-close"></i></button></td>
                                                 </tr>)}
-
-                                                <tr>
-                                                    <td className="product-col">
-                                                        <div className="product">
-                                                            <figure className="product-media">
-                                                                <a href="#">
-                                                                    <img src="assets/images/products/table/product-2.jpg" alt="Product image"/>
-                                                                </a>
-                                                            </figure>
-
-                                                            <h3 className="product-title">
-                                                                <a href="#">Blue utility pinafore denim dress</a>
-                                                            </h3>
-                                                        </div>
-                                                    </td>
-                                                    <td className="price-col">$76.00</td>
-                                                    <td className="quantity-col">
-                                                        <div className="cart-product-quantity">
-                                                            <input type="number" className="form-control" value="5" min="1" max="100" step="5" data-decimals="0" required/>
-                                                        </div>                                
-                                                    </td>
-                                                    <td className="total-col">$76.00</td>
-                                                    <td className="remove-col"><button className="btn-remove"><i className="icon-close"></i></button></td>
-                                                </tr>
                                             </tbody>
                                         </table>
 
@@ -126,18 +179,27 @@ import { Context } from '../../index';
                                                 <tbody>
                                                     <tr className="summary-subtotal">
                                                         <td>ПОДЫТОГ:</td>
-                                                        <td>$160.00</td>
+                                    
+                                                            {
+                                                                user.items.map((item, index) => {
+                                                                     sum = sum + item.product.price * item.quantity
+                                                                    })
+                                                            }
+
+                                                    <td>{sum.toFixed(2)}</td>
+                                                        
                                                     </tr>
                                                     
 
                                                     <tr className="summary-total">
                                                         <td>ИТОГО:</td>
-                                                        <td>$160.00</td>
+                                                           
+                                                        <td>{sum.toFixed(2)}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
 
-                                            <a  style={{fontSize: "20px"}} className="btn btn-outline-primary-2 btn-order btn-block">Оформить заказ</a>
+                                            <NavLink to={CHECKOUT_ROUTE}><a  style={{fontSize: "20px"}} className="btn btn-outline-primary-2 btn-order btn-block">Оформить заказ</a></NavLink>
                                         </div>
 
                                         <button  className="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i className="icon-refresh"></i></button>

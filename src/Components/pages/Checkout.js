@@ -1,6 +1,15 @@
-import React from 'react';
+import { observer } from 'mobx-react-lite';
+import React, {useContext, useEffect} from 'react';
+import { Context } from '../../index';
 
-export default function Checkout() {
+const Checkout = observer(() => {
+
+	const {user} = useContext(Context)
+	let sum = 0
+
+	useEffect(() => {
+		user.getCartData()
+	}, [])
     return (
         <div classNameName="page-wrapper">
             <div className="page-content">
@@ -71,25 +80,29 @@ export default function Checkout() {
 		                							<th>ПОДЫТОГ</th>
 		                						</tr>
 		                					</thead>
-
+											
 		                					<tbody>
-		                						<tr>
-		                							<td><a href="#">Beige knitted elastic runner shoes</a></td>
-		                							<td>$84.00</td>
-		                						</tr>
-
-		                						<tr>
-		                							<td><a href="#">Blue utility pinafore denimdress</a></td>
-		                							<td>$76,00</td>
-		                						</tr>
+											
+											
+											{user.items.map((item, index)=>
+		                						<tr key={index}>
+		                							<td><a href="">{item.product.title}</a></td>
+		                							<td>{item.product.price*item.quantity}</td>
+		                						</tr>)}
 		                						<tr className="summary-subtotal">
 		                							<td>ПОДЫТОГ:</td>
-		                							<td>$160.00</td>
+															{
+                                                                user.items.map((item, index) => {
+                                                                     sum = sum + item.product.price * item.quantity
+                                                                    })
+                                                            }
+		                							<td>{sum.toFixed(2)}</td>
 		                						</tr>
 		                						<tr className="summary-total">
 		                							<td>ИТОГО:</td>
-		                							<td>$160.00</td>
+		                							<td>{sum.toFixed(2)}</td>
 		                						</tr>
+												
 		                					</tbody>
 		                				</table>
 
@@ -107,4 +120,6 @@ export default function Checkout() {
             <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
         </div>
     )
-}
+})
+
+export default  Checkout
