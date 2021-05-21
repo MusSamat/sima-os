@@ -1,23 +1,16 @@
 import React from 'react';
 import Particle from './Particle';
 import "../../App.css";
-
-import Clock from 'react-live-clock';
+import Clocke from "../Clocks/ClockMin"
+import Clock1 from "../Clocks/Clock1"
+import Clock2 from "../Clocks/Clock2"
+import Clock3 from "../Clocks/Clock3"
 
 
 
 export default function Main() {
 
-    const event = new Date(Date.UTC(2021, 4, 3, 12, 47, 0));
-    console.log(event.toLocaleString('en-GB', { timeZone: 'UTC' }));
-
-    let bishkek = new Date().toLocaleTimeString();
-    let moscow = new Date().toLocaleTimeString('en-US');
-    let samara = new Date().toLocaleTimeString('it-IT');
-    let astana = new Date().toLocaleTimeString();
-    let novasibr = new Date().toLocaleTimeString();
-    let time = new Date().toLocaleTimeString();
-
+    
     
 
     
@@ -48,12 +41,8 @@ export default function Main() {
                     <div className="row justify-content-center" style={{paddingLeft: "60px"}}>
                             <div className="col-lg-3 col-sm-6">
                                 <div className="icon-box text-center1">
+                                    <Clocke/>
                                     
-                                    <div className="icon-box-content1">
-                                    <div className="clock">
-                                        <Clock format={'HH:mm'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}}  ticking={true} timezone={'Asia/Bishkek'} />
-                                        </div>
-                                    </div>
                                     <h4 className="city">Bishkek</h4>
                                 </div>
                                 
@@ -61,38 +50,25 @@ export default function Main() {
 
                             <div className="col-lg-3 col-sm-6">
                                 <div className="icon-box text-center1">
-                                    
-                                    <div className="icon-box-content1">
-                                    <div className="clock">
-                                        <Clock format={'HH:mm'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}}  ticking={true} timezone={'Europe/Moscow'} />
-                                        </div>
-                                    </div>
+                                    <Clock1/>
                                     <h4 className="city">Moscow</h4>
                                 </div>
                             </div>
 
                             <div className="col-lg-3 col-sm-6">
                                 <div className="icon-box text-center1">
-                                    
-                                    <div className="icon-box-content1">
-                                        <div className="clock">
-                                            <Clock  format={'HH:mm'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}}  ticking={true} timezone={'Asia/Tashkent'} />
-                                        </div>
-                                    </div>
-                                     <h4 className="city">Tashkent</h4>
+                                    <Clock2/>
+                                   
+                                     <h4 className="city">Samara</h4>
                                 </div>
                             </div>
 
                             <div sty className="col-lg-3 col-sm-6">
                                 <div className="icon-box text-center1">
-                                    
-                                    <div className="icon-box-content1">
-                                    <div className="clock">
-                                        <Clock format={'HH:mm:ss'} style={{fontSize: "30px", color: "red", fontWeight: "bold"}} ticking={true} timezone={'Asia/Yekaterinburg'} />
-                                        </div>
-                                    </div>
-                                    <h4 className="city">Samara</h4>
+                                    <Clock3/>
+                                    <h4 className="city">Tashkent</h4>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -105,7 +81,7 @@ export default function Main() {
                                     <i className="icon-rocket"></i>
                                 </span>
                                 <div className="icon-box-content">
-                                    <h3 className="icon-box-title">{time}</h3>
+                                    <h3 className="icon-box-title"></h3>
                                     <p>Free shipping for orders over $50</p>
                                 </div>
                             </div>
@@ -117,7 +93,7 @@ export default function Main() {
                                     <i className="icon-rotate-left"></i>
                                 </span>
                                 <div className="icon-box-content">
-                                    <h3 className="icon-box-title">{time}</h3>
+                                    <h3 className="icon-box-title"></h3>
                                     <p>Free 100% money back guarantee</p>
                                 </div>
                             </div>
@@ -129,7 +105,7 @@ export default function Main() {
                                     <i className="icon-life-ring"></i>
                                 </span>
                                 <div className="icon-box-content">
-                                    <h3 className="icon-box-title">{time}</h3>
+                                    <h3 className="icon-box-title"></h3>
                                     <p>Alway online feedback 24/7</p>
                                 </div>
                             </div>

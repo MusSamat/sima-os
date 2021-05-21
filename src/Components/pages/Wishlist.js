@@ -6,6 +6,7 @@ import axios from "axios"
 const Wishlist = observer(()=> {
     const {user} = useContext(Context)
     
+    
         
     const deleteWish = (id) => {
         
@@ -28,9 +29,40 @@ const Wishlist = observer(()=> {
         }) 
     }
 
+
+    const addCart = (e, id, quantity) => {
+        const data = JSON.stringify({
+            product: id,
+            quantity: quantity, 
+            
+            
+        })
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/cart-item/`, data, 
+        {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+
+        })
+            .then(response => {
+                user.getCartData()
+                console.log(response)
+                deleteWish(id)
+
+        })
+        .catch(error =>{ 
+            console.log(error)  
+    })
+    e.preventDefault();
+    }
+
     useEffect(() => {
+        console.log(user.list)
         
-      user.getWishlistData()
+            user.getWishlistData()
+        
+      
     }, [])
     return (
         <div className="page-wrapper">
@@ -80,11 +112,11 @@ const Wishlist = observer(()=> {
                                             </h3>
                                         </div>
                                     </td>
-                                    <td className="price-col">${l.product.price }</td>
+                                    <td className="price-col">${l.product.price } {l.quantity}</td>
                                     <td className="stock-col"><span className="in-stock">В наличии</span></td>
                                     <td className="action-col">
                                         <div className="dropdown">
-                                        <button className="btn btn-block btn-outline-primary-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button onClick={(e) =>addCart(e, l.product.id, l.quantity)} className="btn btn-block btn-outline-primary-2" >
                                             В КОРЗИНУ
                                         </button>
                                         </div>

@@ -9,6 +9,7 @@ const Checkout = observer(() => {
 
 	useEffect(() => {
 		user.getCartData()
+		
 	}, [])
     return (
         <div classNameName="page-wrapper">
@@ -28,7 +29,7 @@ const Checkout = observer(() => {
 		                				<div className="row">
 		                					<div className="col-sm-6">
 		                						<label>Имя  *</label>
-		                						<input type="text" className="form-control" required/>
+		                						<input type="text" value={user.userId.username} className="form-control" required/>
 		                					</div>
 
 		                					<div className="col-sm-6">
@@ -55,7 +56,7 @@ const Checkout = observer(() => {
 
 		                					<div className="col-sm-6">
 		                						<label>Email *</label>
-		                						<input type="email" className="form-control" required/>
+		                						<input type="email" value={user.userId.email} className="form-control" required/>
 		                					</div>
 		                				</div>
 
@@ -81,13 +82,13 @@ const Checkout = observer(() => {
 		                						</tr>
 		                					</thead>
 											
-		                					<tbody>
+		                					<tbody >
 											
 											
 											{user.items.map((item, index)=>
-		                						<tr key={index}>
+		                						<tr  key={index}>
 		                							<td><a href="">{item.product.title}</a></td>
-		                							<td>{item.product.price*item.quantity}</td>
+		                							<td>{(item.product.price*item.quantity).toFixed(2)}</td>
 		                						</tr>)}
 		                						<tr className="summary-subtotal">
 		                							<td>ПОДЫТОГ:</td>

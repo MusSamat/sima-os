@@ -5,6 +5,12 @@ import { Context } from '../../index';
 import { LOGIN_ROUTE } from '../../utils/Const';
 import axios from "axios";
 import "../../App.css";
+import { FaStar } from "react-icons/fa";
+
+const colors ={
+    orange: "#FFBA5A",
+    grey: "#a9a9a9"
+}
 
 const Product = observer(({match}) => {
     const {product} = useContext(Context)
@@ -22,7 +28,8 @@ const Product = observer(({match}) => {
     const addWishlist = (e) => {
         const id = match.params.id
         const data = JSON.stringify({
-            product: id 
+            product: id,
+            quantity: count  
         })  
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/wishlist/`, data, 
         {
@@ -33,8 +40,9 @@ const Product = observer(({match}) => {
 
         })
             .then(response => {
-                console.log(response)
+                setCount(count)
                 user.getWishlistData()
+                console.log(response)
         })
         .catch(error =>{ 
             console.log(error)  
@@ -43,7 +51,6 @@ const Product = observer(({match}) => {
     }
 
     const addCart = (e) => {
-        console.log(count)
         const id = match.params.id
         const data = JSON.stringify({
             product: id,
@@ -69,6 +76,55 @@ const Product = observer(({match}) => {
     })
     e.preventDefault();
     }
+
+    const stars = Array(5).fill(0);
+    const [currValue, setCurrValue] = useState(0);
+    const [hoverValue, setHoverValue] = useState(undefined)
+    const [text, setText] = useState()
+
+    const handleClick = (value) => {
+        setCurrValue(value)
+    }
+
+    const handleMouseOver = value => {
+        setHoverValue(value)
+    }
+
+    const handleMouseLeave = () => {
+        setHoverValue(undefined)
+    }
+
+
+    const sendRating = (event) => {
+        const id = match.params.id
+        const data = JSON.stringify({
+            product: id,
+            rating: currValue, 
+            text: text
+            
+            
+        })
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/product-reviews`, data, 
+        {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+
+        })
+            .then(response => {
+                setCurrValue(0)
+                setText("")
+                console.log(response)
+        })
+        .catch(error =>{ 
+            console.log(error)  
+    })
+    event.preventDefault();
+    console.log(event)
+    }
+
+
     
     
     useEffect(() => {
@@ -191,7 +247,7 @@ const Product = observer(({match}) => {
                                                 </div>
                                             </div>
 
-                                            <div className="details-filter-row details-row-size">
+                                            <div className="details-filter-row details-row-size"> 
                                                 <label style={{}} for="qty">КОЛ-ВО:</label>
                                                 <div >
                                                     <button className="kol" onClick={() => setCount(count - 5)}>-</button>
@@ -253,11 +309,39 @@ const Product = observer(({match}) => {
                                                         <hr></hr>
                                                         <div className="ratings-container justify-content-between">
                                                             <p>ВАШ ОТЗЫВ *</p>
-                                                            <div className="ratings" style={{width: "80%;", cursor:"pointer"}}></div>
+                                                            <div>
+                                                                {stars.map((_, index)=>{
+                                                                    return(
+                                                                        <FaStar
+                                                                            key={index}
+                                                                            size={18}
+                                                                            style={{
+                                                                                marginRight: 8,
+                                                                                cursor: "pointer"
+                                                                            }}
+                                                                            color={(hoverValue || currValue) > index ? colors.orange : colors.grey}
+                                                                            onClick={() => handleClick(index + 1)}
+                                                                            onMouseOver={() => handleMouseOver(index+1)}
+                                                                            onMouseLeave={ handleMouseLeave}
+                                                                            onChange={e => setCurrValue(e.target.value)}
+                                                                            value={currValue}
+                                                                        />
+                                                                    )
+                                                                })}
+                                                            </div>
+                                                            {/* <div className="ratings" style={{width: "80%;", cursor:"pointer"}}>
+                                                                
+                                                            </div> */}
                                                         </div>
-                                                        <textarea class="form-control"></textarea>
+                                                        <textarea 
+                                                            class="form-control"
+                                                            value={text}
+                                                            onChange={e => setText(e.target.value)}
+                                                            >
+
+                                                        </textarea>
                                                         <div className="d-grid gap-2">
-                                                            <button className="button-otzyv" type="button">Отправить</button>
+                                                            <button className="button-otzyv" onClick={(e)=>sendRating(e)} type="button">Отправить</button>
                                                             
                                                         </div>
 

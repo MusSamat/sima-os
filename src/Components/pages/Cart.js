@@ -3,21 +3,32 @@ import React, {useContext, useEffect, useState} from 'react'
 import { Context } from '../../index';
 import axios from "axios"
 import { NavLink } from 'react-router-dom';
-import { CHECKOUT_ROUTE } from '../../utils/Const';
+import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
 
  const Cart = observer(() => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
-    const [quantity, setCount] = useState(5)
+    const [count , setCount] = useState(new Array())
     let sum  = 0;
 
+    console.log(count)
+
+    const countIncrement = (id) => {
+        let count = user.items.map(item => item.quantity )
+        setCount(count  + 5)
+        console.log(count)
+    }
+
+    let prod = user.items.map(item => item.product.id )
+    let quan = user.items.map(item => item.quantity )
+    console.log(prod)
+    console.log(quan)
  
 
     const UpdateCart = (e) => {
-        console.log(quantity)
-        const data = JSON.stringify({
-            // product: 
-            quantity: quantity, 
+        const data = JSON.stringify({ 
+            product: prod,
+            quantity: quan, 
             
             
         })
@@ -30,7 +41,6 @@ import { CHECKOUT_ROUTE } from '../../utils/Const';
 
         })
             .then(response => {
-                setCount(quantity)
                 console.log(response)
         })
         .catch(error =>{ 
@@ -38,6 +48,8 @@ import { CHECKOUT_ROUTE } from '../../utils/Const';
     })
     e.preventDefault();
     }
+
+    
 
    
     const deleteCart = (id) => {
@@ -65,12 +77,7 @@ import { CHECKOUT_ROUTE } from '../../utils/Const';
      
 
     useEffect(() => {
-        
-        console.log(user.items[product.title])
-        // user.totalPrice()
-        
         user.getCartData()
-        // summa()
         product.fetchTodo().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
@@ -136,9 +143,10 @@ import { CHECKOUT_ROUTE } from '../../utils/Const';
                                                     
                                                     <td >
                                                         <div >
-                                                            <button  className="kol" onClick={() => setCount(quantity - 5)}>-</button>
+                                                            <button  className="kol" onClick={() => setCount(count + 5)}>-</button>
                                                             <span style={{marginLeft: "7px"}} className="kol-input" >{c.quantity}</span>
-                                                            <button className="kol" onClick={() => setCount(quantity + 5)}>+</button>
+                                                            <span style={{marginLeft: "7px"}} className="kol-input" >{count}</span>
+                                                            <button className="kol" onClick={() => countIncrement(c.quantity)}>+</button>
                                                         
                                                         </div>
                                                         
@@ -150,7 +158,7 @@ import { CHECKOUT_ROUTE } from '../../utils/Const';
                                                         
                                                     </td>
 
-                                                    <td className="total-col">${c.product.price * c.quantity}</td>
+                                                    <td className="total-col">${(c.product.price * c.quantity).toFixed(2)}</td>
                                                     <td className="remove-col"><button onClick={() => deleteCart(c.product.id)} className="btn-remove"><i className="icon-close"></i></button></td>
                                                 </tr>)}
                                             </tbody>
@@ -168,7 +176,7 @@ import { CHECKOUT_ROUTE } from '../../utils/Const';
                                                 </form>
                                             </div>
 
-                                            <a href="#" className="btn btn-outline-dark-2"><span>UPDATE CART</span><i className="icon-refresh"></i></a>
+                                            <a onClick={(e) => UpdateCart(e)} href="#" className="btn btn-outline-dark-2"><span>ОБНОВИТЬ КОРЗИНУ</span><i className="icon-refresh"></i></a>
                                         </div>
                                     </div>
                                     <aside className="col-lg-3">
@@ -202,7 +210,7 @@ import { CHECKOUT_ROUTE } from '../../utils/Const';
                                             <NavLink to={CHECKOUT_ROUTE}><a  style={{fontSize: "20px"}} className="btn btn-outline-primary-2 btn-order btn-block">Оформить заказ</a></NavLink>
                                         </div>
 
-                                        <button  className="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i className="icon-refresh"></i></button>
+                                        <NavLink to={CATALOG_ROUTE}><button  className="btn btn-outline-dark-2 btn-block mb-3"><span>ПРОДОЛЖИТЬ ПОКУПКИ</span><i className="icon-refresh"></i></button></NavLink>
                                     </aside>
                                 </div>
                             </div>

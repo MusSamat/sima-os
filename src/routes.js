@@ -7,12 +7,13 @@ import News from "./Components/pages/News";
 import Product from "./Components/pages/Product";
 import Cart from "./Components/pages/Cart";
 import Checkout from "./Components/pages/Checkout";
-import {CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, ABOUT_ROUTE, NEWS_ROUTE, HOME_ROUTE, PRODUCT_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, ERROR_ROUTE, SINGLE_ROUTE, MYACOUNT_ROUTE} from "./utils/Const";
+import {CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, ABOUT_ROUTE, NEWS_ROUTE, HOME_ROUTE, PRODUCT_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, ERROR_ROUTE, SINGLE_ROUTE, MYACOUNT_ROUTE, FILTER_ROUTE} from "./utils/Const";
 import Wishlist from "./Components/pages/Wishlist";
 import Login from "./Components/pages/Login";
 import Error from "./Components/pages/Error";
 import Single from "./Components/pages/Single";
 import Myacount from "./Components/pages/Myacount";
+import Filter from "./Components/pages/Filter";
 
 
 
@@ -83,8 +84,8 @@ export const publicRoutes = [
         path: MYACOUNT_ROUTE ,
         Component: Myacount,
     },
-    // {
-    //     path: COMPANI_ROUTE + '/:id',
-    //     Component: DevicePages,
-    // },
+    {
+        path: FILTER_ROUTE ,
+        Component: Filter,
+    },
 ]

@@ -132,7 +132,7 @@ const Header = observer(() => {
                             </a>
 
                             <div  className="dropdown-menu dropdown-menu-right">
-                                <div style={{overflowY: "auto", height: "350px"}} >
+                                <div style={{overflowY: "auto", height: "230px"}} >
                                {user.items.map((c, index)=>
                                 <div key={index}   className="dropdown-cart-products">
                                     <div className="product">

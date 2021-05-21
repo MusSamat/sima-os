@@ -55,6 +55,11 @@ export default class ProductStore {
         
     }
 
+    priceFilter(price){
+        return this.allProducts.filter(item => item.price === price)
+        
+    }
+
     getData(id) {
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/` + id)
             .then(response => {

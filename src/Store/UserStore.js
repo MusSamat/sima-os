@@ -12,6 +12,8 @@ export default class UserStore {
         this.items = []
         this.wishList = {}
         this.list = []
+
+        this.count = 5
         makeAutoObservable(this)
     }
 
@@ -27,6 +29,17 @@ export default class UserStore {
     }
     get user(){
         return this._user
+    }
+
+
+    increment(id){
+        this.count = this.items.flatMap
+        this.count =  this.count + id
+        console.log(this.count)
+    }
+    decrement(id){
+        this.count =  this.count - id
+        console.log(this.count)
     }
     
 
@@ -61,15 +74,13 @@ export default class UserStore {
             this.items = this.carts.items 
             
             console.log(this.items)
-
-            console.log((this.items.product.price*this.items.quantity), "www")
-            
-    console.log()
         })
         .catch((e)=>{
             console.error(e)
         }) 
      }
+
+
 
      getWishlistData() {
         this.userGetId = JSON.parse(localStorage.getItem('value'))

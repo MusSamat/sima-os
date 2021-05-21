@@ -2,13 +2,41 @@ import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import { Link } from 'react-router-dom';
+import Slider from '@material-ui/core/Slider';
+import Filter from "./Filter";
+import {
+	ReactiveBase,
+	RangeSlider,
+	SelectedFilters,
+	ResultList,
+	ReactiveList,
+} from '@appbaseio/reactivesearch';
 import "../../App.css"
+
+function valuetext(value) {
+    return `${value}°C`;
+  }
+  
 
  
 const  Catolog = observer(() => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
     const [input, setInput] = useState("")
+
+    const [value, setValue] = useState([0, 100]);
+
+    const handleChange = (event, newValue, value) => {
+        setValue(newValue);
+        
+            console.log(product.allProducts.filter(item => item.price === newValue ))
+        
+        event.preventDefault();
+        // console.log(product.products)
+    };
+
+
+    
     
     
     const search = (e) => {
@@ -103,8 +131,7 @@ const  Catolog = observer(() => {
                                 </div>
 
                                 <div className="products mb-3">
-                                    <div className="row justify-content-center">
-                                        
+                                    <div className="row justify-content-center">                                        
                                         {product.products.map((prod, index) => 
                                         
                                             <div className="col-6 col-md-4 col-lg-4 col-xl-3"  >
@@ -196,6 +223,35 @@ const  Catolog = observer(() => {
                                             </form>
                                         </div>
                                     </div>
+
+                                    {/* <ReactiveBase
+                                            app="good-books-ds"
+                                           url="https://a03a1cb71321:75b6603d-9456-4a5a-af6b-a487b309eb61@appbase-demo-ansible-abxiydt-arc.searchbase.io"
+                                            enableAppbase
+                                   >
+                                                                <RangeSlider
+                                                                    dataField="ratings_count"
+                                                                    componentId="BookSensor"
+                                                                    range={{
+                                                                        start: 300,
+                                                                        end: 500,
+                                                                    }}
+                                                                    rangeLabels={{
+                                                                        start: '300',
+                                                                        end: '500',
+                                                                    }}
+                                                                />
+                                                                <SelectedFilters />
+                                                            </ReactiveBase>
+                                                            
+                                                            <Slider
+                                                                value={value}
+                                                                onChange={handleChange}
+                                                                valueLabelDisplay="auto"
+                                                                aria-labelledby="range-slider"
+                                                                getAriaValueText={valuetext}
+                                                                
+                                                            /> */}
                                     
                                     <div className="widget widget-clean">
                                     
@@ -203,16 +259,21 @@ const  Catolog = observer(() => {
                                         <div className="widget widget-collapsible">
                                             <h3 className="widget-title">
                                                 <a data-toggle="collapse" role="button" aria-expanded="true" aria-controls="widget-5">
-                                                    ФИЛЬТР ПО ЦЕНЕ
+                                                    {/* ФИЛЬТР ПО ЦЕНЕ */}
+                                                    
+                                                    
                                                 </a>
                                             </h3>
+                                            
 
                                             <div className="collapse show" id="widget-5">
                                                 <div className="widget-body">
                                                     <div className="filter-price">
                                                         <div className="filter-price-text">
-                                                            
+                                                            {/* <input type="range"/> */}
                                                             <span id="filter-price-range"></span>
+                                                            {/* <Filter/> */}
+                                                            
                                                         </div>
 
                                                         <div id="price-slider"></div>
