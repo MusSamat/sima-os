@@ -1,14 +1,43 @@
 import { observer } from 'mobx-react-lite';
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import "../../App.css";
 import { useHistory } from 'react-router';
 import { LOGIN_ROUTE } from '../../utils/Const';
+import axios from "axios"
+import { Button, Modal } from 'react-bootstrap'
+import { FaLastfmSquare } from 'react-icons/fa';
 
 const Myacount = observer(() => {
 
     const history = useHistory()
     const {user} = useContext(Context)
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
+    const [username, setUserName] = useState()
+    const [firstName, setFirstName] = useState()
+    const [lastName, setLastName] = useState()
+    const [country, setCountry] = useState()
+    const [city, setCity] = useState()
+    const [address, setAddress] = useState()
+    const [number, setNumber] = useState()
+    const [email, setEmail] = useState()
+    const [loading, setLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+
+    const [oldPassword, setOldPassword] = useState();
+    const [newPassword, setNewPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+    const [loadingPas, setLoadingPas] = useState(false);
+    const [isErrorPas, setIsErrorPas] = useState(false);
+
+
+
 
      const logoOut = () => {
         user.setIsAuth(false)
@@ -17,8 +46,78 @@ const Myacount = observer(() => {
 
     }
 
+    const changePassword = () => {
+        setLoadingPas(true)
+        setIsErrorPas(false)
+        
+        const data = JSON.stringify({
+            old_password: oldPassword,
+            password: newPassword,
+            password2: confirmPassword,
+        })
+        return axios.put(`${process.env.REACT_APP_BASE_URL}/change_password/${user.userGetId?.user.id}/`, data, {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+        })
+        .then(res => {
+            setOldPassword('')
+            setNewPassword('')
+            setConfirmPassword('')
+            setLoadingPas(false)
+        })
+        .catch((e)=>{
+            setLoadingPas(false)
+            setIsErrorPas(true)
+            handleClose(true)
+        })
+    }
+
+
+    const getUserPut = () => {
+        setLoading(true)
+        setIsError(false)
+
+        const data = JSON.stringify({
+            username: username,
+            first_name: firstName,
+            last_name: lastName,
+            phone_number: number,
+            address: address,
+            city: city,
+            country: country,
+            email: user.userId.email
+
+        }) 
+        return axios.put(`${process.env.REACT_APP_BASE_URL}/update_profile/${user.userGetId?.user.id}/`, data, {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+        })
+        .then(res => {
+            setUserName("")
+            setUserName("")
+            setFirstName("")
+            setLastName('')
+            setNumber('')
+            setAddress('')
+            setCity('')
+            setCountry('')
+            setEmail('')
+            setLoading(false)
+            
+        })
+        .catch((e)=>{
+            setLoading(false)
+            setIsError(true)
+        })
+        
+     }
+
+
     useEffect(() => {
-        user.getUserData()
         console.log(user.userId.email)
         
         
@@ -26,21 +125,8 @@ const Myacount = observer(() => {
     }, [])
     return (
         <div className="page-wrapper">
-            <main className="main">
-                <div className="page-header text-center" style={{backgroundImage: "url('assets/images/page-header-bg.jpg')"}}>
-                    <div className="container">
-                        <h1 className="page-title">My Account<span>Shop</span></h1>
-                    </div>
-                </div>
-                <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
-                    <div className="container">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li className="breadcrumb-item"><a href="#">Shop</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">My Account</li>
-                        </ol>
-                    </div>
-                </nav>
+            <main className="main" style={{marginTop: "50px"}}>
+                
 
                 <div className="page-content">
                     <div className="dashboard">
@@ -52,7 +138,7 @@ const Myacount = observer(() => {
                                             <a className="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Панель управления</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a  id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Заказы</a>
+                                            <a  className="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Заказы</a>
                                         </li>
                                         <li className="nav-item">
                                             <a className="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Загрузки</a>
@@ -94,7 +180,7 @@ const Myacount = observer(() => {
                                                 <div className="col-lg-6">
                                                     <div className="card card-dashboard">
                                                         <div className="card-body">
-                                                            <h3 className="card-title">Billing Address</h3>
+                                                            <h3 className="card-title">Платежный адрес</h3>
 
                                                             <p>User Name<br/>
                                                             User Company<br/>
@@ -110,7 +196,7 @@ const Myacount = observer(() => {
                                                 <div className="col-lg-6">
                                                     <div className="card card-dashboard">
                                                         <div className="card-body">
-                                                            <h3 className="card-title">Shipping Address</h3>
+                                                            <h3 className="card-title">Адреса доставки</h3>
 
                                                             <p>You have not set up this type of address yet.<br/>
                                                             <a href="#">Edit <i className="icon-edit"></i></a></p>
@@ -124,36 +210,113 @@ const Myacount = observer(() => {
                                             <form action="#">
                                                 <div className="row">
                                                     <div className="col-sm-6">
-                                                        <label>First Name *</label>
-                                                        <input  type="text" className="form-control" required/>
+                                                        <input 
+                                                            type="text" placeholder="Имя  *" 
+                                                            value={firstName}
+                                                            onChange={e => setFirstName(e.target.value)} 
+                                                            className="form-control" required/>
                                                     </div>
 
                                                     <div className="col-sm-6">
-                                                        <label>Last Name *</label>
-                                                        <input type="text" className="form-control" required/>
+                                                        <input 
+                                                            placeholder="Фамилия *" 
+                                                            value={lastName} 
+                                                            onChange={e => setLastName(e.target.value)}
+                                                            type="text" className="form-control" required/>
+                                                    </div>
+                                                    <div className="col-sm-6">
+                                                        <input  
+                                                            placeholder="Имя пользователя" type="text" 
+                                                            value={username} 
+                                                            onChange={e => setUserName(e.target.value)} 
+                                                            className="form-control" required/>
+                                                    </div>
+                                                    <div className="col-sm-6">
+                                                        <input 
+                                                            placeholder="Страна " type="text" 
+                                                            value={country} 
+                                                            onChange={e => setCountry(e.target.value)} 
+                                                            className="form-control" required/>
+                                                    </div>
+                                                    <div className="col-sm-6">
+                                                        <input 
+                                                            placeholder="Город " type="text" 
+                                                            value={city} 
+                                                            onChange={e => setCity(e.target.value)} 
+                                                            className="form-control" required/>
+                                                    </div>
+                                                    <div className="col-sm-6">
+                                                        <input 
+                                                            placeholder="Адрес" type="text" 
+                                                            value={address} 
+                                                            onChange={e => setAddress(e.target.value)} 
+                                                            className="form-control" required/>
                                                     </div>
                                                 </div>
 
-                                                <label>Display Name *</label>
-                                                <input type="text" className="form-control" required/>
-                                                <small className="form-text">This will be how your name will be displayed in the account section and in reviews</small>
+                                                
+                                               
+                                                
+                                                
 
-                                                <label>Email address *</label>
-                                                <input type="email" className="form-control" required/>
+                                                <div className="row">
+                                                    <div className="col-sm-6">
+                                                        <input placeholder="Телефон" value={number} onChange={e => setNumber(e.target.value)} type="tel" className="form-control" required/>
+                                                    </div>
 
-                                                <label>Current password (leave blank to leave unchanged)</label>
-                                                <input type="password" className="form-control"/>
+                                                    <div className="col-sm-6">
+                                                        <input placeholder="Email" type="email" value={user.userId.email} onChange={e => setEmail(e.target.value)} className="form-control" required/>
+                                                    </div>
+                                                </div>
 
-                                                <label>New password (leave blank to leave unchanged)</label>
-                                                <input type="password" className="form-control"/>
+                                                <button 
+                                                        style={{marginRight: "10px"}}
+                                                        onClick={getUserPut}
+                                                        disabled={loading} type="submit" 
+                                                        className="btn btn-outline-primary-2">
+                                                    
+                                                    {loading ? 'Загрузка...' : 'СОХРАНИТЬ ИЗМЕНЕНИЯ'}
+                                                </button> 
+                                                <>
+                                                    <button className="btn btn-outline-primary-2"  style={{color: "#1877f2", fontSize: "16px",  fontWeight: "500", cursor: "pointer"}} onClick={handleShow}>
+                                                        Изменить пароль
+                                                    </button >
 
-                                                <label>Confirm new password</label>
-                                                <input type="password" className="form-control mb-2"/>
+                                                    <Modal show={show} onHide={handleClose} animation={false}>
+                                                        <Modal.Header closeButton>
+                                                        <Modal.Title>Modal heading</Modal.Title>
+                                                        </Modal.Header>
+                                                        <Modal.Body>
+                                                            <div style={{maxWidth: "90%", display: "block", justifyContent: "center", marginLeft: "20px"}}>
+                                                                
+                                                                <input 
+                                                                    placeholder="Текущий пароль" 
+                                                                    onChange={e => setOldPassword(e.target.value)}
+                                                                    value={oldPassword}
+                                                                    type="password" className="form-control"/>
 
-                                                <button type="submit" className="btn btn-outline-primary-2">
-                                                    <span>SAVE CHANGES</span>
-                                                    <i className="icon-long-arrow-right"></i>
-                                                </button>
+                                                                
+                                                                <input 
+                                                                    placeholder="Новый пароль" 
+                                                                    onChange={e => setNewPassword(e.target.value)} 
+                                                                    value={newPassword}
+                                                                    type="password" className="form-control"/>
+
+                                                                
+                                                                <input 
+                                                                    placeholder="Подтвердите новый пароль" 
+                                                                    onChange={e => setConfirmPassword(e.target.value)} 
+                                                                    value={confirmPassword}
+                                                                    type="password" className="form-control mb-2"/>
+                                                            </div>
+                                                        </Modal.Body>
+                                                        <Modal.Footer>
+                                                        <Button variant="primary" onClick={changePassword}>
+                                                            {loadingPas ? 'Загрузка...': 'Сохранить изменения'}
+                                                        </Button>
+                                                        </Modal.Footer>
+                                                    </Modal>
+                                                </>
                                             </form>
                                         </div>
                                     </div>

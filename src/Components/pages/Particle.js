@@ -5,10 +5,11 @@ export default function Particle() {
     return (
         <div>
              <Particles
+                    height="600px"
                     params={{
                     "particles": {
                         "number": {
-                        "value": 100,
+                        "value": 150,
                         "density": {
                             "enable": true,
                             "value_area": 1000

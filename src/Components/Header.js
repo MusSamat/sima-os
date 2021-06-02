@@ -1,23 +1,31 @@
 import React, {useContext, useEffect} from "react";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {ABOUT_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, MYACOUNT_ROUTE } from "../utils/Const";
 import "../App.css";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
+import { FaUserAlt } from "react-icons/fa";
+import { AiOutlineDown } from "react-icons/ai";
+import logo from "../assets/logo.png"
+import what from "../assets/WhatsApp.png"
+
 
 
 const Header = observer(() => {
 
     const{user} = useContext(Context)
+    const{product} = useContext(Context)
 
     let sum = 0
-
+   
     
 
     useEffect(() => {
         user.getUserData()
         user.getCartData()
         user.getWishlistData()
+        product.subcategoryFilter()
+        product.getSubcategory()
     }, [])
     
   return (
@@ -32,7 +40,7 @@ const Header = observer(() => {
                         <div className="header-dropdown">
                             
                             <div className="header lefft">
-                            <a >Bishkek</a>
+                            <a style={{fontWeight:"bold"}}>Bishkek</a>
                                 
                             </div>
                         </div><br/>
@@ -48,10 +56,11 @@ const Header = observer(() => {
                                 <a >Links</a>
                                 <ul>
                                     <li>
-                                        {user.isAuth ? <NavLink className="sf-with" to={MYACOUNT_ROUTE}><i className="icon-user"></i>МОЙ АККАУНТ</NavLink>
-                                        : <NavLink className="sf-with" to={LOGIN_ROUTE}><i className="icon-user"></i>АВТОРИЗАЦИЯ</NavLink>}</li>
+                                         
+                                        {user.isAuth ? <NavLink style={{fontWeight: "bold"}}  to={MYACOUNT_ROUTE}><FaUserAlt style={{marginRight: "5px", fontSize:"13px", marginBottom:"3px"}}/>МОЙ АККАУНТ</NavLink>
+                                        : <NavLink style={{fontWeight: "bold"}} to={LOGIN_ROUTE}><FaUserAlt style={{marginRight: "5px", fontSize:"13px", marginBottom:"3px"}}/>АВТОРИЗАЦИЯ</NavLink>}</li>
                                     
-                                    <li><a href="contact.html">sima@gmail.com</a></li>
+                                    <li style={{textTransform: "none", fontWeight: "bold"}}>grand139094@gmail.com</li>
                                 </ul>
                             </li>
                         </ul>
@@ -68,7 +77,8 @@ const Header = observer(() => {
                             <i className="icon-bars"></i>
                         </button>
                         <NavLink className="logo" to={HOME_ROUTE}>
-                            <h3 style={{marginTop: "18px"}}>SIMA</h3>
+                            <img style={{width: "120px", height: "75px"}} src={logo}/>
+                            
                         </NavLink>
                         
                     </div>
@@ -79,7 +89,16 @@ const Header = observer(() => {
                                     <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={CATALOG_ROUTE}>КАТАЛОГ</NavLink>
+                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={CATALOG_ROUTE}>КАТАЛОГ </NavLink>
+                                    
+                                    
+                                        <ul  style={{marginLeft: "220px", backgroundColor: "black", marginTop: "-15px", color: "white", }}>
+                                            {product.subcategory.map((prod, index) =>
+                                                <li key={index} style={{cursor: "pointer"}}><a onClick={()=> product.subcategoryFilter(prod.title)} >{prod.title}</a></li>
+                                            )}
+                                        </ul>
+                                   
+                                    
                                 </li>
                                 <li className="megamenu-container ">
                                     <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
@@ -114,10 +133,6 @@ const Header = observer(() => {
                             <i className="icon-heart-o"></i>
                             <span className="wishlist-count">{user.list.length}</span>
                         </NavLink>
-                        {/* <a href="wishlist.html" className="wishlist-link">
-                            <i className="icon-heart-o"></i>
-                            <span className="wishlist-count">3</span>
-                        </a> */}
 
                         <div className="dropdown cart-dropdown">
                             <a  className="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
@@ -175,6 +190,11 @@ const Header = observer(() => {
                 </div>
             </div>
         </header>
+        <Link className="whatsapp"      
+           to={{pathname: "https://wa.me/+996-705-555829"}} target="_blank"
+        >
+            <img src={what}/>
+        </Link>
     </div>
   );
 })

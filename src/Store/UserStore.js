@@ -12,8 +12,9 @@ export default class UserStore {
         this.items = []
         this.wishList = {}
         this.list = []
+        this.userData = {}
 
-        this.count = 5
+        this.count = 0
         makeAutoObservable(this)
     }
 
@@ -33,8 +34,12 @@ export default class UserStore {
 
 
     increment(id){
-        this.count = this.items.flatMap
-        this.count =  this.count + id
+         console.log(this.items)
+         this.items.map((item) => (
+             item.id === id
+
+             
+             ))
         console.log(this.count)
     }
     decrement(id){
@@ -60,6 +65,15 @@ export default class UserStore {
         })
         
      }
+
+    //  countQuantity(id){
+    //      this.items.filter(item => {
+    //          if(item){
+    //             this.count = item + this.count + 5
+    //             console.log(this.count)
+    //          }
+    //      })
+    //  }
 
      getCartData() {
         this.userGetId = JSON.parse(localStorage.getItem('value'))
@@ -106,15 +120,6 @@ export default class UserStore {
      changeFilter(title){
         this.products = this.allProducts.filter(item => item.category === title)
     }
-
-    // totalPrice(){
-    //     let sum = 0 ;
-    //     this.items.reduce((b, a) =>
-    //         sum += b + a.product.price  
-    //      )
-    //      return sum
-    // }
-     
      
 
      

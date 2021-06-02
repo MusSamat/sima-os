@@ -24,7 +24,6 @@ class Clock1 extends React.Component {
     render(){
       const { time, secondHandRotations } = this.state;
       const secondsRotation = time.getSeconds() * 6;
-      console.log(secondsRotation)
       const minuteRotation = time.getMinutes() * 6;
       const currentHour = time.getHours() > 12 ? time.getHours() - 12 : time.getHours()
       const hourRotation = currentHour * 30;

@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import { Context } from '../../index';
 import { LOGIN_ROUTE } from '../../utils/Const';
 import axios from "axios";
-import "../../App.css";
+import  "../../App.css";
 import { FaStar } from "react-icons/fa";
+
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const colors ={
     orange: "#FFBA5A",
@@ -17,19 +21,24 @@ const Product = observer(({match}) => {
     const {user} = useContext(Context)
     const id = match.params.id
     const [count, setCount] = useState(5)
+    const [hover, setHover] = useState(false);
     console.log(id)
+
+    
 
     
     function updateValue(e) {
         console.log(e.target.value);
       }
 
+        const notify = () => toast.success("Wow so easy!");
+	    const notifyError = () => toast.error("Wow so easy!");
+
 
     const addWishlist = (e) => {
         const id = match.params.id
         const data = JSON.stringify({
-            product: id,
-            quantity: count  
+            product: String(id),
         })  
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/wishlist/`, data, 
         {
@@ -43,9 +52,11 @@ const Product = observer(({match}) => {
                 setCount(count)
                 user.getWishlistData()
                 console.log(response)
+                notify()
         })
         .catch(error =>{ 
-            console.log(error)  
+            console.log(error)
+            notifyError()  
     })
     e.preventDefault();
     }
@@ -53,8 +64,8 @@ const Product = observer(({match}) => {
     const addCart = (e) => {
         const id = match.params.id
         const data = JSON.stringify({
-            product: id,
-            quantity: count, 
+            product: String(id),
+            quantity: String(count)
             
             
         })
@@ -70,9 +81,11 @@ const Product = observer(({match}) => {
                 setCount(count)
                 user.getCartData()
                 console.log(response)
+                notify()
         })
         .catch(error =>{ 
             console.log(error)  
+            notifyError()
     })
     e.preventDefault();
     }
@@ -116,9 +129,11 @@ const Product = observer(({match}) => {
                 setCurrValue(0)
                 setText("")
                 console.log(response)
+                notify()
         })
         .catch(error =>{ 
-            console.log(error)  
+            console.log(error) 
+            notifyError() 
     })
     event.preventDefault();
     console.log(event)
@@ -136,10 +151,21 @@ const Product = observer(({match}) => {
         user.getUserData()
         product.getData(id).then(() => {
             const scripts = [
+
+                '/assets/js/jquery.min.js',
+                '/assets/js/bootstrap.bundle.min.js',
+                '/assets/js/jquery.hoverIntent.min.js',
+                '/assets/js/jquery.waypoints.min.js',
+                '/assets/js/superfish.min.js',
+
+                '/assets/js/owl.carousel.min.js',
+                '/assets/js/bootstrap-input-spinner.js',
                 '/assets/js/jquery.elevateZoom.min.js',
+
                 '/assets/js/bootstrap-input-spinner.js',
                 '/assets/js/jquery.magnific-popup.min.js',
-                '/assets/js/main.js'
+                '/assets/js/main.js',
+
             ]
             scripts.forEach(i => {
                 const s = document.createElement('script')
@@ -149,7 +175,7 @@ const Product = observer(({match}) => {
         })
         // product.addProduct(product.index)
         return () => {
-            const elements = document.getElementsByClassName('zoomContainer')
+            const elements = document.getElementsByClassNclassName('zoomContainer')
             while(elements.length > 0){
                 elements[0].parentNode.removeChild(elements[0]);
             }
@@ -158,9 +184,10 @@ const Product = observer(({match}) => {
       }, [])
     return (
         <div>
+            
             <main className="main">
                 <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
-                    <div className="container d-flex align-items-center">
+                    <div style={{marginTop: "100px"}} className="container d-flex align-items-center">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><a href="index.html">Home</a></li>
                             <li className="breadcrumb-item"><a href="#">Products</a></li>
@@ -168,66 +195,82 @@ const Product = observer(({match}) => {
                         </ol>
 
                         <nav className="product-pager ml-auto" aria-label="Product">
-                            <a className="product-pager-link product-pager-prev" href="#" aria-label="Previous" tabindex="-1">
-                                <i className="icon-angle-left"></i>
-                                <span>Prev</span>
-                            </a>
-
-                            <a className="product-pager-link product-pager-next" href="#" aria-label="Next" tabindex="-1">
-                                <span>Next</span>
-                                <i className="icon-angle-right"></i>
-                            </a>
+                            kmkmkm
                         </nav>
                     </div>
                 </nav>
 
                 <div className="page-content">
                     <div className="container">
-                        <div className="product-details-top mb-2">
-                            
-                            {/* {product.loadest.map((item, index)=> */}
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="product-gallery">
-                                            <figure className="product-main-image">
-                                                <img id="product-zoom" src={`${process.env.REACT_APP_BASE_URL}${product.product?.images[0]}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${product.product?.images[0]}`} alt="product image"/>
 
-                                                <a href={`${process.env.REACT_APP_BASE_URL}${product.product?.images[0]}`} id="btn-product-gallery" className="btn-product-gallery">
+
+                        <div className="product-details-top">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="product-gallery product-gallery-vertical">
+                                        <div className="row">
+                                            <figure className="product-main-image">
+                                                <img id="product-zoom" src={`${process.env.REACT_APP_BASE_URL}${product.imagesUser[0]?.images[0]}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${product.imagesUser[0]?.images[0]}`} alt="product image"/>
+                                                <a href={`${process.env.REACT_APP_BASE_URL}${product.imagesUser[0]?.images[0]}`} id="btn-product-gallery" className="btn-product-gallery">
                                                     <i className="icon-arrows"></i>
                                                 </a>
                                             </figure>
 
-                                        <div id="product-zoom-gallery" className="product-image-gallery">
-                                            {product.images.map((img, index) =>
-                                                <a className="product-gallery-item" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
-                                                    <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
-                                                </a>
-                                            )}
+                                            <div id="product-zoom-gallery" className="product-image-gallery">
 
+                                                {product.imagesUser.map((img, index) =>
+                                                    <a className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`}>
+                                                        {console.log(img.images[0])}
+                                                        <img src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product side"/>
+                                                    </a>
+                                                )}
+
+
+                                               
+
+                                                
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="col-md-6">
                                     <div className="product-details">
+                                        
+                                        
                                         <h1 className="product-title">{product.product.title}</h1>
 
                                         <div className="ratings-container justify-content-between">
-                                            <div className="ratings">
-                                                <div className="ratings-val" style={{width: "80%;"}}></div>
-                                                <a className="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
-                                            </div>
                                             
-                                            <div className="product-cat">
-                                                <span>Категория :</span>
-                                                <a href="#">МАГАЗИН /</a>
-                                                <a href="#">{product.product.category} / </a>
-                                                <a href="#">{product.product.title}</a>
+                                            <div style={{color: "rgb(71, 53, 150)", fontWeight:"400"}} className="product-cat">
+                                                <span style={{color: "rgb(71, 53, 150)", fontWeight:"450"}}>КАТЕГОРИЯ :</span>
+                                                <a style={{color: "rgb(71, 53, 150)", fontWeight:"450"}}>МАГАЗИН /</a>
+                                                <a style={{color: "rgb(71, 53, 150)", fontWeight:"450"}}>{product.product.category} / </a>
+                                                <a style={{color: "rgb(71, 53, 150)", fontWeight:"450"}}>{product.product.title}</a>
                                             </div>
                                         </div>
 
-                                        <div className="product-price">
-                                            {user.isAuth ? product.product.price : ""}
+                                        <div style={{color: "black", fontWeight:"450"}} className="product-price">
+                                            {user.isAuth ? `${product.product.price} $`  : ""}
+                                        </div>
+
+                                        <div className="details-filter-row details-row-size">
+                                            <label>Color:</label>
+
+                                            <div className="product-nav product-nav-thumbs">
+                                            
+                                                <a href="#" className="active">
+                                                    {product.imagesUser.map((img, index) =>
+                                                        <>
+                                                        {/* <span>{img.title}</span> */}
+                                                        <img key={index} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product desc"/>
+                                                        {console.log(img.images[0])}
+                                                        </>
+                                                    )}
+                                                    
+                                                </a>
+                                                
+                                            </div>
                                         </div>
 
                                         <div className="details-filter-row details-row-size">
@@ -235,20 +278,7 @@ const Product = observer(({match}) => {
                                         </div>
 
                                         {user.isAuth ?<>
-                                            <div className="details-filter-row details-row-size">
-                                                <label for="size">Размер:</label>
-                                                <div className="select-custom">
-                                                    <select name="size" id="size" className="form-control">
-                                                        {product.size.map((size, index)=>
-                                                            <option key={index} value="#" selected="selected">{size}</option>
-                                                        )}
-                                                            
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                             <div className="details-filter-row details-row-size"> 
-                                                <label style={{}} for="qty">КОЛ-ВО:</label>
                                                 <div >
                                                     <button className="kol" onClick={() => setCount(count - 5)}>-</button>
                                                     <span style={{marginLeft: "7px"}} className="kol-input" >{count}</span>
@@ -256,9 +286,9 @@ const Product = observer(({match}) => {
                                                    
                                                 </div>
                                             </div>
-
+                                            
                                             <div className="product-details-action">
-                                                <button onClick={addCart} className="btn-product btn-cart"><span >В КОРЗИНУ</span></button>
+                                                <button onClick={addCart} className="btn-product btn-cart korziny" >В КОРЗИНУ</button>
 
                                                 <div className="details-action-wrapper">
                                                     <a style={{fontSize: "30px"}} href="" onClick={addWishlist} className="btn-product btn-wishlist" title="Wishlist"></a>
@@ -334,7 +364,7 @@ const Product = observer(({match}) => {
                                                             </div> */}
                                                         </div>
                                                         <textarea 
-                                                            class="form-control"
+                                                            className="form-control"
                                                             value={text}
                                                             onChange={e => setText(e.target.value)}
                                                             >
@@ -345,7 +375,7 @@ const Product = observer(({match}) => {
                                                             
                                                         </div>
 
-                                                        <p></p>
+                                                        <ToastContainer />
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,16 +388,8 @@ const Product = observer(({match}) => {
                                         </div>
                                         
                                     </div>
-                                    <div className="social-icons social-icons-sm">
-                                        <span className="social-label">ПОДЕЛИТЬСЯ:</span>
-                                        <a href="#" className="social-icon" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
-                                        <a href="#" className="social-icon" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                                        <a href="#" className="social-icon" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                                        <a href="#" className="social-icon" title="Pinterest" target="_blank"><i className="icon-pinterest"></i></a>
-                                    </div>
                                 </div>
                             </div>
-                            {/* )} */}
                         </div>
                     </div>
 
@@ -382,6 +404,8 @@ const Product = observer(({match}) => {
                 
             </main>
             <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
+
+            
         </div>
     )
 })

@@ -1,5 +1,6 @@
 import React from 'react';
 import { YMaps, Map, Placemark } from "react-yandex-maps";
+import "../../App.css";
 
 
 
@@ -59,11 +60,11 @@ export default function Contact() {
                                 <div className="contact-box text-center">
                                     <h5>Адрес:</h5>
 
-                                    <address>Кыргызстан,  720016 г. Бишкек, <br/>ул. Абдрахманова 219</address>
+                                    <address className="d-li">Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</address>
 
                                     <h5>Рынок «Дордой»</h5>
-                                    <p>9 проход конт. 893/12</p>
-                                    <p>+996 (312) 90 75 46</p>
+                                    <p className="d-li">5 проход конт. 458/1</p>
+                                    <p className="d-li">+996 (705) 55 58 29</p>
                                 </div>
                             </div>
 
@@ -71,11 +72,9 @@ export default function Contact() {
                                 <div className="contact-box text-center">
                                     <h5>Руководитель:</h5>
 
-                                    <div><a href="mailto:#">+996 (553)32 05 32</a></div>
-                                    <div><a href="tel:#">W/app:+ 996 (772) 32 06 32</a>, <a href="tel:#"></a></div>
-                                    <h5>Менеджер:</h5>
-                                    <div><a href="mailto:#">+ 996 (700) 50 60 46</a></div>
-                                    <div><a href="tel:#">W/app: +996 (557) 63 33 35</a>, <a href="tel:#"></a></div>
+                                    <div><a className="d-li">+996 (709) 99 99 15</a></div>
+                                    <div><a className="d-li">W/app: +996 (705) 55 58 29</a>, <a href="tel:#"></a></div>
+                                    <div><a className="d-li">+ 996 (700) 50 60 46</a></div>
                                 </div>
                             </div>
 

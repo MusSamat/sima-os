@@ -32,8 +32,8 @@ const Wishlist = observer(()=> {
 
     const addCart = (e, id, quantity) => {
         const data = JSON.stringify({
-            product: id,
-            quantity: quantity, 
+            product: [id],
+            quantity: [5], 
             
             
         })
@@ -116,7 +116,7 @@ const Wishlist = observer(()=> {
                                     <td className="stock-col"><span className="in-stock">В наличии</span></td>
                                     <td className="action-col">
                                         <div className="dropdown">
-                                        <button onClick={(e) =>addCart(e, l.product.id, l.quantity)} className="btn btn-block btn-outline-primary-2" >
+                                        <button onClick={(e) =>addCart(e, l.product.id)} className="btn btn-block btn-outline-primary-2" >
                                             В КОРЗИНУ
                                         </button>
                                         </div>

@@ -1,231 +1,68 @@
 import React from 'react';
+import dostavka from "../../assets/dostavka.png"
+import dostavka1 from "../../assets/dostavka1.png"
+import dostavka2 from "../../assets/dostavka2.png"
 import fura from "../../assets/fura.png"
+import "../../App.css"
 
 export default function Delivery() {
 
-	var M = [
-		 [1, 2, 3, 4, 5],
-		 [6, 7, 8, 9, 10],
-		 [11, 12, 13, 14, 15],
-		 [16, 17, 18, 19, 20]
-		 ];
-		 function spiralPrint(M) {
-		 var topRow = 0,
-		 leftCol = 0,
-	    btmRow = M.length - 1,
-	    rightCol = M[0].length - 1;
-
-		
-	   
-	    while (topRow < btmRow && leftCol < rightCol) {
-	    for (var col = 0; col <= rightCol; col++) {
-	    console.log(M[topRow][col]);
-	    }
-	    topRow++
-	    for (var row = topRow; row <= btmRow; row++) {
-	    console.log(M[row][rightCol]);
-	    }
-	    rightCol--;
-	    if (topRow <= btmRow) {
-	    for (var col = rightCol; col >= 0; col--) {
-	    console.log(M[btmRow][col]);
-	    }
-	    btmRow--;
-	    }
-	    if (leftCol <= rightCol) {
-			for (var row = btmRow; row > topRow; row--) {
-				 console.log(M[row][leftCol]);
-			}
-			leftCol++;
-		}
-		}
-	}
-				 console.log(spiralPrint(M));
+	
 	   
     return (
         <div style={{marginTop: "100px"}} className="page-wrapper">
 			<div className="container">
                 <div className="row">
                 	<div className=" col-sm-10">
-                        <h3 style={{ marginTop:"30px",color: "#5d4f84", fontFamily: "Arial", fontZize: "29px"}}>Осуществляем доставку в города России и Казахстана</h3>
+                        <h3 style={{ marginTop:"30px",color: "#5d4f84", fontFamily: "Arial", fontZize: "29px"}}>Осуществляем доставку в города России, Казахстана, Беларуси, Узбекистана, и по всему миру, любым удобным для Вас способом! </h3>
                 	</div>
 
                 	<div  className="col-sm-2">
-                        <img  src={fura}/>
+                        <img src={fura}/>
                 	</div>
                 </div>
+				<img style={{backgroundSize: "cover", width: "100%", height:"80%"}} src={dostavka1}/>
 			</div>
-            <div className="trending">
-                    <a href="#">
-                    <img style={{backgroundSize: "cover", width: "100%"}} src="https://s0.rbk.ru/v6_top_pics/media/img/7/70/755254270044707.jpg" alt="Banner"/>
-                </a>
-            </div>
         <main className="main">
 
            
-            <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
-                <div className="container">
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li className="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li className="breadcrumb-item active" aria-current="page">Contact us</li>
-                    </ol>
-                </div>
-            </nav>
-            <div className="container">
-	        	<div className="page-header page-header-big text-center" style={{backgroundImage: "url('assets/images/contact-header-bg.jpg')"}}>
-        			<h1 className="page-title text-white">Contact us<span className="text-white">keep in touch with us</span></h1>
-	        	</div>
-            </div>
+            
+            
             
             <div className="page-content pb-0">
                 <div className="container">
-                	<div className="row">
-                		<div className="col-lg-6 mb-2 mb-lg-0">
-                			<h2 className="title mb-1">Contact Information</h2>
-                			<p className="mb-3">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
-                			<div className="row">
-                				<div className="col-sm-7">
-                					<div className="contact-info">
-                						<h3>The Office</h3>
 
-                						<ul className="contact-list">
-                							<li>
-                								<i className="icon-map-marker"></i>
-	                							70 Washington Square South New York, NY 10012, United States
-	                						</li>
-                							<li>
-                								<i className="icon-phone"></i>
-                								<a href="tel:#">+92 423 567</a>
-                							</li>
-                							<li>
-                								<i className="icon-envelope"></i>
-                								<a href="mailto:#">info@Molla.com</a>
-                							</li>
-                						</ul>
-                					</div>
-                				</div>
+					<h3>Условия доставки</h3>
+					<p  className="uslovia">Доставка посылок производится железнодорожным, авиа и автомобильным транспортом в зависимости от города</p>
+					<p className="uslovia">Доставка заказов полностью оплачивается Заказчиком . Транспортировка груза производится транспортными компаниями, до центральных городов.</p>
+					<p className="uslovia">Дополнительные отправки и пересылки партий товара в удаленные населенные пункты оплачиваются заказчиком самостоятельно. Доставка до терминалов транспортных компаний бесплатная</p>
+					<p className="uslovia">Товар отгружается в течение 24х часов с момента готовности заказа. Информацию о стоимости и сроках доставки в ваш регион можете получить у представителей данных транспортных компаний или у нашего менеджера</p>
+					<p className="uslovia">Товар отправляется из Бишкека - столицы Кыргызстана, средний срок доставки по России - 7 дней, Казахстан - 3 дня, Беларусь и Украина - 10-14 дней. (При условии отправки через Карго, с момента отгрузки в ТК. При отправке товара через Кит, Энергию, СДЭК и т.п. сроки доставки увеличиваются)</p>
+					<p></p>
 
-                				<div className="col-sm-5">
-                					<div className="contact-info">
-                						<h3>The Office</h3>
 
-                						<ul className="contact-list">
-                							<li>
-                								<i className="icon-clock-o"></i>
-	                							<span className="text-dark">Monday-Saturday</span> <br/>11am-7pm ET
-	                						</li>
-                							<li>
-                								<i className="icon-calendar"></i>
-                								<span className="text-dark">Sunday</span> <br/>11am-6pm ET
-                							</li>
-                						</ul>
-                					</div>
-                				</div>
-                			</div>
-                		</div>
-                		<div className="col-lg-6">
-                			<h2 className="title mb-1">Got Any Questions?</h2>
-                			<p className="mb-2">Use the form below to get in touch with the sales team</p>
-
-                			<form action="#" className="contact-form mb-3">
-                				<div className="row">
-                					<div className="col-sm-6">
-                                        <label for="cname" className="sr-only">Name</label>
-                						<input type="text" className="form-control" id="cname" placeholder="Name *" required/>
-                					</div>
-
-                					<div className="col-sm-6">
-                                        <label for="cemail" className="sr-only">Email</label>
-                						<input type="email" className="form-control" id="cemail" placeholder="Email *" required/>
-                					</div>
-                				</div>
-
-                				<div className="row">
-                					<div className="col-sm-6">
-                                        <label for="cphone" className="sr-only">Phone</label>
-                						<input type="tel" className="form-control" id="cphone" placeholder="Phone"/>
-                					</div>
-
-                					<div className="col-sm-6">
-                                        <label for="csubject" className="sr-only">Subject</label>
-                						<input type="text" className="form-control" id="csubject" placeholder="Subject"/>
-                					</div>
-                				</div>
-
-                                <label for="cmessage" className="sr-only">Message</label>
-                				<textarea className="form-control" cols="30" rows="4" id="cmessage" required placeholder="Message *"></textarea>
-
-                				<button type="submit" className="btn btn-outline-primary-2 btn-minwidth-sm">
-                					<span>SUBMIT</span>
-            						<i className="icon-long-arrow-right"></i>
-                				</button>
-                			</form>
-                		</div>
-                	</div>
+                	
 
                 	<hr className="mt-4 mb-5"/>
 
-                	<div className="stores mb-4 mb-lg-5">
-	                	<h2 className="title text-center mb-3">Our Stores</h2>
+					<p className="day-sima">На сегодняшний день, компания «SIMA» работает с транспортными компаниями: </p>
+					<ul style={{marginLeft: "50px"}}>
+						<li className="d-li">БиекКарго (Россия, Казахстан) <a href="http://www.goldenpages.kg/ru/company/show/6009-biek-cargo-osoo.html">www.goldenpages.kg</a></li>
+						<li className="d-li">Альфа-Карго  (Россия, Казахстан) <a href="https://www.alpha-cargo.kg/"> www.alpha-cargo.kg</a></li>
+						<li className="d-li">Экспресс Карго  <a href="https://bagat.su/dostavka-gruzov-v-mongoliyu/">bagat.su</a></li>
+						<li className="d-li"> Бостон Карго <a href="https://ban24.ru/bishkek/firm/boston-kargo-osoo">ban24.ru/bishkek</a></li>
+						<li className="d-li"> Бишкек Карго (Россия, Казахстан)  <a href="https://bishkek.adresa-telefony.ru/bishkek_kargo_kompanija-70000001020744502.html">bishkek.adresa-telefony.ru</a></li>
+						<li className="d-li">КИТ (Россия, Казахстан, Беларусь, Армения)  <a href="https://www.spyur.am/ru/companies/kit-armn-transport-company-representation-of-russian-kit-company-in-armenia/34761">www.spyur.am/ru</a></li>
+						<li className="d-li">Транспортная компания «Росскарго» <a href="https://moving.tappynow.app/ru/bshk?utm_source=google&utm_medium=cpc&utm_campaign=iprofit_perevozki_bishkek_poisk&utm_term=%2B%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82%D0%BD%D0%B0%D1%8F%20%2B%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F&cm_id=12559893767_118886965665_506833862823_kwd-296625173251_c__g_&gclid=CjwKCAjwqcKFBhAhEiwAfEr7zVQ1_gptAT15rznnjJirp44GJ0aL8WljFBGs7HOvM3HB2N7xckM88hoCIucQAvD_BwE">moving.tappynow.app/ru</a></li>
+						<li className="d-li">Транспортная компания «Альянс Карго» <a href="https://porter-taxi-bishkek.netlify.app/">porter-taxi-bishkek.netlify.app</a></li>
+						<li className="d-li">СДЭК <a href="https://www.cdek.ru/ru/">www.cdek.ru</a></li>
+						<li className="d-li">Энергия (Россия, Казахстан, Беларусь, Армения) <a href="https://nrg-tk.ru/">nrg-tk.ru</a></li>
+						<li className="d-li">И другие</li>
+					</ul>
 
-	                	<div className="row">
-	                		<div className="col-lg-6">
-	                			<div className="store">
-	                				<div className="row">
-	                					<div className="col-sm-5 col-xl-6">
-	                						<figure className="store-media mb-2 mb-lg-0">
-	                							<img src="assets/images/stores/img-1.jpg" alt="image"/>
-	                						</figure>
-	                					</div>
-	                					<div className="col-sm-7 col-xl-6">
-	                						<div className="store-content">
-	                							<h3 className="store-title">Wall Street Plaza</h3>
-	                							<address>88 Pine St, New York, NY 10005, USA</address>
-	                							<div><a href="tel:#">+1 987-876-6543</a></div>
+					<p className="day-sima">Менеджер подберет вам оптимальный тариф на доставку, согласно вашим потребностям. Для каждого партнера подбирается индивидуальное решение по доставке, с учётом местоположения и пожеланий и оптимального срока доставки. </p>
 
-	                							<h4 className="store-subtitle">Store Hours:</h4>
-                								<div>Monday - Saturday 11am to 7pm</div>
-                								<div>Sunday 11am to 6pm</div>
-
-                								<a href="#" className="btn btn-link" target="_blank"><span>View Map</span><i className="icon-long-arrow-right"></i></a>
-	                						</div>
-	                					</div>
-	                				</div>
-	                			</div>
-	                		</div>
-
-	                		
-                            
-                            
-                            <div className="col-lg-6">
-	                			<div className="store">
-	                				<div className="row">
-	                					<div className="col-sm-5 col-xl-6">
-	                						<figure className="store-media mb-2 mb-lg-0">
-	                							<img src="https://s0.rbk.ru/v6_top_pics/media/img/7/70/755254270044707.jpg" alt="image"/>
-	                						</figure>
-	                					</div>
-
-	                					<div className="col-sm-7 col-xl-6">
-	                						<div className="store-content">
-	                							<h3 className="store-title">One New York Plaza</h3>
-	                							<address>88 Pine St, New York, NY 10005, USA</address>
-	                							<div><a href="tel:#">+1 987-876-6543</a></div>
-
-	                							<h4 className="store-subtitle">Store Hours:</h4>
-												<div>Monday - Friday 9am to 8pm</div>
-												<div>Saturday - 9am to 2pm</div>
-												<div>Sunday - Closed</div>
-
-                								<a href="#" className="btn btn-link" target="_blank"><span>View Map</span><i className="icon-long-arrow-right"></i></a>
-	                						</div>
-	                					</div>
-	                				</div>
-	                			</div>
-	                		</div>
-	                	</div>
-                	</div>
+                	
                 </div>
             </div>
         </main>

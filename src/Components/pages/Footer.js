@@ -12,8 +12,7 @@ export default function Footer() {
                                     <h4 className="widget-title">ДОБРО ПОЖАЛОВАТЬ</h4>
                                     <h2 className="widget-title">SIMA</h2>
                                     {/* <img src="assets/images/demos/demo-8/logo-footer.png" className="footer-logo" alt="Footer Logo" width="82" height="25"/> */}
-                                    <h6 className="widget-list">Кыргызстан, 720011 г. Бишкек,</h6>
-                                    <h6 className="widget-list"> ул. Абдрахманова 219</h6>
+                                    <address style={{fontSize: "18px"}} className="widget-list">Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</address>
                                     
                                     <div className="widget-about-info">
                                         <div className="row">

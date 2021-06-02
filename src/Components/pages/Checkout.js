@@ -1,18 +1,59 @@
 import { observer } from 'mobx-react-lite';
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
+import axios from "axios";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Checkout = observer(() => {
 
 	const {user} = useContext(Context)
 	let sum = 0
+	const [note, setNote] = useState()
+	console.log(user.userId)
+
+	const notify = () => toast.success("Wow so easy!");
+	const notifyError = () => toast.error("Wow so easy!");
+
+	const sendOrder = (e) => {
+        const data = JSON.stringify({
+             user: user.carts.user,
+			 first_name: user.userId.first_name,
+			 last_name: user.userId.last_name,
+			 email: user.userId.email,
+			 address: user.userId.address,
+			 country: user.userId.country,
+			 city: user.userId.city,
+			 telephone: user.userId.phone_number,
+			 cart_user_id: user.carts.id,
+			 note: note
+        })  
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/order/`, data, 
+        {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + user.token?.token
+            },
+
+        })
+            .then(response => {
+				setNote('')
+				notify()
+        })
+        .catch(error =>{ 
+            console.log(error) 
+			notifyError() 
+    })
+    e.preventDefault();
+    }
 
 	useEffect(() => {
-		user.getCartData()
-		
+		user.getUserData()
+		console.log(user.userId)
 	}, [])
     return (
-        <div classNameName="page-wrapper">
+        <div classNameName="page-wrapper" style={{marginTop: "50px"}}>
             <div className="page-content">
             	<div className="checkout">
 	                <div className="container">
@@ -28,35 +69,24 @@ const Checkout = observer(() => {
 		                			<h2 className="checkout-title">ДЕТАЛИ ОПЛАТЫ</h2>
 		                				<div className="row">
 		                					<div className="col-sm-6">
-		                						<label>Имя  *</label>
-		                						<input type="text" value={user.userId.username} className="form-control" required/>
+		                						<input type="text" placeholder="Имя  *" value={user.userId.first_name} className="form-control" required/>
 		                					</div>
 
 		                					<div className="col-sm-6">
-		                						<label>Фамилия *</label>
-		                						<input type="text" className="form-control" required/>
+		                						<input placeholder="Фамилия *" value={user.userId.last_name} type="text" className="form-control" required/>
 		                					</div>
 		                				</div>
-										<label>Страна *</label>
-										<select className="form-select form-control" aria-label=".form-select-sm example">
-											<option selected>Open this select menu</option>
-											<option value="1">One</option>
-											<option value="2">Two</option>
-											<option value="3">Three</option>
-										</select>
-
-										<label>Город *</label>
-	        							<input type="text" className="form-control" required/>
+										<input placeholder="Страна *" type="text" value={user.userId.country} className="form-control" required/>
+	        							<input placeholder="Город *" type="text" value={user.userId.city} className="form-control" required/>
+	        							<input placeholder="Адрес" type="text" value={user.userId.address} className="form-control" required/>
 
 	            						<div className="row">
 		                					<div className="col-sm-6">
-		                						<label>Телефон *</label>
-		                						<input type="tel" className="form-control" required/>
+		                						<input placeholder="Телефон" value={user.userId.phone_number} type="tel" className="form-control" required/>
 		                					</div>
 
 		                					<div className="col-sm-6">
-		                						<label>Email *</label>
-		                						<input type="email" value={user.userId.email} className="form-control" required/>
+		                						<input placeholder="Email" type="email" value={user.userId.email} className="form-control" required/>
 		                					</div>
 		                				</div>
 
@@ -68,7 +98,7 @@ const Checkout = observer(() => {
 										</div>
 
 	                					<label>Примечание к заказу (необязательно)</label>
-	        							<textarea className="form-control" cols="30" rows="4" placeholder="Примечания к вашему заказу, например, особые пожелания отделу доставки."></textarea>
+	        							<textarea value={note} onChange={e => setNote(e.target.value)}  className="form-control" cols="30" rows="4" placeholder="Примечания к вашему заказу, например, особые пожелания отделу доставки."></textarea>
 		                		</div>
 		                		<aside className="col-lg-3">
 		                			<div className="summary">
@@ -107,10 +137,11 @@ const Checkout = observer(() => {
 		                					</tbody>
 		                				</table>
 
-		                				<button type="submit" className="btn btn-outline-primary-2 btn-order btn-block">
+		                				<button onClick={sendOrder} type="submit" className="btn btn-outline-primary-2 btn-order btn-block">
 		                					<span className="btn-text">Подтвердить заказ</span>
 		                					<span className="btn-hover-text">Перейти к оформлению заказа</span>
 		                				</button>
+										<ToastContainer />
 		                			</div>
 		                		</aside>
 		                	</div>

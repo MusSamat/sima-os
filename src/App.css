@@ -1,6 +1,7 @@
+
 .App1 {
     text-align: center;
-    background-image: url("https://www.adweek.com/wp-content/uploads/2020/03/behr-zoom-background-1-2020.jpg");
+    background-image: url("https://ak.picdn.net/shutterstock/videos/4979813/thumb/7.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 600px;
@@ -87,9 +88,7 @@
   .custom-control-label:hover{
     color: blue;
   }
-  .vse{
-    padding-left: 5.4rem;
-  }
+  
   .custom-control-label{
     margin-left: -5.2rem;
   }
@@ -194,4 +193,132 @@
     outline: none;
     color: #624e87;
     text-align: center;
+  }
+  .vse{
+    padding-left: 5.4rem;
+  }
+  .s-title{
+    color: red;
+  }
+  .korziny{
+
+  }
+  .korziny:hover{
+    color: white !important; 
+  }
+  /* main */
+  .icons-react{
+    font-size: 3.692em;
+    margin-left: 100px;
+    margin-bottom: 20px;
+  }
+  .icons-react:hover{
+    color: #f64946;
+  }
+  .dostovka{
+    font-size: 18px;
+    line-height: 1.5em;
+    color: #2a2a2a;
+  }
+  .coat{
+    width: 120px;
+    height: 120px;
+    margin-left: 40px;
+  }
+  .container-z{
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .cont{
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10;
+  }
+  .cont-h4{
+    font-size: 17px;
+    font-weight: normal;
+    margin: 0;
+    color: #222;
+    margin-bottom: 15px;
+
+  }
+  .input-z{
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    height: 40px;
+    padding: 0 10px;
+    width: 100%;
+    border-color: #777;
+    margin-bottom: 10px;
+  }
+  .button-t{
+    background-color:darksalmon;
+    color: #555;
+    padding: 10px 25px;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    margin: 15px 0 0 0;
+    border-color: #555;
+  }
+  @media screen and (max-width: 1366px){
+  .container-z {
+    max-width: 1140px;
+    }
+  } 
+
+  /* dostavka */
+  .uslovia{
+    line-height: 1.5em;
+    display: block;
+    margin-block-start: 1em; 
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    font-size: 1.5em;
+    margin-inline-end: 0px;
+    color: #2a2a2a;
+  }
+  .d-li{
+    color: black;
+    list-style: outside;
+    line-height: 1.5em;
+    font-size: 1.5em;
+    font-weight: 400;
+  }
+  .day-sima{
+    font-weight: 400;
+    color: black;
+    line-height: 1.5em;
+    font-size: 2.0em;
+    margin-bottom: 40px;
+  }
+  .whatsapp{
+    margin: 0 10px;
+    float: left;
+    position: fixed;
+    top: 76%;
+    left: 4%;
+    width: 60px;
+    height: 60px;
+    z-index: 999;
+    cursor: pointer;
+  }
+  /* about */
+  .about-text1{
+    font-weight: 400;
+    color: black;
+    line-height: 1.5em;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  /* product */
+  .product-gallery-item::before{
+    border: none;
   }

@@ -4,131 +4,62 @@ export default function About() {
     return (
         <div class="page-wrapper">
             <main class="main">
-                <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-                    <div class="container">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a >Pages</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">About us</li>
-                        </ol>
-                    </div>
-                </nav>
-                <div class="container">
-                    <div class="page-header page-header-big text-center" style={{backgroundImage: "url('assets/images/about-header-bg.jpg')"}}>
-                        <h1 class="page-title text-white">About us<span class="text-white">Who we are</span></h1>
-                    </div>
-                </div>
-
+                
                 <div class="page-content pb-0">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 mb-3 mb-lg-0">
-                                <h2 class="title">Our Vision</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. </p>
-                            </div>
-                            
-                            <div class="col-lg-6">
-                                <h2 class="title">Our Mission</h2>
-                                <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. <br/>Praesent elementum hendrerit tortor. Sed semper lorem at felis. </p>
-                            </div>
-                        </div>
 
-                        <div class="mb-5"></div>
-                    </div>
-
-                    <div class="bg-light-2 pt-6 pb-5 mb-6 mb-lg-8">
+                   
+                    <div class=" pt-6 pb-5 mb-6 mb-lg-8">
                         <div class="container">
-                            <div class="row">
-                                <div class="col-lg-5 mb-3 mb-lg-0">
-                                    <h2 class="title">Who We Are</h2>
-                                    <p class="lead text-primary mb-3">Pellentesque odio nisi, euismod pharetra a ultricies <br/>in diam. Sed arcu. Cras consequat</p>
-                                    <p class="mb-2">Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, uctus metus libero eu augue. </p>
-
-                                    <a href="blog.html" class="btn btn-sm btn-minwidth btn-outline-primary-2">
-                                        <span>VIEW OUR NEWS</span>
-                                        <i class="icon-long-arrow-right"></i>
-                                    </a>
-                                </div>
-
-                                <div class="col-lg-6 offset-lg-1">
-                                    <div class="about-images">
-                                        <img src="assets/images/about/img-1.jpg" alt="" class="about-img-front"/>
-                                        <img src="assets/images/about/img-2.jpg" alt="" class="about-img-back"/>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                                <h4>ДОБРО ПОЖАЛОВАТЬ</h4>
+                                <hr className="mt-4 mb-5" />
+                                <p className="about-text1">Швейная компания «SIMA» — одна из ведущих производителей женской одежды на рынке Кыргызстана, </p>
+                                <p className="about-text1">России, Казахстана, Беларуси и на международном рынке.
+Компания начала свой путь развития с 1998 года.</p>
+                                <p className="about-text1">Наш творческий коллектив дизайнеров, модельеров-конструкторов и технологов предлагают такие решения, что выпускаемая нами продукция позволяет не только подчеркнуть достоинства и скрыть недостатки, но и показать свою уникальность, предать чувства уверенности, легкости, свободы и комфорта, выглядеть современно и стильно.</p>
+                                <p className="about-text1">Продукция «SIMA» поможет каждой женщине в создании собственного неповторимого образа и подарит незабываемые эмоции. Производство женской одежды оптом от нашей компании направлено на удовлетворение спроса конечного потребителя. </p>
+                                <p className="about-text1">20-летний путь становления компании “SIMA” – это путь интенсивного развития, труда.</p>
+                                <p className="about-text1">На сегодняшний день действующая производственная база компании оснащена современным высокотехнологичным оборудованием известных мировых марок и программно-аппаратными комплексами.</p>
+                                <p className="about-text1">Ежегодно выпускаются 4 сезонные коллекции одежды, ориентированные на экспорт.</p>
+                                <p className="about-text1">Средний объем выпускаемой продукции: 20 тыс. единиц в месяц.</p>
+                                <p className="about-text1">Наша цель – помочь развить малый и средний бизнес, так как наши клиенты — это владельцы магазинов и бутиков оптом от производителя. Вся продукция фабрики «SIMA» производится в Кыргызстане. Поэтому одежда поступают на рынок оптом по низким ценам и гарантированно высокого качества. Производство дизайнерской  одежды основано на современных тенденциях. Весь ассортимент производится только после изучения спроса на новую модель</p>
+                                <p className="about-text1">Ассортимент производства женской одежды постоянно изменяется и совершенствуется нашими модельерами, исходя из ваших пожеланий и новых направлений в мире моды.</p>
+                                <p className="about-text1">Перед отправкой заказчикам, все товары дополнительно проверяются на соответствие параметрам. 
+Мы дорожим своей репутацией, потому предлагаем модную одежду оптом, исключительно высокого качества.
+Вы имеете возможность заказать женскую одежду  оптом и по доступным ценам. Гарантируем, что Вы будете довольны, работая с нами.</p>
+                                <p className="about-text1">Молодежная линия - от 42 до 56 размеров, женская линия - от 48 до 62 размеров</p>
+                            
+                            
                         </div>
                     </div>
 
                     <div class="container">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="brands-text">
-                                    <h2 class="title">The world's premium design brands in one destination.</h2>
-                                    <p>Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nis</p>
-                                </div>
+                        
+                            <h4>Предлагаем</h4>
+                            <ul style={{marginLeft: "50px"}}>
+                                <li className="d-li">высокий уровень качества;</li>
+                                <li className="d-li">собственную линию одежды;</li>
+                                <li className="d-li">отправку в любое место на территории России, стран СНГ;</li>
+                            </ul>
+                            <h4>Широкий выбор</h4>
+                            <ul style={{marginLeft: "50px"}}>
+                                <li className="d-li">цветовой гаммы;</li>
+                                <li className="d-li">ассортимента</li>
+                                <li className="d-li">широкая размерная сетка с 42 по 62 размер.</li>
+                            </ul>
+
+                            <div style={{display: "flex", justifyContent: "center", margin: "30px"}}>
+                                <h3 style={{color: "#CF742D"}}>Почему выбирают нас</h3>
+                                
                             </div>
-                            <div class="col-lg-7">
-                                <div class="brands-display">
-                                    <div class="row justify-content-center">
-                                        <div class="col-6 col-sm-4">
-                                            <a href="#" class="brand">
-                                                <img src="assets/images/brands/1.png" alt="Brand Name"/>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-6 col-sm-4">
-                                            <a href="#" class="brand">
-                                                <img src="assets/images/brands/2.png" alt="Brand Name"/>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-6 col-sm-4">
-                                            <a href="#" class="brand">
-                                                <img src="assets/images/brands/3.png" alt="Brand Name"/>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-6 col-sm-4">
-                                            <a href="#" class="brand">
-                                                <img src="assets/images/brands/4.png" alt="Brand Name"/>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-6 col-sm-4">
-                                            <a href="#" class="brand">
-                                                <img src="assets/images/brands/5.png" alt="Brand Name"/>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-6 col-sm-4">
-                                            <a href="#" class="brand">
-                                                <img src="assets/images/brands/6.png" alt="Brand Name"/>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-6 col-sm-4">
-                                            <a href="#" class="brand">
-                                                <img src="assets/images/brands/7.png" alt="Brand Name"/>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-6 col-sm-4">
-                                            <a href="#" class="brand">
-                                                <img src="assets/images/brands/8.png" alt="Brand Name"/>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-6 col-sm-4">
-                                            <a href="#" class="brand">
-                                                <img src="assets/images/brands/9.png" alt="Brand Name"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                            <ul>
+                                    <li className="d-li" style={{marginBottom: "10px"}}>Selya использует самые модные и качественные ткани, так как является импортером текстиля из крупнейших фабрик- производителей Кореи, Турции и Китая. Это преимущество позволяет нам  узнавать новые тренды, модные цвета и стиль будущих коллекций, раньше конкурентов и успешным образом отражается на продажах наших клиентов</li>
+                                    <li className="d-li">Самые низкие цены на высококачественную продукцию. У Вас есть возможность купить женские платья оптом из Киргизии по минимальным ценам, без наценок посредников, в удобном для Вашего бизнеса количестве. Качество изделий отличается безупречной посадкой, тщательной проработкой деталей, оптимально подобранной фурнитурой.</li>
+                                </ul>
+                        
+                            <p style={{color: "red", fontSize: "20px"}}>Цены вас приятно удивят, а закупаемая у нас продукция, порадует вас успешными продажами!
+</p>
+                        <p style={{color: "red", fontSize: "20px"}}>Желаем Вам удачных покупок!</p>
                         <hr class="mt-4 mb-6"/>
 
                         <h2 class="title text-center mb-4">Meet Our Team</h2>

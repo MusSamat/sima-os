@@ -3,7 +3,10 @@ import axios from "axios";
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
 import { useHistory } from 'react-router';
-import { MYACOUNT_ROUTE } from '../../utils/Const';
+import { CATALOG_ROUTE, MYACOUNT_ROUTE } from '../../utils/Const';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = observer(() => {
     const [email, setEmail] = useState()
@@ -14,14 +17,21 @@ const Login = observer(() => {
     
 
     
-    
+    const notify = () => toast.success("Wow so easy!");
+	const notifyError = (error) => toast.error(`Wow so ${error} easy!`);
 
     const sing = () => {
         const article = {email, password, username}
         
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, article)
-            .then(response => setEmail(response.email))
-            .catch(error => console.log(error))
+            .then(response => {
+                setEmail(response.email)
+                notify()
+            })
+            .catch(error => {
+                console.log(error)
+                notifyError(error)
+            })
 
         
     }
@@ -34,11 +44,13 @@ const Login = observer(() => {
                 setUsername(response.username)
                 user.setIsAuth(true)
                 localStorage.setItem('value', JSON.stringify(response.data));
-                history.push(MYACOUNT_ROUTE)
+                history.push(CATALOG_ROUTE)
+                notify()
             })
             .catch(error =>{   
                 console.log(error)
                 user.setIsAuth(false)
+                notifyError(error)
         })
 
         
@@ -79,7 +91,7 @@ const Login = observer(() => {
                                                         onChange={e => setUsername(e.target.value)}
                                                     />
                                                 </div>
-
+                                                
                                                 <div className="form-group">
                                                     <input 
                                                         type="password" 
@@ -100,6 +112,7 @@ const Login = observer(() => {
                                                 </div>
                                             </form>
                                         </div>
+                                        <ToastContainer />
                                         <div className="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
                                             <form action="#">
                                             <div className="form-group">

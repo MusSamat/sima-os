@@ -8,13 +8,14 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
  const Cart = observer(() => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
-    const [count , setCount] = useState(new Array())
+    const [count , setCount] = useState()
     let sum  = 0;
 
     console.log(count)
 
     const countIncrement = (id) => {
-        let count = user.items.map(item => item.quantity )
+        
+        
         setCount(count  + 5)
         console.log(count)
     }
@@ -24,6 +25,19 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
     console.log(prod)
     console.log(quan)
  
+    let arr = [1,3,5,7, 8];
+    const cumulativeSum = list => {
+      let result = [list[0]];
+      
+      for(let i = 1; i < list.length; i++) {
+          console.log(list[i],"k" )
+          console.log(result[i-1] )
+        result.push(list[i] + result[i-1]);
+      } 
+      
+      return result;
+    }
+    console.log(cumulativeSum(arr))
 
     const UpdateCart = (e) => {
         const data = JSON.stringify({ 
@@ -71,7 +85,7 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
         .catch((e)=>{
             console.error(e)
         }) 
-    }
+    } 
      
     
      
@@ -110,12 +124,11 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
                                     <div className="col-lg-9">
                                         <table className="table table-cart table-mobile">
                                             <thead>
-                                                <tr>
-                                                    <th>ТОВАР</th>
-                                                    <th>ЦЕНА</th>
-                                                    <th>КОЛИЧЕСТВО</th>
-                                                    <th>ПОДЫТОГ</th>
-                                                    <th></th>
+                                                <tr >
+                                                    <th style={{color: "black"}}>ТОВАР</th>
+                                                    <th style={{color: "black"}}>ЦЕНА</th>
+                                                    <th style={{color: "black"}}>КОЛИЧЕСТВО</th>
+                                                    <th style={{color: "black"}}>ПОДЫТОГ</th>
                                                 </tr>
                                             </thead>
 
@@ -129,13 +142,13 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
                                                     <td key={index} className="product-col">
                                                         <div className="product">
                                                             <figure className="product-media">
-                                                                <a href="#">
+                                                                <a>
                                                                     <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0]}`} alt="Product image"/>
                                                                 </a>
                                                             </figure>
 
                                                             <h3 className="product-title">
-                                                                <a href="#">{c.product.title}</a>
+                                                                <a>{c.product.title}</a>
                                                             </h3>
                                                         </div>
                                                     </td>
@@ -150,15 +163,9 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
                                                         
                                                         </div>
                                                         
-                                                        
-                                                        {/* <div className="cart-product-quantity">
-                                                        
-                                                            <input type="number" className="form-control" value={c.quantity} min="1" max="100" step="5" data-decimals="0" required/>
-                                                        </div> */}
-                                                        
                                                     </td>
 
-                                                    <td className="total-col">${(c.product.price * c.quantity).toFixed(2)}</td>
+                                                    <td style={{fontWeight: "500"}}>${(c.product.price * c.quantity).toFixed(2)}</td>
                                                     <td className="remove-col"><button onClick={() => deleteCart(c.product.id)} className="btn-remove"><i className="icon-close"></i></button></td>
                                                 </tr>)}
                                             </tbody>
@@ -194,15 +201,15 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
                                                                     })
                                                             }
 
-                                                    <td>{sum.toFixed(2)}</td>
+                                                    <td>{sum.toFixed(2)} $</td>
                                                         
                                                     </tr>
                                                     
 
-                                                    <tr className="summary-total">
+                                                    <tr style={{fontWeight: "500"}}>
                                                         <td>ИТОГО:</td>
                                                            
-                                                        <td>{sum.toFixed(2)}</td>
+                                                        <td>{sum.toFixed(2)} $</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

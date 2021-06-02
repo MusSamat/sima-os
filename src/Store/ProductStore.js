@@ -7,10 +7,11 @@ export default class ProductStore {
         this.blog = []
         this.product = { images: [], size: [] }
         this.blogItem = {images: []}
-        this.images = []
+        this.imagesUser = []
         this.size = []
         this.count = 0
         this.category = []
+        this.subcategory = []
         this.allProducts = []
         this.searchProducts = []
         this.discount = []
@@ -27,6 +28,7 @@ export default class ProductStore {
             .then(res => {
                 this.products = [ ...res.data]
                 this.allProducts = this.products
+                console.log(this.allProducts)
             })
             .catch((e)=>{
                 console.error(e)
@@ -40,11 +42,24 @@ export default class ProductStore {
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/category`)
             .then(res => {
                 this.category = [...res.data]
+
+            })
+    }
+
+    getSubcategory() {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/subcategory`)
+            .then(res => {
+                this.subcategory = [...res.data]
+
             })
     }
 
     changeFilter(title){
         this.products = this.allProducts.filter(item => item.category === title)
+        console.log(this.allProducts)
+    }
+    priceFilter(price){
+        this.products = this.allProducts.filter(item => item.price === price)
     }
     searchFilter(input){
         this.products = this.allProducts.filter(item => item.title.toLowerCase() === input.toLowerCase())
@@ -58,13 +73,21 @@ export default class ProductStore {
     priceFilter(price){
         return this.allProducts.filter(item => item.price === price)
         
+        
+    }
+
+    subcategoryFilter(title){
+        // this.subcategory.filter(item => item.subcategory === title)
+        this.products = this.allProducts.filter(item => item.subcategory === title)
+
+        
     }
 
     getData(id) {
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/` + id)
             .then(response => {
                 this.product = response.data
-                this.images = this.product.images
+                this.imagesUser = this.product.images
                 this.size = this.product.size
 
             })
@@ -90,7 +113,6 @@ export default class ProductStore {
              .then(res => {
                  this.blog = [ ...res.data]
                  this.blog = this.blog
-                 console.log(res)
 
              })
              .catch((e)=>{
