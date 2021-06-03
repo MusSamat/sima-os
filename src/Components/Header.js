@@ -92,11 +92,13 @@ const Header = observer(() => {
                                     <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={SUBCATEGORY_ROUTE}>КАТАЛОГ </NavLink>
                                     
                                     
-                                        {/* <ul  style={{marginLeft: "220px", backgroundColor: "black", marginTop: "-15px", color: "white", }}>
-                                            {product.subcategory.map((prod, index) =>
-                                                <li key={index} style={{cursor: "pointer"}}><a onClick={()=> product.subcategoryFilter(prod.title)} >{prod.title}</a></li>
+                                        <ul  style={{marginLeft: "220px", backgroundColor: "black", marginTop: "-15px", color: "white", }}>
+                                            {product.category.map((prod, index) =>
+                                                <Link to={{pathname: '/productcategory/'+prod.id}} >
+                                                    <li key={index} ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>{prod.title}</a></li>
+                                                </Link>
                                             )}
-                                        </ul> */}
+                                        </ul>
                                    
                                     
                                 </li>

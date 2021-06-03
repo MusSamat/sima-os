@@ -43,7 +43,7 @@ const  Catolog = observer(({match}) => {
     
     useEffect(() => {
         user.getUserData()
-        product.fetchTodo(id).then(() => {
+        product.fetchTodo(product.categoryId,id).then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
                 '/assets/js/bootstrap-input-spinner.js',
@@ -123,7 +123,7 @@ const  Catolog = observer(({match}) => {
                                                 <div className="product product-7 text-center">
                                                     <Link to={{pathname: '/product/'+prod.id}} key={index}>
                                                         <figure className="product-media" >
-                                                                
+                                                                {console.log(product.allProducts)}
                                                                 <img src={`${process.env.REACT_APP_BASE_URL}${prod.images[0].images[0]}`} alt="Product image" className="product-image"/>
                                                                 {/* <span className="onsale"></span> */}
 
@@ -216,9 +216,10 @@ const  Catolog = observer(({match}) => {
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
                                                     <label onClick={()=>product.fetchTodo()} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label>
-                                                        {product.category.map((c, index) =>
+                                                        {product.subcategory.map((c, index) =>
                                                             
                                                                 <div  key={index} className="custom-control custom-checkbox">
+                                                                    {console.log(c.title)}
                                                                     <label onClick={() => product.changeFilter(c.title)} className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label>
                                                                     <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({product.countTitle(c.title)})</span>
                                                                 </div>

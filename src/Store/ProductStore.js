@@ -18,14 +18,15 @@ export default class ProductStore {
         this.discount = []
         this.obj = null
         this.carts = []
+        this.categoryId = null
         
         
 
         makeAutoObservable(this)
     }
-
-     fetchTodo() {
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`)
+    // ?category=4&productcategory=6 
+     fetchTodo(categoryId, id) {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products?category=${categoryId}&productcategory=${id}`)
             .then(res => {
                 this.products = [ ...res.data]
                 this.allProducts = this.products
@@ -54,7 +55,12 @@ export default class ProductStore {
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/category`)
             .then(res => {
                 this.category = [...res.data]
-                console.log(res)
+                this.categoryId = this.category[0].id
+                console.log(this.category.map((i) => {
+                    if(i.id){
+                        return i.id
+                    }
+                }))
 
             })
             .catch((e)=>{
@@ -62,7 +68,7 @@ export default class ProductStore {
             })
     }
     getProdcategory(id) {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?category_id=` + id)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?category_id=`+id)
             .then(res => {
                 this.prodcategory = [...res.data]
                 console.log(this.prodcategory)
@@ -74,7 +80,7 @@ export default class ProductStore {
     }
 
     changeFilter(title){
-        this.products = this.allProducts.filter(item => item.category === title)
+        this.products = this.allProducts.filter(item => item.podcategory === title)
         console.log(this.allProducts)
     }
     priceFilter(price){

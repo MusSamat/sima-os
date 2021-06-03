@@ -9,31 +9,34 @@ const ProductCategory = observer(({match}) => {
     const {user} =  useContext(Context)
     const {product} =  useContext(Context)
     const id = match.params.id
+    console.log("bhbhb")
+    console.log(id)
 
 
     
     useEffect(() => {
-        product.fetchTodo().then(() => {
-            const scripts = [
-                '/assets/js/jquery.elevateZoom.min.js',
-                '/assets/js/bootstrap-input-spinner.js',
-                '/assets/js/jquery.magnific-popup.min.js',
-                '/assets/js/main.js',
-                '/assets/js/bootstrap-input-spinner.js',
-                '/assets/js/owl.carousel.min.js',
-                '/assets/js/superfish.min.js',
-                '/assets/js/jquery.waypoints.min.js',
-                '/assets/js/jquery.hoverIntent.min.js',
-                '/assets/js/bootstrap.bundle.min.js',
-                '/assets/js/jquery.min.js',
-            ]
-            scripts.forEach(i => {
-                const s = document.createElement('script')
-                s.src = i
-                document.body.appendChild(s)
-            })
-        })
+        // product.fetchTodo().then(() => {
+        //     const scripts = [
+        //         '/assets/js/jquery.elevateZoom.min.js',
+        //         '/assets/js/bootstrap-input-spinner.js',
+        //         '/assets/js/jquery.magnific-popup.min.js',
+        //         '/assets/js/main.js',
+        //         '/assets/js/bootstrap-input-spinner.js',
+        //         '/assets/js/owl.carousel.min.js',
+        //         '/assets/js/superfish.min.js',
+        //         '/assets/js/jquery.waypoints.min.js',
+        //         '/assets/js/jquery.hoverIntent.min.js',
+        //         '/assets/js/bootstrap.bundle.min.js',
+        //         '/assets/js/jquery.min.js',
+        //     ]
+        //     scripts.forEach(i => {
+        //         const s = document.createElement('script')
+        //         s.src = i
+        //         document.body.appendChild(s)
+        //     })
+        // })
         product.getProdcategory(id)
+        
         // user.getLocal()
         
         
@@ -49,8 +52,8 @@ const ProductCategory = observer(({match}) => {
                         
                             <div style={{marginTop: "50px"}} key={index} className="col-md-4">
                                 <figure className="product-media" >
-                                    <Link to={{pathname: '/catalog/'+ sub.id}} key={index}>
-                                        <img src={sub.image} alt="Product image" className="product-image"/>
+                                    <Link to={{pathname: '/catalog/' + sub.id}} key={index}>
+                                        <img src={sub.image} alt="Product image" className="product-image news_image"/>
                                     </Link> 
                                 </figure>
                                 <div className="onsale">{sub.title}</div>

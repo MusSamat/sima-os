@@ -36,9 +36,7 @@ const ProdCategory = observer(() => {
         })
         product.getSubcategory()
         product.getCategory()
-        // user.getLocal()
-        
-        
+            
     
       }, []); 
 
@@ -48,11 +46,12 @@ const ProdCategory = observer(() => {
                 <div className="row">
 
                     {product.category.map((sub, index) =>
-                        
+                            
                             <div key={index} style={{marginTop: "40px"}}  className="col-md-4">
                                 <figure className="product-media" >
-                                    <Link to={{pathname: '/productcategory/' + sub.id}} >
-                                        <img src={sub.image} alt="Product image" className="product-image"/>
+                                    <Link to={{pathname: '/productcategory/'+sub.id}} >
+                                        <img  src={sub.image} alt="Product image " className="product-image news_image"/>
+                                        {console.log(sub.id)}
                                     </Link>
                                 </figure>
                                 <div className="onsale">{sub.title}</div>
