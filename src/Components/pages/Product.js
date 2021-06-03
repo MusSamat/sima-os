@@ -22,8 +22,6 @@ const Product = observer(({match}) => {
     const id = match.params.id
     const [count, setCount] = useState(5)
     const [hover, setHover] = useState(false);
-    console.log(id)
-
     
 
     
@@ -94,6 +92,9 @@ const Product = observer(({match}) => {
     const [currValue, setCurrValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined)
     const [text, setText] = useState()
+    const [leftImages, setLeftImages] = useState([])
+    const [selectedImage, setSelectedImage] = useState('')
+    console.log('Selected image: ', selectedImage)
 
     const handleClick = (value) => {
         setCurrValue(value)
@@ -150,6 +151,9 @@ const Product = observer(({match}) => {
          
         user.getUserData()
         product.getData(id).then(() => {
+            setLeftImages(product?.imagesUser[0]?.images ?? [])
+            setSelectedImage(product?.imagesUser[0]?.images[0] || '')
+            console.log('get data')
             const scripts = [
 
                 '/assets/js/jquery.min.js',
@@ -175,7 +179,7 @@ const Product = observer(({match}) => {
         })
         // product.addProduct(product.index)
         return () => {
-            const elements = document.getElementsByClassNclassName('zoomContainer')
+            const elements = document.getElementsByClassName('zoomContainer')
             while(elements.length > 0){
                 elements[0].parentNode.removeChild(elements[0]);
             }
@@ -210,25 +214,19 @@ const Product = observer(({match}) => {
                                     <div className="product-gallery product-gallery-vertical">
                                         <div className="row">
                                             <figure className="product-main-image">
-                                                <img id="product-zoom" src={`${process.env.REACT_APP_BASE_URL}${product.imagesUser[0]?.images[0]}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${product.imagesUser[0]?.images[0]}`} alt="product image"/>
-                                                <a href={`${process.env.REACT_APP_BASE_URL}${product.imagesUser[0]?.images[0]}`} id="btn-product-gallery" className="btn-product-gallery">
+                                                <img id="product-zoom" src={process.env.REACT_APP_BASE_URL + selectedImage} data-zoom-image={process.env.REACT_APP_BASE_URL + selectedImage} alt="product image"/>
+                                                <a href={process.env.REACT_APP_BASE_URL + selectedImage} id="btn-product-gallery" className="btn-product-gallery">
                                                     <i className="icon-arrows"></i>
                                                 </a>
                                             </figure>
 
                                             <div id="product-zoom-gallery" className="product-image-gallery">
-
-                                                {product.imagesUser.map((img, index) =>
-                                                    <a className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`}>
-                                                        {console.log(img.images[0])}
-                                                        <img src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product side"/>
+                                                
+                                                {leftImages.map((img, index) =>
+                                                    <a onClick={() => setSelectedImage(img)} className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
+                                                        <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
                                                     </a>
                                                 )}
-
-
-                                               
-
-                                                
                                             </div>
                                         </div>
                                     </div>
@@ -258,17 +256,23 @@ const Product = observer(({match}) => {
                                             <label>Color:</label>
 
                                             <div className="product-nav product-nav-thumbs">
-                                            
-                                                <a href="#" className="active">
-                                                    {product.imagesUser.map((img, index) =>
-                                                        <>
-                                                        {/* <span>{img.title}</span> */}
+                                            {product.imagesUser.map((img, index) =>
+                                                <a href="#" onMouseEnter={() => {
+                                                    const d = [...img.images]
+                                                        setLeftImages(d)
+                                                        setSelectedImage(d[0])
+                                                }} 
+                                                    onClick={() => {
+                                                    const d = [...img.images]
+                                                        setLeftImages(d)
+                                                        setSelectedImage(d[0])
+                                                    }} className="active">
+                                                    
                                                         <img key={index} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product desc"/>
-                                                        {console.log(img.images[0])}
-                                                        </>
-                                                    )}
+                                                  
                                                     
                                                 </a>
+                                                  )}
                                                 
                                             </div>
                                         </div>

@@ -2,17 +2,18 @@ import { observer } from 'mobx-react-lite';
 import React, {useState, useEffect, useContext} from 'react';
 import { Context } from '../../index';
 import { Link } from 'react-router-dom';
+import "../../App.css";
 
 
 
-const ProductCategory = observer(({match}) => {
+const ProdCategory = observer(() => {
     const {user} =  useContext(Context)
     const {product} =  useContext(Context)
-    const id = match.params.id
 
 
     
     useEffect(() => {
+        user.getUserData()
         product.fetchTodo().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
@@ -33,7 +34,8 @@ const ProductCategory = observer(({match}) => {
                 document.body.appendChild(s)
             })
         })
-        product.getProdcategory(id)
+        product.getSubcategory()
+        product.getCategory()
         // user.getLocal()
         
         
@@ -42,19 +44,20 @@ const ProductCategory = observer(({match}) => {
 
     return (
         <div className="page-content">
-            <div  className="container">
-                <div  className="row">
+            <div className="container">
+                <div className="row">
 
-                    {product.prodcategory.map((sub, index) =>
+                    {product.category.map((sub, index) =>
                         
-                            <div style={{marginTop: "50px"}} key={index} className="col-md-4">
+                            <div key={index} style={{marginTop: "40px"}}  className="col-md-4">
                                 <figure className="product-media" >
-                                    <Link to={{pathname: '/catalog/'+ sub.id}} key={index}>
+                                    <Link to={{pathname: '/productcategory/' + sub.id}} >
                                         <img src={sub.image} alt="Product image" className="product-image"/>
-                                    </Link> 
+                                    </Link>
                                 </figure>
                                 <div className="onsale">{sub.title}</div>
                             </div>
+                            
                         
                     )}
                 
@@ -64,7 +67,7 @@ const ProductCategory = observer(({match}) => {
                             
                                 <div className="col-6 col-md-4 col-lg-4 col-xl-3"  >
                                     <div className="product product-7 text-center">
-                                        <Link to={{pathname: '/product/'+prod.id}} key={index}>
+                                        
                                             <figure className="product-media" >
                                                     
                                                     <img src={`${process.env.REACT_APP_BASE_URL}${prod.images[0].images[0]}`} alt="Product image" className="product-image"/>
@@ -112,4 +115,4 @@ const ProductCategory = observer(({match}) => {
     )
 })
 
-export default  ProductCategory
+export default  ProdCategory

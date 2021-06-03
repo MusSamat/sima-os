@@ -12,6 +12,7 @@ export default class ProductStore {
         this.count = 0
         this.category = []
         this.subcategory = []
+        this.prodcategory = []
         this.allProducts = []
         this.searchProducts = []
         this.discount = []
@@ -38,19 +39,37 @@ export default class ProductStore {
     }
 
     
-    getCategory() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/category`)
-            .then(res => {
-                this.category = [...res.data]
-
-            })
-    }
-
     getSubcategory() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/subcategory`)
             .then(res => {
                 this.subcategory = [...res.data]
+                console.log(res)
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+    }
 
+    getCategory() {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/category`)
+            .then(res => {
+                this.category = [...res.data]
+                console.log(res)
+
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+    }
+    getProdcategory(id) {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?category_id=` + id)
+            .then(res => {
+                this.prodcategory = [...res.data]
+                console.log(this.prodcategory)
+
+            })
+            .catch((e)=>{
+                console.error(e)
             })
     }
 

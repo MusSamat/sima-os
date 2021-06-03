@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import { Link, NavLink } from 'react-router-dom';
-import {ABOUT_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, MYACOUNT_ROUTE } from "../utils/Const";
+import {ABOUT_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, MYACOUNT_ROUTE, SUBCATEGORY_ROUTE} from "../utils/Const";
 import "../App.css";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
@@ -89,14 +89,14 @@ const Header = observer(() => {
                                     <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={CATALOG_ROUTE}>КАТАЛОГ </NavLink>
+                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={SUBCATEGORY_ROUTE}>КАТАЛОГ </NavLink>
                                     
                                     
-                                        <ul  style={{marginLeft: "220px", backgroundColor: "black", marginTop: "-15px", color: "white", }}>
+                                        {/* <ul  style={{marginLeft: "220px", backgroundColor: "black", marginTop: "-15px", color: "white", }}>
                                             {product.subcategory.map((prod, index) =>
                                                 <li key={index} style={{cursor: "pointer"}}><a onClick={()=> product.subcategoryFilter(prod.title)} >{prod.title}</a></li>
                                             )}
-                                        </ul>
+                                        </ul> */}
                                    
                                     
                                 </li>
@@ -140,7 +140,7 @@ const Header = observer(() => {
                                 <span className="cart-count">{user.items.length}</span>
                                 {
                                     user.items.map((item, index) => {
-                                        sum = sum + item.product.price * item.quantity
+                                        sum = sum + item.product?.price * item.quantity
                                        })
                                 }
                                 <span className="cart-txt">{sum.toFixed(2)}</span>
@@ -153,12 +153,12 @@ const Header = observer(() => {
                                     <div className="product">
                                         <div className="product-cart-details">
                                             <h4 className="product-title">
-                                                <a>{c.product.title}</a>
+                                                <a>{c.product?.title}</a>
                                             </h4>
 
                                             <span className="cart-product-info">
                                                 <span className="cart-product-qty">1</span>
-                                                x ${c.product.price}
+                                                x ${c.product?.price}
                                             </span>
                                         </div>
 
@@ -190,6 +190,12 @@ const Header = observer(() => {
                 </div>
             </div>
         </header>
+        <a
+                href="whatsapp://send?text=Здравствуйте, я хочу стать частью команды Яндекс Такси Олимпик Парк&phone=+996501342534&abid=+996501342534"
+                class="btn-whatsapp-link"
+              >
+                Написать на Whatsapp
+              </a>
         <Link className="whatsapp"      
            to={{pathname: "https://wa.me/+996-705-555829"}} target="_blank"
         >

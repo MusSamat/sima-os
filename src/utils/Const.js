@@ -14,4 +14,6 @@ export const ERROR_ROUTE = '/error'
 export const SINGLE_ROUTE = '/single/:id'
 export const MYACOUNT_ROUTE = '/my-acount'
 export const FILTER_ROUTE = '/filter'
+export const SUBCATEGORY_ROUTE = '/productcategory'
+export const PRODUCTCATEGORY_ROUTE = '/subcategory'
 

@@ -5,15 +5,17 @@ import { Link } from 'react-router-dom';
 import "../../App.css";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import Subcategory from "./ProdCategory"
 
 
   
 
  
-const  Catolog = observer(() => {
+const  Catolog = observer(({match}) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
     const [input, setInput] = useState("")
+    const id = match.params.id
 
     
 
@@ -41,7 +43,7 @@ const  Catolog = observer(() => {
     
     useEffect(() => {
         user.getUserData()
-        product.fetchTodo().then(() => {
+        product.fetchTodo(id).then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
                 '/assets/js/bootstrap-input-spinner.js',
@@ -74,15 +76,7 @@ const  Catolog = observer(() => {
     return (
         <div>
              <main className="main">
-                <nav aria-label="breadcrumb" className="breadcrumb-nav mb-2">
-                    <div className="container">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li className="breadcrumb-item"><a href="#">Shop</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">Grid 4 Columns</li>
-                        </ol>
-                    </div>
-                </nav>
+                
 
                 <div className="page-content">
                     <div className="container">
@@ -121,7 +115,6 @@ const  Catolog = observer(() => {
                                         </div>
                                     
                                 </div>
-
                                 <div className="products mb-3">
                                     <div className="row justify-content-center">                                        
                                         {product.allProducts.map((prod, index) => 
@@ -132,7 +125,7 @@ const  Catolog = observer(() => {
                                                         <figure className="product-media" >
                                                                 
                                                                 <img src={`${process.env.REACT_APP_BASE_URL}${prod.images[0].images[0]}`} alt="Product image" className="product-image"/>
-                                                                <span className="onsale"></span>
+                                                                {/* <span className="onsale"></span> */}
 
                                                             <div className="product-action-vertical">
                                                                 {/* <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -171,6 +164,9 @@ const  Catolog = observer(() => {
                                         
                                     </div>
                                 </div>
+
+
+
                             </div>
                             <aside className="col-lg-3 order-lg-first">
                                 <div className="sidebar sidebar-shop">
