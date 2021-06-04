@@ -11,11 +11,16 @@ import Subcategory from "./ProdCategory"
   
 
  
-const  Catolog = observer(({match}) => {
+const  Catolog = observer((props) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
     const [input, setInput] = useState("")
-    const id = match.params.id
+    const id = props.match.params.id
+    const catId = props.match.params.catId
+    const title = props.match.params.title
+    const catTitle = props.location.catTitle
+    console.log(props)
+    console.log(title)
 
     
 
@@ -43,7 +48,7 @@ const  Catolog = observer(({match}) => {
     
     useEffect(() => {
         user.getUserData()
-        product.fetchTodo(product.categoryId,id).then(() => {
+        product.fetchTodo(catId,id).then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
                 '/assets/js/bootstrap-input-spinner.js',
@@ -63,7 +68,7 @@ const  Catolog = observer(({match}) => {
                 document.body.appendChild(s)
             })
         })
-        product.getCategory()
+        product.getSubcategory(title, catId)
         product.changeFilter()
         product.discountTodo()
         // user.getLocal()

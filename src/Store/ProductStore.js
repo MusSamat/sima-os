@@ -18,15 +18,13 @@ export default class ProductStore {
         this.discount = []
         this.obj = null
         this.carts = []
-        this.categoryId = null
         
         
 
         makeAutoObservable(this)
     }
-    // ?category=4&productcategory=6 
      fetchTodo(categoryId, id) {
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products?category=${categoryId}&productcategory=${id}`)
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?category=${categoryId}&productcategory=${id}`)
             .then(res => {
                 this.products = [ ...res.data]
                 this.allProducts = this.products
@@ -39,9 +37,9 @@ export default class ProductStore {
             
     }
 
-    
-    getSubcategory() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/subcategory`)
+    // subcategory/?productcategory_title=Рубашки&category_id=3
+    getSubcategory(title, catId) {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/subcategory/?productcategory_title=${title}&category_id=${catId}`)
             .then(res => {
                 this.subcategory = [...res.data]
                 console.log(res)
@@ -50,23 +48,19 @@ export default class ProductStore {
                 console.error(e)
             })
     }
-
+    
     getCategory() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/category`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/category/`)
             .then(res => {
                 this.category = [...res.data]
-                this.categoryId = this.category[0].id
-                console.log(this.category.map((i) => {
-                    if(i.id){
-                        return i.id
-                    }
-                }))
+                console.log(res)
 
             })
             .catch((e)=>{
                 console.error(e)
             })
     }
+    
     getProdcategory(id) {
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?category_id=`+id)
             .then(res => {

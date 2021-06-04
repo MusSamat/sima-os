@@ -8,9 +8,7 @@ import { Link } from 'react-router-dom';
 const ProductCategory = observer(({match}) => {
     const {user} =  useContext(Context)
     const {product} =  useContext(Context)
-    const id = match.params.id
-    console.log("bhbhb")
-    console.log(id)
+    const catId = match.params.id
 
 
     
@@ -35,7 +33,7 @@ const ProductCategory = observer(({match}) => {
         //         document.body.appendChild(s)
         //     })
         // })
-        product.getProdcategory(id)
+        product.getProdcategory(catId)
         
         // user.getLocal()
         
@@ -52,7 +50,8 @@ const ProductCategory = observer(({match}) => {
                         
                             <div style={{marginTop: "50px"}} key={index} className="col-md-4">
                                 <figure className="product-media" >
-                                    <Link to={{pathname: '/catalog/' + sub.id}} key={index}>
+                                    <Link to={{pathname: `/catalog/${catId}/${ + sub.id}/${sub.title}`
+                                }} key={index}>
                                         <img src={sub.image} alt="Product image" className="product-image news_image"/>
                                     </Link> 
                                 </figure>

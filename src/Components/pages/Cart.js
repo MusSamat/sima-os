@@ -4,11 +4,12 @@ import { Context } from '../../index';
 import axios from "axios"
 import { NavLink } from 'react-router-dom';
 import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
+import ruble from "../../assets/ruble.png"
 
  const Cart = observer(() => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
-    const [count , setCount] = useState()
+    const [count , setCount] = useState(user.items.filter((item) => item.quantity ))
     let sum  = 0;
 
     console.log(count)
@@ -20,29 +21,17 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
         console.log(count)
     }
 
-    let prod = user.items.map(item => item.product.id )
-    let quan = user.items.map(item => item.quantity )
-    console.log(prod)
-    console.log(quan)
+    // let prod = user.items.map(item => item.product.id )
+    // let quan = user.items.map(item => item.quantity )
+    // console.log(prod)
+    // console.log(quan)
  
-    let arr = [1,3,5,7, 8];
-    const cumulativeSum = list => {
-      let result = [list[0]];
-      
-      for(let i = 1; i < list.length; i++) {
-          console.log(list[i],"k" )
-          console.log(result[i-1] )
-        result.push(list[i] + result[i-1]);
-      } 
-      
-      return result;
-    }
-    console.log(cumulativeSum(arr))
+    
 
     const UpdateCart = (e) => {
         const data = JSON.stringify({ 
-            product: prod,
-            quantity: quan, 
+            // product: prod,
+            // quantity: quan, 
             
             
         })
@@ -143,11 +132,14 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
                                                         <div className="product">
                                                             <figure className="product-media">
                                                                 <a>
-                                                                    <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0]}`} alt="Product image"/>
+                                                                    <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0].images[0]}`} alt="Product image"/>
                                                                 </a>
+                                                                {console.log(c.product?.images[0])}
                                                             </figure>
 
                                                             <h3 className="product-title">
+                                                                {console.log(c.quantity)}
+                                                                {/*  */}
                                                                 <a>{c.product.title}</a>
                                                             </h3>
                                                         </div>
@@ -156,10 +148,11 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
                                                     
                                                     <td >
                                                         <div >
-                                                            <button  className="kol" onClick={() => setCount(count + 5)}>-</button>
+                                                            <button  className="kol" onClick={() => setCount(count - 5)}>-</button>
                                                             <span style={{marginLeft: "7px"}} className="kol-input" >{c.quantity}</span>
                                                             <span style={{marginLeft: "7px"}} className="kol-input" >{count}</span>
-                                                            <button className="kol" onClick={() => countIncrement(c.quantity)}>+</button>
+                                                            <button className="kol" onClick={() => setCount(count + 5)}>+</button>
+                                                            {console.log(count)}
                                                         
                                                         </div>
                                                         
@@ -201,7 +194,7 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
                                                                     })
                                                             }
 
-                                                    <td>{sum.toFixed(2)} $</td>
+                                                    <td><img style={{width: "10px"}} src={ruble}/> {sum.toFixed(2)} </td>
                                                         
                                                     </tr>
                                                     

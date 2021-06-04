@@ -34,7 +34,6 @@ const ProdCategory = observer(() => {
                 document.body.appendChild(s)
             })
         })
-        product.getSubcategory()
         product.getCategory()
             
     
@@ -51,7 +50,7 @@ const ProdCategory = observer(() => {
                                 <figure className="product-media" >
                                     <Link to={{pathname: '/productcategory/'+sub.id}} >
                                         <img  src={sub.image} alt="Product image " className="product-image news_image"/>
-                                        {console.log(sub.id)}
+                                        
                                     </Link>
                                 </figure>
                                 <div className="onsale">{sub.title}</div>

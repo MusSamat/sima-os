@@ -18,6 +18,7 @@ const Header = observer(() => {
 
     let sum = 0
    
+    console.log(true || false)
     
 
     useEffect(() => {
@@ -92,7 +93,7 @@ const Header = observer(() => {
                                     <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={SUBCATEGORY_ROUTE}>КАТАЛОГ </NavLink>
                                     
                                     
-                                        <ul  style={{marginLeft: "220px", backgroundColor: "black", marginTop: "-15px", color: "white", }}>
+                                        <ul  style={{marginLeft: "320px", backgroundColor: "black", marginTop: "-15px", color: "white", }}>
                                             {product.category.map((prod, index) =>
                                                 <Link to={{pathname: '/productcategory/'+prod.id}} >
                                                     <li key={index} ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>{prod.title}</a></li>
@@ -109,10 +110,10 @@ const Header = observer(() => {
                                     <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={CONTACT_ROUTE}>КОНТАКТЫ</NavLink>
 
                                 </li>
-                                <li className="megamenu-container ">
+                                {/* <li className="megamenu-container ">
                                     <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={NEWS_ROUTE}>НОВОСТИ</NavLink>
 
-                                </li >
+                                </li > */}
                                 <li className="megamenu-container ">
                                     <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={ABOUT_ROUTE}>О КОМПАНИИ</NavLink>
 
@@ -166,7 +167,7 @@ const Header = observer(() => {
 
                                         <figure className="product-image-container">
                                             <a  className="product-image">
-                                                <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0]}`} alt="product"/>
+                                                <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0].images[0]}`} alt="product"/>
                                             </a>
                                         </figure>
                                         <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close"></i></a>

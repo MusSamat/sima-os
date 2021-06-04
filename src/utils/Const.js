@@ -1,4 +1,4 @@
-export const CATALOG_ROUTE = '/catalog/:id'
+export const CATALOG_ROUTE = '/catalog/:catId?/:id/:title/'
 export const DELIVERY_ROUTE = '/delivery'
 export const CONTACT_ROUTE = '/contact'
 export const ABOUT_ROUTE = '/about'

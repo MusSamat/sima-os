@@ -6,6 +6,8 @@ import { LOGIN_ROUTE } from '../../utils/Const';
 import axios from "axios";
 import  "../../App.css";
 import { FaStar } from "react-icons/fa";
+import { BiGitRepoForked } from "react-icons/bi";
+import {Modal, Button} from "react-bootstrap";
 
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -22,6 +24,10 @@ const Product = observer(({match}) => {
     const id = match.params.id
     const [count, setCount] = useState(5)
     const [hover, setHover] = useState(false);
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     
 
     
@@ -62,8 +68,8 @@ const Product = observer(({match}) => {
     const addCart = (e) => {
         const id = match.params.id
         const data = JSON.stringify({
-            product: String(id),
-            quantity: String(count)
+            product: [String(id)],
+            quantity: [String(count)]
             
             
         })
@@ -195,12 +201,26 @@ const Product = observer(({match}) => {
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><a href="index.html">Home</a></li>
                             <li className="breadcrumb-item"><a href="#">Products</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">Extended Description</li>
+                            <li className="breadcrumb-item active" aria-current="page">Артикул: {product.product.articul}</li>
                         </ol>
 
                         <nav className="product-pager ml-auto" aria-label="Product">
-                            kmkmkm
+                            <BiGitRepoForked onClick={handleShow} style={{fontSize: "30px", cursor: "pointer"}}/>
                         </nav>
+                        <Modal show={show} onHide={handleClose} centered={true} animation={true}>
+                            <Modal.Header closeButton>
+                            <Modal.Title>Modal heading</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                            <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={handleClose}>
+                                Save Changes
+                            </Button>
+                            </Modal.Footer>
+                        </Modal>
                     </div>
                 </nav>
 
@@ -257,17 +277,13 @@ const Product = observer(({match}) => {
 
                                             <div className="product-nav product-nav-thumbs">
                                             {product.imagesUser.map((img, index) =>
-                                                <a href="#" onMouseEnter={() => {
-                                                    const d = [...img.images]
-                                                        setLeftImages(d)
-                                                        setSelectedImage(d[0])
-                                                }} 
+                                                <a href="#" 
                                                     onClick={() => {
                                                     const d = [...img.images]
                                                         setLeftImages(d)
                                                         setSelectedImage(d[0])
                                                     }} className="active">
-                                                    
+                                                    {console.log(product.imagesUser)}
                                                         <img key={index} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product desc"/>
                                                   
                                                     
