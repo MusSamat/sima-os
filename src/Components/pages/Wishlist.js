@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
-import axios from "axios"
+import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const Wishlist = observer(()=> {
     const {user} = useContext(Context)
@@ -96,17 +97,19 @@ const Wishlist = observer(()=> {
                             </thead>
 
                             <tbody>
+                                {console.log(user.list)}
                                 {user.list.map((l, index)=>
                                 
                                 <tr key={index}>
                                     <td className="product-col">
                                         <div className="product">
-                                            <figure className="product-media">
-                                                <a href="#">
-                                                    <img src={`${process.env.REACT_APP_BASE_URL}${l.product?.images[0]}`} alt="Product image"/>
-                                                </a>
-                                            </figure>
-
+                                            <Link to={{pathname: '/product/'+ l.product.id}}>
+                                                <figure className="product-media">
+                                                    <a href="#">
+                                                        <img src={`${process.env.REACT_APP_BASE_URL}${l.product?.images[0].images[0]}`} alt="Product image"/>
+                                                    </a>
+                                                </figure>
+                                            </Link>
                                             <h3 className="product-title">
                                                 <a href="#">{l.product.title}</a>
                                             </h3>
@@ -128,7 +131,7 @@ const Wishlist = observer(()=> {
                         </table>
                         <div className="wishlist-share">
                             <div className="social-icons social-icons-sm mb-2">
-                                <label className="social-label">Поделись:</label>
+                                <label  className="social-label">Поделись:</label>
                                 <a href="#" className="social-icon" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
                                 <a href="#" className="social-icon" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
                                 <a href="#" className="social-icon" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>

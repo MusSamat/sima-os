@@ -18,15 +18,15 @@ const Header = observer(() => {
 
     let sum = 0
    
-    console.log(true || false)
     
 
     useEffect(() => {
         user.getUserData()
         user.getCartData()
-        user.getWishlistData()
+        // user.getWishlistData()
         product.subcategoryFilter()
         product.getSubcategory()
+        product.getCategory()
     }, [])
     
   return (
@@ -41,7 +41,7 @@ const Header = observer(() => {
                         <div className="header-dropdown">
                             
                             <div className="header lefft">
-                            <a style={{fontWeight:"bold"}}>Bishkek</a>
+                                <a>BISHKEK</a>
                                 
                             </div>
                         </div><br/>
@@ -54,14 +54,13 @@ const Header = observer(() => {
                     <div className="header-right">
                         <ul className="top-menu">
                             <li>
-                                <a >Links</a>
                                 <ul>
                                     <li>
-                                         
-                                        {user.isAuth ? <NavLink style={{fontWeight: "bold"}}  to={MYACOUNT_ROUTE}><FaUserAlt style={{marginRight: "5px", fontSize:"13px", marginBottom:"3px"}}/>МОЙ АККАУНТ</NavLink>
-                                        : <NavLink style={{fontWeight: "bold"}} to={LOGIN_ROUTE}><FaUserAlt style={{marginRight: "5px", fontSize:"13px", marginBottom:"3px"}}/>АВТОРИЗАЦИЯ</NavLink>}</li>
+                                    <a  data-toggle="modal"><i class="icon-user"></i></a>
+                                        {user.isAuth ? <NavLink   to={MYACOUNT_ROUTE}>МОЙ АККАУНТ</NavLink>
+                                        : <NavLink to={LOGIN_ROUTE}>АВТОРИЗАЦИЯ</NavLink>}</li>
                                     
-                                    <li style={{textTransform: "none", fontWeight: "bold"}}>grand139094@gmail.com</li>
+                                    <li >grand139094@gmail.com</li>
                                 </ul>
                             </li>
                         </ul>
@@ -78,7 +77,7 @@ const Header = observer(() => {
                             <i className="icon-bars"></i>
                         </button>
                         <NavLink className="logo" to={HOME_ROUTE}>
-                            <img style={{width: "120px", height: "75px"}} src={logo}/>
+                            <img style={{width: "100px", height: "40px"}} src={logo}/>
                             
                         </NavLink>
                         
@@ -87,13 +86,13 @@ const Header = observer(() => {
                         <nav className="main-nav">
                             <ul className="menu sf-arrows">
                                 <li  className="megamenu-container">
-                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
+                                    <NavLink to={HOME_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">ГЛАВНАЯ</a></NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={SUBCATEGORY_ROUTE}>КАТАЛОГ </NavLink>
+                                    <NavLink className="sf-with" to={SUBCATEGORY_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">КАТАЛОГ</a> </NavLink>
                                     
                                     
-                                        <ul  style={{marginLeft: "320px", backgroundColor: "black", marginTop: "-15px", color: "white", }}>
+                                        <ul  style={{marginLeft: "320px", backgroundColor: "black", marginTop: "-15px", color: "white", width: "60px" }}>
                                             {product.category.map((prod, index) =>
                                                 <Link to={{pathname: '/productcategory/'+prod.id}} >
                                                     <li key={index} ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>{prod.title}</a></li>
@@ -104,18 +103,18 @@ const Header = observer(() => {
                                     
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
+                                    <NavLink  className="sf-with" to={DELIVERY_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">ДОСТАВКА</a></NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={CONTACT_ROUTE}>КОНТАКТЫ</NavLink>
+                                    <NavLink  className="sf-with" to={CONTACT_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">КОНТАКТЫ</a></NavLink>
 
                                 </li>
-                                {/* <li className="megamenu-container ">
-                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={NEWS_ROUTE}>НОВОСТИ</NavLink>
-
-                                </li > */}
                                 <li className="megamenu-container ">
-                                    <NavLink style={{fontSize:"18px", color: "#473596"}} className="sf-with" to={ABOUT_ROUTE}>О КОМПАНИИ</NavLink>
+                                    <NavLink  className="sf-with" to={NEWS_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">НОВОСТИ</a></NavLink>
+
+                                </li >
+                                <li className="megamenu-container ">
+                                    <NavLink  className="sf-with" to={ABOUT_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">О КОМПАНИИ</a></NavLink>
 
                                 </li>
                             </ul>
@@ -123,7 +122,7 @@ const Header = observer(() => {
                     </div>
 
                     <div className="header-right">
-                        <div className="header-search">
+                        {/* <div className="header-search">
                             <a  className="search-toggle" role="button"><i className="icon-search"></i></a>
                             <form action="#" method="get">
                                 <div className="header-search-wrapper">
@@ -131,14 +130,14 @@ const Header = observer(() => {
                                     <input type="search" className="form-control" name="q" id="q" placeholder="Search in..." required/>
                                 </div>
                             </form>
-                        </div>
+                        </div> */}
                         <NavLink className="wishlist-link" to={WISHLIST_ROUTE}>
                             <i className="icon-heart-o"></i>
                             <span className="wishlist-count">{user.list.length}</span>
                         </NavLink>
 
                         <div className="dropdown cart-dropdown">
-                            <a  className="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                            <NavLink to={CART_ROUTE}><a  className="dropdown-toggle" >
                                 <i className="icon-shopping-cart"></i>
                                 <span className="cart-count">{user.items.length}</span>
                                 {
@@ -147,7 +146,8 @@ const Header = observer(() => {
                                        })
                                 }
                                 <span className="cart-txt">{sum.toFixed(2)}</span>
-                            </a>
+                                </a>
+                            </NavLink>
 
                             <div  className="dropdown-menu dropdown-menu-right">
                                 <div style={{overflowY: "auto", height: "230px"}} >
@@ -184,7 +184,7 @@ const Header = observer(() => {
                                 <div className="dropdown-cart-action" style={{display: "block"}}>
                                     <NavLink style={{marginBottom: "9px"}} className="btn btn-primary" to={CART_ROUTE}>ПРОСМОТР КОРЗИНЫ</NavLink><br/>
                                     
-                                    <NavLink className="btn btn-outline-primary-2" to={CHECKOUT_ROUTE}><span>ОФОРМИТЬ ЗАКАЗ</span><i className="icon-long-arrow-right"></i></NavLink>
+                                    <NavLink style={{width: "167px"}} className="btn btn-outline-primary-2" to={CHECKOUT_ROUTE}>ОФОРМИТЬ ЗАКАЗ</NavLink>
                                     
                                 </div>
                             </div>

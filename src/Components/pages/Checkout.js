@@ -40,6 +40,7 @@ const Checkout = observer(() => {
             .then(response => {
 				setNote('')
 				notify()
+				user.getCartData()
         })
         .catch(error =>{ 
             console.log(error) 
@@ -57,19 +58,17 @@ const Checkout = observer(() => {
             <div className="page-content">
             	<div className="checkout">
 	                <div className="container">
-            			<div className="checkout-discount">
-            				<form action="#">
-        						<input type="text" className="form-control" required id="checkout-discount-input"/>
-            					<label for="checkout-discount-input" className="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
-            				</form>
-            			</div>
             			<form action="#">
 		                	<div className="row">
 		                		<div className="col-lg-9">
 		                			<h2 className="checkout-title">ДЕТАЛИ ОПЛАТЫ</h2>
 		                				<div className="row">
 		                					<div className="col-sm-6">
-		                						<input type="text" placeholder="Имя  *" value={user.userId.first_name} className="form-control" required/>
+		                						<input 
+													type="text" placeholder="Имя  *"
+													value={user.userId.first_name} 
+													style={{fontSize: " 18px"}}
+													className="form-control" required/>
 		                					</div>
 
 		                					<div className="col-sm-6">
@@ -138,8 +137,7 @@ const Checkout = observer(() => {
 		                				</table>
 
 		                				<button onClick={sendOrder} type="submit" className="btn btn-outline-primary-2 btn-order btn-block">
-		                					<span className="btn-text">Подтвердить заказ</span>
-		                					<span className="btn-hover-text">Перейти к оформлению заказа</span>
+		                					<span style={{fontSize: "18px"}} >Подтвердить заказ</span>
 		                				</button>
 										<ToastContainer />
 		                			</div>

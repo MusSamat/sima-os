@@ -7,33 +7,16 @@ import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
 import ruble from "../../assets/ruble.png"
 
  const Cart = observer(() => {
-    const {product} = useContext(Context)
     const {user} = useContext(Context)
-    const [count , setCount] = useState(user.items.filter((item) => item.quantity ))
+    const {product} = useContext(Context)
+    const [count , setCount] = useState( product.subcategory)
     let sum  = 0;
-
-    console.log(count)
-
-    const countIncrement = (id) => {
-        
-        
-        setCount(count  + 5)
-        console.log(count)
-    }
-
-    // let prod = user.items.map(item => item.product.id )
-    // let quan = user.items.map(item => item.quantity )
-    // console.log(prod)
-    // console.log(quan)
- 
     
-
+    console.log(user.items)
     const UpdateCart = (e) => {
         const data = JSON.stringify({ 
-            // product: prod,
-            // quantity: quan, 
-            
-            
+            product: user.items.map(i=> i.product.id),
+            quantity: user.items.map(i=> i.quantity)
         })
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/cart-item/`, data, 
         {
@@ -45,6 +28,7 @@ import ruble from "../../assets/ruble.png"
         })
             .then(response => {
                 console.log(response)
+                user.getCartData()
         })
         .catch(error =>{ 
             console.log(error)  
@@ -68,7 +52,7 @@ import ruble from "../../assets/ruble.png"
             },
         })
         .then(res => {
-            user.getCartData()
+            // user.getCartData()
         console.log(res)
         })
         .catch((e)=>{
@@ -80,26 +64,8 @@ import ruble from "../../assets/ruble.png"
      
 
     useEffect(() => {
-        user.getCartData()
-        product.fetchTodo().then(() => {
-            const scripts = [
-                '/assets/js/jquery.elevateZoom.min.js',
-                '/assets/js/bootstrap-input-spinner.js',
-                '/assets/js/jquery.magnific-popup.min.js',
-                '/assets/js/main.js',
-                '/assets/js/bootstrap-input-spinner.js',
-                '/assets/js/owl.carousel.min.js',
-                '/assets/js/superfish.min.js',
-                '/assets/js/jquery.waypoints.min.js',
-                '/assets/js/jquery.hoverIntent.min.js',
-                '/assets/js/bootstrap.bundle.min.js',
-                '/assets/js/jquery.min.js',
-            ]
-            scripts.forEach(i => {
-                const s = document.createElement('script')
-                s.src = i
-                document.body.appendChild(s)
-            })
+        user.getCartData().then((items)  => {
+            console.log(items)
         })
 
       }, [])
@@ -122,7 +88,7 @@ import ruble from "../../assets/ruble.png"
                                             </thead>
 
                                             <tbody>
-                                                
+                                                {console.log(user.items)}
                                                 {user.items.map((c, index)=>
                                                 
                                                 
@@ -134,12 +100,9 @@ import ruble from "../../assets/ruble.png"
                                                                 <a>
                                                                     <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0].images[0]}`} alt="Product image"/>
                                                                 </a>
-                                                                {console.log(c.product?.images[0])}
                                                             </figure>
 
                                                             <h3 className="product-title">
-                                                                {console.log(c.quantity)}
-                                                                {/*  */}
                                                                 <a>{c.product.title}</a>
                                                             </h3>
                                                         </div>
@@ -148,11 +111,10 @@ import ruble from "../../assets/ruble.png"
                                                     
                                                     <td >
                                                         <div >
-                                                            <button  className="kol" onClick={() => setCount(count - 5)}>-</button>
+                                                            <button  className="kol" onClick={() =>  user.changeItemQuantity(index, c.quantity - 5)}>-</button>
                                                             <span style={{marginLeft: "7px"}} className="kol-input" >{c.quantity}</span>
-                                                            <span style={{marginLeft: "7px"}} className="kol-input" >{count}</span>
-                                                            <button className="kol" onClick={() => setCount(count + 5)}>+</button>
-                                                            {console.log(count)}
+                                                            <button className="kol" onClick={() => user.changeItemQuantity(index, c.quantity + 5)}>+</button>
+                                                            
                                                         
                                                         </div>
                                                         
@@ -166,17 +128,17 @@ import ruble from "../../assets/ruble.png"
 
                                         <div className="cart-bottom">
                                             <div className="cart-discount">
-                                                <form action="#">
+                                                {/* <form >
                                                     <div className="input-group">
                                                         <input type="text" className="form-control" required placeholder="coupon code"/>
                                                         <div className="input-group-append">
                                                             <button className="btn btn-outline-primary-2" type="submit"><i className="icon-long-arrow-right"></i></button>
                                                         </div>
                                                     </div>
-                                                </form>
+                                                </form> */}
                                             </div>
 
-                                            <a onClick={(e) => UpdateCart(e)} href="#" className="btn btn-outline-dark-2"><span>ОБНОВИТЬ КОРЗИНУ</span><i className="icon-refresh"></i></a>
+                                            <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2"><span>ОБНОВИТЬ КОРЗИНУ</span><i className="icon-refresh"></i></a>
                                         </div>
                                     </div>
                                     <aside className="col-lg-3">
@@ -217,7 +179,6 @@ import ruble from "../../assets/ruble.png"
                         </div>
                     </div>
                 </main>
-                <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
         </div>
     )
 })

@@ -7,28 +7,35 @@ import axios from "axios";
 import  "../../App.css";
 import { FaStar } from "react-icons/fa";
 import { BiGitRepoForked } from "react-icons/bi";
-import {Modal, Button} from "react-bootstrap";
-
+import { AiFillInstagram } from "react-icons/ai";
+import { FaOdnoklassnikiSquare } from "react-icons/fa";
+// import { BiGitRepoForked } from "react-icons/bi";
+// import { BiGitRepoForked } from "react-icons/bi";
+// import { BiGitRepoForked } from "react-icons/bi";
+import {Modal, Button, NavLink} from "react-bootstrap";
+import {PRODUCTCATEGORY_ROUTE} from "../../utils/Const"
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/swiper.scss';
+import Swiper from "react-id-swiper";
 const colors ={
     orange: "#FFBA5A",
     grey: "#a9a9a9"
 }
 
-const Product = observer(({match}) => {
+const Product = observer((props) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
-    const id = match.params.id
+    const id = props.match.params.id
     const [count, setCount] = useState(5)
     const [hover, setHover] = useState(false);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
+    console.log(props)
 
     
     function updateValue(e) {
@@ -40,7 +47,7 @@ const Product = observer(({match}) => {
 
 
     const addWishlist = (e) => {
-        const id = match.params.id
+        const id = props.match.params.id
         const data = JSON.stringify({
             product: String(id),
         })  
@@ -66,7 +73,7 @@ const Product = observer(({match}) => {
     }
 
     const addCart = (e) => {
-        const id = match.params.id
+        const id = props.match.params.id
         const data = JSON.stringify({
             product: [String(id)],
             quantity: [String(count)]
@@ -100,7 +107,8 @@ const Product = observer(({match}) => {
     const [text, setText] = useState()
     const [leftImages, setLeftImages] = useState([])
     const [selectedImage, setSelectedImage] = useState('')
-    console.log('Selected image: ', selectedImage)
+    const [imgTitle, setImgTitle] = useState('') 
+    let categoryName = product.category.filter(i => i.id === product.product.category )
 
     const handleClick = (value) => {
         setCurrValue(value)
@@ -116,7 +124,7 @@ const Product = observer(({match}) => {
 
 
     const sendRating = (event) => {
-        const id = match.params.id
+        const id = props.match.params.id
         const data = JSON.stringify({
             product: id,
             rating: currValue, 
@@ -146,12 +154,24 @@ const Product = observer(({match}) => {
     console.log(event)
     }
 
-
+    function handleRemove(id) {
+        const newList = leftImages.filter((item) => item.id !== id);
+     
+        setLeftImages(newList);
+        console.log(newList)
+      }
     
-    
+    //   var mswiper=new Swiper("#mm",{
+	// 	direction:"vertical",   //Vertical default horizontal (no vertical annotation required)
+	// 	autoplay:2000,	  //Auto play
+	// 	loop:true,	  //loop
+	// 	speed:1000,	  //Display speed
+	// 	pagination:".swiper-pagination",	//Paging device
+	// 	prevButton:".swiper-button-prev",	
+	// 	nextButton:".swiper-button-next"	
+	// })
     useEffect(() => {
         const log = document.getElementById('qty');
-        console.log(log)
          log?.addEventListener('change', updateValue);
          
          
@@ -159,6 +179,7 @@ const Product = observer(({match}) => {
         product.getData(id).then(() => {
             setLeftImages(product?.imagesUser[0]?.images ?? [])
             setSelectedImage(product?.imagesUser[0]?.images[0] || '')
+            setImgTitle(product?.imagesUser[0]?.title || '')
             console.log('get data')
             const scripts = [
 
@@ -192,6 +213,16 @@ const Product = observer(({match}) => {
         }
 
       }, [])
+
+
+      const params = {
+        container: ".container",
+        pagination: ".swiper-pagination",
+        paginationClickable: true,
+        direction: "vertical"
+      };
+
+
     return (
         <div>
             
@@ -200,7 +231,7 @@ const Product = observer(({match}) => {
                     <div style={{marginTop: "100px"}} className="container d-flex align-items-center">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li className="breadcrumb-item"><a href="#">Products</a></li>
+                            <li className="breadcrumb-item"><Link to={{pathname:'/productcategory/'}}>Products</Link></li>
                             <li className="breadcrumb-item active" aria-current="page">Артикул: {product.product.articul}</li>
                         </ol>
 
@@ -211,13 +242,17 @@ const Product = observer(({match}) => {
                             <Modal.Header closeButton>
                             <Modal.Title>Modal heading</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                            <Modal.Body style={{textAlign: "center", fontSize: "30px", display: "flex"}}>
+                                
+                                <a style={{fontSize: "25px"}} href="#" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                                <a style={{fontSize: "25px"}} href="#" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                                <a style={{fontSize: "25px"}} href="#" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                                <a style={{fontSize: "25px"}} href="#" className="social-icon social-youtube" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
+                                
+                            </Modal.Body>
                             <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
-                                Close
-                            </Button>
-                            <Button variant="primary" onClick={handleClose}>
-                                Save Changes
+                                Закрывать
                             </Button>
                             </Modal.Footer>
                         </Modal>
@@ -241,12 +276,16 @@ const Product = observer(({match}) => {
                                             </figure>
 
                                             <div id="product-zoom-gallery" className="product-image-gallery">
-                                                
+
+                                            
                                                 {leftImages.map((img, index) =>
-                                                    <a onClick={() => setSelectedImage(img)} className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
-                                                        <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
-                                                    </a>
-                                                )}
+                                                        <a onClick={() =>  {
+                                                            handleRemove(img.id)
+                                                            setSelectedImage(img)}} className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
+                                                            <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
+                                                        </a>
+                                                    )}
+                                                    
                                             </div>
                                         </div>
                                     </div>
@@ -257,33 +296,36 @@ const Product = observer(({match}) => {
                                         
                                         
                                         <h1 className="product-title">{product.product.title}</h1>
-
+                                                    {console.log(product.category.filter(i => i.id === product.product.category ))}
                                         <div className="ratings-container justify-content-between">
                                             
-                                            <div style={{color: "rgb(71, 53, 150)", fontWeight:"400"}} className="product-cat">
-                                                <span style={{color: "rgb(71, 53, 150)", fontWeight:"450"}}>КАТЕГОРИЯ :</span>
-                                                <a style={{color: "rgb(71, 53, 150)", fontWeight:"450"}}>МАГАЗИН /</a>
-                                                <a style={{color: "rgb(71, 53, 150)", fontWeight:"450"}}>{product.product.category} / </a>
-                                                <a style={{color: "rgb(71, 53, 150)", fontWeight:"450"}}>{product.product.title}</a>
+                                            <div style={{ fontWeight:"400"}} className="product-cat">
+                                                <span style={{ fontWeight:"450"}}>КАТЕГОРИЯ :</span>
+                                                <a style={{ fontWeight:"450"}}>МАГАЗИН /</a>
+                                                {categoryName.map((i, index) =>
+                                                    <a style={{ fontWeight:"450"}}>{i.title} / </a>
+                                                )}
+                                                <a style={{ fontWeight:"450"}}>{product.product.title}</a>
                                             </div>
                                         </div>
 
                                         <div style={{color: "black", fontWeight:"450"}} className="product-price">
                                             {user.isAuth ? `${product.product.price} $`  : ""}
                                         </div>
-
+                                        <label style={{color: "#9393a5", fontSize: "14px", fontWeight: "400", lineHeight: "20px", letterSpacing: "-.15px"}}>Цвет: <span style={{color: "#000"}}>{imgTitle}</span></label>
                                         <div className="details-filter-row details-row-size">
-                                            <label>Color:</label>
+                                            
 
                                             <div className="product-nav product-nav-thumbs">
                                             {product.imagesUser.map((img, index) =>
-                                                <a href="#" 
+                                                <a style={{height: "6rem", border: "none", marginRight: "7px", cursor: "pointer"}} 
                                                     onClick={() => {
+                                                        handleRemove(img.id)
                                                     const d = [...img.images]
                                                         setLeftImages(d)
                                                         setSelectedImage(d[0])
+                                                        setImgTitle([...img.title])
                                                     }} className="active">
-                                                    {console.log(product.imagesUser)}
                                                         <img key={index} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product desc"/>
                                                   
                                                     
@@ -308,17 +350,17 @@ const Product = observer(({match}) => {
                                             </div>
                                             
                                             <div className="product-details-action">
-                                                <button onClick={addCart} className="btn-product btn-cart korziny" >В КОРЗИНУ</button>
+                                                <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product btn-cart" ><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>
 
                                                 <div className="details-action-wrapper">
                                                     <a style={{fontSize: "30px"}} href="" onClick={addWishlist} className="btn-product btn-wishlist" title="Wishlist"></a>
                                                 </div>
                                             </div>
                                         </> :
-                                        <div>
-                                            <p>ЗАРЕГИСТРИРУЙТЕСЬ, ЧТОБЫ ПОСМОТРЕТЬ ЦЕНЫ</p>
+                                        <div className=" justify-content-center text-center">
+                                            <h5>ЗАРЕГИСТРИРУЙТЕСЬ, ЧТОБЫ ПОСМОТРЕТЬ ЦЕНЫ</h5>
                                             <Link to={LOGIN_ROUTE}>
-                                                <button className=" btn-round">Регистрация</button>
+                                                <Button style={{fontSize: "20px", borderRadius: "30px", marginLeft: "30px", height: "40px", margin: "20px"}} variant="danger">Регистрация</Button>
                                             </Link>
                                         </div>
                                         }

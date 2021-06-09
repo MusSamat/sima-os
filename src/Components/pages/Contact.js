@@ -60,11 +60,11 @@ export default function Contact() {
                                 <div className="contact-box text-center">
                                     <h5>Адрес:</h5>
 
-                                    <address className="d-li">Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</address>
+                                    <address style={{fontSize: "18px"}}>Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</address>
 
                                     <h5>Рынок «Дордой»</h5>
-                                    <p className="d-li">5 проход конт. 458/1</p>
-                                    <p className="d-li">+996 (705) 55 58 29</p>
+                                    <p style={{fontSize: "18px"}}>5 проход конт. 458/1</p>
+                                    <p style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
                                 </div>
                             </div>
 
@@ -72,9 +72,9 @@ export default function Contact() {
                                 <div className="contact-box text-center">
                                     <h5>Руководитель:</h5>
 
-                                    <div><a className="d-li">+996 (709) 99 99 15</a></div>
-                                    <div><a className="d-li">W/app: +996 (705) 55 58 29</a>, <a href="tel:#"></a></div>
-                                    <div><a className="d-li">+ 996 (700) 50 60 46</a></div>
+                                    <p style={{fontSize: "18px"}}>+996 (709) 99 99 15</p>
+                                    <p style={{fontSize: "18px"}}>W/app: +996 (705) 55 58 29</p>
+                                    <p style={{fontSize: "18px"}}>+ 996 (700) 50 60 46</p>
                                 </div>
                             </div>
 

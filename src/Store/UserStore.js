@@ -13,6 +13,7 @@ export default class UserStore {
         this.wishList = {}
         this.list = []
         this.userData = {}
+        this.counter = []
 
         this.count = 0
         makeAutoObservable(this)
@@ -32,20 +33,6 @@ export default class UserStore {
         return this._user
     }
 
-
-    increment(id){
-         console.log(this.items)
-         this.items.map((item) => (
-             item.id === id
-
-             
-             ))
-        console.log(this.count)
-    }
-    decrement(id){
-        this.count =  this.count - id
-        console.log(this.count)
-    }
     
 
      getUserData(){
@@ -66,18 +53,9 @@ export default class UserStore {
         
      }
 
-    //  countQuantity(id){
-    //      this.items.filter(item => {
-    //          if(item){
-    //             this.count = item + this.count + 5
-    //             console.log(this.count)
-    //          }
-    //      })
-    //  }
-
      getCartData() {
         this.userGetId = JSON.parse(localStorage.getItem('value'))
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/carts/` + this.userGetId?.user.id, {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/carts/` + this.userGetId?.user.id, {
             headers: {
                 'Content-Type':'application/json',
                 'Authorization':'Token ' + this.token?.token
@@ -86,8 +64,8 @@ export default class UserStore {
         .then(res => {
             this.carts = res.data
             this.items = this.carts.items 
+            return this.items
             
-            console.log(this.items)
         })
         .catch((e)=>{
             console.error(e)
@@ -117,15 +95,9 @@ export default class UserStore {
         }) 
      }
 
-     changeFilter(title){
-        this.products = this.allProducts.filter(item => item.category === title)
-    }
-     
-
-     
-
-     
-     
+    changeItemQuantity (ind, val) {
+        this.items = this.items.map((i, index) => index === ind ? {...i, quantity: val} : i)
+    }   
         
 }
 

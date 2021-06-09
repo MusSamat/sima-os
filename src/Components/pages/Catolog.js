@@ -15,24 +15,19 @@ const  Catolog = observer((props) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
     const [input, setInput] = useState("")
-    const id = props.match.params.id
+    const Prodid = props.match.params.id
     const catId = props.match.params.catId
     const title = props.match.params.title
-    const catTitle = props.location.catTitle
-    console.log(props)
-    console.log(title)
 
     
 
     
 
-    const [value, setValue] = useState([2,100]);
+    const [value, setValue] = useState([2,1000]);
   
-  // Changing State when volume increases/decreases
   const rangeSelector = (event, newValue) => {
     setValue(newValue);
     product.priceFilter(newValue)
-     console.log(product.priceFilter(newValue))
   };
 
 
@@ -48,7 +43,7 @@ const  Catolog = observer((props) => {
     
     useEffect(() => {
         user.getUserData()
-        product.fetchTodo(catId,id).then(() => {
+        product.fetchTodo(catId,Prodid).then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
                 '/assets/js/bootstrap-input-spinner.js',
@@ -69,18 +64,18 @@ const  Catolog = observer((props) => {
             })
         })
         product.getSubcategory(title, catId)
-        product.changeFilter()
         product.discountTodo()
-        // user.getLocal()
         
         
     
       }, []); 
-
+      let percent
+      product.discount.map((i) => i.percent === percent )
+      
 
     return (
         <div>
-             <main className="main">
+             <main style={{marginTop: "80px"}} className="main">
                 
 
                 <div className="page-content">
@@ -93,74 +88,48 @@ const  Catolog = observer((props) => {
                                             ПРОСМОТР: <span>24 / 48 / 96 / <span className="clickvse" onClick={()=>product.fetchTodo()}>ВСЕ</span></span> 
                                         </div>
                                     </div>
-
-                                    {/* <div className="toolbox-right">
-                                        <div className="toolbox-sort">
-                                            <label for="sortby"></label>
-                                            <div className="select-custom">
-                                                <select name="sortby" id="sortby" className="form-control">
-                                                    <option value="popularity" selected="selected">ОТ ПОСЛЕДНЕГО</option>
-                                                    <option value="rating">ПО РЕЙТИНГУ</option>
-                                                    <option value="date">ПО ВОЗРАСТАНИЮ</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div> */}
                                 </div>
 
                                 <div style={{borderRadius: "40px", background: "#f7f7f7",textAlign: "center"}} className="cta cta-border mb-5">
                                     
                                     
-                                        <h4>для запроса каталога следующего сезона, напишите нам на whatsapp</h4>
-                                        <div className="col-12 col-md-4 col-lg-4 col-xl-3">
-                                            <button className="wahtsapp">+996709999915</button>
-                                        </div>
-                                        <div className="col-12 col-md-4 col-lg-4 col-xl-3">
-                                            <button className="wahtsapp">+996709999915</button>
+                                        <h4>ДЛЯ ЗАПРОСА КАТАЛОГА СЛЕДУЮЩЕГО СЕЗОНА, НАПИШИТЕ НАМ НА WHATSAPP</h4>
+                                        <div className="row justify-content-between">
+                                            <div style={{maxWidth: "none", }} className="col-6 col-md-4 col-lg-4 col-xl-3">
+                                                <button className="wahtsapp">+996709999915</button>
+                                            </div>
+                                            <div className="col-12 col-md-4 col-lg-4 col-xl-3">
+                                                <button className="wahtsapp">+996709999915</button>
+                                            </div>
                                         </div>
                                     
                                 </div>
                                 <div className="products mb-3">
                                     <div className="row justify-content-center">                                        
-                                        {product.allProducts.map((prod, index) => 
+                                        {product.products.map((prod, index) => 
                                         
                                             <div className="col-6 col-md-4 col-lg-4 col-xl-3"  >
                                                 <div className="product product-7 text-center">
                                                     <Link to={{pathname: '/product/'+prod.id}} key={index}>
                                                         <figure className="product-media" >
-                                                                {console.log(product.allProducts)}
-                                                                <img src={`${process.env.REACT_APP_BASE_URL}${prod.images[0].images[0]}`} alt="Product image" className="product-image"/>
-                                                                {/* <span className="onsale"></span> */}
-
-                                                            <div className="product-action-vertical">
-                                                                {/* <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                                                <a href="popup/quickView.html" className="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                                                <a href="#" className="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a> */}
-                                                            </div>
-
-                                                            {/* <div className="product-action">
-                                                                <a href="#" className="btn-product btn-cart"><span>В КОРЗИНУ</span></a>
-                                                            </div> */}
+                                                                <img src={`${process.env.REACT_APP_BASE_URL}${prod?.images[0]?.images[0]}`} alt="Product image" className="product-image catologImg"/>
                                                         </figure>
-                                                        
-                                                    
+                                                        <div className="product-body">
+                                                            <div style={{display: "flex", justifyContent: "space-between"}}>
+                                                                <h3 className="product-title"><a >{prod.title}</a></h3>
+                                                                <div style={{color: "black"}} className="product-price">
+                                                                    {user.isAuth ? prod.price : "" } 
+                                                                
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div className="ratings-container">
 
-                                                    <div className="product-body">
-                                                        <div style={{display: "flex", justifyContent: "space-between"}}>
-                                                            <h3 className="product-title"><a >{prod.title}</a></h3>
-                                                            <div style={{color: "black"}} className="product-price">
-                                                                {user.isAuth ? prod.price : "" } $
+                                                        <span style={{color: "black", fontSize: "18px"}}>Размеры:</span> <span className="product-price razmer">  {prod.size[0]}-{prod.size[1]} </span>
                                                             
                                                             </div>
-                                                             
+                                                            
                                                         </div>
-                                                        <div className="ratings-container">
-
-                                                       <span style={{color: "black", fontSize: "18px"}}>Размеры:</span> <span className="product-price razmer">  {prod.size[0]}-{prod.size[1]} </span>
-                                                           
-                                                        </div>
-                                                        
-                                                    </div>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -189,7 +158,7 @@ const  Catolog = observer((props) => {
                                                         onChange={e => setInput(e.target.value)}
                                                         required/><hr/>
                                                     <div className="input-group-append">
-                                                        <button className="btn btn-primary" type="submit"><span>ПОИСК</span></button>
+                                                        <button style={{width: "100px"}} className="btn btn-primary" type="submit"><span>ПОИСК</span></button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -211,27 +180,29 @@ const  Catolog = observer((props) => {
 
                                     <div className="widget widget-collapsible">
                                         <h3 className="widget-title">
-                                            <a data-toggle="collapse" href="#widget-1" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} role="button" aria-expanded="true" aria-controls="widget-1">
-                                                Категория
-                                            </a>
+                                            <Link to={{pathname: '/productcategory/'+catId}} >
+                                                <a data-toggle="collapse" href="#widget-1" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} role="button" aria-expanded="true" aria-controls="widget-1">
+                                                    Категория
+                                                </a>
+                                            </Link>
                                         </h3>
 
                                         <div className="collapse show" >
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
-                                                    <label onClick={()=>product.fetchTodo()} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label>
-                                                        {product.subcategory.map((c, index) =>
+                                                    <label onClick={()=>product.fetchTodo(catId,Prodid)} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label>
+                                                        {console.log(product.subcategory)}
+                                                        {product.subcategory.filter(c=>product.countTitle(c.id)).map((c, index) =>
                                                             
                                                                 <div  key={index} className="custom-control custom-checkbox">
-                                                                    {console.log(c.title)}
-                                                                    <label onClick={() => product.changeFilter(c.title)} className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label>
-                                                                    <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({product.countTitle(c.title)})</span>
+                                                                    
+                                                                    <label onClick={() => product.changeFilter(c.id, Prodid, catId)} className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label>
+                                                                    <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({product.countTitle(c.id)})</span>
                                                                 </div>
                                                                 
                                                             
                                                         )}
-                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -239,35 +210,34 @@ const  Catolog = observer((props) => {
                                                     display: 'block',
                                                     width: 'fit-content'
                                                     }}>
-                                                    <Typography id="range-slider" gutterBottom>
-                                                     ФИЛЬТР ПО ЦЕНЕ
-                                                    </Typography>
                                                     <Slider
                                                         value={value}
                                                         onChange={rangeSelector}
                                                         valueLabelDisplay="auto"
                                                     />
-                                                    Ваш диапазон цен находится между{value[0]} $ {value[1]} $
+                                                   <p style={{fontSize: "16px"}}>   ФИЛЬТР ПО ЦЕНЕ: {value[0]} $ {value[1]} $</p>
                                                 </div>
                                         </div>
                                     </div>
 
                                     <div className="cat-blocks-container">
-                                        
-                                            <p style={{color: "rgb(71, 53, 150)", fontWeight:"500"}}>ТОВАРЫ СО СКИДКОЙ</p><br/>
+                                            <p  onClick={() => product.changeDiscounted(percent)} style={{color: "rgb(71, 53, 150)", fontWeight:"500", cursor: "pointer", marginBottom: "30px"}}>ТОВАРЫ СО СКИДКОЙ</p>
+                                            {console.log(product.discount)}
                                             {product.discount.map((discout, index)=>
-                                            <Link to={{pathname: '/product/'+ discout.id}}>
-                                                <div key={index} className="row">
-                                                    
+                                                <div key={index}>
+                                                <div  className="row">
                                                     <div  className="col-6 ">
+                                                    <Link to={{pathname: '/product/'+ discout.id}}>
                                                         <a className="cat-block">
                                                             <figure>
                                                                 <span>
-                                                                    <img className="images-s" src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]}`} alt="Category image"/>
+                                                                    <img className="images-s" src={`${process.env.REACT_APP_BASE_URL}${discout.images[0].images[0]}`} alt="Category image"/>
                                                                 </span>
                                                             </figure>
                                                         </a>
+                                                        </Link>
                                                     </div>
+                                                   
                                                     <div  className="col-5 ">
                                                         <h3 className="product-title"><a >{discout.title}</a></h3>
                                                         {user.isAuth ? <><p style={{textDecoration:"line-through"}}>{discout.price}$</p>
@@ -275,7 +245,7 @@ const  Catolog = observer((props) => {
                                                     </div>
                                                     
                                                 </div>
-                                                </Link>
+                                                </ div>
                                             )}
                                         </div>
                                     
