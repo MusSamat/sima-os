@@ -14,6 +14,8 @@ import { FaTruckMoving } from "react-icons/fa";
 import { BsShieldShaded } from "react-icons/bs";
 import { FaCertificate } from "react-icons/fa";
 import axios from "axios"
+import p from "../../assets/p.png"
+
 
 
 
@@ -77,13 +79,13 @@ const  Main = () => {
                             Для того чтобы оформить заказ, Вам необходимо пройти простую и удобную регистрацию на сайте, как оптовый покупатель. Только после регистрации, Вам будет открыт доступ к оптовому прайс-листу и детальные описания моделей.
                             
                     </p><br></br>
-
-
                     
+
+                </div> 
                
-                <div class="row" >
+                <div style={{margin: "40px"}} class="row" >
     					<div className="col-md-3 justify-content-center text-align-center">
-                            <div className="justify-content-center">
+                            <div className=" justify-content-center">
                                 <ImClock2 className="icons-react" />
                             </div>
                             <h4>15 ЛЕТ НА РЫНКЕ</h4>
@@ -108,7 +110,8 @@ const  Main = () => {
     						<p style={{fontSize: "18px"}}>Наша продукция прошла маркировку Евразийского соответствия (EAC) - что свидетельствует о том, что продукция прошла все установленные в технических регламентах процедуры.</p>
     					</div>
     				</div>
-                    </div>
+                    
+                    
                     {/* <div className="container"><h3  style={{marginTop: "60px", marginBottom: "30px", padding: "10px 20px"}}>4 ЭТАПА КОНТРОЛЯ КАЧЕСТВА, КОТОРЫЕ ВНЕДРЕНЫ В ПРОИЗВОДСТВО</h3></div> */}
                     {/* <div class="row" style={{padding: "40px 40px"}}>
                         

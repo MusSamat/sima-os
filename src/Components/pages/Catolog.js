@@ -18,6 +18,7 @@ const  Catolog = observer((props) => {
     const Prodid = props.match.params.id
     const catId = props.match.params.catId
     const title = props.match.params.title
+    console.log(props)
 
     
 
@@ -85,7 +86,7 @@ const  Catolog = observer((props) => {
                                 <div className="toolbox">
                                     <div className="toolbox-left">
                                         <div className="toolbox-info">
-                                            ПРОСМОТР: <span>24 / 48 / 96 / <span className="clickvse" onClick={()=>product.fetchTodo()}>ВСЕ</span></span> 
+                                            {/* ПРОСМОТР: <span>24 / 48 / 96 / <span className="clickvse" onClick={()=>product.fetchTodo()}>ВСЕ</span></span>  */}
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +95,7 @@ const  Catolog = observer((props) => {
                                     
                                     
                                         <h4>ДЛЯ ЗАПРОСА КАТАЛОГА СЛЕДУЮЩЕГО СЕЗОНА, НАПИШИТЕ НАМ НА WHATSAPP</h4>
-                                        <div className="row justify-content-between">
+                                        <div className="row  justify-content-around">
                                             <div style={{maxWidth: "none", }} className="col-6 col-md-4 col-lg-4 col-xl-3">
                                                 <button className="wahtsapp">+996709999915</button>
                                             </div>
@@ -104,6 +105,7 @@ const  Catolog = observer((props) => {
                                         </div>
                                     
                                 </div>
+                                {console.log(product.products)}
                                 <div className="products mb-3">
                                     <div className="row justify-content-center">                                        
                                         {product.products.map((prod, index) => 
@@ -115,29 +117,23 @@ const  Catolog = observer((props) => {
                                                                 <img src={`${process.env.REACT_APP_BASE_URL}${prod?.images[0]?.images[0]}`} alt="Product image" className="product-image catologImg"/>
                                                         </figure>
                                                         <div className="product-body">
-                                                            <div style={{display: "flex", justifyContent: "space-between"}}>
-                                                                <h3 className="product-title"><a >{prod.title}</a></h3>
-                                                                <div style={{color: "black"}} className="product-price">
-                                                                    {user.isAuth ? prod.price : "" } 
-                                                                
-                                                                </div>
-                                                                
+                                                            <div className="product-cat">
+                                                                <a >{title}</a>
                                                             </div>
-                                                            <div className="ratings-container">
-
-                                                        <span style={{color: "black", fontSize: "18px"}}>Размеры:</span> <span className="product-price razmer">  {prod.size[0]}-{prod.size[1]} </span>
-                                                            
+                                                            <h3 className="product-title"><a >{prod.title}</a></h3>
+                                                            <div className="product-price">
+                                                                {user.isAuth ? prod.price : "" } ₽
                                                             </div>
-                                                            
                                                         </div>
                                                     </Link>
                                                 </div>
                                             </div>
                                          
-                                        )} 
-                                        
+                                            )}  
+                                        </div>
                                     </div>
-                                </div>
+
+                                
 
 
 
@@ -215,7 +211,7 @@ const  Catolog = observer((props) => {
                                                         onChange={rangeSelector}
                                                         valueLabelDisplay="auto"
                                                     />
-                                                   <p style={{fontSize: "16px"}}>   ФИЛЬТР ПО ЦЕНЕ: {value[0]} $ {value[1]} $</p>
+                                                   <p style={{fontSize: "16px"}}>   ФИЛЬТР ПО ЦЕНЕ: {value[0]} ₽ {value[1]} ₽</p>
                                                 </div>
                                         </div>
                                     </div>
@@ -240,8 +236,8 @@ const  Catolog = observer((props) => {
                                                    
                                                     <div  className="col-5 ">
                                                         <h3 className="product-title"><a >{discout.title}</a></h3>
-                                                        {user.isAuth ? <><p style={{textDecoration:"line-through"}}>{discout.price}$</p>
-                                                        <p >{Math.round(discout.price - (discout.price * discout.percent/100))}.00 $</p></> : ''}
+                                                        {user.isAuth ? <><p style={{textDecoration:"line-through"}}>{discout.price} ₽</p>
+                                                        <p >{Math.round(discout.price - (discout.price * discout.percent/100))}.00 ₽</p></> : ''}
                                                     </div>
                                                     
                                                 </div>

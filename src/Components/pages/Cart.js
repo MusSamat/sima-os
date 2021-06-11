@@ -107,7 +107,7 @@ import ruble from "../../assets/ruble.png"
                                                             </h3>
                                                         </div>
                                                     </td>
-                                                    <td className="price-col">${c.product.price}</td>
+                                                    <td className="price-col">{c.product.price} ₽</td>
                                                     
                                                     <td >
                                                         <div >
@@ -120,7 +120,7 @@ import ruble from "../../assets/ruble.png"
                                                         
                                                     </td>
 
-                                                    <td style={{fontWeight: "500"}}>${(c.product.price * c.quantity).toFixed(2)}</td>
+                                                    <td style={{fontWeight: "500"}}>{(c.product.price * c.quantity).toFixed(2)} ₽</td>
                                                     <td className="remove-col"><button onClick={() => deleteCart(c.product.id)} className="btn-remove"><i className="icon-close"></i></button></td>
                                                 </tr>)}
                                             </tbody>
@@ -156,7 +156,7 @@ import ruble from "../../assets/ruble.png"
                                                                     })
                                                             }
 
-                                                    <td><img style={{width: "10px"}} src={ruble}/> {sum.toFixed(2)} </td>
+                                                    <td>  {sum.toFixed(2)} ₽ </td>
                                                         
                                                     </tr>
                                                     
@@ -164,7 +164,7 @@ import ruble from "../../assets/ruble.png"
                                                     <tr style={{fontWeight: "500"}}>
                                                         <td>ИТОГО:</td>
                                                            
-                                                        <td>{sum.toFixed(2)} $</td>
+                                                        <td>{sum.toFixed(2)} ₽</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

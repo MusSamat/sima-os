@@ -14,6 +14,7 @@ export default class UserStore {
         this.list = []
         this.userData = {}
         this.counter = []
+        this.reviews = []
 
         this.count = 0
         makeAutoObservable(this)
@@ -97,7 +98,23 @@ export default class UserStore {
 
     changeItemQuantity (ind, val) {
         this.items = this.items.map((i, index) => index === ind ? {...i, quantity: val} : i)
-    }   
+    } 
+    getReviews() {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/`, {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + this.token?.token
+            },
+        })
+            .then(response => {
+                this.reviews = response.data
+                console.log(this.reviews)
+
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+     }  
         
 }
 

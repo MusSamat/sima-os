@@ -1,7 +1,8 @@
 
+
 .App1 {
     text-align: center;
-    background-image: url("https://i.pinimg.com/originals/77/05/a0/7705a01c0f713dcd794cacab86d7a464.jpg");
+    background: url("./assets/p.png");
     background-repeat: no-repeat;
     background-size: cover;
     height: 600px;
@@ -47,7 +48,7 @@
   }
 
   .news_image{
-    height: 380px !important;
+    height: 350px !important;
     width: 100%;
   }
   .news-btn{
@@ -64,7 +65,7 @@
     padding: .5em 1em;
   }
   .catologImg{
-    height: 300px !important;
+    height: 270px !important;
   }
   /* .btn-round{
     display: block;
@@ -131,7 +132,7 @@
   }
 
   .wahtsapp{
-    font-size: 20px;
+    font-size: 18px;
     border: 2px solid #009688;
     border-radius: 16px;
     color: #009688;

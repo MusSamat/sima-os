@@ -5,6 +5,7 @@ export default function Particle() {
     return (
         <div>
              <Particles
+                    style={{}}
                     height="600px"
                     params={{
                     "particles": {

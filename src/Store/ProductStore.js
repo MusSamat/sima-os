@@ -21,6 +21,7 @@ export default class ProductStore {
         this.productsCategory = []
         
         
+        
 
         makeAutoObservable(this)
     }
@@ -159,6 +160,8 @@ export default class ProductStore {
                  console.error(e)
              })      
      }
+    
+     
 
      
 

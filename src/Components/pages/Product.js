@@ -2,17 +2,15 @@ import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../index';
-import { LOGIN_ROUTE } from '../../utils/Const';
+import { LOGIN_ROUTE, HOME_ROUTE } from '../../utils/Const';
 import axios from "axios";
 import  "../../App.css";
 import { FaStar } from "react-icons/fa";
 import { BiGitRepoForked } from "react-icons/bi";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaOdnoklassnikiSquare } from "react-icons/fa";
-// import { BiGitRepoForked } from "react-icons/bi";
-// import { BiGitRepoForked } from "react-icons/bi";
-// import { BiGitRepoForked } from "react-icons/bi";
-import {Modal, Button, NavLink} from "react-bootstrap";
+import razmer from "../../assets/razmer.png"
+import {Modal, Button} from "react-bootstrap";
 import {PRODUCTCATEGORY_ROUTE} from "../../utils/Const"
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -32,10 +30,14 @@ const Product = observer((props) => {
     const [count, setCount] = useState(5)
     const [hover, setHover] = useState(false);
     const [show, setShow] = useState(false);
+    const [showRaz, setShowRaz] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    console.log(props)
+
+    const handleCloseRaz = () => setShowRaz(false);
+    const handleShowRaz = () => setShowRaz(true);
+    
 
     
     function updateValue(e) {
@@ -161,20 +163,12 @@ const Product = observer((props) => {
         console.log(newList)
       }
     
-    //   var mswiper=new Swiper("#mm",{
-	// 	direction:"vertical",   //Vertical default horizontal (no vertical annotation required)
-	// 	autoplay:2000,	  //Auto play
-	// 	loop:true,	  //loop
-	// 	speed:1000,	  //Display speed
-	// 	pagination:".swiper-pagination",	//Paging device
-	// 	prevButton:".swiper-button-prev",	
-	// 	nextButton:".swiper-button-next"	
-	// })
+    
     useEffect(() => {
         const log = document.getElementById('qty');
          log?.addEventListener('change', updateValue);
          
-         
+         user.getReviews()
         user.getUserData()
         product.getData(id).then(() => {
             setLeftImages(product?.imagesUser[0]?.images ?? [])
@@ -229,18 +223,20 @@ const Product = observer((props) => {
             <main className="main">
                 <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
                     <div style={{marginTop: "100px"}} className="container d-flex align-items-center">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li className="breadcrumb-item"><Link to={{pathname:'/productcategory/'}}>Products</Link></li>
+                        <ul className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to={HOME_ROUTE} style={{marginTop: "-3px", marginRight: "-5px"}}  >ГЛАВНАЯ</Link></li>
+                            <li className="breadcrumb-item"><Link to={{pathname:'/productcategory/'}}>{categoryName.map((i, index) =>
+                                                    <a style={{ fontWeight:"450"}}>{i.title}</a>
+                                                )}</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page"> {product.product.title}</li>
                             <li className="breadcrumb-item active" aria-current="page">Артикул: {product.product.articul}</li>
-                        </ol>
+                        </ul>
 
                         <nav className="product-pager ml-auto" aria-label="Product">
                             <BiGitRepoForked onClick={handleShow} style={{fontSize: "30px", cursor: "pointer"}}/>
                         </nav>
                         <Modal show={show} onHide={handleClose} centered={true} animation={true}>
                             <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
                             </Modal.Header>
                             <Modal.Body style={{textAlign: "center", fontSize: "30px", display: "flex"}}>
                                 
@@ -310,7 +306,7 @@ const Product = observer((props) => {
                                         </div>
 
                                         <div style={{color: "black", fontWeight:"450"}} className="product-price">
-                                            {user.isAuth ? `${product.product.price} $`  : ""}
+                                            {user.isAuth ? `${product.product.price} ₽`  : ""}
                                         </div>
                                         <label style={{color: "#9393a5", fontSize: "14px", fontWeight: "400", lineHeight: "20px", letterSpacing: "-.15px"}}>Цвет: <span style={{color: "#000"}}>{imgTitle}</span></label>
                                         <div className="details-filter-row details-row-size">
@@ -336,7 +332,12 @@ const Product = observer((props) => {
                                         </div>
 
                                         <div className="details-filter-row details-row-size">
-                                            
+                                            <p style={{fontSize: "16px"}}>Размер: <span style={{cursor: "pointer", color: "rgb(71, 53, 150)"}} onClick={handleShowRaz}> Таблица размеров</span> </p>
+                                            <Modal show={showRaz} onHide={handleCloseRaz} centered={true} animation={true}>
+                                                <Modal.Header closeButton>
+                                                </Modal.Header>
+                                                <img src={razmer}/>
+                                            </Modal>
                                         </div>
 
                                         {user.isAuth ?<>
@@ -439,6 +440,41 @@ const Product = observer((props) => {
 
                                                         <ToastContainer />
                                                     </div>
+                                                    
+                                                    
+                                                        <div class="reviews">
+                                                            <h3>ОТЗЫВ (2)</h3>
+                                                            {user.reviews.map((r, index) =>
+                                                            <div key={index} class="review">
+                                                                <div class="row no-gutters">
+                                                                    <div class="col-auto">
+                                                                        <h4><a >{r.author}</a></h4>
+                                                                        <div class="ratings-container">
+                                                                            <div class="ratings">
+                                                                                <div class="ratings-val"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="review-date"></span>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <h4></h4>
+
+                                                                        <div class="review-content">
+                                                                            <p>{r.text}</p>
+                                                                        </div>
+
+                                                                        <div class="review-action">
+                                                                            <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
+                                                                            <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>)}
+                                                        </div>
+                                                    
+
+
+
                                                 </div>
                                             </div>
 

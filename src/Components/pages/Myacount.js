@@ -135,22 +135,16 @@ const Myacount = observer(() => {
                                 <aside className="col-md-4 col-lg-3">
                                     <ul className="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
                                         <li className="nav-item">
-                                            <a className="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Панель управления</a>
+                                            <a style={{fontSize: "18px"}} className="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Панель управления</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a  className="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Заказы</a>
+                                            <a style={{fontSize: "18px"}} className="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Заказы</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Загрузки</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Адрес</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Профиль</a>
+                                            <a style={{fontSize: "18px"}} className="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Профиль</a>
                                         </li>
                                         <li style={{cursor: "pointer"}} className="nav-item">
-                                            <a className="nav-link" onClick={logoOut}>Выйти</a>
+                                            <a style={{fontSize: "18px"}} className="nav-link" onClick={logoOut}>Выйти</a>
                                         </li>
                                     </ul>
                                 </aside>
@@ -158,52 +152,14 @@ const Myacount = observer(() => {
                                 <div className="col-md-8 col-lg-9">
                                     <div className="tab-content">
                                         <div className="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-                                            <p>Добро пожаловать <span className="font-weight-normal text-dark">{user.userId.username}</span> (не <span className="font-weight-normal text-dark">{user.userId.email}</span>? <a href="" onClick={logoOut}>Выйти</a>) 
+                                            <p style={{fontSize: "16px"}}>Добро пожаловать <span style={{fontSize: "16px"}} className="font-weight-normal text-dark">{user.userId.username}</span> (не <span className="font-weight-normal text-dark">{user.userId.email}</span>? <a href="" onClick={logoOut}>Выйти</a>) 
                                             <br/>
                                             Из главной страницы аккаунта вы можете посмотреть ваши <a href="#tab-orders" className="tab-trigger-link link-underline">недавние заказы</a>, настроить <a href="#tab-address" className="tab-trigger-link">платежный адрес и адрес доставки</a>, а также <a href="#tab-account" className="tab-trigger-link">изменить пароль и основную информацию.</a>.</p>
                                         </div>
 
                                         <div className="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
-                                            <p>No order has been made yet.</p>
+                                            <p style={{fontSize: "16px"}}>Заказ еще не поступил.</p>
                                             <a href="category.html" className="btn btn-outline-primary-2"><span>GO SHOP</span><i className="icon-long-arrow-right"></i></a>
-                                        </div>
-
-                                        <div className="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
-                                            <p>No downloads available yet.</p>
-                                            <a href="category.html" className="btn btn-outline-primary-2"><span>GO SHOP</span><i className="icon-long-arrow-right"></i></a>
-                                        </div>
-
-                                        <div className="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
-                                            <p>The following addresses will be used on the checkout page by default.</p>
-
-                                            <div className="row">
-                                                <div className="col-lg-6">
-                                                    <div className="card card-dashboard">
-                                                        <div className="card-body">
-                                                            <h3 className="card-title">Платежный адрес</h3>
-
-                                                            <p>User Name<br/>
-                                                            User Company<br/>
-                                                            John str<br/>
-                                                            New York, NY 10001<br/>
-                                                            1-234-987-6543<br/>
-                                                            yourmail@mail.com<br/>
-                                                            <a href="#">Edit <i className="icon-edit"></i></a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-lg-6">
-                                                    <div className="card card-dashboard">
-                                                        <div className="card-body">
-                                                            <h3 className="card-title">Адреса доставки</h3>
-
-                                                            <p>You have not set up this type of address yet.<br/>
-                                                            <a href="#">Edit <i className="icon-edit"></i></a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div className="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
@@ -211,7 +167,8 @@ const Myacount = observer(() => {
                                                 <div className="row">
                                                     <div className="col-sm-6">
                                                         <input 
-                                                            type="text" placeholder="Имя  *" 
+                                                            type="text" placeholder="Имя  " 
+                                                            style={{fontSize: "16px", fontWeight: "500"}}
                                                             value={firstName}
                                                             onChange={e => setFirstName(e.target.value)} 
                                                             className="form-control" required/>
@@ -219,7 +176,8 @@ const Myacount = observer(() => {
 
                                                     <div className="col-sm-6">
                                                         <input 
-                                                            placeholder="Фамилия *" 
+                                                            placeholder="Фамилия "
+                                                            style={{fontSize: "16px", fontWeight: "500"}} 
                                                             value={lastName} 
                                                             onChange={e => setLastName(e.target.value)}
                                                             type="text" className="form-control" required/>
@@ -227,7 +185,8 @@ const Myacount = observer(() => {
                                                     <div className="col-sm-6">
                                                         <input  
                                                             placeholder="Имя пользователя" type="text" 
-                                                            value={username} 
+                                                            value={username}
+                                                            style={{fontSize: "16px", fontWeight: "500"}} 
                                                             onChange={e => setUserName(e.target.value)} 
                                                             className="form-control" required/>
                                                     </div>
@@ -235,20 +194,23 @@ const Myacount = observer(() => {
                                                         <input 
                                                             placeholder="Страна " type="text" 
                                                             value={country} 
+                                                            style={{fontSize: "16px", fontWeight: "500"}}
                                                             onChange={e => setCountry(e.target.value)} 
                                                             className="form-control" required/>
                                                     </div>
                                                     <div className="col-sm-6">
                                                         <input 
                                                             placeholder="Город " type="text" 
-                                                            value={city} 
+                                                            value={city}
+                                                            style={{fontSize: "16px", fontWeight: "500"}} 
                                                             onChange={e => setCity(e.target.value)} 
                                                             className="form-control" required/>
                                                     </div>
                                                     <div className="col-sm-6">
                                                         <input 
                                                             placeholder="Адрес" type="text" 
-                                                            value={address} 
+                                                            value={address}
+                                                            style={{fontSize: "16px", fontWeight: "500"}} 
                                                             onChange={e => setAddress(e.target.value)} 
                                                             className="form-control" required/>
                                                     </div>
@@ -261,11 +223,20 @@ const Myacount = observer(() => {
 
                                                 <div className="row">
                                                     <div className="col-sm-6">
-                                                        <input placeholder="Телефон" value={number} onChange={e => setNumber(e.target.value)} type="tel" className="form-control" required/>
+                                                        <input 
+                                                            placeholder="Телефон" 
+                                                            value={number} onChange={e => setNumber(e.target.value)} 
+                                                            type="tel" className="form-control" required
+                                                            style={{fontSize: "16px", fontWeight: "500"}}/>
                                                     </div>
 
                                                     <div className="col-sm-6">
-                                                        <input placeholder="Email" type="email" value={user.userId.email} onChange={e => setEmail(e.target.value)} className="form-control" required/>
+                                                        <input 
+                                                            placeholder="Email" type="email" 
+                                                            value={user.userId.email} 
+                                                            onChange={e => setEmail(e.target.value)} 
+                                                            className="form-control" required
+                                                            style={{fontSize: "16px", fontWeight: "500"}}/>
                                                     </div>
                                                 </div>
 
@@ -278,13 +249,13 @@ const Myacount = observer(() => {
                                                     {loading ? 'Загрузка...' : 'СОХРАНИТЬ ИЗМЕНЕНИЯ'}
                                                 </button> 
                                                 <>
-                                                    <button className="btn btn-outline-primary-2"  style={{color: "#1877f2", fontSize: "16px",  fontWeight: "500", cursor: "pointer"}} onClick={handleShow}>
+                                                    <button className="btn btn-outline-primary-2"  style={{ fontSize: "16px",  fontWeight: "500", cursor: "pointer"}} onClick={handleShow}>
                                                         Изменить пароль
                                                     </button >
 
                                                     <Modal show={show} onHide={handleClose} animation={false}>
                                                         <Modal.Header closeButton>
-                                                        <Modal.Title>Modal heading</Modal.Title>
+                                                        <Modal.Title>Изменить пароль</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body>
                                                             <div style={{maxWidth: "90%", display: "block", justifyContent: "center", marginLeft: "20px"}}>

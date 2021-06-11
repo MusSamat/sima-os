@@ -115,7 +115,7 @@ const Wishlist = observer(()=> {
                                             </h3>
                                         </div>
                                     </td>
-                                    <td className="price-col">${l.product.price } {l.quantity}</td>
+                                    <td className="price-col">{l.product.price } {l.quantity} ₽</td>
                                     <td className="stock-col"><span className="in-stock">В наличии</span></td>
                                     <td className="action-col">
                                         <div className="dropdown">

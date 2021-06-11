@@ -67,37 +67,68 @@ const Checkout = observer(() => {
 		                						<input 
 													type="text" placeholder="Имя  *"
 													value={user.userId.first_name} 
-													style={{fontSize: " 18px"}}
+													style={{fontSize: "16px", fontWeight: "500"}}
 													className="form-control" required/>
 		                					</div>
 
 		                					<div className="col-sm-6">
-		                						<input placeholder="Фамилия *" value={user.userId.last_name} type="text" className="form-control" required/>
+		                						<input 
+													placeholder="Фамилия " 
+													value={user.userId.last_name} type="text" 
+													className="form-control" required
+													style={{fontSize: "16px", fontWeight: "500"}}/>
 		                					</div>
 		                				</div>
-										<input placeholder="Страна *" type="text" value={user.userId.country} className="form-control" required/>
-	        							<input placeholder="Город *" type="text" value={user.userId.city} className="form-control" required/>
-	        							<input placeholder="Адрес" type="text" value={user.userId.address} className="form-control" required/>
+										<div className="row">
+		                					<div className="col-sm-6">
+												<input 
+													placeholder="Страна " type="text" 
+													value={user.userId.country} 
+													className="form-control" required
+													style={{fontSize: "16px", fontWeight: "500"}}/>
+											</div>
+
+										<div className="col-sm-6">
+											<input 
+												placeholder="Город " type="text" 
+												value={user.userId.city} 
+												className="form-control" required
+												style={{fontSize: "16px", fontWeight: "500"}}/>
+												</div>
+		                				</div>
+	        							<input 
+											placeholder="Адрес" type="text" 
+											value={user.userId.address} 
+											className="form-control" required
+											style={{fontSize: "16px", fontWeight: "500"}}/>
 
 	            						<div className="row">
 		                					<div className="col-sm-6">
-		                						<input placeholder="Телефон" value={user.userId.phone_number} type="tel" className="form-control" required/>
+		                						<input 
+													placeholder="Телефон" 
+													value={user.userId.phone_number} type="tel" 
+													className="form-control" required
+													style={{fontSize: "16px", fontWeight: "500"}}/>
 		                					</div>
 
 		                					<div className="col-sm-6">
-		                						<input placeholder="Email" type="email" value={user.userId.email} className="form-control" required/>
+		                						<input 
+													placeholder="Email" type="email" 
+													value={user.userId.email} 
+													className="form-control" required
+													style={{fontSize: "16px", fontWeight: "500"}}/>
 		                					</div>
 		                				</div>
 
 	                					
 
-	        							<div className="custom-control custom-checkbox">
+	        							{/* <div className="custom-control custom-checkbox">
 											<input type="checkbox" className="custom-control-input" id="checkout-create-acc"/>
 											<label className="custom-control-label" for="checkout-create-acc">ДЕТАЛИ</label>
 										</div>
 
 	                					<label>Примечание к заказу (необязательно)</label>
-	        							<textarea value={note} onChange={e => setNote(e.target.value)}  className="form-control" cols="30" rows="4" placeholder="Примечания к вашему заказу, например, особые пожелания отделу доставки."></textarea>
+	        							<textarea value={note} onChange={e => setNote(e.target.value)}  className="form-control" cols="30" rows="4" placeholder="Примечания к вашему заказу, например, особые пожелания отделу доставки."></textarea> */}
 		                		</div>
 		                		<aside className="col-lg-3">
 		                			<div className="summary">
@@ -117,7 +148,7 @@ const Checkout = observer(() => {
 											{user.items.map((item, index)=>
 		                						<tr  key={index}>
 		                							<td><a href="">{item.product.title}</a></td>
-		                							<td>{(item.product.price*item.quantity).toFixed(2)}</td>
+		                							<td>{(item.product.price*item.quantity).toFixed(2)} ₽</td>
 		                						</tr>)}
 		                						<tr className="summary-subtotal">
 		                							<td>ПОДЫТОГ:</td>
@@ -126,11 +157,11 @@ const Checkout = observer(() => {
                                                                      sum = sum + item.product.price * item.quantity
                                                                     })
                                                             }
-		                							<td>{sum.toFixed(2)}</td>
+		                							<td>{sum.toFixed(2)} ₽</td>
 		                						</tr>
 		                						<tr className="summary-total">
 		                							<td>ИТОГО:</td>
-		                							<td>{sum.toFixed(2)}</td>
+		                							<td>{sum.toFixed(2)} ₽</td>
 		                						</tr>
 												
 		                					</tbody>
