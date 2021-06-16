@@ -15,8 +15,8 @@ export default function Mobile() {
                     <nav className="mobile-nav">
                         <ul className="mobile-menu ">
                             <li className="active ">
-                                <NavLink className="sf-with-ul"  to={HOME_ROUTE}>
-                                    ГЛАВНАЯ
+                                <NavLink className="sf-with-ul"  to={HOME_ROUTE}> 
+                                ГЛАВНАЯ
                                 </NavLink>
                             </li>
                             <li >
@@ -30,11 +30,11 @@ export default function Mobile() {
                             <li>
                                 <NavLink  to={CONTACT_ROUTE}>КОНТАКТЫ</NavLink>
                             </li>
-                            {/* <li>
-                                <NavLink  to={NEWS_ROUTE}>НОВОСТИ</NavLink>
-                            </li> */}
                             <li>
-                                <NavLink to={ABOUT_ROUTE}>О КОМПАНИЯ</NavLink>
+                                <NavLink  to={NEWS_ROUTE}>НОВОСТИ</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={ABOUT_ROUTE}>СОТРУДНИЧЕСТВО</NavLink>
                             </li>
                         </ul>
                     </nav>
@@ -47,6 +47,49 @@ export default function Mobile() {
                     </div>
                 </div>
             </div>
+            <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+            
+            
+            <nav class="mobile-nav">
+                <ul class="mobile-menu">
+                    <li class="active">
+                        <a href="/"> 
+                                ГЛАВНАЯ
+                        </a>
+
+                        
+                    </li>
+                    <li>
+                        <a href="/subcategory">КАТАЛОГ</a>
+                        
+                    </li>
+                    <li>
+                        <a href="" >ДОСТАВКА</a>
+                        
+                    </li>
+                    <li>
+                        <a href="">НОВОСТИ</a>
+                    </li>
+                    <li>
+                        <a href="">СОДРУЖЕСТВО</a>
+                    </li>
+                    <li>
+                        <a href="">Elements</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="social-icons">
+                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+            </div>
+        </div>
+    </div>
         </div>
     )
 }

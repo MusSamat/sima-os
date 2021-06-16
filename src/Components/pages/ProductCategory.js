@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, {useState, useEffect, useContext} from 'react';
 import { Context } from '../../index';
 import { Link } from 'react-router-dom';
+import Mobile from './Mobile';
 
 
 

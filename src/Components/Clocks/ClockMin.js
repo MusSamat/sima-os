@@ -1,6 +1,7 @@
 import React from "react";
 import "./Clock.css";
 import clock from "../../assets/clock.png"
+import clock1 from "../../assets/clock1.png"
 
 class ClockMin extends React.Component {
     state = {
@@ -31,7 +32,7 @@ class ClockMin extends React.Component {
       return(
         <React.Fragment>
           <div className="clock-face">
-            <img src={clock}/>
+            <img src={clock1}/>
             <div 
               style={{
                 transform: `translate(0, -50%) rotate(${hourRotation}deg)`,

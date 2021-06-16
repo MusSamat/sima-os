@@ -1,4 +1,6 @@
 import React from 'react'
+import { FaOdnoklassnikiSquare } from "react-icons/fa";
+
 
 export default function Footer() {
     return (
@@ -67,10 +69,10 @@ export default function Footer() {
                         </ul>
 
                         <div className="social-icons social-icons-color">
-                            <a style={{fontSize: "20px"}} href="#" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
-                            <a style={{fontSize: "20px"}} href="#" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                            <a style={{fontSize: "20px"}} href="#" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                            <a style={{fontSize: "20px"}} href="#" className="social-icon social-youtube" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
+                            <a style={{fontSize: "20px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                            <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                            <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                            <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
                             
                         </div>
                     </div>

@@ -3,10 +3,13 @@ import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import "../../App.css";
 import { useHistory } from 'react-router';
-import { LOGIN_ROUTE } from '../../utils/Const';
+import { LOGIN_ROUTE, ORDER_ROUTE } from '../../utils/Const';
 import axios from "axios"
 import { Button, Modal } from 'react-bootstrap'
 import { FaLastfmSquare } from 'react-icons/fa';
+import { Switch, Route, Link} from 'react-router-dom';
+import { orderRoutes } from "../../routes";
+import OrdersTable from './OrdersTable';
 
 const Myacount = observer(() => {
 
@@ -118,8 +121,8 @@ const Myacount = observer(() => {
 
 
     useEffect(() => {
-        console.log(user.userId.email)
-        
+        console.log(user.orders)
+        user.getOrderData()
         
 
     }, [])
@@ -158,8 +161,42 @@ const Myacount = observer(() => {
                                         </div>
 
                                         <div className="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
-                                            <p style={{fontSize: "16px"}}>Заказ еще не поступил.</p>
-                                            <a href="category.html" className="btn btn-outline-primary-2"><span>GO SHOP</span><i className="icon-long-arrow-right"></i></a>
+                                            
+                                            {user.order ?
+                                             <table className="table table-cart table-mobile">
+                                                <thead>
+                                                    <tr >
+                                                        <th style={{color: "black"}}>ЗАКАЗ</th>
+                                                        <th style={{color: "black"}}>ДАТА</th>
+                                                        <th style={{color: "black"}}>СТАТУС</th>
+                                                        <th style={{color: "black"}}>ИТОГО</th>
+                                                        <th style={{color: "black"}}>ДЕЙСТВИЯ</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {console.log(user.order)}
+                                                    {user.order.map((c, index)=>
+                                                    
+                                                    
+                                                    
+                                                    <tr>
+                                                        <td key={index} className="product-col">
+									                        №{c.id}
+                                                        </td>
+                                                        <td className="price-col"> </td>
+                                                        
+                                                        <td >
+                                                           
+                                                            
+                                                        </td>
+
+                                                        <td style={{fontWeight: "500"}}> {c.items.quantity * c.items.product.price} ₽ ЗА  {c.items.quantity} ЕДИНИЦ</td>
+                                                        <td ><button className="btn btn-outline-primary" >ПРОСМОТР</button></td>
+                                                    </tr>)}
+                                                </tbody>
+                                            </table> :
+                                            <p style={{fontSize: "16px"}}>Заказ еще не поступил.</p>}
                                         </div>
 
                                         <div className="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Clock.css";
 import clock from "../../assets/clock.png"
+import clock4 from "../../assets/clock4.png"
 
 class Clock3 extends React.Component {
     state = {

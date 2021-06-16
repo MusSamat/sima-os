@@ -9,7 +9,7 @@ import Cart from "./Components/pages/Cart";
 import Checkout from "./Components/pages/Checkout";
 import {CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, ABOUT_ROUTE, NEWS_ROUTE, HOME_ROUTE, 
         PRODUCT_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, ERROR_ROUTE, SINGLE_ROUTE, MYACOUNT_ROUTE,
-        FILTER_ROUTE, SUBCATEGORY_ROUTE,PRODUCTCATEGORY_ROUTE} from "./utils/Const";
+        FILTER_ROUTE, SUBCATEGORY_ROUTE,PRODUCTCATEGORY_ROUTE, ORDER_ROUTE} from "./utils/Const";
 import Wishlist from "./Components/pages/Wishlist";
 import Login from "./Components/pages/Login";
 import Error from "./Components/pages/Error";
@@ -18,19 +18,20 @@ import Myacount from "./Components/pages/Myacount";
 import Filter from "./Components/pages/Filter";
 import ProdCategory from "./Components/pages/ProdCategory";
 import ProductCategory from "./Components/pages/ProductCategory";
+import OrdersTable from "./Components/pages/OrdersTable";
 
 
 
-// export const authRoutes = [
-//     {
-//         path: CATALOG_ROUTE,
-//         Component: Admin,
-//     },
-//     {
-//         path: BASKET_ROUTE,
-//         Component: Basket,
-//     },
-// ]
+export const orderRoutes = [
+    // {
+    //     path: ORDER_ROUTE,
+    //     Component: OrdersTable,
+    // },
+    // {
+    //     path: BASKET_ROUTE,
+    //     Component: Basket,
+    // },
+]
 export const publicRoutes = [
     {
         path: CATALOG_ROUTE,
@@ -47,6 +48,7 @@ export const publicRoutes = [
     {
         path: ABOUT_ROUTE ,
         Component: About,
+       
     },
     {
         path: NEWS_ROUTE ,
@@ -99,5 +101,9 @@ export const publicRoutes = [
     {
         path: PRODUCTCATEGORY_ROUTE,
         Component: ProductCategory,
+    },
+    {
+        path: ORDER_ROUTE,
+        Component: OrdersTable,
     },
 ]

@@ -5,6 +5,8 @@ import axios from "axios"
 import { NavLink } from 'react-router-dom';
 import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
 import ruble from "../../assets/ruble.png"
+import { Link } from 'react-router-dom';
+
 
  const Cart = observer(() => {
     const {user} = useContext(Context)
@@ -88,7 +90,7 @@ import ruble from "../../assets/ruble.png"
                                             </thead>
 
                                             <tbody>
-                                                {console.log(user.items)}
+                                                
                                                 {user.items.map((c, index)=>
                                                 
                                                 
@@ -96,12 +98,13 @@ import ruble from "../../assets/ruble.png"
                                                 <tr>
                                                     <td key={index} className="product-col">
                                                         <div className="product">
-                                                            <figure className="product-media">
-                                                                <a>
-                                                                    <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0].images[0]}`} alt="Product image"/>
-                                                                </a>
-                                                            </figure>
-
+                                                            <Link to={{pathname: '/product/'+ c.product.id}}>
+                                                                <figure className="product-media">
+                                                                    <a>
+                                                                        <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0].images[0]}`} alt="Product image"/>
+                                                                    </a>
+                                                                </figure>
+                                                            </Link>
                                                             <h3 className="product-title">
                                                                 <a>{c.product.title}</a>
                                                             </h3>

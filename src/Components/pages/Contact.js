@@ -1,6 +1,8 @@
 import React from 'react';
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 import "../../App.css";
+import { FaOdnoklassnikiSquare } from "react-icons/fa";
+import { FaWhatsappSquare } from "react-icons/fa";
 
 
 
@@ -24,15 +26,6 @@ export default function Contact() {
     return (
         
             <main className="main">
-                <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
-                    <div className="container">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li className="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">Contact us 2</li>
-                        </ol>
-                    </div>
-                </nav>
 
                 <div className="page-content">
                     {/* <div id="map" className="mb-5"></div> */}
@@ -60,9 +53,9 @@ export default function Contact() {
                                 <div className="contact-box text-center">
                                     <h5>Адрес:</h5>
 
-                                    <address style={{fontSize: "18px"}}>Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</address>
+                                    <p style={{fontSize: "18px"}}>Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</p>
 
-                                    <h5>Рынок «Дордой»</h5>
+                                    <p style={{fontSize: "18px"}}>Рынок «Дордой»</p>
                                     <p style={{fontSize: "18px"}}>5 проход конт. 458/1</p>
                                     <p style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
                                 </div>
@@ -73,8 +66,9 @@ export default function Contact() {
                                     <h5>Руководитель:</h5>
 
                                     <p style={{fontSize: "18px"}}>+996 (709) 99 99 15</p>
-                                    <p style={{fontSize: "18px"}}>W/app: +996 (705) 55 58 29</p>
                                     <p style={{fontSize: "18px"}}>+ 996 (700) 50 60 46</p>
+                                    <p style={{fontSize: "18px"}}><FaWhatsappSquare style={{}}/> +996 (705) 55 58 29</p>
+                                    
                                 </div>
                             </div>
 
@@ -83,10 +77,10 @@ export default function Contact() {
                                     <h5>Социальное</h5>
 
                                     <div  className="social-icons social-icons-color justify-content-center">
-                                        <a style={{fontSize: "25px"}} href="#" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
-                                        <a style={{fontSize: "25px"}} href="#" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                                        <a style={{fontSize: "25px"}} href="#" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                                        <a style={{fontSize: "25px"}} href="#" className="social-icon social-youtube" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
+                                        <a style={{fontSize: "25px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                                        <a style={{fontSize: "25px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                                        <a style={{fontSize: "25px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                                        <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
                                         
                                     </div>
                                 </div>

@@ -6,6 +6,7 @@ import "../../App.css";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Subcategory from "./ProdCategory"
+import Mobile from './Mobile';
 
 
   
@@ -15,7 +16,7 @@ const  Catolog = observer((props) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
     const [input, setInput] = useState("")
-    const Prodid = props.match.params.id
+    const id = props.match.params.id
     const catId = props.match.params.catId
     const title = props.match.params.title
     console.log(props)
@@ -44,7 +45,7 @@ const  Catolog = observer((props) => {
     
     useEffect(() => {
         user.getUserData()
-        product.fetchTodo(catId,Prodid).then(() => {
+        product.fetchTodoCatalog(catId, id).then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
                 '/assets/js/bootstrap-input-spinner.js',
@@ -105,24 +106,26 @@ const  Catolog = observer((props) => {
                                         </div>
                                     
                                 </div>
-                                {console.log(product.products)}
                                 <div className="products mb-3">
-                                    <div className="row justify-content-center">                                        
+                                    <div className="row justify-content-center"> 
+                                        {console.log(product.products)}                                       
                                         {product.products.map((prod, index) => 
                                         
                                             <div className="col-6 col-md-4 col-lg-4 col-xl-3"  >
                                                 <div className="product product-7 text-center">
                                                     <Link to={{pathname: '/product/'+prod.id}} key={index}>
+                                                        {prod.percent ? <div style={{textAlign: "center"}} class="product-label label-sale">{prod.percent} %</div> : ""}
                                                         <figure className="product-media" >
                                                                 <img src={`${process.env.REACT_APP_BASE_URL}${prod?.images[0]?.images[0]}`} alt="Product image" className="product-image catologImg"/>
                                                         </figure>
                                                         <div className="product-body">
-                                                            <div className="product-cat">
+                                                            <div className="product-cat"> 
                                                                 <a >{title}</a>
                                                             </div>
                                                             <h3 className="product-title"><a >{prod.title}</a></h3>
                                                             <div className="product-price">
-                                                                {user.isAuth ? prod.price : "" } ₽
+                                                                {user.isAuth ?
+                                                                 `${prod.price} ₽` : "" } 
                                                             </div>
                                                         </div>
                                                     </Link>
@@ -145,7 +148,7 @@ const  Catolog = observer((props) => {
                                         <div className="col-sm-10 col-md-8 col-lg-10">
                                         
                                             <form onSubmit={search}>
-                                                <div className="input-group">
+                                                <div className=" input-group">
                                                     <input 
                                                         type="text" 
                                                         className="form-control" 
@@ -153,9 +156,9 @@ const  Catolog = observer((props) => {
                                                         value={input}
                                                         onChange={e => setInput(e.target.value)}
                                                         required/><hr/>
-                                                    <div className="input-group-append">
-                                                        <button style={{width: "100px"}} className="btn btn-primary" type="submit"><span>ПОИСК</span></button>
-                                                    </div>
+                                                    
+                                                        <button style={{width: "210px", height: "40px"}} className="btn btn-primary" type="submit">ПОИСК</button>
+                                                    
                                                 </div>
                                             </form>
                                         </div>
@@ -187,13 +190,13 @@ const  Catolog = observer((props) => {
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
-                                                    <label onClick={()=>product.fetchTodo(catId,Prodid)} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label>
-                                                        {console.log(product.subcategory)}
-                                                        {product.subcategory.filter(c=>product.countTitle(c.id)).map((c, index) =>
-                                                            
+                                                    <label onClick={()=>product.fetchTodo(catId,)} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label>                                                        
+                                                        {product.subcategory.map((c, index) =>
                                                                 <div  key={index} className="custom-control custom-checkbox">
-                                                                    
-                                                                    <label onClick={() => product.changeFilter(c.id, Prodid, catId)} className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label>
+                                                                    <Link
+                                                                       to={{pathname: `/catalog/${c.id}/` + 6}}  
+                                                                   > 
+                                                                    <label onClick={() => product.changeFilter(c.id)} className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label></Link>
                                                                     <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({product.countTitle(c.id)})</span>
                                                                 </div>
                                                                 
@@ -202,6 +205,7 @@ const  Catolog = observer((props) => {
                                                     </div>
                                                 </div>
                                             </div>
+                                            {console.log(value)}
                                             <div style={{
                                                     display: 'block',
                                                     width: 'fit-content'
@@ -218,7 +222,7 @@ const  Catolog = observer((props) => {
 
                                     <div className="cat-blocks-container">
                                             <p  onClick={() => product.changeDiscounted(percent)} style={{color: "rgb(71, 53, 150)", fontWeight:"500", cursor: "pointer", marginBottom: "30px"}}>ТОВАРЫ СО СКИДКОЙ</p>
-                                            {console.log(product.discount)}
+                                            
                                             {product.discount.map((discout, index)=>
                                                 <div key={index}>
                                                 <div  className="row">

@@ -8,6 +8,8 @@ import { FaUserAlt } from "react-icons/fa";
 import { AiOutlineDown } from "react-icons/ai";
 import logo from "../assets/logo.png"
 import what from "../assets/WhatsApp.png"
+import { BsChevronDown } from "react-icons/bs";
+
 
 
 
@@ -39,15 +41,19 @@ const Header = observer(() => {
                  <div className="container eki">
                     <div className="header-left">
                         <div className="header-dropdown">
-                            
                             <div className="header lefft">
-                                <a>BISHKEK</a>
+                                <a>Bishkek</a>
                                 
                             </div>
                         </div><br/>
-
-                        <div className="header">
+                        <div style={{marginRight: "7px", marginTop: "-5px", fontSize: "16px"}} className="header">
+                            <i class="icon-phone"></i>
+                        </div>
+                        <div style={{marginRight: "10px"}} className="header">
                             <a >+996709999915</a>
+                        </div>
+                        <div  className="header">
+                            <a >+996999998815</a>
                         </div>
                     </div>
 
@@ -58,9 +64,9 @@ const Header = observer(() => {
                                     <li>
                                     <a  data-toggle="modal"><i class="icon-user"></i></a>
                                         {user.isAuth ? <NavLink   to={MYACOUNT_ROUTE}>МОЙ АККАУНТ</NavLink>
-                                        : <NavLink to={LOGIN_ROUTE}>АВТОРИЗАЦИЯ</NavLink>}</li>
+                                        : <NavLink to={LOGIN_ROUTE}>ВОЙТИ</NavLink>}</li>
                                     
-                                    <li >grand139094@gmail.com</li>
+                                    <li className="gmail" >simacompany@bk.ru</li>
                                 </ul>
                             </li>
                         </ul>
@@ -72,49 +78,77 @@ const Header = observer(() => {
                 <div className="header-bottom sticky-header">
                   <div className="container">
                     <div className="header-left">
+
+                    {/* <nav class="main-nav">
+                            <ul class="menu sf-arrows">
+                                <li class="megamenu-container active">
+                                    <a href="index.html" class="sf-with-ul">Home</a>
+                                </li>
+                                <li>
+                                    <a href="category.html" class="sf-with-ul">Shop</a>
+                                </li>
+                                <li>
+                                    <a href="product.html" class="sf-with-ul">Product</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="sf-with-ul">Pages</a>
+                                </li>
+                                <li>
+                                    <a href="blog.html" class="sf-with-ul">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="elements-list.html" class="sf-with-ul">Elements</a>
+                                </li>
+                            </ul>
+                        </nav> */}
                         <button className="mobile-menu-toggler">
-                            
                             <i className="icon-bars"></i>
                         </button>
                         <NavLink className="logo" to={HOME_ROUTE}>
-                            <img style={{width: "100px", height: "40px"}} src={logo}/>
+                            <img style={{width: "100px", height: "40px"}} src={logo}/> 
                             
                         </NavLink>
                         
                     </div>
                     <div className="header-center">
                         <nav className="main-nav">
-                            <ul className="menu sf-arrows">
-                                <li  className="megamenu-container">
-                                    <NavLink to={HOME_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">ГЛАВНАЯ</a></NavLink>
+                            <ul className="menu sf-arrows ">
+                                <li className="megamenu-container ">
+                                    <NavLink  className="sf-with" style={{fontSize: "16px"}} to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" to={SUBCATEGORY_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">КАТАЛОГ</a> </NavLink>
+                                    <NavLink className="sf-with" style={{fontSize: "16px", fontWeight: "normal"}} to={SUBCATEGORY_ROUTE}>КАТАЛОГ </NavLink>
                                     
                                     
-                                        <ul  style={{marginLeft: "320px", backgroundColor: "black", marginTop: "-15px", color: "white", width: "60px" }}>
+                                        {/* <ul  style={{marginLeft: "320px", backgroundColor: "black", marginTop: "-15px", color: "white", width: "60px" }}>
                                             {product.category.map((prod, index) =>
                                                 <Link to={{pathname: '/productcategory/'+prod.id}} >
                                                     <li key={index} ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>{prod.title}</a></li>
                                                 </Link>
                                             )}
-                                        </ul>
+                                        </ul> */}
                                    
                                     
-                                </li>
-                                <li className="megamenu-container ">
-                                    <NavLink  className="sf-with" to={DELIVERY_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">ДОСТАВКА</a></NavLink>
-                                </li>
-                                <li className="megamenu-container ">
-                                    <NavLink  className="sf-with" to={CONTACT_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">КОНТАКТЫ</a></NavLink>
-
                                 </li>
                                 <li className="megamenu-container ">
                                     <NavLink  className="sf-with" to={NEWS_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">НОВОСТИ</a></NavLink>
 
                                 </li >
                                 <li className="megamenu-container ">
-                                    <NavLink  className="sf-with" to={ABOUT_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">О КОМПАНИИ</a></NavLink>
+                                    <a style={{fontSize: "16px"}} class="sf-with-ul">СОТРУДНИЧЕСТВО <BsChevronDown/></a>
+                                        <ul  style={{marginLeft: "720px", backgroundColor: "black", marginTop: "-15px", color: "white", width: "60px" }}>
+                                            
+                                                <Link to={ABOUT_ROUTE} >
+                                                    <li  ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>О НАС</a></li>
+                                                </Link>
+                                                <Link to={CONTACT_ROUTE} >
+                                                    <li  ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>КОНТАКТЫ</a></li>
+                                                </Link>
+                                                <Link to={DELIVERY_ROUTE} >
+                                                    <li  ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>ДОСТАВКА</a></li>
+                                                </Link>
+                                            
+                                        </ul>
 
                                 </li>
                             </ul>

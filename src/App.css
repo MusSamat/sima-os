@@ -80,10 +80,7 @@
     margin-bottom: 30px;
     height: 50px;
   } */
-  .btn-round:hover{
-    color: #fff;
-    background: #5d4f84;
-  }
+  
 
   .clickvse{
     cursor: pointer;
@@ -137,7 +134,7 @@
     border-radius: 16px;
     color: #009688;
     margin-top: 30px;
-    width: 100%;
+    width: 200px;
 
   }
 
@@ -207,9 +204,38 @@
   .korziny:hover{
     color: white !important; 
   }
+/* catalog */
+
+  /* Header */
+  
+  .active{
+    color: #cc9966 !important; 
+  }
+  .header-bottom .menu > li > a:before{
+    transform: scale(none) !important;
+    top: none !important;
+    bottom: none !important;
+    background-color: none !important;
+  }
+  .header-bottom .menu > li > a:hover{
+    color: #cc9966 !important;
+  }
+  .header .header-bottom .menu > li > a:before{
+    background-color: none !important;
+  }
+  .menu > li > a :hover{
+    background-color: none;
+  }
+  .header .wishlist-link .wishlist-count, .header .cart-dropdown .cart-count{
+    background-color: #c96 !important;
+  }
+  .gmail{
+    text-transform: none;
+    font-size: 14px !important;
+  }
   /* main */
   .icons-react{
-    font-size: 3.692em;
+    font-size: 1.692em;
     margin-left: 100px;
     margin-bottom: 20px;
   }
@@ -268,6 +294,10 @@
     margin: 15px 0 0 0;
     border-color: #555;
   }
+  .count-title{
+    font-size: 2.0rem !important;
+  }
+  
   @media screen and (max-width: 1366px){
   .container-z {
     max-width: 1140px;

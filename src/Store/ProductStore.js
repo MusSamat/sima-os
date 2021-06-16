@@ -19,6 +19,9 @@ export default class ProductStore {
         this.obj = null
         this.carts = []
         this.productsCategory = []
+        this.reviews = []
+        this.productSorted = []
+        this.allProductSorted = []
         
         
         
@@ -26,10 +29,23 @@ export default class ProductStore {
         makeAutoObservable(this)
     }
    
-     fetchTodo(categoryId, id) {
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?category=${categoryId}&productcategory=${id}`)
+     fetchTodo() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategorysorted`)
             .then(res => {
-                this.products = [ ...res.data]
+                this.productSorted = [...res.data]
+                this.allProductSorted = this.productSorted
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+            
+            
+    }
+    // localhost:8000/api/products/?seasoncategory=3&productcategory=14
+    fetchTodoCatalog(catId, id) {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${catId}&productcategory=${id}`)
+            .then(res => {
+                this.products = [...res.data]
                 this.allProducts = this.products
             })
             .catch((e)=>{
@@ -60,6 +76,18 @@ export default class ProductStore {
                 console.error(e)
             })
     }
+
+    getSortedData(){
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory`)
+            .then(res => {
+                this.productSorted = [...res.data]
+                this.allProductSorted = this.productSorted
+
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+    }
     
     getProdcategory(id) {
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?category_id=`+id)
@@ -72,10 +100,16 @@ export default class ProductStore {
             })
     }
 
-    changeFilter(id, prodId, catId){
-        this.products = this.allProducts.filter((item, index) => item.seasoncategory  === id || item.productcategory === prodId || item.category === catId )
+    changeFilter(id, ){
+        this.products = this.allProducts.filter((item, index) => item.seasoncategory  === id)
         console.log(this.products)
     }
+
+    changeFilterSorted(id){
+        this.productSorted = this.allProductSorted.filter((item, index) => item.seasoncategory  === id )
+        console.log(this.productSorted)
+    }
+
     changeDiscounted(percent){
         this.products = this.allProducts.filter(item => this.discount.some(j => j.id === item.id))
         console.log(this.products)
@@ -84,16 +118,24 @@ export default class ProductStore {
         this.products = this.allProducts.filter(item => item.price === price)
     }
     searchFilter(input){
+        if(parseInt(input)){
+            this.products = this.allProducts.filter(item => item.articul === input) 
+        }else{
         this.products = this.allProducts.filter(item => item.title.toLowerCase() === input.toLowerCase())
+        }
     }
 
     countTitle(id){
         return this.allProducts.filter(item => item.seasoncategory === id).length
         
     }
+    countTitleSorted(id){
+        return this.allProductSorted.filter(item => item.seasoncategory === id).length
+        
+    }
 
-    priceFilter(price){
-        return this.allProducts.filter(item => item.price === price)
+    priceFilter(value, valueEnd){
+        return this.allProducts.filter(item => item.price === value)
         
         
     }
@@ -112,6 +154,7 @@ export default class ProductStore {
                 this.product = response.data
                 this.imagesUser = this.product.images
                 this.size = this.product.size
+                this.reviews = this.product.reviews
                 console.log(this.product)
             })
             .catch((e)=>{

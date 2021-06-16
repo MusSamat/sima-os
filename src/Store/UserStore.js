@@ -15,6 +15,8 @@ export default class UserStore {
         this.userData = {}
         this.counter = []
         this.reviews = []
+        this.orders = {}
+        this.order = []
 
         this.count = 0
         makeAutoObservable(this)
@@ -53,6 +55,27 @@ export default class UserStore {
         })
         
      }
+    //  + this.userGetId?.user.id
+     getOrderData(){
+        this.userGetId = JSON.parse(localStorage.getItem('value'))
+            axios.get(`${process.env.REACT_APP_BASE_URL}/api/order/`,{
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + this.token?.token
+            },
+        })
+        .then(res => {
+            this.orders = res.data
+            this.order = this.orders.items
+            console.log(this.orders)
+        })
+        .catch((e)=>{
+            console.log(e)
+        })
+        
+     }
+
+     
 
      getCartData() {
         this.userGetId = JSON.parse(localStorage.getItem('value'))
@@ -99,13 +122,8 @@ export default class UserStore {
     changeItemQuantity (ind, val) {
         this.items = this.items.map((i, index) => index === ind ? {...i, quantity: val} : i)
     } 
-    getReviews() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/`, {
-            headers: {
-                'Content-Type':'application/json',
-                'Authorization':'Token ' + this.token?.token
-            },
-        })
+    getReviews(id) {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/` + id)
             .then(response => {
                 this.reviews = response.data
                 console.log(this.reviews)

@@ -97,15 +97,13 @@ const Wishlist = observer(()=> {
                             </thead>
 
                             <tbody>
-                                {console.log(user.list)}
                                 {user.list.map((l, index)=>
-                                
                                 <tr key={index}>
                                     <td className="product-col">
                                         <div className="product">
                                             <Link to={{pathname: '/product/'+ l.product.id}}>
                                                 <figure className="product-media">
-                                                    <a href="#">
+                                                    <a >
                                                         <img src={`${process.env.REACT_APP_BASE_URL}${l.product?.images[0].images[0]}`} alt="Product image"/>
                                                     </a>
                                                 </figure>
@@ -129,7 +127,7 @@ const Wishlist = observer(()=> {
                                 
                             </tbody>
                         </table>
-                        <div className="wishlist-share">
+                        {/* <div className="wishlist-share">
                             <div className="social-icons social-icons-sm mb-2">
                                 <label  className="social-label">Поделись:</label>
                                 <a href="#" className="social-icon" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
@@ -138,7 +136,7 @@ const Wishlist = observer(()=> {
                                 <a href="#" className="social-icon" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
                                 <a href="#" className="social-icon" title="Pinterest" target="_blank"><i className="icon-pinterest"></i></a>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </main>

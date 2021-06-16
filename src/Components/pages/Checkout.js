@@ -2,18 +2,21 @@ import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import axios from "axios";
+import {  useHistory} from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ORDER_ROUTE } from '../../utils/Const';
 
 const Checkout = observer(() => {
 
+	const history = useHistory()
 	const {user} = useContext(Context)
 	let sum = 0
 	const [note, setNote] = useState()
 	console.log(user.userId)
 
-	const notify = () => toast.success("Wow so easy!");
+	const notify = () => toast.success("Спасибо. Ваш заказ был принят.");
 	const notifyError = () => toast.error("Wow so easy!");
 
 	const sendOrder = (e) => {
@@ -41,6 +44,8 @@ const Checkout = observer(() => {
 				setNote('')
 				notify()
 				user.getCartData()
+				console.log(user.getCartData())
+				history.push(ORDER_ROUTE)
         })
         .catch(error =>{ 
             console.log(error) 
@@ -64,16 +69,17 @@ const Checkout = observer(() => {
 		                			<h2 className="checkout-title">ДЕТАЛИ ОПЛАТЫ</h2>
 		                				<div className="row">
 		                					<div className="col-sm-6">
+												<label style={{fontSize: "16px"}} for="register-password">Имя </label>
 		                						<input 
-													type="text" placeholder="Имя  *"
+													type="text"
 													value={user.userId.first_name} 
 													style={{fontSize: "16px", fontWeight: "500"}}
 													className="form-control" required/>
 		                					</div>
 
 		                					<div className="col-sm-6">
+												<label style={{fontSize: "16px"}} for="register-password">Фамилия</label>
 		                						<input 
-													placeholder="Фамилия " 
 													value={user.userId.last_name} type="text" 
 													className="form-control" required
 													style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -81,39 +87,43 @@ const Checkout = observer(() => {
 		                				</div>
 										<div className="row">
 		                					<div className="col-sm-6">
+												<label style={{fontSize: "16px"}} for="register-password">Страна</label>
 												<input 
-													placeholder="Страна " type="text" 
+													 type="text" 
 													value={user.userId.country} 
 													className="form-control" required
 													style={{fontSize: "16px", fontWeight: "500"}}/>
 											</div>
 
 										<div className="col-sm-6">
+											<label style={{fontSize: "16px"}} for="register-password">Город</label>
 											<input 
-												placeholder="Город " type="text" 
+												 type="text" 
 												value={user.userId.city} 
 												className="form-control" required
 												style={{fontSize: "16px", fontWeight: "500"}}/>
 												</div>
 		                				</div>
+										<label style={{fontSize: "16px"}} for="register-password">Адрес</label>
 	        							<input 
-											placeholder="Адрес" type="text" 
+											 type="text" 
 											value={user.userId.address} 
 											className="form-control" required
 											style={{fontSize: "16px", fontWeight: "500"}}/>
 
 	            						<div className="row">
 		                					<div className="col-sm-6">
-		                						<input 
-													placeholder="Телефон" 
+												<label style={{fontSize: "16px"}} for="register-password">Телефон</label>
+		                						<input  
 													value={user.userId.phone_number} type="tel" 
 													className="form-control" required
 													style={{fontSize: "16px", fontWeight: "500"}}/>
 		                					</div>
 
 		                					<div className="col-sm-6">
+												<label style={{fontSize: "16px"}} for="register-password">Email</label>
 		                						<input 
-													placeholder="Email" type="email" 
+													 type="email" 
 													value={user.userId.email} 
 													className="form-control" required
 													style={{fontSize: "16px", fontWeight: "500"}}/>

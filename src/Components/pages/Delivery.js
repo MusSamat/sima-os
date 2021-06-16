@@ -13,13 +13,13 @@ export default function Delivery() {
         <div style={{marginTop: "80px"}} className="page-wrapper">
 			<div className="container">
                 <div className="row">
-                	<div className=" col-sm-10">
-                        <h3 style={{ marginTop:"30px",}}>Осуществляем доставку в города России, Казахстана, Беларуси, Узбекистана, и по всему миру, любым удобным для Вас способом! </h3>
+                	<div className=" col-sm-12">
+                        <h4 style={{ marginTop:"30px",}}>Осуществляем доставку в города России, Казахстана, Беларуси, Узбекистана, и по всему миру, любым удобным для Вас способом! </h4>
                 	</div>
 
-                	<div  className="col-sm-2">
+                	{/* <div  className="col-sm-2">
                         <img src={fura}/>
-                	</div>
+                	</div> */}
                 </div>
 				<img style={{backgroundSize: "cover", width: "100%", height:"80%"}} src={dostavka1}/>
 			</div>
@@ -46,7 +46,7 @@ export default function Delivery() {
 
                 	<hr className="mt-4 mb-5"/>
 
-					<h3 >На сегодняшний день, компания «SIMA» работает с транспортными компаниями: </h3>
+					<h3 >На сегодняшний день, компания «SIMA» работает с транспортными компаниями </h3>
 					<ul style={{marginLeft: "70px", marginTop: "50px", listStyle: "outside"}}>
 						<li style={{fontSize: "18px"}}>БиекКарго (Россия, Казахстан) <a href="http://www.goldenpages.kg/ru/company/show/6009-biek-cargo-osoo.html">www.goldenpages.kg</a></li>
 						<li style={{fontSize: "18px"}}>Альфа-Карго  (Россия, Казахстан) <a href="https://www.alpha-cargo.kg/"> www.alpha-cargo.kg</a></li>

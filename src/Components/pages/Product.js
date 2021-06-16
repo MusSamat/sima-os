@@ -6,18 +6,17 @@ import { LOGIN_ROUTE, HOME_ROUTE } from '../../utils/Const';
 import axios from "axios";
 import  "../../App.css";
 import { FaStar } from "react-icons/fa";
-import { BiGitRepoForked } from "react-icons/bi";
-import { AiFillInstagram } from "react-icons/ai";
+import { FcLike } from "react-icons/fc";
 import { FaOdnoklassnikiSquare } from "react-icons/fa";
+import { BiGitRepoForked } from "react-icons/bi";
 import razmer from "../../assets/razmer.png"
 import {Modal, Button} from "react-bootstrap";
 import {PRODUCTCATEGORY_ROUTE} from "../../utils/Const"
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/swiper.scss';
-import Swiper from "react-id-swiper";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
 const colors ={
     orange: "#FFBA5A",
     grey: "#a9a9a9"
@@ -38,7 +37,8 @@ const Product = observer((props) => {
     const handleCloseRaz = () => setShowRaz(false);
     const handleShowRaz = () => setShowRaz(true);
     
-
+    console.log(props)
+    
     
     function updateValue(e) {
         console.log(e.target.value);
@@ -46,6 +46,29 @@ const Product = observer((props) => {
 
         const notify = () => toast.success("Wow so easy!");
 	    const notifyError = () => toast.error("Wow so easy!");
+
+
+        const deleteWish = () => {
+        
+       
+            const data = JSON.stringify({
+                 product: id,  
+            })
+            axios.post(`${process.env.REACT_APP_BASE_URL}/api/destroy-wishlist/`, data, {
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':'Token ' + user.token?.token
+                },
+            })
+            .then(res => {
+                user.getWishlistData()
+                product.getData(id)
+            })
+            .catch((e)=>{
+                console.error(e)
+            }) 
+        }
+
 
 
     const addWishlist = (e) => {
@@ -62,6 +85,7 @@ const Product = observer((props) => {
 
         })
             .then(response => {
+                product.getData(id)
                 setCount(count)
                 user.getWishlistData()
                 console.log(response)
@@ -134,7 +158,7 @@ const Product = observer((props) => {
             
             
         })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/product-reviews`, data, 
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/`, data, 
         {
             headers: {
                 'Content-Type':'application/json',
@@ -143,6 +167,7 @@ const Product = observer((props) => {
 
         })
             .then(response => {
+                product.getData(id)
                 setCurrValue(0)
                 setText("")
                 console.log(response)
@@ -168,7 +193,7 @@ const Product = observer((props) => {
         const log = document.getElementById('qty');
          log?.addEventListener('change', updateValue);
          
-         user.getReviews()
+         user.getReviews(id)
         user.getUserData()
         product.getData(id).then(() => {
             setLeftImages(product?.imagesUser[0]?.images ?? [])
@@ -225,9 +250,10 @@ const Product = observer((props) => {
                     <div style={{marginTop: "100px"}} className="container d-flex align-items-center">
                         <ul className="breadcrumb">
                             <li className="breadcrumb-item"><Link to={HOME_ROUTE} style={{marginTop: "-3px", marginRight: "-5px"}}  >ГЛАВНАЯ</Link></li>
-                            <li className="breadcrumb-item"><Link to={{pathname:'/productcategory/'}}>{categoryName.map((i, index) =>
-                                                    <a style={{ fontWeight:"450"}}>{i.title}</a>
-                                                )}</Link></li>
+                            <li className="breadcrumb-item">{categoryName.map((i, index) =>
+                                                   <Link to={{pathname:'/productcategory/' + i.id}}> <a style={{ fontWeight:"450"}}>{i.title}</a></Link>
+                                                )}</li>
+                                                {console.log(categoryName)}
                             <li className="breadcrumb-item active" aria-current="page"> {product.product.title}</li>
                             <li className="breadcrumb-item active" aria-current="page">Артикул: {product.product.articul}</li>
                         </ul>
@@ -238,12 +264,12 @@ const Product = observer((props) => {
                         <Modal show={show} onHide={handleClose} centered={true} animation={true}>
                             <Modal.Header closeButton>
                             </Modal.Header>
-                            <Modal.Body style={{textAlign: "center", fontSize: "30px", display: "flex"}}>
+                            <Modal.Body style={{textAlign: "center", fontSize: "30px", display: "flex"}}><Link to="https://ok.ru/profile/584170543033"></Link>
                                 
-                                <a style={{fontSize: "25px"}} href="#" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
-                                <a style={{fontSize: "25px"}} href="#" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                                <a style={{fontSize: "25px"}} href="#" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                                <a style={{fontSize: "25px"}} href="#" className="social-icon social-youtube" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
+                                <a style={{fontSize: "25px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                                <a style={{fontSize: "25px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                                <a style={{fontSize: "25px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                               <a style={{fontSize: "25px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
                                 
                             </Modal.Body>
                             <Modal.Footer>
@@ -276,7 +302,6 @@ const Product = observer((props) => {
                                             
                                                 {leftImages.map((img, index) =>
                                                         <a onClick={() =>  {
-                                                            handleRemove(img.id)
                                                             setSelectedImage(img)}} className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
                                                             <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
                                                         </a>
@@ -293,7 +318,7 @@ const Product = observer((props) => {
                                         
                                         <h1 className="product-title">{product.product.title}</h1>
                                                     {console.log(product.category.filter(i => i.id === product.product.category ))}
-                                        <div className="ratings-container justify-content-between">
+                                        {/* <div className="ratings-container justify-content-between">
                                             
                                             <div style={{ fontWeight:"400"}} className="product-cat">
                                                 <span style={{ fontWeight:"450"}}>КАТЕГОРИЯ :</span>
@@ -303,7 +328,7 @@ const Product = observer((props) => {
                                                 )}
                                                 <a style={{ fontWeight:"450"}}>{product.product.title}</a>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         <div style={{color: "black", fontWeight:"450"}} className="product-price">
                                             {user.isAuth ? `${product.product.price} ₽`  : ""}
@@ -316,7 +341,7 @@ const Product = observer((props) => {
                                             {product.imagesUser.map((img, index) =>
                                                 <a style={{height: "6rem", border: "none", marginRight: "7px", cursor: "pointer"}} 
                                                     onClick={() => {
-                                                        handleRemove(img.id)
+                                                        
                                                     const d = [...img.images]
                                                         setLeftImages(d)
                                                         setSelectedImage(d[0])
@@ -351,10 +376,12 @@ const Product = observer((props) => {
                                             </div>
                                             
                                             <div className="product-details-action">
-                                                <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product btn-cart" ><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>
+                                                 <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product btn-cart" ><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>
 
                                                 <div className="details-action-wrapper">
-                                                    <a style={{fontSize: "30px"}} href="" onClick={addWishlist} className="btn-product btn-wishlist" title="Wishlist"></a>
+                                                {product.product.is_favorite ? 
+                                                        <FcLike onClick={deleteWish} style={{fontSize: "30px", cursor: "pointer"}}/>
+                                                    : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}  className="btn-product btn-wishlist" title="Wishlist"></a>}
                                                 </div>
                                             </div>
                                         </> :
@@ -385,7 +412,7 @@ const Product = observer((props) => {
                                                         <a className="nav-link" id="tab-18-tab" data-toggle="tab" href="#tab-18" role="tab" aria-controls="tab-18" aria-selected="false">Детали</a>
                                                     </li>
                                                     <li className="nav-item">
-                                                        <a className="nav-link" id="tab-19-tab" data-toggle="tab" href="#tab-19" role="tab" aria-controls="tab-19" aria-selected="false">Отзывы (0)</a>
+                                                        <a className="nav-link" id="tab-19-tab" data-toggle="tab" href="#tab-19" role="tab" aria-controls="tab-19" aria-selected="false">Отзывы ({product.reviews.length})</a>
                                                     </li>
                                                 </ul>
                                                 <div className="tab-content" id="tab-content-5">
@@ -399,7 +426,34 @@ const Product = observer((props) => {
                                                     </div>
                                                     <div className="tab-pane fade" id="tab-19" role="tabpanel" aria-labelledby="tab-19-tab">
                                                         <strong>БУДЬТЕ ПЕРВЫМ, КТО ОСТАВИЛ ОТЗЫВ НА "{product.product.title}"</strong>
-                                                        <hr></hr>
+                                                        <div class="reviews">
+                                                            {product.reviews.map((r, index) =>
+                                                            <div style={{marginTop: "10px"}} key={index} class="review">
+                                                                <div class="row no-gutters">
+                                                                    <div class="col-auto">
+                                                                        <h4><a >{r.author}</a></h4>
+                                                                        <div class="ratings-container">
+                                                                            {/* <div class="ratings">
+                                                                                <div class="ratings-val"></div>
+                                                                            </div> */}
+                                                                        </div>
+                                                                        <span class="review-date"></span>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <h4></h4>
+
+                                                                        <div class="review-content">
+                                                                            <p style={{fontSize: "16px"}}>{r.text}</p>
+                                                                        </div>
+
+                                                                        <div class="review-action">
+                                                                            <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
+                                                                            <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>)}
+                                                        </div>
                                                         <div className="ratings-container justify-content-between">
                                                             <p>ВАШ ОТЗЫВ *</p>
                                                             <div>
@@ -442,7 +496,7 @@ const Product = observer((props) => {
                                                     </div>
                                                     
                                                     
-                                                        <div class="reviews">
+                                                        {/* <div class="reviews">
                                                             <h3>ОТЗЫВ (2)</h3>
                                                             {user.reviews.map((r, index) =>
                                                             <div key={index} class="review">
@@ -470,7 +524,7 @@ const Product = observer((props) => {
                                                                     </div>
                                                                 </div>
                                                             </div>)}
-                                                        </div>
+                                                        </div> */}
                                                     
 
 
