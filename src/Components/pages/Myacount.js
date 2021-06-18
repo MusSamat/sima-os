@@ -6,6 +6,9 @@ import { useHistory } from 'react-router';
 import { LOGIN_ROUTE, ORDER_ROUTE } from '../../utils/Const';
 import axios from "axios"
 import { Button, Modal } from 'react-bootstrap'
+import Moment from 'react-moment';
+import 'moment-timezone';
+
 import { FaLastfmSquare } from 'react-icons/fa';
 import { Switch, Route, Link} from 'react-router-dom';
 import { orderRoutes } from "../../routes";
@@ -20,6 +23,9 @@ const Myacount = observer(() => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [smShow, setSmShow] = useState(false);
+    const [lgShow, setLgShow] = useState(false);
 
 
     const [username, setUserName] = useState()
@@ -119,6 +125,11 @@ const Myacount = observer(() => {
         
      }
 
+     const openModal = (id) => {
+        setLgShow(true)
+        user.getOrderDataId(id)
+        console.log(id)
+     }
 
     useEffect(() => {
         console.log(user.orders)
@@ -181,22 +192,65 @@ const Myacount = observer(() => {
                                                     
                                                     
                                                     <tr>
-                                                        <td key={index} className="product-col">
+                                                        <td key={index} style={{fontWeight: "500"}} className="product-col">
 									                        №{c.id}
                                                         </td>
-                                                        <td className="price-col"> </td>
+                                                        <td className="price-col"><Moment format="YYYY.MM.DD" date={c.created}></Moment></td>
                                                         
                                                         <td >
-                                                           
+                                                           {c.status}
                                                             
                                                         </td>
 
-                                                        <td style={{fontWeight: "500"}}> {c.items.quantity * c.items.product.price} ₽ ЗА  {c.items.quantity} ЕДИНИЦ</td>
-                                                        <td ><button className="btn btn-outline-primary" >ПРОСМОТР</button></td>
+                                                        <td style={{fontWeight: "500"}}> {c.items.map(i => i.quantity) * c.items.map(i => i.product.price)} ₽ ЗА  {c.items.map(i => i.quantity)} ЕДИНИЦ</td>
+                                                        <td ><Button id={c.id} onClick={() => openModal(c.id)} className="btn btn-outline-primary" >ПРОСМОТР</Button></td>
                                                     </tr>)}
                                                 </tbody>
                                             </table> :
                                             <p style={{fontSize: "16px"}}>Заказ еще не поступил.</p>}
+                                            <Modal 
+                                                    show={lgShow}
+                                                    onHide={() => setLgShow(false)}
+                                                        size="lg"
+                                                        aria-labelledby="contained-modal-title-vcenter"
+                                                        centered>
+                                                <Modal.Header closeButton>
+                                                <Modal.Title id="example-modal-sizes-title-lg">
+                                                    
+                                                </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body style={{padding: "20px"}}>
+                                                    <h3>Информация о заказе</h3>
+                                                    
+                                                    {user.orderId.map((c, index)=>
+                                                        <p key={index}>{c.items.map((i, index) =>
+                                                            <table key={index} className="table table-cart table-mobile">
+                                                                    <tr>
+                                                                        <th>ТОВАР</th>
+                                                                        <th>ИТОГО</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>{i.product.title} ×  {c.items.map(i => i.quantity)}</td>
+                                                                        <td>{c.items.map(i => i.quantity) * c.items.map(i => i.product.price)} ₽</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>ПОДЫТОГ</td>
+                                                                        <td>{c.items.map(i => i.quantity) * c.items.map(i => i.product.price)} ₽</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>МЕТОД ОПЛАТЫ:</td>
+                                                                        <td>ДЕНЕЖНЫЙ ПЕРЕВОД</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>ИТОГО:</td>
+                                                                        <td>{c.items.map(i => i.quantity) * c.items.map(i => i.product.price)} ₽</td>
+                                                                    </tr>
+                                                                    
+                                                    </table>
+                                                        
+                                                        )}</p>
+                                                    )}</Modal.Body>
+                                            </Modal>
                                         </div>
 
                                         <div className="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">

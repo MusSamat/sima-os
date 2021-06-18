@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import "../../App.css";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import {SUBCATEGORY_ROUTE} from "../../utils/Const";
 import Subcategory from "./ProdCategory"
 import Mobile from './Mobile';
 
@@ -45,7 +46,7 @@ const  Catolog = observer((props) => {
     
     useEffect(() => {
         user.getUserData()
-        product.fetchTodoCatalog(catId, id).then(() => {
+        product.fetchTodoCatalog(catId, title).then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
                 '/assets/js/bootstrap-input-spinner.js',
@@ -65,8 +66,9 @@ const  Catolog = observer((props) => {
                 document.body.appendChild(s)
             })
         })
-        product.getSubcategory(title, catId)
         product.discountTodo()
+        product.getCategoryTitle(title)
+        product.getCategoryTitleCount(title)
         
         
     
@@ -120,7 +122,6 @@ const  Catolog = observer((props) => {
                                                         </figure>
                                                         <div className="product-body">
                                                             <div className="product-cat"> 
-                                                                <a >{title}</a>
                                                             </div>
                                                             <h3 className="product-title"><a >{prod.title}</a></h3>
                                                             <div className="product-price">
@@ -179,7 +180,7 @@ const  Catolog = observer((props) => {
 
                                     <div className="widget widget-collapsible">
                                         <h3 className="widget-title">
-                                            <Link to={{pathname: '/productcategory/'+catId}} >
+                                            <Link to={SUBCATEGORY_ROUTE} >
                                                 <a data-toggle="collapse" href="#widget-1" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} role="button" aria-expanded="true" aria-controls="widget-1">
                                                     Категория
                                                 </a>
@@ -190,14 +191,13 @@ const  Catolog = observer((props) => {
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
-                                                    <label onClick={()=>product.fetchTodo(catId,)} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label>                                                        
-                                                        {product.subcategory.map((c, index) =>
+                                                    {/* <label onClick={()=>product.getCategoryTitle(title)} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label>   */}
+                                                        {console.log(product.productTitleCount)}                                                      
+                                                        {product.productTitle.filter(i => i.id).map((c, index) =>
                                                                 <div  key={index} className="custom-control custom-checkbox">
-                                                                    <Link
-                                                                       to={{pathname: `/catalog/${c.id}/` + 6}}  
-                                                                   > 
-                                                                    <label onClick={() => product.changeFilter(c.id)} className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label></Link>
-                                                                    <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({product.countTitle(c.id)})</span>
+                                                                    
+                                                                    <label onClick={() => product.fetchTodoCatalog(c.id, title)} className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label>
+                                                                    <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({product.changeFilterCount(c.id)?.count})</span>
                                                                 </div>
                                                                 
                                                             
@@ -205,7 +205,6 @@ const  Catolog = observer((props) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {console.log(value)}
                                             <div style={{
                                                     display: 'block',
                                                     width: 'fit-content'

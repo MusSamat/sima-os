@@ -57,27 +57,24 @@ const  Main = () => {
                 <div className="App1">
                     <Particle/>
                 </div>
-                <div className="pt-2 pb-2">
+                {/* <div className="pt-2 pb-2">
                     <div className="container brands">
                     
                       
                     </div>
-                </div>
+                </div> */}
 
-                <div className="mb-3"></div>
+                {/* <div className="mb-3"></div> */}
 
-                
+                {/* Рады приветствовать Вас на сайте Швейной компании */}
                     
-                            <h2 class="title">Рады приветствовать Вас на сайте Швейной компании «SIMA»</h2>
+                    <h2 style={{marginTop: "80px"}} class="title"> «SIMA»</h2>
                     
-                    <p style={{fontSize: "18px"}}>Швейная компания <span style={{fontWeight: "400"}}>«SIMA»</span> — одна из ведущих производителей женской одежды на рынке Кыргызстана, России, Казахстана, Беларуси и на международном рынке.
+                    <p style={{fontSize: "18px", textAlign: "justify", marginBottom: "50px"}}> Швейная компания <span style={{fontWeight: "400"}}>«SIMA»</span> — одна из ведущих производителей женской одежды на рынке Кыргызстана, России, Казахстана, Беларуси и на международном рынке.
                     Компания начала свой путь развития с 1998 года.
                     Наш творческий коллектив дизайнеров, модельеров-конструкторов и технологов предлагают такие решения, что выпускаемая нами продукция позволяет не только подчеркнуть достоинства и скрыть недостатки, но и показать свою уникальность, предать чувства уверенности, легкости, свободы и комфорта, выглядеть современно и стильно. Продукция «SIMA» поможет каждой женщине в создании собственного неповторимого образа и подарит незабываемые эмоции. Производство женской одежды оптом от нашей компании направлено на удовлетворение спроса конечного потребителя. 
                     20-летний путь становления компании “SIMA” – это путь интенсивного развития, труда.
-                    </p>
-                    
-                    <p style={{fontSize: "18px"}} >
-                            Для того чтобы оформить заказ, Вам необходимо пройти простую и удобную регистрацию на сайте, как оптовый покупатель. Только после регистрации, Вам будет открыт доступ к оптовому прайс-листу и детальные описания моделей.
+                    Для того чтобы оформить заказ, Вам необходимо пройти простую и удобную регистрацию на сайте, как оптовый покупатель. Только после регистрации, Вам будет открыт доступ к оптовому прайс-листу и детальные описания моделей.
                             
                     </p><br></br>
                     
@@ -92,7 +89,7 @@ const  Main = () => {
                                     <div class="count-wrapper text-white">
                                         {/* <span class="count" data-from="0" data-to="40" data-speed="3000" data-refresh-interval="50"><ImClock2 className="icons-react" /></span> */}
                                     </div>
-                                    <h3 class="count-title text-white">23 ЛЕТ НА РЫНКЕ</h3>
+                                    <h3 class="count-title text-white">БОЛЕЕ 20 ЛЕТ НА РЫНКЕ</h3>
                                 </div>
                             </div>
 
@@ -183,11 +180,11 @@ const  Main = () => {
     					</div>
     				</div> */}
                 
-                <div className="mb-7"></div>
+                {/* <div className="mb-7"></div> */}
                 
 
                 <br/>
-                    <div className="row " >
+                    <div style={{marginTop: "30px"}} className="row " >
                             <div className="col-lg-4 col-sm-6 d-flex justify-content-center">
                                 <div className="icon-box text-center1">
                                     <Clocke/>
@@ -242,9 +239,9 @@ const  Main = () => {
                     
                 
 
-                    <div style={{textAlign: "center",borderTop: "2px solid #ccc", borderBottom: "2px solid #ccc", padding: "30px", marginTop: " 20px"}}>
-                    <p style={{fontSize: "18px", marginBottom: " 20px",    }}>Если у Вас остались дополнительные вопросы, пишите <span style={{fontWeight: "500"}}>simacompany@bk.ru</span> Или оставьте заявку на обратный звонок и мы вам перезвоним!
-поместить на главную</p>
+                    <div style={{textAlign: "center", padding: "30px", marginTop: " 20px"}}>
+                    {/* <p style={{fontSize: "18px", marginBottom: " 20px", fontFamily: "Montserrat, sans-serif"   }}>Если у Вас остались дополнительные вопросы, пишите <span style={{fontWeight: "500"}}>simacompany@bk.ru</span> Или оставьте заявку на обратный звонок и мы вам перезвоним!
+                        поместить на главную</p> */}
                         <div className="container-z" >
                             <h3 className="cont">Закажите обратный звонок</h3>
                             <h4 className="cont-h4">С Вами свяжется наш менеджер и подробно проконсультирует</h4>

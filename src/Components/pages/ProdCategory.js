@@ -38,6 +38,7 @@ const ProdCategory = observer(() => {
         })
         product.getCategory()
         product.getSubcategory()
+        product.getSubcategoryId()
             
     
       }, []); 
@@ -81,7 +82,7 @@ const ProdCategory = observer(() => {
                                         
                                             <div className="col-6 col-md-4 col-lg-4 col-xl-3"  >
                                                 <div className="product product-7 text-center">
-                                                    <Link to={{pathname: `/catalog/${prod.seasoncategory}/${prod.id}`}} key={index}>
+                                                    <Link to={{pathname: `/catalog/${prod.seasoncategory}/${prod.title}`}} key={index}>
                                                         <figure className="product-media" >
                                                                 <img src={prod.image} alt="Product image" className="product-image catologImg"/>
                                                         </figure>
@@ -144,25 +145,18 @@ const ProdCategory = observer(() => {
                                     </div>
 
                                     <div className="widget widget-collapsible">
-                                        <h3 className="widget-title">
-                                            <Link to={{pathname: '/productcategory/'}} >
-                                                <a data-toggle="collapse" href="#widget-1" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} role="button" aria-expanded="true" aria-controls="widget-1">
-                                                    Категория
-                                                </a>
-                                            </Link>
-                                        </h3>
 
                                         <div className="collapse show" >
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
-                                                    <label onClick={() =>product.getSortedData()} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label> 
+                                                    <label onClick={() =>product.fetchTodo()} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label> 
                                                     {console.log(product.subcategory)}                                                       
                                                         {product.subcategory.map((c, index) =>
                                                                 <div  key={index} className="custom-control custom-checkbox">
                                                                     
-                                                                   <label onClick={() => product.changeFilterSorted(c.id)} className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label>
-                                                                    <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({product.countTitleSorted(c.id)})</span>
+                                                                   <label onClick={() => product.getSubcategoryId(c.id) } className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label>
+                                                                    <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({c.count})</span>
                                                                 </div>
                                                                 
                                                             

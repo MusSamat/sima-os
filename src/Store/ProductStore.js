@@ -22,6 +22,8 @@ export default class ProductStore {
         this.reviews = []
         this.productSorted = []
         this.allProductSorted = []
+        this.productTitle = []
+        this.productTitleCount = []
         
         
         
@@ -42,11 +44,12 @@ export default class ProductStore {
             
     }
     // localhost:8000/api/products/?seasoncategory=3&productcategory=14
-    fetchTodoCatalog(catId, id) {
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${catId}&productcategory=${id}`)
+    fetchTodoCatalog(catId, title) {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${catId}&productcategory__title__iexact=${title}`)
             .then(res => {
                 this.products = [...res.data]
                 this.allProducts = this.products
+                console.log(this.products)
             })
             .catch((e)=>{
                 console.error(e)
@@ -55,11 +58,45 @@ export default class ProductStore {
             
     }
 
-    
+    // seasoncategory/?title=Рубашка
+    getCategoryTitle(title) {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/seasoncategory/?title=${title}`)
+            .then(res => {
+                this.productTitle = [...res.data]
+                console.log(this.productTitle)
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+    }
+
+    getCategoryTitleCount(title) {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?title=${title}`)
+            .then(res => {
+                this.productTitleCount = [...res.data]
+                console.log(res)
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+    }
+    //seasoncategory/?title=Рубашка
     getSubcategory() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/seasoncategory/`)
             .then(res => {
                 this.subcategory = [...res.data]
+                // this.subcategory = this.allProductSorted
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+    }
+    
+    getSubcategoryId(id) {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?seasoncategory_id=`+id)
+            .then(res => {
+                 this.productSorted = [...res.data]
+                 console.log(res)
             })
             .catch((e)=>{
                 console.error(e)
@@ -100,9 +137,14 @@ export default class ProductStore {
             })
     }
 
-    changeFilter(id, ){
+    changeFilter(id,){
         this.products = this.allProducts.filter((item, index) => item.seasoncategory  === id)
         console.log(this.products)
+    }
+
+    changeFilterCount(id){
+        return this.productTitleCount.find(item => item.seasoncategory  === id)
+        
     }
 
     changeFilterSorted(id){
@@ -126,18 +168,16 @@ export default class ProductStore {
     }
 
     countTitle(id){
-        return this.allProducts.filter(item => item.seasoncategory === id).length
+        return this.products.filter(item => item.seasoncategory === id).length
         
     }
     countTitleSorted(id){
-        return this.allProductSorted.filter(item => item.seasoncategory === id).length
+        return this.productTitle.filter(item => item.seasoncategory === id).length
         
     }
 
-    priceFilter(value, valueEnd){
-        return this.allProducts.filter(item => item.price === value)
-        
-        
+    priceFilter(value){
+        return this.allProducts.filter(item => item.price === value)        
     }
 
     subcategoryFilter(title){

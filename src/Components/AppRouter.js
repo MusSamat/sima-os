@@ -8,7 +8,7 @@ export default function AppRouter() {
     return (
         <div style={{marginTop: "30px"}}>
             <Switch>
-                <Route exact  path="main" component={Main} />
+                {/* <Route exact  path="main" component={Main} /> */}
                 {publicRoutes.map(({path, Component}) => 
                     <Route exact key={path} path={path} component={Component}  />
                 )}

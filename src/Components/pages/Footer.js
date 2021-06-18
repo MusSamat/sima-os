@@ -11,15 +11,17 @@ export default function Footer() {
                         <div className="row">
                             <div className="col-sm-12 col-lg-4">
                                 <div className="widget widget-about">
-                                    <h4 className="widget-title">ДОБРО ПОЖАЛОВАТЬ</h4>
-                                    <h2 className="widget-title">SIMA</h2>
+                                    <h4 className="widget-title">Контакты</h4>
                                     {/* <img src="assets/images/demos/demo-8/logo-footer.png" className="footer-logo" alt="Footer Logo" width="82" height="25"/> */}
                                     <address style={{fontSize: "18px"}} className="widget-list">Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</address>
+                                    <p style={{fontSize: "18px"}}>Рынок «Дордой»</p>
+                                        <p style={{fontSize: "18px"}}>5 проход конт. 458/1</p>
+                                        <p style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
                                     
                                     <div className="widget-about-info">
                                         <div className="row">
                                             <div className="col-sm-6 col-md-4">
-                                                <a href="tel:+996709999915">+996709999915</a>
+                                                {/* <a href="tel:+996709999915">+996709999915</a> */}
                                             </div>
                                         </div>
                                     </div>
@@ -28,12 +30,12 @@ export default function Footer() {
 
                             <div className="col-sm-12 col-lg-4">
                                 <div className="widget">
-                                    <h4 className="widget-title">НАШИ НОВОСТИ</h4>
+                                    <h4 className="widget-title"> НОВОСТИ</h4>
 
                                     <ul className="widget-list">
-                                        <li style={{ fontSize: "16px"}}><a href="about.html">Оплата не выходя из дома.</a></li>
+                                        {/* <li style={{ fontSize: "16px"}}><a href="about.html">Оплата не выходя из дома.</a></li> */}
                                         <li style={{ fontSize: "16px"}}><a href="#">Почему клиенты выбирают нас</a></li>
-                                        <li style={{ fontSize: "16px"}}><a href="faq.html">Удобная мобильная версия.</a></li>
+                                        {/* <li style={{ fontSize: "16px"}}><a href="faq.html">Удобная мобильная версия.</a></li> */}
                                         <li style={{ fontSize: "16px"}}><a href="contact.html">«Предприятие лидер Евразийского Союза Государств»</a></li>
                                         <li style={{ fontSize: "16px"}}><a href="login.html">«SIMA» на выставках Текстильлегпром</a></li>
                                     </ul>
@@ -41,7 +43,7 @@ export default function Footer() {
                             </div>
 
                             <div className="col-sm-12 col-lg-4">
-                                <div className="widget">
+                                {/* <div className="widget">
                                     <h4 className="widget-title">МЕНЮ</h4>
 
                                     <ul className="widget-list">
@@ -52,7 +54,7 @@ export default function Footer() {
                                         <li style={{fontSize: "16px"}}><a href="#">Новости</a></li>
                                         <li style={{ fontSize: "16px"}}><a href="#">О компании</a></li>
                                     </ul>
-                                </div>
+                                </div> */}
                             </div>
 
                             

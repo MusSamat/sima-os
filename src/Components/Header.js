@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import { FaUserAlt } from "react-icons/fa";
 import { AiOutlineDown } from "react-icons/ai";
-import logo from "../assets/logo.png"
+import logo from "../assets/sima_logo.png"
 import what from "../assets/WhatsApp.png"
 import { BsChevronDown } from "react-icons/bs";
 
@@ -114,10 +114,10 @@ const Header = observer(() => {
                         <nav className="main-nav">
                             <ul className="menu sf-arrows ">
                                 <li className="megamenu-container ">
-                                    <NavLink  className="sf-with" style={{fontSize: "16px"}} to={HOME_ROUTE}>ГЛАВНАЯ</NavLink>
+                                    <NavLink  className="sf-with" style={{fontSize: "16px"}} to={HOME_ROUTE}> <a class="sf-with-ul">ГЛАВНАЯ</a></NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" style={{fontSize: "16px", fontWeight: "normal"}} to={SUBCATEGORY_ROUTE}>КАТАЛОГ </NavLink>
+                                    <NavLink className="sf-with" style={{fontSize: "16px"}} to={SUBCATEGORY_ROUTE}><a class="sf-with-ul">КАТАЛОГ </a></NavLink>
                                     
                                     
                                         {/* <ul  style={{marginLeft: "320px", backgroundColor: "black", marginTop: "-15px", color: "white", width: "60px" }}>
@@ -135,17 +135,20 @@ const Header = observer(() => {
 
                                 </li >
                                 <li className="megamenu-container ">
-                                    <a style={{fontSize: "16px"}} class="sf-with-ul">СОТРУДНИЧЕСТВО <BsChevronDown/></a>
-                                        <ul  style={{marginLeft: "720px", backgroundColor: "black", marginTop: "-15px", color: "white", width: "60px" }}>
+                                    <NavLink  className="sf-with" to={ABOUT_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">О Компании</a></NavLink>
+                                </li >
+                                <li className="megamenu-container ">
+                                    <a style={{fontSize: "16px"}} class="sf-with-ul">СОТРУДНИЧЕСТВО</a>
+                                        <ul  style={{marginLeft: "690px", marginTop: "-15px", color: "white", width: "40px" }}>
                                             
                                                 <Link to={ABOUT_ROUTE} >
-                                                    <li  ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>О НАС</a></li>
+                                                    <li  ><a style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия покупки</a></li>
                                                 </Link>
-                                                <Link to={CONTACT_ROUTE} >
-                                                    <li  ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>КОНТАКТЫ</a></li>
+                                                <Link  to={DELIVERY_ROUTE} >
+                                                    <li  ><a style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия доставки</a></li>
                                                 </Link>
-                                                <Link to={DELIVERY_ROUTE} >
-                                                    <li  ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>ДОСТАВКА</a></li>
+                                                <Link  to={CONTACT_ROUTE}>
+                                                    <li  ><a style={{cursor: "pointer", fontSize: "16px", color: "#777" }}> Контакты</a></li>
                                                 </Link>
                                             
                                         </ul>
