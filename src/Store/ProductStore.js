@@ -24,6 +24,8 @@ export default class ProductStore {
         this.allProductSorted = []
         this.productTitle = []
         this.productTitleCount = []
+        this.token = null
+        this.favorite = []
         
         
         
@@ -189,13 +191,29 @@ export default class ProductStore {
     // }
 
     getData(id) {
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/` + id)
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/` + id,)
             .then(response => {
                 this.product = response.data
                 this.imagesUser = this.product.images
                 this.size = this.product.size
                 this.reviews = this.product.reviews
                 console.log(this.product)
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+     }
+     getDataFavorite(id) {
+        this.token = JSON.parse(localStorage.getItem('value'))
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/` + id, {
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':'Token ' + this.token?.token
+            },
+        })
+            .then(response => {
+                this.favorite = response.data
+                console.log(this.favorite)
             })
             .catch((e)=>{
                 console.error(e)

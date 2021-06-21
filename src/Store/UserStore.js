@@ -128,10 +128,7 @@ export default class UserStore {
         .then(res => {
             this.wishList = res.data
             this.list = this.wishList.items 
-            
-            
-            
-    console.log()
+            console.log(this.list)
         })
         .catch((e)=>{
             console.error(e)

@@ -45,23 +45,13 @@ const ProdCategory = observer(() => {
 
     return (
         <div  className="page-content">
-            <div>
              <main  className="main">
-                
-
                 <div className="page-content">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-9">
-                                <div className="toolbox">
-                                    <div className="toolbox-left">
-                                        <div className="toolbox-info">
-                                            {/* ПРОСМОТР: <span>24 / 48 / 96 / <span className="clickvse" onClick={()=>product.fetchTodo()}>ВСЕ</span></span>  */}
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div style={{borderRadius: "40px", background: "#f7f7f7", textAlign: "center"}} className="cta cta-border mb-5">
+                                <div style={{borderRadius: "40px", background: "#f7f7f7", textAlign: "center",marginTop: "-8px"}} className="cta cta-border mb-5">
                                     
                                     
                                         <h4>ДЛЯ ЗАПРОСА КАТАЛОГА СЛЕДУЮЩЕГО СЕЗОНА, НАПИШИТЕ НАМ НА WHATSAPP</h4>
@@ -90,7 +80,7 @@ const ProdCategory = observer(() => {
                                                             <div className="product-cat">
                                                                 <a ></a>
                                                             </div>
-                                                            <h3 className="product-title"><a >{prod.title}</a></h3>
+                                                            <h3 className="product-title"><strong>{prod.title}</strong></h3>
                                                             <div className="product-price">
                                                                 
                                                             </div>
@@ -150,13 +140,13 @@ const ProdCategory = observer(() => {
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
-                                                    <label onClick={() =>product.fetchTodo()} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label> 
+                                                    <label onClick={() =>product.fetchTodo()} className="custom-control-label vse s-title" style={{ fontWeight:"500"}} >ВСЕ</label> 
                                                     {console.log(product.subcategory)}                                                       
                                                         {product.subcategory.map((c, index) =>
                                                                 <div  key={index} className="custom-control custom-checkbox">
                                                                     
-                                                                   <label onClick={() => product.getSubcategoryId(c.id) } className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label>
-                                                                    <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({c.count})</span>
+                                                                   <label onClick={() => product.getSubcategoryId(c.id) } className="custom-control-label s-title" style={{ fontWeight:"500"}} > {c.title} {c.year}</label>
+                                                                    <span style={{ fontWeight:"500"}} className="item-count">({c.count})</span>
                                                                 </div>
                                                                 
                                                             
@@ -168,38 +158,6 @@ const ProdCategory = observer(() => {
                                            
                                         </div>
                                     </div>
-
-                                    <div className="cat-blocks-container">
-                                            {/* <p  onClick={() => product.changeDiscounted()} style={{color: "rgb(71, 53, 150)", fontWeight:"500", cursor: "pointer", marginBottom: "30px"}}>ТОВАРЫ СО СКИДКОЙ</p> */}
-                                            
-                                            {/* {product.discount.map((discout, index)=>
-                                                <div key={index}>
-                                                <div  className="row">
-                                                    <div  className="col-6 ">
-                                                    <Link to={{pathname: '/product/'+ discout.id}}>
-                                                        <a className="cat-block">
-                                                            <figure>
-                                                                <span>
-                                                                    <img className="images-s" src={`${process.env.REACT_APP_BASE_URL}${discout.images[0].images[0]}`} alt="Category image"/>
-                                                                </span>
-                                                            </figure>
-                                                        </a>
-                                                        </Link>
-                                                    </div>
-                                                   
-                                                    <div  className="col-5 ">
-                                                        <h3 className="product-title"><a >kkk</a></h3>
-                                                        {user.isAuth ? <><p style={{textDecoration:"line-through"}}>{discout.price} ₽</p>
-                                                        <p >{Math.round(discout.price - (discout.price * discout.percent/100))}.00 ₽</p></> : ''}
-                                                    </div>
-                                                    
-                                                </div>
-                                                </ div>
-                                            )} */}
-                                        </div>
-                                    
-
-
                                 </div>
                             </aside>
                         </div>
@@ -208,7 +166,7 @@ const ProdCategory = observer(() => {
             </main>
             <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
         </div>
-        </div>
+       
         
     )
 })

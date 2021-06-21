@@ -11,7 +11,7 @@ import fabric from "../../assets/fabric.png"
 import coat from "../../assets/coat.png"
 import { ImClock2 } from "react-icons/im";
 import { FaTruckMoving } from "react-icons/fa";
-import { BsChevronDown } from "react-icons/bs";
+import { BsShieldShaded } from "react-icons/bs";
 import { FaCertificate } from "react-icons/fa";
 import axios from "axios"
 import p from "../../assets/p.png"
@@ -68,9 +68,9 @@ const  Main = () => {
 
                 {/* Рады приветствовать Вас на сайте Швейной компании */}
                     
-                    <h2 style={{marginTop: "80px"}} class="title"> «SIMA»</h2>
+                    <div style={{ textAlign: "center"}}><h2 style={{marginTop: "80px", display: "flex", textAlign: "center"}} class="title"> «SIMA»</h2></div>
                     
-                    <p style={{fontSize: "18px", textAlign: "justify", marginBottom: "50px"}}> Швейная компания <span style={{fontWeight: "400"}}>«SIMA»</span> — одна из ведущих производителей женской одежды на рынке Кыргызстана, России, Казахстана, Беларуси и на международном рынке.
+                    <p style={{fontSize: "18px", textAlign: "justify", marginBottom: "50px",textIndent: "30px"}}> Швейная компания <span style={{fontWeight: "400"}}>«SIMA»</span> — одна из ведущих производителей женской одежды на рынке Кыргызстана, России, Казахстана, Беларуси и на международном рынке.
                     Компания начала свой путь развития с 1998 года.
                     Наш творческий коллектив дизайнеров, модельеров-конструкторов и технологов предлагают такие решения, что выпускаемая нами продукция позволяет не только подчеркнуть достоинства и скрыть недостатки, но и показать свою уникальность, предать чувства уверенности, легкости, свободы и комфорта, выглядеть современно и стильно. Продукция «SIMA» поможет каждой женщине в создании собственного неповторимого образа и подарит незабываемые эмоции. Производство женской одежды оптом от нашей компании направлено на удовлетворение спроса конечного потребителя. 
                     20-летний путь становления компании “SIMA” – это путь интенсивного развития, труда.
@@ -81,13 +81,16 @@ const  Main = () => {
 
                 </div> 
                 <div className="container">
-                <div class="bg-image pt-7 pb-5 pt-md-12 pb-md-9" style={{backgroundImage: `url(${bg})`}}>
+                <div class="bg-image pt-7 pb-5 pt-md-12 pb-md-9" style={{backgroundImage: `url(${bg})`}}> 
                     <div class="container">
                         <div class="row">
                             <div class="col-6 col-md-3">
                                 <div class="count-container text-center">
                                     <div class="count-wrapper text-white">
                                         {/* <span class="count" data-from="0" data-to="40" data-speed="3000" data-refresh-interval="50"><ImClock2 className="icons-react" /></span> */}
+                                    </div>
+                                    <div className=" justify-content-center">
+                                        <ImClock2  />
                                     </div>
                                     <h3 class="count-title text-white">БОЛЕЕ 20 ЛЕТ НА РЫНКЕ</h3>
                                 </div>
@@ -98,6 +101,7 @@ const  Main = () => {
                                     <div class="count-wrapper text-white">
                                         {/* <span class="count" data-from="0" data-to="20" data-speed="3000" data-refresh-interval="50">0</span>+ */}
                                     </div>
+                                    <FaTruckMoving  />
                                     <h3 class="count-title text-white">УДОБНАЯ ДОСТАВКА</h3>
                                 </div>
                             </div>
@@ -107,6 +111,7 @@ const  Main = () => {
                                     <div class="count-wrapper text-white">
                                         {/* <span class="count" data-from="0" data-to="95" data-speed="3000" data-refresh-interval="50">0</span>% */}
                                     </div>
+                                    <BsShieldShaded />
                                     <h3 class="count-title text-white">КОНТРОЛЬ КАЧЕСТВА</h3>
                                 </div>
                             </div>
@@ -116,6 +121,7 @@ const  Main = () => {
                                     <div class="count-wrapper text-white">
                                         {/* <span class="count" data-from="0" data-to="15" data-speed="3000" data-refresh-interval="50">0</span> */}
                                     </div>
+                                    <FaCertificate  />
                                     <h3 class="count-title text-white">СЕРТИФИКАЦИЯ ТОВАРА</h3>
                                 </div>
                             </div>

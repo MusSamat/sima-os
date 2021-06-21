@@ -94,7 +94,7 @@ const  Catolog = observer((props) => {
                                     </div>
                                 </div>
 
-                                <div style={{borderRadius: "40px", background: "#f7f7f7",textAlign: "center"}} className="cta cta-border mb-5">
+                                <div style={{borderRadius: "40px", background: "#f7f7f7",textAlign: "center", marginTop: "-25px"}} className="cta cta-border mb-5">
                                     
                                     
                                         <h4>ДЛЯ ЗАПРОСА КАТАЛОГА СЛЕДУЮЩЕГО СЕЗОНА, НАПИШИТЕ НАМ НА WHATSAPP</h4>
@@ -181,7 +181,7 @@ const  Catolog = observer((props) => {
                                     <div className="widget widget-collapsible">
                                         <h3 className="widget-title">
                                             <Link to={SUBCATEGORY_ROUTE} >
-                                                <a data-toggle="collapse" href="#widget-1" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} role="button" aria-expanded="true" aria-controls="widget-1">
+                                                <a data-toggle="collapse" href="#widget-1" style={{ fontWeight:"500"}} role="button" aria-expanded="true" aria-controls="widget-1">
                                                     Категория
                                                 </a>
                                             </Link>
@@ -196,8 +196,8 @@ const  Catolog = observer((props) => {
                                                         {product.productTitle.filter(i => i.id).map((c, index) =>
                                                                 <div  key={index} className="custom-control custom-checkbox">
                                                                     
-                                                                    <label onClick={() => product.fetchTodoCatalog(c.id, title)} className="custom-control-label s-title" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} > {c.title} {c.year}</label>
-                                                                    <span style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} className="item-count">({product.changeFilterCount(c.id)?.count})</span>
+                                                                    <label onClick={() => product.fetchTodoCatalog(c.id, title)} className="custom-control-label s-title" style={{ fontWeight:"500"}} > {c.title} {c.year}</label>
+                                                                    <span style={{ fontWeight:"500"}} className="item-count">({product.changeFilterCount(c.id)?.count})</span>
                                                                 </div>
                                                                 
                                                             

@@ -205,8 +205,36 @@
     color: white !important; 
   }
 /* catalog */
-
+.product-title{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.s-title{
+  font-family: 'Montserrat', sans-serif !important;
+}
+/* product */
+.breadcrumb-item{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.seny{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.btn-rounded{
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 18px;
+}
+.description{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.col-sm-12> h4{
+  font-family: 'Montserrat', sans-serif !important;
+}
   /* Header */
+  .Uslovia{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .voiti{
+    font-family: 'Montserrat', sans-serif !important;
+  }
 
   .header-bottom .menu > li > a:before{
     transform: none !important;
@@ -217,6 +245,9 @@
     width: none !important;
     position: none !important;
     display: none !important;
+  }
+  .container > p{
+    font-family: 'Montserrat', sans-serif !important;
   }
   .sf-with-ul{
     font-family: 'Montserrat', sans-serif !important;

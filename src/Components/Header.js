@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import { Link, NavLink } from 'react-router-dom';
-import {ABOUT_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, MYACOUNT_ROUTE, SUBCATEGORY_ROUTE} from "../utils/Const";
+import {ABOUT_ROUTE, PURCHASES_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, MYACOUNT_ROUTE, SUBCATEGORY_ROUTE} from "../utils/Const";
 import "../App.css";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
@@ -63,8 +63,8 @@ const Header = observer(() => {
                                 <ul>
                                     <li>
                                     <a  data-toggle="modal"><i class="icon-user"></i></a>
-                                        {user.isAuth ? <NavLink   to={MYACOUNT_ROUTE}>МОЙ АККАУНТ</NavLink>
-                                        : <NavLink to={LOGIN_ROUTE}>ВОЙТИ</NavLink>}</li>
+                                        {user.isAuth ? <NavLink className="voiti"  to={MYACOUNT_ROUTE}>МОЙ АККАУНТ</NavLink>
+                                        : <NavLink className="voiti" to={LOGIN_ROUTE}>ВОЙТИ</NavLink>}</li>
                                     
                                     <li className="gmail" >simacompany@bk.ru</li>
                                 </ul>
@@ -78,29 +78,6 @@ const Header = observer(() => {
                 <div className="header-bottom sticky-header">
                   <div className="container">
                     <div className="header-left">
-
-                    {/* <nav class="main-nav">
-                            <ul class="menu sf-arrows">
-                                <li class="megamenu-container active">
-                                    <a href="index.html" class="sf-with-ul">Home</a>
-                                </li>
-                                <li>
-                                    <a href="category.html" class="sf-with-ul">Shop</a>
-                                </li>
-                                <li>
-                                    <a href="product.html" class="sf-with-ul">Product</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="sf-with-ul">Pages</a>
-                                </li>
-                                <li>
-                                    <a href="blog.html" class="sf-with-ul">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="elements-list.html" class="sf-with-ul">Elements</a>
-                                </li>
-                            </ul>
-                        </nav> */}
                         <button className="mobile-menu-toggler">
                             <i className="icon-bars"></i>
                         </button>
@@ -117,17 +94,7 @@ const Header = observer(() => {
                                     <NavLink  className="sf-with" style={{fontSize: "16px"}} to={HOME_ROUTE}> <a class="sf-with-ul">ГЛАВНАЯ</a></NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" style={{fontSize: "16px"}} to={SUBCATEGORY_ROUTE}><a class="sf-with-ul">КАТАЛОГ </a></NavLink>
-                                    
-                                    
-                                        {/* <ul  style={{marginLeft: "320px", backgroundColor: "black", marginTop: "-15px", color: "white", width: "60px" }}>
-                                            {product.category.map((prod, index) =>
-                                                <Link to={{pathname: '/productcategory/'+prod.id}} >
-                                                    <li key={index} ><a style={{cursor: "pointer", fontSize: "18px", color: "#fff"}}>{prod.title}</a></li>
-                                                </Link>
-                                            )}
-                                        </ul> */}
-                                   
+                                    <NavLink className="sf-with" style={{fontSize: "16px"}} to={SUBCATEGORY_ROUTE}><a class="sf-with-ul">КАТАЛОГ </a></NavLink>                                  
                                     
                                 </li>
                                 <li className="megamenu-container ">
@@ -141,14 +108,14 @@ const Header = observer(() => {
                                     <a style={{fontSize: "16px"}} class="sf-with-ul">СОТРУДНИЧЕСТВО</a>
                                         <ul  style={{marginLeft: "690px", marginTop: "-15px", color: "white", width: "40px" }}>
                                             
-                                                <Link to={ABOUT_ROUTE} >
-                                                    <li  ><a style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия покупки</a></li>
+                                                <Link to={PURCHASES_ROUTE} >
+                                                    <li   ><a className="Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия покупки</a></li>
                                                 </Link>
                                                 <Link  to={DELIVERY_ROUTE} >
-                                                    <li  ><a style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия доставки</a></li>
+                                                    <li  ><a className="Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия доставки</a></li>
                                                 </Link>
                                                 <Link  to={CONTACT_ROUTE}>
-                                                    <li  ><a style={{cursor: "pointer", fontSize: "16px", color: "#777" }}> Контакты</a></li>
+                                                    <li  ><a className="Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}> Контакты</a></li>
                                                 </Link>
                                             
                                         </ul>

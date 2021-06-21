@@ -9,7 +9,7 @@ import Cart from "./Components/pages/Cart";
 import Checkout from "./Components/pages/Checkout";
 import {CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, ABOUT_ROUTE, NEWS_ROUTE, HOME_ROUTE, 
         PRODUCT_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, ERROR_ROUTE, SINGLE_ROUTE, MYACOUNT_ROUTE,
-        FILTER_ROUTE, SUBCATEGORY_ROUTE,PRODUCTCATEGORY_ROUTE, ORDER_ROUTE} from "./utils/Const";
+        FILTER_ROUTE, SUBCATEGORY_ROUTE,PRODUCTCATEGORY_ROUTE, ORDER_ROUTE, PURCHASES_ROUTE} from "./utils/Const";
 import Wishlist from "./Components/pages/Wishlist";
 import Login from "./Components/pages/Login";
 import Error from "./Components/pages/Error";
@@ -19,6 +19,7 @@ import Filter from "./Components/pages/Filter";
 import ProdCategory from "./Components/pages/ProdCategory";
 import ProductCategory from "./Components/pages/ProductCategory";
 import OrdersTable from "./Components/pages/OrdersTable";
+import Purchases from "./Components/pages/Purchases";
 
 
 
@@ -105,5 +106,9 @@ export const publicRoutes = [
     {
         path: ORDER_ROUTE,
         Component: OrdersTable,
+    },
+    {
+        path: PURCHASES_ROUTE,
+        Component: Purchases,
     },
 ]

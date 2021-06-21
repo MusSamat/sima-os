@@ -61,6 +61,7 @@ const Product = observer((props) => {
                 },
             })
             .then(res => {
+                product.getDataFavorite(id)
                 user.getWishlistData()
                 product.getData(id)
             })
@@ -85,15 +86,15 @@ const Product = observer((props) => {
 
         })
             .then(response => {
+                product.getDataFavorite(id)
                 product.getData(id)
                 setCount(count)
                 user.getWishlistData()
+                product.getData(id)
                 console.log(response)
-                notify()
         })
         .catch(error =>{ 
-            console.log(error)
-            notifyError()  
+            console.log(error) 
     })
     e.preventDefault();
     }
@@ -118,6 +119,7 @@ const Product = observer((props) => {
                 setCount(count)
                 user.getCartData()
                 console.log(response)
+                
                 notify()
         })
         .catch(error =>{ 
@@ -250,12 +252,9 @@ const Product = observer((props) => {
                     <div style={{marginTop: "100px"}} className="container d-flex align-items-center">
                         <ul className="breadcrumb">
                             <li className="breadcrumb-item"><Link to={HOME_ROUTE} style={{marginTop: "-3px", marginRight: "-5px"}}  >ГЛАВНАЯ</Link></li>
-                            <li className="breadcrumb-item">{categoryName.map((i, index) =>
-                                                   <Link to={{pathname:'/productcategory/' + i.id}}> <a style={{ fontWeight:"450"}}>{i.title}</a></Link>
-                                                )}</li>
-                                                {console.log(categoryName)}
-                            <li className="breadcrumb-item active" aria-current="page"> {product.product.title}</li>
-                            <li className="breadcrumb-item active" aria-current="page">Артикул: {product.product.articul}</li>
+                            
+                            <li className="breadcrumb-item " aria-current="page"> {product.product.title}</li>
+                            <li className="breadcrumb-item " aria-current="page">Артикул: {product.product.articul}</li>
                         </ul>
 
                         <nav className="product-pager ml-auto" aria-label="Product">
@@ -379,16 +378,18 @@ const Product = observer((props) => {
                                                  <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product btn-cart" ><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>
 
                                                 <div className="details-action-wrapper">
-                                                {product.product.is_favorite ? 
+                                                    {console.log(product.favorite.is_favorite)}
+                                                {product.favorite.is_favorite ? 
                                                         <FcLike onClick={deleteWish} style={{fontSize: "30px", cursor: "pointer"}}/>
                                                     : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}  className="btn-product btn-wishlist" title="Wishlist"></a>}
                                                 </div>
                                             </div>
                                         </> :
                                         <div className=" justify-content-center text-center">
-                                            <h5>ЗАРЕГИСТРИРУЙТЕСЬ, ЧТОБЫ ПОСМОТРЕТЬ ЦЕНЫ</h5>
+                                            <h5 className="seny">ЗАРЕГИСТРИРУЙТЕСЬ, ЧТОБЫ ПОСМОТРЕТЬ ЦЕНЫ</h5>
                                             <Link to={LOGIN_ROUTE}>
-                                                <Button style={{fontSize: "20px", borderRadius: "30px", marginLeft: "30px", height: "40px", margin: "20px"}} variant="danger">Регистрация</Button>
+                                                <a href="" className="btn btn-primary btn-rounded" >Регистрация</a>
+                                                {/* <Button style={{fontSize: "20px", borderRadius: "30px", marginLeft: "30px", height: "40px", margin: "20px"}} variant="danger">Регистрация</Button> */}
                                             </Link>
                                         </div>
                                         }
@@ -417,15 +418,15 @@ const Product = observer((props) => {
                                                 </ul>
                                                 <div className="tab-content" id="tab-content-5">
                                                     <div className="tab-pane fade show active" id="tab-17" role="tabpanel" aria-labelledby="tab-17-tab">
-                                                        <p><strong>Размер: </strong> {product.product.size[0]}-{product.product.size[product.product.size.length -1]} </p>
-                                                        <p ><strong>Ткань:</strong> {product.product.cloth}</p>
-                                                        <p className="p"><strong>Описание:</strong> {product.product.description}</p>
+                                                        <p className="description"><strong>Размер: </strong> {product.product.size[0]}-{product.product.size[product.product.size.length -1]} </p>
+                                                        <p  className="description"><strong>Ткань:</strong> {product.product.cloth}</p>
+                                                        <p className="description"><strong>Описание:</strong> {product.product.description}</p>
                                                     </div>
                                                     <div className="tab-pane fade" id="tab-18" role="tabpanel" aria-labelledby="tab-18-tab">
                                                         <p>Nobis perspiciatis natus cum, sint dolore earum rerum tempora aspernatur numquam velit tempore omnis, delectus repellat facere voluptatibus nemo non fugiat consequatur repellendus! Enim, commodi, veniam ipsa voluptates quis amet.</p>
                                                     </div>
                                                     <div className="tab-pane fade" id="tab-19" role="tabpanel" aria-labelledby="tab-19-tab">
-                                                        <strong>БУДЬТЕ ПЕРВЫМ, КТО ОСТАВИЛ ОТЗЫВ НА "{product.product.title}"</strong>
+                                                        <h5>БУДЬТЕ ПЕРВЫМ, КТО ОСТАВИЛ ОТЗЫВ НА "{product.product.title}"</h5>
                                                         <div class="reviews">
                                                             {product.reviews.map((r, index) =>
                                                             <div style={{marginTop: "10px"}} key={index} class="review">

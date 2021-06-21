@@ -109,7 +109,7 @@ const Wishlist = observer(()=> {
                                                 </figure>
                                             </Link>
                                             <h3 className="product-title">
-                                                <a href="#">{l.product.title}</a>
+                                                <a href="#">{l.product.title}</a> 
                                             </h3>
                                         </div>
                                     </td>
