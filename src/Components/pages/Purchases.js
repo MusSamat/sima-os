@@ -69,7 +69,7 @@ export default function Purchases() {
                             <p style={{fontSize: "18px", textAlign: "justify",textIndent: "30px"}}>Товар полностью сертифицирован, имеются Декларации соответствия ТС.</p>
                             <p style={{fontSize: "18px", textAlign: "justify",textIndent: "30px"}}>Мы напрямую заинтересованы в процветании Вашего бизнеса и долгосрочном успешном сотрудничестве!</p>
                     
-                    <div className="container-z" >
+                    {/* <div className="container-z" >
                             <h3 className="cont">Закажите обратный звонок</h3>
                             <h4 className="cont-h4">С Вами свяжется наш менеджер и подробно проконсультирует</h4>
                             <div className="row" style={{display: "flex", justifyContent: "center"}} >
@@ -94,7 +94,7 @@ export default function Purchases() {
                             <div onClick={sendName} class="btn-wrap">
 		                		<a style={{fontSize: "18px"}} href="" class="btn btn-primary btn-round">Отправить</a>
 		                	</div>
-                        </div>
+                        </div> */}
                         </div>
                    
                 </div>

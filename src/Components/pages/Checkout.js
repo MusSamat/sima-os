@@ -19,6 +19,8 @@ const Checkout = observer(() => {
 	const notify = () => toast.success("Спасибо. Ваш заказ был принят.");
 	const notifyError = () => toast.error("Wow so easy!");
 
+	console.log(user.carts)
+
 	const sendOrder = (e) => {
         const data = JSON.stringify({
              user: user.carts.user,
@@ -44,7 +46,6 @@ const Checkout = observer(() => {
 				setNote('')
 				notify()
 				user.getCartData()
-				console.log(user.getCartData())
 				history.push(ORDER_ROUTE)
         })
         .catch(error =>{ 
