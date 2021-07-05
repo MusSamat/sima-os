@@ -13,8 +13,6 @@ export const LOGIN_ROUTE = '/login'
 export const ERROR_ROUTE = '/error'
 export const SINGLE_ROUTE = '/single/:id'
 export const MYACOUNT_ROUTE = '/my-acount'
-export const FILTER_ROUTE = '/filter'
-export const PRODUCTCATEGORY_ROUTE = '/productcategory/:id'
 export const SUBCATEGORY_ROUTE = '/subcategory'
 export const PURCHASES_ROUTE = '/purchases'
 

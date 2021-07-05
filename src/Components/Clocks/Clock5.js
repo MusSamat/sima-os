@@ -1,11 +1,11 @@
 import React from "react";
 import "./Clock.css";
 import clock from "../../assets/clock.png"
-import clock1 from "../../assets/clock1.png"
+import clock2 from "../../assets/newClock.png"
 
-class ClockMin extends React.Component {
+class Clock5 extends React.Component {
     state = {
-      time: new Date(),
+      time: new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Novosibirsk"})),
       secondHandRotations: 0
     }
     
@@ -14,8 +14,8 @@ class ClockMin extends React.Component {
       this.interval = setInterval(
         () => this.setState(prevState => (
           {
-            time: new Date(),
-            // secondHandRotations: new Date().getSeconds() ? prevState.secondHandRotations : prevState.secondHandRotations + 1
+            time: new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Novosibirsk"})),
+            secondHandRotations: new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Novosibirsk"})).getSeconds() ? prevState.secondHandRotations : prevState.secondHandRotations + 1
           }
         )),
         100
@@ -24,6 +24,7 @@ class ClockMin extends React.Component {
     
     render(){
       const { time, secondHandRotations } = this.state;
+      const currentDateString = time.toLocaleString("en-US", {timeZone: "Asia/Novosibirsk"});
       const secondsRotation = time.getSeconds() * 6;
       const minuteRotation = time.getMinutes() * 6;
       const currentHour = time.getHours() > 12 ? time.getHours() - 12 : time.getHours()
@@ -32,7 +33,7 @@ class ClockMin extends React.Component {
       return(
         <React.Fragment>
           <div className="clock-face">
-            <img src={clock}/>
+          <img  src={clock}/>
             <div 
               style={{
                 transform: `translate(0, -50%) rotate(${hourRotation}deg)`,
@@ -51,6 +52,7 @@ class ClockMin extends React.Component {
               style={{transform: `translate(0, -50%) rotate(${secondsRotation}deg)`}}
               className="hand second-hand"
             />
+            
           </div>
         </React.Fragment>
       );
@@ -61,6 +63,6 @@ class ClockMin extends React.Component {
     }
   }
 
-  export default ClockMin;
+  export default Clock5;
   
   

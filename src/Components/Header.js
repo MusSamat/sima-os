@@ -6,9 +6,10 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import { FaUserAlt } from "react-icons/fa";
 import { AiOutlineDown } from "react-icons/ai";
-import logo from "../assets/sima_logo.png"
+import logo from "../assets/logo.png"
 import what from "../assets/WhatsApp.png"
 import { BsChevronDown } from "react-icons/bs";
+import mobile_menu from "../Http/mobile_menu";
 
 
 
@@ -23,12 +24,31 @@ const Header = observer(() => {
     
 
     useEffect(() => {
-        user.getUserData()
-        user.getCartData()
+        mobile_menu()
+        user?.getUserData()
+        user?.getCartData()
         // user.getWishlistData()
         product.subcategoryFilter()
-        product.getSubcategory()
-        product.getCategory()
+        product.getSubcategory().then(() => {
+            const scripts = [
+                '/assets/js/jquery.elevateZoom.min.js',
+                '/assets/js/bootstrap-input-spinner.js',
+                '/assets/js/jquery.magnific-popup.min.js',
+                '/assets/js/main.js',
+                '/assets/js/bootstrap-input-spinner.js',
+                '/assets/js/owl.carousel.min.js',
+                '/assets/js/superfish.min.js',
+                '/assets/js/jquery.waypoints.min.js',
+                '/assets/js/jquery.hoverIntent.min.js',
+                '/assets/js/bootstrap.bundle.min.js',
+                '/assets/js/jquery.min.js',
+            ]
+            scripts.forEach(i => {
+                const s = document.createElement('script')
+                s.src = i
+                document.body.appendChild(s)
+            })
+        })
     }, [])
     
   return (
@@ -37,42 +57,6 @@ const Header = observer(() => {
 
 
              <header className="header" style={{position: "fixed", marginTop: "0px", marginLeft: "0px", zIndex: "999"}}>
-             <div className="header-top">
-                 <div className="container eki">
-                    <div className="header-left">
-                        <div className="header-dropdown">
-                            <div className="header lefft">
-                                <a>Bishkek</a>
-                                
-                            </div>
-                        </div><br/>
-                        <div style={{marginRight: "7px", marginTop: "-5px", fontSize: "16px"}} className="header">
-                            <i class="icon-phone"></i>
-                        </div>
-                        <div style={{marginRight: "10px"}} className="header">
-                            <a >+996709999915</a>
-                        </div>
-                        <div  className="header">
-                            <a >+996999998815</a>
-                        </div>
-                    </div>
-
-                    <div className="header-right">
-                        <ul className="top-menu">
-                            <li>
-                                <ul>
-                                    <li>
-                                    <a  data-toggle="modal"><i class="icon-user"></i></a>
-                                        {user.isAuth ? <NavLink className="voiti"  to={MYACOUNT_ROUTE}>МОЙ АККАУНТ</NavLink>
-                                        : <NavLink className="voiti" to={LOGIN_ROUTE}>ВОЙТИ</NavLink>}</li>
-                                    
-                                    <li className="gmail" >simacompany@bk.ru</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
 
 
                 <div className="header-bottom sticky-header">
@@ -81,71 +65,68 @@ const Header = observer(() => {
                         <button className="mobile-menu-toggler">
                             <i className="icon-bars"></i>
                         </button>
-                        <NavLink className="logo" to={HOME_ROUTE}>
+                        <NavLink exact className="logo" to={HOME_ROUTE}>
                             <img style={{width: "100px", height: "40px"}} src={logo}/> 
                             
                         </NavLink>
                         
                     </div>
-                    <div className="header-center">
-                        <nav className="main-nav">
-                            <ul className="menu sf-arrows ">
+                    <div className="header-center ">
+                        <nav className="main-nav ">
+                            <ul className="menu sf-arrows  ">
                                 <li className="megamenu-container ">
-                                    <NavLink  className="sf-with" style={{fontSize: "16px"}} to={HOME_ROUTE}> <a class="sf-with-ul">ГЛАВНАЯ</a></NavLink>
+                                    <NavLink exact className="sf-with"  style={{fontSize: "16px"}} to={HOME_ROUTE}> <a class="sf-with-ul">ГЛАВНАЯ</a></NavLink>
                                 </li>
                                 <li className="megamenu-container ">
                                     <NavLink className="sf-with" style={{fontSize: "16px"}} to={SUBCATEGORY_ROUTE}><a class="sf-with-ul">КАТАЛОГ </a></NavLink>                                  
                                     
                                 </li>
-                                <li className="megamenu-container ">
-                                    <NavLink  className="sf-with" to={NEWS_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">НОВОСТИ</a></NavLink>
+                                <li className="megamenu-container">
+                                    <NavLink exact className="sf-with" to={NEWS_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">НОВОСТИ</a></NavLink>
 
                                 </li >
                                 <li className="megamenu-container ">
-                                    <NavLink  className="sf-with" to={ABOUT_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">О Компании</a></NavLink>
+                                    <NavLink exact className="sf-with" to={ABOUT_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">О  нас</a></NavLink>
                                 </li >
                                 <li className="megamenu-container ">
+                                    <NavLink exact className="sf-with" to={CONTACT_ROUTE}><a style={{fontSize: "16px"}} class="sf-with-ul">Контакты</a></NavLink>
+                                </li >
+                                {/* <li className="megamenu-container ">
                                     <a style={{fontSize: "16px"}} class="sf-with-ul">СОТРУДНИЧЕСТВО</a>
-                                        <ul  style={{marginLeft: "690px", marginTop: "-15px", color: "white", width: "40px" }}>
+                                        <ul className="menu sf-arrows "  style={{marginLeft: "690px", marginTop: "-15px", color: "white", width: "40px" }}>
                                             
                                                 <Link to={PURCHASES_ROUTE} >
-                                                    <li   ><a className="Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия покупки</a></li>
+                                                    <li className="megamenu-container " ><a className="sf-with Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия покупки</a></li>
                                                 </Link>
                                                 <Link  to={DELIVERY_ROUTE} >
-                                                    <li  ><a className="Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия доставки</a></li>
+                                                    <li className="megamenu-container " ><a className="sf-with  Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия доставки</a></li>
                                                 </Link>
                                                 <Link  to={CONTACT_ROUTE}>
-                                                    <li  ><a className="Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}> Контакты</a></li>
+                                                    <li className="megamenu-container " ><a className="sf-with  Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}> Контакты</a></li>
                                                 </Link>
                                             
                                         </ul>
 
-                                </li>
+                                </li> */}
                             </ul>
                         </nav>
                     </div>
 
                     <div className="header-right">
-                        {/* <div className="header-search">
-                            <a  className="search-toggle" role="button"><i className="icon-search"></i></a>
-                            <form action="#" method="get">
-                                <div className="header-search-wrapper">
-                                    <label for="q" className="sr-only">Search</label>
-                                    <input type="search" className="form-control" name="q" id="q" placeholder="Search in..." required/>
-                                </div>
-                            </form>
-                        </div> */}
+                        {user.isAuth ? <NavLink   to={MYACOUNT_ROUTE}><a style={{fontSize: "30px", color: "#666666"}} data-toggle="modal"><i sty class="icon-user"></i></a></NavLink>
+                            : <NavLink  to={LOGIN_ROUTE}><a style={{fontSize: "30px", color: "#666666"}} data-toggle="modal"><i class="icon-user"></i></a></NavLink>}
+                        
                         <NavLink className="wishlist-link" to={WISHLIST_ROUTE}>
                             <i className="icon-heart-o"></i>
-                            <span className="wishlist-count">{user.list.length}</span>
+                            <span className="wishlist-count">{user.list?.length || '0'}</span>
                         </NavLink>
 
                         <div className="dropdown cart-dropdown">
                             <NavLink to={CART_ROUTE}><a  className="dropdown-toggle" >
                                 <i className="icon-shopping-cart"></i>
-                                <span className="cart-count">{user.items.length}</span>
+                                <span className="cart-count">{user.items?.length || '0'}</span>
                                 {
-                                    user.items.map((item, index) => {
+                                    user.items?.map((item, index) => {
                                         sum = sum + item.product?.price * item.quantity
                                        })
                                 }
@@ -155,7 +136,7 @@ const Header = observer(() => {
 
                             <div  className="dropdown-menu dropdown-menu-right">
                                 <div style={{overflowY: "auto", height: "230px"}} >
-                               {user.items.map((c, index)=>
+                               {user.items?.map((c, index)=>
                                 <div key={index}   className="dropdown-cart-products">
                                     <div className="product">
                                         <div className="product-cart-details">
@@ -174,7 +155,7 @@ const Header = observer(() => {
                                                 <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0].images[0]}`} alt="product"/>
                                             </a>
                                         </figure>
-                                        <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close"></i></a>
+                                        <a href="" className="btn-remove" title="Remove Product"></a>
                                     </div>
                                 </div>)}
                                 </div>

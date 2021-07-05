@@ -16,7 +16,7 @@ export default function Mobile() {
                         <ul className="mobile-menu ">
                             <li className="active ">
                                 <NavLink className="sf-with-ul"  to={HOME_ROUTE}> 
-                                ГЛАВНАЯ
+                                    ГЛАВНАЯ
                                 </NavLink>
                             </li>
                             <li >
@@ -25,13 +25,13 @@ export default function Mobile() {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink  to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
+                                <NavLink className="sf-with-ul"  to={DELIVERY_ROUTE}>ДОСТАВКА</NavLink>
                             </li>
                             <li>
-                                <NavLink  to={CONTACT_ROUTE}>КОНТАКТЫ</NavLink>
+                                <NavLink className="sf-with-ul"  to={CONTACT_ROUTE}>КОНТАКТЫ</NavLink>
                             </li>
                             <li>
-                                <NavLink  to={NEWS_ROUTE}>НОВОСТИ</NavLink>
+                                <NavLink className="sf-with-ul"  to={NEWS_ROUTE}>НОВОСТИ</NavLink>
                             </li>
                             <li>
                                 <NavLink to={ABOUT_ROUTE}>СОТРУДНИЧЕСТВО</NavLink>
@@ -67,17 +67,14 @@ export default function Mobile() {
                         
                     </li>
                     <li>
-                        <a href="" >ДОСТАВКА</a>
+                        <a href={NEWS_ROUTE}>НОВОСТИ</a>
+                    </li>
+                    <li>
+                        <a href={ABOUT_ROUTE}>О  нас</a>
+                    </li>
+                    <li>
+                        <a href={CONTACT_ROUTE} >КОНТАКТЫ</a>
                         
-                    </li>
-                    <li>
-                        <a href="">НОВОСТИ</a>
-                    </li>
-                    <li>
-                        <a href="">СОДРУЖЕСТВО</a>
-                    </li>
-                    <li>
-                        <a href="">Elements</a>
                     </li>
                 </ul>
             </nav>

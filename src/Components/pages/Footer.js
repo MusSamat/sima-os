@@ -1,10 +1,71 @@
-import React from 'react'
+import React, {useState, useEffect, useContext} from 'react';
+import axios from "axios"
 import { FaOdnoklassnikiSquare } from "react-icons/fa";
+import "../../App.css";
 
 
 export default function Footer() {
+
+    const [name, setName] = useState()
+    const [number, setNumber] = useState()
+
+    const sendName = (event) => {
+        
+        const data = {
+            name: name,
+            phone: number
+            
+            
+        }
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/backcall`, data)
+            .then(response => {
+                setName('')
+                setNumber('')
+                
+        })
+        .catch(error =>{ 
+            console.log(error) 
+            
+    })
+    event.preventDefault();
+    
+    }
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [])
     return (
         <div>
+
+            <div className="mb-10" style={{textAlign: "center", padding: "30px", marginTop: " 20px",backgroundColor: "#F6F6F6", boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)"}}>
+                        <div className="container-z" >
+                            <h2 className="mb-3" style={{color: "#EEA287"}}>Закажите обратный звонок</h2>
+                            <div className="row d-flex justify-content-center"  >
+                                <div className="col-sm-4">
+                                    <input 
+                                        className="input-z" 
+                                        placeholder="Ваше имя"
+                                        value={name}
+                                        onChange={e => setName(e.target.value)} 
+                                        type="text"/>
+                                </div>
+                                <div className="col-sm-4">
+                                    <input 
+                                        className="input-z" 
+                                        placeholder="Номер телефона"
+                                        value={number}
+                                        onChange={e => setNumber(e.target.value)} 
+                                        type="tel"/>
+                                </div>
+                                
+                            </div>
+                            <div onClick={sendName} class="btn-wrap">
+		                		<a style={{fontSize: "18px"}} href="" class="btn btn-primary btn-round">Отправить</a>
+		                	</div>
+                        </div>
+                        
+                    </div> 
+
+
             <footer className="footer footer-2">
                 <div className="footer-middle">
                     <div className="container">

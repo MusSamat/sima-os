@@ -1,19 +1,25 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite';
+import React, {useContext, useEffect} from 'react';
+import { Link } from 'react-router-dom';
+import "../../App.css";
+import { Context } from '../../index';
 
-export default function About() {
+const About = observer(( ) => {
+    const {user} = useContext(Context)
+    const {product} = useContext(Context)
+    useEffect(() => {
+        window.scrollTo(0,0)
+        product.getSertivicat()
+        product.getGallery()
+    }, [])
     return (
-        <div class="page-wrapper">
-            <main class="main">
-                
-                <div class="page-content pb-0">
-
-                   
-                    <div class=" pt-6 pb-5 mb-6 mb-lg-8">
-                        <div class="container">
-                            
-                                <h4>ДОБРО ПОЖАЛОВАТЬ</h4>
-                                <hr className="mt-4 mb-5" />
-                                <p style={{fontSize: "18px", textAlign: "justify"}}>Швейная компания «SIMA» — одна из ведущих производителей женской одежды на рынке Кыргызстана, 
+        <div className="page-wrapper">
+            <main className="main">
+                <div className="page-content ">
+                    <div className="pb-5 mb-1 mb-lg-8">
+                        <div className="container">
+                                <div  style={{display: "flex", justifyContent: "center", marginBottom: "20px" }}><h2 style={{color: "#EEA287", textAlign: "center"}}>ДОБРО ПОЖАЛОВАТЬ</h2></div>
+                                <p style={{ textAlign: "justify",textIndent: "30px", fontSize: "16px"}}>Швейная компания «SIMA» — одна из ведущих производителей женской одежды на рынке Кыргызстана, 
                                 
                                     России, Казахстана, Беларуси и на международном рынке.
                                     Компания начала свой путь развития с 1998 года.
@@ -33,158 +39,54 @@ export default function About() {
                                 
                                 Молодежная линия - от 42 до 56 размеров, женская линия - от 48 до 62 размеров</p>
                             
+                                <p style={{ fontSize: "16px", }}>Цены вас приятно удивят, а закупаемая у нас продукция, порадует вас успешными продажами!
+                            </p>
+                        <p style={{ fontSize: "16px"}}>Желаем Вам удачных покупок!</p>
+                        </div>
+                    </div>
+
+                    <div className="container">
+                        
                             
+                        <hr className=" mb-1"/>
+                        <h2 className="d-flex justify-content-center" style={{color: "#EEA287"}}>Сертификат</h2>
+                        <div className="products mt-4">
+                        <div className="row justify-content-center">
+                            
+                            {console.log(product.sertificate)}
+                            {product.sertificate?.map((discout, index)=>
+                            <div key={index} className="col-6 col-md-4 col-lg-2">
+                                <div className="product product-7 text-center  ">
+                                        <figure className="product-media ">
+                                            <a href="">
+                                                <img src={`${discout.image}`} alt="Product image" className="product-image"/>
+                                            </a>
+                                        </figure>
+                                </div>
+                            </div>)}
                         </div>
-                    </div>
-
-                    <div class="container">
-                        
-                            <h4>Предлагаем</h4>
-                            <ul style={{marginLeft: "50px"}}>
-                                <li style={{fontSize: "18px", listStyle: "outside"}}>высокий уровень качества;</li>
-                                <li style={{fontSize: "18px", listStyle: "outside"}}>собственную линию одежды;</li>
-                                <li style={{fontSize: "18px", listStyle: "outside"}}>отправку в любое место на территории России, стран СНГ;</li>
-                            </ul>
-                            <h4>Широкий выбор</h4>
-                            <ul style={{marginLeft: "50px"}}>
-                                <li style={{fontSize: "18px", listStyle: "outside"}}>цветовой гаммы;</li>
-                                <li style={{fontSize: "18px", listStyle: "outside"}}>ассортимента</li>
-                                <li style={{fontSize: "18px", listStyle: "outside"}}>широкая размерная сетка с 42 по 62 размер.</li>
-                            </ul>
-
-                            <div style={{display: "flex", justifyContent: "center", margin: "30px"}}>
-                                <h3 >Почему выбирают нас</h3>
-                                
-                            </div>
-                            <ul>
-                                    <li style={{fontSize: "18px", listStyle: "outside", marginBottom: "10px", textAlign: "justify"}} >Selya использует самые модные и качественные ткани, так как является импортером текстиля из крупнейших фабрик- производителей Кореи, Турции и Китая. Это преимущество позволяет нам  узнавать новые тренды, модные цвета и стиль будущих коллекций, раньше конкурентов и успешным образом отражается на продажах наших клиентов</li>
-                                    <li style={{fontSize: "18px", listStyle: "outside", textAlign: "justify"}}>Самые низкие цены на высококачественную продукцию. У Вас есть возможность купить женские платья оптом из Киргизии по минимальным ценам, без наценок посредников, в удобном для Вашего бизнеса количестве. Качество изделий отличается безупречной посадкой, тщательной проработкой деталей, оптимально подобранной фурнитурой.</li>
-                                </ul>
-                        
-                            <p style={{ fontSize: "20px"}}>Цены вас приятно удивят, а закупаемая у нас продукция, порадует вас успешными продажами!
-</p>
-                        <p style={{ fontSize: "20px"}}>Желаем Вам удачных покупок!</p>
-                        <hr class="mt-4 mb-6"/>
-
-                        {/* <h2 class="title text-center mb-4">Meet Our Team</h2>
-
-                        
-                        
-                        
-                        
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="member member-anim text-center">
-                                    <figure class="member-media">
-                                        <img src="assets/images/team/member-1.jpg" alt="member photo"/>
-
-                                        <figcaption class="member-overlay">
-                                            <div class="member-overlay-content">
-                                                <h3 class="member-title">Samanta Grey<span>Founder & CEO</span></h3>
-                                                <p>Sed pretium, ligula sollicitudin viverra, tortor libero sodales leo, eget blandit nunc.</p> 
-                                                <div class="social-icons social-icons-simple">
-                                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                                </div>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                    <div class="member-content">
-                                        <h3 class="member-title">Samanta Grey<span>Founder & CEO</span></h3>
-                                    </div>
+                     </div>
+                     <hr className=" mb-6"/>
+                     <h2 className="d-flex justify-content-center" style={{color: "#EEA287"}}>Галерея</h2>
+                     <div className="products mt-4">
+                        <div className="row justify-content-center">
+                            {product.gallery?.map((discout, index)=>
+                            <div key={index} className="col-6 col-md-4 col-lg-3">
+                                <div className="product product-7 text-center  ">
+                                        <figure className="product-media ">
+                                            <a href="">
+                                                <img src={`${discout.image}`} alt="Product image" className="product-image"/>
+                                            </a>
+                                        </figure>
                                 </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="member member-anim text-center">
-                                    <figure class="member-media">
-                                        <img src="assets/images/team/member-2.jpg" alt="member photo"/>
-
-                                        <figcaption class="member-overlay">
-                                            <div class="member-overlay-content">
-                                                <h3 class="member-title">Bruce Sutton<span>Sales & Marketing Manager</span></h3>
-                                                <p>Sed pretium, ligula sollicitudin viverra, tortor libero sodales leo, eget blandit nunc.</p> 
-                                                <div class="social-icons social-icons-simple">
-                                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                                </div>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                    <div class="member-content">
-                                        <h3 class="member-title">Bruce Sutton<span>Sales & Marketing Manager</span></h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="member member-anim text-center">
-                                    <figure class="member-media">
-                                        <img src="assets/images/team/member-3.jpg" alt="member photo"/>
-
-                                        <figcaption class="member-overlay">
-                                            <div class="member-overlay-content">
-                                                <h3 class="member-title">Janet Joy<span>Product Manager</span></h3>
-                                                <p>Sed pretium, ligula sollicitudin viverra, tortor libero sodales leo, eget blandit nunc.</p> 
-                                                <div class="social-icons social-icons-simple">
-                                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                                </div>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                    <div class="member-content">
-                                        <h3 class="member-title">Janet Joy<span>Product Manager</span></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-                    </div>
-
-                    {/* <div class="mb-2"></div>
-
-                    <div class="about-testimonials bg-light-2 pt-6 pb-6">
-                        <div class="container">
-                            <h2 class="title text-center mb-3">What Customer Say About Us</h2>
-
-                            <div class="owl-carousel owl-simple owl-testimonials-photo" data-toggle="owl" 
-                                data-owl-options='{
-                                    "nav": false, 
-                                    "dots": true,
-                                    "margin": 20,
-                                    "loop": false,
-                                    "responsive": {
-                                        "1200": {
-                                            "nav": true
-                                        }
-                                    }
-                                }'>
-                                <blockquote class="testimonial text-center">
-                                    <img src="assets/images/testimonials/user-1.jpg" alt="user"/>
-                                    <p>“ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque aliquet nibh nec urna. <br/>In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. ”</p>
-                                    <cite>
-                                        Jenson Gregory
-                                        <span>Customer</span>
-                                    </cite>
-                                </blockquote>
-
-                                <blockquote class="testimonial text-center">
-                                    <img src="assets/images/testimonials/user-2.jpg" alt="user"/>
-                                    <p>“ Impedit, ratione sequi, sunt incidunt magnam et. Delectus obcaecati optio eius error libero perferendis nesciunt atque dolores magni recusandae! Doloremque quidem error eum quis similique doloribus natus qui ut ipsum.Velit quos ipsa exercitationem, vel unde obcaecati impedit eveniet non. ”</p>
-
-                                    <cite>
-                                        Victoria Ventura
-                                        <span>Customer</span>
-                                    </cite>
-                                </blockquote>
-                            </div>
+                            </div>)}
                         </div>
-                    </div> */}
+                     </div> 
+                    </div>
                 </div>
             </main>
         </div>
     )
-}
+})
+
+export default  About

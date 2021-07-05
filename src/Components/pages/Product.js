@@ -12,15 +12,65 @@ import { BiGitRepoForked } from "react-icons/bi";
 import razmer from "../../assets/razmer.png"
 import {Modal, Button} from "react-bootstrap";
 import {PRODUCTCATEGORY_ROUTE} from "../../utils/Const"
-
+import mobile_menu from '../../Http/mobile_menu';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import Carousel from 'react-elastic-carousel';
+import Carousel from "react-multi-carousel";
+import { Image } from "semantic-ui-react";
+import styled from "styled-components";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
+const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      paritialVisibilityGutter: 60
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      paritialVisibilityGutter: 50
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      paritialVisibilityGutter: 30
+    }
+  };
+  const images = [
+    "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1550330039-a54e15ed9d33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  ];
 
 const colors ={
     orange: "#FFBA5A",
     grey: "#a9a9a9"
 }
+
+// Index.getInitialProps = ({ req }) => {
+//     let userAgent;
+//     if (req) {
+//       userAgent = req.headers["user-agent"];
+//     } else {
+//       userAgent = navigator.userAgent;
+//     }
+//     const parser = new UAParser();
+//     parser.setUA(userAgent);
+//     const result = parser.getResult();
+//     const deviceType = (result.device && result.device.type) || "desktop";
+//     return { deviceType };
+//   };
 
 const Product = observer((props) => {
     const {product} = useContext(Context)
@@ -30,14 +80,20 @@ const Product = observer((props) => {
     const [hover, setHover] = useState(false);
     const [show, setShow] = useState(false);
     const [showRaz, setShowRaz] = useState(false);
+    const [carusel, setCarusel] = useState([
+        {id: 1, title: 'item #1'},
+        {id: 2, title: 'item #2'},
+        {id: 3, title: 'item #3'},
+        {id: 4, title: 'item #4'},
+        {id: 5, title: 'item #5'}])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const handleCloseRaz = () => setShowRaz(false);
     const handleShowRaz = () => setShowRaz(true);
+
     
-    console.log(props)
     
     
     function updateValue(e) {
@@ -70,7 +126,7 @@ const Product = observer((props) => {
             }) 
         }
 
-
+        
 
     const addWishlist = (e) => {
         const id = props.match.params.id
@@ -91,7 +147,6 @@ const Product = observer((props) => {
                 setCount(count)
                 user.getWishlistData()
                 product.getData(id)
-                console.log(response)
         })
         .catch(error =>{ 
             console.log(error) 
@@ -118,7 +173,6 @@ const Product = observer((props) => {
             .then(response => {
                 setCount(count)
                 user.getCartData()
-                console.log(response)
                 
                 notify()
         })
@@ -136,7 +190,7 @@ const Product = observer((props) => {
     const [leftImages, setLeftImages] = useState([])
     const [selectedImage, setSelectedImage] = useState('')
     const [imgTitle, setImgTitle] = useState('') 
-    let categoryName = product.category.filter(i => i.id === product.product.category )
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const handleClick = (value) => {
         setCurrValue(value)
@@ -180,21 +234,39 @@ const Product = observer((props) => {
             notifyError() 
     })
     event.preventDefault();
-    console.log(event)
     }
 
     function handleRemove(id) {
         const newList = leftImages.filter((item) => item.id !== id);
      
         setLeftImages(newList);
-        console.log(newList)
       }
+
+
+      const handleClickCaruosel = (direction) => {
+        setActiveIndex((prevIndex) => {
+          if (direction === "next") {
+            if (prevIndex + 1 > leftImages.length - 1) {
+              return 0;
+            }
+            return prevIndex + 1;
+          }
     
+          if (prevIndex - 1 < 0) {
+            return leftImages.length - 1;
+          }
+    
+          return prevIndex - 1;
+        });
+      };
     
     useEffect(() => {
+        window.scrollTo(0,0)
+        mobile_menu()
         const log = document.getElementById('qty');
          log?.addEventListener('change', updateValue);
-         
+         user.getWishlistData()
+         product.getDataFavorite(id)
          user.getReviews(id)
         user.getUserData()
         product.getData(id).then(() => {
@@ -249,9 +321,9 @@ const Product = observer((props) => {
             
             <main className="main">
                 <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
-                    <div style={{marginTop: "100px"}} className="container d-flex align-items-center">
+                    <div style={{marginTop: "20px"}} className="container d-flex align-items-center">
                         <ul className="breadcrumb">
-                            <li className="breadcrumb-item"><Link to={HOME_ROUTE} style={{marginTop: "-3px", marginRight: "-5px"}}  >ГЛАВНАЯ</Link></li>
+                            <li className="breadcrumb-item"><Link to={HOME_ROUTE} className="item" style={{marginTop: "-3px", marginRight: "-5px"}}  >ГЛАВНАЯ</Link></li>
                             
                             <li className="breadcrumb-item " aria-current="page"> {product.product.title}</li>
                             <li className="breadcrumb-item " aria-current="page">Артикул: {product.product.articul}</li>
@@ -263,7 +335,7 @@ const Product = observer((props) => {
                         <Modal show={show} onHide={handleClose} centered={true} animation={true}>
                             <Modal.Header closeButton>
                             </Modal.Header>
-                            <Modal.Body style={{textAlign: "center", fontSize: "30px", display: "flex"}}><Link to="https://ok.ru/profile/584170543033"></Link>
+                            <Modal.Body centered={true} style={{textAlign: "center", fontSize: "30px", display: "flex"}}><Link to="https://ok.ru/profile/584170543033"></Link>
                                 
                                 <a style={{fontSize: "25px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
                                 <a style={{fontSize: "25px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
@@ -296,16 +368,15 @@ const Product = observer((props) => {
                                                 </a>
                                             </figure>
 
-                                            <div id="product-zoom-gallery" className="product-image-gallery">
-
-                                            
+                                            <div id="product-zoom-gallery" className="product-image-gallery">                                                
                                                 {leftImages.map((img, index) =>
                                                         <a onClick={() =>  {
-                                                            setSelectedImage(img)}} className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
+                                                            setSelectedImage(img)}} className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} 
+                                                            data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
                                                             <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
                                                         </a>
                                                     )}
-                                                    
+                                                   
                                             </div>
                                         </div>
                                     </div>
@@ -316,7 +387,6 @@ const Product = observer((props) => {
                                         
                                         
                                         <h1 className="product-title">{product.product.title}</h1>
-                                                    {console.log(product.category.filter(i => i.id === product.product.category ))}
                                         {/* <div className="ratings-container justify-content-between">
                                             
                                             <div style={{ fontWeight:"400"}} className="product-cat">
@@ -334,25 +404,64 @@ const Product = observer((props) => {
                                         </div>
                                         <label style={{color: "#9393a5", fontSize: "14px", fontWeight: "400", lineHeight: "20px", letterSpacing: "-.15px"}}>Цвет: <span style={{color: "#000"}}>{imgTitle}</span></label>
                                         <div className="details-filter-row details-row-size">
-                                            
-
-                                            <div className="product-nav product-nav-thumbs">
+                                        
+                                        
+                                        <div class="product-gallery-carousel owl-carousel owl-full owl-nav-dark">
                                             {product.imagesUser.map((img, index) =>
-                                                <a style={{height: "6rem", border: "none", marginRight: "7px", cursor: "pointer"}} 
-                                                    onClick={() => {
-                                                        
-                                                    const d = [...img.images]
-                                                        setLeftImages(d)
-                                                        setSelectedImage(d[0])
-                                                        setImgTitle([...img.title])
-                                                    }} className="active">
-                                                        <img key={index} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product desc"/>
-                                                  
-                                                    
+                                            <figure className="product-gallery-image">
+                                                <a onClick={() => {
+                                                            
+                                                            const d = [...img.images]
+                                                                setLeftImages(d)
+                                                                setSelectedImage(d[0])
+                                                                setImgTitle([...img.title])
+                                                            }} className="active">
+                                                    <img style={{width: "100px", height: "100px", marginLeft: "0px"}} key={index} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`}  alt="product desc"/>
                                                 </a>
-                                                  )}
+                                            </figure>
+                                            )}
+
+                                            
+                                        </div>
+                                        
+                                   
+                                        {/* <Carousel
+                                            ssr
+                                            partialVisbile
+                                            // deviceType={deviceType}
+                                            itemClass="image-item"
+                                            responsive={responsive}
+                                            >
+                                            {images.slice(0, 5).map(image => { 
+                                                return (
+                                                <Image
+                                                    draggable={false}
+                                                    style={{ width: "100%", height: "100%" }}
+                                                    src={image}
+                                                />
+                                                );
+                                            })}
+                                            </Carousel> */}
+                                        
+
+                                            {/* <div className="product-nav product-nav-thumbs"> */}
+                                            
+                                                {/* {product.imagesUser.map((img, index) =>
+                                                    <a key={index}  style={{height: "6rem", border: "none", marginRight: "7px", cursor: "pointer"}} 
+                                                        onClick={() => {
+                                                            
+                                                        const d = [...img.images]
+                                                            setLeftImages(d)
+                                                            setSelectedImage(d[0])
+                                                            setImgTitle([...img.title])
+                                                        }} className="active">
+                                                            <img src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product desc"/>
+                                                    
+                                                        
+                                                    </a>
+                                                    )} */}
                                                 
-                                            </div>
+                                            {/* </div> */}
                                         </div>
 
                                         <div className="details-filter-row details-row-size">
@@ -378,7 +487,6 @@ const Product = observer((props) => {
                                                  <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product btn-cart" ><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>
 
                                                 <div className="details-action-wrapper">
-                                                    {console.log(product.favorite.is_favorite)}
                                                 {product.favorite.is_favorite ? 
                                                         <FcLike onClick={deleteWish} style={{fontSize: "30px", cursor: "pointer"}}/>
                                                     : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}  className="btn-product btn-wishlist" title="Wishlist"></a>}
@@ -423,7 +531,7 @@ const Product = observer((props) => {
                                                         <p className="description"><strong>Описание:</strong> {product.product.description}</p>
                                                     </div>
                                                     <div className="tab-pane fade" id="tab-18" role="tabpanel" aria-labelledby="tab-18-tab">
-                                                        <p>Nobis perspiciatis natus cum, sint dolore earum rerum tempora aspernatur numquam velit tempore omnis, delectus repellat facere voluptatibus nemo non fugiat consequatur repellendus! Enim, commodi, veniam ipsa voluptates quis amet.</p>
+                                                        {/* <p>Nobis perspiciatis natus cum, sint dolore earum rerum tempora aspernatur numquam velit tempore omnis, delectus repellat facere voluptatibus nemo non fugiat consequatur repellendus! Enim, commodi, veniam ipsa voluptates quis amet.</p> */}
                                                     </div>
                                                     <div className="tab-pane fade" id="tab-19" role="tabpanel" aria-labelledby="tab-19-tab">
                                                         <h5>БУДЬТЕ ПЕРВЫМ, КТО ОСТАВИЛ ОТЗЫВ НА "{product.product.title}"</h5>

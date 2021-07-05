@@ -1,26 +1,26 @@
-import React, {useState} from 'react';
-import Particle from './Particle';
+import React, {useState, useEffect, useContext} from 'react';
+import { Link } from 'react-router-dom';
 import "../../App.css";
-import Clocke from "../Clocks/ClockMin"
-import Clock1 from "../Clocks/Clock1"
-import Clock2 from "../Clocks/Clock2"
-import Clock3 from "../Clocks/Clock3"
-import bg from "../../assets/bg.png"
-import sewing from "../../assets/sewing.png"
-import fabric from "../../assets/fabric.png"
-import coat from "../../assets/coat.png"
-import { ImClock2 } from "react-icons/im";
-import { FaTruckMoving } from "react-icons/fa";
-import { BsShieldShaded } from "react-icons/bs";
-import { FaCertificate } from "react-icons/fa";
+import Restangle from "../../assets/Rectangle.png"
+import Restangle30 from "../../assets/Rectangle30.png"
+import Frame from "../../assets/Frame.png"
+import Restangle32 from "../../assets/Rectangle31.png"
+import Restangle33 from "../../assets/Rectangle32.png"
+import Restangle34 from "../../assets/Rectangle33.png"
+import Restangle35 from "../../assets/Rectangle34.png"
+import Restangle332 from "../../assets/Rectangle332.png"
 import axios from "axios"
-import p from "../../assets/p.png"
+import { Context } from '../../index';
+import { observer } from 'mobx-react-lite';
+import { SUBCATEGORY_ROUTE, ABOUT_ROUTE, DELIVERY_ROUTE, PURCHASES_ROUTE } from '../../utils/Const';
 
 
 
 
-const  Main = () => {
+const  Main = observer(() => {
 
+    const {user} = useContext(Context)
+    const {product} = useContext(Context)
     const [name, setName] = useState()
     const [number, setNumber] = useState()
 
@@ -36,7 +36,6 @@ const  Main = () => {
             .then(response => {
                 setName('')
                 setNumber('')
-                console.log(response)
                 
         })
         .catch(error =>{ 
@@ -47,237 +46,210 @@ const  Main = () => {
     
     }
     
-  
+  useEffect(() => {
+    window.scrollTo(0,0)
+   
+    user.getImage()
+    product.discountTodo()
+    product.getDataNew()
+    product.getSubcategory().then(()=>{
+        product.getDataNewSeason(product?.subcategory[0]?.id)
+    })
+    
+  }, [])
          
     
     return (
         <div className="page-wrapper">
             <main className="main">
-            <div className="container">
-                <div className="App1">
-                    <Particle/>
-                </div>
-                {/* <div className="pt-2 pb-2">
-                    <div className="container brands">
-                    
-                      
-                    </div>
-                </div> */}
-
-                {/* <div className="mb-3"></div> */}
-
-                {/* Рады приветствовать Вас на сайте Швейной компании */}
-                    
-                    <div style={{ textAlign: "center"}}><h2 style={{marginTop: "80px", display: "flex", textAlign: "center"}} class="title"> «SIMA»</h2></div>
-                    
-                    <p style={{fontSize: "18px", textAlign: "justify", marginBottom: "50px",textIndent: "30px"}}> Швейная компания <span style={{fontWeight: "400"}}>«SIMA»</span> — одна из ведущих производителей женской одежды на рынке Кыргызстана, России, Казахстана, Беларуси и на международном рынке.
-                    Компания начала свой путь развития с 1998 года.
-                    Наш творческий коллектив дизайнеров, модельеров-конструкторов и технологов предлагают такие решения, что выпускаемая нами продукция позволяет не только подчеркнуть достоинства и скрыть недостатки, но и показать свою уникальность, предать чувства уверенности, легкости, свободы и комфорта, выглядеть современно и стильно. Продукция «SIMA» поможет каждой женщине в создании собственного неповторимого образа и подарит незабываемые эмоции. Производство женской одежды оптом от нашей компании направлено на удовлетворение спроса конечного потребителя. 
-                    20-летний путь становления компании “SIMA” – это путь интенсивного развития, труда.
-                    Для того чтобы оформить заказ, Вам необходимо пройти простую и удобную регистрацию на сайте, как оптовый покупатель. Только после регистрации, Вам будет открыт доступ к оптовому прайс-листу и детальные описания моделей.
+                        <div className="intro-slide" style={{backgroundImage: `url(${Restangle})`}}>
                             
-                    </p><br></br>
-                    
+                            <div className="container intro-content text-left ">
+                                <h1 className="intro-title">Summer<br/><strong>sale</strong></h1>
 
-                </div> 
-                <div className="container">
-                <div class="bg-image pt-7 pb-5 pt-md-12 pb-md-9" style={{backgroundImage: `url(${bg})`}}> 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-6 col-md-3">
-                                <div class="count-container text-center">
-                                    <div class="count-wrapper text-white">
-                                        {/* <span class="count" data-from="0" data-to="40" data-speed="3000" data-refresh-interval="50"><ImClock2 className="icons-react" /></span> */}
-                                    </div>
-                                    <div className=" justify-content-center">
-                                        <ImClock2  />
-                                    </div>
-                                    <h3 class="count-title text-white">БОЛЕЕ 20 ЛЕТ НА РЫНКЕ</h3>
-                                </div>
+                                <Link to={SUBCATEGORY_ROUTE} className="btn">
+                                    <span>Показать</span>
+                                    <i className="icon-long-arrow-right"></i>
+                                </Link>
                             </div>
-
-                            <div class="col-6 col-md-3">
-                                <div class="count-container text-center">
-                                    <div class="count-wrapper text-white">
-                                        {/* <span class="count" data-from="0" data-to="20" data-speed="3000" data-refresh-interval="50">0</span>+ */}
-                                    </div>
-                                    <FaTruckMoving  />
-                                    <h3 class="count-title text-white">УДОБНАЯ ДОСТАВКА</h3>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-md-3">
-                                <div class="count-container text-center">
-                                    <div class="count-wrapper text-white">
-                                        {/* <span class="count" data-from="0" data-to="95" data-speed="3000" data-refresh-interval="50">0</span>% */}
-                                    </div>
-                                    <BsShieldShaded />
-                                    <h3 class="count-title text-white">КОНТРОЛЬ КАЧЕСТВА</h3>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-md-3">
-                                <div class="count-container text-center">
-                                    <div class="count-wrapper text-white">
-                                        {/* <span class="count" data-from="0" data-to="15" data-speed="3000" data-refresh-interval="50">0</span> */}
-                                    </div>
-                                    <FaCertificate  />
-                                    <h3 class="count-title text-white">СЕРТИФИКАЦИЯ ТОВАРА</h3>
-                                </div>
-                            </div>
+                            
                         </div>
-                    </div>
-                </div>
-               
-                    {/* <div style={{margin: "40px"}} class="row" >
-    					<div className="col-md-3 justify-content-center text-align-center">
-                            <div className=" justify-content-center">
-                                <ImClock2 className="icons-react" />
-                            </div>
-                            <h4>15 ЛЕТ НА РЫНКЕ</h4>
-    						<p style={{fontSize: "18px"}}>Компания «SIMA» с момента своего образования, в 2005 году, занимается производством и оптовой реализацией женских платьев из трикотажного полотна для разных возрастных категорий.</p>
-    					</div>
 
-    					<div class="col-md-3">
-                            <FaTruckMoving className="icons-react" />
-                            <h4>УДОБНАЯ ДОСТАВКА</h4>
-    						<p style={{fontSize: "18px"}}>Посредством проверенных транспортных компаний, «SIMA» доставит Ваш заказ в любой город России и Казахстана! Доставка заказов в кратчайшие сроки!</p>
-    					</div>
+                       
 
-    					<div class="col-md-3">
-                            <BsShieldShaded className="icons-react" />
-                            <h4>КОНТРОЛЬ КАЧЕСТВА</h4>
-    						<p style={{fontSize: "18px"}}>Руководитель и сотрудники предприятия идут по пути регулярного повышения квалификации и обучения новым технологиям. На производстве работает отдел контроля качества. </p>
-    					</div>
+                    <div class="container mt-4">
+                            <ul class="nav nav-pills nav-big nav-border-anim justify-content-center mb-2 mb-md-3" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Новые</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Скидки</a>
+                                </li>
+                                
+                            </ul>
 
-    					<div class="col-md-3">
-                            <FaCertificate className="icons-react" />
-                            <h4>СЕРТИФИКАЦИЯ ТОВАРА</h4>
-    						<p style={{fontSize: "18px"}}>Наша продукция прошла маркировку Евразийского соответствия (EAC) - что свидетельствует о том, что продукция прошла все установленные в технических регламентах процедуры.</p>
-    					</div>
-    				</div> */}
-                    
-                    
-                    {/* <div className="container"><h3  style={{marginTop: "60px", marginBottom: "30px", padding: "10px 20px"}}>4 ЭТАПА КОНТРОЛЯ КАЧЕСТВА, КОТОРЫЕ ВНЕДРЕНЫ В ПРОИЗВОДСТВО</h3></div> */}
-                    {/* <div class="row" style={{padding: "40px 40px"}}>
+                        <div class="product-details-tab">
+                            
                         
-    					<div className="col-md-3 justify-content-center text-align-center">
-                            <img className="coat" src={tkan}/>
-                            <h4>Этап разбраковки</h4>
-    						<p className="dostovka">Сырье поступает на фабрику и осуществляется визуальный осмотр на наличие дефектов</p>
-    					</div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                                <div class="products mb-3">
+                                    <div class="row justify-content-center">
+                                    {product.newProduct.slice(0,4).map((discout, index)=>
+                                    <div key={index} class="col-6 col-md-4 col-lg-3">
+                                        <div class="product product-7 text-center ">
+                                            <Link to={{pathname: '/product/'+discout.id}} >
+                                                <figure class="product-media">
+                                                    <a href="">
+                                                        <img src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`} alt="Product image" class="product-image"/>
+                                                    </a>
+                                                </figure>
+                                            </Link>
+                                            <div class="product-body">
+                                                <h3 class="product-title">{discout.title}</h3>
+                                                <div class="product-price">
+                                                    {discout.price  }
+                                                </div>
 
-    					<div class="col-md-3">
-                           <img className="coat" src={fabric}/>
-                            <h4>Этап проверки на усадку</h4>
-    						<p className="dostovka">Сырье подвергается воздействию высоких и низких температур для проверки на усадку</p>
-    					</div>
-
-    					<div class="col-md-3">
-                            <img className="coat" src={sewing}/>
-                            <h4>Этап производства</h4>
-    						<p className="dostovka">Внедрен бригадный метод пошива. Каждый оператор-швея отвечает за сборку определенной детали</p>
-    					</div>
-
-    					<div class="col-md-3">
-                            <img className="coat" src={coat}/>
-                            <h4>Контроль готовой продукции</h4>
-    						<p className="dostovka">Каждое изделие проверяется технологом швейного производства на наличие дефектов и утверждается по ГОСТу</p>
-    					</div>
-    				</div> */}
-                
-                {/* <div className="mb-7"></div> */}
-                
-
-                <br/>
-                    <div style={{marginTop: "30px"}} className="row " >
-                            <div className="col-lg-4 col-sm-6 d-flex justify-content-center">
-                                <div className="icon-box text-center1">
-                                    <Clocke/>
+                                                
+                                            </div>
+                                            </div>
+                                        </div>)}
                                     
-                                    <h4 style={{ marginLeft: "30px"}} className="city">Bishkek</h4>
+                                    </div>
                                 </div>
                                 
                             </div>
+                            <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                                <div class="product-desc-content">
+                                <div class="products mb-3">
+                                    <div class="row justify-content-center">
+                                    {product.discount.slice(0,4).map((discout, index)=>
+                                    <div key={index} class="col-6 col-md-4 col-lg-3">
+                                        <div class="product product-7 text-center ">
+                                            <Link to={{pathname: '/product/'+discout.id}} >
+                                                <figure class="product-media">
+                                                    {discout.percent ? <div style={{textAlign: "center"}} class="product-label label-sale">{discout.percent} %</div> : ""}
+                                                    <a href="">
+                                                        <img src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`} alt="Product image" class="product-image"/>
+                                                    </a>
+                                                </figure>
+                                            </Link>
+                                            <div class="product-body">
+                                                <h3 class="product-title">{discout.title}</h3>
+                                                <div class="product-price">
+                                                    {discout.price}
+                                                </div>
 
-                            <div className="col-lg-4 col-sm-6 d-flex justify-content-center">
-                                <div className="icon-box text-center1">
-                                    <Clock1/>
-                                    <h4 style={{ marginLeft: "30px"}} className="city">Moscow</h4>
+                                                
+                                            </div>
+                                            </div>
+                                        </div>)}
+                                        </div>
+                                        </div>
                                 </div>
                             </div>
+                            
+                        </div>
+                    </div>
+                </div>
 
-                            <div className="col-lg-4 col-sm-6 d-flex justify-content-center">
-                                <div className="icon-box text-center1">
-                                    <Clock2/>
-                                   
-                                     <h4 style={{marginTop: "10px", marginLeft: "15px"}} className="city">Novosibirsk</h4>
-                                </div>
+                    <div class="trending">
+                        <a href="">
+                        
+                            <img src={Restangle30} alt="Banner"/>
+                        </a>
+                        <div class="banner banner-big d-md-block">
+                            <div class="banner-content text-center">
+                                <h3 class="banner-title text-white">новая коллекция</h3>
                             </div>
+                        </div>
+                    </div>
 
-                            <div sty className="col-lg-4 col-sm-6 d-flex justify-content-center">
-                                <div className="icon-box text-center1">
-                                    <Clock3/>
-                                    <h4 style={{ marginLeft: "20px"}} className="city">Nur-Sultan</h4>
+
+                <div className="container">
+
+                    <div class="products mt-4">
+                        <div class="row justify-content-center">
+                            {product.newProductSeason.slice(0,8).map((discout, index)=>
+                            <div key={index} class="col-6 col-md-4 col-lg-3">
+                                <div class="product product-7 text-center  ">
+                                    <Link to={{pathname: '/product/'+discout.id}} >
+                                        <figure class="product-media ">
+                                            <a href="">
+                                                <img src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`} alt="Product image" class="product-image"/>
+                                            </a>
+                                        </figure>
+                                   </Link>
+
+                                    <div class="product-body">
+                                        <h3 class="product-title">{discout.title}</h3>
+                                        <div class="product-price">
+                                        {discout.price}  
+                                        </div>
+
+                                        
+                                    </div>
                                 </div>
+                            </div>)}
+                        </div>
+                     </div>
+
+                </div>
+                
+                <div className="trending mt-3 d-flex justify-content-center  ">
+                    <img  src={Frame} alt="Banner"/>
+                </div>
+                
+
+                    <div className="container mt-8 ">
+                         
+                        <div class="row">
+                            <div  class="col-12 mb-10 col-xl-6 mt-2 mb-12">
+                                <Link to={ABOUT_ROUTE}> 
+                                    <div  className="position-relative d-flex justify-content-center align-items-center mt-8 mb-3 ">
+                                        <img  class=" position-absolute " src={Restangle32} alt="Banner"/>
+                                        <img  class="position-absolute" src={Restangle332} alt="Banner"/>
+                                        <h3 style={{color: "#fff"}}  className="position-absolute monserat" >Более 20 лет на рынке</h3>
+                                        
+                                    </div>
+                                </Link>
                                 
                             </div>
-                            <div className="col-lg-4 col-sm-6 d-flex justify-content-center" >
-                                <div className="icon-box text-center1">
-                                    <Clock2/>
-                                   
-                                     <h4 style={{marginTop: "10px", marginLeft: "40px"}} className="city">Samara</h4>
-                                </div>
+                            <div  class="col-12-mb-10 col-xl-6 mt-2 mb-12">
+                                <Link to={DELIVERY_ROUTE}>
+                                    <div className=" position-relative d-flex justify-content-center align-items-center mt-8 ">
+                                        <img class=" position-absolute" src={Restangle33} alt="Banner"/>
+                                        <img  class=" position-absolute" src={Restangle332} alt="Banner"/>
+                                        <h3 style={{color: "#fff"}} className="position-absolute monserat" >Удобная доставка</h3>
+                                    </div>
+                                </Link>
                             </div>
-
-                            <div sty className="col-lg-4 col-sm-6 d-flex justify-content-center">
-                                <div className="icon-box text-center1">
-                                    <Clock3/>
-                                    <h4 style={{ marginLeft: "30px"}} className="city">Tashkent</h4>
-                                </div>
-                                
+                            
+                        </div>
+                        <div className="row ">
+                            <div  class="col-12 mb-10 col-xl-6 mt-2  mb-12">
+                                <Link to={PURCHASES_ROUTE}>
+                                    <div className="position-relative d-flex justify-content-center align-items-center mt-8">
+                                        <img class=" position-absolute  " src={Restangle34} alt="Banner"/>
+                                        <img  class=" position-absolute" src={Restangle332} alt="Banner"/>
+                                        <h3 style={{color: "#fff"}} className="position-absolute monserat">Контроль качество</h3>                                
+                                    </div>
+                                </Link>
+                            </div>
+                            <div  class="col-12 mb-10 col-xl-6 mt-2 mb-12 ">
+                                <Link to={ABOUT_ROUTE}>
+                                    <div className="position-relative d-flex justify-content-center align-items-center mt-8">
+                                        <img class="position-absolute" src={Restangle35} alt="Banner"/>
+                                        <img  class="position-absolute " src={Restangle332} alt="Banner"/>
+                                        <h3 style={{color: "#fff"}} className="position-absolute monserat" >Сертификация товара</h3>                                    
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                     </div>
                 
-                <div className="container">
-
-                    
                 
-
-                    <div style={{textAlign: "center", padding: "30px", marginTop: " 20px"}}>
-                    {/* <p style={{fontSize: "18px", marginBottom: " 20px", fontFamily: "Montserrat, sans-serif"   }}>Если у Вас остались дополнительные вопросы, пишите <span style={{fontWeight: "500"}}>simacompany@bk.ru</span> Или оставьте заявку на обратный звонок и мы вам перезвоним!
-                        поместить на главную</p> */}
-                        <div className="container-z" >
-                            <h3 className="cont">Закажите обратный звонок</h3>
-                            <h4 className="cont-h4">С Вами свяжется наш менеджер и подробно проконсультирует</h4>
-                            <div className="row" style={{display: "flex", justifyContent: "center"}} >
-                                <div className="col-sm-3">
-                                    <input 
-                                        className="input-z" 
-                                        placeholder="Ваше имя"
-                                        value={name}
-                                        onChange={e => setName(e.target.value)} 
-                                        type="text"/>
-                                </div>
-                                <div className="col-sm-3">
-                                    <input 
-                                        className="input-z" 
-                                        placeholder="Номер телефона"
-                                        value={number}
-                                        onChange={e => setNumber(e.target.value)} 
-                                        type="tel"/>
-                                </div>
-                                
-                            </div>
-                            <div onClick={sendName} class="btn-wrap">
-		                		<a style={{fontSize: "18px"}} href="" class="btn btn-primary btn-round">Отправить</a>
-		                	</div>
-                        </div>
-                        
-                    </div> 
-                     
-                </div>
                     
                 
 
@@ -286,7 +258,7 @@ const  Main = () => {
         </div>
         
     )
-}
+})
 
 export default Main;
 

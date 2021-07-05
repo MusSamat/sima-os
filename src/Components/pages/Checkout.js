@@ -3,10 +3,11 @@ import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import axios from "axios";
 import {  useHistory} from 'react-router-dom';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ORDER_ROUTE } from '../../utils/Const';
+import "../../App.css";
+
 
 const Checkout = observer(() => {
 
@@ -14,12 +15,9 @@ const Checkout = observer(() => {
 	const {user} = useContext(Context)
 	let sum = 0
 	const [note, setNote] = useState()
-	console.log(user.userId)
 
 	const notify = () => toast.success("Спасибо. Ваш заказ был принят.");
 	const notifyError = () => toast.error("Wow so easy!");
-
-	console.log(user.carts)
 
 	const sendOrder = (e) => {
         const data = JSON.stringify({
@@ -56,6 +54,7 @@ const Checkout = observer(() => {
     }
 
 	useEffect(() => {
+		window.scrollTo(0,0)
 		user.getUserData()
 		console.log(user.userId)
 	}, [])
@@ -69,7 +68,7 @@ const Checkout = observer(() => {
 		                		<div className="col-lg-9">
 		                			<h2 className="checkout-title">ДЕТАЛИ ОПЛАТЫ</h2>
 		                				<div className="row">
-		                					<div className="col-sm-6">
+		                					<div className="col-sm-6"> 
 												<label style={{fontSize: "16px"}} for="register-password">Имя </label>
 		                						<input 
 													type="text"
@@ -108,7 +107,7 @@ const Checkout = observer(() => {
 										<label style={{fontSize: "16px"}} for="register-password">Адрес</label>
 	        							<input 
 											 type="text" 
-											value={user.userId.address} 
+											value={user.userId.address || ""} 
 											className="form-control" required
 											style={{fontSize: "16px", fontWeight: "500"}}/>
 
@@ -130,16 +129,6 @@ const Checkout = observer(() => {
 													style={{fontSize: "16px", fontWeight: "500"}}/>
 		                					</div>
 		                				</div>
-
-	                					
-
-	        							{/* <div className="custom-control custom-checkbox">
-											<input type="checkbox" className="custom-control-input" id="checkout-create-acc"/>
-											<label className="custom-control-label" for="checkout-create-acc">ДЕТАЛИ</label>
-										</div>
-
-	                					<label>Примечание к заказу (необязательно)</label>
-	        							<textarea value={note} onChange={e => setNote(e.target.value)}  className="form-control" cols="30" rows="4" placeholder="Примечания к вашему заказу, например, особые пожелания отделу доставки."></textarea> */}
 		                		</div>
 		                		<aside className="col-lg-3">
 		                			<div className="summary">
@@ -158,7 +147,7 @@ const Checkout = observer(() => {
 											
 											{user.items.map((item, index)=>
 		                						<tr  key={index}>
-		                							<td><a href="">{item.product.title}</a></td>
+		                							<td>{item.product.title}</td>
 		                							<td>{(item.product.price*item.quantity).toFixed(2)} ₽</td>
 		                						</tr>)}
 		                						<tr className="summary-subtotal">

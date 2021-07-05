@@ -20,6 +20,10 @@ const Login = observer(() => {
     const notify = () => toast.success("Wow so easy!");
 	const notifyError = (error) => toast.error(`Wow so ${error} easy!`);
 
+    const fd = new FormData()
+
+    console.log(fd)
+
     const sing = () => {
         const article = {email, password, username}
         

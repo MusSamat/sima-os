@@ -18,6 +18,7 @@ export default class UserStore {
         this.orders = {}
         this.order = []
         this.orderId = []
+        this.image = []
 
         this.count = 0
         makeAutoObservable(this)
@@ -89,7 +90,7 @@ export default class UserStore {
             console.log(this.orderId)
         })
         .catch((e)=>{
-            console.log(e)
+            console.log(e) 
         })
         
      }
@@ -108,6 +109,18 @@ export default class UserStore {
             this.carts = res.data
             this.items = this.carts.items 
             return this.items
+            
+        })
+        .catch((e)=>{
+            console.error(e)
+        }) 
+     }
+
+     getImage() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background/`)
+        .then(res => {
+            this.image = res.data 
+            return this.image
             
         })
         .catch((e)=>{

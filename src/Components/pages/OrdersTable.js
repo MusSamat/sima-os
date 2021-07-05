@@ -1,11 +1,15 @@
 import { observer } from 'mobx-react-lite';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Link, useHistory} from 'react-router-dom';
 import { Context } from '../../index';
 
 const OrdersTable = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
+    useEffect(() => {
+        user.getUserData()
+        window.scrollTo(0,0)
+    }, )
     return (
         <div  className="container">
             <p style={{fontSize: "18px", marginTop: "70px"}}>Спасибо. Ваш заказ был принят.</p>
