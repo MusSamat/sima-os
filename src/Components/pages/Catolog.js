@@ -3,14 +3,14 @@ import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import { Link } from 'react-router-dom';
 import "../../App.css";
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import {SUBCATEGORY_ROUTE} from "../../utils/Const";
-import Subcategory from "./ProdCategory"
-import Mobile from './Mobile';
+import mobile_menu from '../../Http/mobile_menu';
 
 
-  
+function valuetext(value) {
+    return `${value}°C`;
+  }
 
  
 const  Catolog = observer((props) => {
@@ -20,17 +20,17 @@ const  Catolog = observer((props) => {
     const id = props.match.params.id
     const catId = props.match.params.catId
     const title = props.match.params.title
-    console.log(props)
 
     
 
     
 
-    const [value, setValue] = useState([2,1000]);
+    const [value, setValue] = useState([500,5000]);
   
   const rangeSelector = (event, newValue) => {
     setValue(newValue);
-    product.priceFilter(newValue)
+    product.priceFilter(newValue);
+    console.log(newValue)
   };
 
 
@@ -40,11 +40,12 @@ const  Catolog = observer((props) => {
     const search = (e) => {
        product.searchFilter(input)
        e.preventDefault();
-       console.log(input)
     }
     
     
     useEffect(() => {
+        window.scrollTo(0,0)
+        mobile_menu()
         user.getUserData()
         product.fetchTodoCatalog(catId, title).then(() => {
             const scripts = [
@@ -66,6 +67,7 @@ const  Catolog = observer((props) => {
                 document.body.appendChild(s)
             })
         })
+        product.priceFilter()
         product.discountTodo()
         product.getCategoryTitle(title)
         product.getCategoryTitleCount(title)
@@ -79,9 +81,7 @@ const  Catolog = observer((props) => {
 
     return (
         <div>
-             <main style={{marginTop: "80px"}} className="main">
-                
-
+             <main  className="main">
                 <div className="page-content">
                     <div className="container">
                         <div className="row">
@@ -94,7 +94,7 @@ const  Catolog = observer((props) => {
                                     </div>
                                 </div>
 
-                                <div style={{borderRadius: "40px", background: "#f7f7f7",textAlign: "center", marginTop: "-25px"}} className="cta cta-border mb-5">
+                                {/* <div style={{borderRadius: "40px", background: "#f7f7f7",textAlign: "center", marginTop: "-25px"}} className="cta cta-border mb-5">
                                     
                                     
                                         <h4>ДЛЯ ЗАПРОСА КАТАЛОГА СЛЕДУЮЩЕГО СЕЗОНА, НАПИШИТЕ НАМ НА WHATSAPP</h4>
@@ -107,10 +107,46 @@ const  Catolog = observer((props) => {
                                             </div>
                                         </div>
                                     
-                                </div>
-                                <div className="products mb-3">
-                                    <div className="row justify-content-center"> 
-                                        {console.log(product.products)}                                       
+                                </div> */}
+
+                                <div class="products mb-3">
+                                        <div class="row justify-content-center">
+                                        {product.products.map((prod, index) =>
+                                            <div class="col-6 col-md-4 col-lg-4">
+                                                <div class="product product-7 text-center">
+                                                    <Link to={{pathname: '/product/'+prod.id}} key={index}>
+                                                        <figure class="product-media">
+                                                            {/* <span class="product-label label-new">New</span> */}
+                                                            {prod.percent ? <div style={{textAlign: "center"}} class="product-label label-sale">{prod.percent} %</div> : ""}
+                                                            <a href="product.html">
+                                                                <img src={`${process.env.REACT_APP_BASE_URL}${prod?.images[0]?.images[0]}`} alt="Product image" class="product-image"/>
+                                                            </a>
+
+                                                            <div class="product-action-vertical">
+                                                                <a href="" class="btn-product-icon btn-wishlist "></a>
+                                                            </div>
+                                                        </figure>
+                                                    </Link>
+                                                    <div class="product-body">
+                                                        {/* <div class="product-cat">
+                                                            <a href="#">Women</a>
+                                                        </div> */}
+                                                        <h3 class="product-title"><a href="">{prod.title}</a></h3>
+                                                        <div class="product-price">
+                                                            {user.isAuth ? prod.discount ? 
+                                                            <><p style={{textDecoration:"line-through"}}>{prod.price} ₽</p>
+                                                            <p >{Math.round(prod.price - (prod.price * prod.percent/100))}.00 ₽</p></> :
+                                                                 `${prod.price} ₽` : "" }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>)}
+                                        </div>
+                                    </div>
+
+
+                                {/* <div className="products mb-3">
+                                    <div className="row justify-content-center">                                       
                                         {product.products.map((prod, index) => 
                                         
                                             <div className="col-6 col-md-4 col-lg-4 col-xl-3"  >
@@ -135,32 +171,26 @@ const  Catolog = observer((props) => {
                                          
                                             )}  
                                         </div>
-                                    </div>
-
-                                
-
-
-
+                                    </div> */}
                             </div>
-                            <aside className="col-lg-3 order-lg-first">
+                            <aside className="col-lg-3 order-lg-first mt-3">
                                 <div className="sidebar sidebar-shop">
 
                                     <div className="">
                                         <div className="col-sm-10 col-md-8 col-lg-10">
-                                        
                                             <form onSubmit={search}>
-                                                <div className=" input-group">
                                                     <input 
+                                                        style={{width: "250px"}}
                                                         type="text" 
                                                         className="form-control" 
                                                         placeholder="Поиск..."  
                                                         value={input}
                                                         onChange={e => setInput(e.target.value)}
-                                                        required/><hr/>
+                                                        required/>
                                                     
-                                                        <button style={{width: "210px", height: "40px"}} className="btn btn-primary" type="submit">ПОИСК</button>
+                                                        <button style={{width: "250px", height: "40px"}} className="btn btn-primary form-control" type="submit">ПОИСК</button>
                                                     
-                                                </div>
+                                               
                                             </form>
                                         </div>
                                     </div>
@@ -181,7 +211,7 @@ const  Catolog = observer((props) => {
                                     <div className="widget widget-collapsible">
                                         <h3 className="widget-title">
                                             <Link to={SUBCATEGORY_ROUTE} >
-                                                <a data-toggle="collapse" href="#widget-1" style={{ fontWeight:"500"}} role="button" aria-expanded="true" aria-controls="widget-1">
+                                                <a className="cate" data-toggle="collapse" href="#widget-1"  role="button" aria-expanded="true" aria-controls="widget-1">
                                                     Категория
                                                 </a>
                                             </Link>
@@ -190,17 +220,12 @@ const  Catolog = observer((props) => {
                                         <div className="collapse show" >
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
-                                                    <div className="filter-item">
-                                                    {/* <label onClick={()=>product.getCategoryTitle(title)} className="custom-control-label vse" style={{color: "rgb(71, 53, 150)", fontWeight:"500"}} >ВСЕ</label>   */}
-                                                        {console.log(product.productTitleCount)}                                                      
+                                                    <div className="filter-item">                                                      
                                                         {product.productTitle.filter(i => i.id).map((c, index) =>
-                                                                <div  key={index} className="custom-control custom-checkbox">
-                                                                    
-                                                                    <label onClick={() => product.fetchTodoCatalog(c.id, title)} className="custom-control-label s-title" style={{ fontWeight:"500"}} > {c.title} {c.year}</label>
-                                                                    <span style={{ fontWeight:"500"}} className="item-count">({product.changeFilterCount(c.id)?.count})</span>
-                                                                </div>
-                                                                
-                                                            
+                                                            <div  key={index} className="custom-control custom-checkbox">
+                                                                <label onClick={() => product.fetchTodoCatalog(c.id, title)} className="custom-control-label s-title"  > {c.title} {c.year}</label>
+                                                                <span  className="item-count">({product.changeFilterCount(c.id)?.count})</span>
+                                                            </div>
                                                         )}
                                                     </div>
                                                 </div>
@@ -213,16 +238,19 @@ const  Catolog = observer((props) => {
                                                         value={value}
                                                         onChange={rangeSelector}
                                                         valueLabelDisplay="auto"
+                                                        aria-labelledby="range-slider"
+                                                        getAriaValueText={valuetext}
+                                                        min={500} 
+                                                        max={5000} 
                                                     />
-                                                   <p style={{fontSize: "16px"}}>   ФИЛЬТР ПО ЦЕНЕ: {value[0]} ₽ {value[1]} ₽</p>
+                                                   <p className="filter" >ФИЛЬТР ПО ЦЕНЕ: {value[0]} ₽ {value[1]} ₽</p>
                                                 </div>
                                         </div>
                                     </div>
 
                                     <div className="cat-blocks-container">
-                                            <p  onClick={() => product.changeDiscounted(percent)} style={{color: "rgb(71, 53, 150)", fontWeight:"500", cursor: "pointer", marginBottom: "30px"}}>ТОВАРЫ СО СКИДКОЙ</p>
-                                            
-                                            {product.discount.map((discout, index)=>
+                                            <p onClick={() => product.changeDiscounted()} style={{  cursor: "pointer", marginBottom: "30px"}}>ТОВАРЫ СО СКИДКОЙ</p>                                            
+                                            {product.discount.slice(0,4).map((discout, index)=>
                                                 <div key={index}>
                                                 <div  className="row">
                                                     <div  className="col-6 ">

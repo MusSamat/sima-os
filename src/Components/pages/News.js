@@ -4,11 +4,14 @@ import { Context } from '../../index';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import "../../App.css";
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 const News = observer(() =>{
     const {product} = useContext(Context)
     const history = useHistory()
     useEffect(() => {
+        window.scrollTo(0,0)
         product.blogFetchTodo()
       }, []);
     return (
@@ -21,47 +24,73 @@ const News = observer(() =>{
                     <div className="container">
                        
 
-                        <div className="entry-container max-col-2" data-layout="fitRows">
+                        {/* <div className="container " data-layout="fitRows"> */}
+                            {/* {product.blog.map((blog, index) =>
+                            <div className="row">
+                                
+                                    <article class="entry entry-list">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6 p-4">
+                                                <figure class="entry-media">
+                                                    <img className="news_image" src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
+                                                    
+                                                </figure>
+                                                <figure  className="entry-media">
+                                                    <img className="news_image" src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
+                                                </figure>
+                                            </div>
+
+                                            <div class="col-md-6 p-4">
+                                                <div class="entry-body">
+                                                    <div class="entry-meta">
+                                                        <span class="entry-author">
+                                                            by <a href="#">John Doe</a>
+                                                        </span>
+                                                        <span class="meta-separator">|</span>
+                                                        <a href="#">Nov 22, 2018</a>
+                                                    </div>
+
+                                                    <h2 class="entry-title">
+                                                        <a href="">{blog.title}</a>
+                                                    </h2>
+
+                                                    <div class="entry-content">
+                                                        <p>{blog.description.slice(0, 300)}</p>
+                                                        <a href="" className="read-more">Подробнее</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </article><hr/>
+                               
+                            </div>)} */}
                             
-                            
+                            {console.log(product.blog)}
                             {product.blog.map((blog, index) =>
-                            <div className="entry-item lifestyle shopping col-sm-6" key={index}  >
+                            <div className="entry-item lifestyle shopping col-6" key={index}  >
                                 
                                 <article className="entry entry-grid text-center">
                                     <figure  className="entry-media">
                                             <img className="news_image" src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
                                     </figure>
-
                                     <div className="entry-body">
-                                        
-
                                         <h6 className="entry-title">
                                            {blog.title}
                                         </h6>
-
-                                        <div className="entry-cats">
-                                            admin <a> в категорию </a>,
-                                            <a href="#">Новости</a>
-                                        </div>
-
                                         <div className="entry-content" >
-                                            <p style={{textAlign: "left"}}>
-                                            <div dangerouslySetInnerHTML={{__html: blog.description}} />
-                                            {console.log(blog)}
+                                            <p style={{textAlign: "left", fontSize: '16px', textAlign: "justify"}}>
+                                                {blog.description.slice(0, 500)}
                                             </p>
                                             <div className="entry-meta" style={{display: "flex"}}>
                                                 <span className="entry-author">
-                                                Добавленно <a href="#"></a>
+                                                Добавленно <a href=""></a>
                                                 </span>
                                                 <span className="meta-separator">|</span>
-                                                <a href="#">Apr 28, 2021</a>
-                                                <span className="meta-separator">|</span>
-                                                <a href="#"></a>
-                                                admin <a> в категорию </a>,
-                                                <a href="#">Новости</a>
+                                                <a href=""><Moment format="YYYY.MM.DD" date={blog.created}></Moment></a>
                                             </div>
                                             <Link to={{pathname: '/single/'+ blog.id}}>
-                                            <button  className="btn btn-outline-dark btn-block col-12 news-btn"><span>подробнее</span><i className="icon-refresh"></i></button>
+                                                <button  className="btn btn-outline-dark btn-block col-12 news-btn"><span>подробнее</span><i className="icon-refresh"></i></button>
                                                 
                                             </Link>
                                         </div>
@@ -70,24 +99,7 @@ const News = observer(() =>{
                                 </article>
                                 
                             </div>)}
-                        </div>
-
-                        <nav aria-label="Page navigation">
-                            <ul className="pagination justify-content-center">
-                                <li className="page-item disabled">
-                                    <a className="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
-                                        <span aria-hidden="true"><i className="icon-long-arrow-left"></i></span>Prev
-                                    </a>
-                                </li>
-                                <li className="page-item active" aria-current="page"><a className="page-link" href="#">1</a></li>
-                                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                <li className="page-item">
-                                    <a className="page-link page-link-next" href="#" aria-label="Next">
-                                        Next <span aria-hidden="true"><i className="icon-long-arrow-right"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        {/* </div> */}
                     </div>
                 </div>
             </main>

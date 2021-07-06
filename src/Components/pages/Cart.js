@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
 import ruble from "../../assets/ruble.png"
 import { Link } from 'react-router-dom';
+import "../../App.css";
 
 
  const Cart = observer(() => {
@@ -54,7 +55,7 @@ import { Link } from 'react-router-dom';
             },
         })
         .then(res => {
-            // user.getCartData()
+            user.getCartData()
         console.log(res)
         })
         .catch((e)=>{
@@ -66,6 +67,7 @@ import { Link } from 'react-router-dom';
      
 
     useEffect(() => {
+        window.scrollTo(0,0)
         user.getCartData().then((items)  => {
             console.log(items)
         })
@@ -91,7 +93,7 @@ import { Link } from 'react-router-dom';
 
                                             <tbody>
                                                 
-                                                {user.items.map((c, index)=>
+                                                {user.items?.map((c, index)=>
                                                 
                                                 
                                                 
@@ -106,7 +108,7 @@ import { Link } from 'react-router-dom';
                                                                 </figure>
                                                             </Link>
                                                             <h3 className="product-title">
-                                                                <a>{c.product.title}</a>
+                                                                <a>{c.product?.title}</a>
                                                             </h3>
                                                         </div>
                                                     </td>
@@ -123,7 +125,7 @@ import { Link } from 'react-router-dom';
                                                         
                                                     </td>
 
-                                                    <td style={{fontWeight: "500"}}>{(c.product.price * c.quantity).toFixed(2)} ₽</td>
+                                                    <td className="price-col" style={{fontWeight: "500"}}>{(c.product.price * c.quantity).toFixed(2)} ₽</td>
                                                     <td className="remove-col"><button onClick={() => deleteCart(c.product.id)} className="btn-remove"><i className="icon-close"></i></button></td>
                                                 </tr>)}
                                             </tbody>
@@ -131,14 +133,6 @@ import { Link } from 'react-router-dom';
 
                                         <div className="cart-bottom">
                                             <div className="cart-discount">
-                                                {/* <form >
-                                                    <div className="input-group">
-                                                        <input type="text" className="form-control" required placeholder="coupon code"/>
-                                                        <div className="input-group-append">
-                                                            <button className="btn btn-outline-primary-2" type="submit"><i className="icon-long-arrow-right"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </form> */}
                                             </div>
 
                                             <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2"><span>ОБНОВИТЬ КОРЗИНУ</span><i className="icon-refresh"></i></a>
@@ -154,7 +148,7 @@ import { Link } from 'react-router-dom';
                                                         <td>ПОДЫТОГ:</td>
                                     
                                                             {
-                                                                user.items.map((item, index) => {
+                                                                user.items?.map((item, index) => {
                                                                      sum = sum + item.product.price * item.quantity
                                                                     })
                                                             }
@@ -164,7 +158,7 @@ import { Link } from 'react-router-dom';
                                                     </tr>
                                                     
 
-                                                    <tr style={{fontWeight: "500"}}>
+                                                    <tr className="summary-subtotal" style={{fontWeight: "500"}}>
                                                         <td>ИТОГО:</td>
                                                            
                                                         <td>{sum.toFixed(2)} ₽</td>

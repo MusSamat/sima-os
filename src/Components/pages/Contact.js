@@ -1,5 +1,4 @@
-import React from 'react';
-import { YMaps, Map, Placemark } from "react-yandex-maps";
+import React,{useEffect} from 'react';
 import "../../App.css";
 import { FaOdnoklassnikiSquare } from "react-icons/fa";
 import { FaWhatsappSquare } from "react-icons/fa";
@@ -7,46 +6,14 @@ import { FaWhatsappSquare } from "react-icons/fa";
 
 
 export default function Contact() {
-
-    const mapData = {
-        center: [41.09213324, 74.873856],
-        zoom: 6 ,
-    };
-
-    const coordinates = [
-        [42.870981, 74.569466],
-        [40.925689, 72.975878],
-        [42.821084, 75.290325],
-        [40.538914, 72.796954],
-        [40.057396, 70.825942],
-    ];
-    
-
-
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [])
     return (
         
             <main className="main">
 
                 <div className="page-content">
-                    {/* <div id="map" className="mb-5"></div> */}
-
-                    <div  className="container" style={{ height: '100vh', width: '95%' }}>
-                        <div className="horizontal">
-                            <hr/>
-                        </div>
-                        <div style={{width:'100%', height:'70%', position:'relative'}} >
-                            <YMaps >
-                                <Map  width='100%' height='100%'  defaultState={mapData} >
-                                    {coordinates.map((coordinate, index) => <Placemark key={index} geometry={coordinate} />)}
-                                </Map>
-                            </YMaps>
-                        </div>
-                        <div className="horizontal">
-                            <hr/>
-                        </div>
-                    </div>
-
-
                     <div className="container">
                         <div className="row">
                             <div className="col-md-4">
@@ -67,7 +34,7 @@ export default function Contact() {
 
                                     <p style={{fontSize: "18px"}}>+996 (709) 99 99 15</p>
                                     <p style={{fontSize: "18px"}}>+ 996 (700) 50 60 46</p>
-                                    <p style={{fontSize: "18px"}}><FaWhatsappSquare style={{}}/> +996 (705) 55 58 29</p>
+                                    <p style={{fontSize: "18px"}}><FaWhatsappSquare style={{ color: "green",fontSize: "30px"}}/> +996 (705) 55 58 29</p>
                                     
                                 </div>
                             </div>

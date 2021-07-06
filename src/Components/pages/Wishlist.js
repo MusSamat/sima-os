@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import "../../App.css";
 
 const Wishlist = observer(()=> {
     const {user} = useContext(Context)
@@ -59,9 +60,9 @@ const Wishlist = observer(()=> {
     }
 
     useEffect(() => {
-        console.log(user.list)
+        window.scrollTo(0,0)
         
-            user.getWishlistData()
+        user.getWishlistData()
         
       
     }, [])
@@ -75,11 +76,7 @@ const Wishlist = observer(()=> {
                 </div> */}
                 <nav aria-label="breadcrumb" className="breadcrumb-nav">
                     <div className="container">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li className="breadcrumb-item"><a href="#">Shop</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">Wishlist</li>
-                        </ol>
+                        
                     </div>
                 </nav>
 
@@ -97,7 +94,8 @@ const Wishlist = observer(()=> {
                             </thead>
 
                             <tbody>
-                                {user.list.map((l, index)=>
+                                {console.log(user.list)}
+                                {user.list?.map((l, index)=>
                                 <tr key={index}>
                                     <td className="product-col">
                                         <div className="product">

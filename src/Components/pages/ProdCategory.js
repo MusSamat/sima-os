@@ -4,6 +4,8 @@ import { Context } from '../../index';
 import { Link } from 'react-router-dom';
 import "../../App.css";
 import Mobile from './Mobile';
+import mobile_menu from '../../Http/mobile_menu';
+
 
 
 
@@ -14,7 +16,8 @@ const ProdCategory = observer(() => {
 
     
     useEffect(() => {
-        
+        window.scrollTo(0,0)
+        mobile_menu()
         user.getUserData()
         product.fetchTodo().then(() => {
             const scripts = [
@@ -36,7 +39,7 @@ const ProdCategory = observer(() => {
                 document.body.appendChild(s)
             })
         })
-        product.getCategory()
+        // product.getCategory()
         product.getSubcategory()
         product.getSubcategoryId()
             
@@ -45,30 +48,14 @@ const ProdCategory = observer(() => {
 
     return (
         <div  className="page-content">
-             <main  className="main">
-                <div className="page-content">
+             <main  className="main ">
+                {/* <div className="page-content"> */}
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-9">
-
-                                <div style={{borderRadius: "40px", background: "#f7f7f7", textAlign: "center",marginTop: "-8px"}} className="cta cta-border mb-5">
-                                    
-                                    
-                                        <h4>ДЛЯ ЗАПРОСА КАТАЛОГА СЛЕДУЮЩЕГО СЕЗОНА, НАПИШИТЕ НАМ НА WHATSAPP</h4>
-                                        <div className="row  justify-content-around">
-                                            <div style={{maxWidth: "none"}} className="col-6 col-md-4 col-lg-4 col-xl-3">
-                                                <button className="wahtsapp">+996709999915</button>
-                                            </div>
-                                            <div className="col-12 col-md-4 col-lg-4 col-xl-3">
-                                                <button className="wahtsapp">+996709999915</button>
-                                            </div>
-                                        </div>
-                                    
-                                </div>
-                                <div className="products mb-3">
-                                    <div className="row justify-content-center">   
-                                        {console.log(product.productSorted)}                                     
-                                        {product.productSorted.filter(i => i.id).map((prod, index) => 
+                            <div className="col-lg-9 ">
+                                <div className="products mb-3 ">
+                                    <div className="row justify-content-center ">                                  
+                                        {/* {product.productSorted.filter(i => i.id).map((prod, index) => 
                                         
                                             <div className="col-6 col-md-4 col-lg-4 col-xl-3"  >
                                                 <div className="product product-7 text-center">
@@ -89,7 +76,28 @@ const ProdCategory = observer(() => {
                                                 </div>
                                             </div>
                                          
-                                            )}  
+                                            )}   */}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="products mb-3">
+                                        <div class="row justify-content-center">
+                                        {product.productSorted.filter(i => i.id).map((prod, index) =>
+                                            <div class="col-6 col-md-4 col-lg-4">
+                                                <div class="product product-7 text-center">
+                                                    <Link to={{pathname: `/catalog/${prod.seasoncategory}/${prod.title}`}} key={index}>
+                                                        <figure class="product-media">
+                                                            <a href="">
+                                                                <img src={prod.image} alt="Product image" class="product-image"/>
+                                                            </a>
+                                                        </figure>
+                                                    </Link>
+                                                    <div class="product-body">
+                                                        <h3 class="product-title"><a href="">{prod.title}</a></h3>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>)}
                                         </div>
                                     </div>
 
@@ -99,42 +107,15 @@ const ProdCategory = observer(() => {
 
                             </div>
                             <aside  className="col-lg-3 order-lg-first">
-                                <div className="sidebar sidebar-shop">
-
-                                    <div className="">
-                                        <div className="col-sm-10 col-md-8 col-lg-10">
-                                        
-                                            <form >
-                                                <div className=" input-group">
-                                                    <input 
-                                                        type="text" 
-                                                        className="form-control" 
-                                                        placeholder="Поиск..."  
-                                                        // value={input}
-                                                        // onChange={e => setInput(e.target.value)}
-                                                        required/><hr/>
-                                                    
-                                                        <button style={{width: "210px", height: "40px"}} className="btn btn-primary" type="submit">ПОИСК</button>
-                                                    
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    
-                                    
-                                    <div className="widget widget-clean">
+                                <div className="sidebar sidebar-shop"> 
+                                    <div className="widget widget-clean ">
                                     
                                         
                                         <div className="widget widget-collapsible">
-                                            
-                                            
-
-                                           
                                         </div>
                                     </div>
 
-                                    <div className="widget widget-collapsible">
+                                    <div className="widget widget-collapsible ">
 
                                         <div className="collapse show" >
                                             <div className="widget-body">
@@ -162,9 +143,10 @@ const ProdCategory = observer(() => {
                             </aside>
                         </div>
                     </div>
-                </div>
+                {/* </div> */}
             </main>
             <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
+            <Mobile/>
         </div>
        
         

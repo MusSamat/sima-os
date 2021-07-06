@@ -2,7 +2,7 @@
 
 .App1 {
     text-align: center;
-    background: url("./assets/p.png");
+    /* background: url("./assets/p.png"); */
     background-repeat: no-repeat;
     background-size: cover;
     height: 600px;
@@ -32,6 +32,7 @@
   }
   .city{
     margin-left: 20px;
+    font-family: 'Montserrat', sans-serif !important;
   }
   .clock{
     width: 120px;
@@ -205,6 +206,25 @@
     color: white !important; 
   }
 /* catalog */
+.cate{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.cat-blocks-container>p{
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.cat-blocks-container{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.filter{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.product-price{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.product-title{
+  font-family: 'Montserrat', sans-serif !important;
+}
 .product-title{
   font-family: 'Montserrat', sans-serif !important;
 }
@@ -212,6 +232,29 @@
   font-family: 'Montserrat', sans-serif !important;
 }
 /* product */
+/* position: relative;
+  max-height: 250px;
+  height: 250px; */
+  .product-image-gallery{
+    position: relative !important;
+    max-height: 250px !important;
+    height: 250px !important;
+  }
+.product-details-action>a{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.seny{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.breadcrumb-item{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.product-details>label{
+  font-family: 'Montserrat', sans-serif !important;
+}
+.details-row-size>p{
+  font-family: 'Montserrat', sans-serif !important;
+}
 .breadcrumb-item{
   font-family: 'Montserrat', sans-serif !important;
 }
@@ -229,11 +272,19 @@
   font-family: 'Montserrat', sans-serif !important;
 }
   /* Header */
+  .header .header-center
+  .header>.header-center{
+    margin-right: none !important;
+  }
+  .container {
+    width: 1300px !important;
+    max-width: 100% !important;
+}
   .Uslovia{
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
   }
   .voiti{
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
   }
 
   .header-bottom .menu > li > a:before{
@@ -288,11 +339,49 @@
     font-size: 14px !important;
   }
   /* main */
+  .monserat{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .intro-title{
+    color: #fff !important;
+  }
+  .text-left{
+    margin-left: -50px !important;
+  }
+  .tab-content{
+    border: none !important;
+  }
+  .trending .banner-content{
+    left: 30% !important;
+  }
+  .banner-title{
+    color: #EEA287 !important;
+  }
+  .banner-content{
+    max-width: 700px !important;
+  }
+  .btn-primary-dark{
+    border: 1px solid #000000 !important;
+  }
+
+  @media screen and (max-width: 800px){
+    .text-left {
+      margin-left: 0px !important;
+      }
+    .banner-title{
+      margin-left: 120px !important;
+    }
+    } 
+
+  .text-white{
+    font-weight: 600;
+  }
   .title{
     font-family: 'Montserrat', sans-serif !important;
   }
   .container > p{
     font-family: 'Montserrat', sans-serif !important;
+    color: #777 !important;
   }
   
   .icons-react{
@@ -376,6 +465,15 @@
   
 
   /* dostavka */
+  .col-sm-12>h4{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .container>h4{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .container>ul>li{
+    font-family: 'Montserrat', sans-serif !important;
+  }
   .uslovia{
     line-height: 1.5em;
     display: block;
@@ -419,8 +517,23 @@
     font-size: 1.5em;
     margin-bottom: 10px;
   }
+  .container>div>h4{
+    font-family: 'Montserrat', sans-serif !important;
+  }
 
   /* product */
+  .item{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .product-image-gallery{
+    height: none !important;
+  }
+  .owl-carousel .owl-item{
+    /* min-height: none !important; */
+  }
+  .owl-carousel{
+    width: 300px !important;
+  }
   .product-gallery-item::before{
     border: none;
   }
@@ -450,7 +563,11 @@
   .mb-5 > h4{
     font-family: 'Montserrat', sans-serif !important;
   }
-
+  /* catalog */
+  .product-title>a{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  
   /* footer */
   .widget-about{
     font-family: 'Montserrat', sans-serif !important;
@@ -463,4 +580,89 @@
   }
   .widget-list >li>a{
     font-family: 'Montserrat', sans-serif !important;
+  }
+
+  /* purchases */
+  .col-sm-12>h4{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  /* wishlist  */
+  .table{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .product-media{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  /* cart  */
+  .table>thead>tr>th{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .btn{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  .summary-title{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .summary-subtotal>td{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  .btn-block{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  /* checkout  */
+  .checkout-title{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  .col-sm-6>label{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  .form-control{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  .table-summary>tbody>tr>td{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  .col-lg-9>label{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  .btn-block>span{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  /* myAcount */
+  .tab-pane>p{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .tab-pane>p>span{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .tab-pane>p>a{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .nav-item>a{
+    font-family: 'Montserrat', sans-serif !important;
+
+  }
+  .entry-title{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .description{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  /* news */
+  .entry-content>p{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .read-more{
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 18px !important;
   }

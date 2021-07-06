@@ -132,7 +132,7 @@ const Myacount = observer(() => {
      }
 
     useEffect(() => {
-        console.log(user.orders)
+        window.scrollTo(0,0)
         user.getOrderData()
         
 
@@ -221,7 +221,7 @@ const Myacount = observer(() => {
                                                 </Modal.Header>
                                                 <Modal.Body style={{padding: "20px"}}>
                                                     <h3>Информация о заказе</h3>
-                                                    
+                                                    {console.log(user.orderId)}
                                                     {user.orderId.map((c, index)=>
                                                         <p key={index}>{c.items.map((i, index) =>
                                                             <table key={index} className="table table-cart table-mobile">
@@ -230,7 +230,8 @@ const Myacount = observer(() => {
                                                                         <th>ИТОГО</th>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>{i.product.title} ×  {c.items.map(i => i.quantity)}</td>
+                                                                        <Link to={{pathname: '/product/'+i.product.id}}>
+                                                                        <td>{i.product.title} ×  {c.items.map(i => i.quantity)}</td></Link>
                                                                         <td>{c.items.map(i => i.quantity) * c.items.map(i => i.product.price)} ₽</td>
                                                                     </tr>
                                                                     <tr>

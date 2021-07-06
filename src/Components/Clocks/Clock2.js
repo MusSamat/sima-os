@@ -32,7 +32,7 @@ class Clock1 extends React.Component {
       return(
         <React.Fragment>
           <div className="clock-face">
-          <img src={clock3}/>
+          <img src={clock}/>
             <div 
               style={{
                 transform: `translate(0, -50%) rotate(${hourRotation}deg)`,
