@@ -49,7 +49,7 @@ export default function Footer() {
                                         onChange={e => setName(e.target.value)} 
                                         type="text"/>
                                 </div>
-                                <div className="col-sm-2"></div>
+                                <div className="col-sm-1"></div>
                                 <div className="col-sm-3">
                                     <input 
                                         className="input-z" 
@@ -60,8 +60,8 @@ export default function Footer() {
                                 </div>
                                 
                             </div>
-                            <div onClick={sendName} class="btn-wrap">
-		                		<a href="" class="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "normal", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Отправить</span></a>
+                            <div style={{width: "250px"}} onClick={sendName} className="btn-wrap">
+		                		<a href="" class="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "600", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Отправить</span></a>
 		                	</div>
                             {/* <div class="btn-wrap">
 		                		<a href="" class="btn btn-outline-primary btn-rounded"><span>Отправить</span><i class="icon-long-arrow-right"></i></a>
