@@ -66,21 +66,21 @@ const News = observer(() =>{
                                
                             </div>)} */}
                             
+
                             {console.log(product.blog)}
                             {product.blog.map((blog, index) =>
-                            <div className="entry-item lifestyle shopping col-6" key={index}  >
+                            <div className="entry-item lifestyle shopping " key={index}  >
                                 
-                                <article className="entry entry-grid text-center">
-                                    <figure  className="entry-media">
-                                            <img className="news_image" src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
-                                    </figure>
-                                    <div className="entry-body">
+                                <article className="entry entry-grid text-center row">
+                                    
+                                    <div className="entry-body col-12 col-md-6 col-lg-6 ">
                                         <h6 className="entry-title">
                                            {blog.title}
                                         </h6>
-                                        <div className="entry-content" >
+                                        <div className="entry-content p-4" >
                                             <p style={{textAlign: "left", fontSize: '16px', textAlign: "justify"}}>
-                                                {blog.description.slice(0, 500)}
+                                                {blog.description.slice(0, 750)}
+                                                
                                             </p>
                                             <div className="entry-meta" style={{display: "flex"}}>
                                                 <span className="entry-author">
@@ -88,15 +88,20 @@ const News = observer(() =>{
                                                 </span>
                                                 <span className="meta-separator">|</span>
                                                 <a href=""><Moment format="YYYY.MM.DD" date={blog.created}></Moment></a>
+                                                {/* <a href="" className="read-more">Подробнее</a> */}
                                             </div>
                                             <Link to={{pathname: '/single/'+ blog.id}}>
                                                 <button  className="btn btn-outline-dark btn-block col-12 news-btn"><span>подробнее</span><i className="icon-refresh"></i></button>
+                                                
                                                 
                                             </Link>
                                         </div>
                                        
                                     </div>
-                                </article>
+                                    <figure  className="entry-media col-12 col-md-6 col-lg-6">
+                                            <img className="" src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
+                                    </figure>
+                                </article><hr />
                                 
                             </div>)}
                         {/* </div> */}

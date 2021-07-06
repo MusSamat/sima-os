@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import axios from "axios"
 import { FaOdnoklassnikiSquare } from "react-icons/fa";
 import "../../App.css";
+import { Link } from 'react-router-dom';
 
 
 export default function Footer() {
@@ -36,19 +37,20 @@ export default function Footer() {
     return (
         <div>
 
-            <div className="mb-10" style={{textAlign: "center", padding: "30px", marginTop: " 20px",backgroundColor: "#F6F6F6", boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)"}}>
+            <div className="mb-10 mt-4  " style={{textAlign: "center", padding: "30px", marginTop: " 20px",backgroundColor: "#F6F6F6", boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)"}}>
                         <div className="container-z" >
                             <h2 className="mb-3" style={{color: "#EEA287"}}>Закажите обратный звонок</h2>
                             <div className="row d-flex justify-content-center"  >
-                                <div className="col-sm-4">
+                                <div className="col-sm-3 d-flex justify-content-center mb-2">
                                     <input 
-                                        className="input-z" 
+                                        className="input-z " 
                                         placeholder="Ваше имя"
                                         value={name}
                                         onChange={e => setName(e.target.value)} 
                                         type="text"/>
                                 </div>
-                                <div className="col-sm-4">
+                                <div className="col-sm-2"></div>
+                                <div className="col-sm-3">
                                     <input 
                                         className="input-z" 
                                         placeholder="Номер телефона"
@@ -59,8 +61,19 @@ export default function Footer() {
                                 
                             </div>
                             <div onClick={sendName} class="btn-wrap">
-		                		<a style={{fontSize: "18px"}} href="" class="btn btn-primary btn-round">Отправить</a>
+		                		<a href="" class="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "normal", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Отправить</span></a>
 		                	</div>
+                            {/* <div class="btn-wrap">
+		                		<a href="" class="btn btn-outline-primary btn-rounded"><span>Отправить</span><i class="icon-long-arrow-right"></i></a>
+		                	</div> */}
+                                {/* <button className="btn">
+                                    <span>Показать</span>
+                                    <i className="icon-long-arrow-right"></i>
+                                </button>
+                            <div onClick={sendName} className="btn">
+                                <span>Показать</span>
+		                		<a style={{fontSize: "18px"}} href="" class="btn btn-primary btn-round">Отправить</a>
+		                	</div> */}
                         </div>
                         
                     </div> 
@@ -104,18 +117,18 @@ export default function Footer() {
                             </div>
 
                             <div className="col-sm-12 col-lg-4">
-                                {/* <div className="widget">
-                                    <h4 className="widget-title">МЕНЮ</h4>
+                                <div className="widget">
+                                    <h4 className="widget-title">Сотрудничество</h4>
 
-                                    <ul className="widget-list">
+                                    {/* <ul className="widget-list">
                                         <li style={{fontSize: "16px"}}><a href="#">Главная</a></li>
                                         <li style={{ fontSize: "16px"}}><a href="#">Каталог</a></li>
                                         <li style={{ fontSize: "16px"}}><a href="#">Доставка</a></li>
                                         <li style={{ fontSize: "16px"}}><a href="#">Контакты</a></li>
                                         <li style={{fontSize: "16px"}}><a href="#">Новости</a></li>
                                         <li style={{ fontSize: "16px"}}><a href="#">О компании</a></li>
-                                    </ul>
-                                </div> */}
+                                    </ul> */}
+                                </div>
                             </div>
 
                             

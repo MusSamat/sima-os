@@ -339,6 +339,9 @@
     font-size: 14px !important;
   }
   /* main */
+  .btn{
+    font-family: 'Montserrat', sans-serif !important;
+  }
   .monserat{
     font-family: 'Montserrat', sans-serif !important;
   }
@@ -569,6 +572,9 @@
   }
   
   /* footer */
+  .container-z>h2{
+    font-family: 'Montserrat', sans-serif !important;
+  }
   .widget-about{
     font-family: 'Montserrat', sans-serif !important;
   }
@@ -659,6 +665,9 @@
     font-family: 'Montserrat', sans-serif !important;
   }
   /* news */
+  .entry-media{
+    background-color: #fff !important;
+  }
   .entry-content>p{
     font-family: 'Montserrat', sans-serif !important;
   }
