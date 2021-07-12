@@ -15,6 +15,8 @@ export const SINGLE_ROUTE = '/single/:id'
 export const MYACOUNT_ROUTE = '/my-acount'
 export const SUBCATEGORY_ROUTE = '/subcategory'
 export const PURCHASES_ROUTE = '/purchases'
+export const FORGET_ROUTE = '/forget'
+export const CHANGEPASS_ROUTE = '/api/password_reset/validate_token/:token'
 
 
 export const ORDER_ROUTE = '/orders'

@@ -259,6 +259,17 @@ const Product = observer((props) => {
           return prevIndex - 1;
         });
       };
+
+      var getValue = function getValue(object, propertyName) {
+        return typeof object === 'undefined' ? undefined : object[propertyName]
+        }
+        var getNestedValueDeclaratively = function getNestedValueDeclaratively(object,
+         propertyName) {
+             console.log(propertyName)
+        return propertyName.split('.').reduce(getValue, object)
+        }
+        console.log(getNestedValueDeclaratively({bar: 'baz'}, 'bar') === 'baz')
+        console.log(getNestedValueDeclaratively({bar: { baz: 1 }}, 'bar.baz')=== 1)
     
     useEffect(() => {
         window.scrollTo(0,0)
@@ -368,12 +379,16 @@ const Product = observer((props) => {
                                                 </a>
                                             </figure>
 
-                                            <div id="product-zoom-gallery" className="product-image-gallery">                                                
+                                            <div id="product-zoom-gallery" className="product-image-gallery">    
+                                            {/* {console.log(leftImages)}                                             */}
                                                 {leftImages.map((img, index) =>
-                                                        <a onClick={() =>  {
-                                                            setSelectedImage(img)}} className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} 
-                                                            data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
+
+                                                        <a onClick={() =>  { 
+                                                            
+                                                            setSelectedImage(`${img}, ${console.log(img)}`)}} className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} 
+                                                            data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`  }>
                                                             <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
+                                                          {/* {console.log(img)} */}
                                                         </a>
                                                     )}
                                                    
@@ -387,18 +402,6 @@ const Product = observer((props) => {
                                         
                                         
                                         <h1 className="product-title">{product.product.title}</h1>
-                                        {/* <div className="ratings-container justify-content-between">
-                                            
-                                            <div style={{ fontWeight:"400"}} className="product-cat">
-                                                <span style={{ fontWeight:"450"}}>КАТЕГОРИЯ :</span>
-                                                <a style={{ fontWeight:"450"}}>МАГАЗИН /</a>
-                                                {categoryName.map((i, index) =>
-                                                    <a style={{ fontWeight:"450"}}>{i.title} / </a>
-                                                )}
-                                                <a style={{ fontWeight:"450"}}>{product.product.title}</a>
-                                            </div>
-                                        </div> */}
-
                                         <div style={{color: "black", fontWeight:"450"}} className="product-price">
                                             {user.isAuth ? `${product.product.price} ₽`  : ""}
                                         </div>
@@ -406,7 +409,7 @@ const Product = observer((props) => {
                                         <div className="details-filter-row details-row-size">
                                         
                                         
-                                        <div class="product-gallery-carousel owl-carousel owl-full owl-nav-dark">
+                                        {/* <div class="product-gallery-carousel owl-carousel owl-full owl-nav-dark">
                                             {product.imagesUser.map((img, index) =>
                                             <figure className="product-gallery-image">
                                                 <a onClick={() => {
@@ -422,7 +425,7 @@ const Product = observer((props) => {
                                             )}
 
                                             
-                                        </div>
+                                        </div> */}
                                         
                                    
                                         {/* <Carousel
@@ -444,24 +447,26 @@ const Product = observer((props) => {
                                             </Carousel> */}
                                         
 
-                                            {/* <div className="product-nav product-nav-thumbs"> */}
+                                            <div className="product-nav product-nav-thumbs">
                                             
-                                                {/* {product.imagesUser.map((img, index) =>
-                                                    <a key={index}  style={{height: "6rem", border: "none", marginRight: "7px", cursor: "pointer"}} 
-                                                        onClick={() => {
-                                                            
-                                                        const d = [...img.images]
-                                                            setLeftImages(d)
-                                                            setSelectedImage(d[0])
-                                                            setImgTitle([...img.title])
-                                                        }} className="active">
-                                                            <img src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product desc"/>
-                                                    
+                                                {product.imagesUser.map((img, index) =>
+                                                    <div key={index} className="product-gallery-image">
+                                                        <a   
+                                                            onClick={() => {
+                                                                
+                                                            const d = [...img.images]
+                                                                setLeftImages(d)
+                                                                setSelectedImage(d[0])
+                                                                setImgTitle([...img.title])
+                                                            }} className="active mt-3 mb-3">
+                                                                <img style={{width: "100px", height: "100px", marginLeft: "10px", cursor: "pointer"}} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product desc"/>
                                                         
-                                                    </a>
-                                                    )} */}
+                                                            
+                                                        </a>
+                                                    </div       >
+                                                    )}
                                                 
-                                            {/* </div> */}
+                                            </div>
                                         </div>
 
                                         <div className="details-filter-row details-row-size">
@@ -493,10 +498,10 @@ const Product = observer((props) => {
                                                 </div>
                                             </div>
                                         </> :
-                                        <div className=" justify-content-center text-center">
+                                        <div className=" justify-content-center text-center mt-3">
                                             <h5 className="seny">ЗАРЕГИСТРИРУЙТЕСЬ, ЧТОБЫ ПОСМОТРЕТЬ ЦЕНЫ</h5>
                                             <Link to={LOGIN_ROUTE}>
-                                                <a href="" className="btn btn-primary btn-rounded" >Регистрация</a>
+                                                <a href="" className="btn btn-primary btn-rounded mb-4" >Регистрация</a>
                                                 {/* <Button style={{fontSize: "20px", borderRadius: "30px", marginLeft: "30px", height: "40px", margin: "20px"}} variant="danger">Регистрация</Button> */}
                                             </Link>
                                         </div>
@@ -512,13 +517,12 @@ const Product = observer((props) => {
 
 
                                         <div className="row">
-                                            <div className="col-md-12">
+
+
+                                        <div className="col-md-12">
                                                 <ul className="nav nav-pills" id="tabs-5" role="tablist">
                                                     <li className="nav-item">
                                                         <a className="nav-link active" id="tab-17-tab" data-toggle="tab" href="#tab-17" role="tab" aria-controls="tab-17" aria-selected="true">Описание</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" id="tab-18-tab" data-toggle="tab" href="#tab-18" role="tab" aria-controls="tab-18" aria-selected="false">Детали</a>
                                                     </li>
                                                     <li className="nav-item">
                                                         <a className="nav-link" id="tab-19-tab" data-toggle="tab" href="#tab-19" role="tab" aria-controls="tab-19" aria-selected="false">Отзывы ({product.reviews.length})</a>
@@ -545,6 +549,20 @@ const Product = observer((props) => {
                                                                             {/* <div class="ratings">
                                                                                 <div class="ratings-val"></div>
                                                                             </div> */}
+                                                                            {/* {console.log(r.rating)} */}
+                                                                            {  
+                                                                            stars.map((_, index)=>{
+                                                                                return(
+                                                                                    <FaStar
+                                                                                        key={index}
+                                                                                        size={13}
+                                                                                        style={{
+                                                                                            marginRight: 3,
+                                                                                        }}
+                                                                                        color={index <= r.rating  ? colors.orange : colors.grey}
+                                                                                    />
+                                                                                )
+                                                                            }) }
                                                                         </div>
                                                                         <span class="review-date"></span>
                                                                     </div>
@@ -554,16 +572,11 @@ const Product = observer((props) => {
                                                                         <div class="review-content">
                                                                             <p style={{fontSize: "16px"}}>{r.text}</p>
                                                                         </div>
-
-                                                                        <div class="review-action">
-                                                                            <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
-                                                                            <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>)}
                                                         </div>
-                                                        <div className="ratings-container justify-content-between">
+                                                        <div className="ratings-container justify-content-between mt-4">
                                                             <p>ВАШ ОТЗЫВ *</p>
                                                             <div>
                                                                 {stars.map((_, index)=>{
@@ -597,6 +610,9 @@ const Product = observer((props) => {
 
                                                         </textarea>
                                                         <div className="d-grid gap-2">
+                                                            {/* <div className="product-details-action">
+                                                                <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product" ><span style={{color: "inherit"}}>Отправить</span></a>
+                                                            </div> */}
                                                             <button className="button-otzyv" onClick={(e)=>sendRating(e)} type="button">Отправить</button>
                                                             
                                                         </div>
@@ -647,11 +663,16 @@ const Product = observer((props) => {
                                             
                                             
                                         </div>
+                                            
+                                            
                                         
                                     </div>
                                 </div>
+                                
                             </div>
+                            
                         </div>
+                        
                     </div>
 
                     

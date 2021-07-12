@@ -196,8 +196,8 @@
   .vse{
     padding-left: 5.4rem;
   }
-  .s-title{
-    color: red;
+  .s-title:hover{
+    color: #EEA287 !important;
   }
   .korziny{
 
@@ -232,9 +232,16 @@
   font-family: 'Montserrat', sans-serif !important;
 }
 /* product */
-/* position: relative;
-  max-height: 250px;
-  height: 250px; */
+.product-nav-thumbs a, .product-nav-thumbs span{
+  width: 8rem !important;
+  height: 8rem  !important;
+}
+.product-nav-thumbs a.active, .product-nav-thumbs a:hover, .product-nav-thumbs a:focus, .product-nav-thumbs span.active, .product-nav-thumbs span:hover, .product-nav-thumbs span:focus{
+  box-shadow: none !important;
+}
+.product-nav-thumbs a, .product-nav-thumbs span {
+  border: none !important;
+}
   .product-image-gallery{
     position: relative !important;
     max-height: 250px !important;
@@ -272,6 +279,15 @@
   font-family: 'Montserrat', sans-serif !important;
 }
   /* Header */
+
+  .header-right{
+    margin-right: 50px !important;
+  }
+  .header .header-center{
+    margin-right: 23rem !important;
+  }
+  
+
   .header .header-center
   .header>.header-center{
     margin-right: none !important;
@@ -301,6 +317,7 @@
     font-family: 'Montserrat', sans-serif !important;
   }
   .sf-with-ul{
+    /* font-family: 'Poppins', sans-serif !important; */
     font-family: 'Montserrat', sans-serif !important;
   }
   .top-menu{
@@ -312,9 +329,15 @@
   .header > a{
     font-family: 'Montserrat', sans-serif !important;
   }
+  .nav-pills.nav-big .nav-link{
+    color: none !important;
+  }
   
   .active{
-    color: #cc9966 !important; 
+    color: #EEA287 !important;
+  }
+  a:hover, a:focus{
+    color: #EEA287 !important;
   }
   .header-bottom .menu > li > a:before{
     transform: scale(none) !important;
@@ -332,7 +355,7 @@
     background-color: none;
   }
   .header .wishlist-link .wishlist-count, .header .cart-dropdown .cart-count{
-    background-color: #c96 !important;
+    background-color: #EEA287 !important;
   }
   .gmail{
     text-transform: none;
@@ -347,6 +370,7 @@
   }
   .intro-title{
     color: #fff !important;
+    left: -10px !important;
   }
   .text-left{
     margin-left: -50px !important;
@@ -435,6 +459,7 @@
     border-color: #777;
     margin-bottom: 10px;
     font-family: 'Montserrat', sans-serif !important;
+    font-size: 20px;
   }
   .button-t{
     background-color:darksalmon;
@@ -506,7 +531,7 @@
     float: left;
     position: fixed;
     top: 88%;
-    left: 1%;
+    right: 1%;
     width: 60px;
     height: 60px;
     z-index: 999;
@@ -525,6 +550,12 @@
   }
 
   /* product */
+  .fade>h5{
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .col-auto>h4>a{
+    font-family: 'Montserrat', sans-serif !important;
+  }
   .item{
     font-family: 'Montserrat', sans-serif !important;
   }
@@ -572,6 +603,9 @@
   }
   
   /* footer */
+  .btn-outline-dark {
+    border-color: #000000 !important;
+  }
   .container-z>h2{
     font-family: 'Montserrat', sans-serif !important;
   }
@@ -664,6 +698,13 @@
   .description{
     font-family: 'Montserrat', sans-serif !important;
   }
+  .form-tab .form-footer a:not(.forgot-link) {
+    text-decoration: none !important;
+  }
+  .forget{
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 14px;
+  }
   /* news */
   .entry-media{
     background-color: #fff !important;
@@ -674,4 +715,8 @@
   .read-more{
     font-family: 'Montserrat', sans-serif !important;
     font-size: 18px !important;
+  }
+  /* contact */
+  .contact-box>p{
+    font-family: 'Montserrat', sans-serif !important;
   }

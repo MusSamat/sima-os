@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import "../../App.css";
-import Restangle from "../../assets/Rectangle.png"
 import Restangle30 from "../../assets/Rectangle30.png"
 import Frame from "../../assets/Frame.png"
 import Restangle32 from "../../assets/Rectangle31.png"
@@ -67,7 +66,7 @@ const  Main = observer(() => {
                         <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>    
                             
                             <div className="container intro-content text-left ">
-                                <h1 className="intro-title">{img.title}<br/><strong>sale</strong></h1>
+                                <h1 className="intro-title">{img.title}<br/>< strong style={{marginLeft: "-9px"}}>sale</strong></h1>
 
                                 <Link to={SUBCATEGORY_ROUTE} className="btn">
                                     <span style={{fontSize: "20px"}}>Показать</span>
@@ -79,7 +78,7 @@ const  Main = observer(() => {
 
                        
 
-                    <div className="container mt-4">
+                    <div className="container mt-6">
                             <ul className="nav nav-pills nav-big nav-border-anim justify-content-center mb-2 mb-md-3" role="tablist">
                                 <li className="nav-item">
                                     <a className="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Новые</a>
@@ -93,7 +92,7 @@ const  Main = observer(() => {
                         <div className="product-details-tab">
                             
                         
-                        <div className="tab-content">
+                        <div className="tab-content mt-3">
                             <div className="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
                                 <div className="products mb-3">
                                     <div className="row justify-content-center">
@@ -156,7 +155,7 @@ const  Main = observer(() => {
                     </div>
                 </div>
 
-                    <div style={{boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)"}} className="trending mb-3">
+                    <div style={{boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)"}} className="trending mb-6">
                         <a href="">
                         
                             <img src={Restangle30} alt="Banner"/>
@@ -171,7 +170,7 @@ const  Main = observer(() => {
 
                 <div className="container ">
 
-                    <div className="products mt-8 mb-4 ">
+                    <div className="products mt-10 mb-4 ">
                         <div className="row justify-content-center">
                             {product.newProductSeason.slice(0,8).map((discout, index)=>
                             <div key={index} className="col-6 col-md-4 col-lg-3">
@@ -198,20 +197,23 @@ const  Main = observer(() => {
                         </div>
                         
                      </div>
-                            <div className="btn-wrap d-flex justify-content-center">
-		                		<a href="" className="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "normal", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Отправить</span></a>
+                            
+                            <div className="btn-wrap d-flex justify-content-center mb-8">
+                                <Link to={SUBCATEGORY_ROUTE} className="btn">
+		                		    <a href="" className="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "normal", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Показать</span></a>
+                                </Link>
 		                	</div>
 
                 </div>
                 
-                <div className="trending mt-3 d-flex justify-content-center  ">
+                <div className="trending mt-8 d-flex justify-content-center mb-6 ">
                     <img  src={Frame} alt="Banner"/>
                 </div>
                 
 
                     <div className="container mt-8 ">
                          
-                        <div className="row">
+                        <div className="row mt-4">
                             <div  className="col-12 mb-10 col-xl-6 mt-2 mb-12">
                                 <Link to={ABOUT_ROUTE}> 
                                     <div  className="position-relative d-flex justify-content-center align-items-center mt-8 mb-3 ">

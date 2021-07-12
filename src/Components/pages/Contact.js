@@ -18,20 +18,20 @@ export default function Contact() {
                         <div className="row">
                             <div className="col-md-4">
                                 <div className="contact-box text-center">
-                                    <h5>Адрес:</h5>
+                                    <h5>Адрес</h5>
 
                                     <p style={{fontSize: "18px"}}>Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</p>
 
                                     <p style={{fontSize: "18px"}}>Рынок «Дордой»</p>
                                     <p style={{fontSize: "18px"}}>5 проход конт. 458/1</p>
-                                    <p style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
+                                    
                                 </div>
                             </div>
 
                             <div className="col-md-4">
                                 <div className="contact-box text-center">
-                                    <h5>Руководитель:</h5>
-
+                                    <h5>Руководитель</h5>
+                                    <p style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
                                     <p style={{fontSize: "18px"}}>+996 (709) 99 99 15</p>
                                     <p style={{fontSize: "18px"}}>+ 996 (700) 50 60 46</p>
                                     <p style={{fontSize: "18px"}}><FaWhatsappSquare style={{ color: "green",fontSize: "30px"}}/> +996 (705) 55 58 29</p>
@@ -41,7 +41,7 @@ export default function Contact() {
 
                             <div className="col-md-4">
                                 <div className="contact-box text-center">
-                                    <h5>Социальное</h5>
+                                    <h5>Мы в соц. сетях</h5>
 
                                     <div  className="social-icons social-icons-color justify-content-center">
                                         <a style={{fontSize: "25px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>

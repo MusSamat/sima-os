@@ -1,20 +1,24 @@
-import React, { useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect, useRef} from 'react';
 import axios from "axios";
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
 import { useHistory } from 'react-router';
-import { SUBCATEGORY_ROUTE, MYACOUNT_ROUTE, FORGET_ROUTE } from '../../utils/Const';
-import "../../App.css";
+import { SUBCATEGORY_ROUTE, MYACOUNT_ROUTE } from '../../utils/Const';
+import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
+import "../../App.css";
 
-const Login = observer(() => {
+const ChangePass = observer((props) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [password1, setPassword1] = useState()
     const [username, setUsername] = useState()
     const {user} = useContext(Context)
     const history = useHistory()
+    const token = props.match.params.token
+    console.log(props)
+    console.log(token)
     
 
     
@@ -24,9 +28,9 @@ const Login = observer(() => {
     
 
     const sing = () => {
-        const article = {email, password, username}
+        const article = {password, token}
         
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, article)
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/password_reset/confirm/`, article)
             .then(response => {
                 setEmail("")
                 notify()
@@ -38,7 +42,7 @@ const Login = observer(() => {
 
         
     }
-    const login = (event) => {
+    const ForgetPass = (event) => {
         const article = {password, username}
         
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, article)
@@ -76,71 +80,31 @@ const Login = observer(() => {
                                 <div className="form-tab">
                                     <ul className="nav nav-pills nav-fill" role="tablist">
                                         <li className="nav-item">
-                                            <a className="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="false">Логин</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab" aria-controls="register-2" aria-selected="true">Регистрация</a>
+                                            <a className="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab" aria-controls="register-2" aria-selected="true">
+                                                Сброс пароля
+                                            </a>
                                         </li>
                                     </ul>
                                     <div className="tab-content">
                                         <div className="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
-                                            <form onSubmit={login}>
-                                                <div className="form-group">
-                                                    <input 
-                                                        type="text" 
-                                                        className="form-control" 
-                                                        id="singin-email-2" 
-                                                        name="singin-email" 
-                                                        placeholder="Имя пользователя или email"
-                                                        required
-                                                        value={username}
-                                                        onChange={e => setUsername(e.target.value)}
-                                                    />
-                                                </div>
-                                                
-                                                <div className="form-group">
-                                                    <input 
-                                                        type="password" 
-                                                        className="form-control" 
-                                                        id="singin-password-2" 
-                                                        name="singin-password" 
-                                                        placeholder="Пароль"
-                                                        required
-                                                        value={password}
-                                                        onChange={e => setPassword(e.target.value)}
-                                                    />
-                                                </div>
-
-                                                <div className="form-footer">
-                                                    <button  type="submit" className="btn btn-outline-primary-2">
-                                                        <span style={{fontSize: "18px"}}>Войти</span>
-                                                    </button>
-                                                </div>
-                                            </form>
+                                           
                                         </div>
                                         <ToastContainer />
                                         <div className="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
                                             <form action="#">
                                             <div className="form-group">
-                                                    <input 
-                                                        type="text" 
-                                                        className="form-control" 
-                                                        name="register-email"
-                                                        placeholder="Имя"
-                                                        required
-                                                        value={username}
-                                                        onChange={e => setUsername(e.target.value)}
-                                                    />
+                                                    
                                                 </div>
+                                                <p className="forget mb-3">Электронный адрес, указанный в вашем профиле</p>
                                                 <div className="form-group">
                                                     <input 
-                                                        type="email" 
+                                                        type="password" 
                                                         className="form-control" 
                                                         id="register-email-2" 
                                                         name="register-email"
-                                                        placeholder="Ваша электронная почта"
+                                                        placeholder="Пароль"
                                                         required
-                                                        value={email}
+                                                        value={password}
                                                         onChange={e => setEmail(e.target.value)}
                                                     />
                                                 </div>
@@ -151,24 +115,17 @@ const Login = observer(() => {
                                                         className="form-control" 
                                                         id="register-password-2" 
                                                         name="register-password"
-                                                        placeholder="Пароль" 
+                                                        placeholder="Подтвердить Пароль" 
                                                         required
-                                                        value={password}
+                                                        value={password1}
                                                         onChange={e => setPassword(e.target.value)}
                                                     />
                                                 </div>
-                                                
-                                                    <p className="forget">Если Вы забыли свой пароль,  нажмите на кнопку "забыл пароль".</p>
-                                               
 
                                                 <div className="form-footer">
                                                     <button onClick={()=> sing()} type="submit" className="btn btn-outline-primary-2">
-                                                        <span style={{fontSize: "18px"}}>Регистрация</span>
+                                                        <span style={{fontSize: "18px"}}>Получить код</span>
                                                     </button>
-                                                    <Link to={FORGET_ROUTE}>
-                                                        <a href="" className="btn btn-link">Забыли пароль?</a>
-                                                    </Link>
-                                                   
                                                 </div>
                                             </form>
                                             
@@ -185,4 +142,4 @@ const Login = observer(() => {
     )
 })
 
-export default  Login;
+export default  ChangePass;

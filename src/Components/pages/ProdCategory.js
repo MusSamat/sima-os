@@ -83,6 +83,7 @@ const ProdCategory = observer(() => {
                                     <div class="products mb-3">
                                         <div class="row justify-content-center">
                                         {product.productSorted.filter(i => i.id).map((prod, index) =>
+                                            
                                             <div class="col-6 col-md-4 col-lg-4">
                                                 <div class="product product-7 text-center">
                                                     <Link to={{pathname: `/catalog/${prod.seasoncategory}/${prod.title}`}} key={index}>
@@ -91,13 +92,13 @@ const ProdCategory = observer(() => {
                                                                 <img src={prod.image} alt="Product image" class="product-image"/>
                                                             </a>
                                                         </figure>
+                                                        <div class="product-body">
+                                                            <h3 class="product-title"><a href="">{prod.title}</a></h3>
+                                                        </div>
                                                     </Link>
-                                                    <div class="product-body">
-                                                        <h3 class="product-title"><a href="">{prod.title}</a></h3>
-                                                        
-                                                    </div>
                                                 </div>
-                                            </div>)}
+                                            </div>
+                                            )}
                                         </div>
                                     </div>
 
