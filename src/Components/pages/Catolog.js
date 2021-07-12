@@ -249,7 +249,7 @@ const  Catolog = observer((props) => {
                                     </div>
 
                                     <div className="cat-blocks-container">
-                                            <p onClick={() => product.changeDiscounted()} style={{  cursor: "pointer", marginBottom: "30px"}}>ТОВАРЫ СО СКИДКОЙ</p>                                            
+                                            <p onClick={() => product.changeDiscounted()} className=" s-title" style={{  cursor: "pointer", marginBottom: "30px"}}>ТОВАРЫ СО СКИДКОЙ</p>                                            
                                             {product.discount.slice(0,4).map((discout, index)=>
                                                 <div key={index}>
                                                 <div  className="row">

@@ -39,23 +39,23 @@ export default function Mobile() {
                         </ul>
                     </nav>
 
-                    <div className="social-icons">
+                    {/* <div className="social-icons">
                         <a href="#" className="social-icon" target="_blank" title="Facebook"><i className="icon-facebook-f"></i></a>
                         <a href="#" className="social-icon" target="_blank" title="Twitter"><i className="icon-twitter"></i></a>
                         <a href="#" className="social-icon" target="_blank" title="Instagram"><i className="icon-instagram"></i></a>
-                        <a href="#" className="social-icon" target="_blank" title="Youtube"><i className="icon-youtube"></i></a>
-                    </div>
+                        <a href="#" className="social-icon" target="_blank" title="odnoklassniki"><i className="icon-odnoklassniki"></i></a>
+                    </div> */}
                 </div>
             </div>
-            <div class="mobile-menu-container">
-        <div class="mobile-menu-wrapper">
-            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+            <div className="mobile-menu-container">
+        <div className="mobile-menu-wrapper">
+            <span className="mobile-menu-close"><i className="icon-close"></i></span>
 
             
             
-            <nav class="mobile-nav">
-                <ul class="mobile-menu">
-                    <li class="active">
+            <nav className="mobile-nav">
+                <ul className="mobile-menu">
+                    <li className="active">
                         <a href="/"> 
                                 ГЛАВНАЯ
                         </a>
@@ -79,11 +79,11 @@ export default function Mobile() {
                 </ul>
             </nav>
 
-            <div class="social-icons">
-                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+            <div className="social-icons">
+                <a href="#" className="social-icon" target="_blank" title="Facebook"><i className="icon-facebook-f"></i></a>
+                <a href="#" className="social-icon" target="_blank" title="Twitter"><i className="icon-twitter"></i></a>
+                <a href="#" className="social-icon" target="_blank" title="Instagram"><i className="icon-instagram"></i></a>
+                <a href="#" className="social-icon" target="_blank" title="odnoklassniki"><i className="icon-odnoklassniki"></i></a>
             </div>
         </div>
     </div>

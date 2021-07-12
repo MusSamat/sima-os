@@ -16,7 +16,7 @@ export default function Delivery() {
 			<div className="container">
                 <div className="row">
                 	<div className=" col-sm-12">
-                        <h4 style={{ marginTop:"30px",}}>Осуществляем доставку в города России, Казахстана, Беларуси, Узбекистана, и по всему миру, любым удобным для Вас способом! </h4>
+						<div style={{display: "flex", justifyContent: "center", margin: "20px", }}><h3 style={{color: "#EEA287"}}>Условия доставки</h3 ></div>
                 	</div>
                 </div>
 				<img style={{backgroundSize: "cover", width: "100%", height:"80%"}} src={dostavka1}/>
@@ -24,8 +24,8 @@ export default function Delivery() {
         <main className="main">
             <div className="page-content pb-0">
                 <div className="container">
-
-					<div style={{display: "flex", justifyContent: "center", margin: "20px", }}><h3 style={{color: "#EEA287"}}>Условия доставки</h3 ></div>
+					<h4 style={{ marginTop:"30px", marginBottom: "10px", textAlign: "center", color: "#EEA287"}}>Осуществляем доставку в города России, Казахстана, Беларуси, Узбекистана, и по всему миру, любым удобным для Вас способом! </h4>
+					
 					<p  style={{fontSize: "16px", textAlign: "justify", textIndent: "30px"}}>Доставка посылок производится железнодорожным, авиа и автомобильным транспортом в зависимости от города
 					Доставка заказов полностью оплачивается Заказчиком . Транспортировка груза производится транспортными компаниями, до центральных городов.
 					Дополнительные отправки и пересылки партий товара в удаленные населенные пункты оплачиваются заказчиком самостоятельно. Доставка до терминалов транспортных компаний бесплатная

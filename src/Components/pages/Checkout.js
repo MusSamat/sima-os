@@ -145,16 +145,16 @@ const Checkout = observer(() => {
 		                					<tbody >
 											
 											
-											{user.items.map((item, index)=>
+											{user.items?.map((item, index)=>
 		                						<tr  key={index}>
 		                							<td>{item.product.title}</td>
-		                							<td>{(item.product.price*item.quantity).toFixed(2)} ₽</td>
+		                							<td>{(item.product?.price*item.quantity).toFixed(2)} ₽</td>
 		                						</tr>)}
 		                						<tr className="summary-subtotal">
 		                							<td>ПОДЫТОГ:</td>
 															{
-                                                                user.items.map((item, index) => {
-                                                                     sum = sum + item.product.price * item.quantity
+                                                                user.items?.map((item, index) => {
+                                                                     sum = sum + item.product?.price * item.quantity
                                                                     })
                                                             }
 		                							<td>{sum.toFixed(2)} ₽</td>

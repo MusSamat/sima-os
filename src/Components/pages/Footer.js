@@ -2,7 +2,8 @@ import React, {useState, useEffect, useContext} from 'react';
 import axios from "axios"
 import { FaOdnoklassnikiSquare } from "react-icons/fa";
 import "../../App.css";
-import { Link } from 'react-router-dom';
+import { NavLink, Router } from 'react-router-dom';
+import { DELIVERY_ROUTE } from '../../utils/Const';
 
 
 export default function Footer() {
@@ -60,8 +61,8 @@ export default function Footer() {
                                 </div>
                                 
                             </div>
-                            <div style={{width: "250px"}} onClick={sendName} className="btn-wrap">
-		                		<a href="" class="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "600", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Отправить</span></a>
+                            <div style={{width: "250px",}} onClick={sendName} className="btn-wrap">
+		                		<a href="" class="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "600", fontStyle: "normal", fontSize: "20px", lineHeight: "24px"}}>Отправить</span></a>
 		                	</div>
                             {/* <div class="btn-wrap">
 		                		<a href="" class="btn btn-outline-primary btn-rounded"><span>Отправить</span><i class="icon-long-arrow-right"></i></a>
@@ -86,11 +87,18 @@ export default function Footer() {
                             <div className="col-sm-12 col-lg-4">
                                 <div className="widget widget-about">
                                     <h4 className="widget-title">Контакты</h4>
-                                    {/* <img src="assets/images/demos/demo-8/logo-footer.png" className="footer-logo" alt="Footer Logo" width="82" height="25"/> */}
-                                    <address style={{fontSize: "18px"}} className="widget-list">Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</address>
+                                    <p style={{fontSize: "18px"}}>Кыргызстан,  720016 г. Бишкек,</p>
+                                    <p style={{fontSize: "18px"}}>ул. Фрунзе 144а</p>
                                     <p style={{fontSize: "18px"}}>Рынок «Дордой»</p>
-                                        <p style={{fontSize: "18px"}}>5 проход конт. 458/1</p>
-                                        <p style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
+                                    <p style={{fontSize: "18px"}}>5 проход конт. 458/1</p>
+                                    <p style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
+                                    <div className="social-icons social-icons-color">
+                                        <a style={{fontSize: "20px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                                        <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                                        <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                                        <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
+                                        
+                                    </div>
                                     
                                     <div className="widget-about-info">
                                         <div className="row">
@@ -119,15 +127,15 @@ export default function Footer() {
                             <div className="col-sm-12 col-lg-4">
                                 <div className="widget">
                                     <h4 className="widget-title">Сотрудничество</h4>
-
-                                    {/* <ul className="widget-list">
-                                        <li style={{fontSize: "16px"}}><a href="#">Главная</a></li>
-                                        <li style={{ fontSize: "16px"}}><a href="#">Каталог</a></li>
-                                        <li style={{ fontSize: "16px"}}><a href="#">Доставка</a></li>
-                                        <li style={{ fontSize: "16px"}}><a href="#">Контакты</a></li>
-                                        <li style={{fontSize: "16px"}}><a href="#">Новости</a></li>
-                                        <li style={{ fontSize: "16px"}}><a href="#">О компании</a></li>
-                                    </ul> */}
+                                    {/* <Router> */}
+                                        <ul className="widget-list">
+                                            <li style={{fontSize: "16px"}}><a href="#">Главная</a></li>
+                                            <li style={{ fontSize: "16px"}}><a href="#">Каталог</a></li>
+                                            {/* <NavLink to={DELIVERY_ROUTE}> */}
+                                                <li style={{ fontSize: "16px"}}><a href="#">Доставка</a></li>
+                                            {/* </NavLink> */}
+                                        </ul>
+                                    {/* </Router> */}
                                 </div>
                             </div>
 
@@ -144,13 +152,13 @@ export default function Footer() {
                             <li style={{ fontSize: "14px"}}><a href="#">АКМАТАЛИЕВ БАЯСТАН</a></li>
                         </ul>
 
-                        <div className="social-icons social-icons-color">
+                        {/* <div className="social-icons social-icons-color">
                             <a style={{fontSize: "20px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
                             <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
                             <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
                             <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
                             
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </footer>
