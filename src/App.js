@@ -8,14 +8,13 @@ import Mobile from './Components/pages/Mobile';
 
 function App() {
   return (
-     <div>
+     <div className="page">
        <BrowserRouter>
         <Header /><br/>
         <Mobile/>
         <AppRouter />
+        <Footer />
       </BrowserRouter>
-       <br />
-       <Footer />
     </div>
   );
 }

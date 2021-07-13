@@ -49,7 +49,7 @@ const Header = observer(() => {
     }, [])
     
   return (
-      <div >
+      <div  >
             
 
 
@@ -176,7 +176,7 @@ const Header = observer(() => {
 
 
         <header style={{position: "fixed", marginTop: "0px", marginLeft: "0px", zIndex: "999"}} className="header mt-30">
-            <div className="header-bottom sticky-header">
+            <div className="header-bottom ">
                 <div className="container">
                     <div className="header-left">
                         <button className="mobile-menu-toggler">
