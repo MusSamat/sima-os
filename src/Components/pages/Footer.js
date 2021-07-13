@@ -3,7 +3,7 @@ import axios from "axios"
 import { FaOdnoklassnikiSquare } from "react-icons/fa";
 import "../../App.css";
 import { NavLink, Router } from 'react-router-dom';
-import { DELIVERY_ROUTE } from '../../utils/Const';
+import { DELIVERY_ROUTE, PURCHASES_ROUTE } from '../../utils/Const';
 
 
 export default function Footer() {
@@ -96,7 +96,8 @@ export default function Footer() {
                                         <a style={{fontSize: "20px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
                                         <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
                                         <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                                        <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
+                                        <a style={{fontSize: "18px", color: "#ee8208"}} href="https://ok.ru/profile/584170543033" className="social-icon" target="_blank" title="odnoklassniki"><i className="icon-odnoklassniki"></i></a>
+                                        {/* <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a> */}
                                         
                                     </div>
                                     
@@ -127,15 +128,14 @@ export default function Footer() {
                             <div className="col-sm-12 col-lg-4">
                                 <div className="widget">
                                     <h4 className="widget-title">Сотрудничество</h4>
-                                    {/* <Router> */}
                                         <ul className="widget-list">
-                                            <li style={{fontSize: "16px"}}><a href="#">Главная</a></li>
-                                            <li style={{ fontSize: "16px"}}><a href="#">Каталог</a></li>
-                                            {/* <NavLink to={DELIVERY_ROUTE}> */}
-                                                <li style={{ fontSize: "16px"}}><a href="#">Доставка</a></li>
-                                            {/* </NavLink> */}
+                                            <NavLink  to={PURCHASES_ROUTE}>
+                                                <li style={{ fontSize: "18px"}}><a className="pokupki" href="">Условия покупки</a></li>
+                                            </NavLink>    
+                                            <NavLink to={DELIVERY_ROUTE}>
+                                                <li style={{ fontSize: "18px"}}><a className="pokupki" href="">Условия доставка</a></li>
+                                            </NavLink>
                                         </ul>
-                                    {/* </Router> */}
                                 </div>
                             </div>
 

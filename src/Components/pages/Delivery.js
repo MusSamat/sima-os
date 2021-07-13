@@ -16,7 +16,7 @@ export default function Delivery() {
 			<div className="container">
                 <div className="row">
                 	<div className=" col-sm-12">
-						<div style={{display: "flex", justifyContent: "center", margin: "20px", }}><h3 style={{color: "#EEA287"}}>Условия доставки</h3 ></div>
+						<div style={{display: "flex", justifyContent: "center", margin: "20px", }}><h2 style={{color: "#EEA287"}}>Условия доставки</h2 ></div>
                 	</div>
                 </div>
 				<img style={{backgroundSize: "cover", width: "100%", height:"80%"}} src={dostavka1}/>
@@ -39,7 +39,7 @@ export default function Delivery() {
 
                 	<hr className="mt-4 mb-5"/>
 
-					<h4 >На сегодняшний день, компания «SIMA» работает с транспортными компаниями </h4>
+					<h4 style={{color: "#EEA287"}}>На сегодняшний день, компания «SIMA» работает с транспортными компаниями </h4>
 					<ul style={{marginLeft: "70px", marginTop: "50px", listStyle: "outside"}}>
 						<li style={{fontSize: "16px"}}>БиекКарго (Россия, Казахстан) <a href="http://www.goldenpages.kg/ru/company/show/6009-biek-cargo-osoo.html">www.goldenpages.kg</a></li>
 						<li style={{fontSize: "16px"}}>Альфа-Карго  (Россия, Казахстан) <a href="https://www.alpha-cargo.kg/"> www.alpha-cargo.kg</a></li>

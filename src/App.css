@@ -1,8 +1,16 @@
 
-
+.page{
+    background: #fff;
+    -webkit-box-shadow: 0 0 32px rgb(0 0 0 / 8%);
+    -moz-box-shadow: 0 0 32px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 32px rgb(0 0 0 / 10%);
+    max-width: 1450px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
 .App1 {
     text-align: center;
-    /* background: url("./assets/p.png"); */
     background-repeat: no-repeat;
     background-size: cover;
     height: 600px;
@@ -279,21 +287,27 @@
   font-family: 'Montserrat', sans-serif !important;
 }
   /* Header */
-
-  .header-right{
-    margin-right: 50px !important;
+  .header .cart-dropdown, .header .compare-dropdown{
+    margin-left: -2.4rem !important;
   }
-  .header .header-center{
-    margin-right: 23rem !important;
+  .wishlist-link{
+    margin-right: 2.4rem !important;
+  }
+  @media all and (max-width: 600px){
+    .header-right{
+      margin-left: -35px !important;
+    }
+    
   }
   
-
-  .header .header-center
-  .header>.header-center{
-    margin-right: none !important;
+  .header{
+    max-width: 1450px !important;
+  }
+  .header .header-center{
+    margin-right: 18rem !important;
   }
   .container {
-    width: 1300px !important;
+    /* width: 1300px !important; */
     max-width: 100% !important;
 }
   .Uslovia{
@@ -430,11 +444,11 @@
     margin-left: 40px;
     
   }
-  .container-z{
+  /* .container-z{
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-  }
+  } */
   .cont{
     font-size: 25px;
     font-weight: 600;
@@ -484,7 +498,7 @@
     font-family: 'Montserrat', sans-serif !important;
   }
   
-  @media screen and (max-width: 1366px){
+  @media all and (max-width: 1366px){
   .container-z {
     max-width: 1140px;
     }
@@ -527,6 +541,7 @@
     margin-bottom: 40px;
   }
   .whatsapp{
+    position: absolute;
     margin: 0 10px;
     float: left;
     position: fixed;
@@ -603,6 +618,9 @@
   }
   
   /* footer */
+  .pokupki{
+    font-family: 'Montserrat', sans-serif !important;
+  }
   .btn-outline-dark {
     border-color: #000000 !important;
   }
