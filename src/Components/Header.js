@@ -175,7 +175,7 @@ const Header = observer(() => {
 
 
 
-        <header style={{position: "fixed", marginTop: "0px", marginLeft: "0px", zIndex: "999"}} className="header mt-30">
+        <header style={{position: "fixed", marginTop: "0px", marginLeft: "0px", zIndex: "999", boxShadow: "0px 0px 36px rgba(0, 0, 0, 0.15)"}} className="header mt-30">
             <div className="header-bottom ">
                 <div className="container">
                     <div className="header-left">

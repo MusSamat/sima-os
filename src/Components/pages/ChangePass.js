@@ -4,20 +4,22 @@ import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
 import { useHistory } from 'react-router';
 import { SUBCATEGORY_ROUTE, MYACOUNT_ROUTE } from '../../utils/Const';
+import useForm from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../../App.css";
+import logo from "../../assets/login.png"
 
 const ChangePass = observer((props) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [password1, setPassword1] = useState()
-    const [username, setUsername] = useState()
+    const [passError, setPassError] = useState(false)
     const {user} = useContext(Context)
     const history = useHistory()
     const token = props.match.params.token
-    console.log(props)
+    console.log(logo)
     console.log(token)
     
 
@@ -28,6 +30,9 @@ const ChangePass = observer((props) => {
     
 
     const sing = () => {
+        if(password !== password1) {
+            passError = true
+        }
         const article = {password, token}
         
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/password_reset/confirm/`, article)
@@ -42,28 +47,28 @@ const ChangePass = observer((props) => {
 
         
     }
-    const ForgetPass = (event) => {
-        const article = {password, username}
+    // const ForgetPass = (event) => {
+    //     const article = {password, username}
         
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, article)
-            .then(response => {
-                setPassword(response.password)
-                setUsername(response.username)
-                user.setIsAuth(true)
-                localStorage.setItem('value', JSON.stringify(response.data));
-                history.push(SUBCATEGORY_ROUTE)
-                notify()
-            })
-            .catch(error =>{   
-                console.log(error)
-                user.setIsAuth(false)
-                notifyError(error)
-        })
+    //     axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, article)
+    //         .then(response => {
+    //             setPassword(response.password)
+    //             setUsername(response.username)
+    //             user.setIsAuth(true)
+    //             localStorage.setItem('value', JSON.stringify(response.data));
+    //             history.push(SUBCATEGORY_ROUTE)
+    //             notify()
+    //         })
+    //         .catch(error =>{   
+    //             console.log(error)
+    //             user.setIsAuth(false)
+    //             notifyError(error)
+    //     })
 
         
-        event.preventDefault();
+    //     event.preventDefault();
         
-    }
+    // }
 
     useEffect(() => {
         window.scrollTo(0,0)
@@ -74,7 +79,7 @@ const ChangePass = observer((props) => {
             <div className="page-wrapper">
                 <main className="main">
 
-                    <div className="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style={{backgroundImage: "url('assets/images/backgrounds/login-bg.jpg')"}}>
+                    <div className="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style={{backgroundImage: `url(${logo})`}}>
                         <div className="container">
                             <div className="form-box">
                                 <div className="form-tab">

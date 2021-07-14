@@ -81,18 +81,18 @@ export default function Footer() {
 
 
             <footer className="footer footer-2">
-                <div className="footer-middle">
+                <div className="footer-middle ">
                     <div className="container">
-                        <div className="row">
-                            <div className="col-sm-12 col-lg-4">
-                                <div className="widget widget-about">
-                                    <h4 className="widget-title">Контакты</h4>
-                                    <p style={{fontSize: "18px"}}>Кыргызстан,  720016 г. Бишкек,</p>
-                                    <p style={{fontSize: "18px"}}>ул. Фрунзе 144а</p>
-                                    <p style={{fontSize: "18px"}}>Рынок «Дордой»</p>
-                                    <p style={{fontSize: "18px"}}>5 проход конт. 458/1</p>
-                                    <p style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
-                                    <div className="social-icons social-icons-color">
+                        <div className="row ">
+                            <div className="col-sm-12 col-lg-4  ">
+                                <div className="widget widget-about  justify-content-center">
+                                    <h4 className="widget-title text-center">Контакты</h4>
+                                    <p className="text-center" style={{fontSize: "18px"}}>Кыргызстан,  720016 г. Бишкек,</p>
+                                    <p className="text-center" style={{fontSize: "18px"}}>ул. Фрунзе 144а</p>
+                                    <p className="text-center" style={{fontSize: "18px"}}>Рынок «Дордой»</p>
+                                    <p className="text-center" style={{fontSize: "18px"}}>5 проход конт. 458/1</p>
+                                    <p className="text-center" style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
+                                    <div className="social-icons social-icons-color d-flex justify-content-center">
                                         <a style={{fontSize: "20px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
                                         <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
                                         <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
@@ -101,39 +101,39 @@ export default function Footer() {
                                         
                                     </div>
                                     
-                                    <div className="widget-about-info">
+                                        {/* <div className="widget-about-info">
                                         <div className="row">
                                             <div className="col-sm-6 col-md-4">
-                                                {/* <a href="tel:+996709999915">+996709999915</a> */}
+                                                <a href="tel:+996709999915">+996709999915</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 
                             <div className="col-sm-12 col-lg-4">
                                 <div className="widget">
-                                    <h4 className="widget-title"> НОВОСТИ</h4>
+                                    <h4 className="widget-title text-center"> НОВОСТИ</h4>
 
                                     <ul className="widget-list">
                                         {/* <li style={{ fontSize: "16px"}}><a href="about.html">Оплата не выходя из дома.</a></li> */}
-                                        <li style={{ fontSize: "16px"}}><a href="#">Почему клиенты выбирают нас</a></li>
+                                        <li className="text-center" style={{ fontSize: "16px"}}><a href="#">Почему клиенты выбирают нас</a></li>
                                         {/* <li style={{ fontSize: "16px"}}><a href="faq.html">Удобная мобильная версия.</a></li> */}
-                                        <li style={{ fontSize: "16px"}}><a href="contact.html">«Предприятие лидер Евразийского Союза Государств»</a></li>
-                                        <li style={{ fontSize: "16px"}}><a href="login.html">«SIMA» на выставках Текстильлегпром</a></li>
+                                        <li className="text-center" style={{ fontSize: "16px"}}><a href="contact.html">«Предприятие лидер Евразийского Союза Государств»</a></li>
+                                        <li className="text-center" style={{ fontSize: "16px"}}><a href="login.html">«SIMA» на выставках Текстильлегпром</a></li>
                                     </ul>
                                 </div>
                             </div>
 
                             <div className="col-sm-12 col-lg-4">
                                 <div className="widget">
-                                    <h4 className="widget-title">Сотрудничество</h4>
+                                    <h4 className="widget-title text-center">Сотрудничество</h4>
                                         <ul className="widget-list">
                                             <NavLink  to={PURCHASES_ROUTE}>
-                                                <li style={{ fontSize: "18px"}}><a className="pokupki" href="">Условия покупки</a></li>
+                                                <li className="text-center" style={{ fontSize: "18px"}}><a className="pokupki" href="">Условия покупки</a></li>
                                             </NavLink>    
                                             <NavLink to={DELIVERY_ROUTE}>
-                                                <li style={{ fontSize: "18px"}}><a className="pokupki" href="">Условия доставка</a></li>
+                                                <li className="text-center" style={{ fontSize: "18px"}}><a className="pokupki" href="">Условия доставка</a></li>
                                             </NavLink>
                                         </ul>
                                 </div>
