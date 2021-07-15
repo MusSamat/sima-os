@@ -122,13 +122,12 @@ const ProdCategory = observer(() => {
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
-                                                    <label onClick={() =>product.fetchTodo()} className="custom-control-label vse s-title" style={{ fontWeight:"500"}} >ВСЕ</label> 
-                                                    {console.log(product.subcategory)}                                                       
+                                                    <label onClick={() =>product.fetchTodo()} className="custom-control-label vse s-title" style={{ fontWeight:"300"}} >ВСЕ</label> 
                                                         {product.subcategory.map((c, index) =>
                                                                 <div  key={index} className="custom-control custom-checkbox">
                                                                     
-                                                                   <label onClick={() => product.getSubcategoryId(c.id) } className="custom-control-label s-title" style={{ fontWeight:"500"}} > {c.title} {c.year}</label>
-                                                                    <span style={{ fontWeight:"500"}} className="item-count">({c.count})</span>
+                                                                   <label onClick={() => product.getSubcategoryId(c.id) } className="custom-control-label s-title" style={{ fontWeight:"300"}} > {c.title} {c.year}</label>
+                                                                    <span style={{ fontWeight:"300"}} className="item-count">({c.count})</span>
                                                                 </div>
                                                                 
                                                             

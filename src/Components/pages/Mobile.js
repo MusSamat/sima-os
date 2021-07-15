@@ -55,14 +55,14 @@ export default function Mobile() {
             
             <nav className="mobile-nav">
                 <ul className="mobile-menu">
-                    <li className="active">
+                    <li >
                         <a href="/"> 
                                 ГЛАВНАЯ
                         </a>
 
                         
                     </li>
-                    <li>
+                    <li >
                         <a href="/subcategory">КАТАЛОГ</a>
                         
                     </li>
@@ -70,7 +70,13 @@ export default function Mobile() {
                         <a href={NEWS_ROUTE}>НОВОСТИ</a>
                     </li>
                     <li>
-                        <a href={ABOUT_ROUTE}>О  нас</a>
+                        <a href="">Сотрудничество</a>
+                        <ul>
+                            <li><a href={ABOUT_ROUTE}>О нас</a></li>
+                            <li><a href={ABOUT_ROUTE}>Контакты</a></li>
+                            <li><a href={ABOUT_ROUTE}>Условия покупки</a></li>
+                            <li><a href={ABOUT_ROUTE}>Условия доставки</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href={CONTACT_ROUTE} >КОНТАКТЫ</a>

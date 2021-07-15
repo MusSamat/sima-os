@@ -287,9 +287,22 @@
   font-family: 'Montserrat', sans-serif !important;
 }
   /* Header */
-  .header .cart-dropdown, .header .compare-dropdown{
-    margin-left: -2.4rem !important;
+  
+  .menu > li > a{
+    text-transform: none !important;
+    font-weight: 300 !important;
   }
+  .cart-txt{
+    color: #000000 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 500 !important;
+  }
+  .header .cart-dropdown, .header .compare-dropdown{
+    padding-left: 0rem !important;
+  }
+  /* .header .cart-dropdown, .header .compare-dropdown{
+    margin-left: -2.4rem !important;
+  } */
   .wishlist-link{
     margin-right: 2.4rem !important;
   }
@@ -311,10 +324,10 @@
     max-width: 100% !important;
 }
   .Uslovia{
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
   }
   .voiti{
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .header-bottom .menu > li > a:before{
@@ -330,9 +343,12 @@
   .container > p{
     font-family: 'Montserrat', sans-serif !important;
   }
+  .megamenu-container>a{
+    color: #000000 !important;
+  }
   .sf-with-ul{
-    /* font-family: 'Poppins', sans-serif !important; */
     font-family: 'Montserrat', sans-serif !important;
+    color: #000000 !important;
   }
   .top-menu{
     font-family: 'Montserrat', sans-serif !important;
@@ -376,6 +392,14 @@
     font-size: 14px !important;
   }
   /* main */
+  /* .nav-pills.nav-big .nav-link{
+    color: none !important;
+  } */
+  
+
+.product-desc-content a {
+  border-bottom: none !important;
+}
   .btn{
     font-family: 'Montserrat', sans-serif !important;
   }
@@ -565,7 +589,7 @@
   }
 
   /* product */
-  .fade>h5{
+  .fade>h5 {
     font-family: 'Montserrat', sans-serif !important;
   }
   .col-auto>h4>a{
@@ -724,6 +748,10 @@
     font-size: 14px;
   }
   /* news */
+  .imgPhoto{
+    max-width: 150px;
+    max-height: 250px;
+  }
   .entry-media{
     background-color: #fff !important;
   }

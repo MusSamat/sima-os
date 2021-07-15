@@ -22,6 +22,7 @@ const  Main = observer(() => {
     const {product} = useContext(Context)
     const [name, setName] = useState()
     const [number, setNumber] = useState()
+    console.log(React.DOM)
 
     const sendName = (event) => {
         
@@ -81,10 +82,10 @@ const  Main = observer(() => {
                     <div className="container mt-6">
                             <ul className="nav nav-pills nav-big nav-border-anim justify-content-center mb-2 mb-md-3" role="tablist">
                                 <li className="nav-item">
-                                    <a className="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Новые</a>
+                                    <a style={{color: "inherit"}} className="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Новые</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Скидки</a>
+                                    <a style={{color: "inherit"}} className="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Скидки</a>
                                 </li>
                                 
                             </ul>
@@ -107,7 +108,7 @@ const  Main = observer(() => {
                                                 </figure>
                                             </Link>
                                             <div className="product-body">
-                                                <h3 className="product-title">{discout.title}</h3>
+                                                <h3 className="product-title"><a href="">{discout.title}</a></h3>
                                                 <div style={{color: "#000000"}} className="product-price">
                                                     {user.isAuth ? `${ discout.price} ₽` : ""}
                                                 </div>
@@ -137,7 +138,7 @@ const  Main = observer(() => {
                                                 </figure>
                                             </Link>
                                             <div className="product-body">
-                                                <h3 className="product-title">{discout.title}</h3>
+                                                <h3 className="product-title"><a href="">{discout.title}</a></h3>
                                                 <div style={{color: "#000000"}} className="product-price">
                                                     {user.isAuth ? `${ discout.price} ₽` : ""}
                                                 </div>
@@ -184,7 +185,7 @@ const  Main = observer(() => {
                                    </Link>
 
                                     <div className="product-body">
-                                        <h3 className="product-title">{discout.title}</h3>
+                                        <h3 className="product-title"><a href="">{discout.title}</a></h3>
                                         <div style={{color: "#000000"}} className="product-price">
                                         {user.isAuth ? `${ discout.price} ₽` : ""}  
                                         </div>
@@ -200,7 +201,8 @@ const  Main = observer(() => {
                             
                             <div className="btn-wrap d-flex justify-content-center mb-8">
                                 <Link to={SUBCATEGORY_ROUTE} className="btn">
-		                		    <a href="" className="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "normal", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Показать</span></a>
+		                		    <a href="" className="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "normal", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Показать <i className="icon-long-arrow-right"></i></span></a>
+                                    
                                 </Link>
 		                	</div>
 
