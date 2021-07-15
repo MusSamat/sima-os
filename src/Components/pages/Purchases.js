@@ -35,14 +35,13 @@ const  Purchases = observer(() => {
     }
     useEffect(() => {
         window.scrollTo(0,0)
-        user.getImage()
+        user.getImagePurchase()
     }, [])
     return (
         <div class="page-wrapper">
             <main class="main">
                 <div class="page-content ">
-                    {console.log(user.image)}
-                    {user.image.map((img, index) =>
+                    {user.purchase.map((img, index) =>
                         <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>    
                             
                             {/* <div className="container intro-content text-left ">
@@ -54,7 +53,7 @@ const  Purchases = observer(() => {
                         </div>)}
                         <div class="container mt-4">
                                 <div style={{display: "flex", justifyContent: "center", }}><h2 style={{color: "#EEA287"}}>Условия покупки</h2></div>
-                                <p style={{fontSize: "16px", textAlign: "justify", textIndent: "30px"}}>Швейная компания «SIMA» приглашает к сотрудничеству индивидуальных предпринимателей, крупных оптовиков, торговые сети, магазины, шоурумы, и иные формы бизнеса, заинтересованные в серьезной и долгосрочной работе.
+                                <p style={{fontSize: "16px", textAlign: "justify", textIndent: "30px", color: "#000000"}}>Швейная компания «SIMA» приглашает к сотрудничеству индивидуальных предпринимателей, крупных оптовиков, торговые сети, магазины, шоурумы, и иные формы бизнеса, заинтересованные в серьезной и долгосрочной работе.
                                 Заказать оптом женскую одежду от производителя можно не выходя из дома при помощи нашего каталога. Мы соберем выбранные вами товары, упакуем и подготовим к отправке наиболее удобным для Вас способом.</p>
                             
                         </div>
@@ -64,14 +63,14 @@ const  Purchases = observer(() => {
                         
                             
                             <ul style={{marginLeft: "60px",marginTop: "20px", marginBottom: "20px"}}>
-                                <li style={{fontSize: "16px", listStyle: "outside"}}>Минимальный заказ 5 размерных рядов</li>
-                                <li style={{fontSize: "16px", listStyle: "outside"}}>Заказы комплектуются только полными размерными рядами</li>
-                                <li style={{fontSize: "16px", listStyle: "outside"}}> Организация доставки товаров по всему СНГ и странам ближнего зарубежья</li>
-                                <li style={{fontSize: "16px", listStyle: "outside"}}> Гарантированный возврат товара при выявлении брака</li>
-                                <li style={{fontSize: "16px", listStyle: "outside"}}> Индивидуальные условия для крупного опта</li>
+                                <li style={{fontSize: "16px", listStyle: "outside", color: "#000000"}}>Минимальный заказ 5 размерных рядов</li>
+                                <li style={{fontSize: "16px", listStyle: "outside", color: "#000000"}}>Заказы комплектуются только полными размерными рядами</li>
+                                <li style={{fontSize: "16px", listStyle: "outside", color: "#000000"}}> Организация доставки товаров по всему СНГ и странам ближнего зарубежья</li>
+                                <li style={{fontSize: "16px", listStyle: "outside", color: "#000000"}}> Гарантированный возврат товара при выявлении брака</li>
+                                <li style={{fontSize: "16px", listStyle: "outside", color: "#000000"}}> Индивидуальные условия для крупного опта</li>
                             </ul>
 
-                            <p style={{fontSize: "16px", textAlign: "justify",textIndent: "30px"}}>Заказать товар можно несколькими способами. Оформить заказ на сайте, или заказать звонок и обсудить заказ с менеджером по телефону, после отправки ваших контактных данных.
+                            <p style={{fontSize: "16px", textAlign: "justify",textIndent: "30px", color: "#000000"}}>Заказать товар можно несколькими способами. Оформить заказ на сайте, или заказать звонок и обсудить заказ с менеджером по телефону, после отправки ваших контактных данных.
                             После оформления заказа на сайте, вам обязательно перезвонят и подтвердят ваш заказ, наличие моделей и прочие детали.
                             После совершения заказа ваш личный менеджер согласует с вами удобную для вас транспортную компанию, через которую будет отправляться заказ.
                             После окончательного согласования заказа Вам будет выставлен счёт на оплату, который нужно будет оплатить с помощью системы переводов "Золотая Корона", Western Union, Контакт, Юнистрим и т.д.

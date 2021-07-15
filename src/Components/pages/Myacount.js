@@ -149,16 +149,16 @@ const Myacount = observer(() => {
                                 <aside className="col-md-4 col-lg-3">
                                     <ul className="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
                                         <li className="nav-item">
-                                            <a style={{fontSize: "18px"}} className="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Панель управления</a>
+                                            <a style={{fontSize: "18px", color: "#000000"}} className="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Панель управления</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a style={{fontSize: "18px"}} className="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Заказы</a>
+                                            <a style={{fontSize: "18px", color: "#000000"}} className="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Заказы</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a style={{fontSize: "18px"}} className="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Профиль</a>
+                                            <a style={{fontSize: "18px", color: "#000000"}} className="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Профиль</a>
                                         </li>
                                         <li style={{cursor: "pointer"}} className="nav-item">
-                                            <a style={{fontSize: "18px"}} className="nav-link" onClick={logoOut}>Выйти</a>
+                                            <a style={{fontSize: "18px", color: "#000000"}} className="nav-link" onClick={logoOut}>Выйти</a>
                                         </li>
                                     </ul>
                                 </aside>
@@ -166,7 +166,7 @@ const Myacount = observer(() => {
                                 <div className="col-md-8 col-lg-9">
                                     <div className="tab-content">
                                         <div className="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-                                            <p style={{fontSize: "16px"}}>Добро пожаловать <span style={{fontSize: "16px"}} className="font-weight-normal text-dark">{user.userId.username}</span> (не <span className="font-weight-normal text-dark">{user.userId.email}</span>? <a href="" onClick={logoOut}>Выйти</a>) 
+                                            <p style={{fontSize: "16px", color: "#000000"}}>Добро пожаловать <span style={{fontSize: "16px"}} className="font-weight-normal text-dark">{user.userId.username}</span> (не <span className="font-weight-normal text-dark">{user.userId.email}</span>? <a href="" onClick={logoOut}>Выйти</a>) 
                                             <br/>
                                             Из главной страницы аккаунта вы можете посмотреть ваши <a href="#tab-orders" className="tab-trigger-link link-underline">недавние заказы</a>, настроить <a href="#tab-address" className="tab-trigger-link">платежный адрес и адрес доставки</a>, а также <a href="#tab-account" className="tab-trigger-link">изменить пароль и основную информацию.</a>.</p>
                                         </div>

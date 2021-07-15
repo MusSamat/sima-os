@@ -82,10 +82,10 @@ const  Main = observer(() => {
                     <div className="container mt-6">
                             <ul className="nav nav-pills nav-big nav-border-anim justify-content-center mb-2 mb-md-3" role="tablist">
                                 <li className="nav-item">
-                                    <a style={{color: "inherit"}} className="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Новые</a>
+                                    <a style={{color: "#000000"}} className="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Новые</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a style={{color: "inherit"}} className="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Скидки</a>
+                                    <a style={{color: "#000000"}} className="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Скидки</a>
                                 </li>
                                 
                             </ul>

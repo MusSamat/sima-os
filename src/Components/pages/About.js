@@ -19,7 +19,7 @@ const About = observer(( ) => {
                     <div className="pb-5 mb-1 mb-lg-8">
                         <div className="container">
                                 <div  style={{display: "flex", justifyContent: "center", marginBottom: "20px" }}><h2 style={{color: "#EEA287", textAlign: "center"}}>ДОБРО ПОЖАЛОВАТЬ</h2></div>
-                                <p style={{ textAlign: "justify",textIndent: "30px", fontSize: "16px"}}>Швейная компания «SIMA» — одна из ведущих производителей женской одежды на рынке Кыргызстана, 
+                                <p style={{ textAlign: "justify",textIndent: "30px", fontSize: "16px", color: "#000000"}}>Швейная компания «SIMA» — одна из ведущих производителей женской одежды на рынке Кыргызстана, 
                                 
                                     России, Казахстана, Беларуси и на международном рынке.
                                     Компания начала свой путь развития с 1998 года.
@@ -39,9 +39,9 @@ const About = observer(( ) => {
                                 
                                 Молодежная линия - от 42 до 56 размеров, женская линия - от 48 до 62 размеров</p>
                             
-                                <p style={{ fontSize: "16px", }}>Цены вас приятно удивят, а закупаемая у нас продукция, порадует вас успешными продажами!
+                                <p style={{ fontSize: "16px", color: "#000000" }}>Цены вас приятно удивят, а закупаемая у нас продукция, порадует вас успешными продажами!
                             </p>
-                        <p style={{ fontSize: "16px"}}>Желаем Вам удачных покупок!</p>
+                        <p style={{ fontSize: "16px", color: "#000000"}}>Желаем Вам удачных покупок!</p>
                         </div>
                     </div>
 

@@ -21,7 +21,7 @@ const News = observer(() =>{
                 
 
                 <div className="page-content">
-                    <div className="container">
+                    <div className="container mt-5">
                             {product.blog.map((blog, index) =>
                             <div className="entry-item lifestyle shopping " key={index}  >
                                 
@@ -32,18 +32,18 @@ const News = observer(() =>{
                                            {blog.title}
                                         </h6>
                                         <div className="entry-content p-2" >
-                                            <p style={{textAlign: "left", fontSize: '16px', textAlign: "justify"}}>
+                                            <p style={{textAlign: "left", fontSize: '16px', textAlign: "justify", color: "#000000"}}>
                                                 {blog.description.slice(0, 250)}
                                                 
                                             </p>
-                                            <div className="entry-meta" style={{display: "flex"}}>
+                                            {/* <div className="entry-meta" style={{display: "flex"}}>
                                                 <span className="entry-author">
                                                 Добавленно <a href=""></a>
                                                 </span>
                                                 <span className="meta-separator">|</span>
                                                 <a href=""><Moment format="YYYY.MM.DD" date={blog.created}></Moment></a>
-                                                {/* <a href="" className="read-more">Подробнее</a> */}
-                                            </div>
+                                                <a href="" className="read-more">Подробнее</a>
+                                            </div> */}
                                             <div class="entry-content">
                                                 <Link to={{pathname: '/single/'+ blog.id}}>
                                                     <a href="" class="read-more">Подробнее</a>
@@ -58,7 +58,7 @@ const News = observer(() =>{
                                        
                                     </div>
                                     <figure  className="entry-media col-12 col-md-6 col-lg-6">
-                                            <img className="imgPhoto" src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
+                                            <img className="imgPhoto"  src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
                                     </figure>
                                 </article><hr />
                                 

@@ -226,6 +226,7 @@
 }
 .filter{
   font-family: 'Montserrat', sans-serif !important;
+  color: #000000;
 }
 .product-price{
   font-family: 'Montserrat', sans-serif !important;
@@ -446,7 +447,6 @@
   }
   .container > p{
     font-family: 'Montserrat', sans-serif !important;
-    color: #777 !important;
   }
   
   .icons-react{
