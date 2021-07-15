@@ -334,10 +334,10 @@ const Product = observer((props) => {
                 <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0 mt-6">
                     <div  className="container d-flex align-items-center ">
                         <ul className="breadcrumb">
-                            <li className="breadcrumb-item"><Link to={HOME_ROUTE} className="item" style={{marginTop: "-3px", marginRight: "-5px"}}  >ГЛАВНАЯ</Link></li>
+                            <li className="breadcrumb-item"><Link to={HOME_ROUTE} className="item" style={{marginTop: "-3px", marginRight: "-5px", color: "#000000"}}  >ГЛАВНАЯ</Link></li>
                             
-                            <li className="breadcrumb-item " aria-current="page"> {product.product.title}</li>
-                            <li className="breadcrumb-item " aria-current="page">Артикул: {product.product.articul}</li>
+                            <li className="breadcrumb-item " style={{color: "#000000"}} aria-current="page"> {product.product.title}</li>
+                            <li className="breadcrumb-item " style={{color: "#000000"}} aria-current="page">Артикул: {product.product.articul}</li>
                         </ul>
 
                         <nav className="product-pager ml-auto" aria-label="Product">
@@ -362,8 +362,6 @@ const Product = observer((props) => {
                         </Modal>
                     </div>
                 </nav>
-
-                <div className="page-content">
                     <div className="container">
 
 
@@ -380,7 +378,6 @@ const Product = observer((props) => {
                                             </figure>
 
                                             <div id="product-zoom-gallery" className="product-image-gallery">    
-                                            {/* {console.log(leftImages)}                                             */}
                                                 {leftImages.map((img, index) =>
 
                                                         <a onClick={() =>  { 
@@ -388,7 +385,6 @@ const Product = observer((props) => {
                                                             setSelectedImage(`${img}, ${console.log(img)}`)}} className="product-gallery-item active" key={index} href="#" data-image={`${process.env.REACT_APP_BASE_URL}${img}`} 
                                                             data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`  }>
                                                             <img src={`${process.env.REACT_APP_BASE_URL}${img}`} alt="product side"/>
-                                                          {/* {console.log(img)} */}
                                                         </a>
                                                     )}
                                                    
@@ -401,50 +397,12 @@ const Product = observer((props) => {
                                     <div className="product-details">
                                         
                                         
-                                        <h1 style={{color: "inherit"}} className="product-title">{product.product.title}</h1>
+                                        <h1 style={{color: "#000000"}} className="product-title">{product.product.title}</h1>
                                         <div style={{color: "black", fontWeight:"300"}} className="product-price">
                                             {user.isAuth ? `${product.product.price} ₽`  : ""}
                                         </div>
                                         <label style={{color: "#9393a5", fontSize: "14px", fontWeight: "300", lineHeight: "20px", letterSpacing: "-.15px"}}>Цвет: <span style={{color: "#000"}}>{imgTitle}</span></label>
                                         <div className="details-filter-row details-row-size">
-                                        
-                                        
-                                        {/* <div class="product-gallery-carousel owl-carousel owl-full owl-nav-dark">
-                                            {product.imagesUser.map((img, index) =>
-                                            <figure className="product-gallery-image">
-                                                <a onClick={() => {
-                                                            
-                                                            const d = [...img.images]
-                                                                setLeftImages(d)
-                                                                setSelectedImage(d[0])
-                                                                setImgTitle([...img.title])
-                                                            }} className="active">
-                                                    <img style={{width: "100px", height: "100px", marginLeft: "0px"}} key={index} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`}  alt="product desc"/>
-                                                </a>
-                                            </figure>
-                                            )}
-
-                                            
-                                        </div> */}
-                                        
-                                   
-                                        {/* <Carousel
-                                            ssr
-                                            partialVisbile
-                                            // deviceType={deviceType}
-                                            itemClass="image-item"
-                                            responsive={responsive}
-                                            >
-                                            {images.slice(0, 5).map(image => { 
-                                                return (
-                                                <Image
-                                                    draggable={false}
-                                                    style={{ width: "100%", height: "100%" }}
-                                                    src={image}
-                                                />
-                                                );
-                                            })}
-                                            </Carousel> */}
                                         
 
                                             <div className="product-nav product-nav-thumbs">
@@ -470,7 +428,7 @@ const Product = observer((props) => {
                                         </div>
 
                                         <div className="details-filter-row details-row-size">
-                                            <p style={{fontSize: "16px"}}>Размер: <span style={{cursor: "pointer", color: "#eea287"}} onClick={handleShowRaz}> Таблица размеров</span> </p>
+                                            <p style={{fontSize: "16px", color: "#000000"}}>Размер: <span style={{cursor: "pointer", color: "#eea287"}} onClick={handleShowRaz}> Таблица размеров</span> </p>
                                             <Modal show={showRaz} onHide={handleCloseRaz} centered={true} animation={true}>
                                                 <Modal.Header closeButton>
                                                 </Modal.Header>
@@ -499,7 +457,7 @@ const Product = observer((props) => {
                                             </div>
                                         </> :
                                         <div className=" justify-content-center text-center mt-3">
-                                            <h5 style={{color: "inherit"}} className="seny">ЗАРЕГИСТРИРУЙТЕСЬ, ЧТОБЫ ПОСМОТРЕТЬ ЦЕНЫ</h5>
+                                            <h5 style={{color: "#000000"}} className="seny">ЗАРЕГИСТРИРУЙТЕСЬ, ЧТОБЫ ПОСМОТРЕТЬ ЦЕНЫ</h5>
                                             <Link to={LOGIN_ROUTE}>
                                                 <a href="" className="btn btn-primary btn-rounded mb-4" >Регистрация</a>
                                                 {/* <Button style={{fontSize: "20px", borderRadius: "30px", marginLeft: "30px", height: "40px", margin: "20px"}} variant="danger">Регистрация</Button> */}
@@ -538,7 +496,7 @@ const Product = observer((props) => {
                                                         {/* <p>Nobis perspiciatis natus cum, sint dolore earum rerum tempora aspernatur numquam velit tempore omnis, delectus repellat facere voluptatibus nemo non fugiat consequatur repellendus! Enim, commodi, veniam ipsa voluptates quis amet.</p> */}
                                                     </div>
                                                     <div className="tab-pane fade" id="tab-19" role="tabpanel" aria-labelledby="tab-19-tab">
-                                                        <h5 style={{color: "#777"}}>Будту первым, кто оставил отзыв на {product.product.title}</h5>
+                                                        <h5 style={{color: "#000000"}}>Будту первым, кто оставил отзыв на {product.product.title}</h5>
                                                         <div class="reviews">
                                                             {product.reviews.map((r, index) =>
                                                             <div style={{marginTop: "10px"}} key={index} class="review">
@@ -673,9 +631,6 @@ const Product = observer((props) => {
                             
                         </div>
                         
-                    </div>
-
-                    
                     </div>
 
 

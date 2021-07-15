@@ -89,25 +89,9 @@ const  Catolog = observer((props) => {
                                 <div className="toolbox">
                                     <div className="toolbox-left">
                                         <div className="toolbox-info">
-                                            {/* ПРОСМОТР: <span>24 / 48 / 96 / <span className="clickvse" onClick={()=>product.fetchTodo()}>ВСЕ</span></span>  */}
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* <div style={{borderRadius: "40px", background: "#f7f7f7",textAlign: "center", marginTop: "-25px"}} className="cta cta-border mb-5">
-                                    
-                                    
-                                        <h4>ДЛЯ ЗАПРОСА КАТАЛОГА СЛЕДУЮЩЕГО СЕЗОНА, НАПИШИТЕ НАМ НА WHATSAPP</h4>
-                                        <div className="row  justify-content-around">
-                                            <div style={{maxWidth: "none", }} className="col-6 col-md-4 col-lg-4 col-xl-3">
-                                                <button className="wahtsapp">+996709999915</button>
-                                            </div>
-                                            <div className="col-12 col-md-4 col-lg-4 col-xl-3">
-                                                <button className="wahtsapp">+996709999915</button>
-                                            </div>
-                                        </div>
-                                    
-                                </div> */}
 
                                 <div class="products mb-3">
                                         <div class="row justify-content-center">
@@ -249,7 +233,7 @@ const  Catolog = observer((props) => {
                                     </div>
 
                                     <div className="cat-blocks-container">
-                                            <p onClick={() => product.changeDiscounted()} className=" s-title" style={{  cursor: "pointer", marginBottom: "30px"}}>ТОВАРЫ СО СКИДКОЙ</p>                                            
+                                            <p onClick={() => product.changeDiscounted()} className=" s-title" style={{  cursor: "pointer", marginBottom: "30px", color: "#eea287"}}>ТОВАРЫ СО СКИДКОЙ</p>                                            
                                             {product.discount.slice(0,4).map((discout, index)=>
                                                 <div key={index}>
                                                 <div  className="row">

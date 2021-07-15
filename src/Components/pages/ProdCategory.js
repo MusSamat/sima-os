@@ -122,11 +122,11 @@ const ProdCategory = observer(() => {
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
-                                                    <label onClick={() =>product.fetchTodo()} className="custom-control-label vse s-title" style={{ fontWeight:"300"}} >ВСЕ</label> 
+                                                    <label onClick={() =>product.fetchTodo()} className="custom-control-label vse s-title" style={{ fontWeight:"300", color: "#000000"}} >ВСЕ</label> 
                                                         {product.subcategory.map((c, index) =>
                                                                 <div  key={index} className="custom-control custom-checkbox">
                                                                     
-                                                                   <label onClick={() => product.getSubcategoryId(c.id) } className="custom-control-label s-title" style={{ fontWeight:"300"}} > {c.title} {c.year}</label>
+                                                                   <label onClick={() => product.getSubcategoryId(c.id) } className="custom-control-label s-title" style={{ fontWeight:"300", color: "#000000"}} > {c.title} {c.year}</label>
                                                                     <span style={{ fontWeight:"300"}} className="item-count">({c.count})</span>
                                                                 </div>
                                                                 

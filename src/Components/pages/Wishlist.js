@@ -85,9 +85,9 @@ const Wishlist = observer(()=> {
                         <table className="table table-wishlist table-mobile">
                             <thead>
                                 <tr>
-                                    <th>ТОВАР</th>
-                                    <th>ЦЕНА</th>
-                                    <th>Состояние на складе</th>
+                                    <th style={{color: "#000000"}}>ТОВАР</th>
+                                    <th style={{color: "#000000"}}>ЦЕНА</th>
+                                    <th style={{color: "#000000"}}>Состояние на складе</th>
                                     <th></th>
                                     <th></th>
                                 </tr>

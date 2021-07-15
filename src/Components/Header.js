@@ -4,7 +4,7 @@ import {ABOUT_ROUTE, PURCHASES_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE,
 import "../App.css";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
-import logo from "../assets/logo1.png"
+import logo from "../assets/simaLogo.jpeg"
 import what from "../assets/WhatsApp.png"
 import mobile_menu from "../Http/mobile_menu";
 
@@ -184,7 +184,7 @@ const Header = observer(() => {
                             <i className="icon-bars"></i>
                         </button>
                         <NavLink exact className="logo" to={HOME_ROUTE}>
-                            <img style={{width: "100px", height: "50px"}} src={logo}/> 
+                            <img style={{width: "200px", height: "80px"}} src={logo}/> 
                             
                         </NavLink>
                         
@@ -193,14 +193,14 @@ const Header = observer(() => {
                         <nav className="main-nav">
                         <ul className="menu sf-arrows  ">
                                 <li className="megamenu-container ">
-                                    <NavLink exact className="sf-with"  style={{fontSize: "18px", fontWeight: "400"}} to={HOME_ROUTE}> <a className="sf-with-ul">Главная</a></NavLink>
+                                    <NavLink exact className="sf-with"  style={{fontSize: "18px", fontWeight: "400", color: "#000000"}} to={HOME_ROUTE}> <a className="sf-with-ul">Главная</a></NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" style={{fontSize: "18px"}} to={SUBCATEGORY_ROUTE}><a className="sf-with-ul">Каталог </a></NavLink>                                  
+                                    <NavLink className="sf-with" style={{fontSize: "18px", color: "#000000"}} to={SUBCATEGORY_ROUTE}><a className="sf-with-ul">Каталог </a></NavLink>                                  
                                     
                                 </li>
                                 <li className="megamenu-container">
-                                    <NavLink exact className="sf-with" to={NEWS_ROUTE}><a style={{fontSize: "18px"}} className="sf-with-ul">Новости</a></NavLink>
+                                    <NavLink exact className="sf-with" to={NEWS_ROUTE}><a style={{fontSize: "18px", color: "#000000"}} className="sf-with-ul">Новости</a></NavLink>
 
                                 </li >
                                 {/* <li className="megamenu-container ">
@@ -210,8 +210,8 @@ const Header = observer(() => {
                                     <NavLink exact className="sf-with" to={CONTACT_ROUTE}><a style={{fontSize: "18px"}} className="sf-with-ul">Контакты</a></NavLink>
                                 </li > */}
                                 <li className="megamenu-container ">
-                                    <a style={{fontSize: "18px"}} className="sf-with-ul">Сотрудничество</a>
-                                        <ul className="menu sf-arrows "  style={{marginLeft: "600px", marginTop: "-10px", color: "white", width: "40px" }}>
+                                    <a style={{fontSize: "18px", color: "#000000"}} className="sf-with-ul">Сотрудничество</a>
+                                        <ul className="menu sf-arrows "  style={{marginLeft: "622px", marginTop: "-10px", color: "white", width: "40px" }}>
                                                 <Link  to={ABOUT_ROUTE} >
                                                     <li className="megamenu-container " ><a className="sf-with  Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#000000" }}>О нас</a></li>
                                                 </Link>

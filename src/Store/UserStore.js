@@ -19,6 +19,8 @@ export default class UserStore {
         this.order = []
         this.orderId = []
         this.image = []
+        this.purchase = []
+        this.delivery = []
 
         this.count = 0
         makeAutoObservable(this)
@@ -121,6 +123,28 @@ export default class UserStore {
         .then(res => {
             this.image = res.data 
             return this.image
+            
+        })
+        .catch((e)=>{
+            console.error(e)
+        }) 
+     }
+     getImagePurchase() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-conditions-purchase/`)
+        .then(res => {
+            this.purchase = res.data 
+            return this.purchase
+            
+        })
+        .catch((e)=>{
+            console.error(e)
+        }) 
+     }
+     getImageDelivery() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-delivery/`)
+        .then(res => {
+            this.delivery = res.data 
+            return this.delivery
             
         })
         .catch((e)=>{

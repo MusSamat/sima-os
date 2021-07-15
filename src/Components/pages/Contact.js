@@ -20,10 +20,10 @@ export default function Contact() {
                                 <div className="contact-box text-center">
                                     <h5>Адрес</h5>
 
-                                    <p style={{fontSize: "18px"}}>Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}>Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</p>
 
-                                    <p style={{fontSize: "18px"}}>Рынок «Дордой»</p>
-                                    <p style={{fontSize: "18px"}}>5 проход конт. 458/1</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}>Рынок «Дордой»</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}>5 проход конт. 458/1</p>
                                     
                                 </div>
                             </div>
@@ -31,10 +31,10 @@ export default function Contact() {
                             <div className="col-md-4">
                                 <div className="contact-box text-center">
                                     <h5>Руководитель</h5>
-                                    <p style={{fontSize: "18px"}}>+996 (705) 55 58 29</p>
-                                    <p style={{fontSize: "18px"}}>+996 (709) 99 99 15</p>
-                                    <p style={{fontSize: "18px"}}>+ 996 (700) 50 60 46</p>
-                                    <p style={{fontSize: "18px"}}><FaWhatsappSquare style={{ color: "green",fontSize: "30px"}}/> +996 (705) 55 58 29</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}>+996 (705) 55 58 29</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}>+996 (709) 99 99 15</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}>+ 996 (700) 50 60 46</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}><FaWhatsappSquare style={{ color: "green",fontSize: "30px"}}/> +996 (705) 55 58 29</p>
                                     
                                 </div>
                             </div>
