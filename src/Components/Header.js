@@ -175,7 +175,7 @@ const Header = observer(() => {
 
 
 
-        <header style={{position: "fixed", marginTop: "0px", marginLeft: "0px", zIndex: "999"}} className="header mt-30">
+        <header style={{position: "fixed", marginTop: "0px", marginLeft: "0px", zIndex: "999", boxShadow: "0px 0px 36px rgba(0, 0, 0, 0.15)"}} className="header mt-30">
             <div className="header-bottom ">
                 <div className="container">
                     <div className="header-left">
@@ -193,51 +193,56 @@ const Header = observer(() => {
                         <nav className="main-nav">
                         <ul className="menu sf-arrows  ">
                                 <li className="megamenu-container ">
-                                    <NavLink exact className="sf-with"  style={{fontSize: "16px"}} to={HOME_ROUTE}> <a className="sf-with-ul">ГЛАВНАЯ</a></NavLink>
+                                    <NavLink exact className="sf-with"  style={{fontSize: "18px", fontWeight: "400"}} to={HOME_ROUTE}> <a className="sf-with-ul">Главная</a></NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" style={{fontSize: "16px"}} to={SUBCATEGORY_ROUTE}><a className="sf-with-ul">КАТАЛОГ </a></NavLink>                                  
+                                    <NavLink className="sf-with" style={{fontSize: "18px"}} to={SUBCATEGORY_ROUTE}><a className="sf-with-ul">Каталог </a></NavLink>                                  
                                     
                                 </li>
                                 <li className="megamenu-container">
-                                    <NavLink exact className="sf-with" to={NEWS_ROUTE}><a style={{fontSize: "16px"}} className="sf-with-ul">НОВОСТИ</a></NavLink>
+                                    <NavLink exact className="sf-with" to={NEWS_ROUTE}><a style={{fontSize: "18px"}} className="sf-with-ul">Новости</a></NavLink>
 
                                 </li >
-                                <li className="megamenu-container ">
-                                    <NavLink exact className="sf-with" to={ABOUT_ROUTE}><a style={{fontSize: "16px"}} className="sf-with-ul">О  нас</a></NavLink>
-                                </li >
-                                <li className="megamenu-container ">
-                                    <NavLink exact className="sf-with" to={CONTACT_ROUTE}><a style={{fontSize: "16px"}} className="sf-with-ul">Контакты</a></NavLink>
-                                </li >
                                 {/* <li className="megamenu-container ">
-                                    <a style={{fontSize: "16px"}} className="sf-with-ul">СОТРУДНИЧЕСТВО</a>
-                                        <ul className="menu sf-arrows "  style={{marginLeft: "690px", marginTop: "-15px", color: "white", width: "40px" }}>
-                                            
+                                    <NavLink exact className="sf-with" to={ABOUT_ROUTE}><a style={{fontSize: "18px"}} className="sf-with-ul">Сотрудничество</a></NavLink>
+                                </li >
+                                <li className="megamenu-container ">
+                                    <NavLink exact className="sf-with" to={CONTACT_ROUTE}><a style={{fontSize: "18px"}} className="sf-with-ul">Контакты</a></NavLink>
+                                </li > */}
+                                <li className="megamenu-container ">
+                                    <a style={{fontSize: "18px"}} className="sf-with-ul">Сотрудничество</a>
+                                        <ul className="menu sf-arrows "  style={{marginLeft: "600px", marginTop: "-10px", color: "white", width: "40px" }}>
+                                                <Link  to={ABOUT_ROUTE} >
+                                                    <li className="megamenu-container " ><a className="sf-with  Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#000000" }}>О нас</a></li>
+                                                </Link>
+                                                <Link  to={CONTACT_ROUTE} >
+                                                    <li className="megamenu-container " ><a className="sf-with  Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#000000" }}>Контакты</a></li>
+                                                </Link>
                                                 <Link to={PURCHASES_ROUTE} >
-                                                    <li className="megamenu-container " ><a className="sf-with Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия покупки</a></li>
+                                                    <li className="megamenu-container " ><a className="sf-with Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#000000" }}>Условия покупки</a></li>
                                                 </Link>
                                                 <Link  to={DELIVERY_ROUTE} >
-                                                    <li className="megamenu-container " ><a className="sf-with  Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#777" }}>Условия доставки</a></li>
+                                                    <li className="megamenu-container " ><a className="sf-with  Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#000000" }}>Условия доставки</a></li>
                                                 </Link>
                                             
                                         </ul>
 
-                                </li> */}
+                                </li>
                             </ul>
                         </nav>
                     </div>
 
                     <div className="header-right">
-                        {user.isAuth ? <NavLink   to={MYACOUNT_ROUTE}><a style={{fontSize: "30px", color: "#666666"}} data-toggle="modal"><i sty className="icon-user"></i></a></NavLink>
-                            : <NavLink  to={LOGIN_ROUTE}><a style={{fontSize: "30px", color: "#666666"}} data-toggle="modal"><i className="icon-user"></i></a></NavLink>}
+                        {user.isAuth ? <NavLink   to={MYACOUNT_ROUTE}><a style={{fontSize: "30px" }} data-toggle="modal"><i style={{color: "#000000"}} className="icon-user"></i></a></NavLink>
+                            : <NavLink  to={LOGIN_ROUTE}><a style={{fontSize: "30px" }} data-toggle="modal"><i style={{color: "#000000"}} className="icon-user"></i></a></NavLink>}<br/>
                         
                         <NavLink className="wishlist-link" to={WISHLIST_ROUTE}>
-                            <i className="icon-heart-o"></i>
+                            <i style={{color: "#000000"}} className="icon-heart-o"></i>
                             <span className="wishlist-count">{user.list?.length || '0'}</span>
                         </NavLink>
-                        <div className="dropdown cart-dropdown">
-                            <NavLink to={CART_ROUTE}><a  className="dropdown-toggle" >
-                                <i className="icon-shopping-cart"></i>
+                        <div className="dropdown cart-dropdown mr-10">
+                            <NavLink to={CART_ROUTE}><a  className="dropdown-toggle " >
+                                <i style={{color: "#000000"}} className="icon-shopping-cart"></i>
                                 <span className="cart-count">{user.items?.length || '0'}</span>
                                 {
                                     user.items?.map((item, index) => {

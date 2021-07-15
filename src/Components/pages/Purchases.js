@@ -1,8 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from "axios";
 import "../../App.css";
+import { observer } from 'mobx-react-lite';
+import { Context } from '../../index';
 
-export default function Purchases() {
+const  Purchases = observer(() => {
+
+    const {user} = useContext(Context)
 
     const [name, setName] = useState()
     const [number, setNumber] = useState()
@@ -31,12 +35,24 @@ export default function Purchases() {
     }
     useEffect(() => {
         window.scrollTo(0,0)
+        user.getImage()
     }, [])
     return (
         <div class="page-wrapper">
             <main class="main">
                 <div class="page-content ">
-                        <div class="container">
+                    {console.log(user.image)}
+                    {user.image.map((img, index) =>
+                        <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>    
+                            
+                            {/* <div className="container intro-content text-left ">
+                                <h1 className="intro-title">{img.title}<br/>< strong style={{marginLeft: "-9px"}}>sale</strong></h1>
+
+                               
+                            </div> */}
+                            
+                        </div>)}
+                        <div class="container mt-4">
                                 <div style={{display: "flex", justifyContent: "center", }}><h2 style={{color: "#EEA287"}}>Условия покупки</h2></div>
                                 <p style={{fontSize: "16px", textAlign: "justify", textIndent: "30px"}}>Швейная компания «SIMA» приглашает к сотрудничеству индивидуальных предпринимателей, крупных оптовиков, торговые сети, магазины, шоурумы, и иные формы бизнеса, заинтересованные в серьезной и долгосрочной работе.
                                 Заказать оптом женскую одежду от производителя можно не выходя из дома при помощи нашего каталога. Мы соберем выбранные вами товары, упакуем и подготовим к отправке наиболее удобным для Вас способом.</p>
@@ -73,5 +89,7 @@ export default function Purchases() {
             </main>
         </div>
     )
-}
+})
+
+export default  Purchases;
 

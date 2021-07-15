@@ -54,12 +54,6 @@ export default function Contact() {
                                 </div>
                             </div>
                         </div>
-
-                        <hr className="mt-3 mb-5 mt-md-1"/>
-
-
-
-                        
                     </div>
 
 

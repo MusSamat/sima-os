@@ -8,6 +8,7 @@ import "../../App.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import logo from "../../assets/login.png"
 
 const Login = observer(() => {
     const [email, setEmail] = useState()
@@ -70,7 +71,7 @@ const Login = observer(() => {
             <div className="page-wrapper">
                 <main className="main">
 
-                    <div className="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style={{backgroundImage: "url('assets/images/backgrounds/login-bg.jpg')"}}>
+                    <div className="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style={{backgroundImage: `url(${logo})`}}>
                         <div className="container">
                             <div className="form-box">
                                 <div className="form-tab">

@@ -122,9 +122,9 @@ const  Catolog = observer((props) => {
                                                                 <img src={`${process.env.REACT_APP_BASE_URL}${prod?.images[0]?.images[0]}`} alt="Product image" class="product-image"/>
                                                             </a>
 
-                                                            <div class="product-action-vertical">
+                                                            {/* <div class="product-action-vertical">
                                                                 <a href="" class="btn-product-icon btn-wishlist "></a>
-                                                            </div>
+                                                            </div> */}
                                                         </figure>
                                                     </Link>
                                                     <div class="product-body">
