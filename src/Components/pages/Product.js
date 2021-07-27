@@ -11,61 +11,17 @@ import { FcLike } from "react-icons/fc";
 import { FaOdnoklassnikiSquare } from "react-icons/fa";
 import { BiGitRepoForked } from "react-icons/bi";
 import razmer from "../../assets/razmer.png"
+import vk from "../../assets/vk.png"
 import {Modal, Button} from "react-bootstrap";
 import mobile_menu from '../../Http/mobile_menu';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-      paritialVisibilityGutter: 60
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      paritialVisibilityGutter: 50
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-      paritialVisibilityGutter: 30
-    }
-  };
-  const images = [
-    "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550330039-a54e15ed9d33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-  ];
 
 const colors ={
     orange: "#FFBA5A",
     grey: "#a9a9a9"
 }
 
-// Index.getInitialProps = ({ req }) => {
-//     let userAgent;
-//     if (req) {
-//       userAgent = req.headers["user-agent"];
-//     } else {
-//       userAgent = navigator.userAgent;
-//     }
-//     const parser = new UAParser();
-//     parser.setUA(userAgent);
-//     const result = parser.getResult();
-//     const deviceType = (result.device && result.device.type) || "desktop";
-//     return { deviceType };
-//   };
 
 const Product = observer((props) => {
     const {product} = useContext(Context)
@@ -305,12 +261,15 @@ const Product = observer((props) => {
                         <Modal show={show} onHide={handleClose} centered={true} animation={true}>
                             <Modal.Header closeButton>
                             </Modal.Header>
-                            <Modal.Body centered={true} style={{textAlign: "center", fontSize: "30px", display: "flex"}}><Link to="https://ok.ru/profile/584170543033"></Link>
+                            <Modal.Body centered={true} >
                                 
-                                <a style={{fontSize: "25px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
-                                <a style={{fontSize: "25px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                                <a style={{fontSize: "25px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                               <a style={{fontSize: "25px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
+                                <div className="d-flex justify-content-center">
+                                    <a style={{fontSize: "25px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                                    <a style={{fontSize: "25px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                                    <a style={{fontSize: "25px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                                    <a style={{fontSize: "25px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
+                                    <a  href="https://vk.com/simastyle"  className="social-icon"><img style={{width: "25px"}} src={vk}/></a>
+                                </div>
                                 
                             </Modal.Body>
                             <Modal.Footer>
@@ -355,7 +314,7 @@ const Product = observer((props) => {
                                 <div className="col-md-6">
                                     <div className="product-details">
                                         
-                                        
+                                        {console.log(product.product)}
                                         <h1 style={{color: "#000000"}} className="product-title">{product.product.title}</h1>
                                         <p>Артикул: {product.product.articul}</p>
                                         <div style={{ fontWeight:"300"}} className="product-price">
@@ -442,6 +401,12 @@ const Product = observer((props) => {
                                                 </Modal.Header>
                                                 <img src={razmer}/>
                                             </Modal>
+                                        </div>
+
+                                        <div className="d-flex">
+                                            {product.product.size.map(size => (
+                                                <div key={size} className="size">{size}</div>
+                                            ))}
                                         </div>
 
                                         {user.isAuth ?<>

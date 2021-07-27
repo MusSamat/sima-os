@@ -49,11 +49,11 @@ const  Catolog = observer((props) => {
     const [count, setCount] = useState(5)
     
     const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setPostsPerPage] = useState(2)
+    const [postsPerPage, setPostsPerPage] = useState(60)
 
     const classes = useStyles();
 
-  
+    
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = product.products.slice(indexOfFirstPost, indexOfLastPost)
@@ -165,13 +165,14 @@ const  Catolog = observer((props) => {
     e.preventDefault();
     }
 
-
+    
     
     useEffect(() => {
         window.scrollTo(0,0)
         mobile_menu()
         user.getUserData()
-        product.fetchTodoCatalog(catId, title, user.isAuth).then(() => {
+        product.fetchTodo()
+        product.getActualProducts().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
                 '/assets/js/bootstrap-input-spinner.js',
@@ -195,6 +196,11 @@ const  Catolog = observer((props) => {
         product.discountTodo()
         product.getCategoryTitle(title)
         product.getCategoryTitleCount(title)
+        product.getSubcategory().then(() =>{
+            // let sesonId = product.subcategory?.map(s => s.id)
+            // product.getProductsSesonCategory(sesonId)
+        })
+        
        
         
         
@@ -204,7 +210,7 @@ const  Catolog = observer((props) => {
       let percent
       product.discount.map((i) => i.percent === percent )
       
-
+      console.log(product.productSorted)
     return (
         <div>
              <main  className="main">
@@ -337,9 +343,9 @@ const  Catolog = observer((props) => {
                                             <li>
                                                 <a className="s-title" style={{color: "black", cursor: "pointer", paddingLeft: "2px"}}>Все</a>
                                                 <ul>
-                                                    {product.productSorted.filter(i => i.id).map((c, index) =>
+                                                    {product.productSorted.map((c, index) =>
 
-                                                        <li  key={index}><a className="category-vse" style={{color: "black", cursor: "pointer", fontSize: "16px", padding: "0px 3rem"}}>{c.title}</a></li>
+                                                        <li onClick={() => product.fetchTodoCatalog(c.seasoncategory, c.title, user.isAuth)}  key={index}><a className="category-vse" style={{color: "black", cursor: "pointer", fontSize: "16px", padding: "0px 3rem"}}>{c.title}</a></li>
                                                 
                                                     )}
                                                 </ul>
@@ -350,18 +356,18 @@ const  Catolog = observer((props) => {
                                     <div className="row justify-content-center">
                                         <div className="col-sm-12 col-md-6 col-lg-6">
                                             <div className="btn-wrap">
-                                                <a  href="" className="btn btn-outline-dark nan"><span>Все</span></a>
+                                                <a  onClick={() => product.getActualProducts()}  href="" className="btn btn-outline-dark nan"><span>Все</span></a>
                                             </div>
                                             <div className="btn-wrap">
-                                                <a href="#" className="btn btn-outline-dark nan"><span>Новинки</span></a>
+                                                <a onClick={() => product.getNoveltyProducts()} href="#" className="btn btn-outline-dark nan"><span>Новинки</span></a>
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-6">
                                             <div className="btn-wrap ">
-                                                <a href="#" className="btn btn-outline-dark nan"><span>Популярное</span></a>
+                                                <a onClick={() => product.getPopularProducts()} href="#" className="btn btn-outline-dark nan"><span>Популярное</span></a>
                                             </div>
                                             <div className="btn-wrap ">
-                                                <a href="#" className="btn btn-outline-dark nan"><span>Скидки</span></a>
+                                                <a onClick={() => product.discountTodo()} href="#" className="btn btn-outline-dark nan"><span>Скидки</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -395,13 +401,25 @@ const  Catolog = observer((props) => {
                                             <div className="collapse show" >
                                                 <div className="widget-body">
                                                     <div className="filter-items filter-items-count">
-                                                        <div className="filter-item">                                                      
-                                                            {product.productTitle.filter(i => i.id).map((c, index) =>
+                                                        <div className="filter-item">    
+                                                            <nav className="mobile-nav">
+                                                                <ul className="mobile-menu">
+                                                                {product.subcategory.map((c, index) =><li>
+                                                                     <a key={index} className="s-title" style={{color: "black", cursor: "pointer", paddingLeft: "2px"}}>{c.title} {c.year}</a>
+                                                                        <ul>
+                                                                            {/* {console.log(product.getProductsSesonCategory(c.id))} */}
+                                                                            {product.productsSesonCategory.map((prod) =>
+                                                                            <li key={prod} onClick={() => product.fetchTodoCatalog(c.id, title)}  key={index}><a className="category-vse" style={{color: "black", cursor: "pointer", fontSize: "16px", padding: "0px 3rem"}}>{prod.title}</a></li>)}                                                                       
+                                                                        </ul>
+                                                                    </li>)}
+                                                                </ul>
+                                                            </nav>                                                  
+                                                            {/* {product.subcategory.map((c, index) =>
                                                             <div  key={index} className="custom-control custom-checkbox">
                                                                 <label onClick={() => product.fetchTodoCatalog(c.id, title)} className="custom-control-label s-title"  > {c.title} {c.year}</label>
                                                                 <span  className="item-count">({product.changeFilterCount(c.id)?.count})</span>
                                                             </div>
-                                                            )}
+                                                            )} */}
                                                         </div>
                                                 </div>
                                             </div>

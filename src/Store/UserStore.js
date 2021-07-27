@@ -21,6 +21,7 @@ export default class UserStore {
         this.image = []
         this.purchase = []
         this.delivery = []
+        this.about = []
 
         this.count = 0
         makeAutoObservable(this)
@@ -148,6 +149,18 @@ export default class UserStore {
         .then(res => {
             this.delivery = res.data 
             return this.delivery
+            
+        })
+        .catch((e)=>{
+            console.error(e)
+        }) 
+     }
+
+     getImageAbout() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-about-us/`)
+        .then(res => {
+            this.about = res.data 
+            return this.about
             
         })
         .catch((e)=>{

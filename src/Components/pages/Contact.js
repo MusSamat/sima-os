@@ -11,9 +11,7 @@ export default function Contact() {
     }, [])
     return (
         
-            <main className="main mt-2">
-
-                <div className="page-content">
+            <main className="main mt-7">
                     <div className="container">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
@@ -58,10 +56,6 @@ export default function Contact() {
                             </div>
                         </div>
                     </div>
-
-
-                    
-                </div>
                 <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
             </main>
     )

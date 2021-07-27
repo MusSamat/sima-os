@@ -12,17 +12,21 @@ const About = observer(( ) => {
         window.scrollTo(0,0)
         product.getSertivicat()
         product.getGallery()
+        user.getImageAbout()
     }, [])
     return (
         <div className="page-wrapper">
             <main className="main">
-                <div className="page-content ">
-                    <div className="pb-5 mb-1 mb-lg-8">
+                    <div className="pb-5 mb-1 mb-lg-8 mt-4 ">
                         <div className="container">
                                 <ol class="breadcrumb mt-1 mb-2">
                                     <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
                                     <li class="breadcrumb-item"><a href="">О нас</a></li>
                                 </ol>
+                                {user.about?.map((img, index) =>
+                                    <div key={index} className="intro-slide mb-2" style={{backgroundImage: `url(${img.image})`}}>
+                                        
+                                    </div>)}
                                 <div  style={{display: "flex", justifyContent: "center", marginBottom: "20px" }}><h2 style={{color: "#EEA287", textAlign: "center"}}>О нас</h2></div>
                                 <p style={{ textAlign: "justify",textIndent: "40px", fontSize: "16px", color: "#000000"}}><span style={{color: "#EEA287"}}>Швейная компания «SIMA»</span> — начала свой путь развития с 1998 года, ежегодно выпускаются 4 сезонные коллекции одежды, ориентированные на рынки России, Украины, Казахстана, Беларуси, Узбекистана и на международные рынки. Вся продукция <span style={{color: "#EEA287"}}>компании «SIMA»</span> производится в Кыргызстане. На сегодняшний день действующая производственная база компании оснащена современными высокотехнологичными оборудованиями известных мировых марок и программно-аппаратными комплексами. Перед отправкой, товар проходит 3-этапную проверку.</p>
                                 <p style={{ textAlign: "justify",textIndent: "40px", fontSize: "16px", color: "#000000"}}>Наша цель – помочь развить малый и средний бизнес, так как наши клиенты — это индивидуальные предприниматели, крупные оптовики, торговые сети, магазины, шоурумы, и иные формы бизнеса. Продукция поступает на рынок оптом по низким ценам и гарантированно высокого качества. Производство дизайнерской одежды основано на современных тенденциях. Весь ассортимент производится только после изучения спроса на новые модели. </p>
@@ -69,7 +73,6 @@ const About = observer(( ) => {
                         </div>
                      </div> 
                     </div>
-                </div>
             </main>
         </div>
     )

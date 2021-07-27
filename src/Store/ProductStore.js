@@ -31,6 +31,7 @@ export default class ProductStore {
         this.newProductSeason = []
         this.gallery = []
         this.sertificate = []
+        this.productsSesonCategory = []
         
         
 
@@ -49,18 +50,59 @@ export default class ProductStore {
             
             
     }
-    // fetchTodoCatalog(catId, title) {
-    //     return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${catId}&productcategory__title__iexact=${title}`)
-    //         .then(res => {
-    //             this.products = [...res.data]
-    //             this.allProducts = this.products
-    //         })
-    //         .catch((e)=>{
-    //             console.error(e)
-    //         })
+    getActualProducts() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`)
+            .then(res => {
+                this.products = [...res.data]
+                this.allProducts = this.products
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
             
             
-    // }
+    }
+
+    getPopularProducts() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?popular=${true}`)
+            .then(res => {
+                this.products = [...res.data]
+                this.allProducts = this.products
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+            
+            
+    }
+
+    getNoveltyProducts() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/novelty`)
+            .then(res => {
+                this.products = [...res.data]
+                this.allProducts = this.products
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+            
+            
+    }
+    // api/productcategory/?seasoncategory_id=10
+
+  async  getProductsSesonCategory(id) {
+        console.log(id)
+        return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?seasoncategory_id=${id}`)
+            .then(res => {
+                this.productsSesonCategory = [...res.data]
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+            
+            
+    }
+
 
     
     getCategoryTitle(title) {
@@ -82,7 +124,7 @@ export default class ProductStore {
                 console.error(e)
             })
     }
-    //seasoncategory/?title=Рубашка
+
     getSubcategory() {
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/seasoncategory/`)
             .then(res => {
@@ -230,7 +272,7 @@ export default class ProductStore {
                 console.error(e)
             })
      }
-    //  
+
     fetchTodoCatalog(catId, title, isAuth) {
         this.token = JSON.parse(localStorage.getItem('value'))
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${catId}&productcategory__title__iexact=${title}`, isAuth ? {
@@ -287,9 +329,7 @@ export default class ProductStore {
      async discountTodo() {
         await  axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`)
              .then(res => {
-                 this.discount = [ ...res.data]
-                 this.discount = this.discount
-                 this.images = this.product.images
+                 this.products = [ ...res.data]
 
                 
              })
