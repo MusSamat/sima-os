@@ -77,36 +77,21 @@ const  Main = observer(() => {
                             
                         </div>)}
 
-                       
 
-                    <div className="container mt-6">
-                            <ul className="nav nav-pills nav-big nav-border-anim justify-content-center mb-2 mb-md-3" role="tablist">
-                                <li className="nav-item">
-                                    <a style={{color: "#000000"}} className="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Новые</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a style={{color: "#000000"}} className="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Скидки</a>
-                                </li>
-                                
-                            </ul>
-
-                        <div className="product-details-tab">
-                            
-                        
-                        <div className="tab-content mt-3">
-                            <div className="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
-                                <div className="products mb-3">
-                                    <div className="row justify-content-center">
-                                    {product.newProduct.slice(0,4).map((discout, index)=>
-                                    <div key={index} className="col-6 col-md-4 col-lg-3">
-                                        <div className="product product-7 text-center ">
-                                            <Link to={{pathname: '/product/'+discout.id}} >
-                                                <figure className="product-media">
-                                                    <a href="">
-                                                        <img src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`} alt="Product image" className="product-image"/>
-                                                    </a>
-                                                </figure>
-                                            </Link>
+                        <div className="container mt-6">
+                        <div className="products mt-2 mb-4 ">
+                            <div className="row justify-content-center">
+                                    {product.discount.slice(0,8).map((discout, index)=>
+                                        <div key={index} className="col-6 col-md-4 col-lg-3">
+                                            <div className="product product-7 text-center ">
+                                                <Link to={{pathname: '/product/'+discout.id}} >
+                                                    <figure className="product-media">
+                                                        {discout.percent ? <div style={{textAlign: "center"}} className="product-label label-sale">{discout.percent} %</div> : ""}
+                                                        <a href="">
+                                                            <img src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`} alt="Product image" className="product-image"/>
+                                                        </a>
+                                                    </figure>
+                                                </Link>
                                             <div className="product-body">
                                                 <h3 className="product-title"><a href="">{discout.title}</a></h3>
                                                 <div style={{color: "#000000"}} className="product-price">
@@ -117,44 +102,19 @@ const  Main = observer(() => {
                                             </div>
                                             </div>
                                         </div>)}
-                                    
+                                        
                                     </div>
+                                    
+                                        <div class="btn-wrap d-flex justify-content-center">
+                                            <Link to={SUBCATEGORY_ROUTE} className="btn  btn-shadow">
+                                                <span style={{fontSize: "20px"}}>Показать</span>
+                                                <i className="icon-long-arrow-right"></i>
+                                            </Link>
+                                        </div>
+                                    
                                 </div>
                                 
-                            </div>
-                            <div className="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
-                                <div className="product-desc-content">
-                                <div className="products mb-3">
-                                    <div className="row justify-content-center">
-                                    {product.discount.slice(0,4).map((discout, index)=>
-                                    <div key={index} className="col-6 col-md-4 col-lg-3">
-                                        <div className="product product-7 text-center ">
-                                            <Link to={{pathname: '/product/'+discout.id}} >
-                                                <figure className="product-media">
-                                                    {discout.percent ? <div style={{textAlign: "center"}} className="product-label label-sale">{discout.percent} %</div> : ""}
-                                                    <a href="">
-                                                        <img src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`} alt="Product image" className="product-image"/>
-                                                    </a>
-                                                </figure>
-                                            </Link>
-                                            <div className="product-body">
-                                                <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                                <div style={{color: "#000000"}} className="product-price">
-                                                    {user.isAuth ? `${ discout.price} ₽` : ""}
-                                                </div>
-
-                                                
-                                            </div>
-                                            </div>
-                                        </div>)}
-                                        </div>
-                                        </div>
-                                </div>
-                            </div>
-                            
                         </div>
-                    </div>
-                </div>
 
                     <div style={{boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)"}} className="trending mb-6">
                         <a href="">
@@ -213,9 +173,9 @@ const  Main = observer(() => {
                 </div>
                 
 
-                    <div className="container mt-8 ">
+                    <div className="container mt-12 mb-10">
                          
-                        <div className="row mt-4">
+                        <div className="row ">
                             <div  className="col-12 mb-10 col-xl-6 mt-2 mb-12">
                                 <Link to={ABOUT_ROUTE}> 
                                     <div  className="position-relative d-flex justify-content-center align-items-center mt-8 mb-3 ">
@@ -244,7 +204,7 @@ const  Main = observer(() => {
                                     <div className="position-relative d-flex justify-content-center align-items-center mt-8">
                                         <img className=" position-absolute  " src={Restangle34} alt="Banner"/>
                                         <img  className=" position-absolute" src={Restangle332} alt="Banner"/>
-                                        <h3 style={{color: "#fff"}} className="position-absolute monserat">Контроль качество</h3>                                
+                                        <h3 style={{color: "#fff"}} className="position-absolute monserat">Контроль качества</h3>                                
                                     </div>
                                 </Link>
                             </div>

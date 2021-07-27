@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {ABOUT_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, SUBCATEGORY_ROUTE} from "../../utils/Const"
+import {ABOUT_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, SUBCATEGORY_ROUTE, PURCHASES_ROUTE} from "../../utils/Const"
 
 
 export default function Mobile() {
@@ -73,14 +73,10 @@ export default function Mobile() {
                         <a href="">Сотрудничество</a>
                         <ul>
                             <li><a href={ABOUT_ROUTE}>О нас</a></li>
-                            <li><a href={ABOUT_ROUTE}>Контакты</a></li>
-                            <li><a href={ABOUT_ROUTE}>Условия покупки</a></li>
-                            <li><a href={ABOUT_ROUTE}>Условия доставки</a></li>
+                            <li><a href={CONTACT_ROUTE}>Контакты</a></li>
+                            <li><a href={PURCHASES_ROUTE}>Условия покупки</a></li>
+                            <li><a href={DELIVERY_ROUTE}>Условия доставки</a></li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href={CONTACT_ROUTE} >КОНТАКТЫ</a>
-                        
                     </li>
                 </ul>
             </nav>

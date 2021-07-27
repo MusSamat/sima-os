@@ -9,7 +9,7 @@ import Cart from "./Components/pages/Cart";
 import Checkout from "./Components/pages/Checkout";
 import {CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, ABOUT_ROUTE, NEWS_ROUTE, HOME_ROUTE, 
         PRODUCT_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, ERROR_ROUTE, SINGLE_ROUTE, MYACOUNT_ROUTE,
-         SUBCATEGORY_ROUTE,PRODUCTCATEGORY_ROUTE, ORDER_ROUTE, PURCHASES_ROUTE, FORGET_ROUTE, CHANGEPASS_ROUTE} from "./utils/Const";
+         SUBCATEGORY_ROUTE,PRODUCTCATEGORY_ROUTE, ORDER_ROUTE, PURCHASES_ROUTE, FORGET_ROUTE, CHANGEPASS_ROUTE, QUICKVIEW_ROUTE} from "./utils/Const";
 import Wishlist from "./Components/pages/Wishlist";
 import Login from "./Components/pages/Login";
 import Error from "./Components/pages/Error";
@@ -21,6 +21,7 @@ import OrdersTable from "./Components/pages/OrdersTable";
 import Purchases from "./Components/pages/Purchases";
 import ForgetPass from "./Components/pages/ForgetPass";
 import ChangePass from "./Components/pages/ChangePass";
+import quickView from "./Components/pages/quickView";
 
 
 
@@ -108,5 +109,10 @@ export const publicRoutes = [
     {
         path: CHANGEPASS_ROUTE,
         Component: ChangePass,
+    },
+    
+    {
+        path: QUICKVIEW_ROUTE,
+        Component: quickView,
     },
 ]

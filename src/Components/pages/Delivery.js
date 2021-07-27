@@ -1,11 +1,10 @@
 import React, {useEffect, useContext} from 'react';
-import dostavka from "../../assets/dostavka.png"
-import dostavka1 from "../../assets/dostavka1.png"
-import dostavka2 from "../../assets/dostavka2.png"
-import fura from "../../assets/fura.png"
 import "../../App.css"
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
+import { NavLink } from 'react-router-dom';
+import { HOME_ROUTE } from '../../utils/Const';
+
 
 const Delivery = observer(() => {
 	const {user} = useContext(Context)
@@ -16,7 +15,13 @@ const Delivery = observer(() => {
 	}, [])
 	   
     return (
-        <div style={{marginTop: "80px"}} className="page-wrapper">
+        <div  className="page-wrapper">
+			<div className="container">
+				<ol className="breadcrumb mt-4 mb-2">
+					<li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+					<li className="breadcrumb-item"><a href="">Условия доставки</a></li>
+				</ol>
+			</div>
 			{user.delivery.map((img, index) =>
                         <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>    
                             
@@ -30,32 +35,23 @@ const Delivery = observer(() => {
 			<div className="container">
                 <div className="row">
                 	<div className=" col-sm-12">
-						<div style={{display: "flex", justifyContent: "center", marginTop: "40px", }}><h2 style={{color: "#EEA287"}}>Условия доставки</h2 ></div>
+						<div style={{display: "flex", justifyContent: "center", marginTop: "40px",  }}><h2 style={{color: "#EEA287"}}>Условия доставки</h2 ></div>
                 	</div>
                 </div>
 				{console.log(user.delivery)}
 					
 			</div>
-        <main className="main">
-            <div className="page-content pb-0">
                 <div className="container">
-					<h4 style={{ marginTop:"30px", marginBottom: "10px", textAlign: "center", color: "#EEA287"}}>Осуществляем доставку в города России, Казахстана, Беларуси, Узбекистана, и по всему миру, любым удобным для Вас способом! </h4>
 					
-					<p  style={{fontSize: "16px", textAlign: "justify", textIndent: "30px", color: "#000000"}}>Доставка посылок производится железнодорожным, авиа и автомобильным транспортом в зависимости от города
-					Доставка заказов полностью оплачивается Заказчиком . Транспортировка груза производится транспортными компаниями, до центральных городов.
-					Дополнительные отправки и пересылки партий товара в удаленные населенные пункты оплачиваются заказчиком самостоятельно. Доставка до терминалов транспортных компаний бесплатная
-					Товар отгружается в течение 24х часов с момента готовности заказа. Информацию о стоимости и сроках доставки в ваш регион можете получить у представителей данных транспортных компаний или у нашего менеджера
-					Товар отправляется из Бишкека - столицы Кыргызстана, средний срок доставки по России - 7 дней, Казахстан - 3 дня, Беларусь и Украина - 10-14 дней. (При условии отправки через Карго, с момента отгрузки в ТК. При отправке товара через Кит, Энергию, СДЭК и т.п. сроки доставки увеличиваются)
-					Менеджер подберет вам оптимальный тариф на доставку, согласно вашим потребностям. Для каждого партнера подбирается индивидуальное решение по доставке, с учётом местоположения и пожеланий и оптимального срока доставки. </p>
-
-
+					<p  style={{fontSize: "16px", textAlign: "justify", textIndent: "40px", color: "#000000"}}>Осуществляем доставку в города России, Украины, Казахстана, Беларуси, Узбекистана, и по всему миру, любым удобным для Вас способом. Доставка посылок производится железнодорожным, авиа и автомобильным транспортом в зависимости от города. Доставка заказов полностью оплачивается Заказчиком. Транспортировка груза производится транспортными компаниями, до центральных городов.  Доставка до терминалов транспортных компаний бесплатная. </p>
+					<p  style={{fontSize: "16px", textAlign: "justify", textIndent: "40px", color: "#000000"}}>После совершения заказа ваш личный менеджер согласует с вами удобный для вас способ доставки. В течение 3-х рабочих дней после поступления оплаты будет выслан ваш заказ, через согласованную транспортную компанию. В день отправки вашего заказа, менеджер предоставит вам номер накладной и код получателя, для отслеживания передвижения вашего заказа в пути. Информацию о стоимости и сроках доставки в ваш регион можете получить у представителей данных транспортных компаний или у нашего менеджера</p>
+					
 
                 	
 
                 	<hr className="mt-4 mb-5"/>
-
-					<h4 style={{color: "#EEA287"}}>На сегодняшний день, компания «SIMA» работает с транспортными компаниями </h4>
-					<ul style={{marginLeft: "70px", marginTop: "50px", listStyle: "outside"}}>
+					<p  style={{fontSize: "16px", textAlign: "justify", textIndent: "30px", color: "#000000"}}>На сегодняшний день, <span style={{color: "#EEA287"}}>компания «SIMA»</span> работает с транспортными компаниями:	</p>
+					<ul style={{marginLeft: "70px", marginTop: "20px", listStyle: "outside"}}>
 						<li style={{fontSize: "16px", color: "#000000"}}>БиекКарго (Россия, Казахстан) <a href="http://www.goldenpages.kg/ru/company/show/6009-biek-cargo-osoo.html">www.goldenpages.kg</a></li>
 						<li style={{fontSize: "16px", color: "#000000"}}>Альфа-Карго  (Россия, Казахстан) <a href="https://www.alpha-cargo.kg/"> www.alpha-cargo.kg</a></li>
 						<li style={{fontSize: "16px", color: "#000000"}}>Экспресс Карго  <a href="https://bagat.su/dostavka-gruzov-v-mongoliyu/">bagat.su</a></li>
@@ -69,11 +65,9 @@ const Delivery = observer(() => {
 						<li style={{fontSize: "16px", color: "#000000"}}>И другие</li>
 					</ul>
 
-
+					<p  style={{fontSize: "16px", textAlign: "justify", textIndent: "40px", color: "#000000"}}>Менеджер подберет вам оптимальный тариф на доставку, согласно вашим потребностям. Для каждого партнера подбирается индивидуальное решение по доставке, с учётом местоположения и пожеланий, и оптимального срока доставки.</p>
                 	
                 </div>
-            </div>
-        </main>
         </div>
     )
 })

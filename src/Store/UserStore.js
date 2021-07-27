@@ -42,6 +42,9 @@ export default class UserStore {
 
     
 
+    
+
+
      getUserData(){
         this.token = JSON.parse(localStorage.getItem('value'))
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/auth/user`,{
@@ -173,6 +176,7 @@ export default class UserStore {
      }
 
     changeItemQuantity (ind, val) {
+        console.log(ind, val)
         this.items = this.items.map((i, index) => index === ind ? {...i, quantity: val} : i)
     } 
     getReviews(id) {

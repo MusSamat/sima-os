@@ -11,16 +11,21 @@ import 'react-toastify/dist/ReactToastify.css';
 import "../../App.css";
 import logo from "../../assets/login.png"
 
+
+
 const ChangePass = observer((props) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [password1, setPassword1] = useState()
     const [passError, setPassError] = useState(false)
     const {user} = useContext(Context)
+    // const [{ username, email, password, passwordConfirmation }, setState] = useState(initialState);
     const history = useHistory()
     const token = props.match.params.token
     console.log(logo)
     console.log(token)
+    
+
     
 
     
@@ -110,7 +115,7 @@ const ChangePass = observer((props) => {
                                                         placeholder="Пароль"
                                                         required
                                                         value={password}
-                                                        onChange={e => setEmail(e.target.value)}
+                                                        onChange={e => setPassword1(e.target.value)}
                                                     />
                                                 </div>
 
@@ -123,7 +128,7 @@ const ChangePass = observer((props) => {
                                                         placeholder="Подтвердить Пароль" 
                                                         required
                                                         value={password1}
-                                                        onChange={e => setPassword(e.target.value)}
+                                                        onChange={e => setPassword1(e.target.value)}
                                                     />
                                                 </div>
 

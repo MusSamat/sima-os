@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import "../../App.css";
-import { FaOdnoklassnikiSquare } from "react-icons/fa";
-import { FaWhatsappSquare } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
+import { HOME_ROUTE } from '../../utils/Const';
 
 
 
@@ -11,11 +11,15 @@ export default function Contact() {
     }, [])
     return (
         
-            <main className="main">
+            <main className="main mt-2">
 
                 <div className="page-content">
                     <div className="container">
-                        <div className="row">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                            <li class="breadcrumb-item"><a href="">Контакты</a></li>
+                        </ol>
+                        <div className="row mt-5">
                             <div className="col-md-4">
                                 <div className="contact-box text-center">
                                     <h5>Адрес</h5>
@@ -28,25 +32,24 @@ export default function Contact() {
                                 </div>
                             </div>
 
-                            <div className="col-md-4">
+                            <div className="col-md-5">
                                 <div className="contact-box text-center">
                                     <h5>Руководитель</h5>
-                                    <p style={{fontSize: "18px", color: "#000000"}}>+996 (705) 55 58 29</p>
-                                    <p style={{fontSize: "18px", color: "#000000"}}>+996 (709) 99 99 15</p>
-                                    <p style={{fontSize: "18px", color: "#000000"}}>+ 996 (700) 50 60 46</p>
-                                    <p style={{fontSize: "18px", color: "#000000"}}><FaWhatsappSquare style={{ color: "green",fontSize: "30px"}}/> +996 (705) 55 58 29</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}>+996 (705) 55 58 29 Руководитель</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}>+996 (709) 99 99 15 Менеджер по продажам</p>
+                                    <p style={{fontSize: "18px", color: "#000000"}}>+996 (999) 99 88 15 Менеджер по продажам</p>
                                     
                                 </div>
                             </div>
 
-                            <div className="col-md-4">
+                            <div className="col-md-3">
                                 <div className="contact-box text-center">
                                     <h5>Мы в соц. сетях</h5>
 
                                     <div  className="social-icons social-icons-color justify-content-center">
                                         <a style={{fontSize: "25px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
                                         <a style={{fontSize: "25px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                                        <a style={{fontSize: "25px"}} href="https://www.instagram.com/simacompany_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                                        <a style={{fontSize: "25px"}} href="https://www.instagram.com/simastyle_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
                                         <a style={{fontSize: "20px", color: "#ee8208"}} href="https://ok.ru/profile/584170543033" className="social-icon" target="_blank" title="odnoklassniki"><i className="icon-odnoklassniki"></i></a>
                                         {/* <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a> */}
                                         

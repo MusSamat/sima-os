@@ -2,24 +2,19 @@ import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../index';
-import { LOGIN_ROUTE, HOME_ROUTE } from '../../utils/Const';
+import { LOGIN_ROUTE, HOME_ROUTE, CATALOG_ROUTE } from '../../utils/Const';
 import axios from "axios";
 import  "../../App.css";
 import { FaStar } from "react-icons/fa";
+import { RiShareLine } from "react-icons/ri";
 import { FcLike } from "react-icons/fc";
 import { FaOdnoklassnikiSquare } from "react-icons/fa";
 import { BiGitRepoForked } from "react-icons/bi";
 import razmer from "../../assets/razmer.png"
 import {Modal, Button} from "react-bootstrap";
-import {PRODUCTCATEGORY_ROUTE} from "../../utils/Const"
 import mobile_menu from '../../Http/mobile_menu';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Carousel from 'react-elastic-carousel';
-import Carousel from "react-multi-carousel";
-import { Image } from "semantic-ui-react";
-import styled from "styled-components";
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const responsive = {
     desktop: {
@@ -80,12 +75,6 @@ const Product = observer((props) => {
     const [hover, setHover] = useState(false);
     const [show, setShow] = useState(false);
     const [showRaz, setShowRaz] = useState(false);
-    const [carusel, setCarusel] = useState([
-        {id: 1, title: 'item #1'},
-        {id: 2, title: 'item #2'},
-        {id: 3, title: 'item #3'},
-        {id: 4, title: 'item #4'},
-        {id: 5, title: 'item #5'}])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -241,35 +230,6 @@ const Product = observer((props) => {
      
         setLeftImages(newList);
       }
-
-
-      const handleClickCaruosel = (direction) => {
-        setActiveIndex((prevIndex) => {
-          if (direction === "next") {
-            if (prevIndex + 1 > leftImages.length - 1) {
-              return 0;
-            }
-            return prevIndex + 1;
-          }
-    
-          if (prevIndex - 1 < 0) {
-            return leftImages.length - 1;
-          }
-    
-          return prevIndex - 1;
-        });
-      };
-
-      var getValue = function getValue(object, propertyName) {
-        return typeof object === 'undefined' ? undefined : object[propertyName]
-        }
-        var getNestedValueDeclaratively = function getNestedValueDeclaratively(object,
-         propertyName) {
-             console.log(propertyName)
-        return propertyName.split('.').reduce(getValue, object)
-        }
-        console.log(getNestedValueDeclaratively({bar: 'baz'}, 'bar') === 'baz')
-        console.log(getNestedValueDeclaratively({bar: { baz: 1 }}, 'bar.baz')=== 1)
     
     useEffect(() => {
         window.scrollTo(0,0)
@@ -334,14 +294,13 @@ const Product = observer((props) => {
                 <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0 mt-6">
                     <div  className="container d-flex align-items-center ">
                         <ul className="breadcrumb">
-                            <li className="breadcrumb-item"><Link to={HOME_ROUTE} className="item" style={{marginTop: "-3px", marginRight: "-5px", color: "#000000"}}  >ГЛАВНАЯ</Link></li>
-                            
+                            <li className="breadcrumb-item"><Link to={HOME_ROUTE} className="item" style={{marginTop: "-3px", marginRight: "-5px", color: "#000000"}}  >Главная</Link></li>
+                            <li className="breadcrumb-item"><Link to={CATALOG_ROUTE} className="item" style={{marginTop: "-3px", color: "#000000"}}  >Каталог</Link></li>                            
                             <li className="breadcrumb-item " style={{color: "#000000"}} aria-current="page"> {product.product.title}</li>
-                            <li className="breadcrumb-item " style={{color: "#000000"}} aria-current="page">Артикул: {product.product.articul}</li>
                         </ul>
 
-                        <nav className="product-pager ml-auto" aria-label="Product">
-                            <BiGitRepoForked onClick={handleShow} style={{fontSize: "30px", cursor: "pointer"}}/>
+                        <nav style={{border: "1px solid #000", borderRadius: "50%", width: "40px", height: "40px"}} className="product-pager ml-auto" aria-label="Product">
+                            <RiShareLine style={{color: "#000000", }} onClick={handleShow} style={{fontSize: "30px", cursor: "pointer"}}/>
                         </nav>
                         <Modal show={show} onHide={handleClose} centered={true} animation={true}>
                             <Modal.Header closeButton>
@@ -398,7 +357,8 @@ const Product = observer((props) => {
                                         
                                         
                                         <h1 style={{color: "#000000"}} className="product-title">{product.product.title}</h1>
-                                        <div style={{color: "black", fontWeight:"300"}} className="product-price">
+                                        <p>Артикул: {product.product.articul}</p>
+                                        <div style={{ fontWeight:"300"}} className="product-price">
                                             {user.isAuth ? `${product.product.price} ₽`  : ""}
                                         </div>
                                         <label style={{color: "#9393a5", fontSize: "14px", fontWeight: "300", lineHeight: "20px", letterSpacing: "-.15px"}}>Цвет: <span style={{color: "#000"}}>{imgTitle}</span></label>
@@ -406,8 +366,56 @@ const Product = observer((props) => {
                                         
 
                                             <div className="product-nav product-nav-thumbs">
+
+
+                                                <div class="owl-carousel owl-theme owl-testimonials" data-toggle="owl" 
+                                                    data-owl-options='{
+                                                        "nav": false, 
+                                                        "dots": true,
+                                                        "margin": 10,
+                                                        "loop": true,
+                                                        "responsive": {
+                                                            "0": {
+                                                                "items":1
+                                                            },
+                                                            "768": {
+                                                                "items":2
+                                                            },
+                                                            "992": {
+                                                                "items":3
+                                                            },
+                                                            "1000": {
+                                                                "items":3,
+                                                                "nav": true
+                                                            }
+                                                        }
+                                                    }'>
+                                                    {product.imagesUser.map((img, index) =>
+                                                    <div key={index} class="testimonial testimonial-icon text-center ">
+                                                        <a   
+                                                            onClick={() => {
+                                                                
+                                                            const d = [...img.images]
+                                                                console.log(d)
+                                                                setLeftImages(d)
+                                                                setSelectedImage(d[0])
+                                                                setImgTitle([img.title])
+                                                            }} className="active mt-3 mb-3">
+                                                                <img style={{width: "100px", height: "100px", marginLeft: "10px", cursor: "pointer"}} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`} alt="product desc"/>
+                                                        
+                                                            
+                                                        </a>
+                                                        {/* <p>“ Lorem ipsum dolor  ”</p>
+                                                        <cite>
+                                                            Jenson Gregory
+                                                            <span>Customer</span>
+                                                        </cite> */}
+                                                    </div>)}
+
+                                                   
+                                                </div>
                                             
-                                                {product.imagesUser.map((img, index) =>
+                                                {/* {product.imagesUser.map((img, index) =>
                                                     <div key={index} className="product-gallery-image">
                                                         <a   
                                                             onClick={() => {
@@ -421,8 +429,8 @@ const Product = observer((props) => {
                                                         
                                                             
                                                         </a>
-                                                    </div       >
-                                                    )}
+                                                    </div>
+                                                    )} */}
                                                 
                                             </div>
                                         </div>
@@ -449,8 +457,8 @@ const Product = observer((props) => {
                                             <div className="product-details-action">
                                                  <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product btn-cart" ><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>
 
-                                                <div className="details-action-wrapper">
-                                                {product.favorite.is_favorite ? 
+                                                <div className="details-action-wrapper"> 
+                                                    {product.favorite.is_favorite ? 
                                                         <FcLike onClick={deleteWish} style={{fontSize: "30px", cursor: "pointer"}}/>
                                                     : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}  className="btn-product btn-wishlist" title="Wishlist"></a>}
                                                 </div>

@@ -1,14 +1,29 @@
-import React, {useContext, useEffect}from 'react';
+import React, {useContext, useEffect, setState}from 'react';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import {HOME_ROUTE } from '../../utils/Const';
 import "../../App.css";
 import Moment from 'react-moment';
 import 'moment-timezone';
 
+
+const initialState = {
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirmation: ""
+  };
+
+
 const News = observer(() =>{
     const {product} = useContext(Context)
+
+    const clearState = () => {
+        setState({ ...initialState, });
+      };
+      console.log(clearState)
     const history = useHistory()
     useEffect(() => {
         window.scrollTo(0,0)
@@ -17,17 +32,18 @@ const News = observer(() =>{
     return (
         <div className="page-wrapper">
              <main className="main mt-2">
-        	
-                
-
                 <div className="page-content">
-                    <div className="container mt-5">
+                    <div className="container ">
+                        <ol className="breadcrumb mb-4 ">
+                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                            <li className="breadcrumb-item"><a href=""> Новости</a></li>
+                        </ol>
                             {product.blog.map((blog, index) =>
                             <div className="entry-item lifestyle shopping " key={index}  >
                                 
                                 <article className="entry entry-grid text-center row">
                                     
-                                    <div className="entry-body col-12 col-md-6 col-lg-6 ">
+                                    <div className="entry-body col-12 col-md-6 col-lg-7 ">
                                         <h6 className="entry-title">
                                            {blog.title}
                                         </h6>
@@ -57,7 +73,7 @@ const News = observer(() =>{
                                         </div>
                                        
                                     </div>
-                                    <figure  className="entry-media col-12 col-md-6 col-lg-6">
+                                    <figure  className="entry-media col-12 col-md-6 col-lg-5">
                                             <img className="imgPhoto"  src={`${process.env.REACT_APP_BASE_URL}${blog.images}`} alt="image desc"/>
                                     </figure>
                                 </article><hr />

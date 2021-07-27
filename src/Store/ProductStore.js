@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import axios from 'axios';
 
+
 export default class ProductStore {
     constructor(){
         this.products = []
@@ -32,11 +33,10 @@ export default class ProductStore {
         this.sertificate = []
         
         
-        
 
         makeAutoObservable(this)
     }
-   
+    
      fetchTodo() {
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategorysorted`)
             .then(res => {
@@ -49,18 +49,18 @@ export default class ProductStore {
             
             
     }
-    fetchTodoCatalog(catId, title) {
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${catId}&productcategory__title__iexact=${title}`)
-            .then(res => {
-                this.products = [...res.data]
-                this.allProducts = this.products
-            })
-            .catch((e)=>{
-                console.error(e)
-            })
+    // fetchTodoCatalog(catId, title) {
+    //     return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${catId}&productcategory__title__iexact=${title}`)
+    //         .then(res => {
+    //             this.products = [...res.data]
+    //             this.allProducts = this.products
+    //         })
+    //         .catch((e)=>{
+    //             console.error(e)
+    //         })
             
             
-    }
+    // }
 
     
     getCategoryTitle(title) {
@@ -217,15 +217,39 @@ export default class ProductStore {
      }
 
      getDataFavorite(id) {
-        this.token = JSON.parse(localStorage.getItem('value'))
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/` + id, {
             headers: {
                 'Content-Type':'application/json',
-                'Authorization':'Token ' + this.token?.token
-            },
-        })
+                'Authorization':'Token ' +  this.token?.token 
+        }
+        } )
             .then(response => {
                 this.favorite = response.data
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+     }
+    //  
+    fetchTodoCatalog(catId, title, isAuth) {
+        this.token = JSON.parse(localStorage.getItem('value'))
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${catId}&productcategory__title__iexact=${title}`, isAuth ? {
+            headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':'Token ' +  this.token?.token 
+                
+                
+            } 
+        } : { 
+            headers: {
+            'Content-Type':'application/json',
+             
+        
+        
+    } })
+            .then(res => {
+                this.products = [...res.data]
+                this.allProducts = this.products
             })
             .catch((e)=>{
                 console.error(e)

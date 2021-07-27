@@ -2,10 +2,8 @@ import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react'
 import { Context } from '../../index';
 import axios from "axios"
-import { NavLink } from 'react-router-dom';
-import { CATALOG_ROUTE, CHECKOUT_ROUTE } from '../../utils/Const';
-import ruble from "../../assets/ruble.png"
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import { CATALOG_ROUTE, CHECKOUT_ROUTE, HOME_ROUTE } from '../../utils/Const';
 import "../../App.css";
 
 
@@ -74,11 +72,15 @@ import "../../App.css";
 
       }, [])
     return (
-        <div style={{marginTop: "80px"}}>
+        <div >
             <main className="main">
                     <div className="page-content">
                         <div className="cart">
                             <div className="container">
+                                <ol className="breadcrumb mb-5">
+                                    <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                                    <li className="breadcrumb-item"><a href=""> Корзина</a></li>
+                                </ol>
                                 <div className="row">
                                     <div className="col-lg-9">
                                         <table className="table table-cart table-mobile">
@@ -166,7 +168,8 @@ import "../../App.css";
                                                 </tbody>
                                             </table>
 
-                                            <NavLink to={CHECKOUT_ROUTE}><a  style={{fontSize: "20px"}} className="btn btn-outline-primary-2 btn-order btn-block">Оформить заказ</a></NavLink>
+                                            <NavLink to={CHECKOUT_ROUTE}><a href="" class="btn btn-outline-dark btn-rounded mb-1">Оформить заказ</a></NavLink>
+                                            
                                         </div>
 
                                         <NavLink to={CATALOG_ROUTE}><button  className="btn btn-outline-dark-2 btn-block mb-3"><span>ПРОДОЛЖИТЬ ПОКУПКИ</span><i className="icon-refresh"></i></button></NavLink>

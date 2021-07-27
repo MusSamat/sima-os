@@ -3,14 +3,14 @@ import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import "../../App.css";
 import { useHistory } from 'react-router';
-import { LOGIN_ROUTE, ORDER_ROUTE } from '../../utils/Const';
+import { LOGIN_ROUTE, ORDER_ROUTE, HOME_ROUTE } from '../../utils/Const';
 import axios from "axios"
 import { Button, Modal } from 'react-bootstrap'
 import Moment from 'react-moment';
 import 'moment-timezone';
 
 import { FaLastfmSquare } from 'react-icons/fa';
-import { Switch, Route, Link} from 'react-router-dom';
+import { Switch, Route, Link, NavLink} from 'react-router-dom';
 import { orderRoutes } from "../../routes";
 import OrdersTable from './OrdersTable';
 
@@ -139,12 +139,16 @@ const Myacount = observer(() => {
     }, [])
     return (
         <div className="page-wrapper">
-            <main className="main" style={{marginTop: "50px"}}>
+            <main className="main" style={{marginTop: "10px"}}>
                 
 
                 <div className="page-content">
                     <div className="dashboard">
                         <div className="container">
+                            <ol className="breadcrumb mb-2 ">
+                                <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                                <li className="breadcrumb-item"><a href=""> Мой аккаунт</a></li>
+                            </ol>
                             <div className="row">
                                 <aside className="col-md-4 col-lg-3">
                                     <ul className="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
@@ -166,7 +170,7 @@ const Myacount = observer(() => {
                                 <div className="col-md-8 col-lg-9">
                                     <div className="tab-content">
                                         <div className="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-                                            <p style={{fontSize: "16px", color: "#000000"}}>Добро пожаловать <span style={{fontSize: "16px"}} className="font-weight-normal text-dark">{user.userId.username}</span> (не <span className="font-weight-normal text-dark">{user.userId.email}</span>? <a href="" onClick={logoOut}>Выйти</a>) 
+                                            <p style={{fontSize: "16px", color: "#000000"}}>Добро пожаловать <span style={{fontSize: "16px"}} className="font-weight-normal text-dark">{user.userId.username}</span> не <span className="font-weight-normal text-dark"></span> <a href="" onClick={logoOut}>Выйти</a>
                                             <br/>
                                             Из главной страницы аккаунта вы можете посмотреть ваши <a href="#tab-orders" className="tab-trigger-link link-underline">недавние заказы</a>, настроить <a href="#tab-address" className="tab-trigger-link">платежный адрес и адрес доставки</a>, а также <a href="#tab-account" className="tab-trigger-link">изменить пароль и основную информацию.</a>.</p>
                                         </div>

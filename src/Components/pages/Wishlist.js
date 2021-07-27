@@ -2,8 +2,9 @@ import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../index';
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import "../../App.css";
+import { HOME_ROUTE } from '../../utils/Const';
 
 const Wishlist = observer(()=> {
     const {user} = useContext(Context)
@@ -69,19 +70,13 @@ const Wishlist = observer(()=> {
     return (
         <div className="page-wrapper">
             <main className="main">
-                {/* <div className="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
-                    <div className="container">
-                        <h1 className="page-title">Wishlist<span>Shop</span></h1>
-                    </div>
-                </div> */}
-                <nav aria-label="breadcrumb" className="breadcrumb-nav">
-                    <div className="container">
-                        
-                    </div>
-                </nav>
 
                 <div className="page-content">
                     <div className="container">
+                        <ol className="breadcrumb mb-4 ">
+                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                            <li className="breadcrumb-item"><a href=""> Изображение</a></li>
+                        </ol>
                         <table className="table table-wishlist table-mobile">
                             <thead>
                                 <tr>
