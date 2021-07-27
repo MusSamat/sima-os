@@ -5,8 +5,10 @@ import axios from "axios";
 import {  useHistory} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ORDER_ROUTE } from '../../utils/Const';
+import { CART_ROUTE, ORDER_ROUTE } from '../../utils/Const';
 import "../../App.css";
+import { NavLink } from 'react-router-dom';
+import { HOME_ROUTE } from '../../utils/Const';
 
 
 const Checkout = observer(() => {
@@ -63,6 +65,11 @@ const Checkout = observer(() => {
             <div className="page-content">
             	<div className="checkout">
 	                <div className="container">
+						<ol className="breadcrumb mb-4 ">
+                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                            <li className="breadcrumb-item"><NavLink to={CART_ROUTE}><a href="">Корзина</a></NavLink></li>
+                            <li className="breadcrumb-item"><a href=""> Оформить заказ</a></li>
+                        </ol>
             			<form action="#">
 		                	<div className="row">
 		                		<div className="col-lg-9">

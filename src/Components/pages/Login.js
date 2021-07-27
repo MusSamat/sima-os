@@ -16,6 +16,13 @@ const Login = observer(() => {
     const [username, setUsername] = useState()
     const {user} = useContext(Context)
     const history = useHistory()
+
+    
+
+    axios.interceptors.response.use((response) =>{
+        console.log(response.data)
+        return response
+    })
     
 
     
@@ -39,6 +46,27 @@ const Login = observer(() => {
 
         
     }
+
+    
+        const solve = (root) => {
+            let checkVal = root.val
+            let all = true
+    
+            function trees(node){
+                
+                if(node.val !==  checkVal) all = false
+                if(node.left) trees(node.left)
+                if(node.right) trees(node.right)
+            }
+            trees(root)
+            return all ? true : false
+        }
+
+        console.log(solve([2, [2, [3, null, null], null], [2, [3, null, null], null]]))
+
+    
+
+
     const login = (event) => {
         const article = {password, username}
         
@@ -61,6 +89,11 @@ const Login = observer(() => {
         event.preventDefault();
         
     }
+
+    axios.interceptors.request.use((request) =>{
+        console.log(request)
+        return request
+    })
 
     useEffect(() => {
         window.scrollTo(0,0)

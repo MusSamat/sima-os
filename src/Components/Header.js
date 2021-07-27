@@ -4,7 +4,7 @@ import {ABOUT_ROUTE, PURCHASES_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE,
 import "../App.css";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
-import logo from "../assets/simaLogo.jpeg"
+import logo from "../assets/logo1.png"
 import what from "../assets/WhatsApp.png"
 import mobile_menu from "../Http/mobile_menu";
 
@@ -183,8 +183,8 @@ const Header = observer(() => {
                             <span className="sr-only">Toggle mobile menu</span>
                             <i className="icon-bars"></i>
                         </button>
-                        <NavLink exact className="logo" to={HOME_ROUTE}>
-                            <img style={{width: "200px", height: "80px"}} src={logo}/> 
+                        <NavLink exact  to={HOME_ROUTE}>
+                            <img className="logo1" src={logo}/> 
                             
                         </NavLink>
                         
@@ -210,8 +210,8 @@ const Header = observer(() => {
                                     <NavLink exact className="sf-with" to={CONTACT_ROUTE}><a style={{fontSize: "18px"}} className="sf-with-ul">Контакты</a></NavLink>
                                 </li > */}
                                 <li className="megamenu-container ">
-                                    <a style={{fontSize: "18px", color: "#000000"}} className="sf-with-ul">Сотрудничество</a>
-                                        <ul className="menu sf-arrows "  style={{marginLeft: "622px", marginTop: "-10px", color: "white", width: "40px" }}>
+                                    <a style={{fontSize: "18px", color: "#000000", cursor: "pointer"}} className="sf-with-ul">Сотрудничество</a>
+                                        <ul className="menu sf-arrows "  style={{marginLeft: "605px", marginTop: "-10px", color: "white", width: "40px" }}>
                                                 <Link  to={ABOUT_ROUTE} >
                                                     <li className="megamenu-container " ><a className="sf-with  Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#000000" }}>О нас</a></li>
                                                 </Link>
@@ -233,6 +233,15 @@ const Header = observer(() => {
                     </div>
 
                     <div className="header-right">
+                        <div className="header-search ">
+                            <a href=""className="search-toggle" role="button" title="Search"><i style={{color: "#000000"}} className="icon-search mt-6"></i></a>
+                            <form action="" method="get">
+                                <div className="header-search-wrapper">
+                                    <label for="q" class="sr-only">Search</label>
+                                    <input type="search"className="form-control" name="q" id="q" placeholder="Search in..." required/>
+                                </div>
+                            </form>
+                        </div>
                         {user.isAuth ? <NavLink   to={MYACOUNT_ROUTE}><a style={{fontSize: "30px" }} data-toggle="modal"><i style={{color: "#000000"}} className="icon-user"></i></a></NavLink>
                             : <NavLink  to={LOGIN_ROUTE}><a style={{fontSize: "30px" }} data-toggle="modal"><i style={{color: "#000000"}} className="icon-user"></i></a></NavLink>}<br/>
                         
@@ -244,7 +253,7 @@ const Header = observer(() => {
                             <NavLink to={CART_ROUTE}><a  className="dropdown-toggle " >
                                 <i style={{color: "#000000"}} className="icon-shopping-cart"></i>
                                 <span className="cart-count">{user.items?.length || '0'}</span>
-                                {
+                                { 
                                     user.items?.map((item, index) => {
                                         sum = sum + item.product?.price * item.quantity
                                        })
@@ -255,9 +264,10 @@ const Header = observer(() => {
 
                             <div  className="dropdown-menu dropdown-menu-right">
                                 <div style={{overflowY: "auto", height: "230px"}} >
-                               {user.items?.map((c, index)=>
-                                <div key={index}   className="dropdown-cart-products">
-                                    <div className="product">
+                              
+                                <div    className="dropdown-cart-products">
+                                {user.items?.map((c, index)=>
+                                    <div key={index} className="product">
                                         <div className="product-cart-details">
                                             <h4 className="product-title">
                                                 <a>{c.product?.title}</a>
@@ -275,8 +285,10 @@ const Header = observer(() => {
                                             </a>
                                         </figure>
                                         <a href="" className="btn-remove" title="Remove Product"></a>
-                                    </div>
-                                </div>)}
+                                    </div>)}
+                                </div> 
+                                
+                                
                                 </div>
 
                                 <div className="dropdown-cart-total">
@@ -286,9 +298,15 @@ const Header = observer(() => {
                                 </div>
 
                                 <div className="dropdown-cart-action" style={{display: "block"}}>
-                                    <NavLink style={{marginBottom: "9px"}} className="btn btn-primary" to={CART_ROUTE}>ПРОСМОТР КОРЗИНЫ</NavLink><br/>
+                                    <NavLink style={{marginBottom: "9px"}} to={CART_ROUTE}>
+                                         {/* <a className="btn btn-primary" ></a>
+                                         <a href="#" class="btn btn-link">ПРОСМОТР КОРЗИНЫ</a> */}
+                                         <a href="" class="btn btn-outline-dark btn-rounded mb-1">ПРОСМОТР КОРЗИНЫ</a>
+                                    </NavLink><br/>
                                     
-                                    <NavLink style={{width: "167px"}} className="btn btn-outline-primary-2" to={CHECKOUT_ROUTE}>ОФОРМИТЬ ЗАКАЗ</NavLink>
+                                    <NavLink style={{width: "167px"}} to={CHECKOUT_ROUTE} >
+                                        <a href="" class="btn btn-outline-dark btn-rounded">ОФОРМИТЬ ЗАКАЗ</a>
+                                    </NavLink>
                                     
                                 </div>
                             </div>
