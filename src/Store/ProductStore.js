@@ -149,8 +149,8 @@ export default class ProductStore {
     getSortedData(){
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory`)
             .then(res => {
-                this.productSorted = [...res.data]
-                this.allProductSorted = this.productSorted
+                this.prodcategory = [...res.data]
+                // this.allProductSorted = this.productSorted
 
             })
             .catch((e)=>{
@@ -158,16 +158,16 @@ export default class ProductStore {
             })
     }
     
-    getProdcategory(id) {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?category_id=`+id)
-            .then(res => {
-                this.prodcategory = [...res.data]
+    // getProdcategory(id) {
+    //     axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategory/?category_id=`+id)
+    //         .then(res => {
+    //             this.prodcategory = [...res.data]
 
-            })
-            .catch((e)=>{
-                console.error(e)
-            })
-    }
+    //         })
+    //         .catch((e)=>{
+    //             console.error(e)
+    //         })
+    // }
 
     changeFilter(id,){
         this.products = this.allProducts.filter((item, index) => item.seasoncategory  === id)
@@ -326,8 +326,8 @@ export default class ProductStore {
      
      
 
-     async discountTodo() {
-        await  axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`)
+      discountTodo() {
+          axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`)
              .then(res => {
                  this.products = [ ...res.data]
 
@@ -337,6 +337,19 @@ export default class ProductStore {
                  console.error(e)
              })      
      }
+
+     discountTodo1() {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`)
+           .then(res => {
+            this.discount = [ ...res.data]
+            console.log(res)
+
+              
+           })
+           .catch((e)=>{
+               console.error(e)
+           })      
+   }
 
      async changeDiscounted(){
         await  axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`)

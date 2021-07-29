@@ -22,6 +22,7 @@ export default class UserStore {
         this.purchase = []
         this.delivery = []
         this.about = []
+        this.contact = []
 
         this.count = 0
         makeAutoObservable(this)
@@ -114,8 +115,11 @@ export default class UserStore {
         .then(res => {
             this.carts = res.data
             this.items = this.carts.items 
-            return this.items
-            
+            return this.items.map((a) => {
+                 a.product.images = a.product.images.filter(i => i.title === a.color).length ? a.product.images.filter(i => i.title === a.color) :[]
+                 return a 
+            })
+        
         })
         .catch((e)=>{
             console.error(e)
@@ -161,6 +165,18 @@ export default class UserStore {
         .then(res => {
             this.about = res.data 
             return this.about
+            
+        })
+        .catch((e)=>{
+            console.error(e)
+        }) 
+     }
+
+     getImageContact() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-about-us/`)
+        .then(res => {
+            this.contact = res.data 
+            return this.contact
             
         })
         .catch((e)=>{

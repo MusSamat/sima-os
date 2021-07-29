@@ -3,7 +3,7 @@ import axios from "axios";
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
 import { useHistory } from 'react-router';
-import { SUBCATEGORY_ROUTE, MYACOUNT_ROUTE, FORGET_ROUTE } from '../../utils/Const';
+import { SUBCATEGORY_ROUTE, MYACOUNT_ROUTE, FORGET_ROUTE, CATALOG_ROUTE } from '../../utils/Const';
 import "../../App.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -66,7 +66,7 @@ const Login = observer(() => {
                 setError(true)
                 user.setIsAuth(true)
                 localStorage.setItem('value', JSON.stringify(response.data));
-                history.push(SUBCATEGORY_ROUTE)
+                history.push(CATALOG_ROUTE)
                 notify()
             })
             .catch(error =>{   

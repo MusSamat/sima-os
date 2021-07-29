@@ -1,31 +1,38 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useContext} from 'react';
 import "../../App.css";
 import { NavLink } from 'react-router-dom';
 import { HOME_ROUTE } from '../../utils/Const';
+import vk from '../../assets/vk.png'
+import { observer } from 'mobx-react-lite';
+import { Context } from '../../index';
 
 
+const Contact = observer(() => {
+    const {user} = useContext(Context)
 
-export default function Contact() {
     useEffect(() => {
         window.scrollTo(0,0)
+        user.getImageContact()
     }, [])
     return (
         
             <main className="main mt-7">
                     <div className="container">
-                        <ol class="breadcrumb">
+                        <ol class="breadcrumb mb-2">
                             <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
                             <li class="breadcrumb-item"><a href="">Контакты</a></li>
                         </ol>
+                        {user.contact?.map((img, index) =>
+                        <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>                             
+                        </div>)}
                         <div className="row mt-5">
                             <div className="col-md-4">
                                 <div className="contact-box text-center">
                                     <h5>Адрес</h5>
-
                                     <p style={{fontSize: "18px", color: "#000000"}}>Кыргызстан,  720016 г. Бишкек, <br/>ул. Фрунзе 144а</p>
 
-                                    <p style={{fontSize: "18px", color: "#000000"}}>Рынок «Дордой»</p>
-                                    <p style={{fontSize: "18px", color: "#000000"}}>5 проход конт. 458/1</p>
+                                    <p style={{fontSize: "18px", color: "#000000", lineHeight: "normal"}}>Рынок «Дордой» <br/> 5 проход конт. 458/1</p>
+                                    
                                     
                                 </div>
                             </div>
@@ -49,7 +56,7 @@ export default function Contact() {
                                         <a style={{fontSize: "25px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
                                         <a style={{fontSize: "25px"}} href="https://www.instagram.com/simastyle_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
                                         <a style={{fontSize: "20px", color: "#ee8208"}} href="https://ok.ru/profile/584170543033" className="social-icon" target="_blank" title="odnoklassniki"><i className="icon-odnoklassniki"></i></a>
-                                        {/* <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a> */}
+                                        <a style={{fontSize: "20px"}} href="https://vk.com/simastyle"  className="social-icon"> <img style={{width: "25px"}} src={vk}/></a>
                                         
                                     </div>
                                 </div>
@@ -59,4 +66,6 @@ export default function Contact() {
                 <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button> 
             </main>
     )
-}
+})
+
+export default Contact;

@@ -49,14 +49,7 @@ const  Purchases = observer(() => {
                     </ol>
                     </div>
                     {user.purchase.map((img, index) =>
-                        <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>    
-                            
-                            {/* <div className="container intro-content text-left ">
-                                <h1 className="intro-title">{img.title}<br/>< strong style={{marginLeft: "-9px"}}>sale</strong></h1>
-
-                               
-                            </div> */}
-                            
+                        <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>                             
                         </div>)}
                         <div className="container mt-4">
                                 <div style={{display: "flex", justifyContent: "center", marginBottom: "25px" }}><h2 style={{color: "#EEA287"}}>Условия покупки</h2></div>

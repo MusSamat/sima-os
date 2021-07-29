@@ -58,7 +58,10 @@ const  Catolog = observer((props) => {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = product.products.slice(indexOfFirstPost, indexOfLastPost)
 
-    const paginate = pageNumber => setCurrentPage(pageNumber)
+    const paginate = (e, pageNumber) => {
+        setCurrentPage(pageNumber)
+        e.preventDefault();
+    }
     
 
     
@@ -165,6 +168,12 @@ const  Catolog = observer((props) => {
     e.preventDefault();
     }
 
+    let a = {}
+    let b = {}
+   console.log(a == b);
+   console.log(a === b);
+
+
     
     
     useEffect(() => {
@@ -192,31 +201,24 @@ const  Catolog = observer((props) => {
                 document.body.appendChild(s)
             })
         })
-        product.priceFilter()
-        product.discountTodo()
-        product.getCategoryTitle(title)
-        product.getCategoryTitleCount(title)
-        product.getSubcategory().then(() =>{
-            // let sesonId = product.subcategory?.map(s => s.id)
-            // product.getProductsSesonCategory(sesonId)
-        })
+        product.getSortedData()
+        // product.getCategoryTitle(title)
+        // product.getCategoryTitleCount(title)
+        product.getSubcategory()
         
        
-        
         
         
     
       }, []); 
       let percent
       product.discount.map((i) => i.percent === percent )
-      
-      console.log(product.productSorted)
     return (
         <div>
              <main  className="main">
                 <div className="page-content ">
                     <div className="container">
-                        <ol className="breadcrumb mt-5 ml-3">
+                        <ol className="breadcrumb mt-2 ml-3">
                             <li className="breadcrumb-item"><a href="/">Главная</a></li>
                             <li className="breadcrumb-item"><a href="">Каталог</a></li>
                         </ol>
@@ -231,7 +233,7 @@ const  Catolog = observer((props) => {
 
                                 <div class="products mb-3">
                                         <div class="row justify-content-center">
-                                            {console.log(user.favorite)}
+                                                {console.log(currentPosts)}
                                                 {currentPosts.map((prod, index) =>
                                             <div class="col-6 col-md-4 col-lg-3">
                                                 <div class="product product-7 text-center">
@@ -343,9 +345,10 @@ const  Catolog = observer((props) => {
                                             <li>
                                                 <a className="s-title" style={{color: "black", cursor: "pointer", paddingLeft: "2px"}}>Все</a>
                                                 <ul>
+                                                    {console.log(product.productSorted)}
                                                     {product.productSorted.map((c, index) =>
 
-                                                        <li onClick={() => product.fetchTodoCatalog(c.seasoncategory, c.title, user.isAuth)}  key={index}><a className="category-vse" style={{color: "black", cursor: "pointer", fontSize: "16px", padding: "0px 3rem"}}>{c.title}</a></li>
+                                                        <li key={index} onClick={() => product.fetchTodoCatalog(c.seasoncategory, c.title, user.isAuth)}  key={index}><a className="category-vse" style={{color: "black", cursor: "pointer", fontSize: "16px", padding: "0px 1.5rem"}}>{c.title}</a></li>
                                                 
                                                     )}
                                                 </ul>
@@ -356,7 +359,7 @@ const  Catolog = observer((props) => {
                                     <div className="row justify-content-center">
                                         <div className="col-sm-12 col-md-6 col-lg-6">
                                             <div className="btn-wrap">
-                                                <a  onClick={() => product.getActualProducts()}  href="" className="btn btn-outline-dark nan"><span>Все</span></a>
+                                                <a  onClick={()=> product.getActualProducts()}  href="" className="btn btn-outline-dark nan"><span>Все</span></a>
                                             </div>
                                             <div className="btn-wrap">
                                                 <a onClick={() => product.getNoveltyProducts()} href="#" className="btn btn-outline-dark nan"><span>Новинки</span></a>
@@ -364,7 +367,7 @@ const  Catolog = observer((props) => {
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-6">
                                             <div className="btn-wrap ">
-                                                <a onClick={() => product.getPopularProducts()} href="#" className="btn btn-outline-dark nan"><span>Популярное</span></a>
+                                                <a onClick={(e) => product.getPopularProducts(e)} href="#" className="btn btn-outline-dark nan"><span>Популярное</span></a>
                                             </div>
                                             <div className="btn-wrap ">
                                                 <a onClick={() => product.discountTodo()} href="#" className="btn btn-outline-dark nan"><span>Скидки</span></a>
@@ -407,9 +410,9 @@ const  Catolog = observer((props) => {
                                                                 {product.subcategory.map((c, index) =><li>
                                                                      <a key={index} className="s-title" style={{color: "black", cursor: "pointer", paddingLeft: "2px"}}>{c.title} {c.year}</a>
                                                                         <ul>
-                                                                            {/* {console.log(product.getProductsSesonCategory(c.id))} */}
-                                                                            {product.productsSesonCategory.map((prod) =>
-                                                                            <li key={prod} onClick={() => product.fetchTodoCatalog(c.id, title)}  key={index}><a className="category-vse" style={{color: "black", cursor: "pointer", fontSize: "16px", padding: "0px 3rem"}}>{prod.title}</a></li>)}                                                                       
+                                                                            {console.log(product.prodcategory)}
+                                                                            {product.prodcategory.filter(a => a.seasoncategory === c.id).map((prod) =>
+                                                                            <li key={prod} onClick={() => product.fetchTodoCatalog(prod.seasoncategory, prod.title, user.isAuth)}  key={index}><a className="category-vse" style={{color: "black", cursor: "pointer", fontSize: "16px", padding: "0px 1.5rem"}}>{prod.title}</a></li>)}                                                                       
                                                                         </ul>
                                                                     </li>)}
                                                                 </ul>
