@@ -94,18 +94,19 @@ import "../../App.css";
                                             </thead>
 
                                             <tbody>
-                                                
+                                            {console.log(user.items)}
                                                 {user.items?.map((c, index)=>
                                                 
                                                 
                                                 
                                                 <tr>
                                                     <td key={index} className="product-col">
+                                                    {console.log(c.color == c.product.images.map(a => a.title))}
                                                         <div className="product">
                                                             <Link to={{pathname: '/product/'+ c.product.id}}>
                                                                 <figure className="product-media">
                                                                     <a>
-                                                                        <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0].images[0]}`} alt="Product image"/>
+                                                                        <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0]?.images[0]}`} alt="Product image"/>
                                                                     </a>
                                                                 </figure>
                                                             </Link>

@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import axios from "axios"
 import "../../App.css";
 import logo from "../../assets/logo.png";
+import vk from "../../assets/vk.png"
 
 
 
@@ -89,12 +90,11 @@ export default function Footer() {
                     <div className=" ">
                         <img  src={logo}/>
                         <div className="social-icons social-icons-color d-flex justify-content-center">
-                            <a style={{fontSize: "20px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
-                            <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                            <a style={{fontSize: "20px"}} href="https://www.instagram.com/simastyle_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                            <a style={{fontSize: "18px", color: "#ee8208"}} href="https://ok.ru/profile/584170543033" className="social-icon" target="_blank" title="odnoklassniki"><i className="icon-odnoklassniki"></i></a>
-                            <a style={{fontSize: "18px", color: "#ee8208"}} href="https://ok.ru/profile/584170543033" className="social-icon" target="_blank" title="vkontakte"><i className="icon icon--share"></i></a>
-                            {/* <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"  className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a> */}
+                            <a style={{fontSize: "25px"}} href="https://www.facebook.com/profile.php?id=100069533462465" className="social-icon social-facebook" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
+                            <a style={{fontSize: "25px"}} href="https://twitter.com/sima_company" className="social-icon social-twitter" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
+                            <a style={{fontSize: "25px"}} href="https://www.instagram.com/simastyle_kg/" className="social-icon social-instagram" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
+                            <a style={{fontSize: "20px", color: "#ee8208"}} href="https://ok.ru/profile/584170543033" className="social-icon" target="_blank" title="odnoklassniki"><i className="icon-odnoklassniki"></i></a>
+                            <a style={{fontSize: "16px"}} href="https://vk.com/simastyle"  className="social-icon"> <img style={{width: "25px"}} src={vk}/></a>
                             
                         </div>
                     </div>

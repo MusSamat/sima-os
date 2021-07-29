@@ -99,11 +99,35 @@ const Product = observer((props) => {
     e.preventDefault();
     }
 
+    
+
+    const stars = Array(5).fill(0);
+    const [currValue, setCurrValue] = useState(0);
+    const [hoverValue, setHoverValue] = useState(undefined)
+    const [text, setText] = useState()
+    const [leftImages, setLeftImages] = useState([])
+    const [selectedImage, setSelectedImage] = useState('')
+    const [imgTitle, setImgTitle] = useState('') 
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const handleClick = (value) => {
+        setCurrValue(value)
+    }
+
+    const handleMouseOver = value => {
+        setHoverValue(value)
+    }
+
+    const handleMouseLeave = () => {
+        setHoverValue(undefined)
+    }
+
     const addCart = (e) => {
         const id = props.match.params.id
         const data = JSON.stringify({
             product: [String(id)],
-            quantity: [String(count)]
+            quantity: [String(count)],
+            color: [String(imgTitle)]
             
             
         })
@@ -126,27 +150,6 @@ const Product = observer((props) => {
             notifyError()
     })
     e.preventDefault();
-    }
-
-    const stars = Array(5).fill(0);
-    const [currValue, setCurrValue] = useState(0);
-    const [hoverValue, setHoverValue] = useState(undefined)
-    const [text, setText] = useState()
-    const [leftImages, setLeftImages] = useState([])
-    const [selectedImage, setSelectedImage] = useState('')
-    const [imgTitle, setImgTitle] = useState('') 
-    const [activeIndex, setActiveIndex] = useState(0);
-
-    const handleClick = (value) => {
-        setCurrValue(value)
-    }
-
-    const handleMouseOver = value => {
-        setHoverValue(value)
-    }
-
-    const handleMouseLeave = () => {
-        setHoverValue(undefined)
     }
 
 

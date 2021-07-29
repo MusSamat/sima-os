@@ -11,7 +11,7 @@ import Restangle332 from "../../assets/Rectangle332.png"
 import axios from "axios"
 import { Context } from '../../index';
 import { observer } from 'mobx-react-lite';
-import { SUBCATEGORY_ROUTE, ABOUT_ROUTE, DELIVERY_ROUTE, PURCHASES_ROUTE } from '../../utils/Const';
+import { SUBCATEGORY_ROUTE, ABOUT_ROUTE, DELIVERY_ROUTE, PURCHASES_ROUTE, CATALOG_ROUTE } from '../../utils/Const';
 
 
 
@@ -22,7 +22,6 @@ const  Main = observer(() => {
     const {product} = useContext(Context)
     const [name, setName] = useState()
     const [number, setNumber] = useState()
-    console.log(React.DOM)
 
     const sendName = (event) => {
         
@@ -49,8 +48,10 @@ const  Main = observer(() => {
   useEffect(() => {
     window.scrollTo(0,0)
    
-    user.getImage()
-    product.discountTodo()
+    user.getImage().then(()=>{
+        product.discountTodo1()
+    })
+    
     product.getDataNew()
     product.getSubcategory().then(()=>{
         product.getDataNewSeason(product?.subcategory[0]?.id)
@@ -62,14 +63,13 @@ const  Main = observer(() => {
     return (
         <div className="page-wrapper">
             <main className="main">
-                        {console.log(user.image)}
                         {user.image.map((img, index) =>
                         <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>    
                             
                             <div className="container intro-content text-left ">
                                 <h1 className="intro-title">{img.title}<br/>< strong style={{marginLeft: "-9px"}}>sale</strong></h1>
 
-                                <Link to={SUBCATEGORY_ROUTE} className="btn">
+                                <Link to={CATALOG_ROUTE} className="btn">
                                     <span style={{fontSize: "20px"}}>Показать</span>
                                     <i className="icon-long-arrow-right"></i>
                                 </Link>
@@ -77,10 +77,11 @@ const  Main = observer(() => {
                             
                         </div>)}
 
-
+ 
                         <div className="container mt-6">
                         <div className="products mt-2 mb-4 ">
                             <div className="row justify-content-center">
+                                    {console.log(product.discount)}
                                     {product.discount.slice(0,8).map((discout, index)=>
                                         <div key={index} className="col-6 col-md-4 col-lg-3">
                                             <div className="product product-7 text-center ">
@@ -106,7 +107,7 @@ const  Main = observer(() => {
                                     </div>
                                     
                                         <div class="btn-wrap d-flex justify-content-center">
-                                            <Link to={SUBCATEGORY_ROUTE} className="btn  btn-shadow">
+                                            <Link to={CATALOG_ROUTE} className="btn  btn-shadow">
                                                 <span style={{fontSize: "20px"}}>Показать</span>
                                                 <i className="icon-long-arrow-right"></i>
                                             </Link>

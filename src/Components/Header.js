@@ -211,7 +211,7 @@ const Header = observer(() => {
                                 </li > */}
                                 <li className="megamenu-container ">
                                     <a style={{fontSize: "18px", color: "#000000", cursor: "pointer"}} className="sf-with-ul">Сотрудничество</a>
-                                        <ul className="menu sf-arrows "  style={{marginLeft: "605px", marginTop: "-10px", color: "white", width: "40px" }}>
+                                        <ul className="menu sf-arrows "  style={{marginLeft: "570px", marginTop: "-10px", color: "white", width: "40px" }}>
                                                 <Link  to={ABOUT_ROUTE} >
                                                     <li className="megamenu-container " ><a className="sf-with  Uslovia" style={{cursor: "pointer", fontSize: "16px", color: "#000000" }}>О нас</a></li>
                                                 </Link>
@@ -281,7 +281,7 @@ const Header = observer(() => {
 
                                         <figure className="product-image-container">
                                             <a  className="product-image">
-                                                <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0].images[0]}`} alt="product"/>
+                                                <img src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0]?.images[0]}`} alt="product"/>
                                             </a>
                                         </figure>
                                         <a href="" className="btn-remove" title="Remove Product"></a>
