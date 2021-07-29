@@ -23,13 +23,7 @@ const Delivery = observer(() => {
 				</ol>
 			</div>
 			{user.delivery.map((img, index) =>
-                        <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>    
-                            
-                            {/* <div className="container intro-content text-left ">
-                                <h1 className="intro-title">{img.title}<br/>< strong style={{marginLeft: "-9px"}}>sale</strong></h1>
-
-                               
-                            </div> */}
+                        <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>
                             
                         </div>)}
 			<div className="container">

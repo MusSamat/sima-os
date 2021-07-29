@@ -14,6 +14,8 @@ const Login = observer(() => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [username, setUsername] = useState()
+    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(false)
     const {user} = useContext(Context)
     const history = useHistory()
 
@@ -40,49 +42,38 @@ const Login = observer(() => {
                 notify()
             })
             .catch(error => {
+                setError(true)
                 console.log(error)
-                notifyError(error)
+
             })
 
         
     }
 
     
-        const solve = (root) => {
-            let checkVal = root.val
-            let all = true
-    
-            function trees(node){
-                
-                if(node.val !==  checkVal) all = false
-                if(node.left) trees(node.left)
-                if(node.right) trees(node.right)
-            }
-            trees(root)
-            return all ? true : false
-        }
-
-        console.log(solve([2, [2, [3, null, null], null], [2, [3, null, null], null]]))
-
-    
 
 
     const login = (event) => {
+        setLoading(true)
+        setError(false)
         const article = {password, username}
         
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, article)
             .then(response => {
                 setPassword(response.password)
                 setUsername(response.username)
+                setLoading(false)
+                setError(true)
                 user.setIsAuth(true)
                 localStorage.setItem('value', JSON.stringify(response.data));
                 history.push(SUBCATEGORY_ROUTE)
                 notify()
             })
             .catch(error =>{   
+                setLoading(false)
+                setError(true)
                 console.log(error)
                 user.setIsAuth(false)
-                notifyError(error)
         })
 
         
@@ -118,6 +109,7 @@ const Login = observer(() => {
                                     </ul>
                                     <div className="tab-content">
                                         <div className="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                                            {error ? <p style={{color: "red", padding: "10px"}}>Логин или пароль неверный...</p> : ""}
                                             <form onSubmit={login}>
                                                 <div className="form-group">
                                                     <input 
@@ -144,11 +136,16 @@ const Login = observer(() => {
                                                         onChange={e => setPassword(e.target.value)}
                                                     />
                                                 </div>
+                                                <p className="forget">Если Вы забыли свой пароль,  нажмите на кнопку "забыл пароль".</p>
 
                                                 <div className="form-footer">
                                                     <button  type="submit" className="btn btn-outline-primary-2">
-                                                        <span style={{fontSize: "18px"}}>Войти</span>
+                                                        <span style={{fontSize: "18px"}}>{loading ?  'Загрузка...' : 'Войти'}</span>
                                                     </button>
+                                                    
+                                                    <Link to={FORGET_ROUTE}>
+                                                        <a href="" className="btn btn-link">Забыли пароль?</a>
+                                                    </Link>
                                                 </div>
                                             </form>
                                         </div>
@@ -191,17 +188,12 @@ const Login = observer(() => {
                                                         onChange={e => setPassword(e.target.value)}
                                                     />
                                                 </div>
-                                                
-                                                    <p className="forget">Если Вы забыли свой пароль,  нажмите на кнопку "забыл пароль".</p>
                                                
 
                                                 <div className="form-footer">
                                                     <button onClick={()=> sing()} type="submit" className="btn btn-outline-primary-2">
-                                                        <span style={{fontSize: "18px"}}>Регистрация</span>
+                                                        <span style={{fontSize: "18px"}}>{loading ?  'Загрузка...' : 'Регистрация'}</span>
                                                     </button>
-                                                    <Link to={FORGET_ROUTE}>
-                                                        <a href="" className="btn btn-link">Забыли пароль?</a>
-                                                    </Link>
                                                    
                                                 </div>
                                             </form>

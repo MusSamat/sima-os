@@ -145,7 +145,7 @@ const Myacount = observer(() => {
                 <div className="page-content">
                     <div className="dashboard">
                         <div className="container">
-                            <ol className="breadcrumb mb-2 ">
+                            <ol className="breadcrumb mb-3 ">
                                 <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
                                 <li className="breadcrumb-item"><a href=""> Мой аккаунт</a></li>
                             </ol>
@@ -337,15 +337,15 @@ const Myacount = observer(() => {
                                                 </div>
 
                                                 <button 
-                                                        style={{marginRight: "10px"}}
+                                                        style={{marginRight: "10px", fontSize: "16px"}}
                                                         onClick={getUserPut}
                                                         disabled={loading} type="submit" 
                                                         className="btn btn-outline-primary-2">
                                                     
-                                                    {loading ? 'Загрузка...' : 'СОХРАНИТЬ ИЗМЕНЕНИЯ'}
+                                                    {loading ? 'Загрузка...' : 'Сохранить изменения'}
                                                 </button> 
                                                 <>
-                                                    <button className="btn btn-outline-primary-2"  style={{ fontSize: "16px",  fontWeight: "500", cursor: "pointer"}} onClick={handleShow}>
+                                                    <button className="btn btn-outline-primary-2"  style={{ fontSize: "16px", cursor: "pointer"}} onClick={handleShow}>
                                                         Изменить пароль
                                                     </button >
 

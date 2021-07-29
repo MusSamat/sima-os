@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import { Link, NavLink } from 'react-router-dom';
-import {ABOUT_ROUTE, PURCHASES_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, MYACOUNT_ROUTE, SUBCATEGORY_ROUTE} from "../utils/Const";
+import {ABOUT_ROUTE, PURCHASES_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, HOME_ROUTE, NEWS_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, MYACOUNT_ROUTE, SUBCATEGORY_ROUTE, CATALOG_ROUTE} from "../utils/Const";
 import "../App.css";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
@@ -196,7 +196,7 @@ const Header = observer(() => {
                                     <NavLink exact className="sf-with"  style={{fontSize: "18px", fontWeight: "400", color: "#000000"}} to={HOME_ROUTE}> <a className="sf-with-ul">Главная</a></NavLink>
                                 </li>
                                 <li className="megamenu-container ">
-                                    <NavLink className="sf-with" style={{fontSize: "18px", color: "#000000"}} to={SUBCATEGORY_ROUTE}><a className="sf-with-ul">Каталог </a></NavLink>                                  
+                                    <NavLink className="sf-with" style={{fontSize: "18px", color: "#000000"}} to={CATALOG_ROUTE}><a className="sf-with-ul">Каталог </a></NavLink>                                  
                                     
                                 </li>
                                 <li className="megamenu-container">
@@ -233,10 +233,10 @@ const Header = observer(() => {
                     </div>
 
                     <div className="header-right">
-                        <div className="header-search ">
+                        <div className="header-search mt-0.5 mr-2">
                             <a href=""className="search-toggle" role="button" title="Search"><i style={{color: "#000000"}} className="icon-search mt-6"></i></a>
                             <form action="" method="get">
-                                <div className="header-search-wrapper">
+                                <div className="header-search-wrapper ">
                                     <label for="q" class="sr-only">Search</label>
                                     <input type="search"className="form-control" name="q" id="q" placeholder="Search in..." required/>
                                 </div>

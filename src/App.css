@@ -190,7 +190,7 @@
   }
 /* catalog */
 .btn{
-  min-width: 140px !important;
+  min-width: 120px !important;
 }
 .category-vse{
   font-family: 'Montserrat', sans-serif !important;
@@ -229,6 +229,23 @@
   font-family: 'Montserrat', sans-serif !important;
 }
 /* product */
+.size{
+  font-size: 18px;
+  line-height: 20px;
+  color: #000;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+  position: relative;
+  display: block;
+  min-width: 20px;
+  padding: 10px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 0 0 1px #fff;
+  box-shadow: inset 0 0 0 1px #fff;
+  margin: 5px;
+}
 .product-details>p{
   font-family: 'Montserrat', sans-serif !important;
   
@@ -247,9 +264,6 @@
 }
 .item{
   font-family: 'Montserrat', sans-serif !important;
-}
-.product-image-gallery{
-  height: none !important;
 }
 .owl-carousel{
   width: 250px !important;
@@ -295,11 +309,6 @@
 .product-nav-thumbs a, .product-nav-thumbs span {
   border: none !important;
 }
-  .product-image-gallery{
-    position: relative !important;
-    max-height: 250px !important;
-    height: 250px !important;
-  }
 .product-details-action>a{
   font-family: 'Montserrat', sans-serif !important;
 }
