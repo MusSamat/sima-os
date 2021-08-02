@@ -66,10 +66,34 @@ const Checkout = observer(() => {
             	<div className="checkout">
 	                <div className="container">
 						<ol className="breadcrumb mb-4 ">
-                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
-                            <li className="breadcrumb-item"><NavLink to={CART_ROUTE}><a href="">Корзина</a></NavLink></li>
+                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item" href="">Главная</a></NavLink></li>
+                            <li className="breadcrumb-item"><NavLink to={CART_ROUTE}><a className="breadcrumb-item" href="">Корзина</a></NavLink></li>
                             <li className="breadcrumb-item"><a href=""> Оформить заказ</a></li>
                         </ol>
+						{user.isRoute ?<button onClick={() => user.setRoute(false)}>Есть купон? Нажмите, чтобы ввести</button>
+						: <button onClick={() => user.setRoute(true)}>Есть купон? Нажмите, чтобы ввести</button>}
+
+						{user.isRoute ? <div class="cta cta-horizontal cta-horizontal-box bg-image mb-5" style={{backgroundImage: "url(assets/images/backgrounds/cta/bg-1.jpg)", backgroundPsition: "center right"}}>
+							 <div class="row align-items-center">
+								<div class="col-lg-4 col-xl-3 offset-xl-1">
+									<h3 class="cta-title">Join Our Newsletter</h3>
+									<p class="cta-desc">Lorem ipsum dolor sit amet adipiscing.</p>
+								</div>
+								
+								<div class="col-lg-8 col-xl-7">
+									<form action="#">
+										<div class="input-group">
+											<input type="email" class="form-control" placeholder="Enter your Email Address" aria-label="Email Adress" required/>
+											<div class="input-group-append">
+												<button class="btn btn-primary btn-rounded" type="submit"><span>Subscribe</span><i class="icon-long-arrow-right"></i></button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div> 
+						</div> : ""}
+
+
             			<form action="#">
 		                	<div className="row">
 		                		<div className="col-lg-9">

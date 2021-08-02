@@ -43,14 +43,6 @@
     margin-left: 20px;
     font-family: 'Montserrat', sans-serif !important;
   }
-  .clock{
-    width: 120px;
-    height: 50px;
-    border-radius: 30px;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-  }
 
   .entry-media{
     float: none;
@@ -189,6 +181,9 @@
     color: white !important; 
   }
 /* catalog */
+.breadcrumb-item>a{
+  font-family: 'Montserrat', sans-serif !important;
+}
 .btn{
   min-width: 120px !important;
 }
@@ -341,6 +336,9 @@
   font-family: 'Montserrat', sans-serif !important;
 }
   /* Header */
+  .header-search .header-search-wrapper.show {
+    margin-top: 20px !important;
+  }
   .logo1{
     width: 150px;
     height: 60px;

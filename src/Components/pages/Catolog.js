@@ -97,7 +97,6 @@ const  Catolog = observer((props) => {
         const data = JSON.stringify({
             product: String(id),
         })  
-        console.log(data)
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/wishlist/`, data, 
         {
             headers: {
@@ -168,12 +167,7 @@ const  Catolog = observer((props) => {
     e.preventDefault();
     }
 
-    let a = {}
-    let b = {}
-   console.log(a == b);
-   console.log(a === b);
-
-
+    let route = props.location.popular
     
     
     useEffect(() => {
@@ -181,6 +175,9 @@ const  Catolog = observer((props) => {
         mobile_menu()
         user.getUserData()
         product.fetchTodo()
+        if(route === "discount"){
+            product.discountTodo()
+        }else if(route === "catalog"){
         product.getActualProducts().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
@@ -200,10 +197,13 @@ const  Catolog = observer((props) => {
                 s.src = i
                 document.body.appendChild(s)
             })
-        })
+        })} else if(route === "popular"){
+            product.getPopularProducts()
+        } else if(route === "novelty"){
+            product.getNoveltyProducts()
+        }
+        // product.getActualProducts()
         product.getSortedData()
-        // product.getCategoryTitle(title)
-        // product.getCategoryTitleCount(title)
         product.getSubcategory()
         
        
@@ -233,7 +233,6 @@ const  Catolog = observer((props) => {
 
                                 <div class="products mb-3">
                                         <div class="row justify-content-center">
-                                                {console.log(currentPosts)}
                                                 {currentPosts.map((prod, index) =>
                                             <div class="col-6 col-md-4 col-lg-3">
                                                 <div class="product product-7 text-center">
@@ -345,7 +344,6 @@ const  Catolog = observer((props) => {
                                             <li>
                                                 <a className="s-title" style={{color: "black", cursor: "pointer", paddingLeft: "2px"}}>Все</a>
                                                 <ul>
-                                                    {console.log(product.productSorted)}
                                                     {product.productSorted.map((c, index) =>
 
                                                         <li key={index} onClick={() => product.fetchTodoCatalog(c.seasoncategory, c.title, user.isAuth)}  key={index}><a className="category-vse" style={{color: "black", cursor: "pointer", fontSize: "16px", padding: "0px 1.5rem"}}>{c.title}</a></li>
@@ -359,18 +357,18 @@ const  Catolog = observer((props) => {
                                     <div className="row justify-content-center">
                                         <div className="col-sm-12 col-md-6 col-lg-6">
                                             <div className="btn-wrap">
-                                                <a  onClick={()=> product.getActualProducts()}  href="" className="btn btn-outline-dark nan"><span>Все</span></a>
+                                                <a  onClick={(e)=> product.getActualProducts(e)}  className="btn btn-outline-dark nan"><span>Все</span></a>
                                             </div>
                                             <div className="btn-wrap">
-                                                <a onClick={() => product.getNoveltyProducts()} href="#" className="btn btn-outline-dark nan"><span>Новинки</span></a>
+                                                <a onClick={(e) => product.getNoveltyProducts(e)}  className="btn btn-outline-dark nan"><span>Новинки</span></a>
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-6">
                                             <div className="btn-wrap ">
-                                                <a onClick={(e) => product.getPopularProducts(e)} href="#" className="btn btn-outline-dark nan"><span>Популярное</span></a>
+                                                <a onClick={(e) => product.getPopularProducts(e)}  className="btn btn-outline-dark nan"><span>Популярное</span></a>
                                             </div>
                                             <div className="btn-wrap ">
-                                                <a onClick={() => product.discountTodo()} href="#" className="btn btn-outline-dark nan"><span>Скидки</span></a>
+                                                <a onClick={(e) => product.discountTodo(e)} className="btn btn-outline-dark nan"><span>Скидки</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -410,7 +408,6 @@ const  Catolog = observer((props) => {
                                                                 {product.subcategory.map((c, index) =><li>
                                                                      <a key={index} className="s-title" style={{color: "black", cursor: "pointer", paddingLeft: "2px"}}>{c.title} {c.year}</a>
                                                                         <ul>
-                                                                            {console.log(product.prodcategory)}
                                                                             {product.prodcategory.filter(a => a.seasoncategory === c.id).map((prod) =>
                                                                             <li key={prod} onClick={() => product.fetchTodoCatalog(prod.seasoncategory, prod.title, user.isAuth)}  key={index}><a className="category-vse" style={{color: "black", cursor: "pointer", fontSize: "16px", padding: "0px 1.5rem"}}>{prod.title}</a></li>)}                                                                       
                                                                         </ul>

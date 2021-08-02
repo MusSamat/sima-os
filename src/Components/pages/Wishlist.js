@@ -74,7 +74,7 @@ const Wishlist = observer(()=> {
                 <div className="page-content">
                     <div className="container">
                         <ol className="breadcrumb mb-4 ">
-                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item" href="">Главная</a></NavLink></li>
                             <li className="breadcrumb-item"><a href=""> Изображение</a></li>
                         </ol>
                         <table className="table table-wishlist table-mobile">

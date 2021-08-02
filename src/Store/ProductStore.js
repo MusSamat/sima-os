@@ -32,6 +32,7 @@ export default class ProductStore {
         this.gallery = []
         this.sertificate = []
         this.productsSesonCategory = []
+        this.popular = []
         
         
 
@@ -68,6 +69,18 @@ export default class ProductStore {
             .then(res => {
                 this.products = [...res.data]
                 this.allProducts = this.products
+            })
+            .catch((e)=>{
+                console.error(e)
+            })
+            
+            
+    }
+
+    getPopularProduct() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?popular=${true}`)
+            .then(res => {
+                this.popular = [...res.data]
             })
             .catch((e)=>{
                 console.error(e)
@@ -342,7 +355,6 @@ export default class ProductStore {
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`)
            .then(res => {
             this.discount = [ ...res.data]
-            console.log(res)
 
               
            })

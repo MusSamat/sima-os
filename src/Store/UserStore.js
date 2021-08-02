@@ -4,6 +4,7 @@ import axios from "axios"
 export default class UserStore {
     constructor(){
         this._isAuth = false
+        this.route = false
         this._user = {} 
         this.token = null
         this.userId = {}
@@ -23,6 +24,7 @@ export default class UserStore {
         this.delivery = []
         this.about = []
         this.contact = []
+        
 
         this.count = 0
         makeAutoObservable(this)
@@ -33,6 +35,12 @@ export default class UserStore {
     }
     setUser(user) {
         this._user = user
+    }
+    setRoute(bool) {
+        this.route = bool
+    }
+    get isRoute(){
+        return this.route
     }
 
     get isAuth(){

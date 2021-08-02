@@ -22,6 +22,7 @@ const  Main = observer(() => {
     const {product} = useContext(Context)
     const [name, setName] = useState()
     const [number, setNumber] = useState()
+    const [fly, setFly] = useState('')
 
     const sendName = (event) => {
         
@@ -56,8 +57,12 @@ const  Main = observer(() => {
     product.getSubcategory().then(()=>{
         product.getDataNewSeason(product?.subcategory[0]?.id)
     })
+    product.getPopularProduct()
     
   }, [])
+
+ 
+
          
     
     return (
@@ -107,8 +112,11 @@ const  Main = observer(() => {
                                     </div>
                                     
                                         <div class="btn-wrap d-flex justify-content-center">
-                                            <Link to={CATALOG_ROUTE} className="btn  btn-shadow">
-                                                <span style={{fontSize: "20px"}}>Показать</span>
+                                            <Link to={{
+                                                    pathname: CATALOG_ROUTE,
+                                                    popular: "discount"
+                                                }}  className="btn  btn-shadow">
+                                                <span onClick={() => setFly("discount")} style={{fontSize: "20px"}}>Показать</span>
                                                 <i className="icon-long-arrow-right"></i>
                                             </Link>
                                         </div>
@@ -150,7 +158,6 @@ const  Main = observer(() => {
                                         <div style={{color: "#000000"}} className="product-price">
                                         {user.isAuth ? `${ discout.price} ₽` : ""}  
                                         </div>
-                                        {/* {user.isAuth ? `${product.product.price} ₽`  : ""} */}
                                         
                                     </div>
                                 </div>
@@ -161,16 +168,68 @@ const  Main = observer(() => {
                      </div>
                             
                             <div className="btn-wrap d-flex justify-content-center mb-8">
-                                <Link to={SUBCATEGORY_ROUTE} className="btn">
+                                <Link  to={{
+                                    pathname: CATALOG_ROUTE,
+                                    popular: "novelty"
+                                }} className="btn  btn-shadow">
+                                    <span style={{fontSize: "20px"}}>Показать</span>
+                                    <i className="icon-long-arrow-right"></i>
+                                </Link>
+                                {/* <Link to={SUBCATEGORY_ROUTE} className="btn">
 		                		    <a href="" className="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "normal", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Показать <i className="icon-long-arrow-right"></i></span></a>
                                     
-                                </Link>
+                                </Link> */}
 		                	</div>
 
                 </div>
                 
                 <div className="trending mt-8 d-flex justify-content-center mb-6 ">
                     <img  src={Frame} alt="Banner"/>
+                </div>
+
+                <div className="container ">
+
+                    <div className="products mt-10 mb-4 ">
+                        <div className="row justify-content-center">
+                            {product.popular.slice(0,8).map((discout, index)=>
+                            <div key={index} className="col-6 col-md-4 col-lg-3">
+                                <div className="product product-7 text-center  ">
+                                    <Link to={{pathname: '/product/'+discout.id}} >
+                                        <figure className="product-media ">
+                                            <a href="">
+                                                <img src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`} alt="Product image" className="product-image"/>
+                                            </a>
+                                        </figure>
+                                   </Link>
+
+                                    <div className="product-body">
+                                        <h3 className="product-title"><a href="">{discout.title}</a></h3>
+                                        <div style={{color: "#000000"}} className="product-price">
+                                        {user.isAuth ? `${ discout.price} ₽` : ""}  
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>)}
+                            
+                        </div>
+                        
+                     </div>
+                            
+                            <div className="btn-wrap d-flex justify-content-center mb-8">
+                                <Link  to={{
+                                    pathname: CATALOG_ROUTE,
+                                    popular: "popular"
+                                }} className="btn  btn-shadow">
+                                    <span style={{fontSize: "20px"}}>Показать</span>
+                                    <i className="icon-long-arrow-right"></i>
+                                </Link>
+                                {/* <Link to={SUBCATEGORY_ROUTE} className="btn">
+		                		    <a href="" className="btn btn-outline-dark btn-rounded"><span style={{fontWeight: "normal", fontStyle: "normal", fontSize: "20px", lineHeight: "24px", color: "#3D3D3D"}}>Показать <i className="icon-long-arrow-right"></i></span></a>
+                                    
+                                </Link> */}
+		                	</div>
+
                 </div>
                 
 

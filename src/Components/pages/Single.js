@@ -1,6 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React, {useEffect, useContext} from 'react';
 import { Context } from '../../index';
+import { HOME_ROUTE, NEWS_ROUTE } from '../../utils/Const';
+import { NavLink } from 'react-router-dom';
 
 const Single = observer(({match}) => {
     const {product} = useContext(Context)
@@ -16,6 +18,11 @@ const Single = observer(({match}) => {
 
                 <div className="page-content">
                     <div className="container">
+                        <ol className="breadcrumb mb-4 ">
+                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item" href="">Главная</a></NavLink></li>
+                            <li className="breadcrumb-item"><NavLink to={NEWS_ROUTE}><a className="breadcrumb-item" href="">Новости</a></NavLink></li>
+                            <li className="breadcrumb-item"><a href=""> {product.blogItem.title}</a></li>
+                        </ol>
                         <div className="row">
                             <div className="col">
                                 <article className="entry single-entry">

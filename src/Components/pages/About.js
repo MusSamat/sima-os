@@ -20,7 +20,7 @@ const About = observer(( ) => {
                     <div className="pb-5 mb-1 mb-lg-8 mt-4 ">
                         <div className="container">
                                 <ol class="breadcrumb mt-1 mb-2">
-                                    <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                                    <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a class="breadcrumb-item" href="">Главная</a></NavLink></li>
                                     <li class="breadcrumb-item"><a href="">О нас</a></li>
                                 </ol>
                                 {user.about?.map((img, index) =>

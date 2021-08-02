@@ -19,7 +19,7 @@ const Contact = observer(() => {
             <main className="main mt-7">
                     <div className="container">
                         <ol class="breadcrumb mb-2">
-                            <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                            <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item" href="">Главная</a></NavLink></li>
                             <li class="breadcrumb-item"><a href="">Контакты</a></li>
                         </ol>
                         {user.contact?.map((img, index) =>

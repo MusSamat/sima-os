@@ -146,7 +146,7 @@ const Myacount = observer(() => {
                     <div className="dashboard">
                         <div className="container">
                             <ol className="breadcrumb mb-3 ">
-                                <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a href="">Главная</a></NavLink></li>
+                                <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item" href="">Главная</a></NavLink></li>
                                 <li className="breadcrumb-item"><a href=""> Мой аккаунт</a></li>
                             </ol>
                             <div className="row">
