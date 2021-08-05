@@ -25,11 +25,6 @@ const useStyles = makeStyles( (theme) =>({
         backroundColor: "white"
     }
     },
-    
-
-    
-    
-
   }));
 
 
@@ -47,7 +42,9 @@ const  Catolog = observer((props) => {
     const title = props.match.params.title
     const [lgShow, setLgShow] = useState(false);
     const [count, setCount] = useState(5)
-    
+    const [quantity, setQuantity] = useState(5)
+
+
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(60)
 
@@ -91,6 +88,19 @@ const  Catolog = observer((props) => {
 
     const handleClose = () => setLgShow(false);
     const handleShow = () => setLgShow(true);
+
+    console.log(product.productOrder)
+
+    const addCardLocal = (proId,quantity, price, color) =>{
+        let productId = product.productOrder.map((i) => i)
+        console.log(productId)
+        product.productOrder.push({
+            product: proId,
+            quantity: quantity,
+            price: price,
+            color: color
+        })
+    }
 
     const addWishlist = (e, id) => {
         e.preventDefault();
@@ -205,12 +215,16 @@ const  Catolog = observer((props) => {
         // product.getActualProducts()
         product.getSortedData()
         product.getSubcategory()
+        product.orderFilter()
+
+        console.log(product)
         
        
         
         
     
-      }, []); 
+      }, []);
+      // let quantity = 5
       let percent
       product.discount.map((i) => i.percent === percent )
     return (
@@ -233,6 +247,7 @@ const  Catolog = observer((props) => {
 
                                 <div class="products mb-3">
                                         <div class="row justify-content-center">
+                                            {console.log(currentPosts)}
                                                 {currentPosts.map((prod, index) =>
                                             <div class="col-6 col-md-4 col-lg-3">
                                                 <div class="product product-7 text-center">
@@ -252,8 +267,9 @@ const  Catolog = observer((props) => {
                                                                  {/*  */}
                                                                 <a  onClick={() => openModal()} className="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
                                                             </div>
+
                                                             <div class="product-action">
-                                                                <a onClick={(e) => addCart(e, prod.id)} href="#" className="btn-product btn-cart s-title "><span>В КОРЗИНУ</span></a>
+                                                                <a style={{cursor: "pointer"}} onClick={() => addCardLocal(prod.id, quantity, prod.price, prod.images[0].title )}  className="btn-product btn-cart s-title "><span>В КОРЗИНУ</span></a>
                                                             </div>
                                                         </figure>
 
@@ -309,7 +325,7 @@ const  Catolog = observer((props) => {
                                     <div >
                                         <div className="col-sm-10 col-md-8 col-lg-10">
                                             <form onSubmit={search}>
-                                                    <input 
+                                                    <input
                                                         style={{width: "250px", paddingLeft: "-10px"}}
                                                         type="text" 
                                                         className="form-control" 

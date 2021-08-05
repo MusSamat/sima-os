@@ -15,8 +15,22 @@ const Checkout = observer(() => {
 
 	const history = useHistory()
 	const {user} = useContext(Context)
+	const {product} = useContext(Context)
 	let sum = 0
 	const [note, setNote] = useState()
+	const [firstName, setFirstName] = useState()
+	const [lastName, setLastName] = useState()
+	const [email, setEmail] = useState()
+	const [address, setAddress] = useState()
+	const [country, setCountry] = useState()
+	const [city, setCity] = useState()
+	const [telophone, setTelephon] = useState()
+	const [conpany, setCompany] = useState()
+	const [cupon, setCupon] = useState()
+	const [discount, setDiscount] = useState()
+	// const [note, setNote] = useState()
+
+
 
 	const notify = () => toast.success("Спасибо. Ваш заказ был принят.");
 	const notifyError = () => toast.error("Wow so easy!");
@@ -61,7 +75,7 @@ const Checkout = observer(() => {
 		console.log(user.userId)
 	}, [])
     return (
-        <div classNameName="page-wrapper" style={{marginTop: "50px"}}>
+        <div className="page-wrapper" style={{marginTop: "50px"}}>
             <div className="page-content">
             	<div className="checkout">
 	                <div className="container">

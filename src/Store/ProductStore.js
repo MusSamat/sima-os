@@ -33,11 +33,27 @@ export default class ProductStore {
         this.sertificate = []
         this.productsSesonCategory = []
         this.popular = []
+        this.productOrder = []
+        this.productOrderFilter = []
+
+
+
+
+
         
         
 
         makeAutoObservable(this)
     }
+
+    addCard (id, quantity, price, color) {
+        console.log(id, quantity, price, color)
+    }
+
+    orderFilter(){
+        this.productOrderFilter = this.products.filter((item, index) => item.id === this.productOrder.map(i => i.id) )
+    }
+
     
      fetchTodo() {
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategorysorted`)
