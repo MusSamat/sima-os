@@ -14,7 +14,8 @@ export default function Error() {
                     </div>
                 </nav>
 
-                <div className="error-content text-center" style={{backgroundImage: "url(assets/images/backgrounds/error-bg.jpg)"}}>
+                <div className="error-content text-center"
+                     style={{backgroundImage: "url(assets/images/backgrounds/error-bg.jpg)"}}>
                     <div className="container">
                         <h1 className="error-title">Error 404</h1>
                         <p>We are sorry, the page you've requested is not available.</p>
