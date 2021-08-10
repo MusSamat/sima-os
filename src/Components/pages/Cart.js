@@ -75,7 +75,7 @@ const Cart = observer(() => {
                     <div className="cart">
                         <div className="container">
                             <ol className="breadcrumb mb-5">
-                                <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a
+                                <li className="breadcrumb-item"><NavLink className="breadcrumb-item" to={HOME_ROUTE}><a
                                     href="">Главная</a></NavLink></li>
                                 <li className="breadcrumb-item"><a href=""> Корзина</a></li>
                             </ol>
@@ -118,7 +118,7 @@ const Cart = observer(() => {
 
                                                 <td>
                                                     <div className="count">
-                                                        <a  style={{width: "30px", cursor: "pointer", fontSize: "18px", marginLeft: "7px"}} onClick={() => user.changeItemQuantity(index,c.quantity - c.product.size.length)}>-</a>
+                                                        <a  style={{width: "30px", cursor: "pointer", fontSize: "18px", marginLeft: "7px"}} onClick={() => user.changeItemQuantity(index, c.quantity - c.product.size.length)}>-</a>
                                                         <span style={{ width: "30px", marginRight: "7px", padding: "5px"}} >{c.quantity}</span>
                                                         <a style={{marginLeft: "7px", width: "30px", cursor: "pointer", fontSize: "18px"}} onClick={() => user.changeItemQuantity(index,c.quantity + c.product.size.length)}>+</a>
 

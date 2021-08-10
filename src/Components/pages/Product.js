@@ -135,8 +135,6 @@ const Product = observer((props) => {
             .then(response => {
                 setCount(count)
                 user.getCartData()
-
-                notify()
             })
             .catch(error => {
                 console.log(error)
@@ -167,8 +165,6 @@ const Product = observer((props) => {
                 product.getData(id)
                 setCurrValue(0)
                 setText("")
-                console.log(response)
-                notify()
             })
             .catch(error => {
                 console.log(error)
@@ -351,63 +347,58 @@ const Product = observer((props) => {
                                     }}>Цвет: <span style={{color: "#000"}}>{imgTitle}</span></label>
                                     <div className="details-filter-row details-row-size">
 
+                                        {product.imagesUser.map((img, index) =>
+                                            <div key={index} class="testimonial testimonial-icon text-center ">
+                                                <a
+                                                    onClick={() => {
 
-                                        <div className="product-nav product-nav-thumbs">
-
-
-                                            <div class="owl-carousel owl-theme owl-testimonials" data-toggle="owl"
-                                                 data-owl-options='{
-                                                        "nav": false, 
-                                                        "dots": true,
-                                                        "margin": 10,
-                                                        "loop": true,
-                                                        "responsive": {
-                                                            "0": {
-                                                                "items":1
-                                                            },
-                                                            "768": {
-                                                                "items":2
-                                                            },
-                                                            "992": {
-                                                                "items":3
-                                                            },
-                                                            "1000": {
-                                                                "items":3,
-                                                                "nav": true
-                                                            }
-                                                        }
-                                                    }'>
-                                                {product.imagesUser.map((img, index) =>
-                                                    <div key={index} class="testimonial testimonial-icon text-center ">
-                                                        <a
-                                                            onClick={() => {
-
-                                                                const d = [...img.images]
-                                                                setLeftImages(d)
-                                                                setSelectedImage(d[0])
-                                                                setImgTitle([img.title])
-                                                            }} className="active mt-3 mb-3">
-                                                            <img style={{
-                                                                width: "100px",
-                                                                height: "100px",
-                                                                marginLeft: "10px",
-                                                                cursor: "pointer"
-                                                            }} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`}
-                                                                 alt="product desc"/>
+                                                        const d = [...img.images]
+                                                        setLeftImages(d)
+                                                        setSelectedImage(d[0])
+                                                        setImgTitle([img.title])
+                                                    }} className="active mt-3 mb-3">
+                                                    <img style={{
+                                                        width: "100px",
+                                                        height: "100px",
+                                                        marginLeft: "10px",
+                                                        cursor: "pointer"
+                                                    }} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`}
+                                                         alt="product desc"/>
 
 
-                                                        </a>
-                                                        {/* <p>“ Lorem ipsum dolor  ”</p>
-                                                        <cite>
-                                                            Jenson Gregory
-                                                            <span>Customer</span>
-                                                        </cite> */}
-                                                    </div>)}
+                                                </a>
+                                            </div>)}
+                                        {/*<div className="product-nav product-nav-thumbs">*/}
 
 
-                                            </div>
+                                        {/*    <div class="owl-carousel owl-theme owl-testimonials" data-toggle="owl"*/}
+                                        {/*         data-owl-options='{*/}
+                                        {/*                "nav": false, */}
+                                        {/*                "dots": true,*/}
+                                        {/*                "margin": 10,*/}
+                                        {/*                "loop": true,*/}
+                                        {/*                "responsive": {*/}
+                                        {/*                    "0": {*/}
+                                        {/*                        "items":1*/}
+                                        {/*                    },*/}
+                                        {/*                    "768": {*/}
+                                        {/*                        "items":2*/}
+                                        {/*                    },*/}
+                                        {/*                    "992": {*/}
+                                        {/*                        "items":3*/}
+                                        {/*                    },*/}
+                                        {/*                    "1000": {*/}
+                                        {/*                        "items":3,*/}
+                                        {/*                        "nav": true*/}
+                                        {/*                    }*/}
+                                        {/*                }*/}
+                                        {/*            }'>*/}
+                                        {/*        */}
 
-                                        </div>
+
+                                        {/*    </div>*/}
+
+                                        {/*</div>*/}
                                     </div>
 
                                     <div className="details-filter-row details-row-size">
@@ -437,8 +428,11 @@ const Product = observer((props) => {
                                             </div>
 
                                             <div className="product-details-action">
-                                                <a style={{cursor: "pointer"}} onClick={addCart}
-                                                   className="btn-product btn-cart"><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>
+                                                <a onClick={addCart} href=""
+                                                   className="btn-product btn-cart"><span>В КОРЗИНУ</span>
+                                                </a>
+                                                {/*<a style={{cursor: "pointer"}} */}
+                                                {/*   className="btn-product btn-cart"><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>*/}
 
                                                 <div className="details-action-wrapper">
                                                     {product.product.is_favorite ?

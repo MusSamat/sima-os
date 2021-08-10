@@ -73,11 +73,11 @@ const Main = observer(() => {
             })
     }
 
-    const addCart = (e, id, color) => {
+    const addCart = (e, id, color, size) => {
         const data = JSON.stringify({
             product: [String(id)],
-            quantity: [String(quantity)],
-            color: color
+            quantity: [String(size)],
+            color: [String(color)],
 
 
         })
@@ -128,7 +128,7 @@ const Main = observer(() => {
 
     }
 
-    const addCardLocal = (proId, quantity, price, color, title) => {
+    const addCardLocal = (proId, size, price, color, title) => {
 
         let productId = product.productOrder.map((i) => i.product)
         let found = -1
@@ -140,7 +140,7 @@ const Main = observer(() => {
         if (found === -1) {
             product.productOrder.push({
                 product: proId,
-                quantity: quantity,
+                quantity: size,
                 price: price,
                 color: color,
                 title: title
@@ -232,13 +232,13 @@ const Main = observer(() => {
                                             <div className="product-action">
                                                 {user.isAuth ?
                                                     <a style={{cursor: "pointer"}}
-                                                       onClick={(e) => addCart(e, discout.id, discout.images[0].title,)}
+                                                       onClick={(e) => addCart(e, discout.id, discout.images[0].title, discout.size.length)}
                                                        className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>
                                                     :
                                                     <>
                                                         <button key={discout.id}
                                                                 style={{cursor: "pointer", border: "none"}}
-                                                                onClick={() => addCardLocal(discout.id, quantity, discout.price, discout.images[0].title, discout.title)}
+                                                                onClick={() => addCardLocal(discout.id, discout.size.length, discout.price, discout.images[0].title, discout.title,)}
                                                                 className="btn-product btn-cart s-title ">
                                                             <span>В КОРЗИНУ</span></button>
                                                     </>
@@ -324,13 +324,13 @@ const Main = observer(() => {
                                             <div className="product-action">
                                                 {user.isAuth ?
                                                     <a style={{cursor: "pointer"}}
-                                                       onClick={(e) => addCart(e, discout.id, discout.images[0].title,)}
+                                                       onClick={(e) => addCart(e, discout.id, discout.images[0].title, discout.size.length)}
                                                        className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>
                                                     :
                                                     <>
                                                         <button key={discout.id}
                                                                 style={{cursor: "pointer", border: "none"}}
-                                                                onClick={() => addCardLocal(discout.id, quantity, discout.price, discout.images[0].title, discout.title)}
+                                                                onClick={() => addCardLocal(discout.id, discout.size.length, discout.price, discout.images[0].title, discout.title)}
                                                                 className="btn-product btn-cart s-title ">
                                                             <span>В КОРЗИНУ</span></button>
                                                     </>
@@ -409,13 +409,13 @@ const Main = observer(() => {
                                             <div className="product-action">
                                                 {user.isAuth ?
                                                     <a style={{cursor: "pointer"}}
-                                                       onClick={(e) => addCart(e, discout.id, discout.images[0].title,)}
+                                                       onClick={(e) => addCart(e, discout.id, discout.images[0].title, discout.size.length)}
                                                        className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>
                                                     :
                                                     <>
                                                         <button key={discout.id}
                                                                 style={{cursor: "pointer", border: "none"}}
-                                                                onClick={() => addCardLocal(discout.id, quantity, discout.price, discout.images[0].title, discout.title)}
+                                                                onClick={() => addCardLocal(discout.id, discout.size.length, discout.price, discout.images[0].title, discout.title)}
                                                                 className="btn-product btn-cart s-title ">
                                                             <span>В КОРЗИНУ</span></button>
                                                     </>
