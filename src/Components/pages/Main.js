@@ -201,6 +201,8 @@ const Main = observer(() => {
                                 <div key={index} className="col-6 col-md-4 col-lg-3">
                                     <div className="product product-7 text-center ">
                                         <figure className="product-media ">
+                                            {discout.percent ? <div style={{textAlign: "center"}}
+                                                                 class="product-label label-sale">{discout.percent} %</div> : ""}
                                             <Link to={{pathname: '/product/' + discout.id}}>
                                                 <a href="">
                                                     <img
