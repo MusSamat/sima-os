@@ -23,7 +23,7 @@ const Login = observer(() => {
 
 
 
-    const notify = () => toast.success("Wow so easy!");
+    const notify = () => toast.success("Вау, так просто!");
     const notifyError = (error) => toast.error(`Wow so ${error} easy!`);
 
 
