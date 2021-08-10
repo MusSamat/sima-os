@@ -362,15 +362,6 @@ const Main = observer(() => {
                             <a style={{fontSize: '25px'}} href="" className="read-more">Показать</a>
                         </Link>
                     </div>
-                    {/*<div className="btn-wrap d-flex justify-content-center mb-8">*/}
-                    {/*    <Link to={{*/}
-                    {/*        pathname: CATALOG_ROUTE,*/}
-                    {/*        popular: "novelty"*/}
-                    {/*    }} className="btn  btn-shadow">*/}
-                    {/*        <span style={{fontSize: "20px"}}>Показать</span>*/}
-                    {/*        <i className="icon-long-arrow-right"></i>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
 
                 </div>
 
@@ -525,7 +516,6 @@ const Main = observer(() => {
 
 
             </main>
-            <button id="scroll-top" title="Back to Top"><i className="icon-arrow-up"></i></button>
         </div>
 
     )

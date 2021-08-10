@@ -25,7 +25,7 @@ const Checkout = observer(() => {
     const [country, setCountry] = useState()
     const [city, setCity] = useState()
     const [telophone, setTelephon] = useState()
-    const [conpany, setCompany] = useState()
+    const [company, setCompany] = useState()
     const [cupon, setCupon] = useState()
     const [discount, setDiscount] = useState()
     // const [note, setNote] = useState()
@@ -33,7 +33,7 @@ const Checkout = observer(() => {
     console.log(product.productOrder)
 
     const notify = () => toast.success("Спасибо. Ваш заказ был принят.");
-    const notifyError = () => toast.error("Wow so easy!");
+    const notifyError = () => toast.error("");
 
     const sendOrder = (e) => {
         let items = []
@@ -185,13 +185,35 @@ const Checkout = observer(() => {
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
                                         </div>
                                     </div>
-                                    <label style={{fontSize: "16px"}} for="register-password">Адрес</label>
-                                    <input
-                                        type="text"
-                                        value={user.isAuth ? user.userId.address : address}
-                                        onChange={e => setAddress(e.target.value)}
-                                        className="form-control" required
-                                        style={{fontSize: "16px", fontWeight: "500"}}/>
+                                    <div className="row">
+                                        <div className="col-sm-6">
+                                            <label style={{fontSize: "16px"}} htmlFor="register-password">Адрес</label>
+                                            <input
+                                                type="text"
+                                                value={user.isAuth ? user.userId.address : address}
+                                                onChange={e => setAddress(e.target.value)}
+                                                className="form-control" required
+                                                style={{fontSize: "16px", fontWeight: "500"}}/>
+
+
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <label style={{fontSize: "16px"}} htmlFor="register-password">Наименование организации</label>
+                                            <input
+                                                type="text"
+                                                value={user.isAuth ? user.userId.address : company}
+                                                onChange={e => setCompany(e.target.value)}
+                                                className="form-control" required
+                                                style={{fontSize: "16px", fontWeight: "500"}}/>
+                                        </div>
+                                    </div>
+                                    {/*<label style={{fontSize: "16px"}} for="register-password">Адрес</label>*/}
+                                    {/*<input*/}
+                                    {/*    type="text"*/}
+                                    {/*    value={user.isAuth ? user.userId.address : address}*/}
+                                    {/*    onChange={e => setAddress(e.target.value)}*/}
+                                    {/*    className="form-control" required*/}
+                                    {/*    style={{fontSize: "16px", fontWeight: "500"}}/>*/}
 
                                     <div className="row">
                                         <div className="col-sm-6">

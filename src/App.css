@@ -788,6 +788,19 @@ a:hover, a:focus {
     margin-bottom: 40px;
 }
 
+.jivo{
+    position: absolute;
+    margin: 0 10px;
+    float: left;
+    position: fixed;
+    top: 88%;
+    right: 2%;
+    width: 60px;
+    height: 60px;
+    z-index: 999;
+    cursor: pointer;
+}
+
 .whatsapp {
     position: absolute;
     margin: 0 10px;

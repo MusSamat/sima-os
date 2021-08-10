@@ -249,6 +249,7 @@ const Header = observer(() => {
                         </div>
                     </div>
                 </div>
+
             </header>
 
 
@@ -258,7 +259,7 @@ const Header = observer(() => {
             >
             </a>
             <Link className="whatsapp"
-                  to={{pathname: "https://wa.me/+996-705-555829"}} target="_blank"
+                  to={{pathname: 'https://wa.me/996709999915'}}  target="_blank"
             >
                 <img src={what}/>
             </Link>
