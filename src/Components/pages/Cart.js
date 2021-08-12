@@ -6,14 +6,14 @@ import {NavLink, Link} from 'react-router-dom';
 import {CATALOG_ROUTE, CHECKOUT_ROUTE, HOME_ROUTE} from '../../utils/Const';
 import "../../App.css";
 
-
 const Cart = observer(() => {
     const {user} = useContext(Context)
     const {product} = useContext(Context)
     const [count, setCount] = useState(product.subcategory)
     let sum = 0;
 
-    console.log(user.items)
+    let data = JSON.parse(localStorage.getItem('order'))
+    console.log(data)
     const UpdateCart = (e) => {
         const data = JSON.stringify({
             product: user.items.map(i => i.product.id),
@@ -60,9 +60,21 @@ const Cart = observer(() => {
             })
     }
 
+    const getItem = (id) => {
+        const a = data?.find(i => i.id === id)
+        return a ? a.quantity : 0
+    }
+    const getPrice = (id) => {
+        const a = data?.find(i => i.id === id)
+        return a ? a.quantity * a.price : 0
+    }
+
+
+
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        product.getActualProducts()
         user.getCartData().then((items) => {
             console.log(items)
         })
@@ -73,18 +85,20 @@ const Cart = observer(() => {
             <main className="main">
                 <div className="page-content">
                     <div className="cart">
-                        <div className="container">
-                            <ol className="breadcrumb mb-5">
-                                <li className="breadcrumb-item"><NavLink className="breadcrumb-item" to={HOME_ROUTE}><a
-                                    href="">Главная</a></NavLink></li>
-                                <li className="breadcrumb-item"><a href=""> Корзина</a></li>
-                            </ol>
+                        <div className="container mt-5">
+                            {/*<ol className="breadcrumb mb-5">*/}
+                            {/*    <li className="breadcrumb-item"><NavLink className="breadcrumb-item" to={HOME_ROUTE}><a*/}
+                            {/*        href="">Главная</a></NavLink></li>*/}
+                            {/*    <li className="breadcrumb-item"><a href=""> Корзина</a></li>*/}
+                            {/*</ol>*/}
+                            <div></div>
                             <div className="row">
                                 <div className="col-lg-9">
                                     <table className="table table-cart table-mobile">
                                         <thead>
                                         <tr>
                                             <th style={{color: "black"}}>ТОВАР</th>
+                                            <th style={{color: "black"}}>ЦВЕТ</th>
                                             <th style={{color: "black"}}>ЦЕНА</th>
                                             <th style={{color: "black"}}>КОЛИЧЕСТВО</th>
                                             <th style={{color: "black"}}>ПОДЫТОГ</th>
@@ -92,8 +106,10 @@ const Cart = observer(() => {
                                         </thead>
 
                                         <tbody>
-                                        {console.log(user.items)}
-                                        {user.items?.map((c, index) =>
+                                        {console.log(product.products)}
+                                        {/*{console.log(product.products?.filter((i) => i.id === data).map((c) => c.id))}*/}
+                                        {/*{console.log(data)}*/}
+                                        { user.isAuth ? user.items?.map((c, index) =>
 
 
                                             <tr>
@@ -114,7 +130,7 @@ const Cart = observer(() => {
                                                     </div>
                                                 </td>
                                                 <td className="price-col">{c.product.price} ₽</td>
-                                                {console.log(c.product.size?.length)}
+                                                <td className="price-col">{c.product.price} ₽</td>
 
                                                 <td>
                                                     <div className="count">
@@ -123,18 +139,6 @@ const Cart = observer(() => {
                                                         <a style={{marginLeft: "7px", width: "30px", cursor: "pointer", fontSize: "18px"}} onClick={() => user.changeItemQuantity(index,c.quantity + c.product.size.length)}>+</a>
 
                                                     </div>
-                                                    {/*<div>*/}
-                                                    {/*    <button className="kol"*/}
-                                                    {/*            onClick={() => user.changeItemQuantity(index, c.quantity - 5)}>-*/}
-                                                    {/*    </button>*/}
-                                                    {/*    <span style={{marginLeft: "7px"}}*/}
-                                                    {/*          className="kol-input">{c.quantity}</span>*/}
-                                                    {/*    <button className="kol"*/}
-                                                    {/*            onClick={() => user.changeItemQuantity(index, c.quantity + 5)}>+*/}
-                                                    {/*    </button>*/}
-
-
-                                                    {/*</div>*/}
 
                                                 </td>
 
@@ -146,6 +150,44 @@ const Cart = observer(() => {
                                                             className="btn-remove"><i className="icon-close"></i>
                                                     </button>
                                                 </td>
+                                            </tr> ) :
+                                            product.products?.filter((i) => data?.map(d => d.id).includes(i.id)).map((c, index) =>
+
+
+                                            <tr>
+                                                <td key={index} className="product-col">
+                                                    <div className="product">
+                                                        <Link to={{pathname: '/product/' + c.id}}>
+                                                            <figure className="product-media">
+                                                                <a>
+                                                                    <img
+                                                                        src={`${process.env.REACT_APP_BASE_URL}${c.images[0]?.images[0]}`}
+                                                                        alt="Product image"/>
+                                                                </a>
+                                                            </figure>
+                                                        </Link>
+                                                        <h3 className="product-title">
+                                                            <a>{c.title}</a>
+                                                        </h3>
+                                                    </div>
+                                                </td>
+                                                <td className="price-col">{data.map(f => f.color === c.images?.map(i => i.title))} </td>
+                                                <td className="price-col">{c.price} ₽</td>
+                                                <td>
+                                                    <div className="count">
+                                                        <button disabled={(isNaN(c.quantity) || c.quantity - c.size.length <= 0)}  style={{width: "30px", cursor: "pointer", backgroundColor: "white", fontSize: "18px", marginLeft: "7px", border: "none"}} onClick={() => product.changeProductQuantity(c.id, (isNaN(c.quantity) ? getItem(c.id) : c.quantity) - c.size.length)}>-</button>
+                                                        <span style={{ width: "30px", marginRight: "7px", padding: "5px"}} >{isNaN(c.quantity) ?  getItem(c.id) : c.quantity}</span>
+                                                        <a style={{marginLeft: "7px", width: "30px", cursor: "pointer", fontSize: "18px"}} onClick={() => product.changeProductQuantity(c.id, (c.quantity ? c.quantity : getItem(c.id)) + c.size.length)}>+</a>
+
+                                                    </div>
+
+                                                </td>
+
+                                                <td className="price-col"
+                                                    style={{fontWeight: "500"}}>{c.quantity ? c.quantity * c.price : getPrice(c.id)} ₽
+                                                </td>
+                                                <td className="remove-col">
+                                                </td>
                                             </tr>)}
                                         </tbody>
                                     </table>
@@ -154,8 +196,8 @@ const Cart = observer(() => {
                                         <div className="cart-discount">
                                         </div>
 
-                                        <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2"><span>ОБНОВИТЬ КОРЗИНУ</span><i
-                                            className="icon-refresh"></i></a>
+                                        {user.isAuth ? <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2"><span>ОБНОВИТЬ КОРЗИНУ</span><i
+                                            className="icon-refresh"></i></a> : null}
                                     </div>
                                 </div>
                                 <aside className="col-lg-3">
@@ -167,12 +209,15 @@ const Cart = observer(() => {
                                             <tr className="summary-subtotal">
                                                 <td>ПОДЫТОГ:</td>
 
-                                                {
+                                                { user.isAuth ?
                                                     user.items?.map((item, index) => {
                                                         sum = sum + item.product.price * item.quantity
+                                                    }):
+                                                    data?.map((item, index) => {
+                                                        sum = sum + item.price * item.quantity
                                                     })
                                                 }
-
+                                                {console.log(product.products)}
                                                 <td>  {sum.toFixed(2)} ₽</td>
 
                                             </tr>

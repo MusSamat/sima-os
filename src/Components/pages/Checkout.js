@@ -8,7 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import {CART_ROUTE, ORDER_ROUTE} from '../../utils/Const';
 import "../../App.css";
 import {NavLink} from 'react-router-dom';
-import {HOME_ROUTE} from '../../utils/Const';
+import Checkbox from '@material-ui/core/Checkbox';
+import {Button, Col, Form, Row} from "react-bootstrap";
+import {FormControlLabel} from "@material-ui/core";
 
 
 const Checkout = observer(() => {
@@ -28,19 +30,24 @@ const Checkout = observer(() => {
     const [company, setCompany] = useState()
     const [cupon, setCupon] = useState()
     const [discount, setDiscount] = useState()
-    // const [note, setNote] = useState()
-
-    console.log(product.productOrder)
+    const [checked, setChecked] = React.useState(true);
+    const [value, setValue] = useState("")
+    let datalocal = JSON.parse(localStorage.getItem('order'))
 
     const notify = () => toast.success("Спасибо. Ваш заказ был принят.");
     const notifyError = () => toast.error("");
 
+
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+    };
+
     const sendOrder = (e) => {
         let items = []
-        product.productOrder?.map((item, i) => {
+        datalocal?.map((item, i) => {
             let obj =
                 {
-                    product: item.product,
+                    product: item.id,
                     quantity: item.quantity,
                     price: item.percent > 0 ? (item.price -
                         (item.price * item.percent / 100)) * item.quantity :
@@ -60,6 +67,7 @@ const Checkout = observer(() => {
             city: user.isAuth ? user.userId.city : city,
             telephone: user.isAuth ? user.userId.phone_number : telophone,
             cart_user_id: user.isAuth ? user.carts.id : '',
+            company: user.isAuth ? '' : company,
             note: note,
             items: user.isAuth ? [] : items,
         })
@@ -81,7 +89,8 @@ const Checkout = observer(() => {
                 notify()
                 user.getCartData()
                 history.push(ORDER_ROUTE)
-                product.productOrder.length = 0
+                product.getActualProducts()
+                localStorage.removeItem('order')
             })
             .catch(error => {
                 console.log(error)
@@ -101,17 +110,18 @@ const Checkout = observer(() => {
                 <div className="checkout">
                     <div className="container">
                         <ol className="breadcrumb mb-4 ">
-                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"
-                                                                                        href="">Главная</a></NavLink>
-                            </li>
                             <li className="breadcrumb-item"><NavLink to={CART_ROUTE}><a className="breadcrumb-item"
                                                                                         href="">Корзина</a></NavLink>
                             </li>
                             <li className="breadcrumb-item"><a href=""> Оформить заказ</a></li>
                         </ol>
                         {user.isRoute ?
-                            <button onClick={() => user.setRoute(false)}>Есть купон? Нажмите, чтобы ввести</button>
-                            : <button onClick={() => user.setRoute(true)}>Есть купон? Нажмите, чтобы ввести</button>}
+                            <div style={{fontSize: "16px"}} className="s-title">Есть купон? Нажмите, чтобы <a href=""
+                                                                                                              onClick={() => user.setRoute(false)}
+                                                                                                              style={{fontSize: "16px"}}
+                                                                                                              className=" s-title btn-link"> ввести</a>
+                            </div>
+                            : null}
 
                         {user.isRoute ? <div class="cta cta-horizontal cta-horizontal-box bg-image mb-5" style={{
                             backgroundImage: "url(assets/images/backgrounds/cta/bg-1.jpg)",
@@ -198,7 +208,8 @@ const Checkout = observer(() => {
 
                                         </div>
                                         <div className="col-sm-6">
-                                            <label style={{fontSize: "16px"}} htmlFor="register-password">Наименование организации</label>
+                                            <label style={{fontSize: "16px"}} htmlFor="register-password">Наименование
+                                                организации</label>
                                             <input
                                                 type="text"
                                                 value={user.isAuth ? user.userId.address : company}
@@ -256,7 +267,7 @@ const Checkout = observer(() => {
                                                         <td>{item.product.title}</td>
                                                         <td>{(item.product?.price * item.quantity).toFixed(2)} ₽</td>
                                                     </tr>) :
-                                                product.productOrder?.map((item, index) =>
+                                                datalocal?.map((item, index) =>
                                                     <tr key={index}>
                                                         <td>{item.title}</td>
                                                         <td>{(item.price * item.quantity).toFixed(2)} ₽</td>
@@ -268,7 +279,7 @@ const Checkout = observer(() => {
                                                     user.items?.map((item, index) => {
                                                         sum = sum + item.product?.price * item.quantity
                                                     }) :
-                                                    product.productOrder?.map((item, index) => {
+                                                    datalocal?.map((item, index) => {
                                                         sum = sum + item.price * item.quantity
                                                     })
                                                 }
@@ -281,6 +292,43 @@ const Checkout = observer(() => {
 
                                             </tbody>
                                         </table>
+
+                                        <Form>
+                                            {console.log(value)}
+                                            <label style={{cursor: "pointer"}}>
+                                                <input type="radio" value="odin"
+                                                       checked={value === "odin"}
+                                                       onChange={e => setValue(e.target.value)}/>
+                                                Оплата курьеру при доставке
+                                            </label><br/>
+                                            <label style={{cursor: "pointer"}}>
+                                                <input type="radio" value="two"
+                                                       checked={value === "two"}
+                                                       onChange={e => setValue(e.target.value)}/>
+
+                                                VISA/MasterCard/Maestro/ЭЛКАРТ
+                                            </label><br/>
+                                            <label style={{cursor: "pointer"}}>
+                                                <input type="radio" value="three"
+                                                       checked={value === "three"}
+                                                       onChange={e => setValue(e.target.value)}/>
+                                                ЭЛСОМ
+                                            </label><br/>
+                                            <label style={{cursor: "pointer"}}>
+                                                <input type="radio" value="four"
+                                                       checked={value === "four"}
+                                                       onChange={e => setValue(e.target.value)}/>
+                                                О!Деньги
+                                            </label><br/>
+                                        </Form>
+                                        <span>Способ доставки</span>
+                                        <Form.Check type="radio" aria-label="radio 1" label="Доставка курьером"/>
+
+                                        <Form.Check aria-label="option 1"  label="Прочитал и согласен с"/>
+                                        <a href="">Соглашение на обработку персональных данных</a>
+                                        <Form.Check aria-label="option 1" label="Прочитал и согласен с"/>
+                                        <a href="">Условия использования</a>
+
 
                                         <button onClick={sendOrder} type="submit"
                                                 className="btn btn-outline-primary-2 btn-order btn-block">

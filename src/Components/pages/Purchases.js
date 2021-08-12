@@ -43,11 +43,11 @@ const Purchases = observer(() => {
         <div className="page-wrapper">
             <main className="main">
                 <div className="container">
-                    <ol className="breadcrumb mt-4 mb-2">
-                        <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"
-                                                                                    href="">Главная</a></NavLink></li>
-                        <li className="breadcrumb-item"><a href="">Условия покупки</a></li>
-                    </ol>
+                    {/*<ol className="breadcrumb mt-4 mb-2">*/}
+                    {/*    <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}
+                    {/*                                                                href="">Главная</a></NavLink></li>*/}
+                    {/*    <li className="breadcrumb-item"><a href="">Условия покупки</a></li>*/}
+                    {/*</ol>*/}
                 </div>
                 {user.purchase.map((img, index) =>
                     <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>

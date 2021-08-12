@@ -17,18 +17,19 @@ const About = observer(() => {
     return (
         <div className="page-wrapper">
             <main className="main">
+                {user.about?.map((img, index) =>
+                    <div key={index} className="intro-slide mb-2"
+                         style={{backgroundImage: `url(${img.image})`}}>
+
+                    </div>)}
                 <div className="pb-5 mb-1 mb-lg-8 mt-4 ">
                     <div className="container">
-                        <ol class="breadcrumb mt-1 mb-2">
-                            <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a class="breadcrumb-item"
-                                                                                    href="">Главная</a></NavLink></li>
-                            <li class="breadcrumb-item"><a href="">О нас</a></li>
-                        </ol>
-                        {user.about?.map((img, index) =>
-                            <div key={index} className="intro-slide mb-2"
-                                 style={{backgroundImage: `url(${img.image})`}}>
+                        {/*<ol class="breadcrumb mt-1 mb-2">*/}
+                        {/*    <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a class="breadcrumb-item"*/}
+                        {/*                                                            href="">Главная</a></NavLink></li>*/}
+                        {/*    <li class="breadcrumb-item"><a href="">О нас</a></li>*/}
+                        {/*</ol>*/}
 
-                            </div>)}
                         <div style={{display: "flex", justifyContent: "center", marginBottom: "20px"}}><h2
                             style={{color: "#EEA287", textAlign: "center"}}>О нас</h2></div>
                         <p style={{textAlign: "justify", textIndent: "40px", fontSize: "16px", color: "#000000"}}><span

@@ -295,6 +295,10 @@
 }
 
 /* product */
+.btn-cart:hover{
+    color: white !important;
+}
+
 .count{
     border: 1px solid #dadada;
     max-width: 131px;
@@ -479,9 +483,6 @@
     padding-left: 0rem !important;
 }
 
-/* .header .cart-dropdown, .header .compare-dropdown{
-  margin-left: -2.4rem !important;
-} */
 .wishlist-link {
     margin-right: 2.4rem !important;
 }
@@ -843,10 +844,6 @@ a:hover, a:focus {
 }
 
 /* footer */
-.footer.footer-2 {
-    background-color: #fff !important;
-}
-
 .pokupki {
     font-family: 'Montserrat', sans-serif !important;
 }
@@ -914,6 +911,11 @@ a:hover, a:focus {
 }
 
 /* checkout  */
+.check{
+    font-family: 'Montserrat', sans-serif !important;
+    margin-left: 0px;
+}
+
 .checkout-title {
     font-family: 'Montserrat', sans-serif !important;
 

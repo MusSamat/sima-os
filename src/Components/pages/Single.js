@@ -19,9 +19,9 @@ const Single = observer(({match}) => {
                 <div className="page-content">
                     <div className="container">
                         <ol className="breadcrumb mb-4 ">
-                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"
-                                                                                        href="">Главная</a></NavLink>
-                            </li>
+                            {/*<li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}
+                            {/*                                                            href="">Главная</a></NavLink>*/}
+                            {/*</li>*/}
                             <li className="breadcrumb-item"><NavLink to={NEWS_ROUTE}><a className="breadcrumb-item"
                                                                                         href="">Новости</a></NavLink>
                             </li>

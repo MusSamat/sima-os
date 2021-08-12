@@ -12,7 +12,7 @@ import {FaOdnoklassnikiSquare} from "react-icons/fa";
 import {BiGitRepoForked} from "react-icons/bi";
 import razmer from "../../assets/razmer.png"
 import vk from "../../assets/vk.png"
-import {Modal, Button} from "react-bootstrap";
+import {Modal, Button, Container, Row, Col} from "react-bootstrap";
 import mobile_menu from '../../Http/mobile_menu';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -42,6 +42,7 @@ const Product = observer((props) => {
     function updateValue(e) {
         console.log(e.target.value);
     }
+
     const notify = () => toast.success("Wow so easy!");
     const notifyError = () => toast.error("Wow so easy!");
 
@@ -143,6 +144,61 @@ const Product = observer((props) => {
         e.preventDefault();
     }
 
+    // const addCardLocal = (e,proId, quantity, price, color, title, count) => {
+    //
+    //     let productId = product.productOrder.map((i) => i.product)
+    //     let found = -1
+    //     productId.map(item => {
+    //         if (item === proId) {
+    //             found = item
+    //         }
+    //     })
+    //     if (found === -1) {
+    //         product.productOrder.push({
+    //             product: proId,
+    //             quantity: count,
+    //             price: price,
+    //             color: color,
+    //             title: title
+    //         })
+    //     } else {
+    //         toast.warning("этот товар есть в карзина")
+    //         found = -1
+    //     }
+    //
+    //     e.preventDefault();
+    // }
+
+
+    const addCardLocal = (e, proId, price, color, title) => {
+        let data = JSON.parse(localStorage.getItem('order'))
+        let productId = product.productOrder.map((i) => i.product)
+        if (data === null) {
+            data = []
+        }
+        data.push({id: proId, quantity: count, color: color, title: title, price: price})
+        let found = -1
+        productId.map(item => {
+            if (item === proId) {
+                found = item
+            }
+        })
+        if (found === -1) {
+            localStorage.setItem('order', JSON.stringify(data));
+            product.productOrder.push({
+                product: proId,
+                quantity: count,
+                price: price,
+                color: color,
+                title: title
+            })
+        } else {
+            toast.warning("этот товар есть в карзина")
+            found = -1
+        }
+        e.preventDefault();
+
+    }
 
     const sendRating = (event) => {
         const id = props.match.params.id
@@ -252,7 +308,9 @@ const Product = observer((props) => {
                                 color: "#000000"
                             }}>Каталог</Link></li>
                             <li className="breadcrumb-item "
-                                aria-current="page"> <Link style={{color: "#000000"}} to={CATALOG_ROUTE}> {product.product.novelty  ? "Новый" : ""} {product.product.popular ? "Популярные" : ""}</Link></li>
+                                aria-current="page"><Link style={{color: "#000000"}}
+                                                          to={CATALOG_ROUTE}> {product.product.novelty ? "Новый" : ""} {product.product.popular ? "Популярные" : ""}</Link>
+                            </li>
                             <li className="breadcrumb-item " style={{color: "#000000"}}
                                 aria-current="page"> {product.product.title}</li>
                         </ul>
@@ -368,47 +426,103 @@ const Product = observer((props) => {
 
                                                 </a>
                                             </div>)}
-                                        {/*<div className="product-nav product-nav-thumbs">*/}
 
-
-                                        {/*    <div class="owl-carousel owl-theme owl-testimonials" data-toggle="owl"*/}
-                                        {/*         data-owl-options='{*/}
-                                        {/*                "nav": false, */}
-                                        {/*                "dots": true,*/}
-                                        {/*                "margin": 10,*/}
-                                        {/*                "loop": true,*/}
-                                        {/*                "responsive": {*/}
-                                        {/*                    "0": {*/}
-                                        {/*                        "items":1*/}
-                                        {/*                    },*/}
-                                        {/*                    "768": {*/}
-                                        {/*                        "items":2*/}
-                                        {/*                    },*/}
-                                        {/*                    "992": {*/}
-                                        {/*                        "items":3*/}
-                                        {/*                    },*/}
-                                        {/*                    "1000": {*/}
-                                        {/*                        "items":3,*/}
-                                        {/*                        "nav": true*/}
-                                        {/*                    }*/}
-                                        {/*                }*/}
-                                        {/*            }'>*/}
-                                        {/*        */}
-
-
-                                        {/*    </div>*/}
-
-                                        {/*</div>*/}
                                     </div>
 
                                     <div className="details-filter-row details-row-size">
                                         <p style={{fontSize: "16px", color: "#000000"}}>Размер: <span
                                             style={{cursor: "pointer", color: "#eea287"}} onClick={handleShowRaz}> Таблица размеров</span>
                                         </p>
-                                        <Modal show={showRaz} onHide={handleCloseRaz} centered={true} animation={true}>
+                                        <Modal show={showRaz} onHide={handleCloseRaz} centered={true} animation={true} size="lg"
+                                               aria-labelledby="contained-modal-title-vcenter"
+                                               >
                                             <Modal.Header closeButton>
                                             </Modal.Header>
-                                            <img src={razmer}/>
+                                            <Container>
+                                                <Row style={{padding: "15px"}}>
+                                                    <Col  xs={6} md={4}>
+                                                        Российский размер
+                                                    </Col>
+                                                    <Col   xs={6} md={4}>
+                                                        Размер производителя
+                                                    </Col>
+                                                    <Col   xs={6} md={4}>
+                                                        Рост, см
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        110-116
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        110
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        110-116
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        116-122
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        116
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        116-122
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        122-128
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        122
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        122-128
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        128-134
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        128
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        128-134
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        134-140
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        134
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        134-140
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        140-146
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        140
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        140-146
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        146-152
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        146
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        146-152
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        152-158
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        152
+                                                    </Col>
+                                                    <Col xs={6} md={4}>
+                                                        152-158
+                                                    </Col>
+                                                </Row>
+                                            </Container>
                                         </Modal>
                                     </div>
 
@@ -417,32 +531,60 @@ const Product = observer((props) => {
                                             <div key={size} className="size">{size}</div>
                                         ))}
                                     </div>
-                                     <>
-                                            <div className="details-filter-row details-row-size">
-                                                <div className="count ">
-                                                    <a  style={{width: "30px", cursor: "pointer", fontSize: "20px", marginLeft: "7px", color: "#000000"}} onClick={() => setCount(count - product.product.size.length)}>-</a>
-                                                    <span style={{ width: "30px",  padding: "px", fontSize: "18px", color: "#000000"}} >{count}</span>
-                                                    <a style={{marginLeft: "7px", width: "30px", cursor: "pointer", fontSize: "20px", color: "#000000"}} onClick={() => setCount(count + product.product.size.length)}>+</a>
+                                    <>
+                                        <div className="details-filter-row details-row-size">
+                                            <div className="count ">
+                                                <button disabled={(isNaN(count) || count - product.product.size.length)}
+                                                        style={{
+                                                            width: "30px",
+                                                            cursor: "pointer",
+                                                            fontSize: "20px",
+                                                            marginLeft: "7px",
+                                                            color: "#000000",
+                                                            backgroundColor: "white",
+                                                            border: "none"
+                                                        }}
+                                                        onClick={() => setCount(count - product.product.size.length)}>-
+                                                </button>
+                                                <span style={{
+                                                    width: "30px",
+                                                    padding: "px",
+                                                    fontSize: "18px",
+                                                    color: "#000000"
+                                                }}>{count}</span>
+                                                <a style={{
+                                                    marginLeft: "7px",
+                                                    width: "30px",
+                                                    cursor: "pointer",
+                                                    fontSize: "20px",
+                                                    color: "#000000"
+                                                }} onClick={() => setCount(count + product.product.size.length)}>+</a>
 
-                                                </div>
                                             </div>
+                                        </div>
 
-                                            <div className="product-details-action">
+                                        <div className="product-details-action">
+                                            {user.isAuth ?
                                                 <a onClick={addCart} href=""
-                                                   className="btn-product btn-cart"><span>В КОРЗИНУ</span>
+                                                   className="btn-product btn-cart">В Корзину
+                                                </a> :
+                                                <a onClick={(e) => addCardLocal(e, product.product.id, product.product.price, product.product.images[0].title, product.product.title)}
+                                                   href=""
+                                                   className="btn-product btn-cart">В Корзину
                                                 </a>
-                                                {/*<a style={{cursor: "pointer"}} */}
-                                                {/*   className="btn-product btn-cart"><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>*/}
+                                            }
+                                            {/*<a style={{cursor: "pointer"}} */}
+                                            {/*   className="btn-product btn-cart"><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>*/}
 
-                                                <div className="details-action-wrapper">
-                                                    {product.product.is_favorite ?
-                                                        <FcLike onClick={deleteWish}
-                                                                style={{fontSize: "30px", cursor: "pointer"}}/>
-                                                        : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}
-                                                             className="btn-product btn-wishlist" title="Wishlist"></a>}
-                                                </div>
+                                            <div className="details-action-wrapper">
+                                                {product.product.is_favorite ?
+                                                    <FcLike onClick={deleteWish}
+                                                            style={{fontSize: "30px", cursor: "pointer"}}/>
+                                                    : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}
+                                                         className="btn-product btn-wishlist" title="Wishlist"></a>}
                                             </div>
-                                        </>
+                                        </div>
+                                    </>
 
 
                                     <div className="product-details-footer">
@@ -557,12 +699,19 @@ const Product = observer((props) => {
 
                                                         </textarea>
                                                     <div className="d-grid gap-2">
-                                                        {/* <div className="product-details-action">
-                                                                <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product" ><span style={{color: "inherit"}}>Отправить</span></a>
-                                                            </div> */}
-                                                        <button className="button-otzyv" onClick={(e) => sendRating(e)}
-                                                                type="button">Отправить
-                                                        </button>
+                                                        {/*<div className="product-details-action">*/}
+                                                        {/*        <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product" ><span style={{color: "inherit"}}>Отправить</span></a>*/}
+                                                        {/*    </div>*/}
+                                                        {/*<button className="button-otzyv" onClick={(e) => sendRating(e)}*/}
+                                                        {/*        type="button">Отправить*/}
+                                                        {/*</button>*/}
+                                                        <div className="dropdown">
+                                                            <button style={{fontSize: "18px"}}
+                                                                    onClick={(e) => sendRating(e)}
+                                                                    className="btn btn-block btn-outline-primary-2 voiti">
+                                                                Отправить
+                                                            </button>
+                                                        </div>
 
                                                     </div>
 

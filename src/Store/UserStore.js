@@ -184,7 +184,7 @@ export default class UserStore {
     }
 
     getImageContact() {
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-about-us/`)
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-contact/`)
             .then(res => {
                 this.contact = res.data
                 return this.contact
@@ -214,10 +214,8 @@ export default class UserStore {
     }
 
     changeItemQuantity(ind, val) {
-        console.log(ind, val)
         this.items = this.items.map((i, index) => index === ind ? {...i, quantity: val} : i)
     }
-
     getReviews(id) {
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/` + id)
             .then(response => {

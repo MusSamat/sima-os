@@ -27,11 +27,14 @@ const Header = observer(() => {
     const {user} = useContext(Context)
     const {product} = useContext(Context)
 
+
     let sum = 0
+    let data = JSON.parse(localStorage.getItem('order'))
 
 
     useEffect(() => {
         mobile_menu()
+        product.getActualProducts()
         user?.getUserData()
         user?.getCartData()
         user.getWishlistData()
@@ -101,12 +104,6 @@ const Header = observer(() => {
                                             className="sf-with-ul">Новости</a></NavLink>
 
                                     </li>
-                                    {/* <li className="megamenu-container ">
-                                    <NavLink exact className="sf-with" to={ABOUT_ROUTE}><a style={{fontSize: "18px"}} className="sf-with-ul">Сотрудничество</a></NavLink>
-                                </li >
-                                <li className="megamenu-container ">
-                                    <NavLink exact className="sf-with" to={CONTACT_ROUTE}><a style={{fontSize: "18px"}} className="sf-with-ul">Контакты</a></NavLink>
-                                </li > */}
                                     <li className="megamenu-container ">
                                         <a style={{fontSize: "18px", color: "#000000", cursor: "pointer"}}
                                            className="sf-with-ul">Сотрудничество</a>
@@ -182,10 +179,14 @@ const Header = observer(() => {
                                 <NavLink to={CART_ROUTE}><a className="dropdown-toggle ">
                                     <i style={{color: "#000000"}} className="icon-shopping-cart"></i>
                                     <span
-                                        className="cart-count">{user.isAuth ? user.items?.length || '0' : product.productOrder?.length || "0"}</span>
-                                    {
+                                        className="cart-count">{user.isAuth ? user.items?.length || '0' : data?.length || "0"}</span>
+                                    {console.log(product.productOrder)}
+                                    { user.isAuth ?
                                         user.items?.map((item, index) => {
                                             sum = sum + item.product?.price * item.quantity
+                                        }) :
+                                        product.productOrder?.map((item, index) => {
+                                            sum = sum + item.price * item.quantity
                                         })
                                     }
                                     <span className="cart-txt">{sum.toFixed(2) } ₽</span>
@@ -193,10 +194,10 @@ const Header = observer(() => {
                                 </NavLink>
 
                                 <div className="dropdown-menu dropdown-menu-right">
-                                    <div style={{overflowY: "auto", height: "230px"}}>
+                                    <div style={{overflowY: "auto", maxHeight: "230px"}}>
 
                                         <div className="dropdown-cart-products">
-                                            {user.items?.map((c, index) =>
+                                            {user.isAuth ? user.items?.map((c, index) =>
                                                 <div key={index} className="product">
                                                     <div className="product-cart-details">
                                                         <h4 className="product-title">
@@ -217,7 +218,30 @@ const Header = observer(() => {
                                                         </a>
                                                     </figure>
                                                     <a href="" className="btn-remove" title="Remove Product"></a>
-                                                </div>)}
+                                                </div>) :
+                                                product.products?.filter((i) => data?.map(d => d.id).includes(i.id)).map((c, index) =>
+                                                            <div key={index} className="product">
+                                                                <div className="product-cart-details">
+                                                                    <h4 className="product-title">
+                                                                        <a>{c.title}</a>
+                                                                    </h4>
+
+                                                                    <span className="cart-product-info">
+                                                                    <span className="cart-product-qty">1</span>
+                                                                    x ${c.price} ₽
+                                                                </span>
+                                                                </div>
+
+                                                                <figure className="product-image-container">
+                                                                    <a className="product-image">
+                                                                        <img
+                                                                            src={`${process.env.REACT_APP_BASE_URL}${c.images[0]?.images[0]}`}
+                                                                            alt="product"/>
+                                                                    </a>
+                                                                </figure>
+                                                                <a href="" className="btn-remove" title="Remove Product"></a>
+                                                            </div>)
+                                            }
                                         </div>
 
 

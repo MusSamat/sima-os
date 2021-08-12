@@ -34,12 +34,12 @@ const News = observer(() => {
             <main className="main mt-2">
                 <div className="page-content">
                     <div className="container ">
-                        <ol className="breadcrumb mb-4 ">
-                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"
-                                                                                        href="">Главная</a></NavLink>
-                            </li>
-                            <li className="breadcrumb-item"><a href=""> Новости</a></li>
-                        </ol>
+                        {/*<ol className="breadcrumb mb-4 ">*/}
+                        {/*    <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}
+                        {/*                                                                href="">Главная</a></NavLink>*/}
+                        {/*    </li>*/}
+                        {/*    <li className="breadcrumb-item"><a href=""> Новости</a></li>*/}
+                        {/*</ol>*/}
                         {product.blog.map((blog, index) =>
                             <div className="entry-item lifestyle shopping " key={index}>
 

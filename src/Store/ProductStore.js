@@ -56,6 +56,10 @@ export default class ProductStore {
 
     }
 
+    changeProductQuantity(id, val) {
+        this.products = this.products.map((i, index) => i.id === id ? {...i, quantity: val} : i)
+    }
+
 
 
     async getActualProducts() {

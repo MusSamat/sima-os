@@ -151,11 +151,15 @@ const Catolog = observer((props) => {
     const handleClose = () => setLgShow(false);
     const handleShow = () => setLgShow(true);
 
-    console.log(product.productOrder)
+    let data = JSON.parse(localStorage.getItem('order'))
 
-    const addCardLocal = (proId, quantity, price, color, title, count) => {
-
+    const addCardLocal = (proId, price, color, title, count) => {
+        // let data = JSON.parse(localStorage.getItem('order'))
         let productId = product.productOrder.map((i) => i.product)
+        if(data === null){
+             data = []
+        }
+        data.push({id: proId, quantity: count, color: color, title: title, price: price})
         let found = -1
         productId.map(item => {
             if (item === proId) {
@@ -163,6 +167,7 @@ const Catolog = observer((props) => {
             }
         })
         if (found === -1) {
+            localStorage.setItem('order', JSON.stringify(data));
             product.productOrder.push({
                 product: proId,
                 quantity: count,
@@ -276,16 +281,15 @@ const Catolog = observer((props) => {
 
 
     useEffect(() => {
-
         window.scrollTo(0, 0)
         mobile_menu()
         user.getWishlistData()
         user.getUserData()
         product.fetchTodo()
         if (route === "discount") {
-            product.discountTodo(user.isAuth)
+            product.discountTodo()
         } else if (!route) {
-            product.getActualProducts(user.isAuth).then(() => {
+            product.getActualProducts().then(() => {
                 const scripts = [
                     '/assets/js/jquery.elevateZoom.min.js',
                     '/assets/js/bootstrap-input-spinner.js',
@@ -403,7 +407,7 @@ const Catolog = observer((props) => {
                                                                 <>
                                                                     <button key={prod.id}
                                                                             style={{cursor: "pointer", border: "none"}}
-                                                                            onClick={() => addCardLocal(prod.id, quantity, prod.price, prod.images[0].title, prod.title, prod.size.length)}
+                                                                            onClick={() => addCardLocal(prod.id, prod.price, prod.images[0].title, prod.title, prod.size.length)}
                                                                             className="btn-product btn-cart s-title ">
                                                                         <span>В КОРЗИНУ</span></button>
                                                                 </>

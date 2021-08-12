@@ -128,9 +128,27 @@ const Main = observer(() => {
 
     }
 
-    const addCardLocal = (proId, size, price, color, title) => {
+    const f = (num) => {
+        const result = [0, 1];
+        for(let i = 2; i<=num; i++){
+            const prevNum1 = result[i - 1];
+            const prevNum2 = result[i - 2];
+            console.log(prevNum1)
+            // console.log(prevNum2)
+            result.push(prevNum1 + prevNum2)
+        }
+        return result[num]
+    }
+    console.log(f(10))
+    // console.log(f(20))
 
+    const addCardLocal = ( proId, count, price, color, title) => {
+        let data = JSON.parse(localStorage.getItem('order'))
         let productId = product.productOrder.map((i) => i.product)
+        if(data === null){
+            data = []
+        }
+        data.push({id: proId, quantity: count, color: color, title: title, price: price})
         let found = -1
         productId.map(item => {
             if (item === proId) {
@@ -138,9 +156,10 @@ const Main = observer(() => {
             }
         })
         if (found === -1) {
+            localStorage.setItem('order', JSON.stringify(data));
             product.productOrder.push({
                 product: proId,
-                quantity: size,
+                quantity: count,
                 price: price,
                 color: color,
                 title: title
@@ -149,9 +168,10 @@ const Main = observer(() => {
             toast.warning("этот товар есть в карзина")
             found = -1
         }
-
+        // e.preventDefault();
 
     }
+
 
     const openModal = (id) => {
         // setLgShow(true)

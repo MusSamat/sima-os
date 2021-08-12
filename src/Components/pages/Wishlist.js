@@ -73,12 +73,12 @@ const Wishlist = observer(() => {
 
                 <div className="page-content">
                     <div className="container">
-                        <ol className="breadcrumb mb-4 ">
-                            <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"
-                                                                                        href="">Главная</a></NavLink>
-                            </li>
-                            <li className="breadcrumb-item"><a href=""> Изображение</a></li>
-                        </ol>
+                        {/*<ol className="breadcrumb mb-4 ">*/}
+                        {/*    <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}
+                        {/*                                                                href="">Главная</a></NavLink>*/}
+                        {/*    </li>*/}
+                        {/*    <li className="breadcrumb-item"><a href=""> Изображение</a></li>*/}
+                        {/*</ol>*/}
                         <table className="table table-wishlist table-mobile">
                             <thead>
                             <tr>
@@ -114,7 +114,6 @@ const Wishlist = observer(() => {
                                     <td className="stock-col"><span className="in-stock">В наличии</span></td>
                                     <td className="action-col">
                                         <div className="dropdown">
-                                            {console.log()}
                                             <button onClick={(e) => addCart(e, l.product.id, l.product.images[0].title, l.product.size.length)}
                                                     className="btn btn-block btn-outline-primary-2">
                                                 В КОРЗИНУ
