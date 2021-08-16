@@ -44,7 +44,6 @@
 }
 
 .city {
-    margin-left: 20px;
     font-family: 'Montserrat', sans-serif !important;
 }
 
@@ -455,6 +454,7 @@
     margin-right: 10px;
     color: black;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .divInput{
@@ -479,8 +479,8 @@
 }
 
 .logo1 {
-    width: 150px;
-    height: 60px;
+    width: 100px;
+    height: 40px;
 }
 
 .breadcrumb-item {

@@ -17,7 +17,7 @@ import {
 import "../App.css";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import logo from "../assets/IMG.png"
+import logo from "../assets/lolo.jpg"
 import what from "../assets/WhatsApp.png"
 import mobile_menu from "../Http/mobile_menu";
 import {VscSearch} from "react-icons/vsc";
@@ -34,11 +34,8 @@ const Header = observer(() => {
     let data = JSON.parse(localStorage.getItem('order'))
     console.log( CATALOG_ROUTE)
     const search = (e) => {
-        if(window.location.href !== CATALOG_ROUTE){
-            window.location.href = CATALOG_ROUTE;
-        }
+        window.location.href = `/catalog?name=${input}`;
         product.searchFilter(input)
-        console.log(input)
 
 
 
@@ -67,7 +64,7 @@ const Header = observer(() => {
 
     useEffect(() => {
         mobile_menu()
-        product.getActualProducts()
+        // product.getActualProducts()
         user?.getUserData()
         user?.getCartData()
         user.getWishlistData()
@@ -111,8 +108,8 @@ const Header = observer(() => {
                                 <i className="icon-bars"></i>
                             </button>
                             <NavLink exact to={HOME_ROUTE}>
-                                {/*<img className="logo1" src={logo}/>*/}
-                                <h1 className="sima-logo ">SIMA</h1>
+                                <img className="logo1" src={logo}/>
+                                {/*<h1 className="sima-logo ">SIMA</h1>*/}
                             </NavLink>
 
                         </div>
@@ -191,24 +188,7 @@ const Header = observer(() => {
                         </div>
 
                         <div className="header-right">
-                            <div className="header-search mt-0.5 mr-2">
 
-                                {/*<a href="" className="search-toggle" onClick={user.setRoute(true)} title="Search"><i*/}
-                                {/*    style={{color: "#000000", fontWeight: "400"}} className="icon-search mt-6"></i></a>*/}
-
-
-                                <form action="" method="get">
-                                    <div className="header-search-wrapper ">
-                                        <label for="q" class="sr-only">Search</label>
-                                        {/*{user.isRoute ?  <input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)}type="text" className="inputFor"  id="q"*/}
-                                        {/*                        placeholder="Search in..." />: null}*/}
-
-                                        {/*<input value={input} onChange={(e) => setInput(e.target.value)}type="text" onKeyDown={(e) =>handleKeyDown(e)}  placeholder="Поиск.."  className="form-control"  />*/}
-                                        {/*<input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)}type="text" className="form-control"  id="q"*/}
-                                        {/*       placeholder="Search in..." />*/}
-                                    </div>
-                                </form>
-                            </div>
                             {user.isRoute ? <VscSearch className="icons" onClick={()=>user.setRoute(false)}/> : <VscSearch className="icons" onClick={()=>user.setRoute(true)}/>}
                             {user.isAuth ?
                                 <NavLink to={MYACOUNT_ROUTE}><a style={{fontSize: "30px"}} data-toggle="modal"><i

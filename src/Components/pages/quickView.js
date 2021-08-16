@@ -151,7 +151,7 @@ const quickView = observer(({id}) => {
         }
 
     }, []);
-     console.log(product.product)
+     console.log(leftImages)
     return (
         <div className="mfp-content">
             <div className="container quickView-container">
@@ -161,7 +161,10 @@ const quickView = observer(({id}) => {
                             <div className="row">
                                 <div className="product-left" >
                                     {leftImages.map((img, index)=>
-                                        <a href="" className="carousel-dot active">
+                                        <a href="" onClick={(e) => { e.preventDefault();
+
+                                            setSelectedImage(`${img}, ${console.log(img)}`)
+                                        }} className="carousel-dot active">
                                             <img src={`${process.env.REACT_APP_BASE_URL}${img}`}/>
                                         </a>
                                     )}
@@ -170,25 +173,23 @@ const quickView = observer(({id}) => {
                                 <div className="product-right">
                                     <div className="intro-slide" data-hash="two">
                                         <img src={process.env.REACT_APP_BASE_URL + selectedImage} alt="Image Desc"/>
-                                        {/*<a href={process.env.REACT_APP_BASE_URL + selectedImage} className="btn-fullscreen">*/}
-                                        {/*    <i className="icon-arrows"></i>*/}
-                                        {/*</a>*/}
+
                                     </div>
 
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-5 col-md-6">
-                            <h2 className="product-title">{product.product.title}</h2>
-                            <p>Артикул: {product.product.articul}</p>
-                            <h3 className="product-price">{`${product.product.price} ₽`}</h3>
+                            <h2 className="product-title city">{product.product.title}</h2>
+                            <p className="city">Артикул: {product.product.articul}</p>
+                            <h3 className="product-price city">{`${product.product.price} ₽`}</h3>
                             <label style={{
                                 color: "#9393a5",
                                 fontSize: "14px",
                                 fontWeight: "300",
                                 lineHeight: "20px",
                                 letterSpacing: "-.15px"
-                            }}>Цвет: <span style={{color: "#000"}}>{imgTitle}</span></label>
+                            }}>Цвет: <span className="city" style={{color: "#000"}}>{imgTitle}</span></label>
 
 
 
@@ -220,7 +221,6 @@ const quickView = observer(({id}) => {
                             </div>
 
                             <div className="details-filter-row details-row-size">
-                                <label for="size">Size:</label>
                                 <div className="d-flex">
                                     {product.product.size.map(size => (
                                         <div key={size} className="size">{size}</div>
@@ -230,7 +230,7 @@ const quickView = observer(({id}) => {
 
                             <div className="details-filter-row details-row-size">
                                 <div className="count ">
-                                    <button disabled={(isNaN(count) || count - product.product.size.length)}
+                                    <button disabled={(isNaN(count) || count - product.product.size.length <= 0)}
                                             style={{
                                                 width: "30px",
                                                 cursor: "pointer",
@@ -262,11 +262,11 @@ const quickView = observer(({id}) => {
                             <div className="product-details-action">
                                 <div className="details-action-wrapper">
                                     <div className="details-action-wrapper">
-                                        {product.product.is_favorite ?
+                                        { user.isAuth ? product.product.is_favorite ?
                                             <FcLike onClick={deleteWish}
                                                     style={{fontSize: "30px", cursor: "pointer"}}/>
                                             : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}
-                                                 className="btn-product btn-wishlist" title="Wishlist"></a>}
+                                                 className="btn-product btn-wishlist" title="Wishlist"></a> : ""}
                                     </div>
                                     {/*<a href="#" className="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>*/}
                                     {/*<a href="#" className="btn-product btn-compare"*/}

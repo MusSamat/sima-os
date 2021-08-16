@@ -1,7 +1,7 @@
 import {observer} from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import {Context} from '../../index';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import "../../App.css";
 import Slider from '@material-ui/core/Slider';
 import {makeStyles} from '@material-ui/core/styles';
@@ -13,6 +13,10 @@ import axios from 'axios';
 import Pagination from './Pagination';
 import {toast} from "react-toastify";
 import Modal from "./Modal"
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 const useStyles = makeStyles((theme) => ({
     MuiSlider: {
@@ -68,6 +72,10 @@ const Catolog = observer((props) => {
     const indexLastSeason = currentSeason * allSeason;
     const indexFirstSeason = indexLastSeason - allSeason
     let seasonFour = product.subcategory.slice(indexFirstSeason, indexLastSeason)
+    console.log(props)
+
+
+    let query = useQuery();
 
     const toggle = index => {
         if (clicked === index) {
@@ -119,8 +127,7 @@ const Catolog = observer((props) => {
     }
 
 
-
-
+    console.log(query.get("name"))
 
 
     const openModal = (id) => {
@@ -137,8 +144,8 @@ const Catolog = observer((props) => {
     const addCardLocal = (proId, price, color, title, count) => {
         // let data = JSON.parse(localStorage.getItem('order'))
         let productId = product.productOrder.map((i) => i.product)
-        if(data === null){
-             data = []
+        if (data === null) {
+            data = []
         }
         data.push({id: proId, quantity: count, color: color, title: title, price: price})
         let found = -1
@@ -178,15 +185,15 @@ const Catolog = observer((props) => {
 
             })
             .then(response => {
-                if(Active === "all"){
+                if (Active === "all") {
                     product.getActualProducts(user.isAuth)
-                } else if(Active === "novelty"){
+                } else if (Active === "novelty") {
                     product.getNoveltyProducts(user.isAuth)
-                } else if(Active === "popular"){
+                } else if (Active === "popular") {
                     product.getPopularProducts(user.isAuth)
-                } else if(Active === "discount") {
+                } else if (Active === "discount") {
                     product.discountTodo(user.isAuth)
-                } else if(Active === "typeProduct"){
+                } else if (Active === "typeProduct") {
                     product.fetchTodoCatalog(name, user.isAuth)
                 }
                 product.getData(id)
@@ -213,16 +220,16 @@ const Catolog = observer((props) => {
         })
             .then(res => {
                 user.getWishlistData()
-                if(Active === "all"){
+                if (Active === "all") {
                     // product.fetchTodoCatalog(title, user.isAuth)
                     product.getActualProducts(user.isAuth)
-                } else if(Active === "novelty"){
+                } else if (Active === "novelty") {
                     product.getNoveltyProducts(user.isAuth)
-                } else if(Active === "popular"){
+                } else if (Active === "popular") {
                     product.getPopularProducts(user.isAuth)
-                } else if(Active === "discount") {
+                } else if (Active === "discount") {
                     product.discountTodo(user.isAuth)
-                }else if(Active === "typeProduct"){
+                } else if (Active === "typeProduct") {
                     product.fetchTodoCatalog(name, user.isAuth)
                 }
             })
@@ -267,58 +274,63 @@ const Catolog = observer((props) => {
         user.getWishlistData()
         user.getUserData()
         product.fetchTodo()
-        if (route === "discount") {
-            product.discountTodo()
-        } else if (!route) {
-            product.getActualProducts().then(() => {
-                const scripts = [
-                    '/assets/js/jquery.elevateZoom.min.js',
-                    '/assets/js/bootstrap-input-spinner.js',
-                    '/assets/js/jquery.magnific-popup.min.js',
-                    '/assets/js/main.js',
-                    '/assets/js/bootstrap-input-spinner.js',
-                    '/assets/js/owl.carousel.min.js',
-                    '/assets/js/superfish.min.js',
-                    '/assets/js/jquery.waypoints.min.js',
-                    '/assets/js/jquery.hoverIntent.min.js',
-                    '/assets/js/bootstrap.bundle.min.js',
-                    '/assets/js/jquery.min.js',
-                ]
-                scripts.forEach(i => {
-                    const s = document.createElement('script')
-                    s.src = i
-                    document.body.appendChild(s)
+        if (query.get("name")) {
+            product.changeFilter(query.get("name"))
+        }else {
+            console.log("sssa")
+            if (route === "discount") {
+                product.discountTodo()
+            } else if (!route) {
+                product.getActualProducts().then(() => {
+                    const scripts = [
+                        '/assets/js/jquery.elevateZoom.min.js',
+                        '/assets/js/bootstrap-input-spinner.js',
+                        '/assets/js/jquery.magnific-popup.min.js',
+                        '/assets/js/main.js',
+                        '/assets/js/bootstrap-input-spinner.js',
+                        '/assets/js/owl.carousel.min.js',
+                        '/assets/js/superfish.min.js',
+                        '/assets/js/jquery.waypoints.min.js',
+                        '/assets/js/jquery.hoverIntent.min.js',
+                        '/assets/js/bootstrap.bundle.min.js',
+                        '/assets/js/jquery.min.js',
+                    ]
+                    scripts.forEach(i => {
+                        const s = document.createElement('script')
+                        s.src = i
+                        document.body.appendChild(s)
+                    })
                 })
-            })
-        } else if (route === "popular") {
-            product.getPopularProducts(user.isAuth)
-        } else if (route === "novelty") {
-            product.getNoveltyProducts(user.isAuth)
-        }else if (route === "catalog") {
-            product.getActualProducts(user.isAuth)
+            } else if (route === "popular") {
+                product.getPopularProducts(user.isAuth)
+            } else if (route === "novelty") {
+                product.getNoveltyProducts(user.isAuth)
+            } else if (route === "catalog") {
+                product.getActualProducts(user.isAuth)
+            }
         }
         // product.getActualProducts()
-        product.getSortedData()
-        product.getSubcategory().then(() => {
-            const scripts = [
-                '/assets/js/jquery.elevateZoom.min.js',
-                '/assets/js/bootstrap-input-spinner.js',
-                '/assets/js/jquery.magnific-popup.min.js',
-                '/assets/js/main.js',
-                '/assets/js/bootstrap-input-spinner.js',
-                '/assets/js/owl.carousel.min.js',
-                '/assets/js/superfish.min.js',
-                '/assets/js/jquery.waypoints.min.js',
-                '/assets/js/jquery.hoverIntent.min.js',
-                '/assets/js/bootstrap.bundle.min.js',
-                '/assets/js/jquery.min.js',
-            ]
-            scripts.forEach(i => {
-                const s = document.createElement('script')
-                s.src = i
-                document.body.appendChild(s)
-            })
-        })
+        // product.getSortedData()
+        // product.getSubcategory().then(() => {
+        //     const scripts = [
+        //         '/assets/js/jquery.elevateZoom.min.js',
+        //         '/assets/js/bootstrap-input-spinner.js',
+        //         '/assets/js/jquery.magnific-popup.min.js',
+        //         '/assets/js/main.js',
+        //         '/assets/js/bootstrap-input-spinner.js',
+        //         '/assets/js/owl.carousel.min.js',
+        //         '/assets/js/superfish.min.js',
+        //         '/assets/js/jquery.waypoints.min.js',
+        //         '/assets/js/jquery.hoverIntent.min.js',
+        //         '/assets/js/bootstrap.bundle.min.js',
+        //         '/assets/js/jquery.min.js',
+        //     ]
+        //     scripts.forEach(i => {
+        //         const s = document.createElement('script')
+        //         s.src = i
+        //         document.body.appendChild(s)
+        //     })
+        // })
 
     }, []);
     // let quantity = 5
@@ -330,13 +342,13 @@ const Catolog = observer((props) => {
                 <div className="page-content ">
                     <div className="container">
                         <nav>
-                        <ol className="breadcrumb ">
-                            <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                            <li className="breadcrumb-item"><a href="">Каталог</a></li>
-                        </ol>
+                            <ol className="breadcrumb ">
+                                {/*<li className="breadcrumb-item"><a href="/">Главная</a></li>*/}
+                                <li className="breadcrumb-item"><a href="">Каталог</a></li>
+                            </ol>
                         </nav>
                         <div className="row">
-                            <div className="col-lg-9">
+                            <div className="col-lg-9 overflow-hidden">
                                 <div className="toolbox">
                                     <div className="toolbox-left">
                                         <div className="toolbox-info">
@@ -396,8 +408,9 @@ const Catolog = observer((props) => {
                                                             }
                                                         </div>
                                                     </figure>
-                                                    { modalActive && <Modal active={modalActive} setActive={setModalActive} id={prodactId}/>}
-
+                                                    {modalActive &&
+                                                    <Modal active={modalActive} setActive={setModalActive}
+                                                           id={prodactId}/>}
 
 
                                                     <div class="product-body">
@@ -420,7 +433,7 @@ const Catolog = observer((props) => {
                                             paginate={paginate}/>
                             </div>
                             <aside className="col-lg-3 order-lg-first mt-3">
-                                <div className="sidebar sidebar-shop">
+                                <div className="sidebar sidebar-shop position-static">
 
 
                                     <div className="accordion accordions">
@@ -493,7 +506,7 @@ const Catolog = observer((props) => {
                                             min={500}
                                             max={2000}
                                         />
-                                        <p className="filter mt-1">ФИЛЬТР ПО ЦЕНЕ: {value[0]} ₽ {value[1]} ₽</p>
+                                        <p className="filter mt-1">ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} ₽</p>
                                     </div>
 
                                     <div className="wrappe mt-3">

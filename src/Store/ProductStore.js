@@ -245,8 +245,14 @@ export default class ProductStore {
             })
     }
 
-    changeFilter() {
-        this.products = this.allProducts.filter((item, index) => item.popular === true)
+    changeFilter(input) {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?title__icontains=` + input)
+            .then(res => {
+                this.products = [...res.data]
+            })
+            .catch((e) => {
+                console.error(e)
+            })
     }
 
     changeFilterCount(id) {

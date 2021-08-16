@@ -510,7 +510,7 @@ const Product = observer((props) => {
                                     <>
                                         <div className="details-filter-row details-row-size">
                                             <div className="count ">
-                                                <button disabled={(isNaN(count) || count - product.product.size.length)}
+                                                <button disabled={(isNaN(count) || count - product.product.size.length <= 0)}
                                                         style={{
                                                             width: "30px",
                                                             cursor: "pointer",
@@ -553,11 +553,11 @@ const Product = observer((props) => {
                                             {/*   className="btn-product btn-cart"><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>*/}
 
                                             <div className="details-action-wrapper">
-                                                {product.product.is_favorite ?
+                                                {user.isAuth ? product.product.is_favorite ?
                                                     <FcLike onClick={deleteWish}
                                                             style={{fontSize: "30px", cursor: "pointer"}}/>
                                                     : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}
-                                                         className="btn-product btn-wishlist" title="Wishlist"></a>}
+                                                         className="btn-product btn-wishlist" title="Wishlist"></a> : ""}
                                             </div>
                                         </div>
                                     </>
@@ -663,9 +663,7 @@ const Product = observer((props) => {
                                                                 )
                                                             })}
                                                         </div>
-                                                        {/* <div className="ratings" style={{width: "80%;", cursor:"pointer"}}>
-                                                                
-                                                            </div> */}
+
                                                     </div>
                                                     <textarea
                                                         className="form-control"
