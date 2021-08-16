@@ -144,30 +144,6 @@ const Product = observer((props) => {
         e.preventDefault();
     }
 
-    // const addCardLocal = (e,proId, quantity, price, color, title, count) => {
-    //
-    //     let productId = product.productOrder.map((i) => i.product)
-    //     let found = -1
-    //     productId.map(item => {
-    //         if (item === proId) {
-    //             found = item
-    //         }
-    //     })
-    //     if (found === -1) {
-    //         product.productOrder.push({
-    //             product: proId,
-    //             quantity: count,
-    //             price: price,
-    //             color: color,
-    //             title: title
-    //         })
-    //     } else {
-    //         toast.warning("этот товар есть в карзина")
-    //         found = -1
-    //     }
-    //
-    //     e.preventDefault();
-    // }
 
 
     const addCardLocal = (e, proId, price, color, title) => {

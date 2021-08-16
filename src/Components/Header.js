@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link, NavLink} from 'react-router-dom';
 import {
     ABOUT_ROUTE,
@@ -20,16 +20,49 @@ import {Context} from "../index";
 import logo from "../assets/IMG.png"
 import what from "../assets/WhatsApp.png"
 import mobile_menu from "../Http/mobile_menu";
+import {VscSearch} from "react-icons/vsc";
 
 
 const Header = observer(() => {
 
     const {user} = useContext(Context)
     const {product} = useContext(Context)
+    const [input, setInput] = useState("")
 
 
     let sum = 0
     let data = JSON.parse(localStorage.getItem('order'))
+    console.log( CATALOG_ROUTE)
+    const search = (e) => {
+        if(window.location.href !== CATALOG_ROUTE){
+            window.location.href = CATALOG_ROUTE;
+        }
+        product.searchFilter(input)
+        console.log(input)
+
+
+
+        e.preventDefault();
+    }
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+
+
+            search()
+            e.preventDefault();
+        }
+
+    }
+
+    // window.localstorage?.removeItem("order")
+    // window.onbeforeunload = function() {
+    //     localStorage.clear();
+    // }
+
+    // window.addEventListener("beforeunload", () => localStorage.removeItem('order'))
+
+    // window.localStorage.removeItem("order");
+
 
 
     useEffect(() => {
@@ -78,8 +111,8 @@ const Header = observer(() => {
                                 <i className="icon-bars"></i>
                             </button>
                             <NavLink exact to={HOME_ROUTE}>
-                                <img className="logo1" src={logo}/>
-
+                                {/*<img className="logo1" src={logo}/>*/}
+                                <h1 className="sima-logo ">SIMA</h1>
                             </NavLink>
 
                         </div>
@@ -152,19 +185,31 @@ const Header = observer(() => {
                                 </ul>
                             </nav>
                         </div>
+                        <div className="divInput">
+                            {user.isRoute ?  <input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)}type="text" className="inputFor" id="q"
+                                                    placeholder="Search in..." />: null}
+                        </div>
 
                         <div className="header-right">
                             <div className="header-search mt-0.5 mr-2">
-                                <a href="" className="search-toggle" role="button" title="Search"><i
-                                    style={{color: "#000000", fontWeight: "400"}} className="icon-search mt-6"></i></a>
+
+                                {/*<a href="" className="search-toggle" onClick={user.setRoute(true)} title="Search"><i*/}
+                                {/*    style={{color: "#000000", fontWeight: "400"}} className="icon-search mt-6"></i></a>*/}
+
+
                                 <form action="" method="get">
                                     <div className="header-search-wrapper ">
                                         <label for="q" class="sr-only">Search</label>
-                                        <input type="search" className="form-control" name="q" id="q"
-                                               placeholder="Search in..." required/>
+                                        {/*{user.isRoute ?  <input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)}type="text" className="inputFor"  id="q"*/}
+                                        {/*                        placeholder="Search in..." />: null}*/}
+
+                                        {/*<input value={input} onChange={(e) => setInput(e.target.value)}type="text" onKeyDown={(e) =>handleKeyDown(e)}  placeholder="Поиск.."  className="form-control"  />*/}
+                                        {/*<input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)}type="text" className="form-control"  id="q"*/}
+                                        {/*       placeholder="Search in..." />*/}
                                     </div>
                                 </form>
                             </div>
+                            {user.isRoute ? <VscSearch className="icons" onClick={()=>user.setRoute(false)}/> : <VscSearch className="icons" onClick={()=>user.setRoute(true)}/>}
                             {user.isAuth ?
                                 <NavLink to={MYACOUNT_ROUTE}><a style={{fontSize: "30px"}} data-toggle="modal"><i
                                     style={{color: "#000000"}} className="icon-user"></i></a></NavLink>

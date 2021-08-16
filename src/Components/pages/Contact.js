@@ -16,7 +16,7 @@ const Contact = observer(() => {
     }, [])
     return (
 
-        <main className="main mt-6">
+        <main className="main mt-4">
 
                 {/*<ol class="breadcrumb mb-2">*/}
                 {/*    <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}

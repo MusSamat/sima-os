@@ -25,8 +25,9 @@ const Login = observer(() => {
 
     const notify = () => toast.success("Вау, так просто!");
     const notifyError = (error) => toast.error(`Wow so ${error} easy!`);
+    let fer = [1,2,3,4,5,6,7]
 
-
+console.log(3 % fer.length)
     const sing = () => {
         const article = {email, password, username}
 

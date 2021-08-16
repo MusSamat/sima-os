@@ -5,18 +5,14 @@ import {Link} from 'react-router-dom';
 import "../../App.css";
 import Slider from '@material-ui/core/Slider';
 import {makeStyles} from '@material-ui/core/styles';
-import {SUBCATEGORY_ROUTE} from "../../utils/Const";
 import mobile_menu from '../../Http/mobile_menu';
-import {Modal, Button} from "react-bootstrap";
-import QuickView from './quickView';
 import {FcLike} from "react-icons/fc";
 import {CgMathPlus} from "react-icons/cg";
 import {FiMinus} from "react-icons/fi";
 import axios from 'axios';
 import Pagination from './Pagination';
-import Modall from './Modal'
 import {toast} from "react-toastify";
-import {Accordion} from "@material-ui/core";
+import Modal from "./Modal"
 
 const useStyles = makeStyles((theme) => ({
     MuiSlider: {
@@ -42,7 +38,6 @@ function valuetext(value) {
 const Catolog = observer((props) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
-    const [input, setInput] = useState("")
     const id = props.match.params.id
     const catId = props.match.params.catId
     const title = props.match.params.title
@@ -61,6 +56,8 @@ const Catolog = observer((props) => {
     const [isActive, setIsActive] = useState(false);
     const [Active, setActive] = useState("all");
     const [name, setName] = useState("");
+    const [modalActive, setModalActive] = useState(false)
+    const [prodactId, setProdactId] = useState(0)
 
     const classes = useStyles();
 
@@ -78,19 +75,6 @@ const Catolog = observer((props) => {
         }
         setClicked(index)
     }
-
-    const toggleClass = () => {
-        setActive(!Active);
-    };
-
-
-    const seasonPage = (e) => {
-        e.preventDefault();
-        console.log(seasonFour)
-        seasonFour = product.subcategory
-
-    }
-    console.log(seasonFour)
 
 
     const paginate = (e, pageNumber) => {
@@ -137,15 +121,12 @@ const Catolog = observer((props) => {
 
 
 
-    const search = (e) => {
-        product.searchFilter(input)
-        e.preventDefault();
-    }
+
 
     const openModal = (id) => {
-        setLgShow(true)
-        user.getOrderDataId(id)
-        console.log(id)
+        setProdactId(id)
+        setModalActive(true)
+
     }
 
     const handleClose = () => setLgShow(false);
@@ -392,7 +373,7 @@ const Catolog = observer((props) => {
                                                                 <i class="icon-heart-o"></i>
                                                                 </span> : ''}
                                                             {/*  */}
-                                                            <a onClick={() => openModal()}
+                                                            <a onClick={() => openModal(prod.id)}
                                                                className="btn-product-icon btn-quickview"
                                                                title="Quick view"><span>Quick view</span></a>
 
@@ -415,30 +396,8 @@ const Catolog = observer((props) => {
                                                             }
                                                         </div>
                                                     </figure>
+                                                    { modalActive && <Modal active={modalActive} setActive={setModalActive} id={prodactId}/>}
 
-                                                    <Modal
-                                                        show={lgShow}
-                                                        onHide={handleClose}
-                                                        dialogClassName="modal-90w "
-                                                        aria-labelledby="example-custom-modal-styling-title"
-                                                        fullscreen={true}
-                                                    >
-                                                        <Modal.Header closeButton>
-                                                            <Modal.Title id="example-custom-modal-styling-title">
-                                                                Custom Modal Styling
-                                                            </Modal.Title>
-                                                        </Modal.Header>
-                                                        <Modal.Body>
-                                                            <p>
-                                                                Ipsum molestiae natus adipisci modi eligendi? Debitis
-                                                                amet quae unde
-                                                                commodi aspernatur enim, consectetur. Cumque deleniti
-                                                                temporibus
-                                                                ipsam atque a dolores quisquam quisquam adipisci
-                                                                possimus
-                                                            </p>
-                                                        </Modal.Body>
-                                                    </Modal>
 
 
                                                     <div class="product-body">

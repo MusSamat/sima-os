@@ -26,6 +26,8 @@ const Main = observer(() => {
     const [fly, setFly] = useState('')
     const [count, setCount] = useState(5)
     const [quantity, setQuantity] = useState(5)
+    const [modalActive, setModalActive] = useState(false)
+    const [prodactId, setProdactId] = useState(0)
 
     const sendName = (event) => {
 
@@ -128,19 +130,6 @@ const Main = observer(() => {
 
     }
 
-    const f = (num) => {
-        const result = [0, 1];
-        for(let i = 2; i<=num; i++){
-            const prevNum1 = result[i - 1];
-            const prevNum2 = result[i - 2];
-            console.log(prevNum1)
-            // console.log(prevNum2)
-            result.push(prevNum1 + prevNum2)
-        }
-        return result[num]
-    }
-    console.log(f(10))
-    // console.log(f(20))
 
     const addCardLocal = ( proId, count, price, color, title) => {
         let data = JSON.parse(localStorage.getItem('order'))
@@ -172,13 +161,11 @@ const Main = observer(() => {
 
     }
 
-
     const openModal = (id) => {
-        // setLgShow(true)
-        user.getOrderDataId(id)
-        console.log(id)
-    }
+        setProdactId(id)
+        setModalActive(true)
 
+    }
     useEffect(() => {
         window.scrollTo(0, 0)
 
@@ -193,7 +180,6 @@ const Main = observer(() => {
         product.getPopularProduct(user.isAuth)
 
     }, [])
-
 
     return (
         <div className="page-wrapper">
@@ -245,11 +231,12 @@ const Main = observer(() => {
                                                                 <i className="icon-heart-o"></i>
                                                                 </span> : ''}
                                                 {/*  */}
-                                                <a onClick={() => openModal()}
+                                                <a onClick={(e) => {e.preventDefault(); openModal(discout.id)}}
                                                    className="btn-product-icon btn-quickview"
                                                    title="Quick view"><span>Quick view</span></a>
 
                                             </div>
+
 
                                             <div className="product-action">
                                                 {user.isAuth ?
@@ -280,6 +267,7 @@ const Main = observer(() => {
                                 </div>)}
 
                         </div>
+                        { modalActive && <Modal active={modalActive} setActive={setModalActive} id={prodactId}/>}
 
                         <div className="entry-content d-flex justify-content-center mb-8">
                             <Link to={{
@@ -337,7 +325,7 @@ const Main = observer(() => {
                                                             className="icon-box-icon">
                                                                 <i className="icon-heart-o"></i>
                                                                 </span> : ''}
-                                                <a onClick={() => openModal()}
+                                                <a onClick={() => openModal(discout.id)}
                                                    className="btn-product-icon btn-quickview"
                                                    title="Quick view"><span>Quick view</span></a>
 
@@ -375,7 +363,7 @@ const Main = observer(() => {
 
                     </div>
 
-                    <Modal/>
+                    {/*<Modal/>*/}
                     <div className="entry-content d-flex justify-content-center mb-8">
                         <Link to={{
                             pathname: CATALOG_ROUTE,
@@ -422,7 +410,7 @@ const Main = observer(() => {
                                                                 <i className="icon-heart-o"></i>
                                                                 </span> : ''}
                                                 {/*  */}
-                                                <a onClick={() => openModal()}
+                                                <a onClick={() => openModal(discout.id)}
                                                    className="btn-product-icon btn-quickview"
                                                    title="Quick view"><span>Quick view</span></a>
 

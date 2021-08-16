@@ -15,7 +15,7 @@ const Delivery = observer(() => {
     }, [])
 
     return (
-        <div className="page-wrapper">
+        <div className="page-wrapper mt-4">
             <div className="container">
                 {/*<ol className="breadcrumb mt-4 mb-2">*/}
                 {/*    <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}

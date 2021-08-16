@@ -446,6 +446,34 @@
 }
 
 /* Header */
+.sima-logo{
+    font-family: 'Archivo Black', sans-serif !important;
+    margin-bottom: -8px;
+}
+.icons{
+    font-size: 20px;
+    margin-right: 10px;
+    color: black;
+    cursor: pointer;
+}
+
+.divInput{
+    position: relative;
+}
+.inputFor{
+    position: absolute;
+    border: 1px solid #777;
+    min-width: 231px;
+    height: 35px;
+    margin-top: 30px;
+    margin-left: -200px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    outline: none;
+    padding: 10px;
+}
 .header-search .header-search-wrapper.show {
     margin-top: 20px !important;
 }
@@ -1003,4 +1031,36 @@ a:hover, a:focus {
 /* contact */
 .contact-box > p {
     font-family: 'Montserrat', sans-serif !important;
+}
+/*modal*/
+.modal_{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    transition: 0.5s;
+}
+.modal_.active{
+    transform: scale(1);
+
+}
+.x-b{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.modal--content{
+    padding: 20px;
+    border-radius: 12px;
+    background-color: white;
+    min-height: 200px;
+    min-width: 200px;
 }
