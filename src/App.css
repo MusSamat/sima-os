@@ -194,7 +194,13 @@
     color: white !important;
 }
 
-/* catalog */
+ /*catalog */
+/*.salt{*/
+/*    position: fixed;*/
+/*    top: 130px;*/
+/*    width: 265px;*/
+/*    bottom: 10px;*/
+/*}*/
 .wrappe{
     display: flex;
     align-items: center;

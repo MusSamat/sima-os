@@ -374,9 +374,16 @@ const Main = observer(() => {
                     </div>
 
                 </div>
+                <div  className="trending mb-6 mt-8">
+                    <a href="">
 
-                <div className="trending mt-8 d-flex justify-content-center mb-6 ">
-                    <img src={Frame} alt="Banner"/>
+                        <img src={Frame} alt="Banner"/>
+                    </a>
+                    <div className="banner banner-big d-md-block">
+                        <div className="banner-content text-center">
+                            <h3 className="banner-title text-white">Популярные</h3>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="container ">

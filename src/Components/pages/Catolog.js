@@ -54,14 +54,13 @@ const Catolog = observer((props) => {
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(60)
 
-    const [currentSeason, setCurrentSeason] = useState(1)
-    const [allSeason, setAllSeason] = useState(3)
-
     const [isActive, setIsActive] = useState(false);
     const [Active, setActive] = useState("all");
     const [name, setName] = useState("");
     const [modalActive, setModalActive] = useState(false)
     const [prodactId, setProdactId] = useState(0)
+    const [isReadMore, setIsReadMore] = useState(true);
+
 
     const classes = useStyles();
 
@@ -69,11 +68,10 @@ const Catolog = observer((props) => {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = product.products.slice(indexOfFirstPost, indexOfLastPost)
 
-    const indexLastSeason = currentSeason * allSeason;
-    const indexFirstSeason = indexLastSeason - allSeason
-    let seasonFour = product.subcategory.slice(indexFirstSeason, indexLastSeason)
-    console.log(props)
 
+    const toggleReadMore = () => {
+        setIsReadMore(!isReadMore);
+    };
 
     let query = useQuery();
 
@@ -309,37 +307,36 @@ const Catolog = observer((props) => {
                 product.getActualProducts(user.isAuth)
             }
         }
-        // product.getActualProducts()
-        // product.getSortedData()
-        // product.getSubcategory().then(() => {
-        //     const scripts = [
-        //         '/assets/js/jquery.elevateZoom.min.js',
-        //         '/assets/js/bootstrap-input-spinner.js',
-        //         '/assets/js/jquery.magnific-popup.min.js',
-        //         '/assets/js/main.js',
-        //         '/assets/js/bootstrap-input-spinner.js',
-        //         '/assets/js/owl.carousel.min.js',
-        //         '/assets/js/superfish.min.js',
-        //         '/assets/js/jquery.waypoints.min.js',
-        //         '/assets/js/jquery.hoverIntent.min.js',
-        //         '/assets/js/bootstrap.bundle.min.js',
-        //         '/assets/js/jquery.min.js',
-        //     ]
-        //     scripts.forEach(i => {
-        //         const s = document.createElement('script')
-        //         s.src = i
-        //         document.body.appendChild(s)
-        //     })
-        // })
+        product.getActualProducts()
+        product.getSortedData()
+        product.getSubcategory().then(() => {
+            const scripts = [
+                '/assets/js/jquery.elevateZoom.min.js',
+                '/assets/js/bootstrap-input-spinner.js',
+                '/assets/js/jquery.magnific-popup.min.js',
+                '/assets/js/main.js',
+                '/assets/js/bootstrap-input-spinner.js',
+                '/assets/js/owl.carousel.min.js',
+                '/assets/js/superfish.min.js',
+                '/assets/js/jquery.waypoints.min.js',
+                '/assets/js/jquery.hoverIntent.min.js',
+                '/assets/js/bootstrap.bundle.min.js',
+                '/assets/js/jquery.min.js',
+            ]
+            scripts.forEach(i => {
+                const s = document.createElement('script')
+                s.src = i
+                document.body.appendChild(s)
+            })
+        })
 
     }, []);
-    // let quantity = 5
     let percent
     product.discount.map((i) => i.percent === percent)
     return (
         <div>
             <main className="main">
-                <div className="page-content ">
+                <div className="page-content mt-3 ">
                     <div className="container">
                         <nav>
                             <ol className="breadcrumb ">
@@ -432,8 +429,8 @@ const Catolog = observer((props) => {
                                 <Pagination postsPerPage={postsPerPage} totalPosts={product.products.length}
                                             paginate={paginate}/>
                             </div>
-                            <aside className="col-lg-3 order-lg-first mt-3">
-                                <div className="sidebar sidebar-shop position-static">
+                            <aside className="col-lg-3 order-lg-first  mt-3">
+                                <div  className="sidebar sidebar-shop salt ">
 
 
                                     <div className="accordion accordions">
@@ -511,7 +508,7 @@ const Catolog = observer((props) => {
 
                                     <div className="wrappe mt-3">
                                         <div className="accordions">
-                                            {product.subcategory.map((item, index) =>
+                                            {isReadMore ? product.subcategory.slice(0, 4).map((item, index) =>
                                                 <div className="Aitem">
                                                     <div onClick={() => toggle(index)} className="Atitle">
                                                         <div className="year">{item.title} {item.year}</div>
@@ -531,7 +528,32 @@ const Catolog = observer((props) => {
                                                     </div>
 
                                                 </div>
-                                            )}
+                                            ) : product.subcategory.map((item, index) =>
+                                                <div className="Aitem">
+                                                    <div onClick={() => toggle(index)} className="Atitle">
+                                                        <div className="year">{item.title} {item.year}</div>
+                                                        <span>{clicked === index ?
+                                                            <FiMinus style={{fontSize: "18px", color: "#000000"}}/> :
+                                                            <CgMathPlus
+                                                                style={{fontSize: "18px", color: "#000000 "}}/>}</span>
+                                                    </div>
+                                                    <div className={clicked === index ? "Acontent show" : "Acontent"}>
+                                                        {product.prodcategory.filter(a => a.seasoncategory === item.id).map((prod) =>
+                                                            <div
+                                                                onClick={(e) => typeOfProduct(e, prod.title)}
+                                                                className="prod" key={prod}>
+                                                                {prod.title}
+                                                            </div>)}
+
+                                                    </div>
+
+                                                </div>
+                                            )  }
+                                            <div style={{cursor: "pointer"}}
+                                                 className="btn-wrap " >
+                                                <a  onClick={() => toggleReadMore()}
+                                                   className="btn btn-outline-dark nan"><span>{isReadMore ? "Все" : " Закрыть"}</span></a>
+                                            </div>
                                         </div>
                                     </div>
 

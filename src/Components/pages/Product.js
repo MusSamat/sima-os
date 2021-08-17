@@ -16,6 +16,9 @@ import {Modal, Button, Container, Row, Col} from "react-bootstrap";
 import mobile_menu from '../../Http/mobile_menu';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
+// import 'react-medium-image-zoom/dist/styles.css'
+import ReactImageZoom from 'react-image-zoom';
 
 const colors = {
     orange: "#FFBA5A",
@@ -211,6 +214,8 @@ const Product = observer((props) => {
         setLeftImages(newList);
     }
 
+    const imagezoom = {width: 400, height: 250, zoomWidth: 500, img: selectedImage};
+
     useEffect(() => {
         console.log(user.isAuth)
         console.log(user.token?.token)
@@ -259,14 +264,6 @@ const Product = observer((props) => {
     }, [])
 
 
-    const params = {
-        container: ".container",
-        pagination: ".swiper-pagination",
-        paginationClickable: true,
-        direction: "vertical"
-    };
-
-
     return (
         <div>
 
@@ -274,18 +271,19 @@ const Product = observer((props) => {
                 <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0 mt-6">
                     <div className="container d-flex align-items-center ">
                         <ul className="breadcrumb">
-                            <li className="breadcrumb-item"><Link to={HOME_ROUTE} className="item" style={{
-                                marginTop: "-3px",
-                                marginRight: "-5px",
-                                color: "#000000"
-                            }}>Главная</Link></li>
+                            {/*<li className="breadcrumb-item"><Link to={HOME_ROUTE} className="item" style={{*/}
+                            {/*    marginTop: "-3px",*/}
+                            {/*    marginRight: "-5px",*/}
+                            {/*    color: "#000000"*/}
+                            {/*}}>Главная</Link></li>*/}
+                            {console.log(product.product)}
                             <li className="breadcrumb-item"><Link to={CATALOG_ROUTE} className="item" style={{
                                 marginTop: "-3px",
                                 color: "#000000"
                             }}>Каталог</Link></li>
                             <li className="breadcrumb-item "
                                 aria-current="page"><Link style={{color: "#000000"}}
-                                                          to={CATALOG_ROUTE}> {product.product.novelty ? "Новый" : ""} {product.product.popular ? "Популярные" : ""}</Link>
+                                                          to={CATALOG_ROUTE}> {product.product.actual ? "Актуальные " : "" || product.product.novelty ? "Новинки" : "" || product.product.popular ? "Популярные" : "" || product.product.percent ? "Скидки" : ""}</Link>
                             </li>
                             <li className="breadcrumb-item " style={{color: "#000000"}}
                                 aria-current="page"> {product.product.title}</li>
@@ -336,11 +334,15 @@ const Product = observer((props) => {
                                 <div className="product-gallery product-gallery-vertical">
                                     <div className="row">
                                         <figure className="product-main-image">
-                                            <img id="product-zoom" src={process.env.REACT_APP_BASE_URL + selectedImage}
-                                                 data-zoom-image={process.env.REACT_APP_BASE_URL + selectedImage}
+                                            <img
+                                                // id="product-zoom"
+                                                src={process.env.REACT_APP_BASE_URL + selectedImage}
+                                                data-zoom-image={process.env.REACT_APP_BASE_URL + selectedImage}
                                                  alt="product image"/>
-                                            <a href={process.env.REACT_APP_BASE_URL + selectedImage}
-                                               id="btn-product-gallery" className="btn-product-gallery">
+                                            <a
+                                                href={process.env.REACT_APP_BASE_URL + selectedImage}
+                                                id="btn-product-gallery"
+                                                className="btn-product-gallery">
                                                 <i className="icon-arrows"></i>
                                             </a>
                                         </figure>
@@ -348,13 +350,13 @@ const Product = observer((props) => {
                                         <div id="product-zoom-gallery" className="product-image-gallery">
                                             {leftImages.map((img, index) =>
 
-                                                <a onClick={() => {
+                                                <a style={{cursor: "pointer"}} onMouseOver={() => setSelectedImage(img)} onClick={() => {
 
-                                                    setSelectedImage(`${img}, ${console.log(img)}`)
-                                                }} className="product-gallery-item active" key={index} href="#"
-                                                   data-image={`${process.env.REACT_APP_BASE_URL}${img}`}
-                                                   data-zoom-image={`${process.env.REACT_APP_BASE_URL}${img}`}>
-                                                    <img src={`${process.env.REACT_APP_BASE_URL}${img}`}
+                                                    setSelectedImage(`${img}`)
+                                                }} className="product-gallery-item active" key={index}
+                                                   data-image={process.env.REACT_APP_BASE_URL + img}
+                                                   data-zoom-image={process.env.REACT_APP_BASE_URL + img}>
+                                                    <img src={process.env.REACT_APP_BASE_URL + img }
                                                          alt="product side"/>
                                                 </a>
                                             )}

@@ -119,28 +119,7 @@ const quickView = observer(({id}) => {
             setLeftImages(product?.imagesUser[0]?.images ?? [])
             setSelectedImage(product?.imagesUser[0]?.images[0] || '')
             setImgTitle(product?.imagesUser[0]?.title || '')
-            const scripts = [
 
-                // '/assets/js/jquery.min.js',
-                // '/assets/js/bootstrap.bundle.min.js',
-                // '/assets/js/jquery.hoverIntent.min.js',
-                // '/assets/js/jquery.waypoints.min.js',
-                // '/assets/js/superfish.min.js',
-                //
-                // '/assets/js/owl.carousel.min.js',
-                // '/assets/js/bootstrap-input-spinner.js',
-                // '/assets/js/jquery.elevateZoom.min.js',
-                //
-                // '/assets/js/bootstrap-input-spinner.js',
-                // '/assets/js/jquery.magnific-popup.min.js',
-                '/assets/js/main.js',
-
-            ]
-            scripts.forEach(i => {
-                const s = document.createElement('script')
-                s.src = i
-                document.body.appendChild(s)
-            })
         })
         // product.addProduct(product.index)
         return () => {
@@ -161,11 +140,11 @@ const quickView = observer(({id}) => {
                             <div className="row">
                                 <div className="product-left" >
                                     {leftImages.map((img, index)=>
-                                        <a href="" onClick={(e) => { e.preventDefault();
+                                        <a href="" onMouseOver={() => setSelectedImage(img)} onClick={(e) => { e.preventDefault();
 
-                                            setSelectedImage(`${img}, ${console.log(img)}`)
+                                            setSelectedImage(img)
                                         }} className="carousel-dot active">
-                                            <img src={`${process.env.REACT_APP_BASE_URL}${img}`}/>
+                                            <img src={process.env.REACT_APP_BASE_URL + img}/>
                                         </a>
                                     )}
 
