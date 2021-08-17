@@ -201,6 +201,10 @@
 /*    width: 265px;*/
 /*    bottom: 10px;*/
 /*}*/
+.btn-product-icon:hover{
+    color: white !important;
+    cursor: pointer;
+}
 .wrappe{
     display: flex;
     align-items: center;

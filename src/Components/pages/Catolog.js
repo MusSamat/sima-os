@@ -273,9 +273,13 @@ const Catolog = observer((props) => {
         user.getUserData()
         product.fetchTodo()
         if (query.get("name")) {
-            product.changeFilter(query.get("name"))
+            if(parseInt(query.get("name"))){
+                product.searchFilterArticul(parseInt(query.get("name")))
+            }else{
+                product.changeFilter(query.get("name"))
+            }
+
         }else {
-            console.log("sssa")
             if (route === "discount") {
                 product.discountTodo()
             } else if (!route) {
@@ -307,7 +311,6 @@ const Catolog = observer((props) => {
                 product.getActualProducts(user.isAuth)
             }
         }
-        product.getActualProducts()
         product.getSortedData()
         product.getSubcategory().then(() => {
             const scripts = [
@@ -549,11 +552,18 @@ const Catolog = observer((props) => {
 
                                                 </div>
                                             )  }
-                                            <div style={{cursor: "pointer"}}
-                                                 className="btn-wrap " >
-                                                <a  onClick={() => toggleReadMore()}
-                                                   className="btn btn-outline-dark nan"><span>{isReadMore ? "Все" : " Закрыть"}</span></a>
+
+                                            <div
+                                                style={{cursor: "pointer"}}
+                                                className="accordion-title d-flex justify-content-sm-between "
+                                                onClick={() => toggleReadMore()}
+                                            >
+                                                <div className="year">{isReadMore ? "Все сезоны" : " Закрыть"}</div>
+                                                <div style={{cursor: "pointer"}}>{isReadMore ?
+                                                    <CgMathPlus style={{fontSize: "18px", color: "#000000"}}/> :
+                                                    <FiMinus style={{fontSize: "18px", color: "#000000 "}}/>}</div>
                                             </div>
+
                                         </div>
                                     </div>
 

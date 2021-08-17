@@ -339,12 +339,12 @@ const Product = observer((props) => {
                                                 src={process.env.REACT_APP_BASE_URL + selectedImage}
                                                 data-zoom-image={process.env.REACT_APP_BASE_URL + selectedImage}
                                                  alt="product image"/>
-                                            <a
-                                                href={process.env.REACT_APP_BASE_URL + selectedImage}
-                                                id="btn-product-gallery"
-                                                className="btn-product-gallery">
-                                                <i className="icon-arrows"></i>
-                                            </a>
+                                            {/*<a*/}
+                                            {/*    href={process.env.REACT_APP_BASE_URL + selectedImage}*/}
+                                            {/*    id="btn-product-gallery"*/}
+                                            {/*    className="btn-product-gallery">*/}
+                                            {/*    <i className="icon-arrows"></i>*/}
+                                            {/*</a>*/}
                                         </figure>
 
                                         <div id="product-zoom-gallery" className="product-image-gallery">

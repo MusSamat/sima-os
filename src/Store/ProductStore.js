@@ -255,6 +255,16 @@ export default class ProductStore {
             })
     }
 
+    searchFilterArticul(input) {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?articul__iexact=` + input)
+            .then(res => {
+                this.products = [...res.data]
+            })
+            .catch((e) => {
+                console.error(e)
+            })
+    }
+
     changeFilterCount(id) {
         return this.productTitleCount.find(item => item.seasoncategory === id)
 

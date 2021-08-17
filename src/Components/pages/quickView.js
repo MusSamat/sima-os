@@ -121,13 +121,6 @@ const quickView = observer(({id}) => {
             setImgTitle(product?.imagesUser[0]?.title || '')
 
         })
-        // product.addProduct(product.index)
-        return () => {
-            const elements = document.getElementsByClassName('zoomContainer')
-            while (elements.length > 0) {
-                elements[0].parentNode.removeChild(elements[0]);
-            }
-        }
 
     }, []);
      console.log(leftImages)
@@ -161,7 +154,7 @@ const quickView = observer(({id}) => {
                         <div className="col-lg-5 col-md-6">
                             <h2 className="product-title city">{product.product.title}</h2>
                             <p className="city">Артикул: {product.product.articul}</p>
-                            <h3 className="product-price city">{`${product.product.price} ₽`}</h3>
+                            <h4 style={{color: "rgb(238, 162, 135)"}} className="city">{`${product.product.price} ₽`}</h4>
                             <label style={{
                                 color: "#9393a5",
                                 fontSize: "14px",
