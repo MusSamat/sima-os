@@ -1,7 +1,7 @@
 import {observer} from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import {Context} from '../../index';
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useHistory} from 'react-router-dom';
 import "../../App.css";
 import Slider from '@material-ui/core/Slider';
 import {makeStyles} from '@material-ui/core/styles';
@@ -55,11 +55,13 @@ const Catolog = observer((props) => {
     const [postsPerPage, setPostsPerPage] = useState(60)
 
     const [isActive, setIsActive] = useState(false);
-    const [Active, setActive] = useState("all");
+    const [Active, setActive] = useState("");
     const [name, setName] = useState("");
     const [modalActive, setModalActive] = useState(false)
     const [prodactId, setProdactId] = useState(0)
     const [isReadMore, setIsReadMore] = useState(true);
+    const [breadcrumb, setBreadcrumb] = useState('Актуальные')
+    const [seson, setSeson] = useState('')
 
 
     const classes = useStyles();
@@ -68,6 +70,7 @@ const Catolog = observer((props) => {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = product.products.slice(indexOfFirstPost, indexOfLastPost)
 
+    let route = props.location.popular
 
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
@@ -75,13 +78,15 @@ const Catolog = observer((props) => {
 
     let query = useQuery();
 
-    const toggle = index => {
+    const toggle = (index, title, year) => {
         if (clicked === index) {
             return setClicked(null)
         }
+        setBreadcrumb("")
         setClicked(index)
-    }
+        setSeson(title+year)
 
+    }
 
     const paginate = (e, pageNumber) => {
         setCurrentPage(pageNumber)
@@ -97,35 +102,57 @@ const Catolog = observer((props) => {
         product.priceFilter(newValue);
     };
 
+    const history = useHistory();
+    console.log(breadcrumb)
     const allProduct = (e) => {
-        product.getActualProducts(user.isAuth)
+        history.push({
+            popular: "",
+        })
+        history.location.popular.replace()
+        product.getActualProducts()
         setActive("all")
+        setBreadcrumb("Актуальные")
         e.preventDefault();
     }
     const allNovelty = (e) => {
-        product.getNoveltyProducts(user.isAuth)
+        product.getNoveltyProducts()
         setActive("novelty")
+        setBreadcrumb("Новинки")
+        history.push({
+            popular: "",
+        })
         e.preventDefault();
     }
     const allPopular = (e) => {
-        product.getPopularProducts(user.isAuth)
+        product.getPopularProducts()
         setActive("popular")
+        setBreadcrumb("Популярное")
+        history.push({
+            popular: "",
+        })
         e.preventDefault();
     }
     const allDiscount = (e) => {
-        product.discountTodo(user.isAuth)
+        product.discountTodo()
         setActive("discount")
+        setBreadcrumb("Скидки")
+        history.push({
+            popular: "",
+        })
         e.preventDefault();
     }
     const typeOfProduct = (e, title) => {
-        product.fetchTodoCatalog(title, user.isAuth)
+        product.fetchTodoCatalog(title)
         setActive("typeProduct")
         setName(title)
         e.preventDefault();
     }
 
-
-    console.log(query.get("name"))
+    const allCategory = () => {
+        setIsActive(!isActive)
+        setSeson("Все категории")
+        setBreadcrumb("")
+    }
 
 
     const openModal = (id) => {
@@ -263,10 +290,13 @@ const Catolog = observer((props) => {
         e.preventDefault();
     }
 
-    let route = props.location.popular
+
+
 
 
     useEffect(() => {
+
+
         window.scrollTo(0, 0)
         mobile_menu()
         user.getWishlistData()
@@ -280,6 +310,7 @@ const Catolog = observer((props) => {
             }
 
         }else {
+            console.log(route)
             if (route === "discount") {
                 product.discountTodo()
             } else if (!route) {
@@ -365,7 +396,12 @@ const Catolog = observer((props) => {
                                                     <figure key={index} class="product-media">
                                                         {prod.percent ? <div style={{textAlign: "center"}}
                                                                              class="product-label label-sale">{prod.percent} %</div> : ""}
-                                                        <Link to={{pathname: '/product/' + prod.id}}>
+                                                        <Link to={{
+                                                            pathname: '/product/' + prod.id,
+                                                            breadcrumb: breadcrumb,
+                                                            seson: seson,
+                                                            title: name
+                                                        }}>
                                                             <a>
                                                                 <img
                                                                     src={`${process.env.REACT_APP_BASE_URL}${prod?.images[0]?.images[0]}`}
@@ -415,14 +451,13 @@ const Catolog = observer((props) => {
 
                                                     <div class="product-body">
                                                         <h3 class="product-title"><a href="">{prod.title}</a></h3>
-                                                        <div class="product-price">
-                                                            {user.isAuth ? prod.discount ?
-                                                                <><p
-                                                                    style={{textDecoration: "line-through"}}>{prod.price} ₽</p>
-                                                                    <p>{Math.round(prod.price - (prod.price * prod.percent / 100))}.00
-                                                                        ₽</p></> :
-                                                                `${prod.price} ₽` : ""}
-                                                        </div>
+                                                        { prod.percent ?<div class="product-price" style={{color: "rgb(238, 162, 135)"}}>
+
+
+                                                                    {Math.round(prod.price - (prod.price * prod.percent / 100))}.00
+                                                                        ₽
+
+                                                        </div> : <div className="product-price">{`${prod.price} ₽` }</div>}
                                                     </div>
                                                 </div>
                                             </div>)}
@@ -440,7 +475,7 @@ const Catolog = observer((props) => {
                                         <div className="accordion-item">
                                             <div
                                                 className="accordion-title d-flex justify-content-sm-between "
-                                                onClick={() => setIsActive(!isActive)}
+                                                onClick={() => allCategory()}
                                             >
                                                 <div className="vse-button">Все категории</div>
                                                 <div style={{cursor: "pointer"}}>{isActive ?
@@ -467,28 +502,16 @@ const Catolog = observer((props) => {
 
                                     <div className="row justify-content-center">
                                         <div className="col-sm-12 col-md-6 col-lg-6">
-                                            <div style={{cursor: "pointer"}}
-                                                 className={Active === "all" ? "btn-wrap active" : "btn-wrap "}>
-                                                <a name={"vse"} onClick={allProduct}
-                                                   className="btn btn-outline-dark nan"><span>Все</span></a>
-                                            </div>
-                                            <div style={{cursor: "pointer"}}
-                                                 className={Active === "novelty" ? "btn-wrap active" : "btn-wrap "}>
-                                                <a name={"novelty"} onClick={allNovelty}
-                                                   className="btn btn-outline-dark nan"><span>Новинки</span></a>
-                                            </div>
+                                            <button onClick={allProduct} className={ route  === "all" ? "novelti actived" : "novelti" && Active === "all" ? "novelti actived" : "novelti"} >Все</button>
+
+                                            <button onClick={allNovelty} className={route  === "novelty" ? "novelti actived" : "novelti" && Active === "novelty" ? "novelti actived" : "novelti"} >Новинки</button>
+
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-6">
-                                            <div style={{cursor: "pointer"}}
-                                                 className={Active === "popular" ? "btn-wrap active" : "btn-wrap "}>
-                                                <a name={"popular"} onClick={allPopular}
-                                                   className="btn btn-outline-dark nan"><span>Популярное</span></a>
-                                            </div>
-                                            <div style={{cursor: "pointer"}}
-                                                 className={Active === "discount" ? "btn-wrap active" : "btn-wrap "}>
-                                                <a name={"discount"} onClick={allDiscount}
-                                                   className="btn btn-outline-dark nan"><span>Скидки</span></a>
-                                            </div>
+                                            <button onClick={allPopular} className={route  === "popular" ? "novelti actived" : "novelti" && Active === "popular" ? "novelti actived" : "novelti"} >Популярное</button>
+
+                                            <button onClick={allDiscount} className={route  === "discount" ? "novelti actived" : "novelti" && Active === "discount" ? "novelti actived" : "novelti"} >Скидки</button>
+
                                         </div>
                                     </div>
 
@@ -533,7 +556,7 @@ const Catolog = observer((props) => {
                                                 </div>
                                             ) : product.subcategory.map((item, index) =>
                                                 <div className="Aitem">
-                                                    <div onClick={() => toggle(index)} className="Atitle">
+                                                    <div onClick={() => toggle(index, item.title, item.year)} className="Atitle">
                                                         <div className="year">{item.title} {item.year}</div>
                                                         <span>{clicked === index ?
                                                             <FiMinus style={{fontSize: "18px", color: "#000000"}}/> :
@@ -558,7 +581,7 @@ const Catolog = observer((props) => {
                                                 className="accordion-title d-flex justify-content-sm-between "
                                                 onClick={() => toggleReadMore()}
                                             >
-                                                <div className="year">{isReadMore ? "Все сезоны" : " Закрыть"}</div>
+                                                <div style={{fontWeight: "bold", color: "#000"}} className="year">{isReadMore ? "Все сезоны" : " Закрыть"}</div>
                                                 <div style={{cursor: "pointer"}}>{isReadMore ?
                                                     <CgMathPlus style={{fontSize: "18px", color: "#000000"}}/> :
                                                     <FiMinus style={{fontSize: "18px", color: "#000000 "}}/>}</div>

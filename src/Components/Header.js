@@ -124,7 +124,7 @@ const Header = observer(() => {
                                     <li className="megamenu-container ">
                                         <NavLink className="sf-with" style={{fontSize: "18px", color: "#000000"}} to={{
                                             pathname: CATALOG_ROUTE,
-                                            popular: "catalog"
+                                            popular: "all"
                                         }}><a className="sf-with-ul">Каталог </a></NavLink>
 
                                     </li>

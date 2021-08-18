@@ -191,7 +191,10 @@ const Main = observer(() => {
                             <h1 className="intro-title">{img.title}<br/>< strong
                                 style={{marginLeft: "-9px"}}>sale</strong></h1>
 
-                            <Link to={CATALOG_ROUTE} className="btn">
+                            <Link to={{
+                                pathname: CATALOG_ROUTE,
+                                popular: "discount"
+                            }} className="btn">
                                 <span style={{fontSize: "20px"}}>Показать</span>
                                 <i className="icon-long-arrow-right"></i>
                             </Link>
@@ -257,8 +260,8 @@ const Main = observer(() => {
                                         </figure>
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                            <div style={{color: "#000000"}} className="product-price">
-                                                {user.isAuth ? `${discout.price} ₽` : ""}
+                                            <div style={{color: "rgb(238, 162, 135)"}} className="product-price">
+                                                { `${discout.price} ₽`}
                                             </div>
 
 
@@ -350,8 +353,8 @@ const Main = observer(() => {
                                         </figure>
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                            <div style={{color: "#000000"}} className="product-price">
-                                                {user.isAuth ? `${discout.price} ₽` : ""}
+                                            <div style={{color: "rgb(238, 162, 135)"}} className="product-price">
+                                                {`${discout.price} ₽`}
                                             </div>
 
 
@@ -443,8 +446,8 @@ const Main = observer(() => {
 
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                            <div style={{color: "#000000"}} className="product-price">
-                                                {user.isAuth ? `${discout.price} ₽` : ""}
+                                            <div style={{color: "rgb(238, 162, 135)"}} className="product-price">
+                                                {`${discout.price} ₽`}
                                             </div>
 
                                         </div>

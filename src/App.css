@@ -201,6 +201,21 @@
 /*    width: 265px;*/
 /*    bottom: 10px;*/
 /*}*/
+.novelti{
+    width: 120px !important;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    font-family: 'Montserrat', sans-serif !important;
+    background-color: white;
+}
+.novelti.actived{
+    color: white;
+    background-color: rgb(238, 162, 135);
+}
+.novelti:hover{
+    color: white;
+    background-color: rgb(238, 162, 135);
+}
 .btn-product-icon:hover{
     color: white !important;
     cursor: pointer;
@@ -283,6 +298,7 @@
 }
 
 .filter {
+    margin-left: 40px;
     font-family: 'Montserrat', sans-serif !important;
     color: #000000;
 }
@@ -546,8 +562,7 @@
 }
 
 .container {
-    /* width: 1300px !important; */
-    max-width: 100% !important;
+     width: 1500px !important;
 }
 
 .Uslovia {

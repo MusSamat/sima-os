@@ -42,6 +42,9 @@ const Product = observer((props) => {
     const handleShowRaz = () => setShowRaz(true);
 
 
+    // let route = props.location
+    console.log(props)
+
     function updateValue(e) {
         console.log(e.target.value);
     }
@@ -96,6 +99,8 @@ const Product = observer((props) => {
             })
         e.preventDefault();
     }
+
+    console.log(props)
 
 
     const stars = Array(5).fill(0);
@@ -276,15 +281,31 @@ const Product = observer((props) => {
                             {/*    marginRight: "-5px",*/}
                             {/*    color: "#000000"*/}
                             {/*}}>Главная</Link></li>*/}
-                            {console.log(product.product)}
                             <li className="breadcrumb-item"><Link to={CATALOG_ROUTE} className="item" style={{
                                 marginTop: "-3px",
                                 color: "#000000"
                             }}>Каталог</Link></li>
-                            <li className="breadcrumb-item "
-                                aria-current="page"><Link style={{color: "#000000"}}
-                                                          to={CATALOG_ROUTE}> {product.product.actual ? "Актуальные " : "" || product.product.novelty ? "Новинки" : "" || product.product.popular ? "Популярные" : "" || product.product.percent ? "Скидки" : ""}</Link>
-                            </li>
+                            {props.location.breadcrumb ?
+                                <li className="breadcrumb-item "
+                                    aria-current="page"><Link style={{color: "#000000"}}
+                                                              to={CATALOG_ROUTE}> {props.location.breadcrumb}</Link>
+                                </li>
+                            :
+                                    <>
+                                        <li className="breadcrumb-item "
+                                            aria-current="page"><Link style={{color: "#000000"}}
+                                            to={CATALOG_ROUTE}> {props.location.seson}</Link>
+                                        </li>
+                                        <li className="breadcrumb-item "
+                                        aria-current="page"><Link style={{color: "#000000"}}
+                                        to={CATALOG_ROUTE}> {props.location.title}</Link>
+                                        </li>
+                                    </>
+                            }
+                            {/*<li className="breadcrumb-item "*/}
+                            {/*    aria-current="page"><Link style={{color: "#000000"}}*/}
+                            {/*                              to={CATALOG_ROUTE}> {props.location.breadcrumb ? props.location.breadcrumb : `${props.location.seson} > ${props.location.title}`}</Link>*/}
+                            {/*</li>*/}
                             <li className="breadcrumb-item " style={{color: "#000000"}}
                                 aria-current="page"> {product.product.title}</li>
                         </ul>
