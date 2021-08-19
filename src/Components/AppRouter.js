@@ -5,6 +5,7 @@ import { HOME_ROUTE } from "../utils/Const"
 import Main from './pages/Main';
 
 export default function AppRouter() {
+    localStorage.clear();
     return (
         <div style={{marginTop: "30px"}}>
             <Switch>
