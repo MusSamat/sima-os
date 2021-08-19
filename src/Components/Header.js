@@ -32,7 +32,6 @@ const Header = observer(() => {
 
     let sum = 0
     let data = JSON.parse(localStorage.getItem('order'))
-    console.log( CATALOG_ROUTE)
     const search = (e) => {
         window.location.href = `/catalog?name=${input}`;
         product.searchFilter(input)
@@ -107,7 +106,7 @@ const Header = observer(() => {
                                 <span className="sr-only">Toggle mobile menu</span>
                                 <i className="icon-bars"></i>
                             </button>
-                            <NavLink exact to={HOME_ROUTE}>
+                            <NavLink exact to={HOME_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                 <img className="logo1" src={logo}/>
                                 {/*<h1 className="sima-logo ">SIMA</h1>*/}
                             </NavLink>
@@ -119,17 +118,17 @@ const Header = observer(() => {
                                     <li className="megamenu-container ">
                                         <NavLink exact className="sf-with"
                                                  style={{fontSize: "18px", fontWeight: "400", color: "#000000"}}
-                                                 to={HOME_ROUTE}> <a className="sf-with-ul">Главная</a></NavLink>
+                                                 to={HOME_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}> <a className="sf-with-ul">Главная</a></NavLink>
                                     </li>
                                     <li className="megamenu-container ">
                                         <NavLink className="sf-with" style={{fontSize: "18px", color: "#000000"}} to={{
                                             pathname: CATALOG_ROUTE,
                                             popular: "all"
-                                        }}><a className="sf-with-ul">Каталог </a></NavLink>
+                                        }} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="sf-with-ul">Каталог </a></NavLink>
 
                                     </li>
                                     <li className="megamenu-container">
-                                        <NavLink exact className="sf-with" to={NEWS_ROUTE}><a
+                                        <NavLink exact className="sf-with" to={NEWS_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a
                                             style={{fontSize: "18px", color: "#000000"}}
                                             className="sf-with-ul">Новости</a></NavLink>
 
@@ -143,7 +142,7 @@ const Header = observer(() => {
                                             color: "white",
                                             width: "40px"
                                         }}>
-                                            <Link to={ABOUT_ROUTE}>
+                                            <Link to={ABOUT_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                                 <li className="megamenu-container "><a className="sf-with  Uslovia"
                                                                                        style={{
                                                                                            cursor: "pointer",
@@ -151,7 +150,7 @@ const Header = observer(() => {
                                                                                            color: "#000000"
                                                                                        }}>О нас</a></li>
                                             </Link>
-                                            <Link to={CONTACT_ROUTE}>
+                                            <Link to={CONTACT_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                                 <li className="megamenu-container "><a className="sf-with  Uslovia"
                                                                                        style={{
                                                                                            cursor: "pointer",
@@ -159,7 +158,7 @@ const Header = observer(() => {
                                                                                            color: "#000000"
                                                                                        }}>Контакты</a></li>
                                             </Link>
-                                            <Link to={PURCHASES_ROUTE}>
+                                            <Link to={PURCHASES_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                                 <li className="megamenu-container "><a className="sf-with Uslovia"
                                                                                        style={{
                                                                                            cursor: "pointer",
@@ -167,7 +166,7 @@ const Header = observer(() => {
                                                                                            color: "#000000"
                                                                                        }}>Условия покупки</a></li>
                                             </Link>
-                                            <Link to={DELIVERY_ROUTE}>
+                                            <Link to={DELIVERY_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                                 <li className="megamenu-container "><a className="sf-with  Uslovia"
                                                                                        style={{
                                                                                            cursor: "pointer",
@@ -191,17 +190,17 @@ const Header = observer(() => {
 
                             {user.isRoute ? <VscSearch className="icons" onClick={()=>user.setRoute(false)}/> : <VscSearch className="icons" onClick={()=>user.setRoute(true)}/>}
                             {user.isAuth ?
-                                <NavLink to={MYACOUNT_ROUTE}><a style={{fontSize: "30px"}} data-toggle="modal"><i
+                                <NavLink to={MYACOUNT_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "30px"}} data-toggle="modal"><i
                                     style={{color: "#000000"}} className="icon-user"></i></a></NavLink>
-                                : <NavLink to={LOGIN_ROUTE}><a style={{fontSize: "30px"}} data-toggle="modal"><i
+                                : <NavLink to={LOGIN_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "30px"}} data-toggle="modal"><i
                                     style={{color: "#000000"}} className="icon-user"></i></a></NavLink>}<br/>
 
-                            <NavLink className="wishlist-link" to={WISHLIST_ROUTE}>
+                            <NavLink className="wishlist-link" to={WISHLIST_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                 <i style={{color: "#000000"}} className="icon-heart-o"></i>
                                 <span className="wishlist-count">{user.list?.length || '0'}</span>
                             </NavLink>
                             <div className="dropdown cart-dropdown mr-10">
-                                <NavLink to={CART_ROUTE}><a className="dropdown-toggle ">
+                                <NavLink to={CART_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="dropdown-toggle ">
                                     <i style={{color: "#000000"}} className="icon-shopping-cart"></i>
                                     <span
                                         className="cart-count">{user.isAuth ? user.items?.length || '0' : data?.length || "0"}</span>
@@ -210,9 +209,9 @@ const Header = observer(() => {
                                         user.items?.map((item, index) => {
                                             sum = sum + item.product?.price * item.quantity
                                         }) :
-                                        product.productOrder?.map((item, index) => {
-                                            sum = sum + item.price * item.quantity
-                                        })
+                                            product.productOrder?.map((item, index) => {
+                                                sum = sum + item.price * item.quantity
+                                            })
                                     }
                                     <span className="cart-txt">{sum.toFixed(2) } ₽</span>
                                 </a>

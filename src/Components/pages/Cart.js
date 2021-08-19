@@ -58,6 +58,23 @@ const Cart = observer(() => {
             .catch((e) => {
                 console.error(e)
             })
+
+    }
+
+    const deleteLocal = async (e, id) => {
+        let order = product.productOrder.filter((item) => item.product !== id);
+        // product.productOrder.push(order);
+        console.log(order)
+        product.getActualProducts()
+         data = data.filter((item) => item.id !== id)
+        await localStorage.setItem("order", JSON.stringify(data));
+        console.log(product.productOrder)
+
+
+        if (data.length === 0) {
+            localStorage.removeItem("order");
+        }
+        e.preventDefault();
     }
 
     const getItem = (id) => {
@@ -129,7 +146,7 @@ const Cart = observer(() => {
                                                         </h3>
                                                     </div>
                                                 </td>
-                                                <td className="price-col">{c.product.price} ₽</td>
+                                                <td className="price-col">{c.color}</td>
                                                 <td className="price-col">{c.product.price} ₽</td>
 
                                                 <td>
@@ -171,7 +188,7 @@ const Cart = observer(() => {
                                                         </h3>
                                                     </div>
                                                 </td>
-                                                <td className="price-col">{data.map(f => f.color === c.images?.map(i => i.title))} </td>
+                                                <td className="price-col">{data.filter(i => i.id === c.id).map(f => f.color)} </td>
                                                 <td className="price-col">{c.price} ₽</td>
                                                 <td>
                                                     <div className="count">
@@ -187,6 +204,9 @@ const Cart = observer(() => {
                                                     style={{fontWeight: "500"}}>{c.quantity ? c.quantity * c.price : getPrice(c.id)} ₽
                                                 </td>
                                                 <td className="remove-col">
+                                                    <button onClick={(e) => deleteLocal(e, c.id)}
+                                                            className="btn-remove"><i className="icon-close"></i>
+                                                    </button>
                                                 </td>
                                             </tr>)}
                                         </tbody>

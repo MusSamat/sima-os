@@ -64,6 +64,7 @@ const Catolog = observer((props) => {
     const [seson, setSeson] = useState('')
 
 
+
     const classes = useStyles();
 
     const indexOfLastPost = currentPage * postsPerPage;
@@ -75,6 +76,7 @@ const Catolog = observer((props) => {
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
     };
+    console.log(props)
 
     let query = useQuery();
 
@@ -84,7 +86,7 @@ const Catolog = observer((props) => {
         }
         setBreadcrumb("")
         setClicked(index)
-        setSeson(title+year)
+        setSeson(title + year)
 
     }
 
@@ -168,7 +170,7 @@ const Catolog = observer((props) => {
 
     const addCardLocal = (proId, price, color, title, count) => {
         // let data = JSON.parse(localStorage.getItem('order'))
-        let productId = product.productOrder.map((i) => i.product)
+        let productId = product.productOrder?.map((i) => i.product)
         if (data === null) {
             data = []
         }
@@ -247,15 +249,15 @@ const Catolog = observer((props) => {
                 user.getWishlistData()
                 if (Active === "all") {
                     // product.fetchTodoCatalog(title, user.isAuth)
-                    product.getActualProducts(user.isAuth)
+                    product.getActualProducts()
                 } else if (Active === "novelty") {
-                    product.getNoveltyProducts(user.isAuth)
+                    product.getNoveltyProducts()
                 } else if (Active === "popular") {
-                    product.getPopularProducts(user.isAuth)
+                    product.getPopularProducts()
                 } else if (Active === "discount") {
-                    product.discountTodo(user.isAuth)
+                    product.discountTodo()
                 } else if (Active === "typeProduct") {
-                    product.fetchTodoCatalog(name, user.isAuth)
+                    product.fetchTodoCatalog(name)
                 }
             })
             .catch((e) => {
@@ -291,9 +293,6 @@ const Catolog = observer((props) => {
     }
 
 
-
-
-
     useEffect(() => {
 
 
@@ -303,17 +302,19 @@ const Catolog = observer((props) => {
         user.getUserData()
         product.fetchTodo()
         if (query.get("name")) {
-            if(parseInt(query.get("name"))){
+            if (parseInt(query.get("name"))) {
                 product.searchFilterArticul(parseInt(query.get("name")))
-            }else{
+            } else {
                 product.changeFilter(query.get("name"))
             }
 
-        }else {
+        } else {
             console.log(route)
             if (route === "discount") {
                 product.discountTodo()
+                setBreadcrumb("Скидки")
             } else if (!route) {
+                setBreadcrumb("Актуальные")
                 product.getActualProducts().then(() => {
                     const scripts = [
                         '/assets/js/jquery.elevateZoom.min.js',
@@ -335,11 +336,13 @@ const Catolog = observer((props) => {
                     })
                 })
             } else if (route === "popular") {
-                product.getPopularProducts(user.isAuth)
+                product.getPopularProducts()
+                setBreadcrumb("Популярное")
             } else if (route === "novelty") {
-                product.getNoveltyProducts(user.isAuth)
-            } else if (route === "catalog") {
-                product.getActualProducts(user.isAuth)
+                product.getNoveltyProducts()
+                setBreadcrumb("Новинки")
+            } else if (route === "all") {
+                product.getActualProducts()
             }
         }
         product.getSortedData()
@@ -451,13 +454,15 @@ const Catolog = observer((props) => {
 
                                                     <div class="product-body">
                                                         <h3 class="product-title"><a href="">{prod.title}</a></h3>
-                                                        { prod.percent ?<div class="product-price" style={{color: "rgb(238, 162, 135)"}}>
+                                                        {prod.percent ? <div class="product-price"
+                                                                             style={{color: "rgb(238, 162, 135)"}}>
 
 
-                                                                    {Math.round(prod.price - (prod.price * prod.percent / 100))}.00
-                                                                        ₽
+                                                                {Math.round(prod.price - (prod.price * prod.percent / 100))}.00
+                                                                ₽
 
-                                                        </div> : <div className="product-price">{`${prod.price} ₽` }</div>}
+                                                            </div> :
+                                                            <div className="product-price">{`${prod.price} ₽`}</div>}
                                                     </div>
                                                 </div>
                                             </div>)}
@@ -468,7 +473,7 @@ const Catolog = observer((props) => {
                                             paginate={paginate}/>
                             </div>
                             <aside className="col-lg-3 order-lg-first  mt-3">
-                                <div  className="sidebar sidebar-shop salt ">
+                                <div className="sidebar sidebar-shop salt ">
 
 
                                     <div className="accordion accordions">
@@ -502,15 +507,23 @@ const Catolog = observer((props) => {
 
                                     <div className="row justify-content-center">
                                         <div className="col-sm-12 col-md-6 col-lg-6">
-                                            <button onClick={allProduct} className={ route  === "all" ? "novelti actived" : "novelti" && Active === "all" ? "novelti actived" : "novelti"} >Все</button>
+                                            <button onClick={allProduct}
+                                                    className={route === "all" ? "novelti actived" : "novelti" && Active === "all" ? "novelti actived" : "novelti" && route === "Актуальные" ? "novelti actived" : "novelti"}>Все
+                                            </button>
 
-                                            <button onClick={allNovelty} className={route  === "novelty" ? "novelti actived" : "novelti" && Active === "novelty" ? "novelti actived" : "novelti"} >Новинки</button>
+                                            <button onClick={allNovelty}
+                                                    className={route === "novelty" && "Новинки" ? "novelti actived" : "novelti" && Active === "novelty" ? "novelti actived" : "novelti" && route === "Новинки" ? "novelti actived" : "novelti"}>Новинки
+                                            </button>
 
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-6">
-                                            <button onClick={allPopular} className={route  === "popular" ? "novelti actived" : "novelti" && Active === "popular" ? "novelti actived" : "novelti"} >Популярное</button>
+                                            <button onClick={allPopular}
+                                                    className={route === "popular" ? "novelti actived" : "novelti" && Active === "popular" ? "novelti actived" : "novelti" && route === "Популярное" ? "novelti actived" : "novelti"}>Популярное
+                                            </button>
 
-                                            <button onClick={allDiscount} className={route  === "discount" ? "novelti actived" : "novelti" && Active === "discount" ? "novelti actived" : "novelti"} >Скидки</button>
+                                            <button onClick={allDiscount}
+                                                    className={route === "discount" ? "novelti actived" : "novelti" && Active === "discount" ? "novelti actived" : "novelti" && route === "Скидки" ? "novelti actived" : "novelti"}>Скидки
+                                            </button>
 
                                         </div>
                                     </div>
@@ -556,7 +569,8 @@ const Catolog = observer((props) => {
                                                 </div>
                                             ) : product.subcategory.map((item, index) =>
                                                 <div className="Aitem">
-                                                    <div onClick={() => toggle(index, item.title, item.year)} className="Atitle">
+                                                    <div onClick={() => toggle(index, item.title, item.year)}
+                                                         className="Atitle">
                                                         <div className="year">{item.title} {item.year}</div>
                                                         <span>{clicked === index ?
                                                             <FiMinus style={{fontSize: "18px", color: "#000000"}}/> :
@@ -574,14 +588,15 @@ const Catolog = observer((props) => {
                                                     </div>
 
                                                 </div>
-                                            )  }
+                                            )}
 
                                             <div
                                                 style={{cursor: "pointer"}}
                                                 className="accordion-title d-flex justify-content-sm-between "
                                                 onClick={() => toggleReadMore()}
                                             >
-                                                <div style={{fontWeight: "bold", color: "#000"}} className="year">{isReadMore ? "Все сезоны" : " Закрыть"}</div>
+                                                <div style={{fontWeight: "bold", color: "#000"}}
+                                                     className="year">{isReadMore ? "Все сезоны" : " Закрыть"}</div>
                                                 <div style={{cursor: "pointer"}}>{isReadMore ?
                                                     <CgMathPlus style={{fontSize: "18px", color: "#000000"}}/> :
                                                     <FiMinus style={{fontSize: "18px", color: "#000000 "}}/>}</div>
