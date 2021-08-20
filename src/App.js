@@ -16,8 +16,72 @@ axios.interceptors.response.use((response) => {
 //     console.log(request)
 //     return request
 // })
-
 function App() {
+
+let arr = [{
+    actual: true,
+    articul: "124343411",
+    average_review_score: 1.3,
+    cloth: "ФФФыФЫ",
+    created: "2021-08-11T04:47:52.400797Z",
+    description: "asdDSAS",
+    id: 7,
+    is_favorite: false,
+    novelty: true,
+    percent: 0,
+    popular: false,
+    price: "1200.00",
+
+},
+    {
+        actual: true,
+        articul: "124343411",
+        average_review_score: 1.3,
+        cloth: "ФФФыФЫ",
+        created: "2021-08-11T04:47:52.400797Z",
+        description: "asdDSAS",
+        id: 7,
+        is_favorite: false,
+        novelty: true,
+        percent: 0,
+        popular: false,
+        price: "1900.00",
+
+    },
+    {
+        actual: true,
+        articul: "124343411",
+        average_review_score: 1.3,
+        cloth: "ФФФыФЫ",
+        created: "2021-08-11T04:47:52.400797Z",
+        description: "asdDSAS",
+        id: 7,
+        is_favorite: false,
+        novelty: true,
+        percent: 0,
+        popular: false,
+        price: "1400.00",
+
+    },
+,
+    {
+        actual: true,
+        articul: "124343411",
+        average_review_score: 1.3,
+        cloth: "ФФФыФЫ",
+        created: "2021-08-11T04:47:52.400797Z",
+        description: "asdDSAS",
+        id: 7,
+        is_favorite: false,
+        novelty: true,
+        percent: 0,
+        popular: false,
+        price: "1800.00",
+
+    }]
+console.log(arr.sort((a,b) => parseInt(b.price) ))
+
+
     return (
         <div className="page">
             <BrowserRouter>

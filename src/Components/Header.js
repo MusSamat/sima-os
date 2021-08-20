@@ -50,15 +50,14 @@ const Header = observer(() => {
 
     }
 
-    // window.localstorage?.removeItem("order")
-    // window.onbeforeunload = function() {
-    //     localStorage.clear();
-    // }
-
-    // window.addEventListener("beforeunload", () => localStorage.removeItem('order'))
-
-    // window.localStorage.removeItem("order");
-
+    // window.addEventListener("click", function(){
+    //     const byId = document.getElementById("inputId")
+    //     const ids = document.getElementById("ids")
+    //     if(byId !== "click" || ids !== "click"){
+    //         user.setRoute(false)
+    //     }
+    //
+    // });
 
 
     useEffect(() => {
@@ -123,7 +122,7 @@ const Header = observer(() => {
                                     <li className="megamenu-container ">
                                         <NavLink className="sf-with" style={{fontSize: "18px", color: "#000000"}} to={{
                                             pathname: CATALOG_ROUTE,
-                                            popular: "all"
+                                            // popular: "all"
                                         }} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="sf-with-ul">Каталог </a></NavLink>
 
                                     </li>
@@ -182,13 +181,13 @@ const Header = observer(() => {
                             </nav>
                         </div>
                         <div className="divInput">
-                            {user.isRoute ?  <input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)}type="text" className="inputFor" id="q"
+                            {user.isRoute ?  <input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)}type="text" className="inputFor" id="inputId"
                                                     placeholder="Search in..." />: null}
                         </div>
 
                         <div className="header-right">
 
-                            {user.isRoute ? <VscSearch className="icons" onClick={()=>user.setRoute(false)}/> : <VscSearch className="icons" onClick={()=>user.setRoute(true)}/>}
+                            {user.isRoute ? <VscSearch className="icons" id="ids" onClick={()=>user.setRoute(false)}/> : <VscSearch id="ids" className="icons" onClick={()=>user.setRoute(true)}/>}
                             {user.isAuth ?
                                 <NavLink to={MYACOUNT_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "30px"}} data-toggle="modal"><i
                                     style={{color: "#000000"}} className="icon-user"></i></a></NavLink>
@@ -204,7 +203,6 @@ const Header = observer(() => {
                                     <i style={{color: "#000000"}} className="icon-shopping-cart"></i>
                                     <span
                                         className="cart-count">{user.isAuth ? user.items?.length || '0' : data?.length || "0"}</span>
-                                    {console.log(product.productOrder)}
                                     { user.isAuth ?
                                         user.items?.map((item, index) => {
                                             sum = sum + item.product?.price * item.quantity
@@ -276,20 +274,36 @@ const Header = observer(() => {
 
                                         <span className="cart-total-price">{sum.toFixed(2)}</span>
                                     </div>
-
-                                    <div className="dropdown-cart-action" style={{display: "block"}}>
-                                        <NavLink style={{marginBottom: "9px"}} to={CART_ROUTE}>
-                                            {/* <a className="btn btn-primary" ></a>
-                                         <a href="#" class="btn btn-link">ПРОСМОТР КОРЗИНЫ</a> */}
-                                            <a href="" class="btn btn-outline-dark btn-rounded mb-1">ПРОСМОТР
-                                                КОРЗИНЫ</a>
-                                        </NavLink><br/>
-
-                                        <NavLink style={{width: "167px"}} to={CHECKOUT_ROUTE}>
-                                            <a href="" class="btn btn-outline-dark btn-rounded">ОФОРМИТЬ ЗАКАЗ</a>
+                                    <div className="dropdown-cart-action">
+                                        <NavLink  to={CART_ROUTE}>
+                                            <a href="" className="btn btn-outline-primary-2">Просмотр корзины</a><br/>
                                         </NavLink>
+                                    </div>
+                                    <NavLink  to={CHECKOUT_ROUTE}>
+                                    <div className="dropdown-cart-action">
+
+                                            <a href=""
+                                               className="btn btn-outline-primary-2">Оформить заказ
+                                                <i style={{marginRight: "-1px"}} className="icon-long-arrow-right"></i>
+                                            </a>
 
                                     </div>
+                                    </NavLink>
+
+
+                                    {/*<div className="dropdown-cart-action" style={{display: "block"}}>*/}
+                                    {/*    <NavLink  to={CART_ROUTE}>*/}
+                                    {/*        /!* <a className="btn btn-primary" ></a>*/}
+                                    {/*     <a href="#" class="btn btn-link">ПРОСМОТР КОРЗИНЫ</a> *!/*/}
+                                    {/*        <a href="" class="btn btn-outline-dark btn-rounded mb-1">ПРОСМОТР*/}
+                                    {/*            КОРЗИНЫ</a>*/}
+                                    {/*    </NavLink><br/>*/}
+
+                                    {/*    <NavLink  to={CHECKOUT_ROUTE}>*/}
+                                    {/*        <a href="" class="btn btn-outline-dark btn-rounded">ОФОРМИТЬ ЗАКАЗ</a>*/}
+                                    {/*    </NavLink>*/}
+
+                                    {/*</div>*/}
                                 </div>
                             </div>
 

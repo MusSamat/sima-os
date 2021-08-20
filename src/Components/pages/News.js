@@ -9,21 +9,12 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 
 
-const initialState = {
-    username: "",
-    email: "",
-    password: "",
-    passwordConfirmation: ""
-};
+
 
 
 const News = observer(() => {
     const {product} = useContext(Context)
 
-    const clearState = () => {
-        setState({...initialState,});
-    };
-    console.log(clearState)
     const history = useHistory()
     useEffect(() => {
         window.scrollTo(0, 0)

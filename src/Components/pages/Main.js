@@ -15,6 +15,11 @@ import {SUBCATEGORY_ROUTE, ABOUT_ROUTE, DELIVERY_ROUTE, PURCHASES_ROUTE, CATALOG
 import Modal from "./Modal"
 import {FcLike} from "react-icons/fc";
 import {toast} from "react-toastify";
+import {FaStar} from "react-icons/fa";
+const colors = {
+    orange: "#FFBA5A",
+    grey: "#a9a9a9"
+}
 
 
 const Main = observer(() => {
@@ -28,6 +33,7 @@ const Main = observer(() => {
     const [quantity, setQuantity] = useState(5)
     const [modalActive, setModalActive] = useState(false)
     const [prodactId, setProdactId] = useState(0)
+    const stars = Array(5).fill(0);
 
     const sendName = (event) => {
 
@@ -164,6 +170,8 @@ const Main = observer(() => {
     const openModal = (id) => {
         setProdactId(id)
         setModalActive(true)
+        console.log(id)
+        console.log(modalActive)
 
     }
     useEffect(() => {
@@ -208,7 +216,7 @@ const Main = observer(() => {
                         <div className="row justify-content-center">
                             {product.discount.slice(0, 8).map((discout, index) =>
                                 <div key={index} className="col-6 col-md-4 col-lg-3">
-                                    <div className="product product-7 text-center ">
+                                    <div className="product product-7 text-center black">
                                         <figure className="product-media ">
                                             {discout.percent ? <div style={{textAlign: "center"}}
                                                                  class="product-label label-sale">{discout.percent} %</div> : ""}
@@ -260,10 +268,24 @@ const Main = observer(() => {
                                         </figure>
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                            <div style={{color: "rgb(238, 162, 135)"}} className="product-price">
+                                            <div style={{color: "#000000"}} className="product-price">
                                                 { `${discout.price} ₽`}
                                             </div>
-
+                                            <div className="ratings-container">
+                                                {
+                                                    stars.map((_, index) => {
+                                                        return (
+                                                            <FaStar
+                                                                key={index}
+                                                                size={13}
+                                                                style={{
+                                                                    marginRight: 3,
+                                                                }}
+                                                                color={index < Math.round(discout.average_review_score) ? colors.orange : colors.grey}
+                                                            />
+                                                        )
+                                                    })}
+                                            </div>
 
                                         </div>
                                     </div>
@@ -272,15 +294,16 @@ const Main = observer(() => {
                         </div>
                         { modalActive && <Modal active={modalActive} setActive={setModalActive} id={prodactId}/>}
 
-                        <div className="entry-content d-flex justify-content-center mb-8">
-                            <Link to={{
-                                pathname: CATALOG_ROUTE,
-                                popular: "discount"
-                            }}>
-                                <a style={{fontSize: "20px"}} href="" className="read-more">Показать</a>
-                            </Link>
-                        </div>
 
+                        <Link to={{
+                            pathname: CATALOG_ROUTE,
+                            popular: "discount"
+                        }}>
+                            <div className="more-container text-center mt-3 mb-3">
+                                <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
+                                    className="icon-long-arrow-right"></i></a>
+                            </div>
+                        </Link>
                     </div>
 
                 </div>
@@ -304,7 +327,7 @@ const Main = observer(() => {
                         <div className="row justify-content-center">
                             {product.novelty.slice(0, 8).map((discout, index) =>
                                 <div key={index} className="col-6 col-md-4 col-lg-3">
-                                    <div className="product product-7 text-center  ">
+                                    <div className="product product-7 text-center  black">
 
                                         <figure className="product-media ">
                                             <Link to={{pathname: '/product/' + discout.id}}>
@@ -353,10 +376,24 @@ const Main = observer(() => {
                                         </figure>
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                            <div style={{color: "rgb(238, 162, 135)"}} className="product-price">
+                                            <div style={{color: "#000000"}} className="product-price">
                                                 {`${discout.price} ₽`}
                                             </div>
-
+                                            <div className="ratings-container">
+                                                {
+                                                    stars.map((_, index) => {
+                                                        return (
+                                                            <FaStar
+                                                                key={index}
+                                                                size={13}
+                                                                style={{
+                                                                    marginRight: 3,
+                                                                }}
+                                                                color={index < Math.round(discout.average_review_score) ? colors.orange : colors.grey}
+                                                            />
+                                                        )
+                                                    })}
+                                            </div>
 
                                         </div>
                                     </div>
@@ -366,15 +403,15 @@ const Main = observer(() => {
 
                     </div>
 
-                    {/*<Modal/>*/}
-                    <div className="entry-content d-flex justify-content-center mb-8">
-                        <Link to={{
-                            pathname: CATALOG_ROUTE,
-                            popular: "novelty"
-                        }}>
-                            <a style={{fontSize: '25px'}} href="" className="read-more">Показать</a>
-                        </Link>
-                    </div>
+                    <Link to={{
+                        pathname: CATALOG_ROUTE,
+                        popular: "novelty"
+                    }}>
+                        <div className="more-container text-center mt-3 mb-3">
+                            <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
+                                className="icon-long-arrow-right"></i></a>
+                        </div>
+                    </Link>
 
                 </div>
                 <div  className="trending mb-6 mt-8">
@@ -395,7 +432,7 @@ const Main = observer(() => {
                         <div className="row justify-content-center">
                             {product.popular.slice(0, 4).map((discout, index) =>
                                 <div key={index} className="col-6 col-md-4 col-lg-3">
-                                    <div className="product product-7 text-center  ">
+                                    <div className="product product-7 text-center  black">
 
                                         <figure className="product-media ">
                                             <Link to={{pathname: '/product/' + discout.id}}>
@@ -446,8 +483,23 @@ const Main = observer(() => {
 
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                            <div style={{color: "rgb(238, 162, 135)"}} className="product-price">
+                                            <div style={{color: "#000000"}} className="product-price">
                                                 {`${discout.price} ₽`}
+                                            </div>
+                                            <div className="ratings-container">
+                                                {
+                                                    stars.map((_, index) => {
+                                                        return (
+                                                            <FaStar
+                                                                key={index}
+                                                                size={13}
+                                                                style={{
+                                                                    marginRight: 3,
+                                                                }}
+                                                                color={index < Math.round(discout.average_review_score) ? colors.orange : colors.grey}
+                                                            />
+                                                        )
+                                                    })}
                                             </div>
 
                                         </div>
@@ -457,24 +509,15 @@ const Main = observer(() => {
                         </div>
 
                     </div>
-                    <div className="entry-content d-flex justify-content-center mb-8">
-                        <Link to={{
-                            pathname: CATALOG_ROUTE,
-                            popular: "popular"
-                        }}>
-                            <a style={{fontSize: "20px"}} href="" className="read-more">Показать</a>
-                        </Link>
-                    </div>
-
-                    {/*<div className="btn-wrap d-flex justify-content-center mb-8">*/}
-                    {/*    <Link to={{*/}
-                    {/*        pathname: CATALOG_ROUTE,*/}
-                    {/*        popular: "popular"*/}
-                    {/*    }} className="btn  btn-shadow">*/}
-                    {/*        <span style={{fontSize: "20px"}}>Показать</span>*/}
-                    {/*        <i className="icon-long-arrow-right"></i>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
+                    <Link to={{
+                        pathname: CATALOG_ROUTE,
+                        popular: "popular"
+                    }}>
+                        <div className="more-container text-center mt-3 mb-3">
+                            <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
+                                className="icon-long-arrow-right"></i></a>
+                        </div>
+                    </Link>
 
                 </div>
 

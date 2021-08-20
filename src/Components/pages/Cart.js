@@ -37,13 +37,12 @@ const Cart = observer(() => {
             })
         e.preventDefault();
     }
-
-
-    const deleteCart = (id) => {
+    const deleteCart = (id, color) => {
 
 
         const data = JSON.stringify({
             product: id,
+            color: color,
         })
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/destroy-cart/`, data, {
             headers: {
@@ -102,7 +101,7 @@ const Cart = observer(() => {
             <main className="main">
                 <div className="page-content">
                     <div className="cart">
-                        <div className="container mt-5">
+                        <div className="container mt-7">
                             {/*<ol className="breadcrumb mb-5">*/}
                             {/*    <li className="breadcrumb-item"><NavLink className="breadcrumb-item" to={HOME_ROUTE}><a*/}
                             {/*        href="">Главная</a></NavLink></li>*/}
@@ -114,16 +113,16 @@ const Cart = observer(() => {
                                     <table className="table table-cart table-mobile">
                                         <thead>
                                         <tr>
-                                            <th style={{color: "black"}}>ТОВАР</th>
-                                            <th style={{color: "black"}}>ЦВЕТ</th>
-                                            <th style={{color: "black"}}>ЦЕНА</th>
-                                            <th style={{color: "black"}}>КОЛИЧЕСТВО</th>
-                                            <th style={{color: "black"}}>ПОДЫТОГ</th>
+                                            <th >Товар</th>
+                                            <th >Свет</th>
+                                            <th >Цена</th>
+                                            <th >Количесиво</th>
+                                            <th >Подытог</th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        {console.log(product.products)}
+                                        {console.log(user.items)}
                                         {/*{console.log(product.products?.filter((i) => i.id === data).map((c) => c.id))}*/}
                                         {/*{console.log(data)}*/}
                                         { user.isAuth ? user.items?.map((c, index) =>
@@ -146,24 +145,24 @@ const Cart = observer(() => {
                                                         </h3>
                                                     </div>
                                                 </td>
-                                                <td className="price-col">{c.color}</td>
-                                                <td className="price-col">{c.product.price} ₽</td>
+                                                <td className="price-col s-title">{c.color}</td>
+                                                <td className="price-col s-title">{c.product.price} ₽</td>
 
                                                 <td>
                                                     <div className="count">
                                                         <a  style={{width: "30px", cursor: "pointer", fontSize: "18px", marginLeft: "7px"}} onClick={() => user.changeItemQuantity(index, c.quantity - c.product.size.length)}>-</a>
                                                         <span style={{ width: "30px", marginRight: "7px", padding: "5px"}} >{c.quantity}</span>
-                                                        <a style={{marginLeft: "7px", width: "30px", cursor: "pointer", fontSize: "18px"}} onClick={() => user.changeItemQuantity(index,c.quantity + c.product.size.length)}>+</a>
+                                                        <a style={{marginLeft: "7px", width: "30px", cursor: "pointer", fontSize: "18px", marginTop: "5px"}} onClick={() => user.changeItemQuantity(index,c.quantity + c.product.size.length)}>+</a>
 
                                                     </div>
 
                                                 </td>
 
-                                                <td className="price-col"
-                                                    style={{fontWeight: "500"}}>{(c.product.price * c.quantity).toFixed(2)} ₽
+                                                <td className="price-col s-title"
+                                                    style={{color: "#c96"}}>{(c.product.price * c.quantity).toFixed(2)} ₽
                                                 </td>
                                                 <td className="remove-col">
-                                                    <button onClick={() => deleteCart(c.product.id)}
+                                                    <button onClick={() => deleteCart(c.product.id, c.color)}
                                                             className="btn-remove"><i className="icon-close"></i>
                                                     </button>
                                                 </td>
@@ -188,8 +187,8 @@ const Cart = observer(() => {
                                                         </h3>
                                                     </div>
                                                 </td>
-                                                <td className="price-col">{data.filter(i => i.id === c.id).map(f => f.color)} </td>
-                                                <td className="price-col">{c.price} ₽</td>
+                                                <td className="price-col s-title">{data.filter(i => i.id === c.id).map(f => f.color)} </td>
+                                                <td className="price-col s-title">{c.price} ₽</td>
                                                 <td>
                                                     <div className="count">
                                                         <button disabled={(isNaN(c.quantity) || c.quantity - c.size.length <= 0)}  style={{width: "30px", cursor: "pointer", backgroundColor: "white", fontSize: "18px", marginLeft: "7px", border: "none"}} onClick={() => product.changeProductQuantity(c.id, (isNaN(c.quantity) ? getItem(c.id) : c.quantity) - c.size.length)}>-</button>
@@ -200,8 +199,8 @@ const Cart = observer(() => {
 
                                                 </td>
 
-                                                <td className="price-col"
-                                                    style={{fontWeight: "500"}}>{c.quantity ? c.quantity * c.price : getPrice(c.id)} ₽
+                                                <td className="price-col s-title"
+                                                    style={{color: "#c96"}}>{c.quantity ? c.quantity * c.price : getPrice(c.id)} ₽
                                                 </td>
                                                 <td className="remove-col">
                                                     <button onClick={(e) => deleteLocal(e, c.id)}
@@ -216,18 +215,18 @@ const Cart = observer(() => {
                                         <div className="cart-discount">
                                         </div>
 
-                                        {user.isAuth ? <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2"><span>ОБНОВИТЬ КОРЗИНУ</span><i
+                                        {user.isAuth ? <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2 pocuoki"><span>ОБНОВИТЬ КОРЗИНУ</span><i
                                             className="icon-refresh"></i></a> : null}
                                     </div>
                                 </div>
                                 <aside className="col-lg-3">
                                     <div className="summary summary-cart">
-                                        <h3 className="summary-title">СУММА ЗАКАЗОВ</h3>
+                                        <h3 className="summary-title">Сумма Заказов</h3>
 
                                         <table className="table table-summary">
                                             <tbody>
                                             <tr className="summary-subtotal">
-                                                <td>ПОДЫТОГ:</td>
+                                                <td>Подытог:</td>
 
                                                 { user.isAuth ?
                                                     user.items?.map((item, index) => {
@@ -244,23 +243,25 @@ const Cart = observer(() => {
 
 
                                             <tr className="summary-subtotal" style={{fontWeight: "500"}}>
-                                                <td>ИТОГО:</td>
+                                                <td>Итого:</td>
 
                                                 <td>{sum.toFixed(2)} ₽</td>
                                             </tr>
                                             </tbody>
                                         </table>
 
-                                        <NavLink to={CHECKOUT_ROUTE}><a href=""
-                                                                        class="btn btn-outline-dark btn-rounded mb-1">Оформить
-                                            заказ</a></NavLink>
 
+                                    <NavLink to={CHECKOUT_ROUTE}>
+                                        <a href="" className="btn btn-outline-primary-2 btn-order btn-block">Оформить
+                                            заказ</a>
+                                    </NavLink>
                                     </div>
 
                                     <NavLink to={CATALOG_ROUTE}>
-                                        <button className="btn btn-outline-dark-2 btn-block mb-3"><span>ПРОДОЛЖИТЬ ПОКУПКИ</span><i
+                                        <button className="btn btn-outline-dark-2 btn-block pocuoki mb-3"><span>ПРОДОЛЖИТЬ ПОКУПКИ</span><i
                                             className="icon-refresh"></i></button>
                                     </NavLink>
+
                                 </aside>
                             </div>
                         </div>

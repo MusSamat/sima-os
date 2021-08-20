@@ -36,9 +36,18 @@ export default class ProductStore {
         this.productOrder = []
         this.productOrderFilter = []
         this.novelty = []
+        this.loader = false
 
 
         makeAutoObservable(this)
+    }
+
+    setLoader(bool) {
+        this.loader = bool
+    }
+
+    get isLoader() {
+        return this.loader
     }
 
 
@@ -63,6 +72,7 @@ export default class ProductStore {
 
 
     async getActualProducts() {
+        this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
         return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`, this.token?.token ? {
             headers: {
@@ -77,15 +87,18 @@ export default class ProductStore {
             .then(res => {
                 this.products = [...res.data]
                 this.allProducts = this.products
+                this.setLoader(false)
             })
             .catch((e) => {
                 console.error(e)
+                this.setLoader(true)
             })
 
 
     }
 
     async getPopularProducts() {
+        this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
         return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/popular`, this.token?.token ? {
             headers: {
@@ -101,9 +114,11 @@ export default class ProductStore {
             .then(res => {
                 this.products = [...res.data]
                 this.allProducts = this.products
+                this.setLoader(false)
             })
             .catch((e) => {
                 console.error(e)
+                this.setLoader(true)
             })
 
 
@@ -133,6 +148,7 @@ export default class ProductStore {
     }
 
     getNoveltyProducts() {
+        this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/novelty`, this.token?.token ? {
             headers: {
@@ -148,9 +164,38 @@ export default class ProductStore {
             .then(res => {
                 this.products = [...res.data]
                 this.allProducts = this.products
+                this.setLoader(false)
             })
             .catch((e) => {
                 console.error(e)
+                this.setLoader(true)
+            })
+
+
+    }
+
+    getAllProductsSort(prod, des) {
+        this.setLoader(true)
+        this.token = JSON.parse(localStorage.getItem('value'))
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/${prod}/?${des}`, this.token?.token ? {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + this.token?.token,
+            }
+        } : {
+            headers: {
+                'Content-Type': 'application/json',
+
+            }
+        })
+            .then(res => {
+                this.products = [...res.data]
+                this.allProducts = this.products
+                this.setLoader(false)
+            })
+            .catch((e) => {
+                console.error(e)
+                this.setLoader(true)
             })
 
 
@@ -280,8 +325,9 @@ export default class ProductStore {
 
     }
 
-    priceFilter(price) {
-        this.products = this.allProducts.filter(item => item.price === price)
+    priceFilter() {
+        this.productss = this.allProducts.sort((a, b) => b.price - a.price)
+        console.log(this.productss)
     }
 
     searchFilter(input) {
@@ -432,6 +478,7 @@ export default class ProductStore {
 
 
     discountTodo() {
+        this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`, this.token?.token ? {
             headers: {
@@ -445,11 +492,12 @@ export default class ProductStore {
         })
             .then(res => {
                 this.products = [...res.data]
-
+                this.setLoader(false)
 
             })
             .catch((e) => {
                 console.error(e)
+                this.setLoader(true)
             })
     }
 

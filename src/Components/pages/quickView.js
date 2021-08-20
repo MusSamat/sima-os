@@ -4,8 +4,9 @@ import {observer} from 'mobx-react-lite';
 import axios from "axios";
 import {toast} from "react-toastify";
 import {FcLike} from "react-icons/fc";
+import {GrClose} from "react-icons/gr";
 
-const quickView = observer(({id}) => {
+const quickView = observer(({id, active, setActive}) => {
     const {user, product} = useContext(Context);
     const [leftImages, setLeftImages] = useState([])
     const [selectedImage, setSelectedImage] = useState('')
@@ -123,9 +124,8 @@ const quickView = observer(({id}) => {
         })
 
     }, []);
-     console.log(leftImages)
     return (
-        <div className="mfp-content">
+
             <div className="container quickView-container">
                 <div className="quickView-content">
                     <div className="row">
@@ -152,16 +152,24 @@ const quickView = observer(({id}) => {
                             </div>
                         </div>
                         <div className="col-lg-5 col-md-6">
-                            <h2 className="product-title city">{product.product.title}</h2>
-                            <p className="city">Артикул: {product.product.articul}</p>
-                            <h4 style={{color: "rgb(238, 162, 135)"}} className="city">{`${product.product.price} ₽`}</h4>
-                            <label style={{
-                                color: "#9393a5",
-                                fontSize: "14px",
-                                fontWeight: "300",
-                                lineHeight: "20px",
-                                letterSpacing: "-.15px"
-                            }}>Цвет: <span className="city" style={{color: "#000"}}>{imgTitle}</span></label>
+                            <div className="row">
+                                <div className="col-md-10">
+                                    <h2 className="product-title city">{product.product.title}</h2>
+                                    <p className="city">Артикул: {product.product.articul}</p>
+                                    <h4 style={{color: "rgb(238, 162, 135)"}} className="city">{`${product.product.price} ₽`}</h4>
+                                    <label style={{
+                                        color: "#9393a5",
+                                        fontSize: "14px",
+                                        fontWeight: "300",
+                                        lineHeight: "20px",
+                                        letterSpacing: "-.15px"
+                                    }}>Цвет: <span className="city" style={{color: "#000"}}>{imgTitle}</span></label>
+                                </div>
+                                <div className="col-md-2">
+                                    <div className={active ? "x-b actives" : "x-b"} onClick={(e) => setActive(false)}> <GrClose/>< /div>
+                                </div>
+                            </div>
+
 
 
 
@@ -240,35 +248,17 @@ const quickView = observer(({id}) => {
                                             : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}
                                                  className="btn-product btn-wishlist" title="Wishlist"></a> : ""}
                                     </div>
-                                    {/*<a href="#" className="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>*/}
-                                    {/*<a href="#" className="btn-product btn-compare"*/}
-                                    {/*   title="Compare"><span>Add to Compare</span></a>*/}
                                 </div>
                                 {user.isAuth ? <a href="" onClick={addCart} className="btn-product btn-cart"><span>В Корзину</span></a>
                                 : <a onClick={(e) => addCardLocal(e, product.product.id, product.product.price, product.product.images[0].title, product.product.title)}
                                      href="" className="btn-product btn-cart"><span>В Корзину</span></a>}
 
                             </div>
-
-                            <div className="product-details-footer">
-
-                                {/*<div className="social-icons social-icons-sm">*/}
-                                {/*    <span className="social-label">Share:</span>*/}
-                                {/*    <a href="#" className="social-icon" title="Facebook" target="_blank"><i*/}
-                                {/*        className="icon-facebook-f"></i></a>*/}
-                                {/*    <a href="#" className="social-icon" title="Twitter" target="_blank"><i*/}
-                                {/*        className="icon-twitter"></i></a>*/}
-                                {/*    <a href="#" className="social-icon" title="Instagram" target="_blank"><i*/}
-                                {/*        className="icon-instagram"></i></a>*/}
-                                {/*    <a href="#" className="social-icon" title="Pinterest" target="_blank"><i*/}
-                                {/*        className="icon-pinterest"></i></a>*/}
-                                {/*</div>*/}
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
     )
 })
 

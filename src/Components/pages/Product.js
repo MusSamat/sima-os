@@ -9,16 +9,11 @@ import {FaStar} from "react-icons/fa";
 import {RiShareLine} from "react-icons/ri";
 import {FcLike} from "react-icons/fc";
 import {FaOdnoklassnikiSquare} from "react-icons/fa";
-import {BiGitRepoForked} from "react-icons/bi";
-import razmer from "../../assets/razmer.png"
 import vk from "../../assets/vk.png"
 import {Modal, Button, Container, Row, Col} from "react-bootstrap";
 import mobile_menu from '../../Http/mobile_menu';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
-// import 'react-medium-image-zoom/dist/styles.css'
-import ReactImageZoom from 'react-image-zoom';
 
 const colors = {
     orange: "#FFBA5A",
@@ -42,8 +37,6 @@ const Product = observer((props) => {
     const handleShowRaz = () => setShowRaz(true);
 
 
-    // let route = props.location
-    console.log(props)
 
     function updateValue(e) {
         console.log(e.target.value);
@@ -100,7 +93,6 @@ const Product = observer((props) => {
         e.preventDefault();
     }
 
-    console.log(props)
 
 
     const stars = Array(5).fill(0);
@@ -177,7 +169,7 @@ const Product = observer((props) => {
                 title: title
             })
         } else {
-            toast.warning("этот товар есть в карзина")
+            toast.warning("Этот товар есть в корзине")
             found = -1
         }
         e.preventDefault();
@@ -439,91 +431,89 @@ const Product = observer((props) => {
                                                >
                                             <Modal.Header closeButton>
                                             </Modal.Header>
-                                            <Container>
                                                 <Row style={{padding: "15px"}}>
-                                                    <Col  xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         Российский размер
                                                     </Col>
-                                                    <Col   xs={6} md={4}>
+                                                    <Col   xs={4} md={4}>
                                                         Размер производителя
                                                     </Col>
-                                                    <Col   xs={6} md={4}>
+                                                    <Col   xs={4} md={4}>
                                                         Рост, см
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         110-116
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         110
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         110-116
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         116-122
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         116
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         116-122
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         122-128
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         122
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         122-128
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         128-134
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         128
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         128-134
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         134-140
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         134
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         134-140
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         140-146
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         140
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         140-146
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         146-152
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         146
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         146-152
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         152-158
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         152
                                                     </Col>
-                                                    <Col xs={6} md={4}>
+                                                    <Col xs={4} md={4}>
                                                         152-158
                                                     </Col>
                                                 </Row>
-                                            </Container>
                                         </Modal>
                                     </div>
 
@@ -533,7 +523,7 @@ const Product = observer((props) => {
                                         ))}
                                     </div>
                                     <>
-                                        <div className="details-filter-row details-row-size">
+                                        <div className="details-filter-row details-row-size mt-1">
                                             <div className="count ">
                                                 <button disabled={(isNaN(count) || count - product.product.size.length <= 0)}
                                                         style={{
@@ -541,7 +531,6 @@ const Product = observer((props) => {
                                                             cursor: "pointer",
                                                             fontSize: "20px",
                                                             marginLeft: "7px",
-                                                            color: "#000000",
                                                             backgroundColor: "white",
                                                             border: "none"
                                                         }}
@@ -551,7 +540,6 @@ const Product = observer((props) => {
                                                     width: "30px",
                                                     padding: "px",
                                                     fontSize: "18px",
-                                                    color: "#000000"
                                                 }}>{count}</span>
                                                 <a style={{
                                                     marginLeft: "7px",
@@ -574,8 +562,6 @@ const Product = observer((props) => {
                                                    className="btn-product btn-cart">В Корзину
                                                 </a>
                                             }
-                                            {/*<a style={{cursor: "pointer"}} */}
-                                            {/*   className="btn-product btn-cart"><span style={{color: "inherit"}}>В КОРЗИНУ</span></a>*/}
 
                                             <div className="details-action-wrapper">
                                                 {user.isAuth ? product.product.is_favorite ?
@@ -623,7 +609,7 @@ const Product = observer((props) => {
                                                 </div>
                                                 <div className="tab-pane fade" id="tab-18" role="tabpanel"
                                                      aria-labelledby="tab-18-tab">
-                                                    {/* <p>Nobis perspiciatis natus cum, sint dolore earum rerum tempora aspernatur numquam velit tempore omnis, delectus repellat facere voluptatibus nemo non fugiat consequatur repellendus! Enim, commodi, veniam ipsa voluptates quis amet.</p> */}
+
                                                 </div>
                                                 <div className="tab-pane fade" id="tab-19" role="tabpanel"
                                                      aria-labelledby="tab-19-tab">
@@ -636,10 +622,6 @@ const Product = observer((props) => {
                                                                     <div class="col-auto">
                                                                         <h4><a>{r.author}</a></h4>
                                                                         <div class="ratings-container">
-                                                                            {/* <div class="ratings">
-                                                                                <div class="ratings-val"></div>
-                                                                            </div> */}
-                                                                            {/* {console.log(r.rating)} */}
                                                                             {
                                                                                 stars.map((_, index) => {
                                                                                     return (
@@ -649,7 +631,7 @@ const Product = observer((props) => {
                                                                                             style={{
                                                                                                 marginRight: 3,
                                                                                             }}
-                                                                                            color={index <= r.rating ? colors.orange : colors.grey}
+                                                                                            color={index < r.rating ? colors.orange : colors.grey}
                                                                                         />
                                                                                     )
                                                                                 })}
@@ -698,12 +680,7 @@ const Product = observer((props) => {
 
                                                         </textarea>
                                                     <div className="d-grid gap-2">
-                                                        {/*<div className="product-details-action">*/}
-                                                        {/*        <a style={{cursor: "pointer"}} onClick={addCart} className="btn-product" ><span style={{color: "inherit"}}>Отправить</span></a>*/}
-                                                        {/*    </div>*/}
-                                                        {/*<button className="button-otzyv" onClick={(e) => sendRating(e)}*/}
-                                                        {/*        type="button">Отправить*/}
-                                                        {/*</button>*/}
+
                                                         <div className="dropdown">
                                                             <button style={{fontSize: "18px"}}
                                                                     onClick={(e) => sendRating(e)}

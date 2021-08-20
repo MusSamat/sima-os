@@ -59,8 +59,7 @@ console.log(3 % fer.length)
                 setError(true)
                 user.setIsAuth(true)
                 localStorage.setItem('value', JSON.stringify(response.data));
-                history.push(CATALOG_ROUTE)
-                notify()
+                history.push(MYACOUNT_ROUTE)
             })
             .catch(error => {
                 setLoading(false)

@@ -143,12 +143,7 @@ const Myacount = observer(() => {
                 <div className="page-content">
                     <div className="dashboard">
                         <div className="container">
-                            <ol className="breadcrumb mb-3 ">
-                                <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"
-                                                                                            href="">Главная</a></NavLink>
-                                </li>
-                                <li className="breadcrumb-item"><a href=""> Мой аккаунт</a></li>
-                            </ol>
+
                             <div className="row">
                                 <aside className="col-md-4 col-lg-3">
                                     <ul className="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
@@ -181,17 +176,15 @@ const Myacount = observer(() => {
                                              aria-labelledby="tab-dashboard-link">
                                             <p style={{fontSize: "16px", color: "#000000"}}>Добро пожаловать <span
                                                 style={{fontSize: "16px"}}
-                                                className="font-weight-normal text-dark">{user.userId.username}</span> не <span
-                                                className="font-weight-normal text-dark"></span> <a href=""
-                                                                                                    onClick={logoOut}>Выйти</a>
+                                                className="font-weight-normal text-dark">{user.userId.username}</span> !
                                                 <br/>
-                                                Из главной страницы аккаунта вы можете посмотреть ваши <a
-                                                    href="#tab-orders" className="tab-trigger-link link-underline">недавние
-                                                    заказы</a>, настроить <a href="#tab-address"
-                                                                             className="tab-trigger-link">платежный
-                                                    адрес и адрес доставки</a>, а также <a href="#tab-account"
-                                                                                           className="tab-trigger-link">изменить
-                                                    пароль и основную информацию.</a>.</p>
+                                                Из главной страницы аккаунта вы можете посмотреть ваши
+                                                   едавние
+                                                    заказы настроить
+                                                                             платежный
+                                                    адрес и адрес доставки, а также
+                                                                                           изменить
+                                                    пароль и основную информацию..</p>
                                         </div>
 
                                         <div className="tab-pane fade" id="tab-orders" role="tabpanel"
