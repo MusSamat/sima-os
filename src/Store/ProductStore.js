@@ -69,6 +69,32 @@ export default class ProductStore {
         this.products = this.products.map((i, index) => i.id === id ? {...i, quantity: val} : i)
     }
 
+    async getActual(prod) {
+        this.setLoader(true)
+        this.token = JSON.parse(localStorage.getItem('value'))
+        return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/${prod}`, this.token?.token ? {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + this.token?.token
+            }
+        } : {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(res => {
+                this.products = [...res.data]
+                this.allProducts = this.products
+                this.setLoader(false)
+            })
+            .catch((e) => {
+                console.error(e)
+                this.setLoader(true)
+            })
+
+
+    }
+
 
 
     async getActualProducts() {
@@ -150,7 +176,7 @@ export default class ProductStore {
     getNoveltyProducts() {
         this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/novelty`, this.token?.token ? {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`, this.token?.token ? {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token,
@@ -175,6 +201,7 @@ export default class ProductStore {
     }
 
     getAllProductsSort(prod, des) {
+        console.log(prod + des)
         this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/${prod}/?${des}`, this.token?.token ? {

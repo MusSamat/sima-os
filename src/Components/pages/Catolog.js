@@ -15,10 +15,9 @@ import {toast} from "react-toastify";
 import Modal from "./Modal"
 import {FaStar} from "react-icons/fa";
 import Loader from "../Loader/Loader";
+import History from "./History";
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+
 
 const useStyles = makeStyles((theme) => ({
     MuiSlider: {
@@ -46,6 +45,8 @@ function valuetext(value) {
 }
 
 
+
+
 const Catolog = observer((props) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
@@ -71,7 +72,17 @@ const Catolog = observer((props) => {
     const [seson, setSeson] = useState('')
     const stars = Array(5).fill(0);
     const [sort, setSort] = useState("products");
+    const [sortActive, setSortActive] = useState("");
 
+    const {search } = useLocation()
+    const query = new URLSearchParams(search)
+
+    const names = query.get('name')
+    const produs = query.get('products')
+    const sorted = query.get('sort')
+
+    console.log(names)
+    console.log(produs)
 
 
     const classes = useStyles();
@@ -86,7 +97,7 @@ const Catolog = observer((props) => {
         setIsReadMore(!isReadMore);
     };
 
-    let query = useQuery();
+
 
     const toggle = (index, title, year) => {
         if (clicked === index) {
@@ -114,46 +125,50 @@ const Catolog = observer((props) => {
 
     const history = useHistory();
 
-    const allProduct = (e) => {
+    const allProduct = (e, produs) => {
         history.push({
-            popular: "",
+            search: `?products=${produs}`
         })
-        history.location.popular.replace()
-        product.getActualProducts()
-        setActive("all")
-        setBreadcrumb("Актуальные")
-        setSort("products")
+        product.getActual(produs)
         e.preventDefault();
     }
-    const allNovelty = (e) => {
-        product.getNoveltyProducts()
-        setActive("novelty")
-        setBreadcrumb("Новинки")
-        setSort("novelty")
-        history.push({
-            popular: "",
-        })
+    const sortProducts = (e, des) => {
         e.preventDefault();
-    }
-    const allPopular = (e) => {
-        product.getPopularProducts()
-        setActive("popular")
-        setBreadcrumb("Популярное")
-        setSort("popular")
         history.push({
-            popular: "",
+            search: `?products=${produs}&sort=${des}`
         })
-        e.preventDefault();
+        product.getAllProductsSort(produs, des)
     }
-    const allDiscount = (e) => {
-        product.discountTodo()
-        setActive("discount")
-        setBreadcrumb("Скидки")
-        history.push({
-            popular: "",
-        })
-        e.preventDefault();
-    }
+    // const allNovelty = (e, produs) => {
+    //    window.location.href = `/catalog?products=novelty`;
+    //     product.getActualProducts(produs)
+    //     setActive("novelty")
+    //     // setBreadcrumb("Новинки")
+    //     // setSort("novelty")
+    //     // history.push({
+    //     //     popular: "",
+    //     // })
+    //     e.preventDefault();
+    // }
+    // const allPopular = (e) => {
+    //     product.getPopularProducts()
+    //     setActive("popular")
+    //     setBreadcrumb("Популярное")
+    //     setSort("popular")
+    //     history.push({
+    //         popular: "",
+    //     })
+    //     e.preventDefault();
+    // }
+    // const allDiscount = (e) => {
+    //     product.discountTodo()
+    //     setActive("discount")
+    //     setBreadcrumb("Скидки")
+    //     history.push({
+    //         popular: "",
+    //     })
+    //     e.preventDefault();
+    // }
     const typeOfProduct = (e, title) => {
         product.fetchTodoCatalog(title)
         setActive("typeProduct")
@@ -178,6 +193,18 @@ const Catolog = observer((props) => {
     const handleShow = () => setLgShow(true);
 
     let data = JSON.parse(localStorage.getItem('order'))
+    let wish = JSON.parse(localStorage.getItem('wishlist'))
+
+    const  as = (num) => {
+        console.log(num & 1)
+        if(num & 1){
+            return false
+        }else {
+            return true
+        }
+
+    }
+    console.log(as(1))
 
     const addCardLocal = (proId, price, color, title, count) => {
         // let data = JSON.parse(localStorage.getItem('order'))
@@ -208,6 +235,24 @@ const Catolog = observer((props) => {
 
 
     }
+    console.log(wish?.map(i => i.id === 7))
+    const addWishlistLocal = (e, proId) => {
+        let wish = JSON.parse(localStorage.getItem('wishlist'))
+        if (wish === null) {
+            wish = []
+        }
+        wish.push({id: proId})
+        localStorage.setItem('wishlist', JSON.stringify(wish));
+        e.preventDefault();
+    }
+    const deleteWishLocal = (proId) => {
+        if (wish === null) {
+            data = []
+        }
+        wish?.push({id: proId})
+        localStorage.setItem('wishlist', JSON.stringify(data));
+    }
+
 
     const addWishlist = (e, id) => {
         e.preventDefault();
@@ -275,9 +320,7 @@ const Catolog = observer((props) => {
             })
     }
 
-    const sortProducts = (prod, des) => {
-      product.getAllProductsSort(prod, des)
-    }
+
 
 
 
@@ -310,13 +353,15 @@ const Catolog = observer((props) => {
 
 
     useEffect(() => {
-
-
+        product.getActual(produs)
         window.scrollTo(0, 0)
         mobile_menu()
-        user.getWishlistData()
-        user.getUserData()
-        product.fetchTodo()
+        if(user.isAuth){
+            user.getWishlistData()
+            user.getUserData()
+        }
+
+        // product.fetchTodo()
         if (query.get("name")) {
             if (parseInt(query.get("name"))) {
                 product.searchFilterArticul(parseInt(query.get("name")))
@@ -325,12 +370,12 @@ const Catolog = observer((props) => {
             }
 
         } else {
-            if (route === "discount") {
+            if (produs === "discount") {
                 product.discountTodo()
-                setBreadcrumb("Скидки")
-            } else if (!route) {
-                setBreadcrumb("Актуальные")
-                product.getActualProducts().then(() => {
+                // setBreadcrumb("Скидки")
+            } else if (produs) {
+                // setBreadcrumb("Актуальные")
+                product.getActual(produs).then(() => {
                     const scripts = [
                         '/assets/js/jquery.elevateZoom.min.js',
                         '/assets/js/bootstrap-input-spinner.js',
@@ -350,10 +395,10 @@ const Catolog = observer((props) => {
                         document.body.appendChild(s)
                     })
                 })
-            } else if (route === "popular") {
+            } else if (produs === "popular") {
                 product.getPopularProducts()
-                setBreadcrumb("Популярное")
-            } else if (route === "novelty") {
+                // setBreadcrumb("Популярное")
+            } else if (produs === "novelty") {
                 product.getNoveltyProducts()
                 setBreadcrumb("Новинки")
             } else if (route === "all") {
@@ -383,7 +428,6 @@ const Catolog = observer((props) => {
         })
 
     }, []);
-    console.log(sort)
     let percent
     product.discount.map((i) => i.percent === percent)
     return (
@@ -400,20 +444,21 @@ const Catolog = observer((props) => {
                         <div className="toolbox">
                             <div className="">
                                 <div className="toolbox-info">
-                                    <button onClick={() => sortProducts(sort, "asc")}
-                                            className="novelti "  >
+
+                                    <button onClick={(e) => sortProducts(e,"asc")}
+                                            className={sorted === "asc" ? "novelti actived" : "novelti"}  >
                                         Цена: По Возрастанию
                                     </button>
-                                    <button onClick={() => sortProducts(sort, "desc")}
-                                            className="novelti "  >
+                                    <button onClick={(e) => sortProducts( e,"desc")}
+                                            className={sorted === "desc" ? "novelti actived" : "novelti"}  >
                                         Цена: По Убыванию
                                     </button>
-                                    <button onClick={() => sortProducts(sort, "dis_asc")}
-                                            className="novelti "  >
+                                    <button onClick={(e) => sortProducts(e, "dis_asc")}
+                                            className={sorted === "dis_asc" ? "novelti actived" : "novelti"}  >
                                         Скидка: По Возрастанию
                                     </button>
-                                    <button onClick={() => sortProducts(sort, "dis_desc")}
-                                            className="novelti "  >
+                                    <button onClick={(e) => sortProducts(e,"dis_desc")}
+                                            className={sorted === "dis_desc" ? "novelti actived" : "novelti"} >
                                         Скидка: По Убыванию
                                     </button>
                                     {/*<button onClick={() => sortProducts(sort, "dis_desc")}*/}
@@ -436,7 +481,7 @@ const Catolog = observer((props) => {
                                     <div class="row justify-content-center">
 
                                         { product.isLoader ? <Loader/>
-                                            :currentPosts.map((prod, index) =>
+                                            : currentPosts.map((prod, index) =>
                                             <div class="col-6 col-md-4 col-lg-3">
                                                 <div class="product product-7 text-center black">
                                                     <figure key={index} class="product-media">
@@ -465,8 +510,19 @@ const Catolog = observer((props) => {
                                                                         onClick={(e) => addWishlist(e, prod.id)}
                                                                         class="icon-box-icon">
                                                                 <i class="icon-heart-o"></i>
-                                                                </span> : ''}
-                                                            {/*  */}
+                                                                </span> :
+                                                                wish?.map(i => i.id === prod.id) ?
+                                                                <FcLike onClick={(e) => deleteWishLocal(e, prod.id)} style={{
+                                                                    fontSize: "30px",
+                                                                    cursor: "pointer",
+                                                                    marginBottom: "20px"
+                                                                }}/>
+                                                                : <span style={{cursor: "pointer"}}
+                                                                        onClick={(e) => addWishlistLocal(e, prod.id)}
+                                                                        class="icon-box-icon">
+                                                                <i class="icon-heart-o"></i>
+                                                                </span>}
+                                                            {console.log(wish?.map(i => i.id === prod.id))}
                                                             <a onClick={() => openModal(prod.id)}
                                                                className="btn-product-icon btn-quickview"
                                                                title="Quick view"><span>Quick view</span></a>
@@ -566,22 +622,27 @@ const Catolog = observer((props) => {
 
                                     <div className="row justify-content-center">
                                         <div className="col-sm-12 col-md-6 col-lg-6">
-                                            <button onClick={allProduct}
-                                                    className={route === "all" ? "novelti actived" : "novelti" && Active === "all" ? "novelti actived" : "novelti" && route === "Актуальные" ? "novelti actived" : "novelti"}>Все
-                                            </button>
-
-                                            <button onClick={allNovelty}
-                                                    className={route === "novelty" && "Новинки" ? "novelti actived" : "novelti" && Active === "novelty" ? "novelti actived" : "novelti" && route === "Новинки" ? "novelti actived" : "novelti"}>Новинки
-                                            </button>
+                                            {/*<Link  to="/catalog?products=products" >*/}
+                                                <button
+                                                    onClick={(e) => allProduct(e,"products")}
+                                                        className={produs === "products" ? "novelti actived" : "novelti" && Active === "all" ? "novelti actived" : "novelti" && route === "Актуальные" ? "novelti actived" : "novelti"}>Все
+                                                </button>
+                                            {/*</Link>*/}
+                                            {/*<Link to="/catalog?products=novelty">*/}
+                                                <button
+                                                    onClick={(e) => allProduct(e,"novelty")}
+                                                        className={produs === "novelty" && "Новинки" ? "novelti actived" : "novelti" && Active === "novelty" ? "novelti actived" : "novelti" && route === "Новинки" ? "novelti actived" : "novelti"}>Новинки
+                                                </button>
+                                            {/*</Link>*/}
 
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-6">
-                                            <button onClick={allPopular}
-                                                    className={route === "popular" ? "novelti actived" : "novelti" && Active === "popular" ? "novelti actived" : "novelti" && route === "Популярное" ? "novelti actived" : "novelti"}>Популярное
+                                            <button onClick={(e) => allProduct(e,"popular")}
+                                                    className={produs === "popular" ? "novelti actived" : "novelti" && Active === "popular" ? "novelti actived" : "novelti" && route === "Популярное" ? "novelti actived" : "novelti"}>Популярное
                                             </button>
 
-                                            <button onClick={allDiscount}
-                                                    className={route === "discount" ? "novelti actived" : "novelti" && Active === "discount" ? "novelti actived" : "novelti" && route === "Скидки" ? "novelti actived" : "novelti"}>Скидки
+                                            <button onClick={(e) => allProduct(e,"discount")}
+                                                    className={produs === "discount" ? "novelti actived" : "novelti" && Active === "discount" ? "novelti actived" : "novelti" && route === "Скидки" ? "novelti actived" : "novelti"}>Скидки
                                             </button>
 
                                         </div>

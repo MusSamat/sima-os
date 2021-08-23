@@ -63,9 +63,12 @@ const Header = observer(() => {
     useEffect(() => {
         mobile_menu()
         // product.getActualProducts()
-        user?.getUserData()
-        user?.getCartData()
-        user.getWishlistData()
+        if(user.isAuth){
+            user?.getUserData()
+            user?.getCartData()
+            user.getWishlistData()
+        }
+
         product.subcategoryFilter()
         product.getSubcategory().then(() => {
             const scripts = [
@@ -120,10 +123,9 @@ const Header = observer(() => {
                                                  to={HOME_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}> <a className="sf-with-ul">Главная</a></NavLink>
                                     </li>
                                     <li className="megamenu-container ">
-                                        <NavLink className="sf-with" style={{fontSize: "18px", color: "#000000"}} to={{
-                                            pathname: CATALOG_ROUTE,
-                                            // popular: "all"
-                                        }} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="sf-with-ul">Каталог </a></NavLink>
+                                        <Link className="sf-with" style={{fontSize: "18px", color: "#000000"}}
+                                              to={`${CATALOG_ROUTE}?products=products`}
+                                              innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="sf-with-ul">Каталог </a></Link>
 
                                     </li>
                                     <li className="megamenu-container">

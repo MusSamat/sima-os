@@ -426,100 +426,69 @@ const Product = observer((props) => {
                                         <p style={{fontSize: "16px", color: "#000000"}}>Размер: <span
                                             style={{cursor: "pointer", color: "#eea287"}} onClick={handleShowRaz}> Таблица размеров</span>
                                         </p>
-                                        <Modal show={showRaz} onHide={handleCloseRaz} centered={true} animation={true} size="lg"
+                                        <Modal  show={showRaz} onHide={handleCloseRaz}  centered={true} animation={true} size="lg"
                                                aria-labelledby="contained-modal-title-vcenter"
                                                >
+
                                             <Modal.Header closeButton>
+                                                <h3>Таблица размеров</h3>
                                             </Modal.Header>
-                                                <Row style={{padding: "15px"}}>
-                                                    <Col xs={4} md={4}>
-                                                        Российский размер
-                                                    </Col>
-                                                    <Col   xs={4} md={4}>
-                                                        Размер производителя
-                                                    </Col>
-                                                    <Col   xs={4} md={4}>
-                                                        Рост, см
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        110-116
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        110
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        110-116
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        116-122
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        116
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        116-122
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        122-128
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        122
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        122-128
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        128-134
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        128
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        128-134
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        134-140
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        134
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        134-140
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        140-146
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        140
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        140-146
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        146-152
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        146
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        146-152
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        152-158
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        152
-                                                    </Col>
-                                                    <Col xs={4} md={4}>
-                                                        152-158
-                                                    </Col>
-                                                </Row>
+
+
+                                            <table style={{margin: "20px", }}>
+                                                <tr style={{ backgroundColor: "#f6f6f6", padding: "10px", margin: "10px"}}>
+                                                    <th>Российский размер</th>
+                                                    <th>Размер производителя</th>
+                                                    <th>Рост, см</th>
+                                                </tr>
+                                                <tr className="table-tr">
+                                                    <td>110-116</td>
+                                                    <td>110</td>
+                                                    <td>110-116</td>
+                                                </tr>
+                                                <tr className="table-tr">
+                                                    <td>116-122</td>
+                                                    <td>116</td>
+                                                    <td>116-122</td>
+                                                </tr>
+                                                <tr className="table-tr">
+                                                    <td>122-128</td>
+                                                    <td>122</td>
+                                                    <td>122-128</td>
+                                                </tr>
+                                                <tr className="table-tr">
+                                                    <td>128-134</td>
+                                                    <td>128</td>
+                                                    <td>128-134</td>
+                                                </tr>
+                                                <tr className="table-tr">
+                                                    <td>134-140</td>
+                                                    <td>134</td>
+                                                    <td>134-140</td>
+                                                </tr>
+                                                <tr className="table-tr">
+                                                    <td>140-146</td>
+                                                    <td>140</td>
+                                                    <td>140-146</td>
+                                                </tr>
+                                                <tr className="table-tr">
+                                                    <td>146-152</td>
+                                                    <td>146</td>
+                                                    <td>146-152</td>
+                                                </tr>
+                                                <tr className="table-tr">
+                                                    <td>152-158</td>
+                                                    <td>152</td>
+                                                    <td>152-158</td>
+                                                </tr>
+                                            </table>
+
                                         </Modal>
                                     </div>
 
                                     <div className="d-flex">
                                         {product.product.size.map(size => (
-                                            <div key={size} className="size">{size}</div>
+                                            <div key={size} className="size ">{size}</div>
                                         ))}
                                     </div>
                                     <>
@@ -536,7 +505,7 @@ const Product = observer((props) => {
                                                         }}
                                                         onClick={() => setCount(count - product.product.size.length)}>-
                                                 </button>
-                                                <span style={{
+                                                <span className="s-title" style={{
                                                     width: "30px",
                                                     padding: "px",
                                                     fontSize: "18px",
@@ -586,12 +555,12 @@ const Product = observer((props) => {
                                         <div className="col-md-12">
                                             <ul className="nav nav-pills" id="tabs-5" role="tablist">
                                                 <li className="nav-item">
-                                                    <a className="nav-link active" id="tab-17-tab" data-toggle="tab"
+                                                    <a className="nav-link active s-title" id="tab-17-tab" data-toggle="tab"
                                                        href="#tab-17" role="tab" aria-controls="tab-17"
                                                        aria-selected="true">Описание</a>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <a className="nav-link" id="tab-19-tab" data-toggle="tab"
+                                                    <a className="nav-link s-title" id="tab-19-tab" data-toggle="tab"
                                                        href="#tab-19" role="tab" aria-controls="tab-19"
                                                        aria-selected="false">Отзывы ({product.reviews.length})</a>
                                                 </li>
@@ -599,21 +568,21 @@ const Product = observer((props) => {
                                             <div className="tab-content" id="tab-content-5">
                                                 <div className="tab-pane fade show active" id="tab-17" role="tabpanel"
                                                      aria-labelledby="tab-17-tab">
-                                                    <p className="description">
+                                                    <p className="description s-title">
                                                         <strong>Размер: </strong> {product.product.size[0]}-{product.product.size[product.product.size.length - 1]}
                                                     </p>
-                                                    <p className="description">
+                                                    <p className="description s-title">
                                                         <strong>Ткань:</strong> {product.product.cloth}</p>
-                                                    <p className="description">
+                                                    <p className="description s-title">
                                                         <strong>Описание:</strong> {product.product.description}</p>
                                                 </div>
-                                                <div className="tab-pane fade" id="tab-18" role="tabpanel"
+                                                <div className="tab-pane fade s-title" id="tab-18" role="tabpanel"
                                                      aria-labelledby="tab-18-tab">
 
                                                 </div>
                                                 <div className="tab-pane fade" id="tab-19" role="tabpanel"
                                                      aria-labelledby="tab-19-tab">
-                                                    <h5 style={{color: "#000000"}}>Будту первым, кто оставил отзыв
+                                                    <h5 className="s-title">Будту первым, кто оставил отзыв
                                                         на {product.product.title}</h5>
                                                     <div class="reviews">
                                                         {product.reviews.map((r, index) =>

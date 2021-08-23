@@ -201,7 +201,7 @@ const quickView = observer(({id, active, setActive}) => {
                             </div>
 
                             <div className="details-filter-row details-row-size">
-                                <div className="d-flex">
+                                <div className="d-flex flex-wrap">
                                     {product.product.size.map(size => (
                                         <div key={size} className="size">{size}</div>
                                     ))}

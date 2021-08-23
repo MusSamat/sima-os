@@ -18,68 +18,7 @@ axios.interceptors.response.use((response) => {
 // })
 function App() {
 
-let arr = [{
-    actual: true,
-    articul: "124343411",
-    average_review_score: 1.3,
-    cloth: "ФФФыФЫ",
-    created: "2021-08-11T04:47:52.400797Z",
-    description: "asdDSAS",
-    id: 7,
-    is_favorite: false,
-    novelty: true,
-    percent: 0,
-    popular: false,
-    price: "1200.00",
 
-},
-    {
-        actual: true,
-        articul: "124343411",
-        average_review_score: 1.3,
-        cloth: "ФФФыФЫ",
-        created: "2021-08-11T04:47:52.400797Z",
-        description: "asdDSAS",
-        id: 7,
-        is_favorite: false,
-        novelty: true,
-        percent: 0,
-        popular: false,
-        price: "1900.00",
-
-    },
-    {
-        actual: true,
-        articul: "124343411",
-        average_review_score: 1.3,
-        cloth: "ФФФыФЫ",
-        created: "2021-08-11T04:47:52.400797Z",
-        description: "asdDSAS",
-        id: 7,
-        is_favorite: false,
-        novelty: true,
-        percent: 0,
-        popular: false,
-        price: "1400.00",
-
-    },
-,
-    {
-        actual: true,
-        articul: "124343411",
-        average_review_score: 1.3,
-        cloth: "ФФФыФЫ",
-        created: "2021-08-11T04:47:52.400797Z",
-        description: "asdDSAS",
-        id: 7,
-        is_favorite: false,
-        novelty: true,
-        percent: 0,
-        popular: false,
-        price: "1800.00",
-
-    }]
-console.log(arr.sort((a,b) => parseInt(b.price) ))
 
 
     return (
@@ -96,3 +35,80 @@ console.log(arr.sort((a,b) => parseInt(b.price) ))
 }
 
 export default App;
+
+//
+// import React from "react";
+// import {
+//     BrowserRouter as Router,
+//     Link,
+//     useLocation
+// } from "react-router-dom";
+//
+// // React Router does not have any opinions about
+// // how you should parse URL query strings.
+// //
+// // If you use simple key=value query strings and
+// // you do not need to support IE 11, you can use
+// // the browser's built-in URLSearchParams API.
+// //
+// // If your query strings contain array or object
+// // syntax, you'll probably need to bring your own
+// // query parsing function.
+//
+// export default function QueryParamsExample() {
+//     return (
+//         <Router>
+//             <QueryParamsDemo />
+//         </Router>
+//     );
+// }
+//
+// // A custom hook that builds on useLocation to parse
+// // the query string for you.
+// function useQuery() {
+//     return new URLSearchParams(useLocation().search);
+// }
+//
+// function QueryParamsDemo() {
+//     let query = useQuery();
+//
+//     return (
+//         <div>
+//             <div>
+//                 <h2>Accounts</h2>
+//                 <ul>
+//                     <li>
+//                         <Link to="/account?name=netflix">Netflix</Link>
+//                     </li>
+//                     <li>
+//                         <Link to="/account?name=zillow-group">Zillow Group</Link>
+//                     </li>
+//                     <li>
+//                         <Link to="/account?name=yahoo">Yahoo</Link>
+//                     </li>
+//                     <li>
+//                         <Link to="/account?name=modus-create">Modus Create</Link>
+//                     </li>
+//                 </ul>
+//
+//                 <Child name={query.get("name")} />
+//             </div>
+//         </div>
+//     );
+// }
+//
+// function Child({ name }) {
+//     return (
+//         <div>
+//             {name ? (
+//                 <h3>
+//                     The <code>name</code> in the query string is &quot;{name}
+//                     &quot;
+//                 </h3>
+//             ) : (
+//                 <h3>There is no name in the query string</h3>
+//             )}
+//         </div>
+//     );
+// }
+
