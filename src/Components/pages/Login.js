@@ -60,6 +60,9 @@ console.log(3 % fer.length)
                 user.setIsAuth(true)
                 localStorage.setItem('value', JSON.stringify(response.data));
                 history.push(MYACOUNT_ROUTE)
+                if(response.data === 401) {
+                    localStorage.removeItem("value");
+                }
             })
             .catch(error => {
                 setLoading(false)
@@ -73,9 +76,6 @@ console.log(3 % fer.length)
 
     }
 
-    // axios.interceptors.request.use((request) => {
-    //     return request
-    // })
 
     useEffect(() => {
         window.scrollTo(0, 0)

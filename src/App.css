@@ -467,13 +467,53 @@
 }
 
 /* Header */
+.header-right{
+    margin-left: auto !important;
+}
+.search-box{
+    position: relative;
+    height: 40px;
+    width: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-box input{
+    height: 100%;
+    width: 80%;
+    border: none;
+    font-size: 18px;
+    border: none;
+    padding: 0 10px 0 10px !important;
+    outline: none;
+}
+.search-box .search-btn{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    right: -25px !important;
+    transform: translate(-50%);
+    line-height: 50px;
+    text-align: center;
+}
+.search-box .cancel-btn{
+    position: absolute;
+    right: -45px !important;
+    transform: translate(-50%);
+    cursor: pointer;
+}
+.search-box.showed{
+    width: 250px;
+    border: 1px solid black;
+    border-radius: 50px;
+    z-index: 999;
+}
 .sima-logo{
     font-family: 'Archivo Black', sans-serif !important;
     margin-bottom: -8px;
 }
 .icons{
     font-size: 20px;
-    margin-right: 20px;
     color: black;
     cursor: pointer;
     font-weight: bold;
@@ -497,7 +537,7 @@
     padding: 10px;
 }
 .header-search .header-search-wrapper.show {
-    margin-top: 20px !important;
+    margin-right: 10px !important;
 }
 
 .logo1 {
@@ -552,7 +592,7 @@
 }
 
 .header .header-center {
-    margin-right: 15rem !important;
+    /*margin-right: 15rem !important;*/
 }
 
 .container {

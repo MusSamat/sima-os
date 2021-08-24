@@ -13,7 +13,7 @@ const Cart = observer(() => {
     let sum = 0;
 
     let data = JSON.parse(localStorage.getItem('order'))
-    console.log(data)
+
     const UpdateCart = (e) => {
         const data = JSON.stringify({
             product: user.items.map(i => i.product.id),
@@ -62,8 +62,6 @@ const Cart = observer(() => {
 
     const deleteLocal = async (e, id) => {
         let order = product.productOrder.filter((item) => item.product !== id);
-        // product.productOrder.push(order);
-        console.log(order)
         product.getActualProducts()
          data = data.filter((item) => item.id !== id)
         await localStorage.setItem("order", JSON.stringify(data));
@@ -91,9 +89,11 @@ const Cart = observer(() => {
     useEffect(() => {
         window.scrollTo(0, 0)
         product.getActualProducts()
-        user.getCartData().then((items) => {
-            console.log(items)
-        })
+        if(user.isAuth){
+            user.getCartData().then((items) => {
+                console.log(items)
+            })
+        }
 
     }, [])
     return (
@@ -122,9 +122,6 @@ const Cart = observer(() => {
                                         </thead>
 
                                         <tbody>
-                                        {console.log(user.items)}
-                                        {/*{console.log(product.products?.filter((i) => i.id === data).map((c) => c.id))}*/}
-                                        {/*{console.log(data)}*/}
                                         { user.isAuth ? user.items?.map((c, index) =>
 
 

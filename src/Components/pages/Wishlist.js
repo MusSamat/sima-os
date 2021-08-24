@@ -5,9 +5,14 @@ import axios from "axios";
 import {Link, NavLink} from 'react-router-dom';
 import "../../App.css";
 import {HOME_ROUTE} from '../../utils/Const';
+import {toast} from "react-toastify";
 
 const Wishlist = observer(() => {
     const {user} = useContext(Context)
+    const {product} = useContext(Context)
+
+    let wish = JSON.parse(localStorage.getItem('wishlist'))
+    let data = JSON.parse(localStorage.getItem('order'))
 
 
     const deleteWish = (id) => {
@@ -60,11 +65,49 @@ const Wishlist = observer(() => {
         e.preventDefault();
     }
 
+    const deleteWishLocal = async (proId) => {
+        wish = wish.filter((item) => item.id !== proId)
+        await localStorage.setItem("wishlist", JSON.stringify(wish));
+        if (wish.length === 0) {
+            localStorage.removeItem("wishlist");
+        }
+        product.getActualProducts()
+    }
+
+    const addCardLocal = (proId, price, color, title, count) => {
+        let productId = product.productOrder?.map((i) => i.product)
+        if (data === null) {
+            data = []
+        }
+        data.push({id: proId, quantity: count, color: color, title: title, price: price})
+        let found = -1
+        productId.map(item => {
+            if (item === proId) {
+                found = item
+            }
+        })
+        if (found === -1) {
+            localStorage.setItem('order', JSON.stringify(data));
+            product.productOrder.push({
+                product: proId,
+                quantity: count,
+                price: price,
+                color: color,
+                title: title
+            })
+        } else {
+            toast.warning("этот товар есть в карзина")
+            found = -1
+        }
+        deleteWishLocal(proId)
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0)
-
-        user.getWishlistData()
-
+        product.getActualProducts()
+        if(user.isAuth) {
+            user.getWishlistData()
+        }
 
     }, [])
     return (
@@ -73,12 +116,6 @@ const Wishlist = observer(() => {
 
                 <div className="page-content">
                     <div className="container">
-                        {/*<ol className="breadcrumb mb-4 ">*/}
-                        {/*    <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}
-                        {/*                                                                href="">Главная</a></NavLink>*/}
-                        {/*    </li>*/}
-                        {/*    <li className="breadcrumb-item"><a href=""> Изображение</a></li>*/}
-                        {/*</ol>*/}
                         <table className="table table-wishlist table-mobile">
                             <thead>
                             <tr>
@@ -92,7 +129,7 @@ const Wishlist = observer(() => {
 
                             <tbody>
                             {console.log(user.list)}
-                            {user.list?.map((l, index) =>
+                            {user.isAuth ? user.list?.map((l, index) =>
                                 <tr key={index}>
                                     <td className="product-col">
                                         <div className="product">
@@ -124,20 +161,44 @@ const Wishlist = observer(() => {
                                         <button onClick={() => deleteWish(l.product.id)} className="btn-remove"><i
                                             className="icon-close">{}</i></button>
                                     </td>
-                                </tr>)}
+                                </tr>) :
+                                product.products?.filter((i) => wish?.map(d => d.id).includes(i.id)).map((l, index) =>
+                                    <tr key={index}>
+                                        <td className="product-col">
+                                            <div className="product">
+                                                <Link to={{pathname: '/product/' + l.id}}>
+                                                    <figure className="product-media">
+                                                        <a>
+                                                            <img
+                                                                src={`${process.env.REACT_APP_BASE_URL}${l.images[0]?.images[0]}`}
+                                                                alt="Product image"/>
+                                                        </a>
+                                                    </figure>
+                                                </Link>
+                                                <h3 className="product-title poppi">
+                                                    <a href="">{l.title} </a>
+                                                </h3>
+                                            </div>
+                                        </td>
+                                        <td className="price-col s-title">{l.price} ₽</td>
+                                        <td className="stock-col"><span className="in-stock">В наличии</span></td>
+                                        <td className="action-col">
+                                            <div className="dropdown">
+                                                <button onClick={() => addCardLocal( l.id, l.price, l.images[0].title, l.title, l.size.length)}
+                                                        className="btn btn-block btn-outline-primary-2">
+                                                    В КОРЗИНУ
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td className="remove-col">
+                                            <button onClick={() => deleteWishLocal(l.id)} className="btn-remove"><i
+                                                className="icon-close">{}</i></button>
+                                        </td>
+                                    </tr>)}
 
                             </tbody>
                         </table>
-                        {/* <div className="wishlist-share">
-                            <div className="social-icons social-icons-sm mb-2">
-                                <label  className="social-label">Поделись:</label>
-                                <a href="#" className="social-icon" title="Facebook" target="_blank"><i className="icon-facebook-f"></i></a>
-                                <a href="#" className="social-icon" title="Twitter" target="_blank"><i className="icon-twitter"></i></a>
-                                <a href="#" className="social-icon" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
-                                <a href="#" className="social-icon" title="Youtube" target="_blank"><i className="icon-youtube"></i></a>
-                                <a href="#" className="social-icon" title="Pinterest" target="_blank"><i className="icon-pinterest"></i></a>
-                            </div>
-                        </div> */}
+
                     </div>
                 </div>
             </main>

@@ -29,12 +29,15 @@ const Product = observer((props) => {
     const [hover, setHover] = useState(false);
     const [show, setShow] = useState(false);
     const [showRaz, setShowRaz] = useState(false);
+    const [localName, setLocalName] = useState("")
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const handleCloseRaz = () => setShowRaz(false);
     const handleShowRaz = () => setShowRaz(true);
+
+    console.log(props)
 
 
 
@@ -185,14 +188,16 @@ const Product = observer((props) => {
 
 
         })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
-
-            })
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/`, data,user.isAuth ? {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + this.token?.token
+            }
+        } : {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
             .then(response => {
                 product.getData(id)
                 setCurrValue(0)
@@ -280,8 +285,7 @@ const Product = observer((props) => {
                             { props.location.breadcrumb ?
                                 <li className="breadcrumb-item "
                                     aria-current="page"><Link style={{color: "#000000"}}
-                                                              to={{pathname: CATALOG_ROUTE,
-                                                                  popular: props.location.breadcrumb}}> {props.location.breadcrumb}</Link>
+                                                              to={`${CATALOG_ROUTE}?products=${props.location.produs}`}> {props.location.breadcrumb}</Link>
                                 </li>
                             :
                                     <>
@@ -354,12 +358,6 @@ const Product = observer((props) => {
                                                 src={process.env.REACT_APP_BASE_URL + selectedImage}
                                                 data-zoom-image={process.env.REACT_APP_BASE_URL + selectedImage}
                                                  alt="product image"/>
-                                            {/*<a*/}
-                                            {/*    href={process.env.REACT_APP_BASE_URL + selectedImage}*/}
-                                            {/*    id="btn-product-gallery"*/}
-                                            {/*    className="btn-product-gallery">*/}
-                                            {/*    <i className="icon-arrows"></i>*/}
-                                            {/*</a>*/}
                                         </figure>
 
                                         <div id="product-zoom-gallery" className="product-image-gallery">
@@ -505,12 +503,13 @@ const Product = observer((props) => {
                                                         }}
                                                         onClick={() => setCount(count - product.product.size.length)}>-
                                                 </button>
-                                                <span className="s-title" style={{
+                                                <span className="s-title"  style={{
                                                     width: "30px",
-                                                    padding: "px",
+                                                    padding: "2px",
                                                     fontSize: "18px",
                                                 }}>{count}</span>
                                                 <a style={{
+                                                    marginTop: "4px",
                                                     marginLeft: "7px",
                                                     width: "30px",
                                                     cursor: "pointer",
@@ -648,7 +647,10 @@ const Product = observer((props) => {
                                                     >
 
                                                         </textarea>
+                                                    {user.isAuth ? "" :
+                                                    <input placeholder="Имя..." value={localName} onChange={e => setLocalName(e.target.value)} type="text" className="mt-2 mb-2 s-title"/> }
                                                     <div className="d-grid gap-2">
+
 
                                                         <div className="dropdown">
                                                             <button style={{fontSize: "18px"}}

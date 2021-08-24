@@ -199,10 +199,7 @@ const Main = observer(() => {
                             <h1 className="intro-title">{img.title}<br/>< strong
                                 style={{marginLeft: "-9px"}}>sale</strong></h1>
 
-                            <Link to={{
-                                pathname: CATALOG_ROUTE,
-                                popular: "discount"
-                            }} className="btn">
+                            <Link to={`${CATALOG_ROUTE}?products=discount`} className="btn">
                                 <span style={{fontSize: "20px"}}>Показать</span>
                                 <i className="icon-long-arrow-right"></i>
                             </Link>
@@ -295,10 +292,7 @@ const Main = observer(() => {
                         { modalActive && <Modal active={modalActive} setActive={setModalActive} id={prodactId}/>}
 
 
-                        <Link to={{
-                            pathname: CATALOG_ROUTE,
-                            popular: "discount"
-                        }}>
+                        <Link to={`${CATALOG_ROUTE}?products=discount`}>
                             <div className="more-container text-center mt-3 mb-3">
                                 <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
                                     className="icon-long-arrow-right"></i></a>
@@ -403,10 +397,7 @@ const Main = observer(() => {
 
                     </div>
 
-                    <Link to={{
-                        pathname: CATALOG_ROUTE,
-                        popular: "novelty"
-                    }}>
+                    <Link to={`${CATALOG_ROUTE}?products=novelty`}>
                         <div className="more-container text-center mt-3 mb-3">
                             <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
                                 className="icon-long-arrow-right"></i></a>
@@ -509,10 +500,7 @@ const Main = observer(() => {
                         </div>
 
                     </div>
-                    <Link to={{
-                        pathname: CATALOG_ROUTE,
-                        popular: "popular"
-                    }}>
+                    <Link to={`${CATALOG_ROUTE}?products=popular`}>
                         <div className="more-container text-center mt-3 mb-3">
                             <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
                                 className="icon-long-arrow-right"></i></a>

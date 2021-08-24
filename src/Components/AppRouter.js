@@ -6,7 +6,7 @@ import Main from './pages/Main';
 import History from "./pages/History";
 
 export default function AppRouter() {
-    localStorage.removeItem('order');
+    // localStorage.removeItem('order');
     return (
         <div style={{marginTop: "30px"}}>
             {/*<Router history={History}>*/}

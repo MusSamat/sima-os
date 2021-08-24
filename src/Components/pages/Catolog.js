@@ -81,9 +81,6 @@ const Catolog = observer((props) => {
     const produs = query.get('products')
     const sorted = query.get('sort')
 
-    console.log(names)
-    console.log(produs)
-
 
     const classes = useStyles();
 
@@ -125,10 +122,11 @@ const Catolog = observer((props) => {
 
     const history = useHistory();
 
-    const allProduct = (e, produs) => {
+    const allProduct = (e, produs, bread) => {
         history.push({
             search: `?products=${produs}`
         })
+        setBreadcrumb(bread)
         product.getActual(produs)
         e.preventDefault();
     }
@@ -139,36 +137,6 @@ const Catolog = observer((props) => {
         })
         product.getAllProductsSort(produs, des)
     }
-    // const allNovelty = (e, produs) => {
-    //    window.location.href = `/catalog?products=novelty`;
-    //     product.getActualProducts(produs)
-    //     setActive("novelty")
-    //     // setBreadcrumb("Новинки")
-    //     // setSort("novelty")
-    //     // history.push({
-    //     //     popular: "",
-    //     // })
-    //     e.preventDefault();
-    // }
-    // const allPopular = (e) => {
-    //     product.getPopularProducts()
-    //     setActive("popular")
-    //     setBreadcrumb("Популярное")
-    //     setSort("popular")
-    //     history.push({
-    //         popular: "",
-    //     })
-    //     e.preventDefault();
-    // }
-    // const allDiscount = (e) => {
-    //     product.discountTodo()
-    //     setActive("discount")
-    //     setBreadcrumb("Скидки")
-    //     history.push({
-    //         popular: "",
-    //     })
-    //     e.preventDefault();
-    // }
     const typeOfProduct = (e, title) => {
         product.fetchTodoCatalog(title)
         setActive("typeProduct")
@@ -195,19 +163,7 @@ const Catolog = observer((props) => {
     let data = JSON.parse(localStorage.getItem('order'))
     let wish = JSON.parse(localStorage.getItem('wishlist'))
 
-    const  as = (num) => {
-        console.log(num & 1)
-        if(num & 1){
-            return false
-        }else {
-            return true
-        }
-
-    }
-    console.log(as(1))
-
     const addCardLocal = (proId, price, color, title, count) => {
-        // let data = JSON.parse(localStorage.getItem('order'))
         let productId = product.productOrder?.map((i) => i.product)
         if (data === null) {
             data = []
@@ -232,10 +188,12 @@ const Catolog = observer((props) => {
             toast.warning("этот товар есть в карзина")
             found = -1
         }
-
-
     }
-    console.log(wish?.map(i => i.id === 7))
+
+    const getItem = (id) => {
+        const a = wish?.find(i => i.id === id)
+        return a ? a.id : 0
+    }
     const addWishlistLocal = (e, proId) => {
         let wish = JSON.parse(localStorage.getItem('wishlist'))
         if (wish === null) {
@@ -243,14 +201,26 @@ const Catolog = observer((props) => {
         }
         wish.push({id: proId})
         localStorage.setItem('wishlist', JSON.stringify(wish));
+        if(sorted) {
+            product.getAllProductsSort(produs, sorted)
+        }else {
+            product.getActual(produs)
+        }
         e.preventDefault();
     }
-    const deleteWishLocal = (proId) => {
-        if (wish === null) {
-            data = []
+
+    const deleteWishLocal = async (e, proId) => {
+        wish = wish.filter((item) => item.id !== proId)
+        await localStorage.setItem("wishlist", JSON.stringify(wish));
+        if (wish.length === 0) {
+            localStorage.removeItem("wishlist");
         }
-        wish?.push({id: proId})
-        localStorage.setItem('wishlist', JSON.stringify(data));
+        if(sorted) {
+            product.getAllProductsSort(produs, sorted)
+        }else {
+            product.getActual(produs)
+        }
+        e.preventDefault();
     }
 
 
@@ -268,17 +238,10 @@ const Catolog = observer((props) => {
 
             })
             .then(response => {
-
-                if (Active === "all" || !Active  ) {
-                    product.getActualProducts()
-                } else if (Active === "novelty") {
-                    product.getNoveltyProducts()
-                } else if (Active === "popular") {
-                    product.getPopularProducts()
-                } else if (Active === "discount") {
-                    product.discountTodo()
-                } else if (Active === "typeProduct") {
-                    product.fetchTodoCatalog(name,)
+                if(sorted) {
+                    product.getAllProductsSort(produs, sorted)
+                }else {
+                    product.getActual(produs)
                 }
                 product.getData(id)
                 user.getWishlistData()
@@ -303,16 +266,10 @@ const Catolog = observer((props) => {
         })
             .then(res => {
                 user.getWishlistData()
-                if (Active === "all" || !Active) {
-                    product.getActualProducts()
-                } else if (Active === "novelty") {
-                    product.getNoveltyProducts()
-                } else if (Active === "popular") {
-                    product.getPopularProducts()
-                } else if (Active === "discount") {
-                    product.discountTodo()
-                } else if (Active === "typeProduct") {
-                    product.fetchTodoCatalog(name)
+                if(sorted) {
+                    product.getAllProductsSort(produs, sorted)
+                }else {
+                    product.getActual(produs)
                 }
             })
             .catch((e) => {
@@ -361,21 +318,17 @@ const Catolog = observer((props) => {
             user.getUserData()
         }
 
-        // product.fetchTodo()
-        if (query.get("name")) {
-            if (parseInt(query.get("name"))) {
-                product.searchFilterArticul(parseInt(query.get("name")))
-            } else {
-                product.changeFilter(query.get("name"))
-            }
+        product.fetchTodo()
+        if (names) {
+
+                product.changeFilter(names)
 
         } else {
             if (produs === "discount") {
                 product.discountTodo()
-                // setBreadcrumb("Скидки")
             } else if (produs) {
-                // setBreadcrumb("Актуальные")
-                product.getActual(produs).then(() => {
+                product.getActual(produs)
+                    .then(() => {
                     const scripts = [
                         '/assets/js/jquery.elevateZoom.min.js',
                         '/assets/js/bootstrap-input-spinner.js',
@@ -405,6 +358,7 @@ const Catolog = observer((props) => {
                 product.getActualProducts()
             }
         }
+        product.fetchTodo()
         product.getSortedData()
         product.getSubcategory().then(() => {
             const scripts = [
@@ -431,7 +385,7 @@ const Catolog = observer((props) => {
     let percent
     product.discount.map((i) => i.percent === percent)
     return (
-        <div>
+        <div className="page-wrapper">
             <main className="main">
                 <div className="page-content mt-3 ">
                     <div className="container">
@@ -461,14 +415,6 @@ const Catolog = observer((props) => {
                                             className={sorted === "dis_desc" ? "novelti actived" : "novelti"} >
                                         Скидка: По Убыванию
                                     </button>
-                                    {/*<button onClick={() => sortProducts(sort, "dis_desc")}*/}
-                                    {/*        className="novelti "  >*/}
-                                    {/*    Рейтинг: по возрастанию*/}
-                                    {/*</button>*/}
-                                    {/*<button onClick={() => sortProducts(sort, "dis_desc")}*/}
-                                    {/*        className="novelti "  >*/}
-                                    {/*    Рейтинг: по убыванию*/}
-                                    {/*</button>*/}
 
                                 </div>
                             </div>
@@ -491,7 +437,8 @@ const Catolog = observer((props) => {
                                                             pathname: '/product/' + prod.id,
                                                             breadcrumb: breadcrumb,
                                                             seson: seson,
-                                                            title: name
+                                                            title: name,
+                                                            produs: produs
                                                         }}>
                                                             <a>
                                                                 <img
@@ -511,7 +458,7 @@ const Catolog = observer((props) => {
                                                                         class="icon-box-icon">
                                                                 <i class="icon-heart-o"></i>
                                                                 </span> :
-                                                                wish?.map(i => i.id === prod.id) ?
+                                                                getItem(prod.id) ?
                                                                 <FcLike onClick={(e) => deleteWishLocal(e, prod.id)} style={{
                                                                     fontSize: "30px",
                                                                     cursor: "pointer",
@@ -522,7 +469,6 @@ const Catolog = observer((props) => {
                                                                         class="icon-box-icon">
                                                                 <i class="icon-heart-o"></i>
                                                                 </span>}
-                                                            {console.log(wish?.map(i => i.id === prod.id))}
                                                             <a onClick={() => openModal(prod.id)}
                                                                className="btn-product-icon btn-quickview"
                                                                title="Quick view"><span>Quick view</span></a>
@@ -550,13 +496,22 @@ const Catolog = observer((props) => {
 
 
                                                     <div class="product-body">
-                                                        <h3 class="product-title"><a href="">{prod.title}</a></h3>
+                                                        <Link to={{
+                                                            pathname: '/product/' + prod.id,
+                                                            breadcrumb: breadcrumb,
+                                                            seson: seson,
+                                                            title: name,
+                                                            produs: produs
+                                                        }}>
+                                                            <h3 class="product-title"><a href="">{prod.title}</a></h3>
+                                                        </Link>
                                                         {prod.percent ? <div class="product-price"
                                                                              style={{color: "rgb(238, 162, 135)"}}>
+                                                                <span className="new-price">{prod.discount_price} ₽</span>
+                                                                <span className="old-price">{`${prod.price} ₽`}</span>
 
 
-                                                                {Math.round(prod.price - (prod.price * prod.percent / 100))}.00
-                                                                ₽
+
 
                                                             </div> :
                                                             <div className="product-price">{`${prod.price} ₽`}</div>}
@@ -624,24 +579,24 @@ const Catolog = observer((props) => {
                                         <div className="col-sm-12 col-md-6 col-lg-6">
                                             {/*<Link  to="/catalog?products=products" >*/}
                                                 <button
-                                                    onClick={(e) => allProduct(e,"products")}
+                                                    onClick={(e) => allProduct(e,"products", "Актуальные")}
                                                         className={produs === "products" ? "novelti actived" : "novelti" && Active === "all" ? "novelti actived" : "novelti" && route === "Актуальные" ? "novelti actived" : "novelti"}>Все
                                                 </button>
                                             {/*</Link>*/}
                                             {/*<Link to="/catalog?products=novelty">*/}
                                                 <button
-                                                    onClick={(e) => allProduct(e,"novelty")}
+                                                    onClick={(e) => allProduct(e,"novelty", "Новинки")}
                                                         className={produs === "novelty" && "Новинки" ? "novelti actived" : "novelti" && Active === "novelty" ? "novelti actived" : "novelti" && route === "Новинки" ? "novelti actived" : "novelti"}>Новинки
                                                 </button>
                                             {/*</Link>*/}
 
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-6">
-                                            <button onClick={(e) => allProduct(e,"popular")}
+                                            <button onClick={(e) => allProduct(e,"popular", "Популярное")}
                                                     className={produs === "popular" ? "novelti actived" : "novelti" && Active === "popular" ? "novelti actived" : "novelti" && route === "Популярное" ? "novelti actived" : "novelti"}>Популярное
                                             </button>
 
-                                            <button onClick={(e) => allProduct(e,"discount")}
+                                            <button onClick={(e) => allProduct(e,"discount", "Скидки")}
                                                     className={produs === "discount" ? "novelti actived" : "novelti" && Active === "discount" ? "novelti actived" : "novelti" && route === "Скидки" ? "novelti actived" : "novelti"}>Скидки
                                             </button>
 

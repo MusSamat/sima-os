@@ -201,7 +201,6 @@ export default class ProductStore {
     }
 
     getAllProductsSort(prod, des) {
-        console.log(prod + des)
         this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/${prod}/?${des}`, this.token?.token ? {
@@ -318,13 +317,17 @@ export default class ProductStore {
     }
 
     changeFilter(input) {
+        this.setLoader(true)
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?title__icontains=` + input)
             .then(res => {
                 this.products = [...res.data]
+                this.setLoader(false)
             })
             .catch((e) => {
                 console.error(e)
+                this.setLoader(true)
             })
+
     }
 
     searchFilterArticul(input) {
