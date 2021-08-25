@@ -254,7 +254,7 @@ const Cart = observer(() => {
                                     </NavLink>
                                     </div>
 
-                                    <NavLink to={CATALOG_ROUTE}>
+                                    <NavLink to={`${CATALOG_ROUTE}?products=products`} >
                                         <button className="btn btn-outline-dark-2 btn-block pocuoki mb-3"><span>ПРОДОЛЖИТЬ ПОКУПКИ</span><i
                                             className="icon-refresh"></i></button>
                                     </NavLink>

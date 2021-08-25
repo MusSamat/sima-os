@@ -132,9 +132,17 @@ const Catolog = observer((props) => {
     }
     const sortProducts = (e, des) => {
         e.preventDefault();
-        history.push({
-            search: `?products=${produs}&sort=${des}`
-        })
+        if(!produs){
+            history.push({
+                search: `?products=products&sort=${des}`
+            })
+            product.getAllProductsSort("products", des)
+        }else {
+            history.push({
+                search: `?products=${produs}&sort=${des}`
+            })
+        }
+
         product.getAllProductsSort(produs, des)
     }
     const typeOfProduct = (e, title) => {
@@ -195,6 +203,10 @@ const Catolog = observer((props) => {
         return a ? a.id : 0
     }
     const addWishlistLocal = (e, proId) => {
+        console.log(product.productWishlist)
+        product.productWishlist.push({
+            id: proId,
+        })
         let wish = JSON.parse(localStorage.getItem('wishlist'))
         if (wish === null) {
             wish = []
@@ -222,7 +234,7 @@ const Catolog = observer((props) => {
         }
         e.preventDefault();
     }
-
+    console.log(product.productWishlist)
 
     const addWishlist = (e, id) => {
         e.preventDefault();
@@ -356,6 +368,8 @@ const Catolog = observer((props) => {
                 setBreadcrumb("Новинки")
             } else if (route === "all") {
                 product.getActualProducts()
+            }else{
+                product.getActualProducts()
             }
         }
         product.fetchTodo()
@@ -427,7 +441,7 @@ const Catolog = observer((props) => {
                                     <div class="row justify-content-center">
 
                                         { product.isLoader ? <Loader/>
-                                            : currentPosts.map((prod, index) =>
+                                            : currentPosts ? currentPosts.map((prod, index) =>
                                             <div class="col-6 col-md-4 col-lg-3">
                                                 <div class="product product-7 text-center black">
                                                     <figure key={index} class="product-media">
@@ -533,7 +547,7 @@ const Catolog = observer((props) => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>)}
+                                            </div>) : <h1>Not found</h1>}
                                     </div>
                                 </div>
                                 {modalActive &&

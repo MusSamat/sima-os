@@ -37,6 +37,7 @@ export default class ProductStore {
         this.productOrderFilter = []
         this.novelty = []
         this.loader = false
+        this.productWishlist = []
 
 
         makeAutoObservable(this)
@@ -320,6 +321,9 @@ export default class ProductStore {
         this.setLoader(true)
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?title__icontains=` + input)
             .then(res => {
+                if(!res){
+                    this.setLoader(true)
+                }
                 this.products = [...res.data]
                 this.setLoader(false)
             })

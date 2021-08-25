@@ -33,6 +33,7 @@ const Header = observer(() => {
 
     let sum = 0
     let data = JSON.parse(localStorage.getItem('order'))
+    let wish = JSON.parse(localStorage.getItem('wishlist'))
     const search = (e) => {
         window.location.href = `/catalog?name=${input}`;
         product.searchFilter(input)
@@ -95,135 +96,6 @@ const Header = observer(() => {
 
     return (
         <div class="page-wrapper">
-            {/*<header className="header">*/}
-            {/*    <div className="header-bottom sticky-header">*/}
-            {/*        <div className="container">*/}
-            {/*            <div className="header-left">*/}
-            {/*                <button className="mobile-menu-toggler">*/}
-            {/*                    <span className="sr-only">Toggle mobile menu</span>*/}
-            {/*                    <i className="icon-bars"></i>*/}
-            {/*                </button>*/}
-
-            {/*                <a href="index.html" className="logo">*/}
-            {/*                    <img src="assets/images/demos/demo-8/logo.png" alt="Molla Logo" width="82" height="20"/>*/}
-            {/*                </a>*/}
-            {/*            </div>*/}
-            {/*            <div className="header-center">*/}
-            {/*                <nav className="main-nav">*/}
-            {/*                    <ul className="menu sf-arrows">*/}
-            {/*                        <li className="megamenu-container active">*/}
-            {/*                            <a href="index.html" className="sf-with-ul">Home</a>*/}
-
-
-            {/*                        </li>*/}
-            {/*                        <li>*/}
-            {/*                            <a href="category.html" className="sf-with-ul">Shop</a>*/}
-            {/*                        </li>*/}
-            {/*                        <li>*/}
-            {/*                            <a href="product.html" className="sf-with-ul">Product</a>*/}
-
-            {/*                        </li>*/}
-            {/*                        <li>*/}
-            {/*                            <a href="#" className="sf-with-ul">Pages</a>*/}
-            {/*                        </li>*/}
-            {/*                        <li>*/}
-            {/*                            <a href="blog.html" className="sf-with-ul">Blog</a>*/}
-            {/*                        </li>*/}
-            {/*                        <li>*/}
-            {/*                            <a href="elements-list.html" className="sf-with-ul">Elements</a>*/}
-            {/*                        </li>*/}
-            {/*                    </ul>*/}
-            {/*                </nav>*/}
-            {/*            </div>*/}
-
-            {/*            <div className="header-right">*/}
-            {/*                <div className="header-search">*/}
-            {/*                    <a href="#" className="search-toggle" role="button"><i className="icon-search"></i></a>*/}
-            {/*                    <form action="#" method="get">*/}
-            {/*                        <div className="header-search-wrapper">*/}
-            {/*                            <label htmlFor="q" className="sr-only">Search</label>*/}
-            {/*                            <input type="search" className="form-control" name="q" id="q"*/}
-            {/*                                   placeholder="Search in..." required/>*/}
-            {/*                        </div>*/}
-            {/*                    </form>*/}
-            {/*                </div>*/}
-
-            {/*                <a href="wishlist.html" className="wishlist-link">*/}
-            {/*                    <i className="icon-heart-o"></i>*/}
-            {/*                    <span className="wishlist-count">3</span>*/}
-            {/*                </a>*/}
-
-            {/*                <div className="dropdown cart-dropdown">*/}
-            {/*                    <a href="#" className="dropdown-toggle" role="button" data-toggle="dropdown"*/}
-            {/*                       aria-haspopup="true" aria-expanded="false" data-display="static">*/}
-            {/*                        <i className="icon-shopping-cart"></i>*/}
-            {/*                        <span className="cart-count">2</span>*/}
-            {/*                        <span className="cart-txt">$ 164,00</span>*/}
-            {/*                    </a>*/}
-
-            {/*                    <div className="dropdown-menu dropdown-menu-right">*/}
-            {/*                        <div className="dropdown-cart-products">*/}
-            {/*                            <div className="product">*/}
-            {/*                                <div className="product-cart-details">*/}
-            {/*                                    <h4 className="product-title">*/}
-            {/*                                        <a href="product.html">Beige knitted elastic runner shoes</a>*/}
-            {/*                                    </h4>*/}
-
-            {/*                                    <span className="cart-product-info">*/}
-            {/*                                    <span className="cart-product-qty">1</span>*/}
-            {/*                                    x $84.00*/}
-            {/*                                </span>*/}
-            {/*                                </div>*/}
-
-            {/*                                <figure className="product-image-container">*/}
-            {/*                                    <a href="product.html" className="product-image">*/}
-            {/*                                        <img src="assets/images/products/cart/product-1.jpg" alt="product"/>*/}
-            {/*                                    </a>*/}
-            {/*                                </figure>*/}
-            {/*                                <a href="#" className="btn-remove" title="Remove Product"><i*/}
-            {/*                                    className="icon-close"></i></a>*/}
-            {/*                            </div>*/}
-
-            {/*                            <div className="product">*/}
-            {/*                                <div className="product-cart-details">*/}
-            {/*                                    <h4 className="product-title">*/}
-            {/*                                        <a href="product.html">Blue utility pinafore denim dress</a>*/}
-            {/*                                    </h4>*/}
-
-            {/*                                    <span className="cart-product-info">*/}
-            {/*                                    <span className="cart-product-qty">1</span>*/}
-            {/*                                    x $76.00*/}
-            {/*                                </span>*/}
-            {/*                                </div>*/}
-
-            {/*                                <figure className="product-image-container">*/}
-            {/*                                    <a href="product.html" className="product-image">*/}
-            {/*                                        <img src="assets/images/products/cart/product-2.jpg" alt="product"/>*/}
-            {/*                                    </a>*/}
-            {/*                                </figure>*/}
-            {/*                                <a href="#" className="btn-remove" title="Remove Product"><i*/}
-            {/*                                    className="icon-close"></i></a>*/}
-            {/*                            </div>*/}
-            {/*                        </div>*/}
-
-            {/*                        <div className="dropdown-cart-total">*/}
-            {/*                            <span>Total</span>*/}
-
-            {/*                            <span className="cart-total-price">$160.00</span>*/}
-            {/*                        </div>*/}
-
-            {/*                        <div className="dropdown-cart-action">*/}
-            {/*                            <a href="cart.html" className="btn btn-primary">View Cart</a>*/}
-            {/*                            <a href="checkout.html"*/}
-            {/*                               className="btn btn-outline-primary-2"><span>Checkout</span><i*/}
-            {/*                                className="icon-long-arrow-right"></i></a>*/}
-            {/*                        </div>*/}
-            {/*                    </div>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</header>*/}
             <header style={{
                 position: "fixed",
                 marginTop: "0px",
@@ -355,21 +227,24 @@ const Header = observer(() => {
 
                             <NavLink className="wishlist-link" to={WISHLIST_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                 <i style={{color: "#000000"}} className="icon-heart-o"></i>
-                                <span className="wishlist-count">{user.list?.length || '0'}</span>
+                                <span className="wishlist-count">{user.isAuth ? user.list?.length || '0' :  wish ? wish?.length : "0"}</span>
                             </NavLink>
                             <div className="dropdown cart-dropdown mr-10">
                                 <NavLink to={CART_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="dropdown-toggle ">
                                     <i style={{color: "#000000"}} className="icon-shopping-cart"></i>
                                     <span
-                                        className="cart-count">{user.isAuth ? user.items?.length || '0' : data?.length || "0"}</span>
+                                        className="cart-count">{user.isAuth ? user.items?.length || '0' : data ? data?.length : '0'}</span>
                                     { user.isAuth ?
                                         user.items?.map((item, index) => {
                                             sum = sum + item.product?.price * item.quantity
                                         }) :
-                                            product.productOrder?.map((item, index) => {
+                                        product.productOrder ? product.productOrder?.map((item, index) => {
                                                 sum = sum + item.price * item.quantity
-                                            })
+                                            }) : data?.map((item, index) => {
+                                            sum = sum + item.price * item.quantity
+                                        })
                                     }
+                                    {console.log(data)}
                                     <span className="cart-txt">{sum.toFixed(2) } ₽</span>
                                 </a>
                                 </NavLink>

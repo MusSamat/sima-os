@@ -266,7 +266,8 @@ const Main = observer(() => {
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
                                             <div style={{color: "#000000"}} className="product-price">
-                                                { `${discout.price} ₽`}
+                                                <span className="new-price">{discout.discount_price} ₽</span>
+                                                <span className="old-price">{`${discout.price} ₽`}</span>
                                             </div>
                                             <div className="ratings-container">
                                                 {

@@ -25,8 +25,7 @@ const OrdersTable = observer(() => {
                 </thead>
 
                 <tbody>
-                {console.log(user.items)}
-                    {user.items.map((c, index)=>
+                    {user.items?.map((c, index)=>
                     
                     
                     

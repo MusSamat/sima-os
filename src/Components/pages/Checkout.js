@@ -1,4 +1,4 @@
-import {observer} from 'mobx-react-lite';
+ import {observer} from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import {Context} from '../../index';
 import axios from "axios";
@@ -59,15 +59,15 @@ const Checkout = observer(() => {
 
         const data = JSON.stringify({
             user: user.carts.user,
-            first_name: user.isAuth ? user.userId.first_name : firstName,
-            last_name: user.isAuth ? user.userId.last_name : lastName,
+            first_name: user.isAuth ? user.userId.first_name ? user.userId.first_name : firstName : firstName,
+            last_name: user.isAuth ? user.userId.last_name ? user.userId.last_name : lastName : lastName,
             email: user.isAuth ? user.userId.email : email,
-            address: user.isAuth ? user.userId.address : address,
-            country: user.isAuth ? user.userId.country : country,
-            city: user.isAuth ? user.userId.city : city,
-            telephone: user.isAuth ? user.userId.phone_number : telophone,
+            address: user.isAuth ? user.userId.address ? user.userId.address : address : address,
+            country: user.isAuth ? user.userId.country ? user.userId.country : country : country,
+            city: user.isAuth ? user.userId.city ? user.userId.city : city : city,
+            telephone: user.isAuth ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone,
             cart_user_id: user.isAuth ? user.carts.id : '',
-            company: user.isAuth ? '' : company,
+            company: user.isAuth ? user.userId.company ? user.userId.company : company : company,
             note: note,
             items: user.isAuth ? [] : items,
         })
@@ -91,6 +91,7 @@ const Checkout = observer(() => {
                 history.push(ORDER_ROUTE)
                 product.getActualProducts()
                 localStorage.removeItem('order')
+                product.productOrder = []
             })
             .catch(error => {
                 console.log(error)
@@ -98,11 +99,11 @@ const Checkout = observer(() => {
             })
         e.preventDefault();
     }
+    console.log(user.carts)
 
     useEffect(() => {
         window.scrollTo(0, 0)
         user.getUserData()
-        console.log(user.userId)
     }, [])
     return (
         <div className="page-wrapper" style={{marginTop: "50px"}}>
@@ -159,7 +160,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Имя </label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.first_name : firstName}
+                                                value={user.isAuth ? user.userId.first_name ? user.userId.first_name : firstName : firstName}
                                                 onChange={e => setFirstName(e.target.value)}
                                                 style={{fontSize: "16px", fontWeight: "500"}}
                                                 className="form-control" required/>
@@ -169,7 +170,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Фамилия</label>
                                             <input
                                                 onChange={e => setLastName(e.target.value)}
-                                                value={user.isAuth ? user.userId.last_name : lastName} type="text"
+                                                value={user.isAuth ? user.userId.last_name ? user.userId.last_name : lastName : lastName} type="text"
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
                                         </div>
@@ -179,7 +180,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Страна</label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.country : country}
+                                                value={user.isAuth ? user.userId.country ? user.userId.country : country : country}
                                                 onChange={e => setCountry(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -189,7 +190,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Город</label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.city : city}
+                                                value={user.isAuth ? user.userId.city ? user.userId.city : city : city}
                                                 onChange={e => setCity(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -200,7 +201,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} htmlFor="register-password">Адрес</label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.address : address}
+                                                value={user.isAuth ? user.userId.address ? user.userId.address : address : address}
                                                 onChange={e => setAddress(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -212,26 +213,20 @@ const Checkout = observer(() => {
                                                 организации</label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.address : company}
+                                                value={user.isAuth ? user.userId.address ? user.userId.address : company : company}
                                                 onChange={e => setCompany(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
                                         </div>
                                     </div>
-                                    {/*<label style={{fontSize: "16px"}} for="register-password">Адрес</label>*/}
-                                    {/*<input*/}
-                                    {/*    type="text"*/}
-                                    {/*    value={user.isAuth ? user.userId.address : address}*/}
-                                    {/*    onChange={e => setAddress(e.target.value)}*/}
-                                    {/*    className="form-control" required*/}
-                                    {/*    style={{fontSize: "16px", fontWeight: "500"}}/>*/}
+
 
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <label style={{fontSize: "16px"}} for="register-password">Телефон</label>
                                             <input
                                                 onChange={e => setTelephon(e.target.value)}
-                                                value={user.isAuth ? user.userId.phone_number : telophone} type="tel"
+                                                value={user.isAuth ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone} type="tel"
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
                                         </div>

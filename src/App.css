@@ -1080,6 +1080,9 @@ a{
     font-family: 'Montserrat', sans-serif !important;
     font-size: 14px;
 }
+.forget:hover{
+    color: black;
+}
 
 /* news */
 .imgPhoto {

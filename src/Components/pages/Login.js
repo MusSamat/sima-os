@@ -142,9 +142,9 @@ console.log(3 % fer.length)
                                                         style={{fontSize: "18px"}}>{loading ? 'Загрузка...' : 'Войти'}</span>
                                                 </button>
 
-                                                <Link to={FORGET_ROUTE}>
-                                                    <a href="" className="btn btn-link">Забыли пароль?</a>
-                                                </Link>
+
+                                                    <a href="" className="btn btn-link "><Link className="forget" to={FORGET_ROUTE}>Забыли пароль?</Link></a>
+
                                             </div>
                                         </form>
                                     </div>

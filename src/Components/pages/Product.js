@@ -267,18 +267,13 @@ const Product = observer((props) => {
 
 
     return (
-        <div>
+        <div class="page-wrapper">
 
             <main className="main">
-                <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0 mt-6">
+                <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0 mt-3   ">
                     <div className="container d-flex align-items-center ">
                         <ul className="breadcrumb">
-                            {/*<li className="breadcrumb-item"><Link to={HOME_ROUTE} className="item" style={{*/}
-                            {/*    marginTop: "-3px",*/}
-                            {/*    marginRight: "-5px",*/}
-                            {/*    color: "#000000"*/}
-                            {/*}}>Главная</Link></li>*/}
-                            <li className="breadcrumb-item"><Link to={CATALOG_ROUTE} className="item" style={{
+                            <li className="breadcrumb-item"><Link to={`${CATALOG_ROUTE}?products=products`} className="item" style={{
                                 marginTop: "-3px",
                                 color: "#000000"
                             }}>Каталог</Link></li>
@@ -300,19 +295,15 @@ const Product = observer((props) => {
                                         </li> : ""}
                                     </>
                             }
-                            {/*<li className="breadcrumb-item "*/}
-                            {/*    aria-current="page"><Link style={{color: "#000000"}}*/}
-                            {/*                              to={CATALOG_ROUTE}> {props.location.breadcrumb ? props.location.breadcrumb : `${props.location.seson} > ${props.location.title}`}</Link>*/}
-                            {/*</li>*/}
                             <li className="breadcrumb-item " style={{color: "#000000"}}
                                 aria-current="page"> {product.product.title}</li>
                         </ul>
 
-                        <nav style={{border: "1px solid #000", borderRadius: "50%", width: "40px", height: "40px"}}
-                             className="product-pager ml-auto" aria-label="Product">
-                            <RiShareLine style={{color: "#000000",}} onClick={handleShow}
-                                         style={{fontSize: "30px", cursor: "pointer"}}/>
-                        </nav>
+                        {/*<nav style={{border: "1px solid #000", borderRadius: "50%", width: "40px", height: "40px"}}*/}
+                        {/*     className="product-pager ml-auto" aria-label="Product">*/}
+                        {/*    <RiShareLine style={{color: "#000000",}} onClick={handleShow}*/}
+                        {/*                 style={{fontSize: "30px", cursor: "pointer"}}/>*/}
+                        {/*</nav>*/}
                         <Modal show={show} onHide={handleClose} centered={true} animation={true}>
                             <Modal.Header closeButton>
                             </Modal.Header>
@@ -384,9 +375,16 @@ const Product = observer((props) => {
                                     <h1 style={{color: "#000000"}}
                                         className="product-title">{product.product.title}</h1>
                                     <p>Артикул: {product.product.articul}</p>
-                                    <div style={{fontWeight: "300"}} className="product-price">
-                                        {`${product.product.price} ₽`}
-                                    </div>
+                                    {product.product.percent ? <div class="product-price"
+                                                         style={{color: "rgb(238, 162, 135)"}}>
+                                            <span className="new-price">{product.product.discount_price} ₽</span>
+                                            <span className="old-price">{`${product.product.price} ₽`}</span>
+
+
+
+
+                                        </div> :
+                                        <div className="product-price">{`${product.product.price} ₽`}</div>}
                                     <label style={{
                                         color: "#9393a5",
                                         fontSize: "14px",
@@ -543,7 +541,23 @@ const Product = observer((props) => {
 
 
                                     <div className="product-details-footer">
-
+                                        <div className="social-icons social-icons-sm">
+                                            {/*<span className="social-label">Share:</span>*/}
+                                            <a style={{fontSize: "20px"}}
+                                               href="https://www.facebook.com/profile.php?id=100069533462465"
+                                               className="social-icon social-facebook" title="Facebook" target="_blank"><i
+                                                className="icon-facebook-f"></i></a>
+                                            <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company"
+                                               className="social-icon social-twitter" title="Twitter" target="_blank"><i
+                                                className="icon-twitter"></i></a>
+                                            <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/"
+                                               className="social-icon social-instagram" title="Instagram" target="_blank"><i
+                                                className="icon-instagram"></i></a>
+                                            <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"
+                                               className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
+                                            <a href="https://vk.com/simastyle" className="social-icon"><img
+                                                style={{width: "20px"}} src={vk}/></a>
+                                        </div>
 
                                     </div>
 
@@ -647,8 +661,7 @@ const Product = observer((props) => {
                                                     >
 
                                                         </textarea>
-                                                    {user.isAuth ? "" :
-                                                    <input placeholder="Имя..." value={localName} onChange={e => setLocalName(e.target.value)} type="text" className="mt-2 mb-2 s-title"/> }
+
                                                     <div className="d-grid gap-2">
 
 
@@ -664,37 +677,6 @@ const Product = observer((props) => {
 
                                                     <ToastContainer/>
                                                 </div>
-
-
-                                                {/* <div class="reviews">
-                                                            <h3>ОТЗЫВ (2)</h3>
-                                                            {user.reviews.map((r, index) =>
-                                                            <div key={index} class="review">
-                                                                <div class="row no-gutters">
-                                                                    <div class="col-auto">
-                                                                        <h4><a >{r.author}</a></h4>
-                                                                        <div class="ratings-container">
-                                                                            <div class="ratings">
-                                                                                <div class="ratings-val"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <span class="review-date"></span>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <h4></h4>
-
-                                                                        <div class="review-content">
-                                                                            <p>{r.text}</p>
-                                                                        </div>
-
-                                                                        <div class="review-action">
-                                                                            <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
-                                                                            <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>)}
-                                                        </div> */}
 
 
                                             </div>
