@@ -3,7 +3,7 @@ import {observer} from 'mobx-react-lite';
 import {Context} from '../../index';
 import {useHistory} from 'react-router';
 import {Link, NavLink} from 'react-router-dom';
-import {HOME_ROUTE} from '../../utils/Const';
+import {CATALOG_ROUTE, HOME_ROUTE} from '../../utils/Const';
 import "../../App.css";
 import Moment from 'react-moment';
 import 'moment-timezone';
@@ -25,12 +25,6 @@ const News = observer(() => {
             <main className="main mt-2">
                 <div className="page-content">
                     <div className="container ">
-                        {/*<ol className="breadcrumb mb-4 ">*/}
-                        {/*    <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}
-                        {/*                                                                href="">Главная</a></NavLink>*/}
-                        {/*    </li>*/}
-                        {/*    <li className="breadcrumb-item"><a href=""> Новости</a></li>*/}
-                        {/*</ol>*/}
                         {product.blog.map((blog, index) =>
                             <div className="entry-item lifestyle shopping " key={index}>
 
@@ -52,8 +46,14 @@ const News = observer(() => {
                                             </p>
                                             <div class="entry-content">
                                                 <Link to={{pathname: '/single/' + blog.id}}>
-                                                    <a href="" class="read-more">Подробнее</a>
+                                                    <div className="more-container text-center mt-3 mb-3">
+                                                        <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Подробнее</span><i
+                                                            className="icon-long-arrow-right"></i></a>
+                                                    </div>
                                                 </Link>
+                                                    {/*<Link to={{pathname: '/single/' + blog.id}}>*/}
+                                                    {/*    <a href="" class="read-more">Подробнее</a>*/}
+                                                    {/*</Link>*/}
                                             </div>
 
                                             {/* <button  className="btn btn-outline-dark btn-block col-12 news-btn"><span>подробнее</span><i className="icon-refresh"></i></button> */}

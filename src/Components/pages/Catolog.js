@@ -136,7 +136,7 @@ const Catolog = observer((props) => {
             history.push({
                 search: `?products=products&sort=${des}`
             })
-            product.getAllProductsSort("products", des)
+            product.getAllProductsSort("products?", des)
         }else {
             history.push({
                 search: `?products=${produs}&sort=${des}`
@@ -428,6 +428,10 @@ const Catolog = observer((props) => {
                                     <button onClick={(e) => sortProducts(e,"dis_desc")}
                                             className={sorted === "dis_desc" ? "novelti actived" : "novelti"} >
                                         Скидка: По Убыванию
+                                    </button>
+                                    <button onClick={(e) => sortProducts(e,"rat_desc")}
+                                            className={sorted === "rat_desc" ? "novelti actived" : "novelti"} >
+                                         По Рейтингу
                                     </button>
 
                                 </div>
