@@ -54,13 +54,16 @@ export default class ProductStore {
 
 
     async fetchTodo() {
+        this.setLoader(true)
         return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategorysorted`)
             .then(res => {
                 this.productSorted = [...res.data]
                 this.allProductSorted = this.productSorted
+                this.setLoader(false)
             })
             .catch((e) => {
                 console.error(e)
+                this.setLoader(false)
             })
 
 
@@ -90,7 +93,7 @@ export default class ProductStore {
             })
             .catch((e) => {
                 console.error(e)
-                this.setLoader(true)
+                this.setLoader(false)
             })
 
 
@@ -118,7 +121,7 @@ export default class ProductStore {
             })
             .catch((e) => {
                 console.error(e)
-                this.setLoader(true)
+                this.setLoader(false)
             })
 
 
@@ -145,13 +148,14 @@ export default class ProductStore {
             })
             .catch((e) => {
                 console.error(e)
-                this.setLoader(true)
+                this.setLoader(false)
             })
 
 
     }
 
     async getPopularProduct() {
+        this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
         return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/popular`, this.token?.token ? {
             headers: {
@@ -166,6 +170,7 @@ export default class ProductStore {
         })
             .then(res => {
                 this.popular = [...res.data]
+
             })
             .catch((e) => {
                 console.error(e)
@@ -195,7 +200,7 @@ export default class ProductStore {
             })
             .catch((e) => {
                 console.error(e)
-                this.setLoader(true)
+                this.setLoader(false)
             })
 
 
@@ -222,7 +227,7 @@ export default class ProductStore {
             })
             .catch((e) => {
                 console.error(e)
-                this.setLoader(true)
+                this.setLoader(false)
             })
 
 
@@ -321,26 +326,26 @@ export default class ProductStore {
         this.setLoader(true)
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?title__icontains=` + input)
             .then(res => {
-                if(!res){
-                    this.setLoader(true)
-                }
                 this.products = [...res.data]
                 this.setLoader(false)
             })
             .catch((e) => {
                 console.error(e)
-                this.setLoader(true)
+                this.setLoader(false)
             })
 
     }
 
     searchFilterArticul(input) {
+        this.setLoader(true)
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?articul__iexact=` + input)
             .then(res => {
                 this.products = [...res.data]
+                this.setLoader(false)
             })
             .catch((e) => {
                 console.error(e)
+                this.setLoader(false)
             })
     }
 

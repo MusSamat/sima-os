@@ -331,10 +331,13 @@ const Catolog = observer((props) => {
         }
 
         product.fetchTodo()
+        console.log(parseInt(names))
         if (names) {
-
+            if(parseInt(names)){
+                product.searchFilterArticul(names)
+            }else {
                 product.changeFilter(names)
-
+            }
         } else {
             if (produs === "discount") {
                 product.discountTodo()
@@ -374,7 +377,8 @@ const Catolog = observer((props) => {
         }
         product.fetchTodo()
         product.getSortedData()
-        product.getSubcategory().then(() => {
+        product.getSubcategory()
+            .then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
                 '/assets/js/bootstrap-input-spinner.js',
