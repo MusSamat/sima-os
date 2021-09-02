@@ -289,44 +289,59 @@ const Checkout = observer(() => {
                                         </table>
 
                                         <Form>
-                                            {console.log(value)}
-                                            <label style={{cursor: "pointer"}}>
-                                                <input type="radio" value="odin"
+                                            <label className="s-title" style={{cursor: "pointer"}}>
+                                                <input className="mr-3" type="radio" value="odin"
                                                        checked={value === "odin"}
                                                        onChange={e => setValue(e.target.value)}/>
                                                 Оплата курьеру при доставке
                                             </label><br/>
-                                            <label style={{cursor: "pointer"}}>
-                                                <input type="radio" value="two"
+                                            <label className="s-title" style={{cursor: "pointer"}}>
+                                                <input className="mr-3" type="radio" value="two"
                                                        checked={value === "two"}
                                                        onChange={e => setValue(e.target.value)}/>
 
                                                 VISA/MasterCard/Maestro/ЭЛКАРТ
                                             </label><br/>
-                                            <label style={{cursor: "pointer"}}>
-                                                <input type="radio" value="three"
+                                            <label className="s-title" style={{cursor: "pointer"}}>
+                                                <input className="mr-3" type="radio" value="three"
                                                        checked={value === "three"}
                                                        onChange={e => setValue(e.target.value)}/>
                                                 ЭЛСОМ
                                             </label><br/>
-                                            <label style={{cursor: "pointer"}}>
-                                                <input type="radio" value="four"
+                                            <label className="s-title" style={{cursor: "pointer"}}>
+                                                <input className="mr-3" type="radio" value="four"
                                                        checked={value === "four"}
                                                        onChange={e => setValue(e.target.value)}/>
                                                 О!Деньги
                                             </label><br/>
                                         </Form>
-                                        <span>Способ доставки</span>
-                                        <Form.Check type="radio" aria-label="radio 1" label="Доставка курьером"/>
+                                        <span>Способ доставки</span><br/>
+                                        <label className="s-title" style={{cursor: "pointer"}}>
+                                            <input className="mr-3" type="radio" value="four"
+                                                   checked={value === "four"}
+                                                  />
+                                            Доставка курьером
+                                        </label><br/>
 
-                                        <Form.Check aria-label="option 1"  label="Прочитал и согласен с"/>
+                                        <label className="s-title" style={{cursor: "pointer"}}>
+                                            <input className="mr-3" type="radio" value="four"
+                                                   checked={value === "four"}
+                                            />
+                                            Прочитал и согласен с
+                                        </label><br/>
                                         <a href="">Соглашение на обработку персональных данных</a>
-                                        <Form.Check aria-label="option 1" label="Прочитал и согласен с"/>
+
+                                        <label className="s-title" style={{cursor: "pointer"}}>
+                                            <input className="mr-3" type="radio" value="four"
+                                                   checked={value === "four"}
+                                            />
+                                            Прочитал и согласен с
+                                        </label><br/>
                                         <a href="">Условия использования</a>
 
 
                                         <button onClick={sendOrder} type="submit"
-                                                className="btn btn-outline-primary-2 btn-order btn-block">
+                                                className="btn btn-outline-primary-2 btn-order btn-block mt-3">
                                             <span style={{fontSize: "18px"}}>Подтвердить заказ</span>
                                         </button>
                                         <ToastContainer/>
