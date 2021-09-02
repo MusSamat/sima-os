@@ -202,12 +202,13 @@
 /*    bottom: 10px;*/
 /*}*/
 .novelti{
-    min-width: 120px !important;
+    min-width: 115px !important;
     margin-bottom: 10px;
     border: 1px solid #d7d7d7;
     font-family: 'Montserrat', sans-serif !important;
     background-color: white;
     margin-right: 10px;
+    font-size: 14px;
 }
 .novelti.actived{
     color: white;

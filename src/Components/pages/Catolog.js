@@ -404,48 +404,48 @@ const Catolog = observer((props) => {
                 <div className="page-content mt-3 ">
                     <div className="container">
                         <nav>
-                            <ol className="breadcrumb">
-                                {/*<li className="breadcrumb-item"><a href="/">Главная</a></li>*/}
-                                <li className="breadcrumb-item"><a href="">СОРТИРОВКА:</a></li>
-                            </ol>
+
                         </nav>
-                        <div className="toolbox">
-                            <div className="">
-                                <div className="toolbox-info">
 
-                                    <button onClick={(e) => sortProducts(e,"asc")}
-                                            className={sorted === "asc" ? "novelti actived" : "novelti"}  >
-                                        Цена: По Возрастанию
-                                    </button>
-                                    <button onClick={(e) => sortProducts( e,"desc")}
-                                            className={sorted === "desc" ? "novelti actived" : "novelti"}  >
-                                        Цена: По Убыванию
-                                    </button>
-                                    <button onClick={(e) => sortProducts(e, "dis_asc")}
-                                            className={sorted === "dis_asc" ? "novelti actived" : "novelti"}  >
-                                        Скидка: По Возрастанию
-                                    </button>
-                                    <button onClick={(e) => sortProducts(e,"dis_desc")}
-                                            className={sorted === "dis_desc" ? "novelti actived" : "novelti"} >
-                                        Скидка: По Убыванию
-                                    </button>
-                                    <button onClick={(e) => sortProducts(e,"rat_desc")}
-                                            className={sorted === "rat_desc" ? "novelti actived" : "novelti"} >
-                                         По Рейтингу
-                                    </button>
-
-                                </div>
-                            </div>
-                        </div>
                         <div className="row">
-                            <div className="col-lg-9 overflow-hidden">
+                            <div className="col-lg-9 overflow-hidden ">
+                                <ol className="breadcrumb">
+                                    <li className="breadcrumb-item"><a href="">СОРТИРОВКА:</a></li>
+                                </ol>
+                                <div className="toolbox">
+                                    <div className="">
+                                        <div className="toolbox-info">
 
+                                            <button onClick={(e) => sortProducts(e,"asc")}
+                                                    className={sorted === "asc" ? "novelti actived" : "novelti"}  >
+                                                Цена: По Возрастанию
+                                            </button>
+                                            <button onClick={(e) => sortProducts( e,"desc")}
+                                                    className={sorted === "desc" ? "novelti actived" : "novelti"}  >
+                                                Цена: По Убыванию
+                                            </button>
+                                            <button onClick={(e) => sortProducts(e, "dis_asc")}
+                                                    className={sorted === "dis_asc" ? "novelti actived" : "novelti"}  >
+                                                Скидка: По Возрастанию
+                                            </button>
+                                            <button onClick={(e) => sortProducts(e,"dis_desc")}
+                                                    className={sorted === "dis_desc" ? "novelti actived" : "novelti"} >
+                                                Скидка: По Убыванию
+                                            </button>
+                                            <button onClick={(e) => sortProducts(e,"rat_desc")}
+                                                    className={sorted === "rat_desc" ? "novelti actived" : "novelti"} >
+                                                По Рейтингу
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="products mb-3">
                                     <div class="row justify-content-center">
 
                                         { product.isLoader ? <Loader/>
-                                            : currentPosts ? currentPosts.map((prod, index) =>
+                                            : currentPosts.length ? currentPosts.map((prod, index) =>
                                             <div class="col-6 col-md-4 col-lg-3">
                                                 <div class="product product-7 text-center black">
                                                     <figure key={index} class="product-media">
@@ -551,7 +551,7 @@ const Catolog = observer((props) => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>) : <h1>Not found</h1>}
+                                            </div>) : <h2 className="s-title ">Продакт не найден</h2>}
                                     </div>
                                 </div>
                                 {modalActive &&
@@ -560,7 +560,7 @@ const Catolog = observer((props) => {
                                 <Pagination postsPerPage={postsPerPage} totalPosts={product.products.length}
                                             paginate={paginate}/>
                             </div>
-                            <aside className="col-lg-3 order-lg-first  mt-3">
+                            <aside className="col-lg-3 order-lg-first ">
                                 <div className="sidebar sidebar-shop salt ">
 
 

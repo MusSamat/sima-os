@@ -30,9 +30,7 @@ const ChangePass = observer((props) => {
 
 
     const sing = () => {
-        if (password !== password1) {
-            passError = true
-        }
+
         const article = {password, token}
 
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/password_reset/confirm/`, article)
@@ -69,6 +67,13 @@ const ChangePass = observer((props) => {
     //     event.preventDefault();
 
     // }
+
+    const checkValidation = (e) => {
+        setPassword1(e.target.value)
+        if(password != password1){
+            setPassError(true)
+        }
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -115,7 +120,7 @@ const ChangePass = observer((props) => {
                                                     placeholder="Пароль"
                                                     required
                                                     value={password}
-                                                    onChange={e => setPassword1(e.target.value)}
+                                                    onChange={e => setPassword(e.target.value)}
                                                 />
                                             </div>
 
@@ -128,7 +133,7 @@ const ChangePass = observer((props) => {
                                                     placeholder="Подтвердить Пароль"
                                                     required
                                                     value={password1}
-                                                    onChange={e => setPassword1(e.target.value)}
+                                                    onChange={e => checkValidation(e)}
                                                 />
                                             </div>
 

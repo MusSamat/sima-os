@@ -30,6 +30,7 @@ const Product = observer((props) => {
     const [show, setShow] = useState(false);
     const [showRaz, setShowRaz] = useState(false);
     const [localName, setLocalName] = useState("")
+    const [bottons, setBottons] = useState(false)
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -109,6 +110,7 @@ const Product = observer((props) => {
 
     const handleClick = (value) => {
         setCurrValue(value)
+        setBottons(true)
     }
 
     const handleMouseOver = value => {
@@ -202,6 +204,7 @@ const Product = observer((props) => {
                 product.getData(id)
                 setCurrValue(0)
                 setText("")
+                setBottons(false)
             })
             .catch(error => {
                 console.log(error)
@@ -536,6 +539,33 @@ const Product = observer((props) => {
                                                     : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}
                                                          className="btn-product btn-wishlist" title="Wishlist"></a> : ""}
                                             </div>
+                                        </div>
+
+                                        <div className="mb-3">
+                                            {stars.map((_, index) => {
+                                                return (
+                                                    <FaStar
+                                                        key={index}
+                                                        size={18}
+                                                        style={{
+                                                            marginRight: 8,
+                                                            cursor: "pointer"
+                                                        }}
+                                                        color={(hoverValue || currValue) > index ? colors.orange : colors.grey}
+                                                        onClick={() => handleClick(index + 1)}
+                                                        onMouseOver={() => handleMouseOver(index + 1)}
+                                                        onMouseLeave={handleMouseLeave}
+                                                        onChange={e => setCurrValue(e.target.value)}
+                                                        value={currValue}
+                                                    />
+                                                )
+                                            })}
+                                            {bottons ?
+                                                <button  style={{fontSize: "18px"}}
+                                                        onClick={(e) => sendRating(e)}
+                                                        className="btn btn-block btn-outline-primary-2 voiti mt-2 ">
+                                                    Отправить
+                                                </button> : null}
                                         </div>
                                     </>
 
