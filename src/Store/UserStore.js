@@ -24,6 +24,9 @@ export default class UserStore {
         this.delivery = []
         this.about = []
         this.contact = []
+        this.popular = []
+        this.novelty = []
+        this.logo = []
 
 
         this.count = 0
@@ -171,6 +174,41 @@ export default class UserStore {
             })
     }
 
+    getImagePopular() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-popular`)
+            .then(res => {
+                this.popular = res.data
+                return this.popular
+
+            })
+            .catch((e) => {
+                console.error(e)
+            })
+    }
+    getImageNovelty() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-collection`)
+            .then(res => {
+                this.novelty = res.data
+                return this.novelty
+
+            })
+            .catch((e) => {
+                console.error(e)
+            })
+    }
+
+    getImageLogo() {
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/logo`)
+            .then(res => {
+                this.logo = res.data
+                return this.logo
+
+            })
+            .catch((e) => {
+                console.error(e)
+            })
+    }
+
     getImageAbout() {
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-about-us/`)
             .then(res => {
@@ -220,7 +258,6 @@ export default class UserStore {
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/` + id)
             .then(response => {
                 this.reviews = response.data
-                console.log(this.reviews)
 
             })
             .catch((e) => {

@@ -28,7 +28,7 @@ export default function Mobile() {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink className="sf-with-ul" to={SUBCATEGORY_ROUTE}>
+                                <NavLink className="sf-with-ul" to={`${CATALOG_ROUTE}?products=products`}>
                                     КАТАЛОГ
                                 </NavLink>
                             </li>
@@ -70,7 +70,7 @@ export default function Mobile() {
 
                             </li>
                             <li>
-                                <a href="/subcategory">КАТАЛОГ</a>
+                                <a href={`${CATALOG_ROUTE}?products=products`}>КАТАЛОГ</a>
 
                             </li>
                             <li>

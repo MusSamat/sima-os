@@ -52,25 +52,15 @@ const Header = observer(() => {
 
     }
 
-    // window.addEventListener("click", function(){
-    //     const byId = document.getElementById("inputId")
-    //     const ids = document.getElementById("ids")
-    //     if(byId !== "click" || ids !== "click"){
-    //         user.setRoute(false)
-    //     }
-    //
-    // });
-
 
     useEffect(() => {
         mobile_menu()
-        // product.getActualProducts()
         if(user.isAuth){
             user?.getUserData()
             user?.getCartData()
             user.getWishlistData()
         }
-
+        user.getImageLogo()
         product.subcategoryFilter()
         product.getSubcategory().then(() => {
             const scripts = [
@@ -110,10 +100,13 @@ const Header = observer(() => {
                                 <span className="sr-only">Toggle mobile menu</span>
                                 <i className="icon-bars"></i>
                             </button>
+                            {user.logo.map((img ) =>
+
                             <NavLink exact to={HOME_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
-                                <img className="logo1" src={logo}/>
+                                <img className="logo1" src={img.image}/>
                                 {/*<h1 className="sima-logo ">SIMA</h1>*/}
                             </NavLink>
+                            )}
 
                         </div>
                         <div className="header-center">
@@ -185,16 +178,7 @@ const Header = observer(() => {
                             </nav>
                         </div>
 
-                            {/*<div className="search-box">*/}
-                            {/*    <input className="search-txt" type="text" name="" placeholder="Type to search"/>*/}
-                            {/*    <a className="search-btn" >*/}
-                            {/*        <VscSearch className="icons" />*/}
-                            {/*    </a>*/}
-                            {/*</div>*/}
-
                         <div className="divInput">
-                            {/*{user.isRoute ?  <input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)}type="text" className="inputFor" id="inputId"*/}
-                            {/*                        placeholder="Search in..." />: null}*/}
                         </div>
 
                         <div className="header-right">
@@ -203,22 +187,7 @@ const Header = observer(() => {
                                 <div className="search-btn">
                                     <VscSearch className="icons" />
                                 </div>
-                                {/*<div className="cancel-btn">*/}
-                                {/*    <FaTimes className="icons" />*/}
-                                {/*</div>*/}
                             </div>
-                             {/*<div className="header-search">*/}
-                             {/*   <a href="" className="search-toggle active" role="button"><i className="icon-search"></i></a>*/}
-                             {/*   <form action="" method="get">*/}
-                             {/*       <div className="header-search-wrapper show">*/}
-                             {/*           <label  className="sr-only">Search</label>*/}
-                             {/*           <input onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)} type="text" className="form-control"*/}
-                             {/*                  placeholder="Search in..." />*/}
-                             {/*       </div>*/}
-                             {/*   </form>*/}
-                             {/*</div>*/}
-
-                            {/*{user.isRoute ? <VscSearch className="icons" id="ids" onClick={()=>user.setRoute(false)}/> : <VscSearch id="ids" className="icons" onClick={()=>user.setRoute(true)}/>}*/}
                             {user.isAuth ?
                                 <NavLink to={MYACOUNT_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "30px"}} data-toggle="modal"><i
                                     style={{color: "#000000"}} className="icon-user"></i></a></NavLink>

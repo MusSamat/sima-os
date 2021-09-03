@@ -180,6 +180,8 @@ const Main = observer(() => {
         user.getImage().then(() => {
             product.discountTodo1(user.isAuth)
         })
+        user.getImageNovelty()
+        user.getImagePopular()
         product.getNoveltyProducts1(user.isAuth)
         product.getDataNew()
         product.getSubcategory().then(() => {
@@ -302,18 +304,19 @@ const Main = observer(() => {
                     </div>
 
                 </div>
+                {user.novelty.map((img) =>
 
                 <div style={{boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)"}} className="trending mb-6 mt-8">
                     <a href="">
 
-                        <img src={Restangle30} alt="Banner"/>
+                        <img src={img.image} alt="Banner"/>
                     </a>
                     <div className="banner banner-big d-md-block">
                         <div className="banner-content text-center">
-                            <h3 className="banner-title text-white">новая коллекция</h3>
+                            <h3 className="banner-title text-white">{img.title}</h3>
                         </div>
                     </div>
-                </div>
+                </div>)}
 
 
                 <div className="container ">
@@ -406,17 +409,20 @@ const Main = observer(() => {
                     </Link>
 
                 </div>
+                {user.popular.map((img) =>
                 <div  className="trending mb-6 mt-8">
                     <a href="">
 
-                        <img src={Frame} alt="Banner"/>
+                            <img src={img.image} alt="Banner"/>
+
+
                     </a>
                     <div className="banner banner-big d-md-block">
                         <div className="banner-content text-center">
-                            <h3 className="banner-title text-white">Популярные</h3>
+                            <h3 className="banner-title text-white">{img.title}</h3>
                         </div>
                     </div>
-                </div>
+                </div>)}
 
                 <div className="container ">
 
