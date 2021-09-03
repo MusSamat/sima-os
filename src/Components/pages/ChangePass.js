@@ -3,9 +3,7 @@ import axios from "axios";
 import {observer} from 'mobx-react-lite';
 import {Context} from '../../index';
 import {useHistory} from 'react-router';
-import {SUBCATEGORY_ROUTE, MYACOUNT_ROUTE} from '../../utils/Const';
-import useForm from "react-hook-form";
-import {Link} from 'react-router-dom';
+import { LOGIN_ROUTE} from '../../utils/Const';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../../App.css";
@@ -18,15 +16,9 @@ const ChangePass = observer((props) => {
     const [password1, setPassword1] = useState()
     const [passError, setPassError] = useState(false)
     const {user} = useContext(Context)
-    // const [{ username, email, password, passwordConfirmation }, setState] = useState(initialState);
     const history = useHistory()
     const token = props.match.params.token
-    console.log(logo)
-    console.log(token)
 
-
-    const notify = () => toast.success("Wow so easy!");
-    const notifyError = (error) => toast.error(`Wow so ${error} easy!`);
 
 
     const sing = () => {
@@ -36,37 +28,15 @@ const ChangePass = observer((props) => {
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/password_reset/confirm/`, article)
             .then(response => {
                 setEmail("")
-                notify()
+                history.push(LOGIN_ROUTE)
+
             })
             .catch(error => {
                 console.log(error)
-                notifyError(error)
             })
 
 
     }
-    // const ForgetPass = (event) => {
-    //     const article = {password, username}
-
-    //     axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, article)
-    //         .then(response => {
-    //             setPassword(response.password)
-    //             setUsername(response.username)
-    //             user.setIsAuth(true)
-    //             localStorage.setItem('value', JSON.stringify(response.data));
-    //             history.push(SUBCATEGORY_ROUTE)
-    //             notify()
-    //         })
-    //         .catch(error =>{   
-    //             console.log(error)
-    //             user.setIsAuth(false)
-    //             notifyError(error)
-    //     })
-
-
-    //     event.preventDefault();
-
-    // }
 
     const checkValidation = (e) => {
         setPassword1(e.target.value)
@@ -110,7 +80,7 @@ const ChangePass = observer((props) => {
                                             <div className="form-group">
 
                                             </div>
-                                            <p className="forget mb-3">Электронный адрес, указанный в вашем профиле</p>
+                                            <p className="forget mb-3">Новый пароль</p>
                                             <div className="form-group">
                                                 <input
                                                     type="password"
@@ -138,9 +108,9 @@ const ChangePass = observer((props) => {
                                             </div>
 
                                             <div className="form-footer">
-                                                <button onClick={() => sing()} type="submit"
+                                                <button disabled={!passError} onClick={() => sing()} type="submit"
                                                         className="btn btn-outline-primary-2">
-                                                    <span style={{fontSize: "18px"}}>Получить код</span>
+                                                    <span style={{fontSize: "18px"}}>Отправить</span>
                                                 </button>
                                             </div>
                                         </form>
