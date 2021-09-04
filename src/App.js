@@ -6,16 +6,22 @@ import {BrowserRouter} from 'react-router-dom';
 import Mobile from './Components/pages/Mobile';
 import {ToastContainer} from "react-toastify";
 import axios from "axios";
+import React, {useEffect} from "react";
 
 
-axios.interceptors.response.use((response) => {
-    console.log(response.data)
-    return response
-})
-// axios.interceptors.request.use((request) => {
-//     console.log(request)
-//     return request
+// axios.interceptors.response.use((response) => {
+//     console.log(response.data)
+//     return response
 // })
+axios.interceptors.response.use(response => {
+    return response;
+}, error => {
+    if (error.response.status === 401) {
+        localStorage.removeItem('value');
+    }
+    return error;
+});
+
 function App() {
 
 
