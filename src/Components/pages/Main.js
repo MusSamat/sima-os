@@ -297,7 +297,7 @@ const Main = observer(() => {
 
                         <Link to={`${CATALOG_ROUTE}?products=discount`}>
                             <div className="more-container text-center mt-3 mb-3">
-                                <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
+                                <a href="" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
                                     className="icon-long-arrow-right"></i></a>
                             </div>
                         </Link>
@@ -403,7 +403,7 @@ const Main = observer(() => {
 
                     <Link to={`${CATALOG_ROUTE}?products=novelty`}>
                         <div className="more-container text-center mt-3 mb-3">
-                            <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
+                            <a href="" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
                                 className="icon-long-arrow-right"></i></a>
                         </div>
                     </Link>
@@ -509,7 +509,7 @@ const Main = observer(() => {
                     </div>
                     <Link to={`${CATALOG_ROUTE}?products=popular`}>
                         <div className="more-container text-center mt-3 mb-3">
-                            <a href="category.html" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
+                            <a href="" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
                                 className="icon-long-arrow-right"></i></a>
                         </div>
                     </Link>

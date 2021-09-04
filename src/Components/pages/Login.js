@@ -9,6 +9,8 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from 'react-router-dom';
 import logo from "../../assets/login.png"
+import {BsFillEyeFill} from "react-icons/bs";
+import {BsFillEyeSlashFill} from "react-icons/bs";
 
 const Login = observer(() => {
     const [email, setEmail] = useState()
@@ -16,6 +18,7 @@ const Login = observer(() => {
     const [username, setUsername] = useState()
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [show, setShow] = useState(false)
     const {user} = useContext(Context)
     const history = useHistory()
 
@@ -25,9 +28,12 @@ const Login = observer(() => {
 
     const notify = () => toast.success("Вау, так просто!");
     const notifyError = (error) => toast.error(`Wow so ${error} easy!`);
-    let fer = [1,2,3,4,5,6,7]
 
-console.log(3 % fer.length)
+
+    const toggler = (e, bo) => {
+        setShow(bo)
+        e.preventDefault();
+    }
     const sing = () => {
         const article = {email, password, username}
 
@@ -121,9 +127,10 @@ console.log(3 % fer.length)
                                                 />
                                             </div>
 
-                                            <div className="form-group">
+                                            <div  className="form-group input-group shadow border rounded">
                                                 <input
-                                                    type="password"
+                                                    style={{borderRight: "none"}}
+                                                    type={show ? "text" : "password"}
                                                     className="form-control"
                                                     id="singin-password-2"
                                                     name="singin-password"
@@ -132,6 +139,9 @@ console.log(3 % fer.length)
                                                     value={password}
                                                     onChange={e => setPassword(e.target.value)}
                                                 />
+                                                {show ? <BsFillEyeFill  style={{marginTop: "15px", cursor: "pointer", marginRight: "10px", color: "black"  }} onClick={(e) => toggler(e,false)}/> :
+
+                                                <BsFillEyeSlashFill onClick={(e) => toggler(e,true)} style={{marginTop: "15px", cursor: "pointer", marginRight: "10px", color: "black" }}/> }
                                             </div>
                                             <p className="forget">Если Вы забыли свой пароль, нажмите на кнопку "забыл
                                                 пароль".</p>
@@ -176,9 +186,10 @@ console.log(3 % fer.length)
                                                 />
                                             </div>
 
-                                            <div className="form-group">
+                                            <div  className="form-group input-group shadow border rounded">
                                                 <input
-                                                    type="password"
+                                                    style={{borderRight: "none"}}
+                                                    type={show ? "text" : "password"}
                                                     className="form-control"
                                                     id="register-password-2"
                                                     name="register-password"
@@ -187,6 +198,9 @@ console.log(3 % fer.length)
                                                     value={password}
                                                     onChange={e => setPassword(e.target.value)}
                                                 />
+                                                {show ? <BsFillEyeFill style={{marginTop: "15px", cursor: "pointer", marginRight: "10px", color: "black" }} onClick={(e) => toggler(e,false)}/> :
+
+                                                    <BsFillEyeSlashFill   onClick={(e) => toggler(e,true)} style={{marginTop: "15px", cursor: "pointer", marginRight: "10px", color: "black"}}/> }
                                             </div>
 
 

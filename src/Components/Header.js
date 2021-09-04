@@ -185,7 +185,8 @@ const Header = observer(() => {
                             <div onClick={()=>user.setRoute(true)} className={ user.isRoute ? "search-box showed" : "search-box" }>
                                 <input className="" type="text" onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)} placeholder="Search in..." />
                                 <div className="search-btn">
-                                    <VscSearch className="icons" />
+                                    {/*<VscSearch className="icons" />*/}
+                                    <i  className="icon-search icons"></i>
                                 </div>
                             </div>
                             {user.isAuth ?

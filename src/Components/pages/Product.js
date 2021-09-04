@@ -302,13 +302,14 @@ const Product = observer((props) => {
                                 aria-current="page"> {product.product.title}</li>
                         </ul>
 
-                        {/*<nav style={{border: "1px solid #000", borderRadius: "50%", width: "40px", height: "40px"}}*/}
-                        {/*     className="product-pager ml-auto" aria-label="Product">*/}
-                        {/*    <RiShareLine style={{color: "#000000",}} onClick={handleShow}*/}
-                        {/*                 style={{fontSize: "30px", cursor: "pointer"}}/>*/}
-                        {/*</nav>*/}
+                        <nav style={{border: "1px solid #000", borderRadius: "50%", width: "40px", height: "40px"}}
+                             className="product-pager ml-auto" aria-label="Product">
+                            <RiShareLine style={{color: "#000000", marginLeft: "2px", fontSize: "30px", cursor: "pointer"}} onClick={handleShow}
+                                         />
+                        </nav>
                         <Modal show={show} onHide={handleClose} centered={true} animation={true}>
                             <Modal.Header closeButton>
+                                <h3 className="s-title d-flex justify-content-center">Поделиться</h3>
                             </Modal.Header>
                             <Modal.Body centered={true}>
 
@@ -570,26 +571,26 @@ const Product = observer((props) => {
                                     </>
 
 
-                                    <div className="product-details-footer">
-                                        <div className="social-icons social-icons-sm">
-                                            {/*<span className="social-label">Share:</span>*/}
-                                            <a style={{fontSize: "20px"}}
-                                               href="https://www.facebook.com/profile.php?id=100069533462465"
-                                               className="social-icon social-facebook" title="Facebook" target="_blank"><i
-                                                className="icon-facebook-f"></i></a>
-                                            <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company"
-                                               className="social-icon social-twitter" title="Twitter" target="_blank"><i
-                                                className="icon-twitter"></i></a>
-                                            <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/"
-                                               className="social-icon social-instagram" title="Instagram" target="_blank"><i
-                                                className="icon-instagram"></i></a>
-                                            <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"
-                                               className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
-                                            <a href="https://vk.com/simastyle" className="social-icon"><img
-                                                style={{width: "20px"}} src={vk}/></a>
-                                        </div>
+                                    {/*<div className="product-details-footer">*/}
+                                    {/*    <div className="social-icons social-icons-sm">*/}
+                                    {/*        <span className="social-label">Share:</span>*/}
+                                    {/*        <a style={{fontSize: "20px"}}*/}
+                                    {/*           href="https://www.facebook.com/profile.php?id=100069533462465"*/}
+                                    {/*           className="social-icon social-facebook" title="Facebook" target="_blank"><i*/}
+                                    {/*            className="icon-facebook-f"></i></a>*/}
+                                    {/*        <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company"*/}
+                                    {/*           className="social-icon social-twitter" title="Twitter" target="_blank"><i*/}
+                                    {/*            className="icon-twitter"></i></a>*/}
+                                    {/*        <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/"*/}
+                                    {/*           className="social-icon social-instagram" title="Instagram" target="_blank"><i*/}
+                                    {/*            className="icon-instagram"></i></a>*/}
+                                    {/*        <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"*/}
+                                    {/*           className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>*/}
+                                    {/*        <a href="https://vk.com/simastyle" className="social-icon"><img*/}
+                                    {/*            style={{width: "20px"}} src={vk}/></a>*/}
+                                    {/*    </div>*/}
 
-                                    </div>
+                                    {/*</div>*/}
 
 
                                     <div className="row">

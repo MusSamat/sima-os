@@ -7,8 +7,8 @@ import vk from "../../assets/vk.png"
 
 export default function Footer() {
 
-    const [name, setName] = useState()
-    const [number, setNumber] = useState()
+    const [name, setName] = useState('')
+    const [number, setNumber] = useState('')
 
     const sendName = (event) => {
 
@@ -66,14 +66,17 @@ export default function Footer() {
                         </div>
 
                     </div>
-                    <div style={{width: "250px",}} onClick={sendName} className="btn-wrap">
-                        <a href="" class="btn btn-outline-dark btn-rounded"><span style={{
-                            fontWeight: "600",
-                            fontStyle: "normal",
-                            fontSize: "20px",
-                            lineHeight: "24px"
-                        }}>Отправить</span></a>
+                    <div className="more-container text-center mt-3 mb-3">
+                        <a href="" onClick={sendName} className="btn btn-outline-dark-3 btn-more"><span>Отправить</span></a>
                     </div>
+                    {/*<div style={{width: "250px",}} onClick={sendName} className="btn-wrap">*/}
+                    {/*    <a href="" class="btn btn-outline-dark btn-rounded"><span style={{*/}
+                    {/*        fontWeight: "600",*/}
+                    {/*        fontStyle: "normal",*/}
+                    {/*        fontSize: "20px",*/}
+                    {/*        lineHeight: "24px"*/}
+                    {/*    }}>Отправить</span></a>*/}
+                    {/*</div>*/}
                 </div>
 
             </div>
