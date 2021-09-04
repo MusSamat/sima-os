@@ -234,7 +234,6 @@ const Catolog = observer((props) => {
         }
         e.preventDefault();
     }
-    console.log(product.productWishlist)
 
     const addWishlist = (e, id) => {
         e.preventDefault();

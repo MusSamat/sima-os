@@ -174,20 +174,55 @@ const Main = observer(() => {
         console.log(modalActive)
 
     }
+    let wish = JSON.parse(localStorage.getItem('wishlist'))
+
+    const getItem = (id) => {
+        const a = wish?.find(i => i.id === id)
+        return a ? a.id : 0
+    }
+
+    const addWishlistLocal = (e, proId) => {
+        product.productWishlist.push({
+            id: proId,
+        })
+        let wish = JSON.parse(localStorage.getItem('wishlist'))
+        if (wish === null) {
+            wish = []
+        }
+        wish.push({id: proId})
+        localStorage.setItem('wishlist', JSON.stringify(wish));
+        product.discountTodo1()
+        product.getNoveltyProducts1()
+        product.getPopularProduct()
+        e.preventDefault();
+    }
+
+    const deleteWishLocal = async (e, proId) => {
+        wish = wish.filter((item) => item.id !== proId)
+        await localStorage.setItem("wishlist", JSON.stringify(wish));
+        if (wish.length === 0) {
+            localStorage.removeItem("wishlist");
+        }
+        product.discountTodo1()
+        product.getNoveltyProducts1()
+        product.getPopularProduct()
+        e.preventDefault();
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0)
 
         user.getImage().then(() => {
-            product.discountTodo1(user.isAuth)
+            product.discountTodo1()
         })
         user.getImageNovelty()
         user.getImagePopular()
-        product.getNoveltyProducts1(user.isAuth)
+        product.getNoveltyProducts1()
         product.getDataNew()
         product.getSubcategory().then(() => {
             product.getDataNewSeason(product?.subcategory[0]?.id)
         })
-        product.getPopularProduct(user.isAuth)
+        product.getPopularProduct()
 
     }, [])
 
@@ -239,8 +274,18 @@ const Main = observer(() => {
                                                             onClick={(e) => addWishlist(e, discout.id)}
                                                             className="icon-box-icon">
                                                                 <i className="icon-heart-o"></i>
-                                                                </span> : ''}
-                                                {/*  */}
+                                                                </span> :
+                                                    getItem(discout.id) ?
+                                                        <FcLike onClick={(e) => deleteWishLocal(e, discout.id)} style={{
+                                                            fontSize: "30px",
+                                                            cursor: "pointer",
+                                                            marginBottom: "20px"
+                                                        }}/>
+                                                        : <span style={{cursor: "pointer"}}
+                                                                onClick={(e) => addWishlistLocal(e, discout.id)}
+                                                                class="icon-box-icon">
+                                                                <i class="icon-heart-o"></i>
+                                                                </span>}
                                                 <a onClick={(e) => {e.preventDefault(); openModal(discout.id)}}
                                                    className="btn-product-icon btn-quickview"
                                                    title="Quick view"><span>Quick view</span></a>
@@ -348,7 +393,17 @@ const Main = observer(() => {
                                                             onClick={(e) => addWishlist(e, discout.id)}
                                                             className="icon-box-icon">
                                                                 <i className="icon-heart-o"></i>
-                                                                </span> : ''}
+                                                                </span> : getItem(discout.id) ?
+                                                    <FcLike onClick={(e) => deleteWishLocal(e, discout.id)} style={{
+                                                        fontSize: "30px",
+                                                        cursor: "pointer",
+                                                        marginBottom: "20px"
+                                                    }}/>
+                                                    : <span style={{cursor: "pointer"}}
+                                                            onClick={(e) => addWishlistLocal(e, discout.id)}
+                                                            class="icon-box-icon">
+                                                                <i class="icon-heart-o"></i>
+                                                                </span>}
                                                 <a onClick={() => openModal(discout.id)}
                                                    className="btn-product-icon btn-quickview"
                                                    title="Quick view"><span>Quick view</span></a>
@@ -453,7 +508,17 @@ const Main = observer(() => {
                                                             onClick={(e) => addWishlist(e, discout.id)}
                                                             className="icon-box-icon">
                                                                 <i className="icon-heart-o"></i>
-                                                                </span> : ''}
+                                                                </span> : getItem(discout.id) ?
+                                                    <FcLike onClick={(e) => deleteWishLocal(e, discout.id)} style={{
+                                                        fontSize: "30px",
+                                                        cursor: "pointer",
+                                                        marginBottom: "20px"
+                                                    }}/>
+                                                    : <span style={{cursor: "pointer"}}
+                                                            onClick={(e) => addWishlistLocal(e, discout.id)}
+                                                            class="icon-box-icon">
+                                                                <i class="icon-heart-o"></i>
+                                                                </span>}
                                                 {/*  */}
                                                 <a onClick={() => openModal(discout.id)}
                                                    className="btn-product-icon btn-quickview"
