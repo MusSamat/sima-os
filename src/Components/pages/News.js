@@ -3,9 +3,7 @@ import {observer} from 'mobx-react-lite';
 import {Context} from '../../index';
 import {useHistory} from 'react-router';
 import {Link, NavLink} from 'react-router-dom';
-import {CATALOG_ROUTE, HOME_ROUTE} from '../../utils/Const';
 import "../../App.css";
-import Moment from 'react-moment';
 import 'moment-timezone';
 
 

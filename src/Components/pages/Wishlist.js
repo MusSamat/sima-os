@@ -105,7 +105,7 @@ const Wishlist = observer(() => {
     useEffect(() => {
         window.scrollTo(0, 0)
         product.getActualProducts()
-        if(user.isAuth) {
+        if(user.token?.token) {
             user.getWishlistData()
         }
 
@@ -128,8 +128,7 @@ const Wishlist = observer(() => {
                             </thead>
 
                             <tbody>
-                            {console.log(user.list)}
-                            {user.isAuth ? user.list?.map((l, index) =>
+                            {user.token?.token ? user.list?.map((l, index) =>
                                 <tr key={index}>
                                     <td className="product-col">
                                         <div className="product">

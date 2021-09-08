@@ -28,11 +28,9 @@ const ForgetPass = observer(() => {
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/password_reset/`, article)
             .then(response => {
                 setEmail("")
-                notify()
             })
             .catch(error => {
                 console.log(error)
-                notifyError(error)
             })
 
 

@@ -89,7 +89,7 @@ const Cart = observer(() => {
     useEffect(() => {
         window.scrollTo(0, 0)
         product.getActualProducts()
-        if(user.isAuth){
+        if(user.token?.token){
             user.getCartData().then((items) => {
                 console.log(items)
             })
@@ -122,7 +122,7 @@ const Cart = observer(() => {
                                         </thead>
 
                                         <tbody>
-                                        { user.isAuth ? user.items?.map((c, index) =>
+                                        { user.token?.token ? user.items?.map((c, index) =>
 
 
                                             <tr>
@@ -212,7 +212,7 @@ const Cart = observer(() => {
                                         <div className="cart-discount">
                                         </div>
 
-                                        {user.isAuth ? <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2 pocuoki"><span>ОБНОВИТЬ КОРЗИНУ</span><i
+                                        {user.token?.token ? <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2 pocuoki"><span>ОБНОВИТЬ КОРЗИНУ</span><i
                                             className="icon-refresh"></i></a> : null}
                                     </div>
                                 </div>
@@ -225,7 +225,7 @@ const Cart = observer(() => {
                                             <tr className="summary-subtotal">
                                                 <td>Подытог:</td>
 
-                                                { user.isAuth ?
+                                                { user.token?.token ?
                                                     user.items?.map((item, index) => {
                                                         sum = sum + item.product.price * item.quantity
                                                     }):
@@ -233,7 +233,6 @@ const Cart = observer(() => {
                                                         sum = sum + item.price * item.quantity
                                                     })
                                                 }
-                                                {console.log(product.products)}
                                                 <td>  {sum.toFixed(2)} ₽</td>
 
                                             </tr>

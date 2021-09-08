@@ -5,6 +5,9 @@ export default class UserStore {
     constructor() {
         this._isAuth = false
         this.route = false
+        this.read = true
+        this.clicked = false
+        this.active = false
         this._user = {}
         this.token = null
         this.userId = {}
@@ -27,10 +30,19 @@ export default class UserStore {
         this.popular = []
         this.novelty = []
         this.logo = []
+        this.name = ""
 
 
         this.count = 0
         makeAutoObservable(this)
+    }
+
+    setName(name) {
+
+        this.name = name
+    }
+    get isName() {
+        return this.active
     }
 
     setIsAuth(bool) {
@@ -44,6 +56,27 @@ export default class UserStore {
 
     setRoute(bool) {
         this.route = bool
+    }
+    setRead(bool) {
+        this.read = bool
+    }
+
+    setClicked(bool) {
+        this.clicked = bool
+    }
+
+    setActive(bool) {
+        this.active = bool
+    }
+    get isActive() {
+        return this.active
+    }
+    get isClicked() {
+        return this.clicked
+    }
+
+    get isRead() {
+        return this.read
     }
 
     get isRoute() {
@@ -73,14 +106,15 @@ export default class UserStore {
             })
             .catch((e) => {
                 this.setIsAuth(false)
+                localStorage.removeItem('value');
             })
 
     }
 
     //
     getOrderData() {
-        this.userGetId = JSON.parse(localStorage.getItem('value'))
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/order/` + this.userGetId?.user.id, {
+        this.token = JSON.parse(localStorage.getItem('value'))
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/order/` + this.token?.user?.id, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token
@@ -89,7 +123,6 @@ export default class UserStore {
             .then(res => {
                 this.orders = res.data
                 this.order = this.orders
-                console.log(this.orders)
             })
             .catch((e) => {
                 console.log(e)
@@ -98,8 +131,8 @@ export default class UserStore {
     }
 
     getOrderDataId(id) {
-        this.userGetId = JSON.parse(localStorage.getItem('value'))
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/order/${this.userGetId?.user.id}/?id=${id}`, {
+        this.token = JSON.parse(localStorage.getItem('value'))
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/order/${this.token?.user.id}/?id=${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token
@@ -117,8 +150,8 @@ export default class UserStore {
 
 
     getCartData() {
-        this.userGetId = JSON.parse(localStorage.getItem('value'))
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/carts/` + this.userGetId?.user.id, {
+        this.token = JSON.parse(localStorage.getItem('value'))
+        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/carts/` + this.token?.user.id, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token
@@ -235,8 +268,8 @@ export default class UserStore {
 
 
     getWishlistData() {
-        this.userGetId = JSON.parse(localStorage.getItem('value'))
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/wisher/` + this.userGetId?.user.id, {
+        this.token = JSON.parse(localStorage.getItem('value'))
+        axios.get(`${process.env.REACT_APP_BASE_URL}/api/wisher/` + this.token?.user.id, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token

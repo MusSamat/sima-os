@@ -8,11 +8,7 @@ import axios from "axios"
 import {Button, Modal} from 'react-bootstrap'
 import Moment from 'react-moment';
 import 'moment-timezone';
-
-import {FaLastfmSquare} from 'react-icons/fa';
 import {Switch, Route, Link, NavLink} from 'react-router-dom';
-import {orderRoutes} from "../../routes";
-import OrdersTable from './OrdersTable';
 
 const Myacount = observer(() => {
 
@@ -62,7 +58,7 @@ const Myacount = observer(() => {
             password: newPassword,
             password2: confirmPassword,
         })
-        return axios.put(`${process.env.REACT_APP_BASE_URL}/change_password/${user.userGetId?.user.id}/`, data, {
+        return axios.put(`${process.env.REACT_APP_BASE_URL}/change_password/${user.token?.user.id}/`, data, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + user.token?.token
@@ -97,7 +93,7 @@ const Myacount = observer(() => {
             email: user.userId.email
 
         })
-        return axios.put(`${process.env.REACT_APP_BASE_URL}/update_profile/${user.userGetId?.user.id}/`, data, {
+        return axios.put(`${process.env.REACT_APP_BASE_URL}/update_profile/${user.token?.user.id}/`, data, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + user.token?.token
@@ -126,12 +122,14 @@ const Myacount = observer(() => {
     const openModal = (id) => {
         setLgShow(true)
         user.getOrderDataId(id)
-        console.log(id)
     }
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        user.getOrderData()
+        if(user.isAuth){
+            user.getOrderData()
+        }
+
 
 
     }, [])
@@ -176,7 +174,7 @@ const Myacount = observer(() => {
                                              aria-labelledby="tab-dashboard-link">
                                             <p style={{fontSize: "16px", color: "#000000"}}>Добро пожаловать <span
                                                 style={{fontSize: "16px"}}
-                                                className="font-weight-normal text-dark">{user.userId.username}</span> !
+                                                className="font-weight-normal text-dark">{user.userId?.username}</span> !
                                                 <br/>
                                                 Из главной страницы аккаунта вы можете посмотреть ваши
                                                    едавние
@@ -203,8 +201,7 @@ const Myacount = observer(() => {
                                                     </thead>
 
                                                     <tbody>
-                                                    {console.log(user.order)}
-                                                    {user.order.map((c, index) =>
+                                                    {user.order?.map((c, index) =>
 
 
                                                         <tr>
@@ -244,8 +241,7 @@ const Myacount = observer(() => {
                                                 </Modal.Header>
                                                 <Modal.Body style={{padding: "20px"}}>
                                                     <h3>Информация о заказе</h3>
-                                                    {console.log(user.orderId)}
-                                                    {user.orderId.map((c, index) =>
+                                                    {user.orderId?.map((c, index) =>
                                                         <p key={index}>{c.items.map((i, index) =>
                                                             <table key={index}
                                                                    className="table table-cart table-mobile">
@@ -269,7 +265,7 @@ const Myacount = observer(() => {
                                                                 </tr>
                                                                 <tr>
                                                                     <td>ИТОГО:</td>
-                                                                    <td>{c.items.map(i => i.quantity) * c.items.map(i => i.product.price)} ₽</td>
+                                                                    <td>{c.items?.map(i => i.quantity) * c.items?.map(i => i.product.price)} ₽</td>
                                                                 </tr>
 
                                                             </table>
@@ -346,7 +342,7 @@ const Myacount = observer(() => {
                                                     <div className="col-sm-6">
                                                         <input
                                                             placeholder="Email" type="email"
-                                                            value={user.userId.email}
+                                                            value={user.userId?.email}
                                                             onChange={e => setEmail(e.target.value)}
                                                             className="form-control" required
                                                             style={{fontSize: "16px", fontWeight: "500"}}/>

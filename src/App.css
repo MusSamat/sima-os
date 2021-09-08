@@ -515,9 +515,10 @@
 }
 .icons{
     font-size: 24px;
-    color: rgb(0, 0, 0);
+    color: #666666;
     cursor: pointer;
     font-weight: 900;
+    margin-right: 2.0rem;
 }
 
 .divInput{

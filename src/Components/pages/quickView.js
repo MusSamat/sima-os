@@ -242,14 +242,14 @@ const quickView = observer(({id, active, setActive}) => {
                             <div className="product-details-action">
                                 <div className="details-action-wrapper">
                                     <div className="details-action-wrapper">
-                                        { user.isAuth ? product.product.is_favorite ?
+                                        { user.token?.token ? product.product.is_favorite ?
                                             <FcLike onClick={deleteWish}
                                                     style={{fontSize: "30px", cursor: "pointer"}}/>
                                             : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}
                                                  className="btn-product btn-wishlist" title="Wishlist"></a> : ""}
                                     </div>
                                 </div>
-                                {user.isAuth ? <a href="" onClick={addCart} className="btn-product btn-cart"><span>В Корзину</span></a>
+                                {user.token?.token ? <a href="" onClick={addCart} className="btn-product btn-cart"><span>В Корзину</span></a>
                                 : <a onClick={(e) => addCardLocal(e, product.product.id, product.product.price, product.product.images[0].title, product.product.title)}
                                      href="" className="btn-product btn-cart"><span>В Корзину</span></a>}
 

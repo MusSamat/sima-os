@@ -8,9 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {CART_ROUTE, ORDER_ROUTE} from '../../utils/Const';
 import "../../App.css";
 import {NavLink} from 'react-router-dom';
-import Checkbox from '@material-ui/core/Checkbox';
-import {Button, Col, Form, Row} from "react-bootstrap";
-import {FormControlLabel} from "@material-ui/core";
+import { Form} from "react-bootstrap";
 
 
 const Checkout = observer(() => {
@@ -59,19 +57,19 @@ const Checkout = observer(() => {
 
         const data = JSON.stringify({
             user: user.carts.user,
-            first_name: user.isAuth ? user.userId.first_name ? user.userId.first_name : firstName : firstName,
-            last_name: user.isAuth ? user.userId.last_name ? user.userId.last_name : lastName : lastName,
-            email: user.isAuth ? user.userId.email : email,
-            address: user.isAuth ? user.userId.address ? user.userId.address : address : address,
-            country: user.isAuth ? user.userId.country ? user.userId.country : country : country,
-            city: user.isAuth ? user.userId.city ? user.userId.city : city : city,
-            telephone: user.isAuth ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone,
-            cart_user_id: user.isAuth ? user.carts.id : '',
-            company: user.isAuth ? user.userId.company ? user.userId.company : company : company,
+            first_name: user.token?.token ? user.userId.first_name ? user.userId.first_name : firstName : firstName,
+            last_name: user.token?.token ? user.userId.last_name ? user.userId.last_name : lastName : lastName,
+            email: user.token?.token ? user.userId.email : email,
+            address: user.token?.token ? user.userId.address ? user.userId.address : address : address,
+            country: user.token?.token ? user.userId.country ? user.userId.country : country : country,
+            city: user.token?.token ? user.userId.city ? user.userId.city : city : city,
+            telephone: user.token?.token ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone,
+            cart_user_id: user.token?.token ? user.carts.id : '',
+            company: user.token?.token ? user.userId.company ? user.userId.company : company : company,
             note: note,
-            items: user.isAuth ? [] : items,
+            items: user.token?.token? [] : items,
         })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/order/`, data, user.isAuth ?
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/order/`, data, user.token?.token ?
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -160,7 +158,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Имя </label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.first_name ? user.userId.first_name : firstName : firstName}
+                                                value={user.token?.token ? user.userId.first_name ? user.userId.first_name : firstName : firstName}
                                                 onChange={e => setFirstName(e.target.value)}
                                                 style={{fontSize: "16px", fontWeight: "500"}}
                                                 className="form-control" required/>
@@ -170,7 +168,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Фамилия</label>
                                             <input
                                                 onChange={e => setLastName(e.target.value)}
-                                                value={user.isAuth ? user.userId.last_name ? user.userId.last_name : lastName : lastName} type="text"
+                                                value={user.token?.token ? user.userId.last_name ? user.userId.last_name : lastName : lastName} type="text"
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
                                         </div>
@@ -180,7 +178,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Страна</label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.country ? user.userId.country : country : country}
+                                                value={user.token?.token? user.userId.country ? user.userId.country : country : country}
                                                 onChange={e => setCountry(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -190,7 +188,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Город</label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.city ? user.userId.city : city : city}
+                                                value={user.token?.token ? user.userId.city ? user.userId.city : city : city}
                                                 onChange={e => setCity(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -201,7 +199,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} htmlFor="register-password">Адрес</label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.address ? user.userId.address : address : address}
+                                                value={user.token?.token ? user.userId.address ? user.userId.address : address : address}
                                                 onChange={e => setAddress(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -213,7 +211,7 @@ const Checkout = observer(() => {
                                                 организации</label>
                                             <input
                                                 type="text"
-                                                value={user.isAuth ? user.userId.address ? user.userId.address : company : company}
+                                                value={user.token?.token ? user.userId.address ? user.userId.address : company : company}
                                                 onChange={e => setCompany(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -226,7 +224,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Телефон</label>
                                             <input
                                                 onChange={e => setTelephon(e.target.value)}
-                                                value={user.isAuth ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone} type="tel"
+                                                value={user.token?.token ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone} type="tel"
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
                                         </div>
@@ -235,7 +233,7 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Email</label>
                                             <input
                                                 type="email"
-                                                value={user.isAuth ? user.userId.email : email}
+                                                value={user.token?.token ? user.userId.email : email}
                                                 onChange={e => setEmail(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -257,7 +255,7 @@ const Checkout = observer(() => {
                                             <tbody>
 
 
-                                            {user.isAuth ? user.items?.map((item, index) =>
+                                            {user.token?.token ? user.items?.map((item, index) =>
                                                     <tr key={index}>
                                                         <td>{item.product.title}</td>
                                                         <td>{(item.product?.price * item.quantity).toFixed(2)} ₽</td>
@@ -270,7 +268,7 @@ const Checkout = observer(() => {
                                             }
                                             <tr className="summary-subtotal">
                                                 <td>ПОДЫТОГ:</td>
-                                                {user.isAuth ?
+                                                {user.token?.token ?
                                                     user.items?.map((item, index) => {
                                                         sum = sum + item.product?.price * item.quantity
                                                     }) :

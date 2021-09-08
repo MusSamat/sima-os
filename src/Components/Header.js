@@ -20,8 +20,6 @@ import {Context} from "../index";
 import logo from "../assets/lolo.jpg"
 import what from "../assets/WhatsApp.png"
 import mobile_menu from "../Http/mobile_menu";
-import {VscSearch} from "react-icons/vsc";
-import {FaTimes} from "react-icons/fa";
 
 
 const Header = observer(() => {
@@ -55,7 +53,7 @@ const Header = observer(() => {
 
     useEffect(() => {
         mobile_menu()
-        if(user.isAuth){
+        if(user.token?.token){
             user?.getUserData()
             user?.getCartData()
             user.getWishlistData()
@@ -182,29 +180,28 @@ const Header = observer(() => {
                         </div>
 
                         <div className="header-right">
-                            <div onClick={()=>user.setRoute(true)} className={ user.isRoute ? "search-box showed" : "search-box" }>
+                            <div onClick={user.isRoute ? ()=>user.setRoute(false) : ()=>user.setRoute(true) } className={ user.isRoute ? "search-box showed" : "search-box" }>
                                 <input className="" type="text" onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)} placeholder="Search in..." />
                                 <div className="search-btn">
-                                    {/*<VscSearch className="icons" />*/}
                                     <i  className="icon-search icons"></i>
                                 </div>
                             </div>
-                            {user.isAuth ?
+                            {user.token?.token ?
                                 <NavLink to={MYACOUNT_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "30px"}} data-toggle="modal"><i
-                                    style={{color: "#000000"}} className="icon-user"></i></a></NavLink>
+                                    style={{color: "#666666"}} className="icon-user"></i></a></NavLink>
                                 : <NavLink to={LOGIN_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "30px"}} data-toggle="modal"><i
-                                    style={{color: "#000000"}} className="icon-user"></i></a></NavLink>}<br/>
+                                    style={{color: "#666666"}} className="icon-user"></i></a></NavLink>}<br/>
 
                             <NavLink className="wishlist-link" to={WISHLIST_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
-                                <i style={{color: "#000000"}} className="icon-heart-o"></i>
-                                <span className="wishlist-count">{user.isAuth ? user.list?.length || '0' :  wish ? wish?.length : "0"}</span>
+                                <i style={{color: "#666666"}} className="icon-heart-o"></i>
+                                <span className="wishlist-count">{user.token?.token ? user.list?.length || '0' :  wish ? wish?.length : "0"}</span>
                             </NavLink>
                             <div className="dropdown cart-dropdown mr-10">
                                 <NavLink to={CART_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="dropdown-toggle ">
-                                    <i style={{color: "#000000"}} className="icon-shopping-cart"></i>
+                                    <i style={{color: "#666666"}} className="icon-shopping-cart"></i>
                                     <span
-                                        className="cart-count">{user.isAuth ? user.items?.length || '0' : data ? data?.length : '0'}</span>
-                                    { user.isAuth ?
+                                        className="cart-count">{user.token?.token ? user.items?.length || '0' : data ? data?.length : '0'}</span>
+                                    { user.token?.token ?
                                         user.items?.map((item, index) => {
                                             sum = sum + item.product?.price * item.quantity
                                         }) :
@@ -214,7 +211,6 @@ const Header = observer(() => {
                                             sum = sum + item.price * item.quantity
                                         })
                                     }
-                                    {console.log(data)}
                                     <span className="cart-txt">{sum.toFixed(2) } ₽</span>
                                 </a>
                                 </NavLink>
@@ -223,7 +219,7 @@ const Header = observer(() => {
                                     <div style={{overflowY: "auto", maxHeight: "230px"}}>
 
                                         <div className="dropdown-cart-products">
-                                            {user.isAuth ? user.items?.map((c, index) =>
+                                            {user.token?.token ? user.items?.map((c, index) =>
                                                 <div key={index} className="product">
                                                     <div className="product-cart-details">
                                                         <h4 className="product-title">

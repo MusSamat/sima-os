@@ -1,7 +1,5 @@
 import React, {useEffect, useContext} from 'react';
 import "../../App.css";
-import {NavLink} from 'react-router-dom';
-import {HOME_ROUTE} from '../../utils/Const';
 import vk from '../../assets/vk.png'
 import {observer} from 'mobx-react-lite';
 import {Context} from '../../index';

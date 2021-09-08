@@ -8,11 +8,6 @@ import {ToastContainer} from "react-toastify";
 import axios from "axios";
 import React, {useEffect} from "react";
 
-
-// axios.interceptors.response.use((response) => {
-//     console.log(response.data)
-//     return response
-// })
 axios.interceptors.response.use(response => {
     return response;
 }, error => {

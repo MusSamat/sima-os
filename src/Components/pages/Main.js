@@ -1,8 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import "../../App.css";
-import Restangle30 from "../../assets/Rectangle30.png"
-import Frame from "../../assets/Frame.png"
 import Restangle32 from "../../assets/Rectangle31.png"
 import Restangle33 from "../../assets/Rectangle32.png"
 import Restangle34 from "../../assets/Rectangle33.png"
@@ -121,13 +119,13 @@ const Main = observer(() => {
 
             })
             .then(response => {
-                product.getNoveltyProducts1(user.isAuth)
-                product.fetchTodoCatalog(user.isAuth)
-                product.discountTodo1(user.isAuth)
+                product.getNoveltyProducts1()
+                product.fetchTodoCatalog()
+                product.discountTodo1()
                 setCount(count)
                 user.getWishlistData()
                 product.getData(id)
-                product.getPopularProduct(user.isAuth)
+                product.getPopularProduct()
             })
             .catch(error => {
                 console.log(error)
@@ -192,8 +190,6 @@ const Main = observer(() => {
         wish.push({id: proId})
         localStorage.setItem('wishlist', JSON.stringify(wish));
         product.discountTodo1()
-        product.getNoveltyProducts1()
-        product.getPopularProduct()
         e.preventDefault();
     }
 
@@ -204,8 +200,7 @@ const Main = observer(() => {
             localStorage.removeItem("wishlist");
         }
         product.discountTodo1()
-        product.getNoveltyProducts1()
-        product.getPopularProduct()
+
         e.preventDefault();
     }
 
@@ -264,7 +259,7 @@ const Main = observer(() => {
 
 
                                             <div className="product-action-vertical">
-                                                {user.isAuth ? discout.is_favorite ?
+                                                {user.token?.token ? discout.is_favorite ?
                                                     <FcLike onClick={(e) => deleteWish(e, discout.id)} style={{
                                                         fontSize: "30px",
                                                         cursor: "pointer",
@@ -294,7 +289,7 @@ const Main = observer(() => {
 
 
                                             <div className="product-action">
-                                                {user.isAuth ?
+                                                {user.token?.token ?
                                                     <a style={{cursor: "pointer"}}
                                                        onClick={(e) => addCart(e, discout.id, discout.images[0].title, discout.size.length)}
                                                        className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>
@@ -383,7 +378,7 @@ const Main = observer(() => {
 
 
                                             <div className="product-action-vertical">
-                                                {user.isAuth ? discout.is_favorite ?
+                                                {user.token?.token ? discout.is_favorite ?
                                                     <FcLike onClick={(e) => deleteWish(e, discout.id)} style={{
                                                         fontSize: "30px",
                                                         cursor: "pointer",
@@ -411,7 +406,7 @@ const Main = observer(() => {
                                             </div>
 
                                             <div className="product-action">
-                                                {user.isAuth ?
+                                                {user.token?.token ?
                                                     <a style={{cursor: "pointer"}}
                                                        onClick={(e) => addCart(e, discout.id, discout.images[0].title, discout.size.length)}
                                                        className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>
@@ -498,7 +493,7 @@ const Main = observer(() => {
 
 
                                             <div className="product-action-vertical">
-                                                {user.isAuth ? discout.is_favorite ?
+                                                {user.token?.token ? discout.is_favorite ?
                                                     <FcLike onClick={(e) => deleteWish(e, discout.id)} style={{
                                                         fontSize: "30px",
                                                         cursor: "pointer",
@@ -519,7 +514,6 @@ const Main = observer(() => {
                                                             class="icon-box-icon">
                                                                 <i class="icon-heart-o"></i>
                                                                 </span>}
-                                                {/*  */}
                                                 <a onClick={() => openModal(discout.id)}
                                                    className="btn-product-icon btn-quickview"
                                                    title="Quick view"><span>Quick view</span></a>
@@ -527,7 +521,7 @@ const Main = observer(() => {
                                             </div>
 
                                             <div className="product-action">
-                                                {user.isAuth ?
+                                                {user.token?.token ?
                                                     <a style={{cursor: "pointer"}}
                                                        onClick={(e) => addCart(e, discout.id, discout.images[0].title, discout.size.length)}
                                                        className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>

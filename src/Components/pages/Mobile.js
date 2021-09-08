@@ -77,7 +77,7 @@ export default function Mobile() {
                                 <a href={NEWS_ROUTE}>НОВОСТИ</a>
                             </li>
                             <li>
-                                <a href="">Сотрудничество</a>
+                                <a href>Сотрудничество</a>
                                 <ul>
                                     <li><a href={ABOUT_ROUTE}>О нас</a></li>
                                     <li><a href={CONTACT_ROUTE}>Контакты</a></li>

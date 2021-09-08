@@ -75,7 +75,6 @@ export default class ProductStore {
 
     async getActual(prod) {
         this.setLoader(true)
-        this.token = JSON.parse(localStorage.getItem('value'))
         return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/${prod}`, this.token?.token ? {
             headers: {
                 'Content-Type': 'application/json',

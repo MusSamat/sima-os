@@ -34,7 +34,6 @@ const Delivery = observer(() => {
                             style={{color: "#EEA287"}}>Условия доставки</h2></div>
                     </div>
                 </div>
-                {console.log(user.delivery)}
 
             </div>
             <div className="container">

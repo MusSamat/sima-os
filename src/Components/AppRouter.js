@@ -3,13 +3,10 @@ import {Switch, Route, Redirect, Router} from 'react-router-dom';
 import {publicRoutes} from "../routes";
 import { HOME_ROUTE } from "../utils/Const"
 import Main from './pages/Main';
-import History from "./pages/History";
 
 export default function AppRouter() {
-    // localStorage.removeItem('order');
     return (
         <div style={{marginTop: "30px"}}>
-            {/*<Router history={History}>*/}
                 <Switch>
                     <Route exact  path="/" component={Main} />
                     {publicRoutes.map(({path, Component}) =>
@@ -18,7 +15,6 @@ export default function AppRouter() {
 
                     <Redirect to={HOME_ROUTE} />
                 </Switch>
-            {/*</Router>*/}
         </div>
     )
 }

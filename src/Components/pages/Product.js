@@ -73,7 +73,6 @@ const Product = observer((props) => {
 
 
     const addWishlist = (e) => {
-        console.log(user.token?.token)
         const id = props.match.params.id
         const data = JSON.stringify({
             product: String(id),
@@ -190,10 +189,10 @@ const Product = observer((props) => {
 
 
         })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/`, data,user.isAuth ? {
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/`, data,user.token?.token? {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
+                'Authorization': 'Token ' + user.token?.token
             }
         } : {
             headers: {
@@ -283,18 +282,17 @@ const Product = observer((props) => {
                             { props.location.breadcrumb ?
                                 <li className="breadcrumb-item "
                                     aria-current="page"><Link style={{color: "#000000"}}
-                                                              to={`${CATALOG_ROUTE}?products=${props.location.produs}`}> {props.location.breadcrumb}</Link>
+                                                              to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {props.location.breadcrumb}</Link>
                                 </li>
                             :
                                     <>
                                     {props.location.seson ? <li className="breadcrumb-item "
                                             aria-current="page"><Link style={{color: "#000000"}}
-                                            to={{pathname: CATALOG_ROUTE,
-                                                popular:props.location.seson}}> {props.location.seson}</Link>
+                                                                      to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {props.location.seson}</Link>
                                         </li> : ""}
                                     {props.location.title ?<li className="breadcrumb-item "
                                         aria-current="page"><Link style={{color: "#000000"}}
-                                        to={CATALOG_ROUTE}> {props.location.title}</Link>
+                                                                  to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {props.location.title}</Link>
                                         </li> : ""}
                                     </>
                             }
@@ -302,11 +300,32 @@ const Product = observer((props) => {
                                 aria-current="page"> {product.product.title}</li>
                         </ul>
 
-                        <nav style={{border: "1px solid #000", borderRadius: "50%", width: "40px", height: "40px"}}
+                        <nav
                              className="product-pager ml-auto" aria-label="Product">
-                            <RiShareLine style={{color: "#000000", marginLeft: "2px", fontSize: "30px", cursor: "pointer"}} onClick={handleShow}
-                                         />
+                            {/*<RiShareLine style={{color: "#000000", marginLeft: "2px", fontSize: "30px", cursor: "pointer"}} onClick={handleShow}*/}
+                            {/*             />*/}
+
                         </nav>
+                        <div style={{borderTop: "none"}} className="product-details-footer d-flex">
+                            <div className="social-icons social-icons-sm">
+                                {/*<span className="social-label">Share:</span>*/}
+                                <a style={{fontSize: "20px"}}
+                                   href="https://www.facebook.com/profile.php?id=100069533462465"
+                                   className="social-icon social-facebook" title="Facebook" target="_blank"><i
+                                    className="icon-facebook-f"></i></a>
+                                <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company"
+                                   className="social-icon social-twitter" title="Twitter" target="_blank"><i
+                                    className="icon-twitter"></i></a>
+                                <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/"
+                                   className="social-icon social-instagram" title="Instagram" target="_blank"><i
+                                    className="icon-instagram"></i></a>
+                                <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"
+                                   className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
+                                <a href="https://vk.com/simastyle" className="social-icon"><img
+                                    style={{width: "20px"}} src={vk}/></a>
+                            </div>
+
+                        </div>
                         <Modal show={show} onHide={handleClose} centered={true} animation={true}>
                             <Modal.Header closeButton>
                                 <h3 className="s-title d-flex justify-content-center">Поделиться</h3>
@@ -523,7 +542,7 @@ const Product = observer((props) => {
                                         </div>
 
                                         <div className="product-details-action">
-                                            {user.isAuth ?
+                                            {user.token?.token ?
                                                 <a onClick={addCart} href=""
                                                    className="btn-product btn-cart">В Корзину
                                                 </a> :
@@ -534,7 +553,7 @@ const Product = observer((props) => {
                                             }
 
                                             <div className="details-action-wrapper">
-                                                {user.isAuth ? product.product.is_favorite ?
+                                                    {user.token?.token ? product.product.is_favorite ?
                                                     <FcLike onClick={deleteWish}
                                                             style={{fontSize: "30px", cursor: "pointer"}}/>
                                                     : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}
@@ -571,26 +590,7 @@ const Product = observer((props) => {
                                     </>
 
 
-                                    {/*<div className="product-details-footer">*/}
-                                    {/*    <div className="social-icons social-icons-sm">*/}
-                                    {/*        <span className="social-label">Share:</span>*/}
-                                    {/*        <a style={{fontSize: "20px"}}*/}
-                                    {/*           href="https://www.facebook.com/profile.php?id=100069533462465"*/}
-                                    {/*           className="social-icon social-facebook" title="Facebook" target="_blank"><i*/}
-                                    {/*            className="icon-facebook-f"></i></a>*/}
-                                    {/*        <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company"*/}
-                                    {/*           className="social-icon social-twitter" title="Twitter" target="_blank"><i*/}
-                                    {/*            className="icon-twitter"></i></a>*/}
-                                    {/*        <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/"*/}
-                                    {/*           className="social-icon social-instagram" title="Instagram" target="_blank"><i*/}
-                                    {/*            className="icon-instagram"></i></a>*/}
-                                    {/*        <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"*/}
-                                    {/*           className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>*/}
-                                    {/*        <a href="https://vk.com/simastyle" className="social-icon"><img*/}
-                                    {/*            style={{width: "20px"}} src={vk}/></a>*/}
-                                    {/*    </div>*/}
 
-                                    {/*</div>*/}
 
 
                                     <div className="row">

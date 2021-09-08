@@ -3,8 +3,6 @@ import axios from "axios";
 import "../../App.css";
 import {observer} from 'mobx-react-lite';
 import {Context} from '../../index';
-import {NavLink} from 'react-router-dom';
-import {HOME_ROUTE} from '../../utils/Const';
 
 const Purchases = observer(() => {
 
@@ -43,11 +41,6 @@ const Purchases = observer(() => {
         <div className="page-wrapper">
             <main className="main">
                 <div className="container">
-                    {/*<ol className="breadcrumb mt-4 mb-2">*/}
-                    {/*    <li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}
-                    {/*                                                                href="">Главная</a></NavLink></li>*/}
-                    {/*    <li className="breadcrumb-item"><a href="">Условия покупки</a></li>*/}
-                    {/*</ol>*/}
                 </div>
                 {user.purchase.map((img, index) =>
                     <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>

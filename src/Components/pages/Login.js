@@ -3,7 +3,7 @@ import axios from "axios";
 import {observer} from 'mobx-react-lite';
 import {Context} from '../../index';
 import {useHistory} from 'react-router';
-import {SUBCATEGORY_ROUTE, MYACOUNT_ROUTE, FORGET_ROUTE, CATALOG_ROUTE} from '../../utils/Const';
+import { MYACOUNT_ROUTE, FORGET_ROUTE} from '../../utils/Const';
 import "../../App.css";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,7 +40,6 @@ const Login = observer(() => {
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, article)
             .then(response => {
                 setEmail("")
-                notify()
             })
             .catch(error => {
                 setError(true)
@@ -66,9 +65,7 @@ const Login = observer(() => {
                 user.setIsAuth(true)
                 localStorage.setItem('value', JSON.stringify(response.data));
                 history.push(MYACOUNT_ROUTE)
-                if(response.data === 401) {
-                    localStorage.removeItem("value");
-                }
+
             })
             .catch(error => {
                 setLoading(false)

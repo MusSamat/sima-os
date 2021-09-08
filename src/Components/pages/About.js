@@ -1,9 +1,7 @@
 import {observer} from 'mobx-react-lite';
 import React, {useContext, useEffect} from 'react';
-import {NavLink} from 'react-router-dom';
 import "../../App.css";
 import {Context} from '../../index';
-import {HOME_ROUTE} from '../../utils/Const';
 
 const About = observer(() => {
     const {user} = useContext(Context)
@@ -24,11 +22,6 @@ const About = observer(() => {
                     </div>)}
                 <div className="pb-5 mb-1 mb-lg-8 mt-4 ">
                     <div className="container">
-                        {/*<ol class="breadcrumb mt-1 mb-2">*/}
-                        {/*    <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a class="breadcrumb-item"*/}
-                        {/*                                                            href="">Главная</a></NavLink></li>*/}
-                        {/*    <li class="breadcrumb-item"><a href="">О нас</a></li>*/}
-                        {/*</ol>*/}
 
                         <div style={{display: "flex", justifyContent: "center", marginBottom: "20px"}}><h2
                             style={{color: "#EEA287", textAlign: "center"}}>О нас</h2></div>
