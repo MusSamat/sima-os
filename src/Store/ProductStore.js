@@ -100,7 +100,9 @@ export default class ProductStore {
 
 
 
-    async getActualProducts() {
+    async getActualProducts(e) {
+        localStorage.setItem('category', JSON.stringify("Актуальные"));
+        localStorage.removeItem('viewProduct')
         this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
         return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`, this.token?.token ? {
@@ -123,7 +125,7 @@ export default class ProductStore {
                 this.setLoader(false)
             })
 
-
+        e.preventDefault();
     }
 
     async getPopularProducts() {

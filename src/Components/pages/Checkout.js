@@ -288,26 +288,26 @@ const Checkout = observer(() => {
 
                                         <Form>
                                             <label className="s-title" style={{cursor: "pointer"}}>
-                                                <input className="mr-3" type="radio" value="odin"
+                                                <input style={{cursor: "pointer"}}   className="mr-3" type="radio" value="odin"
                                                        checked={value === "odin"}
                                                        onChange={e => setValue(e.target.value)}/>
                                                 Оплата курьеру при доставке
                                             </label><br/>
                                             <label className="s-title" style={{cursor: "pointer"}}>
-                                                <input className="mr-3" type="radio" value="two"
+                                                <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="two"
                                                        checked={value === "two"}
                                                        onChange={e => setValue(e.target.value)}/>
 
                                                 VISA/MasterCard/Maestro/ЭЛКАРТ
                                             </label><br/>
                                             <label className="s-title" style={{cursor: "pointer"}}>
-                                                <input className="mr-3" type="radio" value="three"
+                                                <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="three"
                                                        checked={value === "three"}
                                                        onChange={e => setValue(e.target.value)}/>
                                                 ЭЛСОМ
                                             </label><br/>
                                             <label className="s-title" style={{cursor: "pointer"}}>
-                                                <input className="mr-3" type="radio" value="four"
+                                                <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"
                                                        checked={value === "four"}
                                                        onChange={e => setValue(e.target.value)}/>
                                                 О!Деньги
@@ -315,23 +315,23 @@ const Checkout = observer(() => {
                                         </Form>
                                         <span>Способ доставки</span><br/>
                                         <label className="s-title" style={{cursor: "pointer"}}>
-                                            <input className="mr-3" type="radio" value="four"
-                                                   checked={value === "four"}
+                                            <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"
+
                                                   />
                                             Доставка курьером
                                         </label><br/>
 
                                         <label className="s-title" style={{cursor: "pointer"}}>
-                                            <input className="mr-3" type="radio" value="four"
-                                                   checked={value === "four"}
+                                            <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"
+
                                             />
                                             Прочитал и согласен с
                                         </label><br/>
                                         <a href="">Соглашение на обработку персональных данных</a>
 
                                         <label className="s-title" style={{cursor: "pointer"}}>
-                                            <input className="mr-3" type="radio" value="four"
-                                                   checked={value === "four"}
+                                            <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"
+
                                             />
                                             Прочитал и согласен с
                                         </label><br/>

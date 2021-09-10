@@ -96,6 +96,8 @@ const Catolog = observer((props) => {
         if (user.isClicked === index) {
             return user.setClicked(null)
         }
+        localStorage.setItem('category', JSON.stringify(`${title + year}`));
+        localStorage.removeItem('viewProduct')
         setBreadcrumb("")
         user.setClicked(index)
         setSeson(title + year)
@@ -123,14 +125,19 @@ const Catolog = observer((props) => {
         history.push({
             search: `?products=${produs}`
         })
+        localStorage.setItem('category', JSON.stringify(bread));
+        localStorage.removeItem('viewProduct')
+        user.setActive(false)
+        user.setClicked(false)
         setBreadcrumb(bread)
         product.getActual(produs)
         e.preventDefault();
     }
-    console.log(user.isName)
+
     const sortProducts = (e, des) => {
-        user.setName("axa")
         e.preventDefault();
+        user.setActive(false)
+        user.setClicked(false)
         if(!produs){
             history.push({
                 search: `?products=products&sort=${des}`
@@ -147,6 +154,7 @@ const Catolog = observer((props) => {
     const typeOfProduct = (e, title) => {
         product.fetchTodoCatalog(title)
         setActive("typeProduct")
+        localStorage.setItem('viewProduct', JSON.stringify(title));
         setName(title)
         e.preventDefault();
     }
@@ -154,6 +162,7 @@ const Catolog = observer((props) => {
     const allCategory = () => {
         user.setActive(!user.isActive)
         setSeson("Все категории")
+        localStorage.setItem('category', JSON.stringify("Все категории"));
         setBreadcrumb("")
         user.setClicked(false)
         user.setRead(true)
@@ -318,9 +327,18 @@ const Catolog = observer((props) => {
             })
         e.preventDefault();
     }
-
+    console.log(user.token?.token)
 
     useEffect(() => {
+        if(produs === "discount"){
+            localStorage.setItem('category', JSON.stringify("Скидки"));
+        } else if (produs === "novelty"){
+            localStorage.setItem('category', JSON.stringify("Новинки"));
+        } else if(produs === "popular") {
+            localStorage.setItem('category', JSON.stringify("Популярное"));
+        }else if(produs === "products"){
+            localStorage.setItem('category', JSON.stringify("Актуальные"));
+        }
         user.getUserData()
         product.getActual(produs)
         window.scrollTo(0, 0)
@@ -329,6 +347,9 @@ const Catolog = observer((props) => {
             user.getWishlistData()
             user.getUserData()
         }
+        if(user.token?.token){
+            console.log("a")
+        } else console.log("b")
 
         product.fetchTodo()
         if (names) {
@@ -377,26 +398,6 @@ const Catolog = observer((props) => {
         product.fetchTodo()
         product.getSortedData()
         product.getSubcategory()
-            .then(() => {
-            const scripts = [
-                '/assets/js/jquery.elevateZoom.min.js',
-                '/assets/js/bootstrap-input-spinner.js',
-                '/assets/js/jquery.magnific-popup.min.js',
-                '/assets/js/main.js',
-                '/assets/js/bootstrap-input-spinner.js',
-                '/assets/js/owl.carousel.min.js',
-                '/assets/js/superfish.min.js',
-                '/assets/js/jquery.waypoints.min.js',
-                '/assets/js/jquery.hoverIntent.min.js',
-                '/assets/js/bootstrap.bundle.min.js',
-                '/assets/js/jquery.min.js',
-            ]
-            scripts.forEach(i => {
-                const s = document.createElement('script')
-                s.src = i
-                document.body.appendChild(s)
-            })
-        })
 
     }, []);
     let percent
@@ -441,8 +442,6 @@ const Catolog = observer((props) => {
                                         </div>
                                     </div>
                                 </div>
-                                {console.log(currentPosts)}
-
                                 <div class="products mb-3">
                                     <div class="row justify-content-center">
 

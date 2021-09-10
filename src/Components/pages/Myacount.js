@@ -126,7 +126,8 @@ const Myacount = observer(() => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        if(user.isAuth){
+        user.getUserData()
+        if(user.token?.token){
             user.getOrderData()
         }
 

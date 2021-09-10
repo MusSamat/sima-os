@@ -204,11 +204,15 @@ const Main = observer(() => {
         e.preventDefault();
     }
 
+
+
     useEffect(() => {
+
         window.scrollTo(0, 0)
 
         user.getImage().then(() => {
             product.discountTodo1()
+
         })
         user.getImageNovelty()
         user.getImagePopular()
@@ -216,6 +220,8 @@ const Main = observer(() => {
         product.getDataNew()
         product.getSubcategory().then(() => {
             product.getDataNewSeason(product?.subcategory[0]?.id)
+            localStorage.removeItem('category')
+            localStorage.removeItem('viewProduct')
         })
         product.getPopularProduct()
 
@@ -232,7 +238,7 @@ const Main = observer(() => {
                                 style={{marginLeft: "-9px"}}>sale</strong></h1>
 
                             <Link to={`${CATALOG_ROUTE}?products=discount`} className="btn">
-                                <span style={{fontSize: "20px"}}>Показать</span>
+                                <span  style={{fontSize: "20px"}}>Показать</span>
                                 <i className="icon-long-arrow-right"></i>
                             </Link>
                         </div>
@@ -335,8 +341,8 @@ const Main = observer(() => {
                         { modalActive && <Modal active={modalActive} setActive={setModalActive} id={prodactId}/>}
 
 
-                        <Link to={`${CATALOG_ROUTE}?products=discount`}>
-                            <div className="more-container text-center mt-3 mb-3">
+                        <Link  to={`${CATALOG_ROUTE}?products=discount`}>
+                            <div  className="more-container text-center mt-3 mb-3">
                                 <a href="" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
                                     className="icon-long-arrow-right"></i></a>
                             </div>
@@ -452,7 +458,7 @@ const Main = observer(() => {
                     </div>
 
                     <Link to={`${CATALOG_ROUTE}?products=novelty`}>
-                        <div className="more-container text-center mt-3 mb-3">
+                        <div  className="more-container text-center mt-3 mb-3">
                             <a href="" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
                                 className="icon-long-arrow-right"></i></a>
                         </div>
@@ -566,8 +572,8 @@ const Main = observer(() => {
                         </div>
 
                     </div>
-                    <Link to={`${CATALOG_ROUTE}?products=popular`}>
-                        <div className="more-container text-center mt-3 mb-3">
+                    <Link  to={`${CATALOG_ROUTE}?products=popular`}>
+                        <div  className="more-container text-center mt-3 mb-3">
                             <a href="" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
                                 className="icon-long-arrow-right"></i></a>
                         </div>

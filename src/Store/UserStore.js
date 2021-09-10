@@ -106,14 +106,12 @@ export default class UserStore {
             })
             .catch((e) => {
                 this.setIsAuth(false)
-                localStorage.removeItem('value');
             })
 
     }
 
-    //
+
     getOrderData() {
-        this.token = JSON.parse(localStorage.getItem('value'))
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/order/` + this.token?.user?.id, {
             headers: {
                 'Content-Type': 'application/json',

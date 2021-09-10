@@ -51,6 +51,8 @@ const Header = observer(() => {
     }
 
 
+
+
     useEffect(() => {
         mobile_menu()
         if(user.token?.token){
@@ -80,6 +82,16 @@ const Header = observer(() => {
                 document.body.appendChild(s)
             })
         })
+        const search = document.getElementById("demo")
+        const outsideClick = function(e){
+            if (search === e.target.closest('#demo')) {
+                user.setRoute(true)
+            } else user.setRoute(false)
+        }
+        document.addEventListener("click", outsideClick);
+        return () => {
+            document.removeEventListener('click', outsideClick)
+        }
     }, [])
 
     return (
@@ -116,9 +128,9 @@ const Header = observer(() => {
                                                  to={HOME_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}> <a className="sf-with-ul">Главная</a></NavLink>
                                     </li>
                                     <li className="megamenu-container ">
-                                        <Link className="sf-with" style={{fontSize: "18px", color: "#000000"}}
+                                        <Link onClick={(e) =>product.getActualProducts(e)} className="sf-with" style={{fontSize: "18px", color: "#000000"}}
                                               to={`${CATALOG_ROUTE}?products=products`}
-                                              innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="sf-with-ul">Каталог </a></Link>
+                                              innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a  className="sf-with-ul">Каталог </a></Link>
 
                                     </li>
                                     <li className="megamenu-container">
@@ -180,12 +192,15 @@ const Header = observer(() => {
                         </div>
 
                         <div className="header-right">
-                            <div onClick={user.isRoute ? ()=>user.setRoute(false) : ()=>user.setRoute(true) } className={ user.isRoute ? "search-box showed" : "search-box" }>
+                            <div  id="demo" className={ user.isRoute ? "search-box showed" : "search-box" }>
                                 <input className="" type="text" onKeyDown={handleKeyDown} value={input} onChange={(e) => setInput(e.target.value)} placeholder="Search in..." />
                                 <div className="search-btn">
-                                    <i  className="icon-search icons"></i>
+                                    {user.isRoute ?
+                                        <i onClick={(e)=>search(e) } className="icon-search icons"></i> :
+                                        <i onClick={ ()=>user.setRoute(false)  } className="icon-search icons"></i> }
                                 </div>
                             </div>
+
                             {user.token?.token ?
                                 <NavLink to={MYACOUNT_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "30px"}} data-toggle="modal"><i
                                     style={{color: "#666666"}} className="icon-user"></i></a></NavLink>

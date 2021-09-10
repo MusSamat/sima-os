@@ -218,6 +218,9 @@ const Product = observer((props) => {
         setLeftImages(newList);
     }
 
+    const category = JSON.parse(localStorage.getItem('category'))
+    const viewProduct = JSON.parse(localStorage.getItem('viewProduct'))
+
     const imagezoom = {width: 400, height: 250, zoomWidth: 500, img: selectedImage};
 
     useEffect(() => {
@@ -279,23 +282,17 @@ const Product = observer((props) => {
                                 marginTop: "-3px",
                                 color: "#000000"
                             }}>Каталог</Link></li>
-                            { props.location.breadcrumb ?
-                                <li className="breadcrumb-item "
-                                    aria-current="page"><Link style={{color: "#000000"}}
-                                                              to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {props.location.breadcrumb}</Link>
-                                </li>
-                            :
+
                                     <>
-                                    {props.location.seson ? <li className="breadcrumb-item "
+                                    {category ? <li className="breadcrumb-item "
                                             aria-current="page"><Link style={{color: "#000000"}}
-                                                                      to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {props.location.seson}</Link>
+                                                                      to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {category}</Link>
                                         </li> : ""}
-                                    {props.location.title ?<li className="breadcrumb-item "
+                                    {viewProduct ? <li className="breadcrumb-item "
                                         aria-current="page"><Link style={{color: "#000000"}}
-                                                                  to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {props.location.title}</Link>
+                                                                  to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {viewProduct}</Link>
                                         </li> : ""}
                                     </>
-                            }
                             <li className="breadcrumb-item " style={{color: "#000000"}}
                                 aria-current="page"> {product.product.title}</li>
                         </ul>
@@ -561,32 +558,6 @@ const Product = observer((props) => {
                                             </div>
                                         </div>
 
-                                        <div className="mb-3">
-                                            {stars.map((_, index) => {
-                                                return (
-                                                    <FaStar
-                                                        key={index}
-                                                        size={18}
-                                                        style={{
-                                                            marginRight: 8,
-                                                            cursor: "pointer"
-                                                        }}
-                                                        color={(hoverValue || currValue) > index ? colors.orange : colors.grey}
-                                                        onClick={() => handleClick(index + 1)}
-                                                        onMouseOver={() => handleMouseOver(index + 1)}
-                                                        onMouseLeave={handleMouseLeave}
-                                                        onChange={e => setCurrValue(e.target.value)}
-                                                        value={currValue}
-                                                    />
-                                                )
-                                            })}
-                                            {bottons ?
-                                                <button  style={{fontSize: "18px"}}
-                                                        onClick={(e) => sendRating(e)}
-                                                        className="btn btn-block btn-outline-primary-2 voiti mt-2 ">
-                                                    Отправить
-                                                </button> : null}
-                                        </div>
                                     </>
 
 
