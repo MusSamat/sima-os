@@ -54,16 +54,13 @@ export default class ProductStore {
 
 
     async fetchTodo() {
-        this.setLoader(true)
         return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/productcategorysorted`)
             .then(res => {
                 this.productSorted = [...res.data]
                 this.allProductSorted = this.productSorted
-                this.setLoader(false)
             })
             .catch((e) => {
                 console.error(e)
-                this.setLoader(false)
             })
 
 
@@ -75,6 +72,7 @@ export default class ProductStore {
 
     async getActual(prod) {
         this.setLoader(true)
+        const wish = JSON.parse(localStorage.getItem('wishlist'))
         return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/${prod}`, this.token?.token ? {
             headers: {
                 'Content-Type': 'application/json',
@@ -86,8 +84,13 @@ export default class ProductStore {
             }
         })
             .then(res => {
-                this.products = [...res.data]
-                this.allProducts = this.products
+                this.products = res.data.map(i => {
+                    const d = wish?.find(j => j.id === i.id)
+                    if (d) {
+                        i.is_favorite = d?.is_favorite
+                    }
+                    return i
+                })
                 this.setLoader(false)
             })
             .catch((e) => {
@@ -103,6 +106,7 @@ export default class ProductStore {
     async getActualProducts(e) {
         localStorage.setItem('category', JSON.stringify("Актуальные"));
         localStorage.removeItem('viewProduct')
+        const wish = JSON.parse(localStorage.getItem('wishlist'))
         this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
         return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`, this.token?.token ? {
@@ -116,8 +120,13 @@ export default class ProductStore {
             }
         })
             .then(res => {
-                this.products = [...res.data]
-                this.allProducts = this.products
+                this.products = res.data.map(i => {
+                    const d = wish.find(j => j.id === i.id)
+                    if (d) {
+                        i.is_favorite = d.is_favorite
+                    }
+                    return i
+                })
                 this.setLoader(false)
             })
             .catch((e) => {
@@ -180,10 +189,11 @@ export default class ProductStore {
 
     }
 
-    getNoveltyProducts() {
+    async getNoveltyProducts() {
         this.setLoader(true)
         this.token = JSON.parse(localStorage.getItem('value'))
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`, this.token?.token ? {
+        const wish = JSON.parse(localStorage.getItem('wishlist'))
+        await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`, this.token?.token ? {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token,
@@ -207,10 +217,11 @@ export default class ProductStore {
 
     }
 
-    getAllProductsSort(prod, des) {
+    async getAllProductsSort(prod, des) {
         this.setLoader(true)
+        const wish = JSON.parse(localStorage.getItem('wishlist'))
         this.token = JSON.parse(localStorage.getItem('value'))
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/${prod}/?${des}`, this.token?.token ? {
+        await axios.get(`${process.env.REACT_APP_BASE_URL}/api/${prod}/?${des}`, this.token?.token ? {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token,
@@ -222,8 +233,13 @@ export default class ProductStore {
             }
         })
             .then(res => {
-                this.products = [...res.data]
-                this.allProducts = this.products
+                this.products = res.data.map(i => {
+                    const d = wish?.find(j => j.id === i.id)
+                    if (d) {
+                        i.is_favorite = d?.is_favorite
+                    }
+                    return i
+                })
                 this.setLoader(false)
             })
             .catch((e) => {
@@ -235,6 +251,7 @@ export default class ProductStore {
     }
 
     getNoveltyProducts1() {
+        const wish = JSON.parse(localStorage.getItem('wishlist'))
         this.token = JSON.parse(localStorage.getItem('value'))
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/novelty`, this.token?.token ? {
             headers: {
@@ -248,7 +265,13 @@ export default class ProductStore {
             }
         })
             .then(res => {
-                this.novelty = [...res.data]
+                this.novelty = res.data.map(i => {
+                    const d = wish?.find(j => j.id === i.id)
+                    if (d) {
+                        i.is_favorite = d?.is_favorite
+                    }
+                    return i
+                })
             })
             .catch((e) => {
                 console.error(e)
@@ -323,11 +346,18 @@ export default class ProductStore {
             })
     }
 
-    changeFilter(input) {
+    async changeFilter(input) {
+        const wish = JSON.parse(localStorage.getItem('wishlist'))
         this.setLoader(true)
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?title__icontains=` + input)
+       await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?title__icontains=` + input)
             .then(res => {
-                this.products = [...res.data]
+                this.products = res.data.map(i => {
+                    const d = wish?.find(j => j.id === i.id)
+                    if (d) {
+                        i.is_favorite = d?.is_favorite
+                    }
+                    return i
+                })
                 this.setLoader(false)
             })
             .catch((e) => {
@@ -338,10 +368,17 @@ export default class ProductStore {
     }
 
     searchFilterArticul(input) {
+        const wish = JSON.parse(localStorage.getItem('wishlist'))
         this.setLoader(true)
         axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?articul__iexact=` + input)
             .then(res => {
-                this.products = [...res.data]
+                this.products = res.data.map(i => {
+                    const d = wish?.find(j => j.id === i.id)
+                    if (d) {
+                        i.is_favorite = d?.is_favorite
+                    }
+                    return i
+                })
                 this.setLoader(false)
             })
             .catch((e) => {
@@ -447,29 +484,11 @@ export default class ProductStore {
             })
     }
 
-    getDataFavorite() {
-        this.token = JSON.parse(localStorage.getItem('value'))
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/`, this.token?.token ? {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
-            }
-        } : {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(response => {
-                this.favorite = response.data
-            })
-            .catch((e) => {
-                console.error(e)
-            })
-    }
 
-    fetchTodoCatalog(title) {
+    async fetchTodoCatalog(title) {
+        const wish = JSON.parse(localStorage.getItem('wishlist'))
         this.token = JSON.parse(localStorage.getItem('value'))
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?productcategory__title__iexact=${title}`, this.token?.token ? {
+        await  axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?productcategory__title__iexact=${title}`, this.token?.token ? {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token
@@ -484,8 +503,13 @@ export default class ProductStore {
             }
         })
             .then(res => {
-                this.products = [...res.data]
-                this.allProducts = this.products
+                this.products = res.data.map(i => {
+                    const d = wish?.find(j => j.id === i.id)
+                    if (d) {
+                        i.is_favorite = d?.is_favorite
+                    }
+                    return i
+                })
             })
             .catch((e) => {
                 console.error(e)
@@ -517,10 +541,10 @@ export default class ProductStore {
     }
 
 
-    discountTodo() {
-        this.setLoader(true)
+   async discountTodo1() {
+       const wish = JSON.parse(localStorage.getItem('wishlist'))
         this.token = JSON.parse(localStorage.getItem('value'))
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`, this.token?.token ? {
+       await axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`, this.token?.token ? {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token
@@ -531,30 +555,13 @@ export default class ProductStore {
             }
         })
             .then(res => {
-                this.products = [...res.data]
-                this.setLoader(false)
-
-            })
-            .catch((e) => {
-                console.error(e)
-                this.setLoader(true)
-            })
-    }
-
-    discountTodo1() {
-        this.token = JSON.parse(localStorage.getItem('value'))
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`, this.token?.token ? {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
-            }
-        } : {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(res => {
-                this.discount = [...res.data]
+                this.discount = res.data.map(i => {
+                    const d = wish?.find(j => j.id === i.id)
+                    if (d) {
+                        i.is_favorite = d?.is_favorite
+                    }
+                    return i
+                })
 
 
             })
@@ -563,25 +570,6 @@ export default class ProductStore {
             })
     }
 
-    async changeDiscounted() {
-        this.token = JSON.parse(localStorage.getItem('value'))
-        await axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`, this.token?.token ? {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
-            }
-        } : {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(res => {
-                this.products = [...res.data]
-            })
-            .catch((e) => {
-                console.error(e)
-            })
-    }
 
     async getGallery() {
         await axios.get(`${process.env.REACT_APP_BASE_URL}/api/gallery`)

@@ -182,6 +182,7 @@ const Catolog = observer((props) => {
     let wish = JSON.parse(localStorage.getItem('wishlist'))
 
     const addCardLocal = (proId, price, color, title, count) => {
+        user.getImageLogo()
         let productId = product.productOrder?.map((i) => i.product)
         if (data === null) {
             data = []
@@ -214,7 +215,10 @@ const Catolog = observer((props) => {
         return a ? a.id : 0
     }
     const addWishlistLocal = (e, proId, is_favorite) => {
-
+        user.getImageLogo()
+            product.productWishlist.push({
+                id: proId
+            })
         const test  = currentPosts.find((i) => i.id === proId)
         if(test){
             test.is_favorite = true
@@ -233,6 +237,7 @@ const Catolog = observer((props) => {
     }
 
     const deleteWishLocal = async (e, proId) => {
+        user.getImageLogo()
         const test  = currentPosts?.find((i) => i.id === proId)
         if(test){
             test.is_favorite = false

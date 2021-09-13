@@ -934,6 +934,11 @@ a:hover, a:focus {
 /*}*/
 
 /* footer */
+.cta .btn {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+
+}
 .pokupki {
     font-family: 'Montserrat', sans-serif !important;
 }

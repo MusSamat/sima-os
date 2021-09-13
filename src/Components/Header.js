@@ -209,7 +209,7 @@ const Header = observer(() => {
 
                             <NavLink className="wishlist-link" to={WISHLIST_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                 <i style={{color: "#666666"}} className="icon-heart-o"></i>
-                                <span className="wishlist-count">{user.token?.token ? user.list?.length || '0' :  wish ? wish?.length : "0"}</span>
+                                <span className="wishlist-count">{user.token?.token ? user.list?.length || '0' : wish  ? wish?.length : '0' }</span>
                             </NavLink>
                             <div className="dropdown cart-dropdown mr-10">
                                 <NavLink to={CART_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="dropdown-toggle ">
@@ -220,9 +220,7 @@ const Header = observer(() => {
                                         user.items?.map((item, index) => {
                                             sum = sum + item.product?.price * item.quantity
                                         }) :
-                                        product.productOrder ? product.productOrder?.map((item, index) => {
-                                                sum = sum + item.price * item.quantity
-                                            }) : data?.map((item, index) => {
+                                         data?.map((item, index) => {
                                             sum = sum + item.price * item.quantity
                                         })
                                     }

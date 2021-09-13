@@ -179,7 +179,8 @@ const Main = observer(() => {
         return a ? a.id : 0
     }
 
-    const addWishlistLocal = (e, proId) => {
+    const addWishlistLocal = (e, proId, is_favorite) => {
+        user.getImageLogo()
         product.productWishlist.push({
             id: proId,
         })
@@ -187,13 +188,17 @@ const Main = observer(() => {
         if (wish === null) {
             wish = []
         }
-        wish.push({id: proId})
+        wish.push({
+            id: proId,
+            is_favorite: true,
+        })
         localStorage.setItem('wishlist', JSON.stringify(wish));
         product.discountTodo1()
         e.preventDefault();
     }
 
     const deleteWishLocal = async (e, proId) => {
+        user.getImageLogo()
         wish = wish.filter((item) => item.id !== proId)
         await localStorage.setItem("wishlist", JSON.stringify(wish));
         if (wish.length === 0) {
@@ -283,7 +288,7 @@ const Main = observer(() => {
                                                             marginBottom: "20px"
                                                         }}/>
                                                         : <span style={{cursor: "pointer"}}
-                                                                onClick={(e) => addWishlistLocal(e, discout.id)}
+                                                                onClick={(e) => addWishlistLocal(e, discout.id, discout.is_favorite)}
                                                                 class="icon-box-icon">
                                                                 <i class="icon-heart-o"></i>
                                                                 </span>}
@@ -401,7 +406,7 @@ const Main = observer(() => {
                                                         marginBottom: "20px"
                                                     }}/>
                                                     : <span style={{cursor: "pointer"}}
-                                                            onClick={(e) => addWishlistLocal(e, discout.id)}
+                                                            onClick={(e) => addWishlistLocal(e, discout.id, discout.is_favorite)}
                                                             class="icon-box-icon">
                                                                 <i class="icon-heart-o"></i>
                                                                 </span>}
@@ -516,7 +521,7 @@ const Main = observer(() => {
                                                         marginBottom: "20px"
                                                     }}/>
                                                     : <span style={{cursor: "pointer"}}
-                                                            onClick={(e) => addWishlistLocal(e, discout.id)}
+                                                            onClick={(e) => addWishlistLocal(e, discout.id, discout.is_favorite)}
                                                             class="icon-box-icon">
                                                                 <i class="icon-heart-o"></i>
                                                                 </span>}
