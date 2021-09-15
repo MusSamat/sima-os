@@ -135,26 +135,32 @@ const Catolog = observer((props) => {
     }
 
     const sortProducts = (e, des) => {
+        let view = JSON.parse(localStorage.getItem('viewProduct'))
+        let sesonId = JSON.parse(localStorage.getItem('sesonId'))
+        let prodId = JSON.parse(localStorage.getItem('prodId'))
         e.preventDefault();
-        user.setActive(false)
-        user.setClicked(false)
-        if(!produs){
-            history.push({
-                search: `?products=products&sort=${des}`
-            })
-            product.getAllProductsSort("products?", des)
+        if(!view) {
+            if (!produs) {
+                history.push({
+                    search: `?products=products&sort=${des}`
+                })
+                product.getAllProductsSort("products?", des)
+            } else {
+                history.push({
+                    search: `?products=${produs}&sort=${des}`
+                })
+            }
+            product.getAllProductsSort(produs, des)
         }else {
-            history.push({
-                search: `?products=${produs}&sort=${des}`
-            })
+            product.fetchTodoCatalog(sesonId, prodId, des)
         }
-
-        product.getAllProductsSort(produs, des)
     }
-    const typeOfProduct = (e, title) => {
-        product.fetchTodoCatalog(title)
+    const typeOfProduct = (e, title, prodId, id) => {
+        product.fetchTodoCatalog(prodId, id)
         setActive("typeProduct")
         localStorage.setItem('viewProduct', JSON.stringify(title));
+        localStorage.setItem('sesonId', JSON.stringify(prodId));
+        localStorage.setItem('prodId', JSON.stringify(id));
         setName(title)
         e.preventDefault();
     }
@@ -570,7 +576,7 @@ const Catolog = observer((props) => {
                             <aside className="col-lg-3 order-lg-first ">
                                 <div className="sidebar sidebar-shop salt ">
 
-
+                                    {console.log(product.productSorted)}
                                     <div className="accordion accordions">
                                         <div className="accordion-item">
                                             <div
@@ -587,7 +593,7 @@ const Catolog = observer((props) => {
                                                     {product.productSorted.map((c, index) =>
 
                                                         <li key={index}
-                                                            onClick={(e) => typeOfProduct(e, c.title)}
+                                                            onClick={(e) => typeOfProduct(e, c.title, c.seasoncategory, c.id)}
                                                             key={index}><a className="category-vse" style={{
                                                             cursor: "pointer",
                                                             fontSize: "16px",
@@ -655,7 +661,7 @@ const Catolog = observer((props) => {
                                                     <div className={user.isClicked === index ? "Acontent show" : "Acontent"}>
                                                         {product.prodcategory.filter(a => a.seasoncategory === item.id).map((prod) =>
                                                             <div
-                                                                onClick={(e) => typeOfProduct(e, prod.title)}
+                                                                onClick={(e) => typeOfProduct(e, prod.title,prod.seasoncategory, prod.id)}
                                                                 className="prod" key={prod}>
                                                                 {prod.title}
                                                             </div>)}
@@ -676,7 +682,7 @@ const Catolog = observer((props) => {
                                                     <div className={user.isClicked === index ? "Acontent show" : "Acontent"}>
                                                         {product.prodcategory.filter(a => a.seasoncategory === item.id).map((prod) =>
                                                             <div
-                                                                onClick={(e) => typeOfProduct(e, prod.title)}
+                                                                onClick={(e) => typeOfProduct(e, prod.title, prod.seasoncategory, prod.id)}
                                                                 className="prod" key={prod}>
                                                                 {prod.title}
                                                             </div>)}

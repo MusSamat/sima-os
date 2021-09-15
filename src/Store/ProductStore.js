@@ -485,10 +485,11 @@ export default class ProductStore {
     }
 
 
-    async fetchTodoCatalog(title) {
+    async fetchTodoCatalog(prodId, id, des) {
         const wish = JSON.parse(localStorage.getItem('wishlist'))
         this.token = JSON.parse(localStorage.getItem('value'))
-        await  axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/?productcategory__title__iexact=${title}`, this.token?.token ? {
+        await  axios.get(des ? `${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${prodId}&productcategory=${id}&${des}`
+            : `${process.env.REACT_APP_BASE_URL}/api/products/?seasoncategory=${prodId}&productcategory=${id}`, this.token?.token ? {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + this.token?.token
