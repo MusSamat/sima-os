@@ -124,23 +124,23 @@ const Header = observer(() => {
                                 <ul className="menu sf-arrows  ">
                                     <li className="megamenu-container ">
                                         <NavLink exact className="sf-with"
-                                                 style={{fontSize: "18px", fontWeight: "400", color: "#000000"}}
-                                                 to={HOME_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}> <a className="sf-with-ul">Главная</a></NavLink>
+
+                                                 to={HOME_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}> <a style={{fontSize: "20px", color: "#333"}} className="sf-with-ul">Главная</a></NavLink>
                                     </li>
                                     <li className="megamenu-container ">
-                                        <Link onClick={(e) =>product.getActualProducts(e)} className="sf-with" style={{fontSize: "18px", color: "#000000"}}
+                                        <Link onClick={(e) =>product.getActualProducts(e)} className="sf-with"
                                               to={`${CATALOG_ROUTE}?products=products`}
-                                              innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a  className="sf-with-ul">Каталог </a></Link>
+                                              innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "20px", color: "#333"}} className="sf-with-ul">Каталог </a></Link>
 
                                     </li>
                                     <li className="megamenu-container">
                                         <NavLink exact className="sf-with" to={NEWS_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a
-                                            style={{fontSize: "18px", color: "#000000"}}
+                                            style={{fontSize: "18px", color: "#333"}}
                                             className="sf-with-ul">Новости</a></NavLink>
 
                                     </li>
                                     <li className="megamenu-container ">
-                                        <a style={{fontSize: "18px", color: "#000000", cursor: "pointer"}}
+                                        <a style={{fontSize: "20px", cursor: "pointer"}}
                                            className="sf-with-ul">Сотрудничество</a>
                                         <ul className="menu sf-arrows " style={{
                                             marginLeft: "570px",
@@ -153,7 +153,7 @@ const Header = observer(() => {
                                                                                        style={{
                                                                                            cursor: "pointer",
                                                                                            fontSize: "16px",
-                                                                                           color: "#000000"
+                                                                                           color: "#333"
                                                                                        }}>О нас</a></li>
                                             </Link>
                                             <Link to={CONTACT_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
@@ -161,7 +161,7 @@ const Header = observer(() => {
                                                                                        style={{
                                                                                            cursor: "pointer",
                                                                                            fontSize: "16px",
-                                                                                           color: "#000000"
+                                                                                           color: "#333"
                                                                                        }}>Контакты</a></li>
                                             </Link>
                                             <Link to={PURCHASES_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
@@ -169,7 +169,7 @@ const Header = observer(() => {
                                                                                        style={{
                                                                                            cursor: "pointer",
                                                                                            fontSize: "16px",
-                                                                                           color: "#000000"
+                                                                                           color: "#333"
                                                                                        }}>Условия покупки</a></li>
                                             </Link>
                                             <Link to={DELIVERY_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
@@ -177,7 +177,7 @@ const Header = observer(() => {
                                                                                        style={{
                                                                                            cursor: "pointer",
                                                                                            fontSize: "16px",
-                                                                                           color: "#000000"
+                                                                                           color: "#333"
                                                                                        }}>Условия доставки</a></li>
                                             </Link>
 

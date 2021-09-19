@@ -20,7 +20,7 @@ import Loader from "../Loader/Loader";
 
 const useStyles = makeStyles((theme) => ({
     MuiSlider: {
-        color: "rgb(238, 162, 135)",
+        color: "#c96",
         padding: '0px 0px',
         marginTop: "10px",
         MuiSlidertrack: {
@@ -371,7 +371,7 @@ const Catolog = observer((props) => {
             }
         } else {
             if (produs === "discount") {
-                product.discountTodo()
+                product.getActual(produs)
             } else if (produs) {
                 product.getActual(produs)
                     .then(() => {
@@ -423,10 +423,8 @@ const Catolog = observer((props) => {
                         </nav>
                         <div className="row">
                             <div className="col-lg-9 overflow-hidden ">
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item"><a href="">СОРТИРОВКА:</a></li>
-                                </ol>
                                 <div className="toolbox">
+                                    <label style={{fontSize: "16px"}}>Сортировка:</label>
                                     <div className="">
                                         <div className="toolbox-info">
                                             <button onClick={(e) => sortProducts(e,"asc")}
@@ -512,13 +510,11 @@ const Catolog = observer((props) => {
                                                                    onClick={(e) => addCart(e, prod.id, prod.images[0].title, prod.size.length)}
                                                                    className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>
                                                                 :
-                                                                <>
-                                                                    <button key={prod.id}
+                                                                    <a key={prod.id}
                                                                             style={{cursor: "pointer", border: "none"}}
                                                                             onClick={() => addCardLocal(prod.id, prod.price, prod.images[0].title, prod.title, prod.size.length)}
                                                                             className="btn-product btn-cart s-title ">
-                                                                        <span>В КОРЗИНУ</span></button>
-                                                                </>
+                                                                        <span>В КОРЗИНУ</span></a>
 
                                                             }
                                                         </div>
@@ -536,9 +532,8 @@ const Catolog = observer((props) => {
                                                         }}>
                                                             <h3 class="product-title"><a href="">{prod.title}</a></h3>
                                                         </Link>
-                                                        {prod.percent ? <div class="product-price"
-                                                                             style={{color: "rgb(238, 162, 135)"}}>
-                                                                <span className="new-price">{prod.discount_price} ₽</span>
+                                                        {prod.percent ? <div class="product-price">
+                                                                <span  className="new-price">{prod.discount_price} ₽</span>
                                                                 <span className="old-price">{`${prod.price} ₽`}</span>
 
 
@@ -576,7 +571,6 @@ const Catolog = observer((props) => {
                             <aside className="col-lg-3 order-lg-first ">
                                 <div className="sidebar sidebar-shop salt ">
 
-                                    {console.log(product.productSorted)}
                                     <div className="accordion accordions">
                                         <div className="accordion-item">
                                             <div
@@ -595,6 +589,8 @@ const Catolog = observer((props) => {
                                                         <li key={index}
                                                             onClick={(e) => typeOfProduct(e, c.title, c.seasoncategory, c.id)}
                                                             key={index}><a className="category-vse" style={{
+                                                            fontWeight: "400",
+                                                            color: "#333333",
                                                             cursor: "pointer",
                                                             fontSize: "16px",
                                                             padding: "0px 1.5rem"
@@ -644,7 +640,7 @@ const Catolog = observer((props) => {
                                             min={500}
                                             max={2000}
                                         />
-                                        <p className="filter mt-1">ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} ₽</p>
+                                        <p  className="filter mt-1">ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} ₽</p>
                                     </div>
 
                                     <div className="wrappe mt-3">
@@ -652,7 +648,7 @@ const Catolog = observer((props) => {
                                             {user.isRead ? product.subcategory.slice(0, 4).map((item, index) =>
                                                 <div className="Aitem">
                                                     <div onClick={() => toggle(index, item.title, item.year)} className="Atitle">
-                                                        <div className="year">{item.title} {item.year}</div>
+                                                        <div style={{fontWeight: "400", color: "#333333"}} className="year">{item.title} {item.year}</div>
                                                         <span>{user.isClicked === index ?
                                                             <FiMinus style={{fontSize: "18px", color: "#8c8c8c"}}/> :
                                                             <CgMathPlus
@@ -673,7 +669,7 @@ const Catolog = observer((props) => {
                                                 <div className="Aitem">
                                                     <div onClick={() => toggle(index, item.title, item.year)}
                                                          className="Atitle">
-                                                        <div className="year">{item.title} {item.year}</div>
+                                                        <div style={{fontWeight: "400", color: "#333333"}} className="year">{item.title} {item.year}</div>
                                                         <span>{user.isClicked === index ?
                                                             <FiMinus style={{fontSize: "18px", color: "#8c8c8c"}}/> :
                                                             <CgMathPlus
@@ -697,7 +693,7 @@ const Catolog = observer((props) => {
                                                 className="accordion-title d-flex justify-content-sm-between "
                                                 onClick={() => toggleReadMore()}
                                             >
-                                                <div style={{fontWeight: "bold", color: "#000"}}
+                                                <div style={{fontWeight: "500", color: "#333333"}}
                                                      className="year">{user.isRead ? "Все сезоны" : " Закрыть"}</div>
                                                 <div style={{cursor: "pointer"}}>{user.isRead ?
                                                     <CgMathPlus style={{fontSize: "18px", color: "#8c8c8c"}}/> :

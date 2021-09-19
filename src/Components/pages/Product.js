@@ -440,7 +440,7 @@ const Product = observer((props) => {
 
                                     <div className="details-filter-row details-row-size">
                                         <p style={{fontSize: "16px", color: "#000000"}}>Размер: <span
-                                            style={{cursor: "pointer", color: "#eea287"}} onClick={handleShowRaz}> Таблица размеров</span>
+                                            style={{cursor: "pointer", color: "#c96"}} onClick={handleShowRaz}> Таблица размеров</span>
                                         </p>
                                         <Modal  show={showRaz} onHide={handleCloseRaz}  centered={true} animation={true} size="lg"
                                                aria-labelledby="contained-modal-title-vcenter"
