@@ -56,7 +56,7 @@ const Catolog = observer((props) => {
     const [count, setCount] = useState(5)
 
     const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setPostsPerPage] = useState(2)
+    const [postsPerPage, setPostsPerPage] = useState(60)
 
     const [isActive, setIsActive] = useState(false);
     const [Active, setActive] = useState("");
@@ -145,6 +145,9 @@ const Catolog = observer((props) => {
 
         if(pagi){
             product.getPagination(e,pagi, des)
+            history.push({
+                search: `?products=products&sort=${des}`
+            })
         }else if(!view) {
             if (!produs) {
                 history.push({
