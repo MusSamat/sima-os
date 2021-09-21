@@ -5,6 +5,7 @@ const Pagination = ({postsPerPage, totalPosts, paginate}) => {
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
         pageNumbers.push(i)
     }
+
     return (
         <nav aria-label="Page navigation">
             <ul className="pagination justify-content-center">

@@ -222,9 +222,9 @@ const Main = observer(() => {
         user.getImageNovelty()
         user.getImagePopular()
         product.getNoveltyProducts1()
-        product.getDataNew()
+        // product.getDataNew()
         product.getSubcategory().then(() => {
-            product.getDataNewSeason(product?.subcategory[0]?.id)
+            // product.getDataNewSeason(product?.subcategory[0]?.id)
             localStorage.removeItem('category')
             localStorage.removeItem('viewProduct')
         })
@@ -235,7 +235,7 @@ const Main = observer(() => {
     return (
         <div className="page-wrapper">
             <main className="main">
-                {user.image.map((img, index) =>
+                {user?.image.map((img, index) =>
                     <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>
 
                         <div className="container intro-content text-left ">

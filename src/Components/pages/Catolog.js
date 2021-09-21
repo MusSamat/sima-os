@@ -106,7 +106,9 @@ const Catolog = observer((props) => {
     }
 
     const paginate = (e, pageNumber) => {
+        localStorage.setItem('pagination', JSON.stringify(pageNumber));
         setCurrentPage(pageNumber)
+        product.getPagination(e,pageNumber)
         e.preventDefault();
     }
 
@@ -135,11 +137,15 @@ const Catolog = observer((props) => {
     }
 
     const sortProducts = (e, des) => {
+        let pagi = JSON.parse(localStorage.getItem('pagination'))
         let view = JSON.parse(localStorage.getItem('viewProduct'))
         let sesonId = JSON.parse(localStorage.getItem('sesonId'))
         let prodId = JSON.parse(localStorage.getItem('prodId'))
         e.preventDefault();
-        if(!view) {
+
+        if(pagi){
+            product.getPagination(e,pagi, des)
+        }else if(!view) {
             if (!produs) {
                 history.push({
                     search: `?products=products&sort=${des}`
@@ -151,7 +157,7 @@ const Catolog = observer((props) => {
                 })
             }
             product.getAllProductsSort(produs, des)
-        }else {
+        } else {
             product.fetchTodoCatalog(sesonId, prodId, des)
         }
     }
@@ -338,9 +344,9 @@ const Catolog = observer((props) => {
             })
         e.preventDefault();
     }
-    console.log(user.token?.token)
 
     useEffect(() => {
+
         if(produs === "discount"){
             localStorage.setItem('category', JSON.stringify("Скидки"));
         } else if (produs === "novelty"){
@@ -455,7 +461,7 @@ const Catolog = observer((props) => {
                                     <div class="row justify-content-center">
 
                                         { product.isLoader ? <Loader/>
-                                            : currentPosts.length ? currentPosts.map((prod, index) =>
+                                            : product.products.length ? product.products.map((prod, index) =>
                                             <div class="col-6 col-md-4 col-lg-3">
                                                 <div class="product product-7 text-center black">
                                                     <figure key={index} class="product-media">
@@ -565,7 +571,7 @@ const Catolog = observer((props) => {
                                 {modalActive &&
                                 <Modal active={modalActive} setActive={setModalActive}
                                        id={prodactId}/>}
-                                <Pagination postsPerPage={postsPerPage} totalPosts={product.products.length}
+                                <Pagination postsPerPage={postsPerPage} totalPosts={product.pagination}
                                             paginate={paginate}/>
                             </div>
                             <aside className="col-lg-3 order-lg-first ">
@@ -657,7 +663,7 @@ const Catolog = observer((props) => {
                                                     <div className={user.isClicked === index ? "Acontent show" : "Acontent"}>
                                                         {product.prodcategory.filter(a => a.seasoncategory === item.id).map((prod) =>
                                                             <div
-                                                                onClick={(e) => typeOfProduct(e, prod.title,prod.seasoncategory, prod.id)}
+                                                                onClick={(e) => typeOfProduct(e, prod.title, prod.seasoncategory, prod.id)}
                                                                 className="prod" key={prod}>
                                                                 {prod.title}
                                                             </div>)}

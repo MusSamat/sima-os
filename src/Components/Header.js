@@ -61,7 +61,7 @@ const Header = observer(() => {
             user.getWishlistData()
         }
         user.getImageLogo()
-        product.subcategoryFilter()
+        // product.subcategoryFilter()
         product.getSubcategory().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',

@@ -25,7 +25,7 @@ const Product = observer((props) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
     const id = props.match.params.id
-    const [count, setCount] = useState(product.product.size.length)
+    const [count, setCount] = useState(product.size.length)
     const [hover, setHover] = useState(false);
     const [show, setShow] = useState(false);
     const [showRaz, setShowRaz] = useState(false);

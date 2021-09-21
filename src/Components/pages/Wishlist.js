@@ -68,9 +68,6 @@ const Wishlist = observer(() => {
     const deleteWishLocal = async (proId) => {
         wish = wish.filter((item) => item.id !== proId)
         await localStorage.setItem("wishlist", JSON.stringify(wish));
-        if (wish.length === 0) {
-            localStorage.removeItem("wishlist");
-        }
         product.getActualProducts()
     }
 

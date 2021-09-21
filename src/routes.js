@@ -9,14 +9,13 @@ import Cart from "./Components/pages/Cart";
 import Checkout from "./Components/pages/Checkout";
 import {CATALOG_ROUTE, DELIVERY_ROUTE, CONTACT_ROUTE, ABOUT_ROUTE, NEWS_ROUTE, HOME_ROUTE, 
         PRODUCT_ROUTE, CART_ROUTE, CHECKOUT_ROUTE, WISHLIST_ROUTE, LOGIN_ROUTE, ERROR_ROUTE, SINGLE_ROUTE, MYACOUNT_ROUTE,
-         SUBCATEGORY_ROUTE,PRODUCTCATEGORY_ROUTE, ORDER_ROUTE, PURCHASES_ROUTE, FORGET_ROUTE, CHANGEPASS_ROUTE, QUICKVIEW_ROUTE} from "./utils/Const";
+         SUBCATEGORY_ROUTE, ORDER_ROUTE, PURCHASES_ROUTE, FORGET_ROUTE, CHANGEPASS_ROUTE, QUICKVIEW_ROUTE} from "./utils/Const";
 import Wishlist from "./Components/pages/Wishlist";
 import Login from "./Components/pages/Login";
 import Error from "./Components/pages/Error";
 import Single from "./Components/pages/Single";
 import Myacount from "./Components/pages/Myacount";
 import ProdCategory from "./Components/pages/ProdCategory";
-import ProductCategory from "./Components/pages/ProductCategory";
 import OrdersTable from "./Components/pages/OrdersTable";
 import Purchases from "./Components/pages/Purchases";
 import ForgetPass from "./Components/pages/ForgetPass";
@@ -90,10 +89,6 @@ export const publicRoutes = [
         path: SUBCATEGORY_ROUTE,
         Component: ProdCategory,
     },
-    // {
-    //     path: PRODUCTCATEGORY_ROUTE,
-    //     Component: ProductCategory,
-    // },
     {
         path: ORDER_ROUTE,
         Component: OrdersTable,
