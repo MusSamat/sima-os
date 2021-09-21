@@ -56,7 +56,7 @@ const Catolog = observer((props) => {
     const [count, setCount] = useState(5)
 
     const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setPostsPerPage] = useState(60)
+    const [postsPerPage, setPostsPerPage] = useState(56)
 
     const [isActive, setIsActive] = useState(false);
     const [Active, setActive] = useState("");
