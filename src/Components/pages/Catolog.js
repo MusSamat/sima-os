@@ -143,12 +143,8 @@ const Catolog = observer((props) => {
         let prodId = JSON.parse(localStorage.getItem('prodId'))
         e.preventDefault();
 
-        if(pagi){
-            product.getPagination(e,pagi, des)
-            history.push({
-                search: `?products=products&sort=${des}`
-            })
-        }else if(!view) {
+
+            if(!view) {
             if (!produs) {
                 history.push({
                     search: `?products=products&sort=${des}`
