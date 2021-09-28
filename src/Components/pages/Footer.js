@@ -35,44 +35,9 @@ export default function Footer() {
         window.scrollTo(0, 0)
     }, [])
     return (
-        <div>
+        <div style={{bottom: "0"}}>
 
-            {/*<div className="mb-10 mt-4  " style={{*/}
-            {/*    textAlign: "center",*/}
-            {/*    padding: "30px",*/}
-            {/*    marginTop: " 20px",*/}
-            {/*    backgroundColor: "#F6F6F6",*/}
-            {/*    boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)"*/}
-            {/*}}>*/}
-            {/*    <div className="container-z">*/}
-            {/*        <h2 className="mb-3" style={{color: "#EEA287"}}>Закажите обратный звонок</h2>*/}
-            {/*        <div className="row d-flex justify-content-center">*/}
-            {/*            <div className="col-sm-3 d-flex justify-content-center mb-2">*/}
-            {/*                <input*/}
-            {/*                    className="input-z "*/}
-            {/*                    placeholder="Ваше имя"*/}
-            {/*                    value={name}*/}
-            {/*                    onChange={e => setName(e.target.value)}*/}
-            {/*                    type="text"/>*/}
-            {/*            </div>*/}
-            {/*            <div className="col-sm-1"></div>*/}
-            {/*            <div className="col-sm-3">*/}
-            {/*                <input*/}
-            {/*                    className="input-z"*/}
-            {/*                    placeholder="Номер телефона"*/}
-            {/*                    value={number}*/}
-            {/*                    onChange={e => setNumber(e.target.value)}*/}
-            {/*                    type="tel"/>*/}
-            {/*            </div>*/}
 
-            {/*        </div>*/}
-            {/*        <div className="more-container text-center mt-3 mb-3">*/}
-            {/*            <a href="" onClick={sendName} className="btn btn-outline-dark-3 btn-more"><span>Отправить</span></a>*/}
-            {/*        </div>*/}
-
-            {/*    </div>*/}
-
-            {/*</div>*/}
             <div className="container">
                 <div className="cta cta-horizontal cta-horizontal-box bg-image mb-5"
                      style={{backgroundImage: "url(assets/images/backgrounds/cta/bg-1.jpg)", backgroundPosition: "center right"}}>

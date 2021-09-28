@@ -28,7 +28,7 @@ const Checkout = observer(() => {
     const [company, setCompany] = useState()
     const [cupon, setCupon] = useState()
     const [discount, setDiscount] = useState()
-    const [checked, setChecked] = React.useState(true);
+    const [checkeds, setCheckeds] = React.useState(true);
     const [value, setValue] = useState("")
     let datalocal = JSON.parse(localStorage.getItem('order'))
 
@@ -36,9 +36,9 @@ const Checkout = observer(() => {
     const notifyError = () => toast.error("");
 
 
-    const handleChange = (event) => {
-        setChecked(event.target.checked);
-    };
+    // const handleChange = (event) => {
+    //     setChecked(event.target.checked);
+    // };
 
     const sendOrder = (e) => {
         let items = []
@@ -97,7 +97,21 @@ const Checkout = observer(() => {
             })
         e.preventDefault();
     }
-    console.log(user.carts)
+
+    const handleChange = (e, link) => {
+        setValue(e.target.value)
+        setCheckeds(true);
+        localStorage.setItem('link', JSON.stringify(link));
+    }
+
+    const handleChanges = (e) => {
+        setValue(e.target.value)
+        setCheckeds(false);
+    }
+
+
+    let link = JSON.parse(localStorage.getItem('link'))
+    console.log(link)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -290,26 +304,26 @@ const Checkout = observer(() => {
                                             <label className="s-title" style={{cursor: "pointer"}}>
                                                 <input style={{cursor: "pointer"}}   className="mr-3" type="radio" value="odin"
                                                        checked={value === "odin"}
-                                                       onChange={e => setValue(e.target.value)}/>
+                                                       onChange={handleChanges}/>
                                                 Оплата курьеру при доставке
                                             </label><br/>
                                             <label className="s-title" style={{cursor: "pointer"}}>
                                                 <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="two"
                                                        checked={value === "two"}
-                                                       onChange={e => setValue(e.target.value)}/>
+                                                       onChange={(e) => handleChange(e,"visa")}/>
 
                                                 VISA/MasterCard/Maestro/ЭЛКАРТ
                                             </label><br/>
                                             <label className="s-title" style={{cursor: "pointer"}}>
                                                 <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="three"
                                                        checked={value === "three"}
-                                                       onChange={e => setValue(e.target.value)}/>
+                                                       onChange={(e) => handleChange(e,"three")}/>
                                                 ЭЛСОМ
                                             </label><br/>
                                             <label className="s-title" style={{cursor: "pointer"}}>
                                                 <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"
                                                        checked={value === "four"}
-                                                       onChange={e => setValue(e.target.value)}/>
+                                                       onChange={(e) => handleChange(e,"four")}/>
                                                 О!Деньги
                                             </label><br/>
                                         </Form>
@@ -336,12 +350,15 @@ const Checkout = observer(() => {
                                             Прочитал и согласен с
                                         </label><br/>
                                         <a href="">Условия использования</a>
-
-
-                                        <button onClick={sendOrder} type="submit"
-                                                className="btn btn-outline-primary-2 btn-order btn-block mt-3">
-                                            <span style={{fontSize: "18px"}}>Подтвердить заказ</span>
-                                        </button>
+                                        {checkeds ? <NavLink className="btn btn-outline-primary-2 btn-order btn-block mt-3" to={`/${link}`}>Подтвердить заказ</NavLink> :
+                                            <button onClick={sendOrder} type="submit"
+                                                    className="btn btn-outline-primary-2 btn-order btn-block mt-3">
+                                                <span style={{fontSize: "18px"}}>Подтвердить заказ</span>
+                                            </button>}
+                                        {/*<button onClick={sendOrder} type="submit"*/}
+                                        {/*        className="btn btn-outline-primary-2 btn-order btn-block mt-3">*/}
+                                        {/*    <span style={{fontSize: "18px"}}>Подтвердить заказ</span>*/}
+                                        {/*</button>*/}
                                         <ToastContainer/>
                                     </div>
                                 </aside>

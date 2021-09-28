@@ -18,6 +18,7 @@ export const PURCHASES_ROUTE = '/purchases'
 export const FORGET_ROUTE = '/forget'
 export const QUICKVIEW_ROUTE = '/quickview'
 export const CHANGEPASS_ROUTE = '/api/password_reset/validate_token/:token'
+export const VISA_ROUTE = '/visa'
 
 
 export const ORDER_ROUTE = '/orders'
