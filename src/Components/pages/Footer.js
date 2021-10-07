@@ -65,8 +65,8 @@ export default function Footer() {
                 </div>
             </div>
 
-            <footer class="footer footer-2">
-                <div class="footer-middle">
+            <footer style={{    backgroundColor: "#fff"}} className="footer ">
+                <div classN="footer-middle">
                     <div className="container">
                         <div className="row mt-5">
                             <div className="col-md-4">
@@ -114,6 +114,7 @@ export default function Footer() {
                                             <img style={{width: "25px"}} src={vk}/></a>
 
                                     </div>
+                                    <div  className='s-title mt-3'>grand139094@gmail.com</div>
                                 </div>
                             </div>
                         </div>
@@ -121,16 +122,16 @@ export default function Footer() {
 
                 </div>
 
-                {/*<div class="footer-bottom">*/}
-                {/*    <div class="container">*/}
-                {/*        <p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p>*/}
-                {/*        <ul class="footer-menu">*/}
-                {/*            <li><a href="#">Terms Of Use</a></li>*/}
-                {/*            <li><a href="#">Privacy Policy</a></li>*/}
-                {/*        </ul>*/}
+                <div class="footer-bottom">
+                    <div class="container">
+                        <p class="footer-copyright"> © 2021 Sima Store. All Rights Reserved.</p>
+                        <ul class="footer-menu">
+                            <li><a href="">Sigma Software Solutions</a></li>
+                            {/*<li><a href="">Privacy Policy</a></li>*/}
+                        </ul>
 
-                {/*    </div>*/}
-                {/*</div>*/}
+                    </div>
+                </div>
             </footer>
         </div>
     )

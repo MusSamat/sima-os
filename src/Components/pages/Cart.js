@@ -5,6 +5,7 @@ import axios from "axios"
 import {NavLink, Link} from 'react-router-dom';
 import {CATALOG_ROUTE, CHECKOUT_ROUTE, HOME_ROUTE} from '../../utils/Const';
 import "../../App.css";
+import {toast} from "react-toastify";
 
 const Cart = observer(() => {
     const {user} = useContext(Context)
@@ -58,6 +59,10 @@ const Cart = observer(() => {
                 console.error(e)
             })
 
+    }
+
+    const errorClick = () => {
+        toast.warning("Минимальный заказ 5 размерных рядов")
     }
 
     const deleteLocal = async (e, id) => {
@@ -233,7 +238,7 @@ const Cart = observer(() => {
                                                         sum = sum + item.price * item.quantity
                                                     })
                                                 }
-                                                <td>  {sum.toFixed(2)} ₽</td>
+                                                <td>  {new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum.toFixed(2))} ₽</td>
 
                                             </tr>
 
@@ -241,16 +246,29 @@ const Cart = observer(() => {
                                             <tr className="summary-subtotal" style={{fontWeight: "500"}}>
                                                 <td>Итого:</td>
 
-                                                <td>{sum.toFixed(2)} ₽</td>
+                                                <td>{ new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum.toFixed(2))} ₽</td>
                                             </tr>
                                             </tbody>
                                         </table>
 
 
-                                    <NavLink to={CHECKOUT_ROUTE}>
-                                        <a href="" className="btn btn-outline-primary-2 btn-order btn-block">Оформить
-                                            заказ</a>
-                                    </NavLink>
+
+                                        { user.token?.token ? user.items.length >= 5 ?
+                                                <NavLink to={CHECKOUT_ROUTE}>
+                                                    <a href="" className="btn btn-outline-primary-2 btn-order btn-block">Оформить
+                                                        заказ</a>
+                                                </NavLink> :
+                                                    <a style={{color: "#c96"}} onClick={errorClick} className="btn btn-outline-primary-2 btn-order btn-block">Оформить
+                                                        заказ</a>
+
+                                            : data?.length >= 5 ?
+                                                <NavLink to={CHECKOUT_ROUTE}>
+                                                    <a href="" className="btn btn-outline-primary-2 btn-order btn-block">Оформить
+                                                        заказ</a>
+                                                </NavLink> :
+                                                    <a style={{color: "#c96"}} onClick={errorClick} className="btn btn-outline-primary-2 btn-order btn-block">Оформить
+                                                        заказ</a>
+                                        }
                                     </div>
 
                                     <NavLink to={`${CATALOG_ROUTE}?products=products`} >

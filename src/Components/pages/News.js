@@ -20,7 +20,7 @@ const News = observer(() => {
     }, []);
     return (
         <div className="page-wrapper">
-            <main className="main mt-2">
+            <main className="main mt-5">
                 <div className="page-content">
                     <div className="container ">
                         {product.blog.map((blog, index) =>

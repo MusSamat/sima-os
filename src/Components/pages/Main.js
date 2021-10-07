@@ -242,10 +242,11 @@ const Main = observer(() => {
                             <h1 className="intro-title" >{img.title}<br/>< strong
                                 style={{marginLeft: "-9px", color: "#c96"}}>sale</strong></h1>
 
-                            <Link to={`${CATALOG_ROUTE}?products=discount`} className="btn">
+                            <Link to={`${CATALOG_ROUTE}?products=discount`} className="btn btn-outline-primary-2 s-title">
                                 <span  style={{fontSize: "20px"}}>Показать</span>
                                 <i className="icon-long-arrow-right"></i>
                             </Link>
+
                         </div>
 
                     </div>)}
@@ -347,7 +348,7 @@ const Main = observer(() => {
 
                         <Link  to={`${CATALOG_ROUTE}?products=discount`}>
                             <div  className="more-container text-center mt-3 mb-3">
-                                <a href="" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
+                                <a href="" className="btn btn-outline-primary-2 s-title"><span>Показать</span><i
                                     className="icon-long-arrow-right"></i></a>
                             </div>
                         </Link>
@@ -357,10 +358,10 @@ const Main = observer(() => {
                 {user.novelty.map((img) =>
 
                 <div style={{boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)"}} className="trending mb-6 mt-8">
-                    <a href="">
+                    <Link to={`${CATALOG_ROUTE}?products=novelty`}>
 
                         <img src={img.image} alt="Banner"/>
-                    </a>
+                    </Link>
                     <div className="banner banner-big d-md-block">
                         <div className="banner-content text-center">
                             <h3 className="banner-title text-white">{img.title}</h3>
@@ -463,7 +464,7 @@ const Main = observer(() => {
 
                     <Link to={`${CATALOG_ROUTE}?products=novelty`}>
                         <div  className="more-container text-center mt-3 mb-3">
-                            <a href="" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
+                            <a href="" className="btn btn-outline-primary-2 "><span className="s-title">Показать</span><i
                                 className="icon-long-arrow-right"></i></a>
                         </div>
                     </Link>
@@ -578,7 +579,7 @@ const Main = observer(() => {
                     </div>
                     <Link  to={`${CATALOG_ROUTE}?products=popular`}>
                         <div  className="more-container text-center mt-3 mb-3">
-                            <a href="" className="btn btn-outline-dark-3 btn-more"><span>Показать</span><i
+                            <a href=""  className="btn btn-outline-primary-2 s-title "><span>Показать</span><i
                                 className="icon-long-arrow-right"></i></a>
                         </div>
                     </Link>

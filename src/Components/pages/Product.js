@@ -14,6 +14,16 @@ import {Modal, Button, Container, Row, Col} from "react-bootstrap";
 import mobile_menu from '../../Http/mobile_menu';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    TwitterShareButton,
+    TwitterIcon,
+    OKIcon,
+    OKShareButton,
+    VKShareButton, VKIcon
+} from "react-share";
+import {Instagram} from "@material-ui/icons";
 
 const colors = {
     orange: "#FFBA5A",
@@ -270,7 +280,7 @@ const Product = observer((props) => {
 
     }, [])
 
-
+    const shareUrl  = `${process.env.REACT_APP_BASE_URL}/product/${id}`
     return (
         <div class="page-wrapper">
 
@@ -305,21 +315,47 @@ const Product = observer((props) => {
                         </nav>
                         <div style={{borderTop: "none"}} className="product-details-footer d-flex">
                             <div className="social-icons social-icons-sm">
+
+                                <FacebookShareButton url={shareUrl}>
+                                    {/*<FacebookIcon size={35} round={true}/>*/}
+
+                                    <a style={{fontSize: "20px"}}
+                                        href=""
+                                       className="social-icon social-facebook" title="Facebook" target="_blank"><i
+                                        className="icon-facebook-f"></i></a>
+                                </FacebookShareButton >
+                                <TwitterShareButton url={shareUrl}>
+                                    {/*<TwitterIcon size={35} round={true}/>*/}
+                                    <a style={{fontSize: "20px"}} href=""
+                                       className="social-icon social-twitter ml-1" title="Twitter" target="_blank"><i
+                                        className="icon-twitter"></i></a>
+                                </TwitterShareButton>
+
+                                <OKShareButton url={shareUrl}>
+                                    {/*<OKIcon size={35} round={true}/>*/}
+                                    <a style={{fontSize: "20px"}} href=""
+                                       className="social-icon ml-1"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
+                                </OKShareButton>
+                                <VKShareButton url={shareUrl}>
+                                    {/*<VKIcon size={35} round={true}/>*/}
+                                    <a href="" className="social-icon ml-1"><img
+                                        style={{width: "20px"}} src={vk}/></a>
+                                </VKShareButton>
                                 {/*<span className="social-label">Share:</span>*/}
-                                <a style={{fontSize: "20px"}}
-                                   href="https://www.facebook.com/profile.php?id=100069533462465"
-                                   className="social-icon social-facebook" title="Facebook" target="_blank"><i
-                                    className="icon-facebook-f"></i></a>
-                                <a style={{fontSize: "20px"}} href="https://twitter.com/sima_company"
-                                   className="social-icon social-twitter" title="Twitter" target="_blank"><i
-                                    className="icon-twitter"></i></a>
-                                <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/"
-                                   className="social-icon social-instagram" title="Instagram" target="_blank"><i
-                                    className="icon-instagram"></i></a>
-                                <a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"
-                                   className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
-                                <a href="https://vk.com/simastyle" className="social-icon"><img
-                                    style={{width: "20px"}} src={vk}/></a>
+                                {/*<a style={{fontSize: "20px"}}*/}
+                                {/*   href="https://www.facebook.com/profile.php?id=100069533462465"*/}
+                                {/*   className="social-icon social-facebook" title="Facebook" target="_blank"><i*/}
+                                {/*    className="icon-facebook-f"></i></a>*/}
+                                {/*<a style={{fontSize: "20px"}} href="https://twitter.com/sima_company"*/}
+                                {/*   className="social-icon social-twitter" title="Twitter" target="_blank"><i*/}
+                                {/*    className="icon-twitter"></i></a>*/}
+                                {/*<a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/"*/}
+                                {/*   className="social-icon social-instagram" title="Instagram" target="_blank"><i*/}
+                                {/*    className="icon-instagram"></i></a>*/}
+                                {/*<a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"*/}
+                                {/*   className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>*/}
+                                {/*<a href="https://vk.com/simastyle" className="social-icon"><img*/}
+                                {/*    style={{width: "20px"}} src={vk}/></a>*/}
                             </div>
 
                         </div>

@@ -109,7 +109,7 @@ const Wishlist = observer(() => {
     }, [])
     return (
         <div className="page-wrapper">
-            <main className="main">
+            <main className="main mt-5">
 
                 <div className="page-content">
                     <div className="container">

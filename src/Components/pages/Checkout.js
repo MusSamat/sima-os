@@ -36,9 +36,7 @@ const Checkout = observer(() => {
     const notifyError = () => toast.error("");
 
 
-    // const handleChange = (event) => {
-    //     setChecked(event.target.checked);
-    // };
+    let linkData = '';
 
     const sendOrder = (e) => {
         let items = []
@@ -69,6 +67,7 @@ const Checkout = observer(() => {
             note: note,
             items: user.token?.token? [] : items,
         })
+        linkData = data
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/order/`, data, user.token?.token ?
             {
                 headers: {
@@ -355,10 +354,7 @@ const Checkout = observer(() => {
                                                     className="btn btn-outline-primary-2 btn-order btn-block mt-3">
                                                 <span style={{fontSize: "18px"}}>Подтвердить заказ</span>
                                             </button>}
-                                        {/*<button onClick={sendOrder} type="submit"*/}
-                                        {/*        className="btn btn-outline-primary-2 btn-order btn-block mt-3">*/}
-                                        {/*    <span style={{fontSize: "18px"}}>Подтвердить заказ</span>*/}
-                                        {/*</button>*/}
+
                                         <ToastContainer/>
                                     </div>
                                 </aside>

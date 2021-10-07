@@ -215,7 +215,7 @@ const Catolog = observer((props) => {
                 title: title
             })
         } else {
-            toast.warning("этот товар есть в карзина")
+            toast.warning("этот товар уже в карзине")
             found = -1
         }
     }
@@ -428,29 +428,30 @@ const Catolog = observer((props) => {
                         </nav>
                         <div className="row">
                             <div className="col-lg-9 overflow-hidden ">
-                                <div className="toolbox">
-                                    <label style={{fontSize: "16px"}}>Сортировка:</label>
+                                <div style={{display: 'flex', justifyContent: "center", color: "#333333"}}>Сортировка</div>
+                                <div className="toolbox ">
+
                                     <div className="">
                                         <div className="toolbox-info">
                                             <button onClick={(e) => sortProducts(e,"asc")}
                                                     className={sorted === "asc" ? "novelti actived" : "novelti"}  >
-                                                Цена: По Возрастанию
+                                                Цена: по возрастанию
                                             </button>
                                             <button onClick={(e) => sortProducts( e,"desc")}
                                                     className={sorted === "desc" ? "novelti actived" : "novelti"}  >
-                                                Цена: По Убыванию
+                                                Цена: по убыванию
                                             </button>
                                             <button onClick={(e) => sortProducts(e, "dis_asc")}
                                                     className={sorted === "dis_asc" ? "novelti actived" : "novelti"}  >
-                                                Скидка: По Возрастанию
+                                                Скидка: по возрастанию
                                             </button>
                                             <button onClick={(e) => sortProducts(e,"dis_desc")}
                                                     className={sorted === "dis_desc" ? "novelti actived" : "novelti"} >
-                                                Скидка: По Убыванию
+                                                Скидка: по убыванию
                                             </button>
                                             <button onClick={(e) => sortProducts(e,"rat_desc")}
                                                     className={sorted === "rat_desc" ? "novelti actived" : "novelti"} >
-                                                По Рейтингу
+                                                По рейтингу
                                             </button>
 
                                         </div>

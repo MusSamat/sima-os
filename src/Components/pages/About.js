@@ -24,12 +24,12 @@ const About = observer(() => {
                     <div className="container">
 
                         <div style={{display: "flex", justifyContent: "center", marginBottom: "20px"}}><h2
-                            style={{color: "#EEA287", textAlign: "center"}}>О нас</h2></div>
+                            style={{color: "#c96", textAlign: "center"}}>О нас</h2></div>
                         <p style={{textAlign: "justify", textIndent: "40px", fontSize: "16px", color: "#000000"}}><span
-                            style={{color: "#EEA287"}}>Швейная компания «SIMA»</span> — начала свой путь развития с 1998
+                            style={{color: "#c96"}}>Швейная компания «SIMA»</span> — начала свой путь развития с 1998
                             года, ежегодно выпускаются 4 сезонные коллекции одежды, ориентированные на рынки России,
                             Украины, Казахстана, Беларуси, Узбекистана и на международные рынки. Вся продукция <span
-                                style={{color: "#EEA287"}}>компании «SIMA»</span> производится в Кыргызстане. На
+                                style={{color: "#c96"}}>компании «SIMA»</span> производится в Кыргызстане. На
                             сегодняшний день действующая производственная база компании оснащена современными
                             высокотехнологичными оборудованиями известных мировых марок и программно-аппаратными
                             комплексами. Перед отправкой, товар проходит 3-этапную проверку.</p>
@@ -61,7 +61,7 @@ const About = observer(() => {
 
 
                     <hr className=" mb-1"/>
-                    <h2 className="d-flex justify-content-center" style={{color: "#EEA287"}}>Награды и сертификаты</h2>
+                    <h2 className="d-flex justify-content-center" style={{color: "#c96"}}>Награды и сертификаты</h2>
                     <div className="products mt-4">
                         <div className="row justify-content-center">
                             {product.sertificate?.map((discout, index) =>
@@ -78,7 +78,7 @@ const About = observer(() => {
                         </div>
                     </div>
                     <hr className=" mb-6"/>
-                    <h2 className="d-flex justify-content-center" style={{color: "#EEA287"}}>Фотогаллерея</h2>
+                    <h2 className="d-flex justify-content-center" style={{color: "#c96"}}>Фотогаллерея</h2>
                     <div className="products mt-4">
                         <div className="row justify-content-center">
                             {product.gallery?.map((discout, index) =>

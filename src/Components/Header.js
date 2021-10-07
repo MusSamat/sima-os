@@ -17,7 +17,7 @@ import {
 import "../App.css";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import logo from "../assets/lolo.jpg"
+import {toast} from "react-toastify";
 import what from "../assets/WhatsApp.png"
 import mobile_menu from "../Http/mobile_menu";
 
@@ -50,7 +50,9 @@ const Header = observer(() => {
 
     }
 
-
+    const errorClick = () => {
+        toast.warning("Минимальный заказ 5 размерных рядов")
+    }
 
 
     useEffect(() => {
@@ -209,7 +211,7 @@ const Header = observer(() => {
 
                             <NavLink className="wishlist-link" to={WISHLIST_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                 <i style={{color: "#666666"}} className="icon-heart-o"></i>
-                                <span className="wishlist-count">{user.token?.token ? user.list?.length || '0' : wish  ? wish?.length : '0' }</span>
+                                <span className="wishlist-count flex justify-content-center align-center">{user.token?.token ? user.list?.length || '0' : wish  ? wish?.length : '0' }</span>
                             </NavLink>
                             <div className="dropdown cart-dropdown mr-10">
                                 <NavLink to={CART_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="dropdown-toggle ">
@@ -224,7 +226,7 @@ const Header = observer(() => {
                                             sum = sum + item.price * item.quantity
                                         })
                                     }
-                                    <span className="cart-txt">{sum.toFixed(2) } ₽</span>
+                                    <span className="cart-txt">{new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format( sum.toFixed(2)) } ₽</span>
                                 </a>
                                 </NavLink>
 
@@ -239,10 +241,10 @@ const Header = observer(() => {
                                                             <a>{c.product?.title}</a>
                                                         </h4>
 
-                                                        <span className="cart-product-info">
-                                                <span className="cart-product-qty">1</span>
-                                                x ${c.product?.price}
-                                            </span>
+                                                        <span style={{color: '#666666', fontWeight: "normal"}} className="cart-product-info">
+                                                            {/*<span className="cart-product-qty"></span>*/}
+                                                            {c.product?.price}
+                                                        </span>
                                                     </div>
 
                                                     <figure className="product-image-container">
@@ -261,9 +263,9 @@ const Header = observer(() => {
                                                                         <a>{c.title}</a>
                                                                     </h4>
 
-                                                                    <span className="cart-product-info">
-                                                                    <span className="cart-product-qty">1</span>
-                                                                    x ${c.price} ₽
+                                                                    <span style={{color: '#666666', fontWeight: "normal"}} className="cart-product-info">
+                                                                    {/*<span className="cart-product-qty">1</span>*/}
+                                                                    {c.price} ₽
                                                                 </span>
                                                                 </div>
 
@@ -283,25 +285,46 @@ const Header = observer(() => {
                                     </div>
 
                                     <div className="dropdown-cart-total">
-                                        <span>ИТОГО:</span>
+                                        <span style={{color: '#666666', fontWeight: "normal"}} >ИТОГО:</span>
 
-                                        <span className="cart-total-price">{sum.toFixed(2)}</span>
+                                        <span style={{color: '#666666', fontWeight: "normal"}}  className="cart-total-price">{new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum.toFixed(2)) } ₽</span>
                                     </div>
                                     <div className="dropdown-cart-action">
                                         <NavLink  to={CART_ROUTE}>
                                             <a href="" className="btn btn-outline-primary-2">Просмотр корзины</a><br/>
                                         </NavLink>
                                     </div>
+                                    { user.token?.token ? user.items.length >= 5 ?
                                     <NavLink  to={CHECKOUT_ROUTE}>
-                                    <div className="dropdown-cart-action">
-
-                                            <a href=""
-                                               className="btn btn-outline-primary-2">Оформить заказ
-                                                <i style={{marginRight: "-1px"}} className="icon-long-arrow-right"></i>
-                                            </a>
-
-                                    </div>
-                                    </NavLink>
+                                        <div className="dropdown-cart-action">
+                                                <a href=""
+                                                   className="btn btn-outline-primary-2">Оформить заказ
+                                                    <i style={{marginRight: "-1px"}} className="icon-long-arrow-right"></i>
+                                                </a>
+                                        </div>
+                                    </NavLink> :
+                                            <div onClick={errorClick} className="dropdown-cart-action">
+                                                <a href style={{color: "#c96"}}
+                                                   className="btn btn-outline-primary-2">Оформить заказ
+                                                    <i style={{marginRight: "-1px"}} className="icon-long-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        : data?.length >= 5 ?
+                                        <NavLink  to={CHECKOUT_ROUTE}>
+                                            <div className="dropdown-cart-action">
+                                                <a href=""
+                                                   className="btn btn-outline-primary-2">Оформить заказ
+                                                    <i style={{marginRight: "-1px"}} className="icon-long-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </NavLink> :
+                                            <div onClick={errorClick} className="dropdown-cart-action">
+                                                <a href style={{color: "#c96"}}
+                                                   className="btn btn-outline-primary-2">Оформить заказ
+                                                    <i style={{marginRight: "-1px"}} className="icon-long-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                    }
 
 
                                     {/*<div className="dropdown-cart-action" style={{display: "block"}}>*/}

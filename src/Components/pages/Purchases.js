@@ -47,9 +47,9 @@ const Purchases = observer(() => {
                     </div>)}
                 <div className="container mt-4">
                     <div style={{display: "flex", justifyContent: "center", marginBottom: "25px"}}><h2
-                        style={{color: "#EEA287"}}>Условия покупки</h2></div>
+                        style={{color: "#c96"}}>Условия покупки</h2></div>
                     <p style={{fontSize: "16px", textAlign: "justify", textIndent: "40px", color: "#000000"}}><span
-                        style={{color: "#EEA287"}}>Швейная компания «SIMA»</span> приглашает к сотрудничеству
+                        style={{color: "#c96"}}>Швейная компания «SIMA»</span> приглашает к сотрудничеству
                         индивидуальных предпринимателей, крупных оптовиков, торговые сети, магазины, шоурумы, и иные
                         формы бизнеса, заинтересованные в серьезной и долгосрочной работе.</p>
                     <p style={{fontSize: "16px", textAlign: "justify", textIndent: "40px", color: "#000000"}}>Заказать
@@ -79,7 +79,7 @@ const Purchases = observer(() => {
                             для крупного опта
                         </li>
                     </ul>
-                    <p style={{fontSize: "16px", textAlign: "justify", textIndent: "58px", color: "#EEA287"}}>Заказать
+                    <p style={{fontSize: "16px", textAlign: "justify", textIndent: "58px", color: "#c96"}}>Заказать
                         товар можно несколькими способами:</p>
                     <ul style={{marginLeft: "60px", marginTop: "5px", marginBottom: "20px"}}>
                         <li style={{fontSize: "16px", listStyle: "outside", color: "#000000"}}>Оформить заказ на сайте.
@@ -93,33 +93,37 @@ const Purchases = observer(() => {
                                 <li style={{
                                     fontSize: "16px",
                                     listStyle: "outside",
-                                    color: "#EEA287",
+                                    color: "#c96",
                                     listStyle: 'none',
-                                    marginLeft: '20px'
+                                    marginLeft: '20px',
+                                    fontWeight: "500"
                                 }}>o Наличным
                                 </li>
                                 <li style={{
                                     fontSize: "16px",
                                     listStyle: "outside",
-                                    color: "#EEA287",
+                                    color: "#c96",
                                     listStyle: 'none',
-                                    marginLeft: '20px'
+                                    marginLeft: '20px',
+                                    fontWeight: "500"
                                 }}>o Безналичным расчетом
                                 </li>
                                 <li style={{
                                     fontSize: "16px",
                                     listStyle: "outside",
-                                    color: "#EEA287",
+                                    color: "#c96",
                                     listStyle: 'none',
-                                    marginLeft: '20px'
+                                    marginLeft: '20px',
+                                    fontWeight: "500"
                                 }}>o Банковским переводом
                                 </li>
                                 <li style={{
                                     fontSize: "16px",
                                     listStyle: "outside",
-                                    color: "#EEA287",
+                                    color: "#c96",
                                     listStyle: 'none',
-                                    marginLeft: '20px'
+                                    marginLeft: '20px',
+                                    fontWeight: "500"
                                 }}>o Банковской карточкой
                                 </li>
                             </ul>

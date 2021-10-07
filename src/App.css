@@ -211,7 +211,9 @@
     margin-right: 10px;
     font-size: 14px;
     height: 30px;
-    color: #999999;
+    font-weight: 400;
+    color: #333333;
+    cursor: pointer
 }
 .novelti.actived{
     color: white;
@@ -308,9 +310,6 @@
     font-weight: 500;
 }
 
-.product-price {
-    font-family: 'Montserrat', sans-serif !important;
-}
 
 .product-title {
     font-family: 'Montserrat', sans-serif !important;
@@ -485,7 +484,7 @@
     font-family: 'Montserrat', sans-serif !important;
 }
 
-/* Header */
+
 .header-right{
     margin-left: auto !important;
 }
