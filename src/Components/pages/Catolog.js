@@ -428,7 +428,7 @@ const Catolog = observer((props) => {
                         </nav>
                         <div className="row">
                             <div className="col-lg-9 overflow-hidden ">
-                                <div style={{display: 'flex', justifyContent: "center", color: "#333333"}}>Сортировка</div>
+                                <div style={{ color: "#333333", fontWeight: '400'}}>СОРТИРОВКА</div>
                                 <div className="toolbox ">
 
                                     <div className="">
@@ -585,8 +585,8 @@ const Catolog = observer((props) => {
                                             >
                                                 <div className="vse-button">Все категории</div>
                                                 <div style={{cursor: "pointer"}}>{user.isActive ?
-                                                    <FiMinus style={{fontSize: "18px", color: "#8c8c8c;"}}/> :
-                                                    <CgMathPlus style={{fontSize: "18px", color: "#8c8c8c; "}}/>}</div>
+                                                    <FiMinus style={{fontSize: "18px", color: "#333333"}}/> :
+                                                    <CgMathPlus style={{fontSize: "18px", color: "#333333 "}}/>}</div>
                                             </div>
                                             {user.isActive ? <div className="accordion-content">{
                                                 <ul>
@@ -654,17 +654,18 @@ const Catolog = observer((props) => {
                                             {user.isRead ? product.subcategory.slice(0, 4).map((item, index) =>
                                                 <div className="Aitem">
                                                     <div onClick={() => toggle(index, item.title, item.year)} className="Atitle">
-                                                        <div style={{fontWeight: "400", color: "#333333"}} className="year">{item.title} {item.year}</div>
+                                                        <div style={{fontWeight: "400", color: "#333333", fontSize: '16px'}} >{item.title} {item.year}</div>
                                                         <span>{user.isClicked === index ?
-                                                            <FiMinus style={{fontSize: "18px", color: "#8c8c8c"}}/> :
+                                                            <FiMinus style={{fontSize: "18px", color: "#333333"}}/> :
                                                             <CgMathPlus
-                                                                style={{fontSize: "18px", color: "#8c8c8c"}}/>}</span>
+                                                                style={{fontSize: "18px", color: "#333333"}}/>}</span>
                                                     </div>
                                                     <div className={user.isClicked === index ? "Acontent show" : "Acontent"}>
                                                         {product.prodcategory.filter(a => a.seasoncategory === item.id).map((prod) =>
                                                             <div
                                                                 onClick={(e) => typeOfProduct(e, prod.title, prod.seasoncategory, prod.id)}
-                                                                className="prod" key={prod}>
+                                                                 key={prod}
+                                                                style={{fontSize: '18px'}} >
                                                                 {prod.title}
                                                             </div>)}
 
@@ -675,18 +676,18 @@ const Catolog = observer((props) => {
                                                 <div className="Aitem">
                                                     <div onClick={() => toggle(index, item.title, item.year)}
                                                          className="Atitle">
-                                                        <div style={{fontWeight: "400", color: "#333333"}} className="year">{item.title} {item.year}</div>
+                                                        <div style={{fontWeight: "400", color: "#333333", fontSize: '16px'}} >{item.title} {item.year}</div>
                                                         <span>{user.isClicked === index ?
-                                                            <FiMinus style={{fontSize: "18px", color: "#8c8c8c"}}/> :
+                                                            <FiMinus style={{fontSize: "18px", color: "#333333"}}/> :
                                                             <CgMathPlus
-                                                                style={{fontSize: "18px", color: "#8c8c8c"}}/>}</span>
+                                                                style={{fontSize: "18px", color: "#333333"}}/>}</span>
                                                     </div>
                                                     <div className={user.isClicked === index ? "Acontent show" : "Acontent"}>
                                                         {product.prodcategory.filter(a => a.seasoncategory === item.id).map((prod) =>
                                                             <div
                                                                 onClick={(e) => typeOfProduct(e, prod.title, prod.seasoncategory, prod.id)}
-                                                                className="prod" key={prod}>
-                                                                {prod.title}
+                                                                style={{fontSize: '18px'}} key={prod}>
+                                                                {prod.title}..
                                                             </div>)}
 
                                                     </div>
@@ -699,11 +700,11 @@ const Catolog = observer((props) => {
                                                 className="accordion-title d-flex justify-content-sm-between "
                                                 onClick={() => toggleReadMore()}
                                             >
-                                                <div style={{fontWeight: "500", color: "#333333"}}
-                                                     className="year">{user.isRead ? "Все сезоны" : " Закрыть"}</div>
+                                                <div style={{fontWeight: "500", color: "#333333", fontSize: '18px'}}
+                                                     >{user.isRead ? "Все сезоны" : " Закрыть"}</div>
                                                 <div style={{cursor: "pointer"}}>{user.isRead ?
-                                                    <CgMathPlus style={{fontSize: "18px", color: "#8c8c8c"}}/> :
-                                                    <FiMinus style={{fontSize: "18px", color: "#8c8c8c"}}/>}</div>
+                                                    <CgMathPlus style={{fontSize: "18px", color: "#333333"}}/> :
+                                                    <FiMinus style={{fontSize: "18px", color: "#333333"}}/>}</div>
                                             </div>
 
                                         </div>

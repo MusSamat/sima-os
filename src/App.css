@@ -209,10 +209,10 @@
     font-family: 'Montserrat', sans-serif ;
     background-color: white;
     margin-right: 10px;
-    font-size: 14px;
+    font-size: 13px;
     height: 30px;
-    font-weight: 400;
-    color: #333333;
+    font-weight: 500;
+    color: #c96;
     cursor: pointer
 }
 .novelti.actived{
@@ -243,7 +243,7 @@
     cursor: pointer;
 }
 .year{
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Montserrat', sans-serif !important;
 }
 .Acontent {
@@ -260,7 +260,7 @@
 .prod{
     margin-left: 15px;
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     color: #000000 !important;
 
@@ -313,6 +313,7 @@
 
 .product-title {
     font-family: 'Montserrat', sans-serif !important;
+    font-weight: 500;
 }
 
 .s-title {

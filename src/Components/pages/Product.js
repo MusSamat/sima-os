@@ -317,30 +317,31 @@ const Product = observer((props) => {
                             <div className="social-icons social-icons-sm">
 
                                 <FacebookShareButton url={shareUrl}>
-                                    {/*<FacebookIcon size={35} round={true}/>*/}
 
                                     <a style={{fontSize: "20px"}}
                                         href=""
                                        className="social-icon social-facebook" title="Facebook" target="_blank"><i
                                         className="icon-facebook-f"></i></a>
                                 </FacebookShareButton >
+                                <VKShareButton url={shareUrl}>
+                                    <a href="" className="social-icon ml-1"><img
+                                        style={{width: "20px"}} src={vk}/></a>
+                                </VKShareButton>
+                                <a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/"
+                                   className="social-icon social-instagram ml-1" title="Instagram" target="_blank"><i
+                                    className="icon-instagram"></i></a>
+                                <OKShareButton url={shareUrl}>
+                                    <a style={{fontSize: "20px"}} href=""
+                                       className="social-icon ml-1"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
+                                </OKShareButton>
                                 <TwitterShareButton url={shareUrl}>
-                                    {/*<TwitterIcon size={35} round={true}/>*/}
                                     <a style={{fontSize: "20px"}} href=""
                                        className="social-icon social-twitter ml-1" title="Twitter" target="_blank"><i
                                         className="icon-twitter"></i></a>
                                 </TwitterShareButton>
 
-                                <OKShareButton url={shareUrl}>
-                                    {/*<OKIcon size={35} round={true}/>*/}
-                                    <a style={{fontSize: "20px"}} href=""
-                                       className="social-icon ml-1"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>
-                                </OKShareButton>
-                                <VKShareButton url={shareUrl}>
-                                    {/*<VKIcon size={35} round={true}/>*/}
-                                    <a href="" className="social-icon ml-1"><img
-                                        style={{width: "20px"}} src={vk}/></a>
-                                </VKShareButton>
+
+
                                 {/*<span className="social-label">Share:</span>*/}
                                 {/*<a style={{fontSize: "20px"}}*/}
                                 {/*   href="https://www.facebook.com/profile.php?id=100069533462465"*/}
