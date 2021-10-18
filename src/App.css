@@ -202,17 +202,39 @@
 /*    bottom: 10px;*/
 /*}*/
 
+.rating{
+    min-width: 115px !important;
+    margin-bottom: 10px;
+    border: 1px solid #e4e4e4;
+    background-color: white;
+    margin-right: 10px;
+    font-size: 14px;
+    height: 30px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #777;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.rating.actived{
+    color: white;
+    background-color: #c96;
+}
+.rating:hover{
+    color: white;
+    background-color: #c96;
+}
+
 .novelti{
     min-width: 115px !important;
     margin-bottom: 10px;
-    border: 1px solid #e4e4e4;;
-    font-family: 'Montserrat', sans-serif ;
+    border: 1px solid #e4e4e4;
     background-color: white;
     margin-right: 10px;
-    font-size: 13px;
+    font-size: 14px;
     height: 30px;
+    font-family: 'Montserrat', sans-serif !important;
     font-weight: 500;
-    color: #c96;
     cursor: pointer
 }
 .novelti.actived{
@@ -258,12 +280,15 @@
 
 }
 .prod{
-    margin-left: 15px;
+    margin-left: 14px;
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
-    color: #000000 !important;
+    color: #333333 !important;
 
+}
+.prod:hover{
+    color: #c96 !important;
 }
 .breadcrumb-item > a {
     font-family: 'Montserrat', sans-serif !important;
@@ -287,8 +312,8 @@
     font-family: 'Montserrat', sans-serif !important;
     cursor: pointer;
     font-weight: 500;
-    font-size: 18px;
-    color: #333333;
+    font-size: 20px;
+    color: black;
 }
 .cate {
     font-family: 'Montserrat', sans-serif !important;
@@ -306,7 +331,7 @@
 .filter {
     margin: 20px;
     font-family: 'Montserrat', sans-serif !important;
-    color: #333333;
+    color: black;
     font-weight: 500;
 }
 
@@ -567,7 +592,6 @@
 
 .breadcrumb-item {
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 16px !important;
 }
 .breadcrumb-item >a {
     font-family: 'Montserrat', sans-serif !important;
@@ -692,6 +716,9 @@ a:hover, a:focus {
 
 .header .wishlist-link .wishlist-count, .header .cart-dropdown .cart-count {
     background-color: #c96 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .gmail {

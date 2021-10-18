@@ -290,20 +290,20 @@ const Product = observer((props) => {
                         <ul className="breadcrumb">
                             <li className="breadcrumb-item"><Link to={`${CATALOG_ROUTE}?products=products`} className="item" style={{
                                 marginTop: "-3px",
-                                color: "#000000"
+                                color: "#777"
                             }}>Каталог</Link></li>
 
                                     <>
                                     {category ? <li className="breadcrumb-item "
-                                            aria-current="page"><Link style={{color: "#000000"}}
+                                            aria-current="page"><Link style={{color: "#777"}}
                                                                       to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {category}</Link>
                                         </li> : ""}
                                     {viewProduct ? <li className="breadcrumb-item "
-                                        aria-current="page"><Link style={{color: "#000000"}}
+                                        aria-current="page"><Link style={{color: "#777"}}
                                                                   to={`${CATALOG_ROUTE}?products=${props.location.title ? props.location.title : props.location.produs}`}> {viewProduct}</Link>
                                         </li> : ""}
                                     </>
-                            <li className="breadcrumb-item " style={{color: "#000000"}}
+                            <li className="breadcrumb-item " style={{color: "#777"}}
                                 aria-current="page"> {product.product.title}</li>
                         </ul>
 
@@ -339,24 +339,6 @@ const Product = observer((props) => {
                                        className="social-icon social-twitter ml-1" title="Twitter" target="_blank"><i
                                         className="icon-twitter"></i></a>
                                 </TwitterShareButton>
-
-
-
-                                {/*<span className="social-label">Share:</span>*/}
-                                {/*<a style={{fontSize: "20px"}}*/}
-                                {/*   href="https://www.facebook.com/profile.php?id=100069533462465"*/}
-                                {/*   className="social-icon social-facebook" title="Facebook" target="_blank"><i*/}
-                                {/*    className="icon-facebook-f"></i></a>*/}
-                                {/*<a style={{fontSize: "20px"}} href="https://twitter.com/sima_company"*/}
-                                {/*   className="social-icon social-twitter" title="Twitter" target="_blank"><i*/}
-                                {/*    className="icon-twitter"></i></a>*/}
-                                {/*<a style={{fontSize: "20px"}} href="https://www.instagram.com/simacompany_kg/"*/}
-                                {/*   className="social-icon social-instagram" title="Instagram" target="_blank"><i*/}
-                                {/*    className="icon-instagram"></i></a>*/}
-                                {/*<a style={{fontSize: "20px"}} href="https://ok.ru/profile/584170543033"*/}
-                                {/*   className="social-icon"> <FaOdnoklassnikiSquare style={{color: "#ee8208"}}/></a>*/}
-                                {/*<a href="https://vk.com/simastyle" className="social-icon"><img*/}
-                                {/*    style={{width: "20px"}} src={vk}/></a>*/}
                             </div>
 
                         </div>

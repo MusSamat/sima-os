@@ -318,9 +318,9 @@ const Main = observer(() => {
                                         </figure>
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                            <div style={{color: "#000000"}} className="product-price">
-                                                <span className="new-price">{discout.discount_price} ₽</span>
-                                                <span className="old-price">{`${discout.price} ₽`}</span>
+                                            <div  className="product-price">
+                                                <span style={{fontWeight: '500'}} className="new-price">{discout.discount_price} ₽</span>
+                                                <span style={{fontWeight: '500'}} className="old-price">{`${discout.price} ₽`}</span>
                                             </div>
                                             <div className="ratings-container">
                                                 {
@@ -435,7 +435,7 @@ const Main = observer(() => {
                                         </figure>
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                            <div style={{color: "#000000"}} className="product-price">
+                                            <div style={{fontWeight: '500'}} className="product-price">
                                                 {`${discout.price} ₽`}
                                             </div>
                                             <div className="ratings-container">
@@ -472,17 +472,20 @@ const Main = observer(() => {
                 </div>
                 {user.popular.map((img) =>
                 <div  className="trending mb-6 mt-8">
-                    <a href="">
+                    <Link  to={`${CATALOG_ROUTE}?products=popular`}>
+                        <a href="">
 
-                            <img src={img.image} alt="Banner"/>
+                                <img src={img.image} alt="Banner"/>
 
 
-                    </a>
-                    <div className="banner banner-big d-md-block">
-                        <div className="banner-content text-center">
-                            <h3 className="banner-title text-white">{img.title}</h3>
+                        </a>
+                    </Link>
+                        <div className="banner banner-big d-md-block">
+                            <div className="banner-content text-center">
+                                <h3 className="banner-title text-white">{img.title}</h3>
+                            </div>
                         </div>
-                    </div>
+
                 </div>)}
 
                 <div className="container ">
@@ -550,8 +553,8 @@ const Main = observer(() => {
                                         </figure>
 
                                         <div className="product-body">
-                                            <h3 className="product-title"><a href="">{discout.title}</a></h3>
-                                            <div style={{color: "#000000"}} className="product-price">
+                                            <h3  className="product-title"><a href="">{discout.title}</a></h3>
+                                            <div style={{fontWeight: '500'}} className="product-price">
                                                 {`${discout.price} ₽`}
                                             </div>
                                             <div className="ratings-container">
