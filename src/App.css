@@ -586,8 +586,9 @@
 }
 
 .logo1 {
-    width: 80px;
-    height: 50px;
+    width: 140px;
+    height: 60px;
+    object-fit: contain;
 }
 
 .breadcrumb-item {
