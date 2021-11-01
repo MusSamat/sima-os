@@ -588,7 +588,7 @@
 .logo1 {
     width: 140px;
     height: 60px;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .breadcrumb-item {
@@ -1136,6 +1136,7 @@ a{
 .imgPhoto {
     max-width: 150px;
     max-height: 250px;
+    object-fit: cover;
 }
 
 .entry-media {
