@@ -86,9 +86,9 @@ const Checkout = observer(() => {
                 notify()
                 user.getCartData()
                 history.push(ORDER_ROUTE)
-                product.getActualProducts()
                 localStorage.removeItem('order')
                 product.productOrder = []
+                user.getImageLogo()
             })
             .catch(error => {
                 console.log(error)
@@ -121,12 +121,6 @@ const Checkout = observer(() => {
             <div className="page-content">
                 <div className="checkout">
                     <div className="container">
-                        <ol className="breadcrumb mb-4 ">
-                            <li className="breadcrumb-item"><NavLink to={CART_ROUTE}><a className="breadcrumb-item"
-                                                                                        href="">Корзина</a></NavLink>
-                            </li>
-                            <li className="breadcrumb-item"><a href=""> Оформить заказ</a></li>
-                        </ol>
                         {user.isRoute ?
                             <div style={{fontSize: "16px"}} className="s-title">Есть купон? Нажмите, чтобы <a href=""
                                                                                                               onClick={() => user.setRoute(false)}
@@ -299,61 +293,62 @@ const Checkout = observer(() => {
                                             </tbody>
                                         </table>
 
-                                        <Form>
-                                            <label className="s-title" style={{cursor: "pointer"}}>
-                                                <input style={{cursor: "pointer"}}   className="mr-3" type="radio" value="odin"
-                                                       checked={value === "odin"}
-                                                       onChange={handleChanges}/>
-                                                Оплата курьеру при доставке
-                                            </label><br/>
-                                            <label className="s-title" style={{cursor: "pointer"}}>
-                                                <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="two"
-                                                       checked={value === "two"}
-                                                       onChange={(e) => handleChange(e,"visa")}/>
+                                        {/*<Form>*/}
+                                        {/*    <label className="s-title" style={{cursor: "pointer"}}>*/}
+                                        {/*        <input style={{cursor: "pointer"}}   className="mr-3" type="radio" value="odin"*/}
+                                        {/*               checked={value === "odin"}*/}
+                                        {/*               onChange={handleChanges}/>*/}
+                                        {/*        Оплата курьеру при доставке*/}
+                                        {/*    </label><br/>*/}
+                                        {/*    <label className="s-title" style={{cursor: "pointer"}}>*/}
+                                        {/*        <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="two"*/}
+                                        {/*               checked={value === "two"}*/}
+                                        {/*               onChange={(e) => handleChange(e,"visa")}/>*/}
 
-                                                VISA/MasterCard/Maestro/ЭЛКАРТ
-                                            </label><br/>
-                                            <label className="s-title" style={{cursor: "pointer"}}>
-                                                <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="three"
-                                                       checked={value === "three"}
-                                                       onChange={(e) => handleChange(e,"three")}/>
-                                                ЭЛСОМ
-                                            </label><br/>
-                                            <label className="s-title" style={{cursor: "pointer"}}>
-                                                <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"
-                                                       checked={value === "four"}
-                                                       onChange={(e) => handleChange(e,"four")}/>
-                                                О!Деньги
-                                            </label><br/>
-                                        </Form>
-                                        <span>Способ доставки</span><br/>
-                                        <label className="s-title" style={{cursor: "pointer"}}>
-                                            <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"
+                                        {/*        VISA/MasterCard/Maestro/ЭЛКАРТ*/}
+                                        {/*    </label><br/>*/}
+                                        {/*    <label className="s-title" style={{cursor: "pointer"}}>*/}
+                                        {/*        <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="three"*/}
+                                        {/*               checked={value === "three"}*/}
+                                        {/*               onChange={(e) => handleChange(e,"three")}/>*/}
+                                        {/*        ЭЛСОМ*/}
+                                        {/*    </label><br/>*/}
+                                        {/*    <label className="s-title" style={{cursor: "pointer"}}>*/}
+                                        {/*        <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"*/}
+                                        {/*               checked={value === "four"}*/}
+                                        {/*               onChange={(e) => handleChange(e,"four")}/>*/}
+                                        {/*        О!Деньги*/}
+                                        {/*    </label><br/>*/}
+                                        {/*</Form>*/}
+                                        {/*<span>Способ доставки</span><br/>*/}
+                                        {/*<label className="s-title" style={{cursor: "pointer"}}>*/}
+                                        {/*    <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"*/}
 
-                                                  />
-                                            Доставка курьером
-                                        </label><br/>
+                                        {/*          />*/}
+                                        {/*    Доставка курьером*/}
+                                        {/*</label><br/>*/}
 
-                                        <label className="s-title" style={{cursor: "pointer"}}>
-                                            <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"
+                                        {/*<label className="s-title" style={{cursor: "pointer"}}>*/}
+                                        {/*    <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"*/}
 
-                                            />
-                                            Прочитал и согласен с
-                                        </label><br/>
-                                        <a href="">Соглашение на обработку персональных данных</a>
+                                        {/*    />*/}
+                                        {/*    Прочитал и согласен с*/}
+                                        {/*</label><br/>*/}
+                                        {/*<a href="">Соглашение на обработку персональных данных</a>*/}
 
-                                        <label className="s-title" style={{cursor: "pointer"}}>
-                                            <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"
+                                        {/*<label className="s-title" style={{cursor: "pointer"}}>*/}
+                                        {/*    <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"*/}
 
-                                            />
-                                            Прочитал и согласен с
-                                        </label><br/>
-                                        <a href="">Условия использования</a>
-                                        {checkeds ? <NavLink className="btn btn-outline-primary-2 btn-order btn-block mt-3" to={`/${link}`}>Подтвердить заказ</NavLink> :
+                                        {/*    />*/}
+                                        {/*    Прочитал и согласен с*/}
+                                        {/*</label><br/>*/}
+                                        {/*<a href="">Условия использования</a>*/}
+                                        {/*{checkeds ? <NavLink className="btn btn-outline-primary-2 btn-order btn-block mt-3" to={`/${link}`}>Подтвердить заказ</NavLink> :*/}
                                             <button onClick={sendOrder} type="submit"
                                                     className="btn btn-outline-primary-2 btn-order btn-block mt-3">
                                                 <span style={{fontSize: "18px"}}>Подтвердить заказ</span>
-                                            </button>}
+                                            </button>
+                                        {/*}*/}
 
                                         <ToastContainer/>
                                     </div>
