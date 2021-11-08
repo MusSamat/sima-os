@@ -148,6 +148,7 @@ const Main = observer(() => {
                 found = item
             }
         })
+        user.getImageLogo()
         if (found === -1) {
             localStorage.setItem('order', JSON.stringify(data));
             product.productOrder.push({
