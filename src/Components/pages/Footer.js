@@ -77,9 +77,17 @@ export default function Footer() {
 
                                     <p style={{fontSize: "18px", color: "inherit", lineHeight: "normal"}}>Рынок «Дордой» <br/> 5
                                         проход конт. 458/1</p>
-
-
+                                    <div className="col-sm-6 col-md-8 ml-5">
+                                        <span className="widget-about-title">Payment Method</span>
+                                        <figure className="footer-payments d-flex ">
+                                            <img className="mr-4" src="assets/images/visa.png" alt="Payment methods" width="52"
+                                                 height="20"/>
+                                            <img  src="assets/images/elcart.png" alt="Payment methods" width="36"
+                                                  height="10"/>
+                                        </figure>
+                                    </div>
                                 </div>
+
                             </div>
 
                             <div className="col-md-5">
