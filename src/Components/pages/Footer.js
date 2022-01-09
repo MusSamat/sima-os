@@ -135,7 +135,6 @@ export default function Footer() {
                         <p class="footer-copyright"> © 2021 Sima Store. All Rights Reserved.</p>
                         <ul class="footer-menu">
                             <li><a href="">Sigma Software Solutions</a></li>
-                            {/*<li><a href="">Privacy Policy</a></li>*/}
                         </ul>
 
                     </div>
