@@ -8,10 +8,6 @@ import {ToastContainer} from "react-toastify";
 import React from "react";
 
 function App() {
-
-
-
-
     return (
         <div className="page">
             <BrowserRouter>

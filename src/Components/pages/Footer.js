@@ -7,17 +7,13 @@ import vk from "../../assets/vk.png"
 
 
 export default function Footer() {
-
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
 
     const sendName = (event) => {
-
         const data = {
             name: name,
             phone: number
-
-
         }
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/backcall`, data)
             .then(response => {
@@ -37,8 +33,6 @@ export default function Footer() {
     }, [])
     return (
         <div style={{bottom: "0"}}>
-
-
             <div className="container">
                 <div className="cta cta-horizontal cta-horizontal-box bg-image mb-5"
                      style={{backgroundImage: "url(assets/images/backgrounds/cta/bg-1.jpg)", backgroundPosition: "center right"}}>
