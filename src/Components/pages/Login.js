@@ -24,10 +24,6 @@ const Login = observer(() => {
     const history = useHistory()
     const [, setCookie] = useCookies(['authToken'])
 
-    const notify = () => toast.success("Вау, так просто!");
-    const notifyError = (error) => toast.error(`Wow so ${error} easy!`);
-
-
     const toggler = (e, bo) => {
         setShow(bo)
         e.preventDefault();
@@ -47,8 +43,6 @@ const Login = observer(() => {
 
 
     }
-
-    console.log(user._user)
 
     const login = (event) => {
         setLoading(true)
