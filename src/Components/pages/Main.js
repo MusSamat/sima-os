@@ -6,14 +6,14 @@ import Restangle33 from "../../assets/Rectangle32.png"
 import Restangle34 from "../../assets/Rectangle33.png"
 import Restangle35 from "../../assets/Rectangle34.png"
 import Restangle332 from "../../assets/Rectangle332.png"
-import axios from "axios"
 import {Context} from '../../index';
 import {observer} from 'mobx-react-lite';
-import {SUBCATEGORY_ROUTE, ABOUT_ROUTE, DELIVERY_ROUTE, PURCHASES_ROUTE, CATALOG_ROUTE} from '../../utils/Const';
+import { ABOUT_ROUTE, DELIVERY_ROUTE, PURCHASES_ROUTE, CATALOG_ROUTE} from '../../utils/Const';
 import Modal from "./Modal"
 import {FcLike} from "react-icons/fc";
 import {toast} from "react-toastify";
 import {FaStar} from "react-icons/fa";
+import { productService } from '../../services/product';
 const colors = {
     orange: "#FFBA5A",
     grey: "#a9a9a9"
@@ -24,49 +24,19 @@ const Main = observer(() => {
 
     const {user} = useContext(Context)
     const {product} = useContext(Context)
-    const [name, setName] = useState()
-    const [number, setNumber] = useState()
-    const [fly, setFly] = useState('')
-    const [count, setCount] = useState(5)
-    const [quantity, setQuantity] = useState(5)
     const [modalActive, setModalActive] = useState(false)
     const [prodactId, setProdactId] = useState(0)
     const stars = Array(5).fill(0);
 
-    const sendName = (event) => {
-
-        const data = {
-            name: name,
-            phone: number
-
-
-        }
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/backcall`, data)
-            .then(response => {
-                setName('')
-                setNumber('')
-
-            })
-            .catch(error => {
-                console.log(error)
-
-            })
-        event.preventDefault();
-
-    }
+    
 
     const deleteWish = (e, id) => {
         e.preventDefault();
 
-        const data = JSON.stringify({
+        const data = {
             product: id,
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/destroy-wishlist/`, data, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + user.token?.token
-            },
-        })
+        }
+        productService.deleteWishList(data)
             .then(res => {
                 product.getNoveltyProducts1(user.isAuth)
                 product.fetchTodoCatalog(user.isAuth)
@@ -80,23 +50,15 @@ const Main = observer(() => {
     }
 
     const addCart = (e, id, color, size) => {
-        const data = JSON.stringify({
+        const data = {
             product: [String(id)],
             quantity: [String(size)],
             color: [String(color)],
 
 
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/cart-item/`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
-
-            })
+        }
+        productService.addCartId(data)
             .then(response => {
-                setCount(count)
                 user.getCartData()
             })
             .catch(error => {
@@ -107,24 +69,15 @@ const Main = observer(() => {
 
     const addWishlist = (e, id) => {
         e.preventDefault();
-        const data = JSON.stringify({
+        const data = {
             product: String(id),
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/wishlist/`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
-
-            })
+        }
+        productService.addWishList(data)
             .then(response => {
                 product.getNoveltyProducts1()
                 product.fetchTodoCatalog()
                 product.discountTodo1()
-                setCount(count)
                 user.getWishlistData()
-                product.getData(id)
                 product.getPopularProduct()
             })
             .catch(error => {
@@ -162,7 +115,6 @@ const Main = observer(() => {
             toast.warning("этот товар есть в карзина")
             found = -1
         }
-        // e.preventDefault();
 
     }
 
@@ -223,9 +175,7 @@ const Main = observer(() => {
         user.getImageNovelty()
         user.getImagePopular()
         product.getNoveltyProducts1()
-        // product.getDataNew()
         product.getSubcategory().then(() => {
-            // product.getDataNewSeason(product?.subcategory[0]?.id)
             localStorage.removeItem('category')
             localStorage.removeItem('viewProduct')
         })
@@ -272,7 +222,7 @@ const Main = observer(() => {
 
 
                                             <div className="product-action-vertical">
-                                                {user.token?.token ? discout.is_favorite ?
+                                                {user._user?.username ? discout.is_favorite ?
                                                     <FcLike onClick={(e) => deleteWish(e, discout.id)} style={{
                                                         fontSize: "30px",
                                                         cursor: "pointer",
@@ -301,7 +251,7 @@ const Main = observer(() => {
                                             </div>
 
                                             <div className="product-action">
-                                                {user.token?.token ?
+                                                {user._user?.username ?
                                                     <a style={{cursor: "pointer"}}
                                                        onClick={(e) => addCart(e, discout.id, discout.images[0].title, discout.size.length)}
                                                        className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>
@@ -390,7 +340,7 @@ const Main = observer(() => {
 
 
                                             <div className="product-action-vertical">
-                                                {user.token?.token ? discout.is_favorite ?
+                                                {user._user?.username? discout.is_favorite ?
                                                     <FcLike onClick={(e) => deleteWish(e, discout.id)} style={{
                                                         fontSize: "30px",
                                                         cursor: "pointer",
@@ -418,7 +368,7 @@ const Main = observer(() => {
                                             </div>
 
                                             <div className="product-action">
-                                                {user.token?.token ?
+                                                {user._user?.username ?
                                                     <a style={{cursor: "pointer"}}
                                                        onClick={(e) => addCart(e, discout.id, discout.images[0].title, discout.size.length)}
                                                        className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>
@@ -508,7 +458,7 @@ const Main = observer(() => {
 
 
                                             <div className="product-action-vertical">
-                                                {user.token?.token ? discout.is_favorite ?
+                                                {user._user?.username ? discout.is_favorite ?
                                                     <FcLike onClick={(e) => deleteWish(e, discout.id)} style={{
                                                         fontSize: "30px",
                                                         cursor: "pointer",
@@ -536,7 +486,7 @@ const Main = observer(() => {
                                             </div>
 
                                             <div className="product-action">
-                                                {user.token?.token ?
+                                                {user._user?.username?
                                                     <a style={{cursor: "pointer"}}
                                                        onClick={(e) => addCart(e, discout.id, discout.images[0].title, discout.size.length)}
                                                        className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>

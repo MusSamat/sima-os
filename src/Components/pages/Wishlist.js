@@ -6,6 +6,7 @@ import {Link, NavLink} from 'react-router-dom';
 import "../../App.css";
 import {HOME_ROUTE} from '../../utils/Const';
 import {toast} from "react-toastify";
+import { userService } from '../../services/users';
 
 const Wishlist = observer(() => {
     const {user} = useContext(Context)
@@ -16,17 +17,10 @@ const Wishlist = observer(() => {
 
 
     const deleteWish = (id) => {
-
-
-        const data = JSON.stringify({
+        const data = {
             product: id,
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/destroy-wishlist/`, data, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + user.token?.token
-            },
-        })
+        }
+        userService.deleteUserWish(data)
             .then(res => {
                 user.getWishlistData()
                 console.log(res)
@@ -38,24 +32,14 @@ const Wishlist = observer(() => {
 
 
     const addCart = (e, id, color, size ) => {
-        const data = JSON.stringify({
+        const data = {
             product: [id],
             quantity: [size],
             color: [color]
-
-
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/cart-item/`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
-
-            })
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            //     })
+            userService.addCart(data)
             .then(response => {
                 user.getCartData()
-                console.log(response)
                 deleteWish(id)
 
             })
@@ -101,10 +85,10 @@ const Wishlist = observer(() => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        product.getActualProducts()
-        if(user.token?.token) {
-            user.getWishlistData()
-        }
+        if(user._user) {
+            user.getWishlistData() 
+        } product.getActualProducts()
+        
 
     }, [])
     return (
@@ -125,7 +109,7 @@ const Wishlist = observer(() => {
                             </thead>
 
                             <tbody>
-                            {user.token?.token ? user.list?.map((l, index) =>
+                            {user._user?.username ? user.list?.map((l, index) =>
                                 <tr key={index}>
                                     <td className="product-col">
                                         <div className="product">

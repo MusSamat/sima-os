@@ -5,17 +5,7 @@ import AppRouter from './Components/AppRouter';
 import {BrowserRouter} from 'react-router-dom';
 import Mobile from './Components/pages/Mobile';
 import {ToastContainer} from "react-toastify";
-import axios from "axios";
-import React, {useEffect} from "react";
-
-axios.interceptors.response.use(response => {
-    return response;
-}, error => {
-    if (error.response.status === 401) {
-        localStorage.removeItem('value');
-    }
-    return error;
-});
+import React from "react";
 
 function App() {
 

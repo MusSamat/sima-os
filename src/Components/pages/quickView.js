@@ -166,9 +166,9 @@ const quickView = observer(({id, active, setActive}) => {
                                     }}>Цвет: <span className="city" style={{color: "#000"}}>{imgTitle}</span></label>
                                 </div>
                                 <div className="col-md-2">
-                                    <div className={active ? "x-b actives" : "x-b"} onClick={(e) => setActive(false)}> <GrClose/>< /div>
+                                    <div className={active ? "x-b actives" : "x-b"} onClick={(e) => setActive(false)}>
+                                    </div>
                                 </div>
-                            </div>
 
 
 
@@ -257,6 +257,7 @@ const quickView = observer(({id, active, setActive}) => {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
     )

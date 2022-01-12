@@ -11,7 +11,8 @@ import {Link} from 'react-router-dom';
 import logo from "../../assets/login.png"
 import {BsFillEyeFill} from "react-icons/bs";
 import {BsFillEyeSlashFill} from "react-icons/bs";
-
+import { useCookies } from 'react-cookie'
+import { userService } from '../../services/users';
 const Login = observer(() => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
@@ -21,10 +22,7 @@ const Login = observer(() => {
     const [show, setShow] = useState(false)
     const {user} = useContext(Context)
     const history = useHistory()
-
-
-
-
+    const [, setCookie] = useCookies(['authToken'])
 
     const notify = () => toast.success("Вау, так просто!");
     const notifyError = (error) => toast.error(`Wow so ${error} easy!`);
@@ -50,6 +48,7 @@ const Login = observer(() => {
 
     }
 
+    console.log(user._user)
 
     const login = (event) => {
         setLoading(true)
@@ -58,8 +57,6 @@ const Login = observer(() => {
 
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, article)
             .then(response => {
-                setPassword(response.password)
-                setUsername(response.username)
                 setLoading(false)
                 setError(true)
                 user.setIsAuth(true)

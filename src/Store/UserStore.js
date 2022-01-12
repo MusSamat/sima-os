@@ -1,5 +1,8 @@
 import {makeAutoObservable} from "mobx";
 import axios from "axios"
+import Cookies from 'js-cookie'
+import cookie from 'cookie'
+import { userService } from "../services/users";
 
 export default class UserStore {
     constructor() {
@@ -92,31 +95,22 @@ export default class UserStore {
     }
 
 
-    getUserData() {
-        this.token = JSON.parse(localStorage.getItem('value'))
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/auth/user`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
-            },
-        })
-            .then(res => {
-                this.userId = res.data
-                this.setIsAuth(true)
+    async getUserData() {
+       await userService.getUser().then(res => {
+                this.userId = res
+                this.setUser(res)
             })
             .catch((e) => {
-                this.setIsAuth(false)
+                console.log(e)
             })
 
     }
 
 
     getOrderData() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/order/` + this.token?.user?.id, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
-            },
+        userService.getOrder(this._user.id).then(res => {
+            this.userId = res
+            this.setUser(res)
         })
             .then(res => {
                 this.orders = res.data
@@ -129,16 +123,10 @@ export default class UserStore {
     }
 
     getOrderDataId(id) {
-        this.token = JSON.parse(localStorage.getItem('value'))
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/order/${this.token?.user.id}/?id=${id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
-            },
-        })
+        userService.getUserOderId(this._user.id, id)
             .then(res => {
-                this.orderId = res.data
-                console.log(this.orderId)
+                this.orderId = res
+                console.log(res)
             })
             .catch((e) => {
                 console.log(e)
@@ -147,16 +135,10 @@ export default class UserStore {
     }
 
 
-    getCartData() {
-        this.token = JSON.parse(localStorage.getItem('value'))
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/carts/` + this.token?.user.id, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
-            },
-        })
+   async getCartData() {
+       await userService.getUserCart(this._user.id)
             .then(res => {
-                this.carts = res.data
+                this.carts = res
                 this.items = this.carts.items
                 return this.items.map((a) => {
                     a.product.images = a.product.images.filter(i => i.title === a.color).length ? a.product.images.filter(i => i.title === a.color) : []
@@ -167,7 +149,7 @@ export default class UserStore {
             .catch((e) => {
                 console.error(e)
             })
-    }
+    } 
 
     getImage() {
         return axios.get(`${process.env.REACT_APP_BASE_URL}/api/background/`)
@@ -265,16 +247,10 @@ export default class UserStore {
     }
 
 
-    getWishlistData() {
-        this.token = JSON.parse(localStorage.getItem('value'))
-        axios.get(`${process.env.REACT_APP_BASE_URL}/api/wisher/` + this.token?.user.id, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
-            },
-        })
+    async getWishlistData() {
+       await userService.getWish(this._user.id)
             .then(res => {
-                this.wishList = res.data
+                this.wishList = res
                 this.list = this.wishList.items
             })
             .catch((e) => {

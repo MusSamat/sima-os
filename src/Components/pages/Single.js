@@ -19,9 +19,6 @@ const Single = observer(({match}) => {
                 <div className="page-content">
                     <div className="container">
                         <ol className="breadcrumb mb-4 ">
-                            {/*<li className="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}
-                            {/*                                                            href="">Главная</a></NavLink>*/}
-                            {/*</li>*/}
                             <li className="breadcrumb-item"><NavLink to={NEWS_ROUTE}><a className="breadcrumb-item"
                                                                                         href="">Новости</a></NavLink>
                             </li>
@@ -31,7 +28,7 @@ const Single = observer(({match}) => {
                             <div className="col">
                                 <article className="entry single-entry">
                                     <figure className="entry-media">
-                                        <img style={{backgroundSize: "cover", maxHeight: "600px"}}
+                                        <img  style={{backgroundSize: "cover",objectFit: "cover", maxHeight: "600px"}}
                                              src={`${process.env.REACT_APP_BASE_URL}${product.blogItem?.images[0]}`}
                                              alt="image desc"/>
                                     </figure>

@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react';
 import axios from "axios"
 import "../../App.css";
-import logo from "../../assets/logo.png";
+import elcart from "../../assets/elcart.png";
+import visa from "../../assets/visa.png";
 import vk from "../../assets/vk.png"
 
 
@@ -80,9 +81,9 @@ export default function Footer() {
                                     <div className="col-sm-6 col-md-8 ml-5">
                                         <span className="widget-about-title">Payment Method</span>
                                         <figure className="footer-payments d-flex ">
-                                            <img className="mr-4" src="assets/images/visa.png" alt="Payment methods" width="52"
+                                            <img className="mr-4" src={visa}  width="52"
                                                  height="20"/>
-                                            <img  src="assets/images/elcart.png" alt="Payment methods" width="36"
+                                            <img  src={elcart}  width="36"
                                                   height="10"/>
                                         </figure>
                                     </div>

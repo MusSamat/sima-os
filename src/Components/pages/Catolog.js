@@ -15,6 +15,7 @@ import {toast} from "react-toastify";
 import Modal from "./Modal"
 import {FaStar} from "react-icons/fa";
 import Loader from "../Loader/Loader";
+import { productService } from '../../services/product';
 
 
 
@@ -41,7 +42,7 @@ const colors = {
 
 function valuetext(value) {
     return `${value}°C`;
-}
+} 
 
 
 
@@ -49,21 +50,15 @@ function valuetext(value) {
 const Catolog = observer((props) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
-    const id = props.match.params.id
-    const catId = props.match.params.catId
-    const title = props.match.params.title
-    const [lgShow, setLgShow] = useState(false);
     const [count, setCount] = useState(5)
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(56)
 
-    const [isActive, setIsActive] = useState(false);
     const [Active, setActive] = useState("");
     const [name, setName] = useState("");
     const [modalActive, setModalActive] = useState(false)
     const [prodactId, setProdactId] = useState(0)
-    const [isReadMore, setIsReadMore] = useState(true);
     const [breadcrumb, setBreadcrumb] = useState('Актуальные')
     const [seson, setSeson] = useState('')
     const stars = Array(5).fill(0);
@@ -186,9 +181,6 @@ const Catolog = observer((props) => {
 
     }
 
-    const handleClose = () => setLgShow(false);
-    const handleShow = () => setLgShow(true);
-
     let data = JSON.parse(localStorage.getItem('order'))
     let wish = JSON.parse(localStorage.getItem('wishlist'))
 
@@ -218,12 +210,6 @@ const Catolog = observer((props) => {
             toast.warning("этот товар уже в карзине")
             found = -1
         }
-    }
-
-    const getItem = (id) => {
-
-        const a = wish?.find(i => i.id === id)
-        return a ? a.id : 0
     }
     const addWishlistLocal = (e, proId, is_favorite) => {
         user.getImageLogo()
@@ -267,17 +253,10 @@ const Catolog = observer((props) => {
             test.is_favorite = true
         }
         e.preventDefault();
-        const data = JSON.stringify({
+        const data = {
             product: String(id),
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/wishlist/`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
-
-            })
+        }
+        productService.addWishList(data)
             .then(response => {
                 product.getData(id)
                 user.getWishlistData()
@@ -295,18 +274,12 @@ const Catolog = observer((props) => {
         }
         e.preventDefault();
 
-        const data = JSON.stringify({
+        const data = {
             product: id,
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/destroy-wishlist/`, data, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + user.token?.token
-            },
-        })
+        }
+        productService.deleteWishList(data)
             .then(res => {
                 user.getWishlistData()
-
             })
             .catch((e) => {
                 console.error(e)
@@ -319,24 +292,17 @@ const Catolog = observer((props) => {
 
 
     const addCart = (e, id, color, count) => {
-        const data = JSON.stringify({
+        const data = {
             product: [String(id)],
             quantity: [String(count)],
             color: [String(color)]
 
 
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/cart-item/`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
-
-            })
+        }
+        productService.addCartId(data)
             .then(response => {
                 setCount(count)
-                user.getCartData()
+                user.getCartData()                 
             })
             .catch(error => {
                 console.log(error)
@@ -363,10 +329,6 @@ const Catolog = observer((props) => {
             user.getWishlistData()
             user.getUserData()
         }
-        if(user.token?.token){
-            console.log("a")
-        } else console.log("b")
-
         product.fetchTodo()
         if (names) {
             if(parseInt(names)){
@@ -482,7 +444,7 @@ const Catolog = observer((props) => {
                                                             </a>
                                                         </Link>
                                                         <div className="product-action-vertical">
-                                                            {user.token?.token ? prod.is_favorite ?
+                                                            {user._user?.username ? prod.is_favorite ?
                                                                 <FcLike onClick={(e) => deleteWish(e, prod.id,)} style={{
                                                                     fontSize: "30px",
                                                                     cursor: "pointer",
@@ -511,7 +473,7 @@ const Catolog = observer((props) => {
                                                         </div>
 
                                                         <div class="product-action">
-                                                            {user.token?.token ?
+                                                            {user._user?.username ?
                                                                 <a style={{cursor: "pointer"}}
                                                                    onClick={(e) => addCart(e, prod.id, prod.images[0].title, prod.size.length)}
                                                                    className="btn-product btn-cart s-title "><span>В КОРЗИНУ </span></a>

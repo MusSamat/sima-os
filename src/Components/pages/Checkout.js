@@ -9,6 +9,7 @@ import {CART_ROUTE, ORDER_ROUTE} from '../../utils/Const';
 import "../../App.css";
 import {NavLink} from 'react-router-dom';
 import { Form} from "react-bootstrap";
+import { productService } from '../../services/product';
 
 
 const Checkout = observer(() => {
@@ -68,19 +69,20 @@ const Checkout = observer(() => {
             items: user.token?.token? [] : items,
         })
         linkData = data
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/order/`, data, user.token?.token ?
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
+        // axios.post(`${process.env.REACT_APP_BASE_URL}/api/order/`, data, user.token?.token ?
+        //     {
+        //         headers: { 
+        //             'Content-Type': 'application/json',
+        //             'Authorization': 'Token ' + user.token?.token
+        //         },
 
-            } : {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+        //     } : {
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
 
-            })
+        //     })
+        productService.productOrder(data)
             .then(response => {
                 setNote('')
                 notify()
@@ -110,7 +112,7 @@ const Checkout = observer(() => {
 
 
     let link = JSON.parse(localStorage.getItem('link'))
-    console.log(link)
+    console.log(user._user)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -165,7 +167,8 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Имя </label>
                                             <input
                                                 type="text"
-                                                value={user.token?.token ? user.userId.first_name ? user.userId.first_name : firstName : firstName}
+                                                defaultValue={user._user?.first_name}
+                                                // value={user.token?.token ? user.userId.first_name ? user.userId.first_name : firstName : firstName}
                                                 onChange={e => setFirstName(e.target.value)}
                                                 style={{fontSize: "16px", fontWeight: "500"}}
                                                 className="form-control" required/>
@@ -175,7 +178,8 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Фамилия</label>
                                             <input
                                                 onChange={e => setLastName(e.target.value)}
-                                                value={user.token?.token ? user.userId.last_name ? user.userId.last_name : lastName : lastName} type="text"
+                                                defaultValue={user._user?.last_name}
+                                                // value={user._user?.username ? user.userId.last_name ? user.userId.last_name : lastName : lastName} type="text"
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
                                         </div>
@@ -185,7 +189,8 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Страна</label>
                                             <input
                                                 type="text"
-                                                value={user.token?.token? user.userId.country ? user.userId.country : country : country}
+                                                defaultValue={user._user?.country}
+                                                // value={user._user?.username ? user.userId.country ? user.userId.country : country : country}
                                                 onChange={e => setCountry(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -195,7 +200,8 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Город</label>
                                             <input
                                                 type="text"
-                                                value={user.token?.token ? user.userId.city ? user.userId.city : city : city}
+                                                defaultValue={user._user?.city}
+                                                // value={user._user?.username ? user.userId.city ? user.userId.city : city : city}
                                                 onChange={e => setCity(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -206,7 +212,8 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} htmlFor="register-password">Адрес</label>
                                             <input
                                                 type="text"
-                                                value={user.token?.token ? user.userId.address ? user.userId.address : address : address}
+                                                defaultValue={user._user?.address}
+                                                // value={user._user?.username ? user.userId.address ? user.userId.address : address : address}
                                                 onChange={e => setAddress(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -218,7 +225,8 @@ const Checkout = observer(() => {
                                                 организации</label>
                                             <input
                                                 type="text"
-                                                value={user.token?.token ? user.userId.address ? user.userId.address : company : company}
+                                                defaultValue={user.userId.address}
+                                                // value={user._user?.username ? user.userId.address ? user.userId.address : company : company}
                                                 onChange={e => setCompany(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -231,7 +239,9 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Телефон</label>
                                             <input
                                                 onChange={e => setTelephon(e.target.value)}
-                                                value={user.token?.token ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone} type="tel"
+                                                defaultValue={user._user?.phone_number}
+                                                // value={user.token?.token ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone}
+                                                type="tel"
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
                                         </div>
@@ -240,7 +250,8 @@ const Checkout = observer(() => {
                                             <label style={{fontSize: "16px"}} for="register-password">Email</label>
                                             <input
                                                 type="email"
-                                                value={user.token?.token ? user.userId.email : email}
+                                                defaultValue={user._user?.email}
+                                                // value={user.token?.token ? user.userId.email : email}
                                                 onChange={e => setEmail(e.target.value)}
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
@@ -262,7 +273,7 @@ const Checkout = observer(() => {
                                             <tbody>
 
 
-                                            {user.token?.token ? user.items?.map((item, index) =>
+                                            {user._user?.username ? user.items?.map((item, index) =>
                                                     <tr key={index}>
                                                         <td>{item.product.title}</td>
                                                         <td>{(item.product?.price * item.quantity).toFixed(2)} ₽</td>
@@ -275,7 +286,7 @@ const Checkout = observer(() => {
                                             }
                                             <tr className="summary-subtotal">
                                                 <td>ПОДЫТОГ:</td>
-                                                {user.token?.token ?
+                                                {user._user?.username ?
                                                     user.items?.map((item, index) => {
                                                         sum = sum + item.product?.price * item.quantity
                                                     }) :
@@ -283,72 +294,19 @@ const Checkout = observer(() => {
                                                         sum = sum + item.price * item.quantity
                                                     })
                                                 }
-                                                <td>{sum.toFixed(2)} ₽</td>
+                                                <td>{sum?.toFixed(2)} ₽</td>
                                             </tr>
                                             <tr className="summary-total">
                                                 <td>ИТОГО:</td>
-                                                <td>{sum.toFixed(2)} ₽</td>
+                                                <td>{sum?.toFixed(2)} ₽</td>
                                             </tr>
 
                                             </tbody>
                                         </table>
-
-                                        {/*<Form>*/}
-                                        {/*    <label className="s-title" style={{cursor: "pointer"}}>*/}
-                                        {/*        <input style={{cursor: "pointer"}}   className="mr-3" type="radio" value="odin"*/}
-                                        {/*               checked={value === "odin"}*/}
-                                        {/*               onChange={handleChanges}/>*/}
-                                        {/*        Оплата курьеру при доставке*/}
-                                        {/*    </label><br/>*/}
-                                        {/*    <label className="s-title" style={{cursor: "pointer"}}>*/}
-                                        {/*        <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="two"*/}
-                                        {/*               checked={value === "two"}*/}
-                                        {/*               onChange={(e) => handleChange(e,"visa")}/>*/}
-
-                                        {/*        VISA/MasterCard/Maestro/ЭЛКАРТ*/}
-                                        {/*    </label><br/>*/}
-                                        {/*    <label className="s-title" style={{cursor: "pointer"}}>*/}
-                                        {/*        <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="three"*/}
-                                        {/*               checked={value === "three"}*/}
-                                        {/*               onChange={(e) => handleChange(e,"three")}/>*/}
-                                        {/*        ЭЛСОМ*/}
-                                        {/*    </label><br/>*/}
-                                        {/*    <label className="s-title" style={{cursor: "pointer"}}>*/}
-                                        {/*        <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"*/}
-                                        {/*               checked={value === "four"}*/}
-                                        {/*               onChange={(e) => handleChange(e,"four")}/>*/}
-                                        {/*        О!Деньги*/}
-                                        {/*    </label><br/>*/}
-                                        {/*</Form>*/}
-                                        {/*<span>Способ доставки</span><br/>*/}
-                                        {/*<label className="s-title" style={{cursor: "pointer"}}>*/}
-                                        {/*    <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"*/}
-
-                                        {/*          />*/}
-                                        {/*    Доставка курьером*/}
-                                        {/*</label><br/>*/}
-
-                                        {/*<label className="s-title" style={{cursor: "pointer"}}>*/}
-                                        {/*    <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"*/}
-
-                                        {/*    />*/}
-                                        {/*    Прочитал и согласен с*/}
-                                        {/*</label><br/>*/}
-                                        {/*<a href="">Соглашение на обработку персональных данных</a>*/}
-
-                                        {/*<label className="s-title" style={{cursor: "pointer"}}>*/}
-                                        {/*    <input style={{cursor: "pointer"}} className="mr-3" type="radio" value="four"*/}
-
-                                        {/*    />*/}
-                                        {/*    Прочитал и согласен с*/}
-                                        {/*</label><br/>*/}
-                                        {/*<a href="">Условия использования</a>*/}
-                                        {/*{checkeds ? <NavLink className="btn btn-outline-primary-2 btn-order btn-block mt-3" to={`/${link}`}>Подтвердить заказ</NavLink> :*/}
                                             <button onClick={sendOrder} type="submit"
                                                     className="btn btn-outline-primary-2 btn-order btn-block mt-3">
                                                 <span style={{fontSize: "18px"}}>Подтвердить заказ</span>
                                             </button>
-                                        {/*}*/}
 
                                         <ToastContainer/>
                                     </div>

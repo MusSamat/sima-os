@@ -6,6 +6,7 @@ import {NavLink, Link} from 'react-router-dom';
 import {CATALOG_ROUTE, CHECKOUT_ROUTE, HOME_ROUTE} from '../../utils/Const';
 import "../../App.css";
 import {toast} from "react-toastify";
+import { userService } from '../../services/users';
 
 const Cart = observer(() => {
     const {user} = useContext(Context)
@@ -16,19 +17,13 @@ const Cart = observer(() => {
     let data = JSON.parse(localStorage.getItem('order'))
 
     const UpdateCart = (e) => {
-        const data = JSON.stringify({
+        
+        const data = {
             product: user.items.map(i => i.product.id),
             quantity: user.items.map(i => i.quantity),
             color: user.items.map(i => i.color)
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/cart-item/`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
-
-            })
+        }
+        userService.updateCart(data)
             .then(response => {
                 console.log(response)
                 user.getCartData()
@@ -39,18 +34,11 @@ const Cart = observer(() => {
         e.preventDefault();
     }
     const deleteCart = (id, color) => {
-
-
-        const data = JSON.stringify({
+        const data = {
             product: id,
             color: color,
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/destroy-cart/`, data, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + user.token?.token
-            },
-        })
+        }
+        userService.deleteUserCart(data)
             .then(res => {
                 user.getCartData()
                 console.log(res)
@@ -58,7 +46,6 @@ const Cart = observer(() => {
             .catch((e) => {
                 console.error(e)
             })
-
     }
 
     const errorClick = () => {
@@ -88,17 +75,15 @@ const Cart = observer(() => {
         return a ? a.quantity * a.price : 0
     }
 
+    // console.log(user._user ? 'a' :"b")
+    console.log(user.items)
 
 
-
-    useEffect(() => {
+    useEffect(async() => {
         window.scrollTo(0, 0)
-        product.getActualProducts()
-        if(user.token?.token){
-            user.getCartData().then((items) => {
-                console.log(items)
-            })
-        }
+        if(user._user?.username){
+            await user.getCartData()
+        } product.getActualProducts()
 
     }, [])
     return (
@@ -107,11 +92,6 @@ const Cart = observer(() => {
                 <div className="page-content">
                     <div className="cart">
                         <div className="container mt-7">
-                            {/*<ol className="breadcrumb mb-5">*/}
-                            {/*    <li className="breadcrumb-item"><NavLink className="breadcrumb-item" to={HOME_ROUTE}><a*/}
-                            {/*        href="">Главная</a></NavLink></li>*/}
-                            {/*    <li className="breadcrumb-item"><a href=""> Корзина</a></li>*/}
-                            {/*</ol>*/}
                             <div></div>
                             <div className="row">
                                 <div className="col-lg-9">
@@ -127,7 +107,7 @@ const Cart = observer(() => {
                                         </thead>
 
                                         <tbody>
-                                        { user.token?.token ? user.items?.map((c, index) =>
+                                        { user._user?.username ? user.items?.map((c, index) =>
 
 
                                             <tr>
@@ -217,7 +197,7 @@ const Cart = observer(() => {
                                         <div className="cart-discount">
                                         </div>
 
-                                        {user.token?.token ? <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2 pocuoki"><span>ОБНОВИТЬ КОРЗИНУ</span><i
+                                        {user._user?.username ? <a onClick={(e) => UpdateCart(e)} className="btn btn-outline-dark-2 pocuoki"><span>ОБНОВИТЬ КОРЗИНУ</span><i
                                             className="icon-refresh"></i></a> : null}
                                     </div>
                                 </div>
@@ -230,15 +210,15 @@ const Cart = observer(() => {
                                             <tr className="summary-subtotal">
                                                 <td>Подытог:</td>
 
-                                                { user.token?.token ?
+                                                { user._user?.username ?
                                                     user.items?.map((item, index) => {
-                                                        sum = sum + item.product.price * item.quantity
+                                                        sum = sum + item?.product.price * item?.quantity
                                                     }):
                                                     data?.map((item, index) => {
-                                                        sum = sum + item.price * item.quantity
+                                                        sum = sum + item?.price * item?.quantity
                                                     })
                                                 }
-                                                <td>  {new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum.toFixed(2))} ₽</td>
+                                                <td>  {new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum?.toFixed(2))} ₽</td>
 
                                             </tr>
 
@@ -246,14 +226,14 @@ const Cart = observer(() => {
                                             <tr className="summary-subtotal" style={{fontWeight: "500"}}>
                                                 <td>Итого:</td>
 
-                                                <td>{ new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum.toFixed(2))} ₽</td>
+                                                <td>{ new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum?.toFixed(2))} ₽</td>
                                             </tr>
                                             </tbody>
                                         </table>
 
 
 
-                                        { user.token?.token ? user.items.length >= 5 ?
+                                        { user._user?.username ? user.items?.length >= 5 ?
                                                 <NavLink to={CHECKOUT_ROUTE}>
                                                     <a href="" className="btn btn-outline-primary-2 btn-order btn-block">Оформить
                                                         заказ</a>

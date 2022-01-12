@@ -24,6 +24,7 @@ import {
     VKShareButton, VKIcon
 } from "react-share";
 import {Instagram} from "@material-ui/icons";
+import { productService } from '../../services/product';
 
 const colors = {
     orange: "#FFBA5A",
@@ -35,7 +36,7 @@ const Product = observer((props) => {
     const {product} = useContext(Context)
     const {user} = useContext(Context)
     const id = props.match.params.id
-    const [count, setCount] = useState(product.size.length)
+    const [count, setCount] = useState('')
     const [hover, setHover] = useState(false);
     const [show, setShow] = useState(false);
     const [showRaz, setShowRaz] = useState(false);
@@ -48,12 +49,9 @@ const Product = observer((props) => {
     const handleCloseRaz = () => setShowRaz(false);
     const handleShowRaz = () => setShowRaz(true);
 
-    console.log(props)
-
-
 
     function updateValue(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
     }
 
     const notify = () => toast.success("Wow so easy!");
@@ -62,19 +60,14 @@ const Product = observer((props) => {
 
     const deleteWish = () => {
 
-
-        const data = JSON.stringify({
+ 
+        const data = {
             product: id,
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/destroy-wishlist/`, data, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + user.token?.token
-            },
-        })
+        }
+        productService.deleteWishList(data)
             .then(res => {
                 user.getWishlistData()
-                product.getData(id, user.isAuth)
+                product.getData(id)
             })
             .catch((e) => {
                 console.error(e)
@@ -84,20 +77,12 @@ const Product = observer((props) => {
 
     const addWishlist = (e) => {
         const id = props.match.params.id
-        const data = JSON.stringify({
+        const data = {
             product: String(id),
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/wishlist/`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
-
-            })
+        }
+        productService.addWishList(data)
             .then(response => {
-                product.getData(id, user.isAuth)
-                setCount(count)
+                product.getData(id)
                 user.getWishlistData()
             })
             .catch(error => {
@@ -115,7 +100,6 @@ const Product = observer((props) => {
     const [leftImages, setLeftImages] = useState([])
     const [selectedImage, setSelectedImage] = useState('')
     const [imgTitle, setImgTitle] = useState('')
-    const [activeIndex, setActiveIndex] = useState(0);
 
     const handleClick = (value) => {
         setCurrValue(value)
@@ -132,30 +116,22 @@ const Product = observer((props) => {
 
     const addCart = (e) => {
         const id = props.match.params.id
-        const data = JSON.stringify({
+        const data = {
             product: [String(id)],
             quantity: [String(count)],
             color: [String(imgTitle)]
-
-
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/cart-item/`, data,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token?.token
-                },
-
-            })
+        }
+        productService.addCartId(data)
             .then(response => {
                 setCount(count)
                 user.getCartData()
+                user.getImageLogo()
             })
             .catch(error => {
                 console.log(error)
                 notifyError()
             })
-        e.preventDefault();
+            e.preventDefault();
     }
 
 
@@ -192,23 +168,14 @@ const Product = observer((props) => {
 
     const sendRating = (event) => {
         const id = props.match.params.id
-        const data = JSON.stringify({
+        const data = {
             product: id,
             rating: currValue,
             text: text
 
 
-        })
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/product-reviews/`, data,user.token?.token? {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + user.token?.token
-            }
-        } : {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
+        }
+        productService.sendRating(data)
             .then(response => {
                 product.getData(id)
                 setCurrValue(0)
@@ -222,31 +189,23 @@ const Product = observer((props) => {
         event.preventDefault();
     }
 
-    function handleRemove(id) {
-        const newList = leftImages.filter((item) => item.id !== id);
-
-        setLeftImages(newList);
-    }
-
     const category = JSON.parse(localStorage.getItem('category'))
     const viewProduct = JSON.parse(localStorage.getItem('viewProduct'))
 
-    const imagezoom = {width: 400, height: 250, zoomWidth: 500, img: selectedImage};
-
     useEffect(() => {
-        console.log(user.isAuth)
-        console.log(user.token?.token)
         window.scrollTo(0, 0)
         mobile_menu()
+        
         const log = document.getElementById('qty');
         log?.addEventListener('change', updateValue);
         user.getWishlistData()
         user.getReviews(id)
         user.getUserData()
-        product.getData(id, user.isAuth).then(() => {
+        product.getData(id).then(() => {
             setLeftImages(product?.imagesUser[0]?.images ?? [])
             setSelectedImage(product?.imagesUser[0]?.images[0] || '')
             setImgTitle(product?.imagesUser[0]?.title || '')
+            setCount(product.size?.length || '')
             const scripts = [
 
                 '/assets/js/jquery.min.js',
@@ -270,7 +229,7 @@ const Product = observer((props) => {
                 document.body.appendChild(s)
             })
         })
-        // product.addProduct(product.index)
+        
         return () => {
             const elements = document.getElementsByClassName('zoomContainer')
             while (elements.length > 0) {
@@ -384,9 +343,7 @@ const Product = observer((props) => {
                                     <div className="row">
                                         <figure className="product-main-image">
                                             <img
-                                                // id="product-zoom"
                                                 src={process.env.REACT_APP_BASE_URL + selectedImage}
-                                                data-zoom-image={process.env.REACT_APP_BASE_URL + selectedImage}
                                                  alt="product image"/>
                                         </figure>
 
@@ -522,7 +479,7 @@ const Product = observer((props) => {
                                     </div>
 
                                     <div className="d-flex">
-                                        {product.product.size.map(size => (
+                                        {product.product?.size?.map(size => (
                                             <div key={size} className="size ">{size}</div>
                                         ))}
                                     </div>
@@ -538,7 +495,7 @@ const Product = observer((props) => {
                                                             backgroundColor: "white",
                                                             border: "none"
                                                         }}
-                                                        onClick={() => setCount(count - product.product.size.length)}>-
+                                                        onClick={() => setCount(count - product.product?.size?.length)}>-
                                                 </button>
                                                 <span className="s-title"  style={{
                                                     width: "30px",
@@ -558,8 +515,8 @@ const Product = observer((props) => {
                                         </div>
 
                                         <div className="product-details-action">
-                                            {user.token?.token ?
-                                                <a onClick={addCart} href=""
+                                            {user._user?.username ?
+                                                <a onClick={(e) => addCart(e)} href=''
                                                    className="btn-product btn-cart">В Корзину
                                                 </a> :
                                                 <a onClick={(e) => addCardLocal(e, product.product.id, product.product.price, product.product.images[0].title, product.product.title)}
@@ -569,7 +526,7 @@ const Product = observer((props) => {
                                             }
 
                                             <div className="details-action-wrapper">
-                                                    {user.token?.token ? product.product.is_favorite ?
+                                                    {user._user?.username ? product.product.is_favorite ?
                                                     <FcLike onClick={deleteWish}
                                                             style={{fontSize: "30px", cursor: "pointer"}}/>
                                                     : <a style={{fontSize: "30px"}} href="" onClick={addWishlist}

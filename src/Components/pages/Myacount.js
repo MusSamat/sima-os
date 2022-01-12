@@ -3,12 +3,12 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Context} from '../../index';
 import "../../App.css";
 import {useHistory} from 'react-router';
-import {LOGIN_ROUTE, ORDER_ROUTE, HOME_ROUTE} from '../../utils/Const';
+import {LOGIN_ROUTE} from '../../utils/Const';
 import axios from "axios"
 import {Button, Modal} from 'react-bootstrap'
 import Moment from 'react-moment';
 import 'moment-timezone';
-import {Switch, Route, Link, NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Myacount = observer(() => {
 
@@ -20,7 +20,6 @@ const Myacount = observer(() => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [smShow, setSmShow] = useState(false);
     const [lgShow, setLgShow] = useState(false);
 
 
@@ -43,7 +42,7 @@ const Myacount = observer(() => {
 
 
     const logoOut = () => {
-        user.setIsAuth(false)
+        user.setUser({})
         localStorage.removeItem("value")
         history.push(LOGIN_ROUTE)
 
@@ -124,15 +123,13 @@ const Myacount = observer(() => {
         user.getOrderDataId(id)
     }
 
+
     useEffect(() => {
         window.scrollTo(0, 0)
         user.getUserData()
-        if(user.token?.token){
+        if(user._user?.username){
             user.getOrderData()
         }
-
-
-
     }, [])
     return (
         <div className="page-wrapper">

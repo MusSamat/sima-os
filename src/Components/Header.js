@@ -32,6 +32,7 @@ const Header = observer(() => {
     let sum = 0
     let data = JSON.parse(localStorage.getItem('order'))
     let wish = JSON.parse(localStorage.getItem('wishlist'))
+    let authToken = JSON.parse(localStorage.getItem('value'))
     const search = (e) => {
         window.location.href = `/catalog?name=${input}`;
         product.searchFilter(input)
@@ -48,23 +49,22 @@ const Header = observer(() => {
             e.preventDefault();
         }
 
-    }
+    } 
 
     const errorClick = () => {
         toast.warning("Минимальный заказ 5 размерных рядов")
     }
 
 
-    useEffect(() => {
+    useEffect(async() => {
         mobile_menu()
-        if(user.token?.token){
-            user?.getUserData()
-            user?.getCartData()
-            user.getWishlistData()
+        if(authToken){
+            await user.getUserData()
+            await user?.getCartData()
+            await user.getWishlistData()
         }
-        user.getImageLogo()
-        // product.subcategoryFilter()
-        product.getSubcategory().then(() => {
+        await user.getImageLogo()
+        await product.getSubcategory().then(() => {
             const scripts = [
                 '/assets/js/jquery.elevateZoom.min.js',
                 '/assets/js/bootstrap-input-spinner.js',
@@ -203,7 +203,7 @@ const Header = observer(() => {
                                 </div>
                             </div>
 
-                            {user.token?.token ?
+                            {user.userId?.username ?
                                 <NavLink to={MYACOUNT_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "30px"}} data-toggle="modal"><i
                                     style={{color: "#666666"}} className="icon-user"></i></a></NavLink>
                                 : <NavLink to={LOGIN_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a style={{fontSize: "30px"}} data-toggle="modal"><i
@@ -211,14 +211,14 @@ const Header = observer(() => {
 
                             <NavLink className="wishlist-link" to={WISHLIST_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}>
                                 <i style={{color: "#666666"}} className="icon-heart-o"></i>
-                                <span className="wishlist-count flex justify-content-center align-center">{user.token?.token ? user.list?.length || '0' : wish  ? wish?.length : '0' }</span>
+                                <span className="wishlist-count flex justify-content-center align-center">{user._user?.username ? user.list?.length || '0' : wish  ? wish?.length : '0' }</span>
                             </NavLink>
                             <div className="dropdown cart-dropdown mr-10">
                                 <NavLink to={CART_ROUTE} innerRef={node => node?.addEventListener('click', () => window.scrollTo({top: "0px"}))}><a className="dropdown-toggle ">
                                     <i style={{color: "#666666"}} className="icon-shopping-cart"></i>
                                     <span
-                                        className="cart-count">{user.token?.token ? user.items?.length || '0' : data ? data?.length : '0'}</span>
-                                    { user.token?.token ?
+                                        className="cart-count">{user._user?.username ? user.items?.length || '0' : data ? data?.length : '0'}</span>
+                                    { user._user?.username ?
                                         user.items?.map((item, index) => {
                                             sum = sum + item.product?.price * item.quantity
                                         }) :
@@ -234,7 +234,7 @@ const Header = observer(() => {
                                     <div style={{overflowY: "auto", maxHeight: "230px"}}>
 
                                         <div className="dropdown-cart-products">
-                                            {user.token?.token ? user.items?.map((c, index) =>
+                                            {user._user?.username ? user.items?.map((c, index) =>
                                                 <div key={index} className="product">
                                                     <div className="product-cart-details">
                                                         <h4 className="product-title">
@@ -287,14 +287,14 @@ const Header = observer(() => {
                                     <div className="dropdown-cart-total">
                                         <span style={{color: '#666666', fontWeight: "normal"}} >ИТОГО:</span>
 
-                                        <span style={{color: '#666666', fontWeight: "normal"}}  className="cart-total-price">{new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum.toFixed(2)) } ₽</span>
+                                        <span style={{color: '#666666', fontWeight: "normal"}}  className="cart-total-price">{new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum?.toFixed(2)) } ₽</span>
                                     </div>
                                     <div className="dropdown-cart-action">
                                         <NavLink  to={CART_ROUTE}>
                                             <a href="" className="btn btn-outline-primary-2">Просмотр корзины</a><br/>
                                         </NavLink>
                                     </div>
-                                    { user.token?.token ? user.items.length >= 5 ?
+                                    { user._user?.username ? user.items?.length >= 5 ?
                                     <NavLink  to={CHECKOUT_ROUTE}>
                                         <div className="dropdown-cart-action">
                                                 <a href=""
@@ -325,21 +325,6 @@ const Header = observer(() => {
                                                 </a>
                                             </div>
                                     }
-
-
-                                    {/*<div className="dropdown-cart-action" style={{display: "block"}}>*/}
-                                    {/*    <NavLink  to={CART_ROUTE}>*/}
-                                    {/*        /!* <a className="btn btn-primary" ></a>*/}
-                                    {/*     <a href="#" class="btn btn-link">ПРОСМОТР КОРЗИНЫ</a> *!/*/}
-                                    {/*        <a href="" class="btn btn-outline-dark btn-rounded mb-1">ПРОСМОТР*/}
-                                    {/*            КОРЗИНЫ</a>*/}
-                                    {/*    </NavLink><br/>*/}
-
-                                    {/*    <NavLink  to={CHECKOUT_ROUTE}>*/}
-                                    {/*        <a href="" class="btn btn-outline-dark btn-rounded">ОФОРМИТЬ ЗАКАЗ</a>*/}
-                                    {/*    </NavLink>*/}
-
-                                    {/*</div>*/}
                                 </div>
                             </div>
 
