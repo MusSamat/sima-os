@@ -1,5 +1,6 @@
 import React from "react";
 import Quick from "./quickView";
+import "../../App.css";
 
 
 const Modal = ({active, setActive, id}) => {

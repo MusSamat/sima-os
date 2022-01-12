@@ -69,19 +69,6 @@ const Checkout = observer(() => {
             items: user.token?.token? [] : items,
         })
         linkData = data
-        // axios.post(`${process.env.REACT_APP_BASE_URL}/api/order/`, data, user.token?.token ?
-        //     {
-        //         headers: { 
-        //             'Content-Type': 'application/json',
-        //             'Authorization': 'Token ' + user.token?.token
-        //         },
-
-        //     } : {
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-
-        //     })
         productService.productOrder(data)
             .then(response => {
                 setNote('')

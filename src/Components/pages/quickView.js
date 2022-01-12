@@ -4,7 +4,7 @@ import {observer} from 'mobx-react-lite';
 import axios from "axios";
 import {toast} from "react-toastify";
 import {FcLike} from "react-icons/fc";
-import {GrClose} from "react-icons/gr";
+import "../../App.css";
 
 const quickView = observer(({id, active, setActive}) => {
     const {user, product} = useContext(Context);

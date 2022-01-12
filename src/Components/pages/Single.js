@@ -1,8 +1,9 @@
 import {observer} from 'mobx-react-lite';
 import React, {useEffect, useContext} from 'react';
 import {Context} from '../../index';
-import {HOME_ROUTE, NEWS_ROUTE} from '../../utils/Const';
+import { NEWS_ROUTE} from '../../utils/Const';
 import {NavLink} from 'react-router-dom';
+import "../../App.css";
 
 const Single = observer(({match}) => {
     const {product} = useContext(Context)

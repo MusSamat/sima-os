@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect} from 'react';
 import { Link, useHistory} from 'react-router-dom';
 import { Context } from '../../index';
+import "../../App.css";
 
 const OrdersTable = observer(() => {
     const {user} = useContext(Context)

@@ -182,25 +182,9 @@
     padding-left: 5.4rem;
 }
 
-/*.s-title:hover {*/
-/*    color: #EEA287 !important;*/
-/*}*/
-
-.korziny {
-
-}
-
 .korziny:hover {
     color: white !important;
 }
-
- /*catalog */
-/*.salt{*/
-/*    position: fixed;*/
-/*    top: 130px;*/
-/*    width: 265px;*/
-/*    bottom: 10px;*/
-/*}*/
 
 .rating{
     min-width: 115px !important;

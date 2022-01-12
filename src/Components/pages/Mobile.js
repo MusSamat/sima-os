@@ -7,9 +7,9 @@ import {
     CONTACT_ROUTE,
     HOME_ROUTE,
     NEWS_ROUTE,
-    SUBCATEGORY_ROUTE,
     PURCHASES_ROUTE
 } from "../../utils/Const"
+import "../../App.css";
 
 
 export default function Mobile() {

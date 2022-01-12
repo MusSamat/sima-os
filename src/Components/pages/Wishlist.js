@@ -1,10 +1,8 @@
 import {observer} from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
 import {Context} from '../../index';
-import axios from "axios";
 import {Link, NavLink} from 'react-router-dom';
 import "../../App.css";
-import {HOME_ROUTE} from '../../utils/Const';
 import {toast} from "react-toastify";
 import { userService } from '../../services/users';
 

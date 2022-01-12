@@ -111,16 +111,6 @@ const ForgetPass = observer(() => {
                                             </div>
 
                                             <div className="form-group">
-                                                {/* <input
-                                                        type="password" 
-                                                        className="form-control" 
-                                                        id="register-password-2" 
-                                                        name="register-password"
-                                                        placeholder="Пароль" 
-                                                        required
-                                                        value={password}
-                                                        onChange={e => setPassword(e.target.value)}
-                                                    /> */}
                                             </div>
 
                                             <div className="form-footer">
