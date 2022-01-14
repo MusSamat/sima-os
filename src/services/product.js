@@ -8,17 +8,17 @@ class ProductService extends BaseApiService {
     }
 
 	getProducts () {
-        const url = `${process.env.REACT_APP_BASE_URL}/api/products`
+        const url = `${process.env.REACT_APP_BASE_URL}/api/products/`
 		return this.sendGetRequest(url)
     }
 
 	getPopular () {
-        const url = `${process.env.REACT_APP_BASE_URL}/api/popular`
+        const url = `${process.env.REACT_APP_BASE_URL}/api/popular/`
 		return this.sendGetRequest(url)
     }
 
 	getId (id) {
-		const url = `${process.env.REACT_APP_BASE_URL}/api/products/${id}`
+		const url = `${process.env.REACT_APP_BASE_URL}/api/products/${id}/`
 		return this.sendGetRequest(url)
 	}
 
