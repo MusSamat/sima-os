@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.fc5f0d8f.chunk.css",
-    "main.js": "/static/js/main.7ef14b26.chunk.js",
-    "main.js.map": "/static/js/main.7ef14b26.chunk.js.map",
+    "main.js": "/static/js/main.e0afb574.chunk.js",
+    "main.js.map": "/static/js/main.e0afb574.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.d7bdc1f8.js",
     "runtime-main.js.map": "/static/js/runtime-main.d7bdc1f8.js.map",
     "static/css/2.97503911.chunk.css": "/static/css/2.97503911.chunk.css",
@@ -19,7 +19,6 @@
     "static/media/Rectangle33.e907f92a.png": "/static/media/Rectangle33.e907f92a.png",
     "static/media/Rectangle332.45cba8f7.png": "/static/media/Rectangle332.45cba8f7.png",
     "static/media/Rectangle34.e882b696.png": "/static/media/Rectangle34.e882b696.png",
-    "static/media/WhatsApp.3b7723f1.png": "/static/media/WhatsApp.3b7723f1.png",
     "static/media/login.4cb7e2bb.png": "/static/media/login.4cb7e2bb.png",
     "static/media/visa.a1526052.png": "/static/media/visa.a1526052.png",
     "static/media/vk.aef20084.png": "/static/media/vk.aef20084.png"
@@ -29,6 +28,6 @@
     "static/css/2.97503911.chunk.css",
     "static/js/2.470b4cb4.chunk.js",
     "static/css/main.fc5f0d8f.chunk.css",
-    "static/js/main.7ef14b26.chunk.js"
+    "static/js/main.e0afb574.chunk.js"
   ]
 }

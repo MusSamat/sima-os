@@ -18,9 +18,10 @@ import "../App.css";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {toast} from "react-toastify";
-import what from "../assets/WhatsApp.png"
+// import what from "../assets/WhatsApp.png"
 import mobile_menu from "../Http/mobile_menu";
 
+const what = "../assets/WhatsApp.png"
 
 const Header = observer(() => {
 
@@ -344,7 +345,7 @@ const Header = observer(() => {
             <Link className="whatsapp"
                   to={{pathname: 'https://wa.me/996709999915'}}  target="_blank"
             >
-                <img src={what}/>
+                <img src={what} alt=""/>
             </Link>
         </div>
     );
