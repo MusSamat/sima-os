@@ -36,6 +36,7 @@ export default class BaseApiService {
 			method: method,
 			headers: { ...authHeader() },
 		}
+		console.log(isFormData)
 		if (!isFormData) {
 			requestOptions.headers['Content-Type'] = 'application/json'
 		}

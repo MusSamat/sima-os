@@ -46,6 +46,16 @@ class ProductService extends BaseApiService {
 		const url = `${process.env.REACT_APP_BASE_URL}/api/order/`
 		return this.sendPostRequest(url, data)
 	}
+
+	getNovelty () {
+		const url = `${process.env.REACT_APP_BASE_URL}/api/novelty`
+		return this.sendGetRequest(url)
+	}
+
+	getDiscount () {
+		const url = `${process.env.REACT_APP_BASE_URL}/api/discount`
+		return this.sendGetRequest(url)
+	}
 }
 
 export const productService = new ProductService() 

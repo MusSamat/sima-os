@@ -39,6 +39,7 @@ export default class ProductStore {
         this.novelty = []
         this.loader = false
         this.productWishlist = []
+        this.advantage = []
 
 
         makeAutoObservable(this)
@@ -171,21 +172,10 @@ export default class ProductStore {
     }
 
     async getPopularProduct() {
-        this.setLoader(true)
-        this.token = JSON.parse(localStorage.getItem('value'))
-        return await axios.get(`${process.env.REACT_APP_BASE_URL}/api/popular`, this.token?.token ? {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token,
-            }
-        } : {
-            headers: {
-                'Content-Type': 'application/json',
-
-            }
-        })
+        await productService.getPopular()
             .then(res => {
-                this.popular = res.data.results
+                console.log(res)
+                this.popular = res.results
 
             })
             .catch((e) => {
@@ -228,22 +218,24 @@ export default class ProductStore {
 
     }
 
-    getNoveltyProducts1() {
+    async getNoveltyProducts1() {
         const wish = JSON.parse(localStorage.getItem('wishlist'))
         this.token = JSON.parse(localStorage.getItem('value'))
-        return axios.get(`${process.env.REACT_APP_BASE_URL}/api/novelty`, this.token?.token ? {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token,
-            }
-        } : {
-            headers: {
-                'Content-Type': 'application/json',
+        
+        // return axios.get(`${process.env.REACT_APP_BASE_URL}/api/novelty`, this.token?.token ? {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': 'Token ' + this.token?.token,
+        //     }
+        // } : {
+        //     headers: {
+        //         'Content-Type': 'application/json',
 
-            }
-        })
+        //     }
+        // })
+        await productService.getNovelty()
             .then(res => {
-                this.novelty = res.data.results.map(i => {
+                this.novelty = res.results.map(i => {
                     const d = wish?.find(j => j.id === i.id)
                     if (d) {
                         i.is_favorite = d?.is_favorite
@@ -438,19 +430,9 @@ export default class ProductStore {
 
    async discountTodo1() {
        const wish = JSON.parse(localStorage.getItem('wishlist'))
-        this.token = JSON.parse(localStorage.getItem('value'))
-       await axios.get(`${process.env.REACT_APP_BASE_URL}/api/discount`, this.token?.token ? {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + this.token?.token
-            }
-        } : {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
+        await productService.getDiscount()
             .then(res => {
-                this.discount = res.data.results.map(i => {
+                this.discount = res.results.map(i => {
                     const d = wish?.find(j => j.id === i.id)
                     if (d) {
                         i.is_favorite = d?.is_favorite
@@ -480,6 +462,16 @@ export default class ProductStore {
         await axios.get(`${process.env.REACT_APP_BASE_URL}/api/sertificate`)
             .then(res => {
                 this.sertificate = res.data
+            })
+            .catch((e) => {
+                console.error(e)
+            })
+    }
+
+    async getAdvantage() {
+        await axios.get(`${process.env.REACT_APP_BASE_URL}/api/background-advantage`)
+            .then(res => {
+                this.advantage = res.data
             })
             .catch((e) => {
                 console.error(e)

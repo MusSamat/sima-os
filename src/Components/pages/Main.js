@@ -180,8 +180,10 @@ const Main = observer(() => {
             localStorage.removeItem('viewProduct')
         })
         product.getPopularProduct()
+        product.getAdvantage()
 
     }, [])
+
 
     return (
         <div className="page-wrapper">
@@ -544,7 +546,18 @@ const Main = observer(() => {
                 <div className="container mt-12 mb-10">
 
                     <div className="row ">
-                        <div className="col-12 mb-10 col-xl-6 mt-2 mb-12">
+                        {product.advantage.map((item, index) => (
+                            <div key={index} className="col-12 mb-10 col-xl-6 mt-2 mb-12">
+                                <a href={item.link}>
+                                    <div className="position-relative d-flex justify-content-center align-items-center mt-8 mb-3 ">
+                                        <img className=" position-absolute " src={item.image} alt="Banner"/>
+                                        <img className="position-absolute" src={Restangle332} alt="Banner"/>
+                                        <h3 style={{color: "#fff"}} className="position-absolute monserat">{item.title}</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        ))}
+                        {/* <div className="col-12 mb-10 col-xl-6 mt-2 mb-12">
                             <Link to={ABOUT_ROUTE}>
                                 <div
                                     className="position-relative d-flex justify-content-center align-items-center mt-8 mb-3 ">
@@ -556,43 +569,40 @@ const Main = observer(() => {
                                 </div>
                             </Link>
 
-                        </div>
-                        <div className="col-12-mb-10 col-xl-6 mt-2 mb-12">
+                        </div> */}
+                        {/* <div className="col-12-mb-10 col-xl-6 mt-2 mb-12">
                             <Link to={DELIVERY_ROUTE}>
                                 <div
                                     className=" position-relative d-flex justify-content-center align-items-center mt-8 ">
                                     <img className=" position-absolute" src={Restangle33} alt="Banner"/>
                                     <img className=" position-absolute" src={Restangle332} alt="Banner"/>
-                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Удобная
-                                        доставка</h3>
+                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Удобная доставка</h3>
                                 </div>
                             </Link>
-                        </div>
+                        </div> */}
 
                     </div>
                     <div className="row ">
-                        <div className="col-12 mb-10 col-xl-6 mt-2  mb-12">
+                        {/* <div className="col-12 mb-10 col-xl-6 mt-2  mb-12">
                             <Link to={PURCHASES_ROUTE}>
                                 <div
                                     className="position-relative d-flex justify-content-center align-items-center mt-8">
                                     <img className=" position-absolute  " src={Restangle34} alt="Banner"/>
                                     <img className=" position-absolute" src={Restangle332} alt="Banner"/>
-                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Контроль
-                                        качества</h3>
+                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Контроль качества</h3>
                                 </div>
                             </Link>
-                        </div>
-                        <div className="col-12 mb-10 col-xl-6 mt-2 mb-12 ">
+                        </div> */}
+                        {/* <div className="col-12 mb-10 col-xl-6 mt-2 mb-12 ">
                             <Link to={ABOUT_ROUTE}>
                                 <div
                                     className="position-relative d-flex justify-content-center align-items-center mt-8">
                                     <img className="position-absolute" src={Restangle35} alt="Banner"/>
                                     <img className="position-absolute " src={Restangle332} alt="Banner"/>
-                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Сертификация
-                                        товара</h3>
+                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Сертификация товара</h3>
                                 </div>
                             </Link>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
