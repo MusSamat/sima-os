@@ -7,7 +7,7 @@ import "../App.css";
 
 export default function AppRouter() {
     return (
-        <div style={{marginTop: "30px"}}>
+        <div style={{marginTop: "40px"}}>
                 <Switch>
                     <Route exact  path="/" component={Main} />
                     {publicRoutes.map(({path, Component}) =>

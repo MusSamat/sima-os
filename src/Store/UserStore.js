@@ -1,7 +1,5 @@
 import {makeAutoObservable} from "mobx";
 import axios from "axios"
-import Cookies from 'js-cookie'
-import cookie from 'cookie'
 import { userService } from "../services/users";
 
 export default class UserStore {

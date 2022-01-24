@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import {Context} from '../../index';
 import axios from "axios"
 import {NavLink, Link} from 'react-router-dom';
-import {CATALOG_ROUTE, CHECKOUT_ROUTE, HOME_ROUTE} from '../../utils/Const';
+import {CATALOG_ROUTE, CHECKOUT_ROUTE, GUARANTEE_ROUTE, VOZVRAT_ROUTE} from '../../utils/Const';
 import "../../App.css";
 import {toast} from "react-toastify";
 import { userService } from '../../services/users';
@@ -250,6 +250,13 @@ const Cart = observer(() => {
                                                         заказ</a>
                                         }
                                     </div>
+                                    <p style={{margin: "10px", fontSize: "16px", color: "#000000"}}>
+                                        <Link to={VOZVRAT_ROUTE}>Описания политики отмены/возврата товаров</Link>
+                                    </p>
+                                    <p style={{margin: "10px", fontSize: "16px", color: "#000000"}}>
+                                        <Link to={GUARANTEE_ROUTE}>Гарантии безопасности платежей;
+                                        </Link>
+                                    </p>
 
                                     <NavLink to={`${CATALOG_ROUTE}?products=products`} >
                                         <button className="btn btn-outline-dark-2 btn-block pocuoki mb-3"><span>ПРОДОЛЖИТЬ ПОКУПКИ</span><i

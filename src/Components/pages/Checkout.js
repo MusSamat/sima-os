@@ -5,10 +5,9 @@ import axios from "axios";
 import {useHistory} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {CART_ROUTE, ORDER_ROUTE} from '../../utils/Const';
+import {PRIVACY_ROUTE, ORDER_ROUTE, OPLATA_ROUTE, VOZVRATMONEY_ROUTE, } from '../../utils/Const';
 import "../../App.css";
-import {NavLink} from 'react-router-dom';
-import { Form} from "react-bootstrap";
+import {Link} from 'react-router-dom';
 import { productService } from '../../services/product';
 
 
@@ -110,7 +109,7 @@ const Checkout = observer(() => {
             <div className="page-content">
                 <div className="checkout">
                     <div className="container">
-                        {user.isRoute ?
+                        {user._user?.username ?
                             <div style={{fontSize: "16px"}} className="s-title">Есть купон? Нажмите, чтобы <a href=""
                                                                                                               onClick={() => user.setRoute(false)}
                                                                                                               style={{fontSize: "16px"}}
@@ -243,6 +242,17 @@ const Checkout = observer(() => {
                                                 className="form-control" required
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
                                         </div>
+                                    </div>
+                                    <div>
+                                        <div style={{textAlign: "justify",fontSize: "16px", color: "fff"}}>Ваши личные данные будут использоваться для обработки ваших заказов и упрощения вашей работы с сайтом. Все уточнения на странице <Link to={PRIVACY_ROUTE}>политика конфиденциальности.</Link></div>
+                                    </div>
+                                    <div>
+
+                                        <div style={{textAlign: "justify",fontSize: "16px", color: "fff"}}><Link to={OPLATA_ROUTE}>Способы оплаты</Link></div>
+                                    </div>
+                                    <div>
+
+                                        <div style={{textAlign: "justify",fontSize: "16px", color: "fff"}}><Link to={VOZVRATMONEY_ROUTE}>Возврат денежных средств</Link></div>
                                     </div>
                                 </div>
                                 <aside className="col-lg-3">

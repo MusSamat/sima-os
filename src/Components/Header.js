@@ -18,10 +18,8 @@ import "../App.css";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {toast} from "react-toastify";
-// import what from "../assets/WhatsApp.png"
 import mobile_menu from "../Http/mobile_menu";
-
-const what = "../assets/WhatsApp.png"
+import what from "../assets/WhatsApp.png";
 
 const Header = observer(() => {
 
@@ -335,18 +333,21 @@ const Header = observer(() => {
                 </div>
 
             </header>
-
-
             <a
                 href="whatsapp://send?text=Здравствуйте, я хочу стать частью команды Яндекс Такси Олимпик Парк&phone=+996501342534&abid=+996501342534"
                 className="btn-whatsapp-link"
             >
+
             </a>
             <Link className="whatsapp"
                   to={{pathname: 'https://wa.me/996709999915'}}  target="_blank"
             >
-                <img src={what} alt=""/>
+                <figure >
+                    <img src={what} alt=""/>
+                </figure>
+
             </Link>
+
         </div>
     );
 })

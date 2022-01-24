@@ -19,7 +19,11 @@ export const FORGET_ROUTE = '/forget'
 export const QUICKVIEW_ROUTE = '/quickview'
 export const CHANGEPASS_ROUTE = '/api/password_reset/validate_token/:token'
 export const VISA_ROUTE = '/visa'
-
+export const PRIVACY_ROUTE = '/privacy-policy'
+export const VOZVRAT_ROUTE = '/vozvrat-tovara'
+export const OPLATA_ROUTE = '/oplata'
+export const VOZVRATMONEY_ROUTE = '/vozvrat-money'
+export const GUARANTEE_ROUTE = '/guarantee'
 
 export const ORDER_ROUTE = '/orders'
 

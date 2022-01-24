@@ -10,6 +10,30 @@
     margin: 0 auto;
 
 }
+/* style={{marginTop: "10px",textAlign: "justify",  fontSize: "16px", color: "#000000"}} */
+.vosvrat {
+    margin-top: 10px;
+    text-align: justify;
+    font-size: 16px;
+    color: #000000;
+}
+.c-important-msg{
+    margin: 25px, 0;
+    background: #ccc;
+    padding: 11px;
+    border-radius: 6px;
+    font-size: 0;
+    position: relative;
+    padding-left: 38px;
+    margin-top: 10px;
+}
+
+.vosvrat:before {
+    content: '—';
+    position: absolute;
+    top: 0;
+    left: -20px;
+}
 
 .App1 {
     text-align: center;

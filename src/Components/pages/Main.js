@@ -551,58 +551,11 @@ const Main = observer(() => {
                                 <a href={item.link}>
                                     <div className="position-relative d-flex justify-content-center align-items-center mt-8 mb-3 ">
                                         <img className=" position-absolute " src={item.image} alt="Banner"/>
-                                        <img className="position-absolute" src={Restangle332} alt="Banner"/>
                                         <h3 style={{color: "#fff"}} className="position-absolute monserat">{item.title}</h3>
                                     </div>
                                 </a>
                             </div>
-                        ))}
-                        {/* <div className="col-12 mb-10 col-xl-6 mt-2 mb-12">
-                            <Link to={ABOUT_ROUTE}>
-                                <div
-                                    className="position-relative d-flex justify-content-center align-items-center mt-8 mb-3 ">
-                                    <img className=" position-absolute " src={Restangle32} alt="Banner"/>
-                                    <img className="position-absolute" src={Restangle332} alt="Banner"/>
-                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Более 20 лет на
-                                        рынке</h3>
-
-                                </div>
-                            </Link>
-
-                        </div> */}
-                        {/* <div className="col-12-mb-10 col-xl-6 mt-2 mb-12">
-                            <Link to={DELIVERY_ROUTE}>
-                                <div
-                                    className=" position-relative d-flex justify-content-center align-items-center mt-8 ">
-                                    <img className=" position-absolute" src={Restangle33} alt="Banner"/>
-                                    <img className=" position-absolute" src={Restangle332} alt="Banner"/>
-                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Удобная доставка</h3>
-                                </div>
-                            </Link>
-                        </div> */}
-
-                    </div>
-                    <div className="row ">
-                        {/* <div className="col-12 mb-10 col-xl-6 mt-2  mb-12">
-                            <Link to={PURCHASES_ROUTE}>
-                                <div
-                                    className="position-relative d-flex justify-content-center align-items-center mt-8">
-                                    <img className=" position-absolute  " src={Restangle34} alt="Banner"/>
-                                    <img className=" position-absolute" src={Restangle332} alt="Banner"/>
-                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Контроль качества</h3>
-                                </div>
-                            </Link>
-                        </div> */}
-                        {/* <div className="col-12 mb-10 col-xl-6 mt-2 mb-12 ">
-                            <Link to={ABOUT_ROUTE}>
-                                <div
-                                    className="position-relative d-flex justify-content-center align-items-center mt-8">
-                                    <img className="position-absolute" src={Restangle35} alt="Banner"/>
-                                    <img className="position-absolute " src={Restangle332} alt="Banner"/>
-                                    <h3 style={{color: "#fff"}} className="position-absolute monserat">Сертификация товара</h3>
-                                </div>
-                            </Link>
-                        </div> */}
+                        ))}                        
                     </div>
                 </div>
 
