@@ -272,8 +272,8 @@ const Main = observer(() => {
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
                                             <div  className="product-price">
-                                                <span style={{fontWeight: '500'}} className="new-price">{discout.discount_price} ₽</span>
-                                                <span style={{fontWeight: '500'}} className="old-price">{`${discout.price} ₽`}</span>
+                                                <span style={{fontWeight: '500'}} className="new-price">{discout.discount_price} Сом</span>
+                                                <span style={{fontWeight: '500'}} className="old-price">{`${discout.price} Сом`}</span>
                                             </div>
                                             <div className="ratings-container">
                                                 {
@@ -389,7 +389,7 @@ const Main = observer(() => {
                                         <div className="product-body">
                                             <h3 className="product-title"><a href="">{discout.title}</a></h3>
                                             <div style={{fontWeight: '500'}} className="product-price">
-                                                {`${discout.price} ₽`}
+                                                {`${discout.price} Сом`}
                                             </div>
                                             <div className="ratings-container">
                                                 {
@@ -508,7 +508,7 @@ const Main = observer(() => {
                                         <div className="product-body">
                                             <h3  className="product-title"><a href="">{discout.title}</a></h3>
                                             <div style={{fontWeight: '500'}} className="product-price">
-                                                {`${discout.price} ₽`}
+                                                {`${discout.price} Сом`}
                                             </div>
                                             <div className="ratings-container">
                                                 {

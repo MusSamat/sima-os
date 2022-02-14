@@ -373,14 +373,10 @@ const Product = observer((props) => {
                                     <p>Артикул: {product.product.articul}</p>
                                     {product.product.percent ? <div class="product-price"
                                                          style={{color: "rgb(238, 162, 135)"}}>
-                                            <span className="new-price">{product.product.discount_price} ₽</span>
-                                            <span className="old-price">{`${product.product.price} ₽`}</span>
-
-
-
-
+                                            <span className="new-price">{product.product.discount_price} Сом</span>
+                                            <span className="old-price">{`${product.product.price} Сом`}</span>
                                         </div> :
-                                        <div className="product-price">{`${product.product.price} ₽`}</div>}
+                                        <div className="product-price">{`${product.product.price} Сом`}</div>}
                                     <label style={{
                                         color: "#9393a5",
                                         fontSize: "14px",
@@ -407,8 +403,6 @@ const Product = observer((props) => {
                                                         cursor: "pointer"
                                                     }} src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`}
                                                          alt="product desc"/>
-
-
                                                 </a>
                                             </div>)}
 

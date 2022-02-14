@@ -128,7 +128,7 @@ const Cart = observer(() => {
                                                     </div>
                                                 </td>
                                                 <td className="price-col s-title">{c.color}</td>
-                                                <td className="price-col s-title">{c.product.price} ₽</td>
+                                                <td className="price-col s-title">{c.product.price} Сом</td>
 
                                                 <td>
                                                     <div className="count">
@@ -141,7 +141,7 @@ const Cart = observer(() => {
                                                 </td>
 
                                                 <td className="price-col s-title"
-                                                    style={{color: "#c96"}}>{(c.product.price * c.quantity).toFixed(2)} ₽
+                                                    style={{color: "#c96"}}>{(c.product.price * c.quantity).toFixed(2)} Сом
                                                 </td>
                                                 <td className="remove-col">
                                                     <button onClick={() => deleteCart(c.product.id, c.color)}
@@ -170,7 +170,7 @@ const Cart = observer(() => {
                                                     </div>
                                                 </td>
                                                 <td className="price-col s-title">{data.filter(i => i.id === c.id).map(f => f.color)} </td>
-                                                <td className="price-col s-title">{c.price} ₽</td>
+                                                <td className="price-col s-title">{c.price} Сом</td>
                                                 <td>
                                                     <div className="count">
                                                         <button disabled={(isNaN(c.quantity) || c.quantity - c.size.length <= 0)}  style={{width: "30px", cursor: "pointer", backgroundColor: "white", fontSize: "18px", marginLeft: "7px", border: "none"}} onClick={() => product.changeProductQuantity(c.id, (isNaN(c.quantity) ? getItem(c.id) : c.quantity) - c.size.length)}>-</button>
@@ -182,7 +182,7 @@ const Cart = observer(() => {
                                                 </td>
 
                                                 <td className="price-col s-title"
-                                                    style={{color: "#c96"}}>{c.quantity ? c.quantity * c.price : getPrice(c.id)} ₽
+                                                    style={{color: "#c96"}}>{c.quantity ? c.quantity * c.price : getPrice(c.id)} Сом
                                                 </td>
                                                 <td className="remove-col">
                                                     <button onClick={(e) => deleteLocal(e, c.id)}
@@ -218,7 +218,7 @@ const Cart = observer(() => {
                                                         sum = sum + item?.price * item?.quantity
                                                     })
                                                 }
-                                                <td>  {new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum?.toFixed(2))} ₽</td>
+                                                <td>  {new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum?.toFixed(2))} Сом</td>
 
                                             </tr>
 
@@ -226,7 +226,7 @@ const Cart = observer(() => {
                                             <tr className="summary-subtotal" style={{fontWeight: "500"}}>
                                                 <td>Итого:</td>
 
-                                                <td>{ new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum?.toFixed(2))} ₽</td>
+                                                <td>{ new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum?.toFixed(2))} Сом</td>
                                             </tr>
                                             </tbody>
                                         </table>

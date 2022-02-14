@@ -225,7 +225,7 @@ const Header = observer(() => {
                                             sum = sum + item.price * item.quantity
                                         })
                                     }
-                                    <span className="cart-txt">{new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format( sum.toFixed(2)) } ₽</span>
+                                    <span className="cart-txt">{new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format( sum.toFixed(2)) } Сом</span>
                                 </a>
                                 </NavLink>
 
@@ -241,7 +241,6 @@ const Header = observer(() => {
                                                         </h4>
 
                                                         <span style={{color: '#666666', fontWeight: "normal"}} className="cart-product-info">
-                                                            {/*<span className="cart-product-qty"></span>*/}
                                                             {c.product?.price}
                                                         </span>
                                                     </div>
@@ -264,7 +263,7 @@ const Header = observer(() => {
 
                                                                     <span style={{color: '#666666', fontWeight: "normal"}} className="cart-product-info">
                                                                     {/*<span className="cart-product-qty">1</span>*/}
-                                                                    {c.price} ₽
+                                                                    {c.price} Сом
                                                                 </span>
                                                                 </div>
 
@@ -286,7 +285,7 @@ const Header = observer(() => {
                                     <div className="dropdown-cart-total">
                                         <span style={{color: '#666666', fontWeight: "normal"}} >ИТОГО:</span>
 
-                                        <span style={{color: '#666666', fontWeight: "normal"}}  className="cart-total-price">{new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum?.toFixed(2)) } ₽</span>
+                                        <span style={{color: '#666666', fontWeight: "normal"}}  className="cart-total-price">{new Intl.NumberFormat('fr-CA', {style: 'decimal'}).format(sum?.toFixed(2)) } Сом</span>
                                     </div>
                                     <div className="dropdown-cart-action">
                                         <NavLink  to={CART_ROUTE}>

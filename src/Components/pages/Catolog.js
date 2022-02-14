@@ -501,14 +501,14 @@ const Catolog = observer((props) => {
                                                             <h3  class="product-title "><a href="">{prod.title}</a></h3>
                                                         </Link>
                                                         {prod.percent ? <div class="product-price">
-                                                                <span style={{fontWeight: '500'}}  className="new-price ">{prod.discount_price} ₽</span>
-                                                                <span style={{fontWeight: '500'}} className="old-price s-title">{`${prod.price} ₽`}</span>
+                                                                <span style={{fontWeight: '500'}}  className="new-price ">{prod.discount_price} Сом</span>
+                                                                <span style={{fontWeight: '500'}} className="old-price s-title">{`${prod.price} Сом`}</span>
 
 
 
 
                                                             </div> :
-                                                            <div style={{fontWeight: '500'}} className="product-price ">{`${prod.price} ₽`}</div>}
+                                                            <div style={{fontWeight: '500'}} className="product-price ">{`${prod.price} Сом`}</div>}
 
                                                         <div className="ratings-container">
                                                             {
@@ -608,7 +608,7 @@ const Catolog = observer((props) => {
                                             min={500}
                                             max={2000}
                                         />
-                                        <p  className="filter mt-1">ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} ₽</p>
+                                        <p  className="filter mt-1">ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} Сом</p>
                                     </div>
 
                                     <div className="wrappe mt-3">

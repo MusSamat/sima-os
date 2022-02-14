@@ -273,12 +273,12 @@ const Checkout = observer(() => {
                                             {user._user?.username ? user.items?.map((item, index) =>
                                                     <tr key={index}>
                                                         <td>{item.product.title}</td>
-                                                        <td>{(item.product?.price * item.quantity).toFixed(2)} ₽</td>
+                                                        <td>{(item.product?.price * item.quantity).toFixed(2)} Сом</td>
                                                     </tr>) :
                                                 datalocal?.map((item, index) =>
                                                     <tr key={index}>
                                                         <td>{item.title}</td>
-                                                        <td>{(item.price * item.quantity).toFixed(2)} ₽</td>
+                                                        <td>{(item.price * item.quantity).toFixed(2)} Сом</td>
                                                     </tr>)
                                             }
                                             <tr className="summary-subtotal">
@@ -291,11 +291,11 @@ const Checkout = observer(() => {
                                                         sum = sum + item.price * item.quantity
                                                     })
                                                 }
-                                                <td>{sum?.toFixed(2)} ₽</td>
+                                                <td>{sum?.toFixed(2)} Сом</td>
                                             </tr>
                                             <tr className="summary-total">
                                                 <td>ИТОГО:</td>
-                                                <td>{sum?.toFixed(2)} ₽</td>
+                                                <td>{sum?.toFixed(2)} Сом</td>
                                             </tr>
 
                                             </tbody>
