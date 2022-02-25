@@ -31,12 +31,12 @@ export default class BaseApiService {
 
 	sendRequest (method, url, data) {
 		const isFormData = data instanceof FormData
+		// console.log( ...authHeader())
 		
 		const requestOptions = {
 			method: method,
 			headers: { ...authHeader() },
 		}
-		console.log(isFormData)
 		if (!isFormData) {
 			requestOptions.headers['Content-Type'] = 'application/json'
 		}

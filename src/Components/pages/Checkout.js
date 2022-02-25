@@ -31,6 +31,7 @@ const Checkout = observer(() => {
     const [checkeds, setCheckeds] = React.useState(true);
     const [value, setValue] = useState("")
     let datalocal = JSON.parse(localStorage.getItem('order'))
+    let token = JSON.parse(localStorage.getItem('value'))
 
     const notify = () => toast.success("Спасибо. Ваш заказ был принят.");
     const notifyError = () => toast.error("");
@@ -55,20 +56,29 @@ const Checkout = observer(() => {
 
         const data = JSON.stringify({
             user: user.carts.user,
-            first_name: user.token?.token ? user.userId.first_name ? user.userId.first_name : firstName : firstName,
-            last_name: user.token?.token ? user.userId.last_name ? user.userId.last_name : lastName : lastName,
-            email: user.token?.token ? user.userId.email : email,
-            address: user.token?.token ? user.userId.address ? user.userId.address : address : address,
-            country: user.token?.token ? user.userId.country ? user.userId.country : country : country,
-            city: user.token?.token ? user.userId.city ? user.userId.city : city : city,
-            telephone: user.token?.token ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone,
-            cart_user_id: user.token?.token ? user.carts.id : '',
-            company: user.token?.token ? user.userId.company ? user.userId.company : company : company,
+            first_name: token?.token ? user.userId.first_name ? user.userId.first_name : firstName : firstName,
+            last_name: token?.token ? user.userId.last_name ? user.userId.last_name : lastName : lastName,
+            email: token?.token ? user.userId.email : email,
+            address: token?.token ? user.userId.address ? user.userId.address : address : address,
+            country: token?.token ? user.userId.country ? user.userId.country : country : country,
+            city: token?.token ? user.userId.city ? user.userId.city : city : city,
+            telephone: token?.token ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone,
+            cart_user_id: token?.token ? user.carts.id : '',
+            company: token?.token ? user.userId.company ? user.userId.company : company : company,
             note: note,
-            items: user.token?.token? [] : items,
+            items: token?.token ? [] : items,
         })
         linkData = data
-        productService.productOrder(data)
+        axios.post(`${process.env.REACT_APP_BASE_URL}/api/order/`, linkData, token?.token ? {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + token?.token
+            }
+        } : {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
             .then(response => {
                 setNote('')
                 notify()
@@ -77,10 +87,11 @@ const Checkout = observer(() => {
                 localStorage.removeItem('order')
                 product.productOrder = []
                 user.getImageLogo()
+                console.log("h")
             })
             .catch(error => {
                 console.log(error)
-                notifyError()
+                // notifyError()
             })
         e.preventDefault();
     }
@@ -98,7 +109,6 @@ const Checkout = observer(() => {
 
 
     let link = JSON.parse(localStorage.getItem('link'))
-    console.log(user._user)
 
     useEffect(() => {
         window.scrollTo(0, 0)

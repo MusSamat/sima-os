@@ -42,7 +42,7 @@ class ProductService extends BaseApiService {
 		return this.sendPostRequest(url, data)
 	}
 
-	productOeder (data) {
+	productOrder (data) {
 		const url = `${process.env.REACT_APP_BASE_URL}/api/order/`
 		return this.sendPostRequest(url, data)
 	}
