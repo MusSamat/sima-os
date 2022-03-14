@@ -28,6 +28,8 @@ const Main = observer(() => {
     const [prodactId, setProdactId] = useState(0)
     const stars = Array(5).fill(0);
 
+    let tokenCatalog = JSON.parse(localStorage.getItem('value'))
+
     
 
     const deleteWish = (e, id) => {
@@ -59,7 +61,7 @@ const Main = observer(() => {
         }
         productService.addCartId(data)
             .then(response => {
-                user.getCartData()
+                user.getCartData(tokenCatalog.user.id)
             })
             .catch(error => {
                 console.log(error)
@@ -332,7 +334,7 @@ const Main = observer(() => {
                                     <div className="product product-7 text-center  black">
 
                                         <figure className="product-media ">
-                                            <Link to={{pathname: '/product/' + discout.id}}>
+                                            <Link to={{pathname: '/products/' + discout.id}}>
                                                 <a href="">
                                                     <img
                                                         src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`}

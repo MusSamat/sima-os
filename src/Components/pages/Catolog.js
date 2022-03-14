@@ -183,6 +183,7 @@ const Catolog = observer((props) => {
 
     let data = JSON.parse(localStorage.getItem('order'))
     let wish = JSON.parse(localStorage.getItem('wishlist'))
+    let tokenCatalog = JSON.parse(localStorage.getItem('value'))
 
     const addCardLocal = (proId, price, color, title, count) => {
         user.getImageLogo()
@@ -302,7 +303,7 @@ const Catolog = observer((props) => {
         productService.addCartId(data)
             .then(response => {
                 setCount(count)
-                user.getCartData()                 
+                user.getCartData(tokenCatalog.user.id)                 
             })
             .catch(error => {
                 console.log(error)
@@ -554,7 +555,7 @@ const Catolog = observer((props) => {
                                                 <ul>
                                                     {product.productSorted.map((c, index) =>
 
-                                                        <li key={index}
+                                                        <li
                                                             onClick={(e) => typeOfProduct(e, c.title, c.seasoncategory, c.id)}
                                                             key={index}><a className="category-vse" style={{
                                                             fontWeight: "400",

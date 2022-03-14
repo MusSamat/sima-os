@@ -10,6 +10,11 @@ class UserService extends BaseApiService {
 		return this.sendPostRequest(url, data)
 	}
 
+	setRegister (data) {
+		const url = `${process.env.REACT_APP_BASE_URL}/api/auth/register`
+		return this.sendPostRequest(url, data)
+	}
+
 	getOrder (id) {
 		const url = `${process.env.REACT_APP_BASE_URL}/api/order/${id}`
 		return this.sendGetRequest(url)
@@ -19,7 +24,7 @@ class UserService extends BaseApiService {
 		const url = `${process.env.REACT_APP_BASE_URL}/api/carts/${id}`
 		return this.sendGetRequest(url)
 	}
-
+ 
 	getWish (id) {
 		const url = `${process.env.REACT_APP_BASE_URL}/api/wisher/${id}`
 		return this.sendGetRequest(url)

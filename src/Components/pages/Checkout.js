@@ -9,9 +9,12 @@ import {PRIVACY_ROUTE, ORDER_ROUTE, OPLATA_ROUTE, VOZVRATMONEY_ROUTE, } from '..
 import "../../App.css";
 import {Link} from 'react-router-dom';
 import { productService } from '../../services/product';
+import { useForm } from "react-hook-form";
 
 
 const Checkout = observer(() => {
+
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const history = useHistory()
     const {user} = useContext(Context)
@@ -28,7 +31,7 @@ const Checkout = observer(() => {
     const [company, setCompany] = useState()
     const [cupon, setCupon] = useState()
     const [discount, setDiscount] = useState()
-    const [checkeds, setCheckeds] = React.useState(true);
+    const [checkeds, setCheckeds] = useState(true);
     const [value, setValue] = useState("")
     let datalocal = JSON.parse(localStorage.getItem('order'))
     let token = JSON.parse(localStorage.getItem('value'))
@@ -36,10 +39,12 @@ const Checkout = observer(() => {
     const notify = () => toast.success("Спасибо. Ваш заказ был принят.");
     const notifyError = () => toast.error("");
 
+    // const onSubmit = data => console.log(data);
+
 
     let linkData = '';
 
-    const sendOrder = (e) => {
+    const onSubmit = (data,e) => {
         let items = []
         datalocal?.map((item, i) => {
             let obj =
@@ -54,21 +59,14 @@ const Checkout = observer(() => {
             items.push(obj)
         })
 
-        const data = JSON.stringify({
+        const datas = JSON.stringify({
             user: user.carts.user,
-            first_name: token?.token ? user.userId.first_name ? user.userId.first_name : firstName : firstName,
-            last_name: token?.token ? user.userId.last_name ? user.userId.last_name : lastName : lastName,
-            email: token?.token ? user.userId.email : email,
-            address: token?.token ? user.userId.address ? user.userId.address : address : address,
-            country: token?.token ? user.userId.country ? user.userId.country : country : country,
-            city: token?.token ? user.userId.city ? user.userId.city : city : city,
-            telephone: token?.token ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone,
-            cart_user_id: token?.token ? user.carts.id : '',
-            company: token?.token ? user.userId.company ? user.userId.company : company : company,
             note: note,
             items: token?.token ? [] : items,
+            cart_user_id: token?.token ? user.carts.id : '',
+            ...data
         })
-        linkData = data
+        linkData = datas
         axios.post(`${process.env.REACT_APP_BASE_URL}/api/order/`, linkData, token?.token ? {
             headers: {
                 'Content-Type': 'application/json',
@@ -112,20 +110,25 @@ const Checkout = observer(() => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        user.getUserData()
+        const call  = async () => {
+            await user.getUserData()
+            await user.getCartData(user._user?.id)
+        }
+        
+        call()
     }, [])
     return (
         <div className="page-wrapper" style={{marginTop: "50px"}}>
             <div className="page-content">
                 <div className="checkout">
                     <div className="container">
-                        {user._user?.username ?
+                        {/* {user._user?.username ?
                             <div style={{fontSize: "16px"}} className="s-title">Есть купон? Нажмите, чтобы <a href=""
                                                                                                               onClick={() => user.setRoute(false)}
                                                                                                               style={{fontSize: "16px"}}
                                                                                                               className=" s-title btn-link"> ввести</a>
                             </div>
-                            : null}
+                            : null} */}
 
                         {user.isRoute ? <div class="cta cta-horizontal cta-horizontal-box bg-image mb-5" style={{
                             backgroundImage: "url(assets/images/backgrounds/cta/bg-1.jpg)",
@@ -154,92 +157,92 @@ const Checkout = observer(() => {
                         </div> : ""}
 
 
-                        <form action="#">
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="row">
                                 <div className="col-lg-9">
                                     <h2 className="checkout-title">ДЕТАЛИ ОПЛАТЫ</h2>
                                     <div className="row">
                                         <div className="col-sm-6">
-                                            <label style={{fontSize: "16px"}} for="register-password">Имя </label>
+                                            <label style={{fontSize: "16px"}}>Имя </label>
                                             <input
                                                 type="text"
                                                 defaultValue={user._user?.first_name}
-                                                // value={user.token?.token ? user.userId.first_name ? user.userId.first_name : firstName : firstName}
-                                                onChange={e => setFirstName(e.target.value)}
+                                                {...register("first_name", { required: 'Обязательное поле' })}
                                                 style={{fontSize: "16px", fontWeight: "500"}}
-                                                className="form-control" required/>
+                                                className="form-control" />
+                                                {errors.first_name && <span className='red'>{errors.first_name.message}</span>}
                                         </div>
 
                                         <div className="col-sm-6">
-                                            <label style={{fontSize: "16px"}} for="register-password">Фамилия</label>
+                                            <label style={{fontSize: "16px"}} >Фамилия</label>
                                             <input
-                                                onChange={e => setLastName(e.target.value)}
+                                               {...register("last_name", { required: 'Обязательное поле' })}
                                                 defaultValue={user._user?.last_name}
-                                                // value={user._user?.username ? user.userId.last_name ? user.userId.last_name : lastName : lastName} type="text"
-                                                className="form-control" required
+                                                className="form-control"
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
+                                                {errors.last_name && <span className='red'>{errors.last_name.message}</span>}
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-sm-6">
-                                            <label style={{fontSize: "16px"}} for="register-password">Страна</label>
+                                            <label style={{fontSize: "16px"}}>Страна</label>
                                             <input
                                                 type="text"
                                                 defaultValue={user._user?.country}
-                                                // value={user._user?.username ? user.userId.country ? user.userId.country : country : country}
-                                                onChange={e => setCountry(e.target.value)}
-                                                className="form-control" required
+                                                {...register("country", { required: 'Обязательное поле' })}
+                                                className="form-control" 
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
+                                                {errors.country && <span className='red'>{errors.country.message}</span>}
                                         </div>
 
                                         <div className="col-sm-6">
-                                            <label style={{fontSize: "16px"}} for="register-password">Город</label>
+                                            <label style={{fontSize: "16px"}}>Город</label>
                                             <input
                                                 type="text"
                                                 defaultValue={user._user?.city}
-                                                // value={user._user?.username ? user.userId.city ? user.userId.city : city : city}
-                                                onChange={e => setCity(e.target.value)}
-                                                className="form-control" required
+                                                {...register("city", { required: 'Обязательное поле' })}
+                                                className="form-control" 
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
+                                                {errors.city && <span className='red'>{errors.city.message}</span>}
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-sm-6">
-                                            <label style={{fontSize: "16px"}} htmlFor="register-password">Адрес</label>
+                                            <label style={{fontSize: "16px"}} >Адрес</label>
                                             <input
                                                 type="text"
                                                 defaultValue={user._user?.address}
-                                                // value={user._user?.username ? user.userId.address ? user.userId.address : address : address}
-                                                onChange={e => setAddress(e.target.value)}
-                                                className="form-control" required
+                                                {...register("address", { required: 'Обязательное поле' })}
+                                                className="form-control"
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
+                                                 {errors.address && <span className='red'>{errors.address.message}</span>}
 
 
                                         </div>
                                         <div className="col-sm-6">
-                                            <label style={{fontSize: "16px"}} htmlFor="register-password">Наименование
+                                            <label style={{fontSize: "16px"}}>Наименование
                                                 организации</label>
                                             <input
                                                 type="text"
-                                                defaultValue={user.userId.address}
-                                                // value={user._user?.username ? user.userId.address ? user.userId.address : company : company}
-                                                onChange={e => setCompany(e.target.value)}
-                                                className="form-control" required
+                                                defaultValue={user.userId.company}
+                                                {...register("company", { required: 'Обязательное поле' })}
+                                                className="form-control" 
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
+                                                {errors.company && <span className='red'>{errors.company.message}</span>}
                                         </div>
                                     </div>
 
 
                                     <div className="row">
                                         <div className="col-sm-6">
-                                            <label style={{fontSize: "16px"}} for="register-password">Телефон</label>
+                                            <label style={{fontSize: "16px"}}>Телефон</label>
                                             <input
-                                                onChange={e => setTelephon(e.target.value)}
+                                                {...register("telephone", { required: 'Обязательное поле' })}
                                                 defaultValue={user._user?.phone_number}
-                                                // value={user.token?.token ? user.userId.phone_number ? user.userId.phone_number : telophone : telophone}
                                                 type="tel"
-                                                className="form-control" required
+                                                className="form-control" 
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
+                                                {errors.telephone && <span className='red'>{errors.telephone.message}</span>}
                                         </div>
 
                                         <div className="col-sm-6">
@@ -247,13 +250,18 @@ const Checkout = observer(() => {
                                             <input
                                                 type="email"
                                                 defaultValue={user._user?.email}
-                                                // value={user.token?.token ? user.userId.email : email}
-                                                onChange={e => setEmail(e.target.value)}
-                                                className="form-control" required
+                                                {...register("email", { required: 'Обязательное поле' })}
+                                                className="form-control" 
                                                 style={{fontSize: "16px", fontWeight: "500"}}/>
+                                                {errors.email && <span className='red'>{errors.email.message}</span>}
                                         </div>
                                     </div>
-                                    <div>
+                                    
+                                    <div >
+                                        <div style={{display: 'flex', alignItems: 'center'}}>
+                                            <input  {...register("acceptTerms", { required: 'Обязательное поле' })} type="checkbox"  /> 
+                                            <div className={`input-check ${errors.acceptTerms ? 'invalid-check' : ''}`} >Нажимая кнопку</div>
+                                        </div>
                                         <div style={{textAlign: "justify",fontSize: "16px", color: "fff"}}>Ваши личные данные будут использоваться для обработки ваших заказов и упрощения вашей работы с сайтом. Все уточнения на странице <Link to={PRIVACY_ROUTE}>политика конфиденциальности.</Link></div>
                                     </div>
                                     <div>
@@ -277,8 +285,7 @@ const Checkout = observer(() => {
                                             </tr>
                                             </thead>
 
-                                            <tbody>
-
+                                            <tbody>                                        
 
                                             {user._user?.username ? user.items?.map((item, index) =>
                                                     <tr key={index}>
@@ -310,7 +317,7 @@ const Checkout = observer(() => {
 
                                             </tbody>
                                         </table>
-                                            <button onClick={sendOrder} type="submit"
+                                            <button  type="submit"
                                                     className="btn btn-outline-primary-2 btn-order btn-block mt-3">
                                                 <span style={{fontSize: "18px"}}>Подтвердить заказ</span>
                                             </button>

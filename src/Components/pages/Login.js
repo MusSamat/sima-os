@@ -11,7 +11,6 @@ import {Link} from 'react-router-dom';
 import logo from "../../assets/login.png"
 import {BsFillEyeFill} from "react-icons/bs";
 import {BsFillEyeSlashFill} from "react-icons/bs";
-import { useCookies } from 'react-cookie'
 import { userService } from '../../services/users';
 const Login = observer(() => {
     const [email, setEmail] = useState()
@@ -22,22 +21,26 @@ const Login = observer(() => {
     const [show, setShow] = useState(false)
     const {user} = useContext(Context)
     const history = useHistory()
-    const [, setCookie] = useCookies(['authToken'])
 
     const toggler = (e, bo) => {
         setShow(bo)
         e.preventDefault();
     }
-    const sing = () => {
-        const article = {email, password, username}
+    const sing = async (e) => {
+        e.preventDefault();
+        const data = {email, password, username}
 
-        axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, article)
+        await axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, data)
             .then(response => {
                 setEmail("")
+                setPassword('')
+                setUsername('')
+                toast.success("")
             })
             .catch(error => {
                 setError(true)
                 console.log(error)
+                toast.error("произошла ошибка")
 
             })
 
@@ -141,7 +144,7 @@ const Login = observer(() => {
                                                 </button>
 
 
-                                                    <a href="" className="btn btn-link "><Link className="forget" to={FORGET_ROUTE}>Забыли пароль?</Link></a>
+                                                    <a  className="btn btn-link "><Link className="forget" to={FORGET_ROUTE}>Забыли пароль?</Link></a>
 
                                             </div>
                                         </form>
@@ -149,7 +152,7 @@ const Login = observer(() => {
                                     <ToastContainer/>
                                     <div className="tab-pane fade show active" id="register-2" role="tabpanel"
                                          aria-labelledby="register-tab-2">
-                                        <form action="#">
+                                        <form >
                                             <div className="form-group">
                                                 <input
                                                     type="text"
@@ -190,10 +193,8 @@ const Login = observer(() => {
 
                                                     <BsFillEyeSlashFill   onClick={(e) => toggler(e,true)} style={{marginTop: "15px", cursor: "pointer", marginRight: "10px", color: "black"}}/> }
                                             </div>
-
-
                                             <div className="form-footer">
-                                                <button onClick={() => sing()} type="submit"
+                                                <button onClick={(e) => sing(e)} type="submit"
                                                         className="btn btn-outline-primary-2">
                                                     <span
                                                         style={{fontSize: "18px"}}>{loading ? 'Загрузка...' : 'Регистрация'}</span>

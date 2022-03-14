@@ -1197,3 +1197,22 @@ a{
     max-height: 80vh;
     max-width: 50vw;
 }
+
+.red {
+    color: red;
+    font-size: 16px;
+}
+.border-red {
+    border: 1px solid red !important;
+    width: 20px;
+    height: 20px;
+}
+.input-check{
+    text-align: justify;
+    font-size: 16px;
+    margin-left: 12px;
+}
+
+.invalid-check{
+    color: red;
+}

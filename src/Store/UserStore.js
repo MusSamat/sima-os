@@ -94,7 +94,7 @@ export default class UserStore {
 
 
     async getUserData() {
-       await userService.getUser().then(res => {
+       await userService.getUser().then(res => { 
                 this.userId = res
                 this.setUser(res)
             })
@@ -105,12 +105,16 @@ export default class UserStore {
     }
 
 
-    getOrderData() {
-        userService.getOrder(this._user.id).then(res => {
+    getOrderData(id) {
+        userService.getOrder(id).then(res => {
+            console.log(res)
             this.userId = res
+            this.orders = res
+            this.order = this.orders
             this.setUser(res)
         })
             .then(res => {
+                
                 this.orders = res.data
                 this.order = this.orders
             })
@@ -133,8 +137,8 @@ export default class UserStore {
     }
 
 
-   async getCartData() {
-       await userService.getUserCart(this._user.id)
+   async getCartData(id) {       
+       await userService.getUserCart(id)
             .then(res => {
                 this.carts = res
                 this.items = this.carts.items

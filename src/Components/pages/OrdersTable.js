@@ -7,8 +7,14 @@ import "../../App.css";
 const OrdersTable = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
+
+    let token = JSON.parse(localStorage.getItem('value'))
     useEffect(() => {
-        user.getUserData()
+        const call = async () => {
+            await user.getUserData() 
+            await user.getCartData(token.user?.id)
+        }
+        call()
         window.scrollTo(0,0)
     }, )
     return (

@@ -40,6 +40,9 @@ const Myacount = observer(() => {
     const [loadingPas, setLoadingPas] = useState(false);
     const [isErrorPas, setIsErrorPas] = useState(false);
 
+    const valueToken = JSON.parse(localStorage.getItem('value'))
+    console.log(valueToken.user.id)
+
 
     const logoOut = () => {
         user.setUser({})
@@ -57,10 +60,10 @@ const Myacount = observer(() => {
             password: newPassword,
             password2: confirmPassword,
         })
-        return axios.put(`${process.env.REACT_APP_BASE_URL}/change_password/${user.token?.user.id}/`, data, {
+        return axios.put(`${process.env.REACT_APP_BASE_URL}/change_password/${valueToken.user.id}/`, data, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token ' + user.token?.token
+                'Authorization': 'Token ' + valueToken.token
             },
         })
             .then(res => {
@@ -92,10 +95,10 @@ const Myacount = observer(() => {
             email: user.userId.email
 
         })
-        return axios.put(`${process.env.REACT_APP_BASE_URL}/update_profile/${user.token?.user.id}/`, data, {
+        return axios.put(`${process.env.REACT_APP_BASE_URL}/update_profile/${valueToken.user.id}/`, data, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token ' + user.token?.token
+                'Authorization': 'Token ' + valueToken.token
             },
         })
             .then(res => {
@@ -124,11 +127,12 @@ const Myacount = observer(() => {
     }
 
 
+
     useEffect(() => {
         window.scrollTo(0, 0)
         user.getUserData()
-        if(user._user?.username){
-            user.getOrderData()
+        if(valueToken.user.username){
+            user.getOrderData(valueToken.user.id)
         }
     }, [])
     return (
@@ -185,6 +189,7 @@ const Myacount = observer(() => {
 
                                         <div className="tab-pane fade" id="tab-orders" role="tabpanel"
                                              aria-labelledby="tab-orders-link">
+                                                 {console.log()}
 
                                             {user.order ?
                                                 <table className="table table-cart table-mobile">
