@@ -58,7 +58,8 @@ const Cart = observer(() => {
   }
 
   const errorClick = () => {
-    toast.warning('Минимальный заказ 5 размерных рядов')
+    // toast.warning('Минимальный заказ 5 размерных рядов')
+    alert('Минимальный заказ 5 размерных рядов')
   }
 
   const deleteLocal = async (e, id) => {

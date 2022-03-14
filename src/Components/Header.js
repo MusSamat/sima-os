@@ -43,7 +43,8 @@ const Header = observer(() => {
   }
 
   const errorClick = () => {
-    toast.warning('Минимальный заказ 5 размерных рядов')
+    // toast.warning('Минимальный заказ 5 размерных рядов')
+    alert('Минимальный заказ 5 размерных рядов')
   }
 
   useEffect(() => {
