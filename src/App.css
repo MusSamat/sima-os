@@ -753,9 +753,17 @@ a:focus {
     .intro-title {
         text-align: start;
     }
+    .intro-title,
+    strong {
+        font-size: 8rem !important;
+    }
 }
 .intro-title {
     left: -10px !important;
+}
+.intro-title,
+strong {
+    font-size: 12rem;
 }
 
 .text-left {
