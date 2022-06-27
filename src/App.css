@@ -763,7 +763,7 @@ a:focus {
 }
 .intro-title,
 strong {
-    font-size: 12rem;
+    /* font-size: 12rem; */
 }
 
 .text-left {
