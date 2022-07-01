@@ -216,7 +216,7 @@ const Main = observer(() => {
         <div className="container mt-8">
           <div className="products mt-4 mb-4 ">
             <div className="row justify-content-center">
-              {product.discount.slice(0, 8).map((discout, index) => (
+              {product.discount.map((discout, index) => (
                 <div key={index} className="col-6 col-md-4 col-lg-3">
                   <div className="product product-7 text-center black">
                     <figure className="product-media ">
@@ -233,7 +233,7 @@ const Main = observer(() => {
                       <Link to={{ pathname: "/product/" + discout.id }}>
                         <a href="">
                           <img
-                            src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`}
+                            src={`${process.env.REACT_APP_BASE_URL}${discout.image.image}`}
                             alt="Product image"
                             className="product-image"
                           />
@@ -304,8 +304,8 @@ const Main = observer(() => {
                               addCart(
                                 e,
                                 discout.id,
-                                discout.images[0].title,
-                                discout.size.length
+                                discout.image.color,
+                                discout.image.size_quantity
                               )
                             }
                             className="btn-product btn-cart s-title "
@@ -410,14 +410,14 @@ const Main = observer(() => {
         <div className="container ">
           <div className="products mt-10 mb-4 ">
             <div className="row justify-content-center">
-              {product.novelty.slice(0, 8).map((discout, index) => (
+              {product.novelty.map((discout, index) => (
                 <div key={index} className="col-6 col-md-4 col-lg-3">
                   <div className="product product-7 text-center  black">
                     <figure className="product-media ">
                       <Link to={{ pathname: "/product/" + discout.id }}>
                         <a href="">
                           <img
-                            src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`}
+                            src={`${process.env.REACT_APP_BASE_URL}${discout.image.image}`}
                             alt="Product image"
                             className="product-image"
                           />
@@ -577,14 +577,16 @@ const Main = observer(() => {
         <div className="container ">
           <div className="products mt-10 mb-4 ">
             <div className="row justify-content-center">
-              {product.popular.slice(0, 4).map((discout, index) => (
+              {console.log(product.popular)}
+              {product.popular.map((discout, index) => (
                 <div key={index} className="col-6 col-md-4 col-lg-3">
                   <div className="product product-7 text-center  black">
                     <figure className="product-media ">
                       <Link to={{ pathname: "/product/" + discout.id }}>
+                        {console.log(discout)}
                         <a href="">
                           <img
-                            src={`${process.env.REACT_APP_BASE_URL}${discout.images[0]?.images[0]}`}
+                            src={`${process.env.REACT_APP_BASE_URL}${discout.image.image}`}
                             alt="Product image"
                             className="product-image"
                           />

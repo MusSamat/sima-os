@@ -1,99 +1,98 @@
-import { observer } from 'mobx-react-lite'
-import React, { useContext, useEffect, useState } from 'react'
-import { Context } from '../../index'
-import axios from 'axios'
-import { NavLink, Link } from 'react-router-dom'
+import { observer } from "mobx-react-lite";
+import React, { useContext, useEffect, useState } from "react";
+import { Context } from "../../index";
+import axios from "axios";
+import { NavLink, Link } from "react-router-dom";
 import {
   CATALOG_ROUTE,
   CHECKOUT_ROUTE,
   GUARANTEE_ROUTE,
   VOZVRAT_ROUTE,
   PURCHASES_ROUTE,
-} from '../../utils/Const'
-import '../../App.css'
-import { toast } from 'react-toastify'
-import { userService } from '../../services/users'
+} from "../../utils/Const";
+import "../../App.css";
+import { toast } from "react-toastify";
+import { userService } from "../../services/users";
 
 const Cart = observer(() => {
-  const { user } = useContext(Context)
-  const { product } = useContext(Context)
-  const [count, setCount] = useState(product.subcategory)
-  let sum = 0
+  const { user } = useContext(Context);
+  const { product } = useContext(Context);
+  const [count, setCount] = useState(product.subcategory);
+  let sum = 0;
 
-  let data = JSON.parse(localStorage.getItem('order'))
-  let token = JSON.parse(localStorage.getItem('value'))
-
+  let data = JSON.parse(localStorage.getItem("order"));
+  let token = JSON.parse(localStorage.getItem("value"));
 
   const UpdateCart = (e) => {
     const data = {
       product: user.items.map((i) => i.product.id),
       quantity: user.items.map((i) => i.quantity),
       color: user.items.map((i) => i.color),
-    }
+    };
     userService
       .updateCart(data)
       .then((response) => {
-        console.log(response)
-        user.getCartData()
+        console.log(response);
+        user.getCartData();
       })
       .catch((error) => {
-        console.log(error)
-      })
-    e.preventDefault()
-  }
+        console.log(error);
+      });
+    e.preventDefault();
+  };
   const deleteCart = (id, color) => {
     const data = {
       product: id,
       color: color,
-    }
+    };
     userService
       .deleteUserCart(data)
       .then((res) => {
-        user.getCartData(token.user.id)
-        console.log(res)
+        user.getCartData(token.user.id);
+        console.log(res);
       })
       .catch((e) => {
-        console.error(e)
-      })
-  }
+        console.error(e);
+      });
+  };
 
   const errorClick = () => {
     // toast.warning('Минимальный заказ 5 размерных рядов')
-    alert('Минимальный заказ 5 размерных рядов')
-  }
+    alert("Минимальный заказ 5 размерных рядов");
+  };
 
   const deleteLocal = async (e, id) => {
-    let order = product.productOrder.filter((item) => item.product !== id)
-    product.getActualProducts()
-    data = data.filter((item) => item.id !== id)
-    await localStorage.setItem('order', JSON.stringify(data))
-    console.log(product.productOrder)
+    let order = product.productOrder.filter((item) => item.product !== id);
+    product.getActualProducts();
+    data = data.filter((item) => item.id !== id);
+    await localStorage.setItem("order", JSON.stringify(data));
+    console.log(product.productOrder);
 
     if (data.length === 0) {
-      localStorage.removeItem('order')
+      localStorage.removeItem("order");
     }
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   const getItem = (id) => {
-    const a = data?.find((i) => i.id === id)
-    return a ? a.quantity : 0
-  }
+    const a = data?.find((i) => i.id === id);
+    return a ? a.quantity : 0;
+  };
   const getPrice = (id) => {
-    const a = data?.find((i) => i.id === id)
-    return a ? a.quantity * a.price : 0
-  }
+    const a = data?.find((i) => i.id === id);
+    return a ? a.quantity * a.price : 0;
+  };
 
   // console.log(user._user ? 'a' :"b")
-  console.log(user.items)
+  console.log(data);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     if (user._user?.username) {
-      user.getCartData(token.user.id)
+      user.getCartData(token.user.id);
     }
-    product.getActualProducts()
-  }, [])
+    product.getActualProducts();
+  }, []);
   return (
     <div>
       <main className="main">
@@ -122,13 +121,13 @@ const Cart = observer(() => {
                                 <div className="product">
                                   <Link
                                     to={{
-                                      pathname: '/product/' + c.product.id,
+                                      pathname: "/product/" + c.product.id,
                                     }}
                                   >
                                     <figure className="product-media">
                                       <a>
                                         <img
-                                          src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0]?.images[0]}`}
+                                          src={`${process.env.REACT_APP_BASE_URL}${c.product?.image.image}`}
                                           alt="Product image"
                                         />
                                       </a>
@@ -148,15 +147,15 @@ const Cart = observer(() => {
                                 <div className="count">
                                   <a
                                     style={{
-                                      width: '30px',
-                                      cursor: 'pointer',
-                                      fontSize: '18px',
-                                      marginLeft: '7px',
+                                      width: "30px",
+                                      cursor: "pointer",
+                                      fontSize: "18px",
+                                      marginLeft: "7px",
                                     }}
                                     onClick={() =>
                                       user.changeItemQuantity(
                                         index,
-                                        c.quantity - c.product.size.length,
+                                        c.quantity - c.product.size.length
                                       )
                                     }
                                   >
@@ -164,25 +163,25 @@ const Cart = observer(() => {
                                   </a>
                                   <span
                                     style={{
-                                      width: '30px',
-                                      marginRight: '7px',
-                                      padding: '5px',
+                                      width: "30px",
+                                      marginRight: "7px",
+                                      padding: "5px",
                                     }}
                                   >
                                     {c.quantity}
                                   </span>
                                   <a
                                     style={{
-                                      marginLeft: '7px',
-                                      width: '30px',
-                                      cursor: 'pointer',
-                                      fontSize: '18px',
-                                      marginTop: '5px',
+                                      marginLeft: "7px",
+                                      width: "30px",
+                                      cursor: "pointer",
+                                      fontSize: "18px",
+                                      marginTop: "5px",
                                     }}
                                     onClick={() =>
                                       user.changeItemQuantity(
                                         index,
-                                        c.quantity + c.product.size.length,
+                                        c.quantity + c.product.size.length
                                       )
                                     }
                                   >
@@ -193,7 +192,7 @@ const Cart = observer(() => {
 
                               <td
                                 className="price-col s-title"
-                                style={{ color: '#c96' }}
+                                style={{ color: "#c96" }}
                               >
                                 {(c.product.price * c.quantity).toFixed(2)} Сом
                               </td>
@@ -211,17 +210,17 @@ const Cart = observer(() => {
                           ))
                         : product.products
                             ?.filter((i) =>
-                              data?.map((d) => d.id).includes(i.id),
+                              data?.map((d) => d.id).includes(i.id)
                             )
                             .map((c, index) => (
                               <tr>
                                 <td key={index} className="product-col">
                                   <div className="product">
-                                    <Link to={{ pathname: '/product/' + c.id }}>
+                                    <Link to={{ pathname: "/product/" + c.id }}>
                                       <figure className="product-media">
                                         <a>
                                           <img
-                                            src={`${process.env.REACT_APP_BASE_URL}${c.images[0]?.images[0]}`}
+                                            src={`${process.env.REACT_APP_BASE_URL}${c.image.image}`}
                                             alt="Product image"
                                           />
                                         </a>
@@ -235,7 +234,7 @@ const Cart = observer(() => {
                                 <td className="price-col s-title">
                                   {data
                                     .filter((i) => i.id === c.id)
-                                    .map((f) => f.color)}{' '}
+                                    .map((f) => f.color)}{" "}
                                 </td>
                                 <td className="price-col s-title">
                                   {c.price} Сом
@@ -248,19 +247,19 @@ const Cart = observer(() => {
                                         c.quantity - c.size.length <= 0
                                       }
                                       style={{
-                                        width: '30px',
-                                        cursor: 'pointer',
-                                        backgroundColor: 'white',
-                                        fontSize: '18px',
-                                        marginLeft: '7px',
-                                        border: 'none',
+                                        width: "30px",
+                                        cursor: "pointer",
+                                        backgroundColor: "white",
+                                        fontSize: "18px",
+                                        marginLeft: "7px",
+                                        border: "none",
                                       }}
                                       onClick={() =>
                                         product.changeProductQuantity(
                                           c.id,
                                           (isNaN(c.quantity)
                                             ? getItem(c.id)
-                                            : c.quantity) - c.size.length,
+                                            : c.quantity) - c.size.length
                                         )
                                       }
                                     >
@@ -268,9 +267,9 @@ const Cart = observer(() => {
                                     </button>
                                     <span
                                       style={{
-                                        width: '30px',
-                                        marginRight: '7px',
-                                        padding: '5px',
+                                        width: "30px",
+                                        marginRight: "7px",
+                                        padding: "5px",
                                       }}
                                     >
                                       {isNaN(c.quantity)
@@ -279,17 +278,17 @@ const Cart = observer(() => {
                                     </span>
                                     <a
                                       style={{
-                                        marginLeft: '7px',
-                                        width: '30px',
-                                        cursor: 'pointer',
-                                        fontSize: '18px',
+                                        marginLeft: "7px",
+                                        width: "30px",
+                                        cursor: "pointer",
+                                        fontSize: "18px",
                                       }}
                                       onClick={() =>
                                         product.changeProductQuantity(
                                           c.id,
                                           (c.quantity
                                             ? c.quantity
-                                            : getItem(c.id)) + c.size.length,
+                                            : getItem(c.id)) + c.size.length
                                         )
                                       }
                                     >
@@ -300,11 +299,11 @@ const Cart = observer(() => {
 
                                 <td
                                   className="price-col s-title"
-                                  style={{ color: '#c96' }}
+                                  style={{ color: "#c96" }}
                                 >
                                   {c.quantity
                                     ? c.quantity * c.price
-                                    : getPrice(c.id)}{' '}
+                                    : getPrice(c.id)}{" "}
                                   Сом
                                 </td>
                                 <td className="remove-col">
@@ -345,30 +344,31 @@ const Cart = observer(() => {
 
                           {user._user?.username
                             ? user.items?.map((item, index) => {
-                                sum = sum + item?.product.price * item?.quantity
+                                sum =
+                                  sum + item?.product.price * item?.quantity;
                               })
                             : data?.map((item, index) => {
-                                sum = sum + item?.price * item?.quantity
+                                sum = sum + item?.price * item?.quantity;
                               })}
                           <td>
-                            {' '}
-                            {new Intl.NumberFormat('fr-CA', {
-                              style: 'decimal',
-                            }).format(sum?.toFixed(2))}{' '}
+                            {" "}
+                            {new Intl.NumberFormat("fr-CA", {
+                              style: "decimal",
+                            }).format(sum?.toFixed(2))}{" "}
                             Сом
                           </td>
                         </tr>
 
                         <tr
                           className="summary-subtotal"
-                          style={{ fontWeight: '500' }}
+                          style={{ fontWeight: "500" }}
                         >
                           <td>Итого:</td>
 
                           <td>
-                            {new Intl.NumberFormat('fr-CA', {
-                              style: 'decimal',
-                            }).format(sum?.toFixed(2))}{' '}
+                            {new Intl.NumberFormat("fr-CA", {
+                              style: "decimal",
+                            }).format(sum?.toFixed(2))}{" "}
                             Сом
                           </td>
                         </tr>
@@ -376,9 +376,9 @@ const Cart = observer(() => {
                     </table>
                     <p
                       style={{
-                        margin: '10px',
-                        fontSize: '16px',
-                        color: '#000000',
+                        margin: "10px",
+                        fontSize: "16px",
+                        color: "#000000",
                       }}
                     >
                       <Link to={PURCHASES_ROUTE}>Условия Оформить заказ</Link>
@@ -397,8 +397,8 @@ const Cart = observer(() => {
                         </NavLink>
                       ) : (
                         <a
-                        disabled={user.items?.length >= 5}
-                          style={{ color: '#c96' }}
+                          disabled={user.items?.length >= 5}
+                          style={{ color: "#c96" }}
                           onClick={errorClick}
                           className="btn btn-outline-primary-2 btn-order btn-block"
                         >
@@ -408,7 +408,7 @@ const Cart = observer(() => {
                     ) : data?.length >= 5 ? (
                       <NavLink to={CHECKOUT_ROUTE}>
                         <a
-                        disabled={user.items?.length >= 5}
+                          disabled={user.items?.length >= 5}
                           href=""
                           className="btn btn-outline-primary-2 btn-order btn-block"
                         >
@@ -417,8 +417,8 @@ const Cart = observer(() => {
                       </NavLink>
                     ) : (
                       <a
-                      disabled={user.items?.length >= 5}
-                        style={{ color: '#c96' }}
+                        disabled={user.items?.length >= 5}
+                        style={{ color: "#c96" }}
                         onClick={errorClick}
                         className="btn btn-outline-primary-2 btn-order btn-block"
                       >
@@ -428,9 +428,9 @@ const Cart = observer(() => {
                   </div>
                   <p
                     style={{
-                      margin: '10px',
-                      fontSize: '16px',
-                      color: '#000000',
+                      margin: "10px",
+                      fontSize: "16px",
+                      color: "#000000",
                     }}
                   >
                     <Link to={VOZVRAT_ROUTE}>
@@ -439,9 +439,9 @@ const Cart = observer(() => {
                   </p>
                   <p
                     style={{
-                      margin: '10px',
-                      fontSize: '16px',
-                      color: '#000000',
+                      margin: "10px",
+                      fontSize: "16px",
+                      color: "#000000",
                     }}
                   >
                     <Link to={GUARANTEE_ROUTE}>
@@ -462,7 +462,7 @@ const Cart = observer(() => {
         </div>
       </main>
     </div>
-  )
-})
+  );
+});
 
-export default Cart
+export default Cart;

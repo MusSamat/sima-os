@@ -1,48 +1,46 @@
-import {authHeader, handleResponse} from "../helpers/authHeader"
+import { authHeader, handleResponse } from "../helpers/authHeader";
 
 export default class BaseApiService {
+  sendGetRequest(url) {
+    return this.sendRequest("GET", url);
+  }
 
-	sendGetRequest (url) {
-		return this.sendRequest('GET', url)
-	}
+  sendDeleteRequest(url) {
+    return this.sendRequest("DELETE", url);
+  }
 
-	sendDeleteRequest (url) {
-		return this.sendRequest('DELETE', url)
-	}
+  sendPostRequest(url, data) {
+    return this.sendRequest("POST", url, data);
+  }
 
-	sendPostRequest (url, data) {
-		return this.sendRequest('POST', url, data)
-	}
+  sendPutRequest(url, data) {
+    return this.sendRequest("PUT", url, data);
+  }
 
-	sendPutRequest (url, data) {
-		return this.sendRequest('PUT', url, data)
-	}
+  queryFilter() {
+    let q = "";
+    Array.from(arguments).forEach((ar, i, arr) => {
+      if (ar.value) {
+        if (q.length > 1) q += "&";
+        q += ar.title + "=" + ar.value;
+      }
+    });
+    return q;
+  }
 
-	queryFilter () {
-	    let q = '?'
-		Array.from(arguments).forEach((ar, i, arr) => {
-	        if (ar.value) {
-				if (q.length > 1) q += '&'
-	            q += ar.title+'='+ar.value
-	        }
-		})
-		return q
-	}
+  sendRequest(method, url, data) {
+    const isFormData = data instanceof FormData;
 
-	sendRequest (method, url, data) {
-		const isFormData = data instanceof FormData
-		
-		const requestOptions = {
-			method: method,
-			headers: { ...authHeader() },
-		}
-		if (!isFormData) {
-			requestOptions.headers['Content-Type'] = 'application/json'
-		}
-		if (data) {
-			requestOptions.body = isFormData ? data : JSON.stringify(data)
-		}
-		return fetch(url, requestOptions)
-			.then(handleResponse)
-	}
+    const requestOptions = {
+      method: method,
+      headers: { ...authHeader() },
+    };
+    if (!isFormData) {
+      requestOptions.headers["Content-Type"] = "application/json";
+    }
+    if (data) {
+      requestOptions.body = isFormData ? data : JSON.stringify(data);
+    }
+    return fetch(url, requestOptions).then(handleResponse);
+  }
 }

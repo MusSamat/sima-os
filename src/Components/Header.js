@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import {
   ABOUT_ROUTE,
   PURCHASES_ROUTE,
@@ -13,89 +13,89 @@ import {
   LOGIN_ROUTE,
   MYACOUNT_ROUTE,
   CATALOG_ROUTE,
-} from '../utils/Const'
-import '../App.css'
-import { observer } from 'mobx-react-lite'
-import { Context } from '../index'
-import { toast } from 'react-toastify'
-import mobile_menu from '../Http/mobile_menu'
-import what from '../assets/WhatsApp.png'
+} from "../utils/Const";
+import "../App.css";
+import { observer } from "mobx-react-lite";
+import { Context } from "../index";
+import { toast } from "react-toastify";
+import mobile_menu from "../Http/mobile_menu";
+import what from "../assets/WhatsApp.png";
 
 const Header = observer(() => {
-  const { user } = useContext(Context)
-  const { product } = useContext(Context)
-  const [input, setInput] = useState('')
+  const { user } = useContext(Context);
+  const { product } = useContext(Context);
+  const [input, setInput] = useState("");
 
-  let sum = 0
-  let data = JSON.parse(localStorage.getItem('order'))
-  let wish = JSON.parse(localStorage.getItem('wishlist'))
-  let authToken = JSON.parse(localStorage.getItem('value'))
+  let sum = 0;
+  let data = JSON.parse(localStorage.getItem("order"));
+  let wish = JSON.parse(localStorage.getItem("wishlist"));
+  let authToken = JSON.parse(localStorage.getItem("value"));
   const search = (e) => {
-    window.location.href = `/catalog?name=${input}`
-    product.searchFilter(input)
-    e.preventDefault()
-  }
+    window.location.href = `/catalog?name=${input}`;
+    product.searchFilter(input);
+    e.preventDefault();
+  };
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      search()
-      e.preventDefault()
+    if (e.key === "Enter") {
+      search();
+      e.preventDefault();
     }
-  }
+  };
 
   const errorClick = () => {
     // toast.warning('Минимальный заказ 5 размерных рядов')
-    alert('Минимальный заказ 5 размерных рядов')
-  }
+    alert("Минимальный заказ 5 размерных рядов");
+  };
 
   useEffect(() => {
-    mobile_menu()
+    mobile_menu();
     if (authToken) {
-      user.getUserData()
-      user?.getCartData(authToken.user.id)
-      user.getWishlistData()
+      user.getUserData();
+      user?.getCartData(authToken.user.id);
+      user.getWishlistData();
     }
-    user.getImageLogo()
+    user.getImageLogo();
     product.getSubcategory().then(() => {
       const scripts = [
-        '/assets/js/jquery.elevateZoom.min.js',
-        '/assets/js/bootstrap-input-spinner.js',
-        '/assets/js/jquery.magnific-popup.min.js',
-        '/assets/js/main.js',
-        '/assets/js/bootstrap-input-spinner.js',
-        '/assets/js/owl.carousel.min.js',
-        '/assets/js/superfish.min.js',
-        '/assets/js/jquery.waypoints.min.js',
-        '/assets/js/jquery.hoverIntent.min.js',
-        '/assets/js/bootstrap.bundle.min.js',
-        '/assets/js/jquery.min.js',
-      ]
+        "/assets/js/jquery.elevateZoom.min.js",
+        "/assets/js/bootstrap-input-spinner.js",
+        "/assets/js/jquery.magnific-popup.min.js",
+        "/assets/js/main.js",
+        "/assets/js/bootstrap-input-spinner.js",
+        "/assets/js/owl.carousel.min.js",
+        "/assets/js/superfish.min.js",
+        "/assets/js/jquery.waypoints.min.js",
+        "/assets/js/jquery.hoverIntent.min.js",
+        "/assets/js/bootstrap.bundle.min.js",
+        "/assets/js/jquery.min.js",
+      ];
       scripts.forEach((i) => {
-        const s = document.createElement('script')
-        s.src = i
-        document.body.appendChild(s)
-      })
-    })
-    const search = document.getElementById('demo')
+        const s = document.createElement("script");
+        s.src = i;
+        document.body.appendChild(s);
+      });
+    });
+    const search = document.getElementById("demo");
     const outsideClick = function (e) {
-      if (search === e.target.closest('#demo')) {
-        user.setRoute(true)
-      } else user.setRoute(false)
-    }
-    document.addEventListener('click', outsideClick)
+      if (search === e.target.closest("#demo")) {
+        user.setRoute(true);
+      } else user.setRoute(false);
+    };
+    document.addEventListener("click", outsideClick);
     return () => {
-      document.removeEventListener('click', outsideClick)
-    }
-  }, [])
+      document.removeEventListener("click", outsideClick);
+    };
+  }, []);
 
   return (
     <div className="page-wrapper">
       <header
         style={{
-          position: 'fixed',
-          marginTop: '0px',
-          marginLeft: '0px',
-          zIndex: '999',
-          boxShadow: '0px 0px 36px rgba(0, 0, 0, 0.15)',
+          position: "fixed",
+          marginTop: "0px",
+          marginLeft: "0px",
+          zIndex: "999",
+          boxShadow: "0px 0px 36px rgba(0, 0, 0, 0.15)",
         }}
         className="header mt-30"
       >
@@ -111,8 +111,8 @@ const Header = observer(() => {
                   exact
                   to={HOME_ROUTE}
                   innerRef={(node) =>
-                    node?.addEventListener('click', () =>
-                      window.scrollTo({ top: '0px' }),
+                    node?.addEventListener("click", () =>
+                      window.scrollTo({ top: "0px" })
                     )
                   }
                 >
@@ -130,14 +130,14 @@ const Header = observer(() => {
                       className="sf-with"
                       to={HOME_ROUTE}
                       innerRef={(node) =>
-                        node?.addEventListener('click', () =>
-                          window.scrollTo({ top: '0px' }),
+                        node?.addEventListener("click", () =>
+                          window.scrollTo({ top: "0px" })
                         )
                       }
                     >
-                      {' '}
+                      {" "}
                       <a
-                        style={{ fontSize: '20px', color: '#333' }}
+                        style={{ fontSize: "20px", color: "#333" }}
                         className="sf-with-ul"
                       >
                         Главная
@@ -148,18 +148,18 @@ const Header = observer(() => {
                     <Link
                       onClick={(e) => product.getActualProducts(e)}
                       className="sf-with"
-                      to={`${CATALOG_ROUTE}?products=products`}
+                      to={`${CATALOG_ROUTE}`}
                       innerRef={(node) =>
-                        node?.addEventListener('click', () =>
-                          window.scrollTo({ top: '0px' }),
+                        node?.addEventListener("click", () =>
+                          window.scrollTo({ top: "0px" })
                         )
                       }
                     >
                       <a
-                        style={{ fontSize: '20px', color: '#333' }}
+                        style={{ fontSize: "20px", color: "#333" }}
                         className="sf-with-ul"
                       >
-                        Каталог{' '}
+                        Каталог{" "}
                       </a>
                     </Link>
                   </li>
@@ -169,13 +169,13 @@ const Header = observer(() => {
                       className="sf-with"
                       to={NEWS_ROUTE}
                       innerRef={(node) =>
-                        node?.addEventListener('click', () =>
-                          window.scrollTo({ top: '0px' }),
+                        node?.addEventListener("click", () =>
+                          window.scrollTo({ top: "0px" })
                         )
                       }
                     >
                       <a
-                        style={{ fontSize: '18px', color: '#333' }}
+                        style={{ fontSize: "18px", color: "#333" }}
                         className="sf-with-ul"
                       >
                         Новости
@@ -184,7 +184,7 @@ const Header = observer(() => {
                   </li>
                   <li className="megamenu-container ">
                     <a
-                      style={{ fontSize: '20px', cursor: 'pointer' }}
+                      style={{ fontSize: "20px", cursor: "pointer" }}
                       className="sf-with-ul"
                     >
                       Сотрудничество
@@ -192,17 +192,17 @@ const Header = observer(() => {
                     <ul
                       className="menu sf-arrows "
                       style={{
-                        marginLeft: '570px',
-                        marginTop: '-10px',
-                        color: 'white',
-                        width: '40px',
+                        marginLeft: "570px",
+                        marginTop: "-10px",
+                        color: "white",
+                        width: "40px",
                       }}
                     >
                       <Link
                         to={ABOUT_ROUTE}
                         innerRef={(node) =>
-                          node?.addEventListener('click', () =>
-                            window.scrollTo({ top: '0px' }),
+                          node?.addEventListener("click", () =>
+                            window.scrollTo({ top: "0px" })
                           )
                         }
                       >
@@ -210,9 +210,9 @@ const Header = observer(() => {
                           <a
                             className="sf-with  Uslovia"
                             style={{
-                              cursor: 'pointer',
-                              fontSize: '16px',
-                              color: '#333',
+                              cursor: "pointer",
+                              fontSize: "16px",
+                              color: "#333",
                             }}
                           >
                             О нас
@@ -222,8 +222,8 @@ const Header = observer(() => {
                       <Link
                         to={CONTACT_ROUTE}
                         innerRef={(node) =>
-                          node?.addEventListener('click', () =>
-                            window.scrollTo({ top: '0px' }),
+                          node?.addEventListener("click", () =>
+                            window.scrollTo({ top: "0px" })
                           )
                         }
                       >
@@ -231,9 +231,9 @@ const Header = observer(() => {
                           <a
                             className="sf-with  Uslovia"
                             style={{
-                              cursor: 'pointer',
-                              fontSize: '16px',
-                              color: '#333',
+                              cursor: "pointer",
+                              fontSize: "16px",
+                              color: "#333",
                             }}
                           >
                             Контакты
@@ -243,8 +243,8 @@ const Header = observer(() => {
                       <Link
                         to={PURCHASES_ROUTE}
                         innerRef={(node) =>
-                          node?.addEventListener('click', () =>
-                            window.scrollTo({ top: '0px' }),
+                          node?.addEventListener("click", () =>
+                            window.scrollTo({ top: "0px" })
                           )
                         }
                       >
@@ -252,9 +252,9 @@ const Header = observer(() => {
                           <a
                             className="sf-with Uslovia"
                             style={{
-                              cursor: 'pointer',
-                              fontSize: '16px',
-                              color: '#333',
+                              cursor: "pointer",
+                              fontSize: "16px",
+                              color: "#333",
                             }}
                           >
                             Условия покупки
@@ -264,8 +264,8 @@ const Header = observer(() => {
                       <Link
                         to={DELIVERY_ROUTE}
                         innerRef={(node) =>
-                          node?.addEventListener('click', () =>
-                            window.scrollTo({ top: '0px' }),
+                          node?.addEventListener("click", () =>
+                            window.scrollTo({ top: "0px" })
                           )
                         }
                       >
@@ -273,9 +273,9 @@ const Header = observer(() => {
                           <a
                             className="sf-with  Uslovia"
                             style={{
-                              cursor: 'pointer',
-                              fontSize: '16px',
-                              color: '#333',
+                              cursor: "pointer",
+                              fontSize: "16px",
+                              color: "#333",
                             }}
                           >
                             Условия доставки
@@ -293,7 +293,7 @@ const Header = observer(() => {
             <div className="header-right">
               <div
                 id="demo"
-                className={user.isRoute ? 'search-box showed' : 'search-box'}
+                className={user.isRoute ? "search-box showed" : "search-box"}
               >
                 <input
                   className=""
@@ -322,26 +322,26 @@ const Header = observer(() => {
                 <NavLink
                   to={MYACOUNT_ROUTE}
                   innerRef={(node) =>
-                    node?.addEventListener('click', () =>
-                      window.scrollTo({ top: '0px' }),
+                    node?.addEventListener("click", () =>
+                      window.scrollTo({ top: "0px" })
                     )
                   }
                 >
-                  <a style={{ fontSize: '30px' }} data-toggle="modal">
-                    <i style={{ color: '#666666' }} className="icon-user"></i>
+                  <a style={{ fontSize: "30px" }} data-toggle="modal">
+                    <i style={{ color: "#666666" }} className="icon-user"></i>
                   </a>
                 </NavLink>
               ) : (
                 <NavLink
                   to={LOGIN_ROUTE}
                   innerRef={(node) =>
-                    node?.addEventListener('click', () =>
-                      window.scrollTo({ top: '0px' }),
+                    node?.addEventListener("click", () =>
+                      window.scrollTo({ top: "0px" })
                     )
                   }
                 >
-                  <a style={{ fontSize: '30px' }} data-toggle="modal">
-                    <i style={{ color: '#666666' }} className="icon-user"></i>
+                  <a style={{ fontSize: "30px" }} data-toggle="modal">
+                    <i style={{ color: "#666666" }} className="icon-user"></i>
                   </a>
                 </NavLink>
               )}
@@ -351,59 +351,59 @@ const Header = observer(() => {
                 className="wishlist-link"
                 to={WISHLIST_ROUTE}
                 innerRef={(node) =>
-                  node?.addEventListener('click', () =>
-                    window.scrollTo({ top: '0px' }),
+                  node?.addEventListener("click", () =>
+                    window.scrollTo({ top: "0px" })
                   )
                 }
               >
-                <i style={{ color: '#666666' }} className="icon-heart-o"></i>
+                <i style={{ color: "#666666" }} className="icon-heart-o"></i>
                 <span className="wishlist-count flex justify-content-center align-center">
                   {user._user?.username
-                    ? user.list?.length || '0'
+                    ? user.list?.length || "0"
                     : wish
                     ? wish?.length
-                    : '0'}
+                    : "0"}
                 </span>
               </NavLink>
               <div className="dropdown cart-dropdown mr-10">
                 <NavLink
                   to={CART_ROUTE}
                   innerRef={(node) =>
-                    node?.addEventListener('click', () =>
-                      window.scrollTo({ top: '0px' }),
+                    node?.addEventListener("click", () =>
+                      window.scrollTo({ top: "0px" })
                     )
                   }
                 >
                   <a className="dropdown-toggle ">
                     <i
-                      style={{ color: '#666666' }}
+                      style={{ color: "#666666" }}
                       className="icon-shopping-cart"
                     ></i>
                     <span className="cart-count">
                       {user._user?.username
-                        ? user.items?.length || '0'
+                        ? user.items?.length || "0"
                         : data
                         ? data?.length
-                        : '0'}
+                        : "0"}
                     </span>
                     {user._user?.username
                       ? user.items?.map((item, index) => {
-                          sum = sum + item.product?.price * item.quantity
+                          sum = sum + item.product?.price * item.quantity;
                         })
                       : data?.map((item, index) => {
-                          sum = sum + item.price * item.quantity
+                          sum = sum + item.price * item.quantity;
                         })}
                     <span className="cart-txt">
-                      {new Intl.NumberFormat('fr-CA', {
-                        style: 'decimal',
-                      }).format(sum.toFixed(2))}{' '}
+                      {new Intl.NumberFormat("fr-CA", {
+                        style: "decimal",
+                      }).format(sum.toFixed(2))}{" "}
                       Сом
                     </span>
                   </a>
                 </NavLink>
 
                 <div className="dropdown-menu dropdown-menu-right">
-                  <div style={{ overflowY: 'auto', maxHeight: '230px' }}>
+                  <div style={{ overflowY: "auto", maxHeight: "230px" }}>
                     <div className="dropdown-cart-products">
                       {user._user?.username
                         ? user.items?.map((c, index) => (
@@ -415,8 +415,8 @@ const Header = observer(() => {
 
                                 <span
                                   style={{
-                                    color: '#666666',
-                                    fontWeight: 'normal',
+                                    color: "#666666",
+                                    fontWeight: "normal",
                                   }}
                                   className="cart-product-info"
                                 >
@@ -427,7 +427,7 @@ const Header = observer(() => {
                               <figure className="product-image-container">
                                 <a className="product-image">
                                   <img
-                                    src={`${process.env.REACT_APP_BASE_URL}${c.product?.images[0]?.images[0]}`}
+                                    src={`${process.env.REACT_APP_BASE_URL}${c.product?.image.image}`}
                                     alt="product"
                                   />
                                 </a>
@@ -441,7 +441,7 @@ const Header = observer(() => {
                           ))
                         : product.products
                             ?.filter((i) =>
-                              data?.map((d) => d.id).includes(i.id),
+                              data?.map((d) => d.id).includes(i.id)
                             )
                             .map((c, index) => (
                               <div key={index} className="product">
@@ -452,8 +452,8 @@ const Header = observer(() => {
 
                                   <span
                                     style={{
-                                      color: '#666666',
-                                      fontWeight: 'normal',
+                                      color: "#666666",
+                                      fontWeight: "normal",
                                     }}
                                     className="cart-product-info"
                                   >
@@ -465,7 +465,7 @@ const Header = observer(() => {
                                 <figure className="product-image-container">
                                   <a className="product-image">
                                     <img
-                                      src={`${process.env.REACT_APP_BASE_URL}${c.images[0]?.images[0]}`}
+                                      src={`${process.env.REACT_APP_BASE_URL}${c.image.image}`}
                                       alt="product"
                                     />
                                   </a>
@@ -481,29 +481,31 @@ const Header = observer(() => {
                   </div>
 
                   <div className="dropdown-cart-total">
-                    <span style={{ color: '#666666', fontWeight: 'normal' }}>
+                    <span style={{ color: "#666666", fontWeight: "normal" }}>
                       ИТОГО:
                     </span>
 
                     <span
-                      style={{ color: '#666666', fontWeight: 'normal' }}
+                      style={{ color: "#666666", fontWeight: "normal" }}
                       className="cart-total-price"
                     >
-                      {new Intl.NumberFormat('fr-CA', {
-                        style: 'decimal',
-                      }).format(sum?.toFixed(2))}{' '}
+                      {new Intl.NumberFormat("fr-CA", {
+                        style: "decimal",
+                      }).format(sum?.toFixed(2))}{" "}
                       Сом
                     </span>
                   </div>
                   <p
-                      style={{
-                        margin: '10px',
-                        fontSize: '14px',
-                        color: '#000000',
-                      }}
-                    >
-                      <NavLink to={PURCHASES_ROUTE}>Условия Оформить заказ</NavLink>
-                    </p>
+                    style={{
+                      margin: "10px",
+                      fontSize: "14px",
+                      color: "#000000",
+                    }}
+                  >
+                    <NavLink to={PURCHASES_ROUTE}>
+                      Условия Оформить заказ
+                    </NavLink>
+                  </p>
                   <div className="dropdown-cart-action">
                     <NavLink to={CART_ROUTE}>
                       <a href="" className="btn btn-outline-primary-2">
@@ -512,7 +514,7 @@ const Header = observer(() => {
                       <br />
                     </NavLink>
                   </div>
-                  
+
                   {user._user?.username ? (
                     user.items?.length >= 5 ? (
                       <NavLink to={CHECKOUT_ROUTE}>
@@ -520,7 +522,7 @@ const Header = observer(() => {
                           <a href="" className="btn btn-outline-primary-2">
                             Оформить заказ
                             <i
-                              style={{ marginRight: '-1px' }}
+                              style={{ marginRight: "-1px" }}
                               className="icon-long-arrow-right"
                             ></i>
                           </a>
@@ -533,12 +535,12 @@ const Header = observer(() => {
                       >
                         <a
                           href
-                          style={{ color: '#c96' }}
+                          style={{ color: "#c96" }}
                           className="btn btn-outline-primary-2"
                         >
                           Оформить заказ
                           <i
-                            style={{ marginRight: '-1px' }}
+                            style={{ marginRight: "-1px" }}
                             className="icon-long-arrow-right"
                           ></i>
                         </a>
@@ -550,7 +552,7 @@ const Header = observer(() => {
                         <a href="" className="btn btn-outline-primary-2">
                           Оформить заказ
                           <i
-                            style={{ marginRight: '-1px' }}
+                            style={{ marginRight: "-1px" }}
                             className="icon-long-arrow-right"
                           ></i>
                         </a>
@@ -560,12 +562,12 @@ const Header = observer(() => {
                     <div onClick={errorClick} className="dropdown-cart-action">
                       <a
                         href
-                        style={{ color: '#c96' }}
+                        style={{ color: "#c96" }}
                         className="btn btn-outline-primary-2"
                       >
                         Оформить заказ
                         <i
-                          style={{ marginRight: '-1px' }}
+                          style={{ marginRight: "-1px" }}
                           className="icon-long-arrow-right"
                         ></i>
                       </a>
@@ -583,7 +585,7 @@ const Header = observer(() => {
       ></a>
       <Link
         className="whatsapp"
-        to={{ pathname: 'https://wa.me/996709999915' }}
+        to={{ pathname: "https://wa.me/996709999915" }}
         target="_blank"
       >
         <figure>
@@ -591,7 +593,7 @@ const Header = observer(() => {
         </figure>
       </Link>
     </div>
-  )
-})
+  );
+});
 
-export default Header
+export default Header;
