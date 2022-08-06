@@ -3,7 +3,6 @@ class ProductService extends BaseApiService {
   getActualProducts(sort) {
     const query = this.queryFilter({ title: sort, value: true });
     const url = `${process.env.REACT_APP_BASE_URL}/api/products${sort}`;
-    console.log(url);
     return this.sendGetRequest(url);
   }
 

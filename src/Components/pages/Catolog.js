@@ -346,6 +346,7 @@ const Catolog = observer((props) => {
         document.body.appendChild(s);
       });
     });
+    product.getSortedData();
     // if (user.token?.token) {
     //   user.getWishlistData();
     //   user.getUserData();

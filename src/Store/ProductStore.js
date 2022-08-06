@@ -73,11 +73,9 @@ export default class ProductStore {
   async getActual(prod) {
     this.setLoader(true);
     const wish = JSON.parse(localStorage.getItem("wishlist"));
-    console.log(prod);
     productService
       .getActualProducts(prod)
       .then((res) => {
-        console.log(res);
         this.products = res.results.map((i) => {
           const d = wish?.find((j) => j.id === i.id);
           if (d) {
@@ -228,7 +226,6 @@ export default class ProductStore {
     await productService
       .getNovelty()
       .then((res) => {
-        console.log(res);
         this.novelty = res.map((i) => {
           const d = wish?.find((j) => j.id === i.id);
           if (d) {
@@ -372,7 +369,7 @@ export default class ProductStore {
     if (!newValue) {
       return [];
     } else {
-      let arr = this.allProducts?.filter(
+      let arr = this.products?.filter(
         (a) =>
           parseInt(a?.price) >= newValue[0] && parseInt(a?.price) <= newValue[1]
       );
