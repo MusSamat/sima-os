@@ -75,7 +75,9 @@ const Catolog = observer((props) => {
   );
 
   let route = props.location.popular;
-  let pathname = window.location.search;
+
+  const pathname = new URLSearchParams(props.location.search);
+  const a = pathname.get("name");
 
   const toggleReadMore = () => {
     user.setRead(!user.isRead);
@@ -127,6 +129,7 @@ const Catolog = observer((props) => {
     localStorage.removeItem("viewProduct");
     setBreadcrumb(bread);
     e.preventDefault();
+    product.getActualProducts();
   };
 
   const sortProducts = (e, des) => {
@@ -323,29 +326,11 @@ const Catolog = observer((props) => {
     //   localStorage.setItem("category", JSON.stringify("Актуальные"));
     // }
     // user.getUserData();
+    console.log(a);
 
     window.scrollTo(0, 0);
     mobile_menu();
-    product.getActual(pathname).then(() => {
-      const scripts = [
-        "/assets/js/jquery.elevateZoom.min.js",
-        "/assets/js/bootstrap-input-spinner.js",
-        "/assets/js/jquery.magnific-popup.min.js",
-        "/assets/js/main.js",
-        "/assets/js/bootstrap-input-spinner.js",
-        "/assets/js/owl.carousel.min.js",
-        "/assets/js/superfish.min.js",
-        "/assets/js/jquery.waypoints.min.js",
-        "/assets/js/jquery.hoverIntent.min.js",
-        "/assets/js/bootstrap.bundle.min.js",
-        "/assets/js/jquery.min.js",
-      ];
-      scripts.forEach((i) => {
-        const s = document.createElement("script");
-        s.src = i;
-        document.body.appendChild(s);
-      });
-    });
+    product.getActual(pathname ? `/?name=${a}` : "");
     product.getSortedData();
     // if (user.token?.token) {
     //   user.getWishlistData();
@@ -394,7 +379,9 @@ const Catolog = observer((props) => {
     //     product.getActualProducts();
     //   }
     // }
-  }, [pathname]);
+  }, [a]);
+
+  console.log(pathname);
   let percent;
   product.discount.map((i) => i.percent === percent);
   return (
@@ -669,6 +656,7 @@ const Catolog = observer((props) => {
                     id={prodactId}
                   />
                 )}
+                {console.log(product.products)}
                 <Pagination
                   // postsPerPage={postsPerPage}
                   // totalPosts={product.pagination}

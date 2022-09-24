@@ -57,12 +57,26 @@ function Pagination({ page }) {
         previousLabel="<<"
         initialPage={page.num_pages < 2 ? 0 : (2 || 1) - 1}
         renderOnZeroPageCount={null}
-        //   containerClassName={"flex"}
-        //   pageClassName={" px-3 py-0 flex items-center rounded-sm"}
-        //   pageLinkClassName={"text-black-300"}
-        //   previousClassName={"text-blue-400 p-2 flex items-center rounded-sm"}
-        //   nextClassName={"text-blue-400 p-2 flex items-center rounded-sm"}
-        //   activeClassName={"bg-blue-600 text-white"}
+        containerClassName={{ display: "flex" }}
+        pageClassName={{
+          display: "flex",
+          alignItems: "center",
+          bordeRadius: "0.125rem",
+        }}
+        pageLinkClassName={{ color: "rgb(0 0 0)" }}
+        previousClassName={{
+          color: "rgb(96 165 250)",
+          display: "flex",
+          alignItems: "center",
+          bordeRadius: "0.125rem",
+        }}
+        nextClassName={{
+          color: "rgb(96 165 250)",
+          display: "flex",
+          alignItems: "center",
+          bordeRadius: "0.125rem",
+        }}
+        activeClassName={{ color: "rgb(37 99 235)", color: "rgb(255 255 255)" }}
       />
     </div>
   );
