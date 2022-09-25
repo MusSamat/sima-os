@@ -45,18 +45,18 @@ const Header = observer(() => {
   };
 
   const errorClick = () => {
-    // toast.warning('Минимальный заказ 5 размерных рядов')
+    toast.warning("Минимальный заказ 5 размерных рядов");
     alert("Минимальный заказ 5 размерных рядов");
   };
 
   useEffect(() => {
     mobile_menu();
-    // if (authToken) {
-    //   user.getUserData();
-    //   user?.getCartData(authToken.user.id);
-    //   user.getWishlistData();
-    // }
-    // user.getImageLogo();
+    if (authToken) {
+      user.getUserData();
+      user?.getCartData(authToken.user.id);
+      user.getWishlistData();
+    }
+    user.getImageLogo();
     product.getSubcategory();
     const search = document.getElementById("demo");
 

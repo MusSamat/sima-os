@@ -22,7 +22,6 @@ const ProdCategory = observer(() => {
     const openModal = (id) => {
         setLgShow(true)
         user.getOrderDataId(id)
-        console.log(id)
      }
 
      
@@ -197,7 +196,6 @@ const ProdCategory = observer(() => {
                                             <div className="widget-body">
                                                 <div className="filter-items filter-items-count">
                                                     <div className="filter-item">
-                                                        {console.log(product.subcategory)}
 
                                                         <nav className="mobile-nav">
                                                             <ul className="mobile-menu">

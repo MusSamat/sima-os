@@ -127,8 +127,6 @@ const Main = observer(() => {
   const openModal = (id) => {
     setProdactId(id);
     setModalActive(true);
-    console.log(id);
-    console.log(modalActive);
   };
   let wish = JSON.parse(localStorage.getItem("wishlist"));
 
@@ -577,13 +575,11 @@ const Main = observer(() => {
         <div className="container ">
           <div className="products mt-10 mb-4 ">
             <div className="row justify-content-center">
-              {console.log(product.popular)}
               {product.popular.map((discout, index) => (
                 <div key={index} className="col-6 col-md-4 col-lg-3">
                   <div className="product product-7 text-center  black">
                     <figure className="product-media ">
                       <Link to={{ pathname: "/product/" + discout.id }}>
-                        {console.log(discout)}
                         <a href="">
                           <img
                             src={`${process.env.REACT_APP_BASE_URL}${discout.image.image}`}

@@ -13,7 +13,6 @@ const quickView = observer(({id, active, setActive}) => {
     const [imgTitle, setImgTitle] = useState('')
     const [count, setCount] = useState(product.product.size.length)
 
-    console.log(id)
     const addCart = (e) => {
         const data = JSON.stringify({
             product: [String(id)],

@@ -1,8 +1,12 @@
 import BaseApiService from "../services/baseApi.service";
 class ProductService extends BaseApiService {
   getActualProducts(sort) {
-    const query = this.queryFilter({ title: sort, value: true });
     const url = `${process.env.REACT_APP_BASE_URL}/api/products${sort}`;
+    return this.sendGetRequest(url);
+  }
+
+  getAllFilterProducts(sort) {
+    const url = `${process.env.REACT_APP_BASE_URL}/api/products/${sort}`;
     return this.sendGetRequest(url);
   }
 

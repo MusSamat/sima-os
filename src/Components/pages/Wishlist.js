@@ -21,7 +21,6 @@ const Wishlist = observer(() => {
       .deleteUserWish(data)
       .then((res) => {
         user.getWishlistData();
-        console.log(res);
       })
       .catch((e) => {
         console.error(e);

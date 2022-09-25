@@ -9,18 +9,17 @@ const Contact = observer(() => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // user.getImageContact()
+    user.getImageContact();
   }, []);
   return (
     <main className="main mt-4">
-      {/*<ol class="breadcrumb mb-2">*/}
-      {/*    <li class="breadcrumb-item"><NavLink to={HOME_ROUTE}><a className="breadcrumb-item"*/}
-      {/*                                                            href="">Главная</a></NavLink></li>*/}
-      {/*    <li class="breadcrumb-item"><a href="">Контакты</a></li>*/}
-      {/*</ol>*/}
-      {/* {user.contact?.map((img, index) =>
-                    <div key={index} className="intro-slide" style={{backgroundImage: `url(${img.image})`}}>
-                    </div>)} */}
+      {user.contact?.map((img, index) => (
+        <div
+          key={index}
+          className="intro-slide"
+          style={{ backgroundImage: `url(${img.image})` }}
+        ></div>
+      ))}
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-4">

@@ -92,14 +92,14 @@ export default class ProductStore {
       });
   }
 
-  async getActualProducts(e) {
+  async getActualProducts(sort) {
     localStorage.setItem("category", JSON.stringify("Актуальные"));
     localStorage.removeItem("viewProduct");
     const wish = JSON.parse(localStorage.getItem("wishlist"));
     this.setLoader(true);
     this.token = JSON.parse(localStorage.getItem("value"));
     await productService
-      .getProducts()
+      .getAllFilterProducts(sort)
       .then((res) => {
         this.products = res.results.map((i) => {
           const d = wish.find((j) => j.id === i.id);
@@ -158,13 +158,20 @@ export default class ProductStore {
     e.preventDefault();
   }
 
-  async getPopularProducts() {
+  async getPopularProducts(sort) {
     this.setLoader(true);
+    const wish = JSON.parse(localStorage.getItem("wishlist"));
     await productService
-      .getPopular()
+      .getAllFilterProducts(sort)
       .then((res) => {
-        this.products = res;
-        this.allProducts = this.products;
+        this.pagination = res.count;
+        this.products = res.results.map((i) => {
+          const d = wish?.find((j) => j.id === i.id);
+          if (d) {
+            i.is_favorite = d.is_favorite;
+          }
+          return i;
+        });
         this.setLoader(false);
       })
       .catch((e) => {

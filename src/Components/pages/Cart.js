@@ -32,7 +32,6 @@ const Cart = observer(() => {
     userService
       .updateCart(data)
       .then((response) => {
-        console.log(response);
         user.getCartData();
       })
       .catch((error) => {
@@ -49,7 +48,6 @@ const Cart = observer(() => {
       .deleteUserCart(data)
       .then((res) => {
         user.getCartData(token.user.id);
-        console.log(res);
       })
       .catch((e) => {
         console.error(e);
@@ -66,7 +64,6 @@ const Cart = observer(() => {
     product.getActualProducts();
     data = data.filter((item) => item.id !== id);
     await localStorage.setItem("order", JSON.stringify(data));
-    console.log(product.productOrder);
 
     if (data.length === 0) {
       localStorage.removeItem("order");
@@ -82,9 +79,6 @@ const Cart = observer(() => {
     const a = data?.find((i) => i.id === id);
     return a ? a.quantity * a.price : 0;
   };
-
-  // console.log(user._user ? 'a' :"b")
-  console.log(data);
 
   useEffect(() => {
     window.scrollTo(0, 0);

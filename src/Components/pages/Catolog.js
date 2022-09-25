@@ -47,7 +47,7 @@ const Catolog = observer((props) => {
   const [count, setCount] = useState(5);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(56);
+  const [postsPerPage, setPostsPerPage] = useState(20);
 
   const [Active, setActive] = useState("");
   const [name, setName] = useState("");
@@ -78,6 +78,9 @@ const Catolog = observer((props) => {
 
   const pathname = new URLSearchParams(props.location.search);
   const a = pathname.get("name");
+  const activeFilterButton = props.location.search;
+
+  console.log(activeFilterButton);
 
   const toggleReadMore = () => {
     user.setRead(!user.isRead);
@@ -114,7 +117,7 @@ const Catolog = observer((props) => {
   const history = useHistory();
 
   const allProduct = (e, produs, bread, active) => {
-    console.log(produs);
+    // console.log(produs);
     if (produs !== "") {
       history.push({
         search: `${produs}=${active}`,
@@ -129,7 +132,11 @@ const Catolog = observer((props) => {
     localStorage.removeItem("viewProduct");
     setBreadcrumb(bread);
     e.preventDefault();
-    product.getActualProducts();
+    if (produs !== "") {
+      product.getPopularProducts(activeFilterButton);
+    } else {
+      product.getActualProducts();
+    }
   };
 
   const sortProducts = (e, des) => {
@@ -138,7 +145,6 @@ const Catolog = observer((props) => {
     let sesonId = JSON.parse(localStorage.getItem("sesonId"));
     let prodId = JSON.parse(localStorage.getItem("prodId"));
     e.preventDefault();
-    // console.log(!view);
     history.push({
       search: `&sort=${des}`,
     });
@@ -188,7 +194,6 @@ const Catolog = observer((props) => {
   let tokenCatalog = JSON.parse(localStorage.getItem("value"));
 
   const addCardLocal = (proId, price, color, count, title) => {
-    console.log(proId, price, color, title, count);
     user.getImageLogo();
     let productId = product.productOrder?.map((i) => i.product);
     if (data === null) {
@@ -326,11 +331,14 @@ const Catolog = observer((props) => {
     //   localStorage.setItem("category", JSON.stringify("Актуальные"));
     // }
     // user.getUserData();
-    console.log(a);
 
     window.scrollTo(0, 0);
     mobile_menu();
-    product.getActual(pathname ? `/?name=${a}` : "");
+    if (a) {
+      product.getActual(pathname ? `/?title__icontains=${a}` : "");
+    } else {
+      product.getActualProducts(activeFilterButton);
+    }
     product.getSortedData();
     // if (user.token?.token) {
     //   user.getWishlistData();
@@ -379,9 +387,7 @@ const Catolog = observer((props) => {
     //     product.getActualProducts();
     //   }
     // }
-  }, [a]);
-
-  console.log(pathname);
+  }, [a, activeFilterButton]);
   let percent;
   product.discount.map((i) => i.percent === percent);
   return (
@@ -401,7 +407,7 @@ const Catolog = observer((props) => {
                       <button
                         onClick={(e) => sortProducts(e, "asc")}
                         className={
-                          pathname === "?&sort=asc"
+                          activeFilterButton === "?&sort=asc"
                             ? "rating actived"
                             : "rating"
                         }
@@ -411,7 +417,7 @@ const Catolog = observer((props) => {
                       <button
                         onClick={(e) => sortProducts(e, "desc")}
                         className={
-                          pathname === "?&sort=desc"
+                          activeFilterButton === "?&sort=desc"
                             ? "rating actived"
                             : "rating"
                         }
@@ -421,7 +427,7 @@ const Catolog = observer((props) => {
                       <button
                         onClick={(e) => sortProducts(e, "dis_asc")}
                         className={
-                          pathname === "?&sort=dis_asc"
+                          activeFilterButton === "?&sort=dis_asc"
                             ? "rating actived"
                             : "rating"
                         }
@@ -431,7 +437,7 @@ const Catolog = observer((props) => {
                       <button
                         onClick={(e) => sortProducts(e, "dis_desc")}
                         className={
-                          pathname === "?&sort=dis_desc"
+                          activeFilterButton === "?&sort=dis_desc"
                             ? "rating actived"
                             : "rating"
                         }
@@ -441,7 +447,7 @@ const Catolog = observer((props) => {
                       <button
                         onClick={(e) => sortProducts(e, "rat_desc")}
                         className={
-                          pathname === "?&sort=rat_desc"
+                          activeFilterButton === "?&sort=rat_desc"
                             ? "rating actived"
                             : "rating"
                         }
@@ -656,11 +662,10 @@ const Catolog = observer((props) => {
                     id={prodactId}
                   />
                 )}
-                {console.log(product.products)}
                 <Pagination
-                  // postsPerPage={postsPerPage}
-                  // totalPosts={product.pagination}
-                  // paginate={paginate}
+                  postsPerPage={postsPerPage}
+                  totalPosts={product.pagination}
+                  paginate={paginate}
                   page={product.products}
                 />
               </div>
@@ -729,7 +734,7 @@ const Catolog = observer((props) => {
                       <button
                         onClick={(e) => allProduct(e, "", "Актуальные")}
                         className={
-                          pathname === ""
+                          activeFilterButton === ""
                             ? "novelti actived"
                             : "novelti" && Active === "all"
                             ? "novelti actived"
@@ -745,7 +750,7 @@ const Catolog = observer((props) => {
                           allProduct(e, "novelty", "Новинки", true)
                         }
                         className={
-                          pathname === "?novelty=true"
+                          activeFilterButton === "?novelty=true"
                             ? "novelti actived"
                             : "novelti" && Active === "novelty"
                             ? "novelti actived"
@@ -763,7 +768,7 @@ const Catolog = observer((props) => {
                           allProduct(e, "popular", "Популярное", true)
                         }
                         className={
-                          pathname === "?popular=true"
+                          activeFilterButton === "?popular=true"
                             ? "novelti actived"
                             : "novelti" && Active === "popular"
                             ? "novelti actived"
@@ -780,7 +785,7 @@ const Catolog = observer((props) => {
                           allProduct(e, "discount", "Скидки", true)
                         }
                         className={
-                          pathname === "?discount=true"
+                          activeFilterButton === "?discount=true"
                             ? "novelti actived"
                             : "novelti" && Active === "discount"
                             ? "novelti actived"

@@ -41,7 +41,6 @@ const Myacount = observer(() => {
     const [isErrorPas, setIsErrorPas] = useState(false);
 
     const valueToken = JSON.parse(localStorage.getItem('value'))
-    console.log(valueToken.user.id)
 
 
     const logoOut = () => {
@@ -189,7 +188,6 @@ const Myacount = observer(() => {
 
                                         <div className="tab-pane fade" id="tab-orders" role="tabpanel"
                                              aria-labelledby="tab-orders-link">
-                                                 {console.log()}
 
                                             {user.order ?
                                                 <table className="table table-cart table-mobile">
