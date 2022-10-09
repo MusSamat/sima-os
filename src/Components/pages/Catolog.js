@@ -109,13 +109,11 @@ const Catolog = observer((props) => {
 
   const rangeSelector = (event, newValue) => {
     setValue(newValue);
-    // product.priceFilter(newValue);
   };
 
   const history = useHistory();
 
   const allProduct = (e, produs, bread, active) => {
-    // console.log(produs);
     if (produs !== "") {
       history.push({
         search: `${produs}=${active}`,
