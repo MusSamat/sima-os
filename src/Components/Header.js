@@ -56,7 +56,26 @@ const Header = observer(() => {
       user?.getCartData(authToken.user.id);
       user.getWishlistData();
     }
-    user.getImageLogo();
+    user.getImageLogo().then(() => {
+      const scripts = [
+        "/assets/js/jquery.elevateZoom.min.js",
+        "/assets/js/bootstrap-input-spinner.js",
+        "/assets/js/jquery.magnific-popup.min.js",
+        "/assets/js/main.js",
+        "/assets/js/bootstrap-input-spinner.js",
+        "/assets/js/owl.carousel.min.js",
+        "/assets/js/superfish.min.js",
+        "/assets/js/jquery.waypoints.min.js",
+        "/assets/js/jquery.hoverIntent.min.js",
+        "/assets/js/bootstrap.bundle.min.js",
+        "/assets/js/jquery.min.js",
+      ];
+      scripts.forEach((i) => {
+        const s = document.createElement("script");
+        s.src = i;
+        document.body.appendChild(s);
+      });
+    });
     product.getSubcategory();
     const search = document.getElementById("demo");
 

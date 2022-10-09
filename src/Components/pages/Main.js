@@ -171,6 +171,7 @@ const Main = observer(() => {
     user.getImage().then(() => {
       product.discountTodo1();
     });
+    product.blogFetchTodo();
     user.getImageNovelty();
     user.getImagePopular();
     product.getNoveltyProducts1();

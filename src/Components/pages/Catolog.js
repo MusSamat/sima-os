@@ -80,8 +80,6 @@ const Catolog = observer((props) => {
   const a = pathname.get("name");
   const activeFilterButton = props.location.search;
 
-  console.log(activeFilterButton);
-
   const toggleReadMore = () => {
     user.setRead(!user.isRead);
     user.setActive(false);
@@ -321,72 +319,52 @@ const Catolog = observer((props) => {
   };
 
   useEffect(() => {
-    // if (produs === "discount") {
-    //   localStorage.setItem("category", JSON.stringify("Скидки"));
-    // } else if (produs === "novelty") {
-    //   localStorage.setItem("category", JSON.stringify("Новинки"));
-    // } else if (produs === "popular") {
-    //   localStorage.setItem("category", JSON.stringify("Популярное"));
-    // } else if (produs === "products") {
-    //   localStorage.setItem("category", JSON.stringify("Актуальные"));
-    // }
-    // user.getUserData();
-
     window.scrollTo(0, 0);
     mobile_menu();
     if (a) {
-      product.getActual(pathname ? `/?title__icontains=${a}` : "");
+      product.getActual(pathname ? `/?title__icontains=${a}` : "").then(() => {
+        const scripts = [
+          "/assets/js/jquery.elevateZoom.min.js",
+          "/assets/js/bootstrap-input-spinner.js",
+          "/assets/js/jquery.magnific-popup.min.js",
+          "/assets/js/main.js",
+          "/assets/js/bootstrap-input-spinner.js",
+          "/assets/js/owl.carousel.min.js",
+          "/assets/js/superfish.min.js",
+          "/assets/js/jquery.waypoints.min.js",
+          "/assets/js/jquery.hoverIntent.min.js",
+          "/assets/js/bootstrap.bundle.min.js",
+          "/assets/js/jquery.min.js",
+        ];
+        scripts.forEach((i) => {
+          const s = document.createElement("script");
+          s.src = i;
+          document.body.appendChild(s);
+        });
+      });
     } else {
-      product.getActualProducts(activeFilterButton);
+      product.getActualProducts(activeFilterButton).then(() => {
+        const scripts = [
+          "/assets/js/jquery.elevateZoom.min.js",
+          "/assets/js/bootstrap-input-spinner.js",
+          "/assets/js/jquery.magnific-popup.min.js",
+          "/assets/js/main.js",
+          "/assets/js/bootstrap-input-spinner.js",
+          "/assets/js/owl.carousel.min.js",
+          "/assets/js/superfish.min.js",
+          "/assets/js/jquery.waypoints.min.js",
+          "/assets/js/jquery.hoverIntent.min.js",
+          "/assets/js/bootstrap.bundle.min.js",
+          "/assets/js/jquery.min.js",
+        ];
+        scripts.forEach((i) => {
+          const s = document.createElement("script");
+          s.src = i;
+          document.body.appendChild(s);
+        });
+      });
     }
     product.getSortedData();
-    // if (user.token?.token) {
-    //   user.getWishlistData();
-    //   user.getUserData();
-    // }
-    // product.fetchTodo();
-    // if (names) {
-    //   if (parseInt(names)) {
-    //     product.searchFilterArticul(names);
-    //   } else {
-    //     product.changeFilter(names);
-    //   }
-    // } else {
-    //   if (produs === "discount") {
-    //     product.getActual(produs);
-    //   } else if (produs) {
-    //     product.getActual(produs).then(() => {
-    //       const scripts = [
-    //         "/assets/js/jquery.elevateZoom.min.js",
-    //         "/assets/js/bootstrap-input-spinner.js",
-    //         "/assets/js/jquery.magnific-popup.min.js",
-    //         "/assets/js/main.js",
-    //         "/assets/js/bootstrap-input-spinner.js",
-    //         "/assets/js/owl.carousel.min.js",
-    //         "/assets/js/superfish.min.js",
-    //         "/assets/js/jquery.waypoints.min.js",
-    //         "/assets/js/jquery.hoverIntent.min.js",
-    //         "/assets/js/bootstrap.bundle.min.js",
-    //         "/assets/js/jquery.min.js",
-    //       ];
-    //       scripts.forEach((i) => {
-    //         const s = document.createElement("script");
-    //         s.src = i;
-    //         document.body.appendChild(s);
-    //       });
-    //     });
-    //   } else if (produs === "popular") {
-    //     product.getPopularProducts();
-    //     // setBreadcrumb("Популярное")
-    //   } else if (produs === "novelty") {
-    //     product.getNoveltyProducts();
-    //     setBreadcrumb("Новинки");
-    //   } else if (route === "all") {
-    //     product.getActualProducts();
-    //   } else {
-    //     product.getActualProducts();
-    //   }
-    // }
   }, [a, activeFilterButton]);
   let percent;
   product.discount.map((i) => i.percent === percent);
