@@ -1,6 +1,6 @@
 import BaseApiService from "../services/baseApi.service";
 class ProductService extends BaseApiService {
-  getActualProducts(sort) {
+  getActualProduct(sort) {
     const url = `${process.env.REACT_APP_BASE_URL}/api/products${sort}`;
     return this.sendGetRequest(url);
   }
