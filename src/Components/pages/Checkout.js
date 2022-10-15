@@ -417,7 +417,7 @@ const Checkout = observer(() => {
                                   {(
                                     item.product?.price * item.quantity
                                   ).toFixed(2)}{" "}
-                                  Сом
+                                  Рубль
                                 </td>
                               </tr>
                             ))
@@ -425,7 +425,8 @@ const Checkout = observer(() => {
                               <tr key={index}>
                                 <td>{item.title}</td>
                                 <td>
-                                  {(item.price * item.quantity).toFixed(2)} Сом
+                                  {(item.price * item.quantity).toFixed(2)}{" "}
+                                  Рубль
                                 </td>
                               </tr>
                             ))}
@@ -438,11 +439,11 @@ const Checkout = observer(() => {
                             : datalocal?.map((item, index) => {
                                 sum = sum + item.price * item.quantity;
                               })}
-                          <td>{sum?.toFixed(2)} Сом</td>
+                          <td>{sum?.toFixed(2)} Рубль</td>
                         </tr>
                         <tr className="summary-total">
                           <td>ИТОГО:</td>
-                          <td>{sum?.toFixed(2)} Сом</td>
+                          <td>{sum?.toFixed(2)} Рубль</td>
                         </tr>
                       </tbody>
                     </table>

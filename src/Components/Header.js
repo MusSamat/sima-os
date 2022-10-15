@@ -90,6 +90,10 @@ const Header = observer(() => {
     };
   }, []);
 
+  const handleClick = (event) => {
+    user.setActive(true);
+  };
+
   return (
     <div className="page-wrapper">
       <header
@@ -105,7 +109,10 @@ const Header = observer(() => {
         <div className="header-bottom ">
           <div className="container">
             <div className="header-left">
-              <button className="mobile-menu-toggler">
+              <button
+                onClick={() => handleClick()}
+                className="mobile-menu-toggler"
+              >
                 <span className="sr-only">Toggle mobile menu</span>
                 <i className="icon-bars"></i>
               </button>
@@ -400,7 +407,7 @@ const Header = observer(() => {
                       {new Intl.NumberFormat("fr-CA", {
                         style: "decimal",
                       }).format(sum.toFixed(2))}{" "}
-                      Сом
+                      Рубль
                     </span>
                   </a>
                 </NavLink>
@@ -461,7 +468,7 @@ const Header = observer(() => {
                                     className="cart-product-info"
                                   >
                                     {/*<span className="cart-product-qty">1</span>*/}
-                                    {c.price} Сом
+                                    {c.price} Рубль
                                   </span>
                                 </div>
 
@@ -495,7 +502,7 @@ const Header = observer(() => {
                       {new Intl.NumberFormat("fr-CA", {
                         style: "decimal",
                       }).format(sum?.toFixed(2))}{" "}
-                      Сом
+                      Рубль
                     </span>
                   </div>
                   <p

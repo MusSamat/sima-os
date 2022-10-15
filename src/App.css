@@ -587,6 +587,11 @@
     margin-right: 10px !important;
 }
 
+.mmenu-active .mobile-menu-container {
+    visibility: visible !important;
+    transform: translateX(280px) !important;
+}
+
 .logo1 {
     width: 120px;
     height: 50px;

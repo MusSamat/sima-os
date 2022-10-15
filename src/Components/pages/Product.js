@@ -457,12 +457,12 @@ const Product = observer((props) => {
                       style={{ color: "rgb(238, 162, 135)" }}
                     >
                       <span className="new-price">
-                        {product.product.discount_price} Сом
+                        {product.product.discount_price} Рубль
                       </span>
-                      <span className="old-price">{`${product.product.price} Сом`}</span>
+                      <span className="old-price">{`${product.product.price} Рубль`}</span>
                     </div>
                   ) : (
-                    <div className="product-price">{`${product.product.price} Сом`}</div>
+                    <div className="product-price">{`${product.product.price} Рубль`}</div>
                   )}
                   <label
                     style={{

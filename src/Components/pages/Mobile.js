@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import {
   ABOUT_ROUTE,
@@ -10,13 +10,18 @@ import {
   PURCHASES_ROUTE,
 } from "../../utils/Const";
 import "../../App.css";
+import { Context } from "../..";
 
 export default function Mobile() {
+  const { user } = useContext(Context);
+  const handleClick = (event) => {
+    user.setActive(false);
+  };
   return (
-    <div>
-      <div className="mobile-menu-container">
+    <div className={user.active ? "mmenu-active" : ""}>
+      {/* <div className="mobile-menu-container">
         <div className="mobile-menu-wrapper">
-          <span className="mobile-menu-close">
+          <span onClick={handleClick} className="mobile-menu-close">
             <i className="icon-close"></i>
           </span>
 
@@ -52,18 +57,18 @@ export default function Mobile() {
               </li>
             </ul>
           </nav>
-
-          {/* <div className="social-icons">
-                        <a href="#" className="social-icon" target="_blank" title="Facebook"><i className="icon-facebook-f"></i></a>
-                        <a href="#" className="social-icon" target="_blank" title="Twitter"><i className="icon-twitter"></i></a>
-                        <a href="#" className="social-icon" target="_blank" title="Instagram"><i className="icon-instagram"></i></a>
-                        <a href="#" className="social-icon" target="_blank" title="odnoklassniki"><i className="icon-odnoklassniki"></i></a>
-                    </div> */}
         </div>
-      </div>
-      <div className="mobile-menu-container">
+      </div> */}
+
+      <div
+        className={
+          user.active
+            ? "mmenu-active mobile-menu-container"
+            : "mobile-menu-container"
+        }
+      >
         <div className="mobile-menu-wrapper">
-          <span className="mobile-menu-close">
+          <span onClick={handleClick} className="mobile-menu-close">
             <i className="icon-close"></i>
           </span>
 
@@ -73,7 +78,7 @@ export default function Mobile() {
                 <a href="/">ГЛАВНАЯ</a>
               </li>
               <li>
-                <a href={`${CATALOG_ROUTE}`}>КАТАЛОГ</a>
+                <a href={`/catalog`}>КАТАЛОГ</a>
               </li>
               <li>
                 <a href={NEWS_ROUTE}>НОВОСТИ</a>

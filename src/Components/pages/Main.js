@@ -347,12 +347,12 @@ const Main = observer(() => {
                           style={{ fontWeight: "500" }}
                           className="new-price"
                         >
-                          {discout.discount_price} Сом
+                          {discout.discount_price} Рубль
                         </span>
                         <span
                           style={{ fontWeight: "500" }}
                           className="old-price"
-                        >{`${discout.price} Сом`}</span>
+                        >{`${discout.price} Рубль`}</span>
                       </div>
                       <div className="ratings-container">
                         {stars.map((_, index) => {
@@ -532,7 +532,7 @@ const Main = observer(() => {
                         style={{ fontWeight: "500" }}
                         className="product-price"
                       >
-                        {`${discout.price} Сом`}
+                        {`${discout.price} Рубль`}
                       </div>
                       <div className="ratings-container">
                         {stars.map((_, index) => {
@@ -705,7 +705,7 @@ const Main = observer(() => {
                         style={{ fontWeight: "500" }}
                         className="product-price"
                       >
-                        {`${discout.price} Сом`}
+                        {`${discout.price} Рубль`}
                       </div>
                       <div className="ratings-container">
                         {stars.map((_, index) => {

@@ -616,18 +616,18 @@ const Catolog = observer((props) => {
                                     style={{ fontWeight: "500" }}
                                     className="new-price "
                                   >
-                                    {prod.discount_price} Сом
+                                    {prod.discount_price} Рубль
                                   </span>
                                   <span
                                     style={{ fontWeight: "500" }}
                                     className="old-price s-title"
-                                  >{`${prod.price} Сом`}</span>
+                                  >{`${prod.price} Рубль`}</span>
                                 </div>
                               ) : (
                                 <div
                                   style={{ fontWeight: "500" }}
                                   className="product-price "
-                                >{`${prod.price} Сом`}</div>
+                                >{`${prod.price} Рубль`}</div>
                               )}
 
                               <div className="ratings-container">
@@ -819,7 +819,7 @@ const Catolog = observer((props) => {
                       max={3000}
                     />
                     <p className="filter mt-1">
-                      ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} Сом
+                      ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} Рубль
                     </p>
                   </div>
 
