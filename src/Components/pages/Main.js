@@ -229,7 +229,12 @@ const Main = observer(() => {
                       ) : (
                         ""
                       )}
-                      <Link to={{ pathname: "/product/" + discout.id }}>
+                      <Link
+                        to={{
+                          pathname: "/product",
+                          id: discout.id,
+                        }}
+                      >
                         <a href="">
                           <img
                             src={`${process.env.REACT_APP_BASE_URL}${discout.image.image}`}
@@ -413,7 +418,12 @@ const Main = observer(() => {
                 <div key={index} className="col-6 col-md-4 col-lg-3">
                   <div className="product product-7 text-center  black">
                     <figure className="product-media ">
-                      <Link to={{ pathname: "/product/" + discout.id }}>
+                      <Link
+                        to={{
+                          pathname: "/product",
+                          id: discout.id,
+                        }}
+                      >
                         <a href="">
                           <img
                             src={`${process.env.REACT_APP_BASE_URL}${discout.image.image}`}
@@ -580,7 +590,12 @@ const Main = observer(() => {
                 <div key={index} className="col-6 col-md-4 col-lg-3">
                   <div className="product product-7 text-center  black">
                     <figure className="product-media ">
-                      <Link to={{ pathname: "/product/" + discout.id }}>
+                      <Link
+                        to={{
+                          pathname: "/product",
+                          id: discout.id,
+                        }}
+                      >
                         <a href="">
                           <img
                             src={`${process.env.REACT_APP_BASE_URL}${discout.image.image}`}

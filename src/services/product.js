@@ -59,6 +59,11 @@ class ProductService extends BaseApiService {
     const url = `${process.env.REACT_APP_BASE_URL}/api/discount`;
     return this.sendGetRequest(url);
   }
+
+  getPriceFilter(start, end) {
+    const url = `${process.env.REACT_APP_BASE_URL}/api/products/?price__gte=${start}&price__lte=${end}`;
+    return this.sendGetRequest(url);
+  }
 }
 
 export const productService = new ProductService();

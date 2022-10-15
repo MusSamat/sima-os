@@ -115,7 +115,8 @@ const Cart = observer(() => {
                                 <div className="product">
                                   <Link
                                     to={{
-                                      pathname: "/product/" + c.product.id,
+                                      pathname: "/product",
+                                      id: c.product.id,
                                     }}
                                   >
                                     <figure className="product-media">
@@ -210,7 +211,9 @@ const Cart = observer(() => {
                               <tr>
                                 <td key={index} className="product-col">
                                   <div className="product">
-                                    <Link to={{ pathname: "/product/" + c.id }}>
+                                    <Link
+                                      to={{ pathname: "/product", id: c.id }}
+                                    >
                                       <figure className="product-media">
                                         <a>
                                           <img

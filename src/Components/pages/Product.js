@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext, useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { Context } from "../../index";
 import { LOGIN_ROUTE, HOME_ROUTE, CATALOG_ROUTE } from "../../utils/Const";
 import axios from "axios";
@@ -36,13 +36,14 @@ const colors = {
 const Product = observer((props) => {
   const { product } = useContext(Context);
   const { user } = useContext(Context);
-  const id = props.match.params.id;
+  const id = props.location.id;
   const [count, setCount] = useState("");
   const [hover, setHover] = useState(false);
   const [show, setShow] = useState(false);
   const [showRaz, setShowRaz] = useState(false);
   const [localName, setLocalName] = useState("");
   const [bottons, setBottons] = useState(false);
+  const history = useHistory();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -54,6 +55,9 @@ const Product = observer((props) => {
 
   const notify = () => toast.success("Wow so easy!");
   const notifyError = () => toast.error("Wow so easy!");
+  const pathname = new URLSearchParams(props.location.search);
+  const a = pathname.get("id");
+  console.log(a);
 
   const deleteWish = () => {
     const data = {
@@ -164,6 +168,8 @@ const Product = observer((props) => {
     e.preventDefault();
   };
 
+  console.log(props.location.id);
+
   const sendRating = (event) => {
     const id = props.match.params.id;
     const data = {
@@ -192,21 +198,27 @@ const Product = observer((props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     mobile_menu();
-
-    // const log = document.getElementById('qty')
-    // log?.addEventListener('change', updateValue)
+    if (id) {
+      history.push({
+        search: `id=${id}`,
+      });
+    } else {
+      history.push({
+        search: `id=${a}`,
+      });
+    }
     user.getWishlistData();
     user.getReviews(id);
     user.getUserData();
-    product.getData(id).then(() => {
+    product.getData(a).then(() => {
       setLeftImages(product?.imagesUser[0]?.images ?? []);
       setSelectedImage(product?.imagesUser[0]?.images[0] || "");
       setImgTitle(product?.imagesUser[0]?.title || "");
       setCount(product.size?.length || "");
     });
-  }, []);
+  }, [a]);
 
-  const shareUrl = `${process.env.REACT_APP_BASE_URL}/product/${id}`;
+  const shareUrl = `${process.env.REACT_APP_BASE_URL}/product?id=${a}`;
   return (
     <div class="page-wrapper">
       <main className="main">

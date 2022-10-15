@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Context } from "../../index";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import "../../App.css";
@@ -105,10 +105,18 @@ const Catolog = observer((props) => {
     e.preventDefault();
   };
 
-  const [value, setValue] = useState([500, 2000]);
+  const [value, setValue] = useState([500, 3000]);
+  const timerRef = useRef();
+  const expensiveCallback = (value) => {
+    setValue(value);
+    product.getPriceFilters(value[0], value[1]);
+  };
 
   const rangeSelector = (event, newValue) => {
-    setValue(newValue);
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      expensiveCallback(newValue);
+    }, 250);
   };
 
   const history = useHistory();
@@ -128,11 +136,6 @@ const Catolog = observer((props) => {
     localStorage.removeItem("viewProduct");
     setBreadcrumb(bread);
     e.preventDefault();
-    if (produs !== "") {
-      product.getPopularProducts(activeFilterButton);
-    } else {
-      product.getActualProducts();
-    }
   };
 
   const sortProducts = (e, des) => {
@@ -454,12 +457,13 @@ const Catolog = observer((props) => {
                               )}
                               <Link
                                 to={{
-                                  pathname: "/product/" + prod.id,
+                                  pathname: "/product",
                                   breadcrumb: breadcrumb,
                                   seson: seson,
                                   title: name,
                                   produs: produs,
                                   vidTitle: vidTitle,
+                                  id: prod.id,
                                 }}
                               >
                                 <a>
@@ -758,10 +762,10 @@ const Catolog = observer((props) => {
 
                       <button
                         onClick={(e) =>
-                          allProduct(e, "discount", "Скидки", true)
+                          allProduct(e, "?percent__gt", "Скидки", 0)
                         }
                         className={
-                          activeFilterButton === "?discount=true"
+                          activeFilterButton === "?percent__gt=0"
                             ? "novelti actived"
                             : "novelti" && Active === "discount"
                             ? "novelti actived"
@@ -789,7 +793,7 @@ const Catolog = observer((props) => {
                       getAriaValueText={valuetext}
                       className={classes.MuiSlider}
                       min={500}
-                      max={2000}
+                      max={3000}
                     />
                     <p className="filter mt-1">
                       ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} Сом

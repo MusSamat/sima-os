@@ -114,7 +114,9 @@ const Wishlist = observer(() => {
                       <tr key={index}>
                         <td className="product-col">
                           <div className="product">
-                            <Link to={{ pathname: "/product/" + l.product.id }}>
+                            <Link
+                              to={{ pathname: "/product", id: l.product.id }}
+                            >
                               <figure className="product-media">
                                 <a>
                                   <img
@@ -168,7 +170,7 @@ const Wishlist = observer(() => {
                         <tr key={index}>
                           <td className="product-col">
                             <div className="product">
-                              <Link to={{ pathname: "/product/" + l.id }}>
+                              <Link to={{ pathname: "/product", id: l.id }}>
                                 <figure className="product-media">
                                   <a>
                                     <img

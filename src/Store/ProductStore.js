@@ -76,6 +76,7 @@ export default class ProductStore {
     productService
       .getActualProducts(prod)
       .then((res) => {
+        console.log(res);
         this.products = res.results.map((i) => {
           const d = wish?.find((j) => j.id === i.id);
           if (d) {
@@ -243,6 +244,28 @@ export default class ProductStore {
       })
       .catch((e) => {
         console.error(e);
+      });
+  }
+
+  async getPriceFilters(start, end) {
+    this.setLoader(true);
+    const wish = JSON.parse(localStorage.getItem("wishlist"));
+    this.token = JSON.parse(localStorage.getItem("value"));
+    await productService
+      .getPriceFilter(start, end)
+      .then((res) => {
+        this.products = res.results.map((i) => {
+          const d = wish?.find((j) => j.id === i.id);
+          if (d) {
+            i.is_favorite = d?.is_favorite;
+          }
+          return i;
+        });
+        this.setLoader(false);
+      })
+      .catch((e) => {
+        console.error(e);
+        this.setLoader(false);
       });
   }
 
