@@ -76,7 +76,6 @@ export default class ProductStore {
     productService
       .getActualProducts(prod)
       .then((res) => {
-        console.log(res);
         this.products = res.results.map((i) => {
           const d = wish?.find((j) => j.id === i.id);
           if (d) {
