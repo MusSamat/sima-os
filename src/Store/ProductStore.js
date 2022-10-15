@@ -282,6 +282,7 @@ export default class ProductStore {
           }
           return i;
         });
+        this.pagination = res.count;
         this.setLoader(false);
       })
       .catch((e) => {
@@ -431,6 +432,7 @@ export default class ProductStore {
   async fetchTodoCatalog(prodId, id, des) {
     const wish = JSON.parse(localStorage.getItem("wishlist"));
     this.token = JSON.parse(localStorage.getItem("value"));
+    this.setLoader(true);
     await axios
       .get(
         des
@@ -450,6 +452,7 @@ export default class ProductStore {
             }
       )
       .then((res) => {
+        this.setLoader(false);
         this.products = res.data.results.map((i) => {
           const d = wish?.find((j) => j.id === i.id);
           if (d) {
@@ -457,9 +460,11 @@ export default class ProductStore {
           }
           return i;
         });
+        this.pagination = res.data.count;
       })
       .catch((e) => {
         console.error(e);
+        this.setLoader(false);
       });
   }
 

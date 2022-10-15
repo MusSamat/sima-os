@@ -147,21 +147,6 @@ const Catolog = observer((props) => {
     history.push({
       search: `&sort=${des}`,
     });
-    // if (!view) {
-    //   if (!produs) {
-    //     history.push({
-    //       search: `&sort=${des}`,
-    //     });
-    //     // product.getAllProductsSort("products?", des);
-    //   } else {
-    //     history.push({
-    //       search: `&sort=${des}`,
-    //     });
-    //   }
-    //   product.getAllProductsSort(produs, des);
-    // } else {
-    //   product.fetchTodoCatalog(sesonId, prodId, des);
-    // }
   };
 
   const typeOfProduct = (e, title, prodId, id) => {
@@ -343,55 +328,32 @@ const Catolog = observer((props) => {
           document.body.appendChild(s);
         });
       });
-    } else {
-      product.getActualProducts(activeFilterButton).then(() => {
-        const scripts = [
-          "/assets/js/jquery.elevateZoom.min.js",
-          "/assets/js/bootstrap-input-spinner.js",
-          "/assets/js/jquery.magnific-popup.min.js",
-          "/assets/js/main.js",
-          "/assets/js/bootstrap-input-spinner.js",
-          "/assets/js/owl.carousel.min.js",
-          "/assets/js/superfish.min.js",
-          "/assets/js/jquery.waypoints.min.js",
-          "/assets/js/jquery.hoverIntent.min.js",
-          "/assets/js/bootstrap.bundle.min.js",
-          "/assets/js/jquery.min.js",
-        ];
-        scripts.forEach((i) => {
-          const s = document.createElement("script");
-          s.src = i;
-          document.body.appendChild(s);
-        });
-      });
     }
     product.getSortedData();
-  }, [a, activeFilterButton]);
+  }, [a]);
 
   useEffect(() => {
-    if (!a && !activeFilterButton) {
-      product.getAllProductsCatalog().then(() => {
-        const scripts = [
-          "/assets/js/jquery.elevateZoom.min.js",
-          "/assets/js/bootstrap-input-spinner.js",
-          "/assets/js/jquery.magnific-popup.min.js",
-          "/assets/js/main.js",
-          "/assets/js/bootstrap-input-spinner.js",
-          "/assets/js/owl.carousel.min.js",
-          "/assets/js/superfish.min.js",
-          "/assets/js/jquery.waypoints.min.js",
-          "/assets/js/jquery.hoverIntent.min.js",
-          "/assets/js/bootstrap.bundle.min.js",
-          "/assets/js/jquery.min.js",
-        ];
-        scripts.forEach((i) => {
-          const s = document.createElement("script");
-          s.src = i;
-          document.body.appendChild(s);
-        });
+    product.getActualProducts(activeFilterButton).then(() => {
+      const scripts = [
+        "/assets/js/jquery.elevateZoom.min.js",
+        "/assets/js/bootstrap-input-spinner.js",
+        "/assets/js/jquery.magnific-popup.min.js",
+        "/assets/js/main.js",
+        "/assets/js/bootstrap-input-spinner.js",
+        "/assets/js/owl.carousel.min.js",
+        "/assets/js/superfish.min.js",
+        "/assets/js/jquery.waypoints.min.js",
+        "/assets/js/jquery.hoverIntent.min.js",
+        "/assets/js/bootstrap.bundle.min.js",
+        "/assets/js/jquery.min.js",
+      ];
+      scripts.forEach((i) => {
+        const s = document.createElement("script");
+        s.src = i;
+        document.body.appendChild(s);
       });
-    }
-  }, []);
+    });
+  }, [activeFilterButton]);
   let percent;
   product.discount.map((i) => i.percent === percent);
   return (
@@ -405,6 +367,7 @@ const Catolog = observer((props) => {
                 <div style={{ color: "#333333", fontWeight: "400" }}>
                   СОРТИРОВКА
                 </div>
+                {/* <p>{productService.getAllFilterProducts(activeFilterButton)}</p> */}
                 <div className="toolbox ">
                   <div className="">
                     <div className="toolbox-info">
@@ -601,11 +564,12 @@ const Catolog = observer((props) => {
                             <div class="product-body">
                               <Link
                                 to={{
-                                  pathname: "/product/" + prod.id,
+                                  pathname: "/product",
                                   breadcrumb: breadcrumb,
                                   seson: seson,
                                   title: name,
                                   produs: produs,
+                                  id: prod.id,
                                 }}
                               >
                                 <h3 class="product-title ">
