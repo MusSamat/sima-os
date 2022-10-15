@@ -490,6 +490,7 @@ export default class ProductStore {
     await productService
       .getDiscount()
       .then((res) => {
+        console.log(res);
         this.discount = res.map((i) => {
           const d = wish?.find((j) => j.id === i.id);
           if (d) {
