@@ -1,6 +1,5 @@
 export default function mobile_menu() {
   let loadScript = function (src) {
-    console.log(src);
     let tag = document.createElement("script");
     tag.async = false;
     tag.src = src;

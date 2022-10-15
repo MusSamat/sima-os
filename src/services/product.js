@@ -5,6 +5,11 @@ class ProductService extends BaseApiService {
     return this.sendGetRequest(url);
   }
 
+  getActualProductsCatalog() {
+    const url = `${process.env.REACT_APP_BASE_URL}/api/products/`;
+    return this.sendGetRequest(url);
+  }
+
   getAllFilterProducts(sort) {
     const url = `${process.env.REACT_APP_BASE_URL}/api/products/${sort}`;
     return this.sendGetRequest(url);

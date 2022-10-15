@@ -19,47 +19,6 @@ export default function Mobile() {
   };
   return (
     <div className={user.active ? "mmenu-active" : ""}>
-      {/* <div className="mobile-menu-container">
-        <div className="mobile-menu-wrapper">
-          <span onClick={handleClick} className="mobile-menu-close">
-            <i className="icon-close"></i>
-          </span>
-
-          <nav className="mobile-nav">
-            <ul className="mobile-menu ">
-              <li className="active ">
-                <NavLink className="sf-with-ul" to={HOME_ROUTE}>
-                  ГЛАВНАЯ
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="sf-with-ul" to={`${CATALOG_ROUTE}`}>
-                  КАТАЛОГ
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="sf-with-ul" to={DELIVERY_ROUTE}>
-                  ДОСТАВКА
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="sf-with-ul" to={CONTACT_ROUTE}>
-                  КОНТАКТЫ
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="sf-with-ul" to={NEWS_ROUTE}>
-                  НОВОСТИ
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={ABOUT_ROUTE}>СОТРУДНИЧЕСТВО</NavLink>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div> */}
-
       <div
         className={
           user.active

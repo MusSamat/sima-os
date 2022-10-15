@@ -202,7 +202,7 @@ const Main = observer(() => {
               </h1>
 
               <Link
-                to={`${CATALOG_ROUTE}?products=discount`}
+                to={`${CATALOG_ROUTE}?percent__gt=0`}
                 className="btn btn-outline-primary-2 s-title"
               >
                 <span style={{ fontSize: "20px" }}>Показать</span>
@@ -385,7 +385,7 @@ const Main = observer(() => {
               />
             )}
 
-            <Link to={`${CATALOG_ROUTE}?products=discount`}>
+            <Link to={`${CATALOG_ROUTE}?percent__gt=0`}>
               <div className="more-container text-center mt-3 mb-3">
                 <a href="" className="btn btn-outline-primary-2 s-title">
                   <span>Показать</span>
@@ -400,7 +400,7 @@ const Main = observer(() => {
             style={{ boxShadow: "0px 0px 18px rgba(0, 0, 0, 0.25)" }}
             className="trending mb-6 mt-8"
           >
-            <Link to={`${CATALOG_ROUTE}?products=novelty`}>
+            <Link to={`${CATALOG_ROUTE}?novelty=true`}>
               <img src={img.image} alt="Banner" />
             </Link>
             <div className="banner banner-big d-md-block">
@@ -559,7 +559,7 @@ const Main = observer(() => {
             </div>
           </div>
 
-          <Link to={`${CATALOG_ROUTE}?products=novelty`}>
+          <Link to={`${CATALOG_ROUTE}?novelty=true`}>
             <div className="more-container text-center mt-3 mb-3">
               <a href="" className="btn btn-outline-primary-2 ">
                 <span className="s-title">Показать</span>
@@ -570,7 +570,7 @@ const Main = observer(() => {
         </div>
         {user.popular.map((img) => (
           <div className="trending mb-6 mt-8">
-            <Link to={`${CATALOG_ROUTE}?products=popular`}>
+            <Link to={`${CATALOG_ROUTE}?popular=true`}>
               <a href="">
                 <img src={img.image} alt="Banner" />
               </a>
@@ -731,7 +731,7 @@ const Main = observer(() => {
               ))}
             </div>
           </div>
-          <Link to={`${CATALOG_ROUTE}?products=popular`}>
+          <Link to={`${CATALOG_ROUTE}?popular=true`}>
             <div className="more-container text-center mt-3 mb-3">
               <a href="" className="btn btn-outline-primary-2 s-title ">
                 <span>Показать</span>

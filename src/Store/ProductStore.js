@@ -92,6 +92,28 @@ export default class ProductStore {
       });
   }
 
+  async getAllProductsCatalog() {
+    this.setLoader(true);
+    const wish = JSON.parse(localStorage.getItem("wishlist"));
+    productService
+      .getActualProductsCatalog()
+      .then((res) => {
+        this.products = res.results.map((i) => {
+          const d = wish?.find((j) => j.id === i.id);
+          if (d) {
+            i.is_favorite = d?.is_favorite;
+          }
+          return i;
+        });
+        this.pagination = res.count;
+        this.setLoader(false);
+      })
+      .catch((e) => {
+        console.error(e);
+        this.setLoader(false);
+      });
+  }
+
   async getActualProducts(sort) {
     localStorage.setItem("category", JSON.stringify("Актуальные"));
     localStorage.removeItem("viewProduct");

@@ -369,7 +369,7 @@ const Catolog = observer((props) => {
   }, [a, activeFilterButton]);
 
   useEffect(() => {
-    product.getActualProducts().then(() => {
+    product.getAllProductsCatalog().then(() => {
       const scripts = [
         "/assets/js/jquery.elevateZoom.min.js",
         "/assets/js/bootstrap-input-spinner.js",
@@ -681,17 +681,7 @@ const Catolog = observer((props) => {
                         onClick={() => allCategory()}
                       >
                         <div className="vse-button">Все категории</div>
-                        <div style={{ cursor: "pointer" }}>
-                          {user.isActive ? (
-                            <FiMinus
-                              style={{ fontSize: "18px", color: "black" }}
-                            />
-                          ) : (
-                            <CgMathPlus
-                              style={{ fontSize: "18px", color: "black" }}
-                            />
-                          )}
-                        </div>
+                        <div style={{ cursor: "pointer" }}></div>
                       </div>
                       {user.isActive ? (
                         <div className="accordion-content">
