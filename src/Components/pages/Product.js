@@ -166,9 +166,8 @@ const Product = observer((props) => {
       found = -1;
     }
     e.preventDefault();
+    user.getImageLogo();
   };
-
-  console.log(props.location.id);
 
   const sendRating = (event) => {
     const id = props.match.params.id;
@@ -729,19 +728,20 @@ const Product = observer((props) => {
                           aria-labelledby="tab-17-tab"
                         >
                           <p className="description s-title">
-                            <strong>Размер: </strong> {product.product.size[0]}-
-                            {
-                              product.product.size[
-                                product.product.size.length - 1
-                              ]
-                            }
+                            <p>
+                              Размер: {product.product.size[0]} -{" "}
+                              {
+                                product.product.size[
+                                  product.product.size.length - 1
+                                ]
+                              }
+                            </p>
+                          </p>
+                          <p className=" s-title">
+                            <p>Ткань: {product.product.cloth} </p>
                           </p>
                           <p className="description s-title">
-                            <strong>Ткань:</strong> {product.product.cloth}
-                          </p>
-                          <p className="description s-title">
-                            <strong>Описание:</strong>{" "}
-                            {product.product.description}
+                            <p>Описание: {product.product.description}</p>
                           </p>
                         </div>
                         <div
