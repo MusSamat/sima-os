@@ -91,7 +91,7 @@ const Header = observer(() => {
   }, []);
 
   const handleClick = (event) => {
-    user.setActive(true);
+    document.body.classList.add("mmenu-active");
   };
 
   return (
