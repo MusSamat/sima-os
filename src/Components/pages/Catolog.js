@@ -41,6 +41,12 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 const Catolog = observer((props) => {
   const { product } = useContext(Context);
   const { user } = useContext(Context);
@@ -60,6 +66,7 @@ const Catolog = observer((props) => {
 
   const { search } = useLocation();
   const query = new URLSearchParams(search);
+  let querys = useQuery();
 
   const names = query.get("name");
   const produs = query.get("products");
@@ -145,7 +152,7 @@ const Catolog = observer((props) => {
     let prodId = JSON.parse(localStorage.getItem("prodId"));
     e.preventDefault();
     history.push({
-      search: `&sort=${des}`,
+      search: `sort=${des}`,
     });
   };
 
@@ -308,7 +315,7 @@ const Catolog = observer((props) => {
     window.scrollTo(0, 0);
     mobile_menu();
     if (a) {
-      product.getActual(pathname ? `/?title__icontains=${a}` : "").then(() => {
+      product.getActual(pathname ? `?title__icontains=${a}` : "").then(() => {
         const scripts = [
           "/assets/js/jquery.elevateZoom.min.js",
           "/assets/js/bootstrap-input-spinner.js",

@@ -124,9 +124,9 @@ export default class ProductStore {
       .getAllFilterProducts(sort)
       .then((res) => {
         this.products = res.results.map((i) => {
-          const d = wish.find((j) => j.id === i.id);
+          const d = wish?.find((j) => j.id === i.id);
           if (d) {
-            i.is_favorite = d.is_favorite;
+            i.is_favorite = d?.is_favorite;
           }
           return i;
         });
@@ -167,7 +167,7 @@ export default class ProductStore {
         this.products = res.data.results.map((i) => {
           const d = wish?.find((j) => j.id === i.id);
           if (d) {
-            i.is_favorite = d.is_favorite;
+            i.is_favorite = d?.is_favorite;
           }
           return i;
         });
@@ -190,7 +190,7 @@ export default class ProductStore {
         this.products = res.results.map((i) => {
           const d = wish?.find((j) => j.id === i.id);
           if (d) {
-            i.is_favorite = d.is_favorite;
+            i.is_favorite = d?.is_favorite;
           }
           return i;
         });
