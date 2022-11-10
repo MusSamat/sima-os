@@ -407,7 +407,7 @@ const Header = observer(() => {
                       {new Intl.NumberFormat("fr-CA", {
                         style: "decimal",
                       }).format(sum.toFixed(2))}{" "}
-                      Рубль
+                       ₽
                     </span>
                   </a>
                 </NavLink>
@@ -468,7 +468,7 @@ const Header = observer(() => {
                                     className="cart-product-info"
                                   >
                                     {/*<span className="cart-product-qty">1</span>*/}
-                                    {c.price} Рубль
+                                    {c.price}  ₽
                                   </span>
                                 </div>
 
@@ -502,7 +502,7 @@ const Header = observer(() => {
                       {new Intl.NumberFormat("fr-CA", {
                         style: "decimal",
                       }).format(sum?.toFixed(2))}{" "}
-                      Рубль
+                       ₽
                     </span>
                   </div>
                   <p

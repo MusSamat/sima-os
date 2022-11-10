@@ -183,6 +183,8 @@ const Main = observer(() => {
     product.getAdvantage();
   }, []);
 
+  console.log(product.advantage);
+
   return (
     <div className="page-wrapper">
       <main className="main">
@@ -347,12 +349,12 @@ const Main = observer(() => {
                           style={{ fontWeight: "500" }}
                           className="new-price"
                         >
-                          {discout.discount_price} Рубль
+                          {discout.discount_price} ₽
                         </span>
                         <span
                           style={{ fontWeight: "500" }}
                           className="old-price"
-                        >{`${discout.price} Рубль`}</span>
+                        >{`${discout.price}  ₽`}</span>
                       </div>
                       <div className="ratings-container">
                         {stars.map((_, index) => {
@@ -532,7 +534,7 @@ const Main = observer(() => {
                         style={{ fontWeight: "500" }}
                         className="product-price"
                       >
-                        {`${discout.price} Рубль`}
+                        {`${discout.price}  ₽`}
                       </div>
                       <div className="ratings-container">
                         {stars.map((_, index) => {
@@ -705,7 +707,7 @@ const Main = observer(() => {
                         style={{ fontWeight: "500" }}
                         className="product-price"
                       >
-                        {`${discout.price} Рубль`}
+                        {`${discout.price}  ₽`}
                       </div>
                       <div className="ratings-container">
                         {stars.map((_, index) => {
@@ -740,10 +742,11 @@ const Main = observer(() => {
             </div>
           </Link>
         </div>
+        {console.log(product.advantage)}
 
         <div className="container mt-12 mb-10">
           <div className="row ">
-            {product.advantage.map((item, index) => (
+            {product?.advantage.map((item, index) => (
               <div key={index} className="col-12 mb-10 col-xl-6 mt-2 mb-12">
                 <a href={item.link}>
                   <div className="position-relative d-flex justify-content-center align-items-center mt-8 mb-3 ">

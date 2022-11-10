@@ -135,7 +135,7 @@ const Cart = observer(() => {
                               </td>
                               <td className="price-col s-title">{c.color}</td>
                               <td className="price-col s-title">
-                                {c.product.price} Рубль
+                                {c.product.price} ₽
                               </td>
 
                               <td>
@@ -189,8 +189,7 @@ const Cart = observer(() => {
                                 className="price-col s-title"
                                 style={{ color: "#c96" }}
                               >
-                                {(c.product.price * c.quantity).toFixed(2)}{" "}
-                                Рубль
+                                {(c.product.price * c.quantity).toFixed(2)} ₽
                               </td>
                               <td className="remove-col">
                                 <button
@@ -235,7 +234,7 @@ const Cart = observer(() => {
                                     .map((f) => f.color)}{" "}
                                 </td>
                                 <td className="price-col s-title">
-                                  {c.price} Рубль
+                                  {c.price} ₽
                                 </td>
                                 <td>
                                   <div className="count">
@@ -302,7 +301,7 @@ const Cart = observer(() => {
                                   {c.quantity
                                     ? c.quantity * c.price
                                     : getPrice(c.id)}{" "}
-                                  Рубль
+                                  ₽
                                 </td>
                                 <td className="remove-col">
                                   <button
@@ -353,7 +352,7 @@ const Cart = observer(() => {
                             {new Intl.NumberFormat("fr-CA", {
                               style: "decimal",
                             }).format(sum?.toFixed(2))}{" "}
-                            Рубль
+                            ₽
                           </td>
                         </tr>
 
@@ -367,7 +366,7 @@ const Cart = observer(() => {
                             {new Intl.NumberFormat("fr-CA", {
                               style: "decimal",
                             }).format(sum?.toFixed(2))}{" "}
-                            Рубль
+                            ₽
                           </td>
                         </tr>
                       </tbody>

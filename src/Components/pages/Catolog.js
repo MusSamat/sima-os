@@ -157,6 +157,7 @@ const Catolog = observer((props) => {
   };
 
   const typeOfProduct = (e, title, prodId, id) => {
+    // window.scrollTo(100, 100);
     product.fetchTodoCatalog(prodId, id);
     setActive("typeProduct");
     localStorage.setItem("viewProduct", JSON.stringify(title));
@@ -589,18 +590,18 @@ const Catolog = observer((props) => {
                                     style={{ fontWeight: "500" }}
                                     className="new-price "
                                   >
-                                    {prod.discount_price} Рубль
+                                    {prod.discount_price} ₽
                                   </span>
                                   <span
                                     style={{ fontWeight: "500" }}
                                     className="old-price s-title"
-                                  >{`${prod.price} Рубль`}</span>
+                                  >{`${prod.price}  ₽`}</span>
                                 </div>
                               ) : (
                                 <div
                                   style={{ fontWeight: "500" }}
                                   className="product-price "
-                                >{`${prod.price} Рубль`}</div>
+                                >{`${prod.price}  ₽`}</div>
                               )}
 
                               <div className="ratings-container">
@@ -782,7 +783,7 @@ const Catolog = observer((props) => {
                       max={3000}
                     />
                     <p className="filter mt-1">
-                      ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} Рубль
+                      ФИЛЬТР ПО ЦЕНЕ: {value[0]}-{value[1]} ₽
                     </p>
                   </div>
 
