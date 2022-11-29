@@ -1,19 +1,19 @@
-import { observer } from "mobx-react-lite";
-import React, { useContext, useEffect, useState, useCallback } from "react";
-import { Link, useLocation, useHistory } from "react-router-dom";
-import { Context } from "../../index";
-import { LOGIN_ROUTE, HOME_ROUTE, CATALOG_ROUTE } from "../../utils/Const";
-import axios from "axios";
-import "../../App.css";
-import { FaStar } from "react-icons/fa";
-import { RiShareLine } from "react-icons/ri";
-import { FcLike } from "react-icons/fc";
-import { FaOdnoklassnikiSquare } from "react-icons/fa";
-import vk from "../../assets/vk.png";
-import { Modal, Button, Container, Row, Col } from "react-bootstrap";
-import mobile_menu from "../../Http/mobile_menu";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { observer } from 'mobx-react-lite'
+import React, { useContext, useEffect, useState, useCallback } from 'react'
+import { Link, useLocation, useHistory } from 'react-router-dom'
+import { Context } from '../../index'
+import { LOGIN_ROUTE, HOME_ROUTE, CATALOG_ROUTE } from '../../utils/Const'
+import axios from 'axios'
+import '../../App.css'
+import { FaStar } from 'react-icons/fa'
+import { RiShareLine } from 'react-icons/ri'
+import { FcLike } from 'react-icons/fc'
+import { FaOdnoklassnikiSquare } from 'react-icons/fa'
+import vk from '../../assets/vk.png'
+import { Modal, Button, Container, Row, Col } from 'react-bootstrap'
+import mobile_menu from '../../Http/mobile_menu'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -23,121 +23,121 @@ import {
   OKShareButton,
   VKShareButton,
   VKIcon,
-} from "react-share";
-import { Instagram } from "@material-ui/icons";
-import { productService } from "../../services/product";
-import Zoom from "react-img-zoom";
+} from 'react-share'
+import { Instagram } from '@material-ui/icons'
+import { productService } from '../../services/product'
+import Zoom from 'react-img-zoom'
 
 const colors = {
-  orange: "#FFBA5A",
-  grey: "#a9a9a9",
-};
+  orange: '#FFBA5A',
+  grey: '#a9a9a9',
+}
 
 const Product = observer((props) => {
-  const { product } = useContext(Context);
-  const { user } = useContext(Context);
-  const id = props.location.id;
-  const [count, setCount] = useState("");
-  const [hover, setHover] = useState(false);
-  const [show, setShow] = useState(false);
-  const [showRaz, setShowRaz] = useState(false);
-  const [localName, setLocalName] = useState("");
-  const [bottons, setBottons] = useState(false);
-  const history = useHistory();
+  const { product } = useContext(Context)
+  const { user } = useContext(Context)
+  const id = props.location.id
+  const [count, setCount] = useState('')
+  const [hover, setHover] = useState(false)
+  const [show, setShow] = useState(false)
+  const [showRaz, setShowRaz] = useState(false)
+  const [localName, setLocalName] = useState('')
+  const [bottons, setBottons] = useState(false)
+  const history = useHistory()
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
-  const handleCloseRaz = () => setShowRaz(false);
-  const handleShowRaz = () => setShowRaz(true);
+  const handleCloseRaz = () => setShowRaz(false)
+  const handleShowRaz = () => setShowRaz(true)
 
   function updateValue(e) {}
 
-  const notify = () => toast.success("Wow so easy!");
-  const notifyError = () => toast.error("Wow so easy!");
-  const pathname = new URLSearchParams(props.location.search);
-  const a = pathname.get("id");
-  console.log(a);
+  const notify = () => toast.success('Wow so easy!')
+  const notifyError = () => toast.error('Wow so easy!')
+  const pathname = new URLSearchParams(props.location.search)
+  const a = pathname.get('id')
+  console.log(a)
 
   const deleteWish = () => {
     const data = {
       product: id,
-    };
+    }
     productService
       .deleteWishList(data)
       .then((res) => {
-        user.getWishlistData();
-        product.getData(id);
+        user.getWishlistData()
+        product.getData(id)
       })
       .catch((e) => {
-        console.error(e);
-      });
-  };
+        console.error(e)
+      })
+  }
 
   const addWishlist = (e) => {
-    const id = props.match.params.id;
+    const id = props.match.params.id
     const data = {
       product: String(id),
-    };
+    }
     productService
       .addWishList(data)
       .then((response) => {
-        product.getData(id);
-        user.getWishlistData();
+        product.getData(id)
+        user.getWishlistData()
       })
       .catch((error) => {
-        console.log(error);
-      });
-    e.preventDefault();
-  };
+        console.log(error)
+      })
+    e.preventDefault()
+  }
 
-  const stars = Array(5).fill(0);
-  const [currValue, setCurrValue] = useState(0);
-  const [hoverValue, setHoverValue] = useState(undefined);
-  const [text, setText] = useState();
-  const [leftImages, setLeftImages] = useState([]);
-  const [selectedImage, setSelectedImage] = useState("");
-  const [imgTitle, setImgTitle] = useState("");
+  const stars = Array(5).fill(0)
+  const [currValue, setCurrValue] = useState(0)
+  const [hoverValue, setHoverValue] = useState(undefined)
+  const [text, setText] = useState()
+  const [leftImages, setLeftImages] = useState([])
+  const [selectedImage, setSelectedImage] = useState('')
+  const [imgTitle, setImgTitle] = useState('')
 
   const handleClick = (value) => {
-    setCurrValue(value);
-    setBottons(true);
-  };
+    setCurrValue(value)
+    setBottons(true)
+  }
 
   const handleMouseOver = (value) => {
-    setHoverValue(value);
-  };
+    setHoverValue(value)
+  }
 
   const handleMouseLeave = () => {
-    setHoverValue(undefined);
-  };
+    setHoverValue(undefined)
+  }
 
   const addCart = (e) => {
-    const id = props.match.params.id;
+    const id = props.match.params.id
     const data = {
       product: [String(id)],
       quantity: [String(count)],
       color: [String(imgTitle)],
-    };
+    }
     productService
       .addCartId(data)
       .then((response) => {
-        setCount(count);
-        user.getCartData();
-        user.getImageLogo();
+        setCount(count)
+        user.getCartData()
+        user.getImageLogo()
       })
       .catch((error) => {
-        console.log(error);
-        notifyError();
-      });
-    e.preventDefault();
-  };
+        console.log(error)
+        notifyError()
+      })
+    e.preventDefault()
+  }
 
   const addCardLocal = (e, proId, price, title) => {
-    let data = JSON.parse(localStorage.getItem("order"));
-    let productId = product.productOrder.map((i) => i.product);
+    let data = JSON.parse(localStorage.getItem('order'))
+    let productId = product.productOrder.map((i) => i.product)
     if (data === null) {
-      data = [];
+      data = []
     }
     data.push({
       id: proId,
@@ -145,95 +145,95 @@ const Product = observer((props) => {
       color: imgTitle,
       title: title,
       price: price,
-    });
-    let found = -1;
+    })
+    let found = -1
     productId.map((item) => {
       if (item === proId) {
-        found = item;
+        found = item
       }
-    });
+    })
     if (found === -1) {
-      localStorage.setItem("order", JSON.stringify(data));
+      localStorage.setItem('order', JSON.stringify(data))
       product.productOrder.push({
         product: proId,
         quantity: count,
         price: price,
         color: imgTitle,
         title: title,
-      });
+      })
     } else {
-      toast.warning("Этот товар есть в корзине");
-      found = -1;
+      toast.warning('Этот товар есть в корзине')
+      found = -1
     }
-    e.preventDefault();
-    user.getImageLogo();
-  };
+    e.preventDefault()
+    user.getImageLogo()
+  }
 
   const sendRating = (event) => {
-    const id = props.match.params.id;
+    const id = props.match.params.id
     const data = {
       product: id,
       rating: currValue,
       text: text,
-    };
+    }
     productService
       .sendRating(data)
       .then((response) => {
-        product.getData(id);
-        setCurrValue(0);
-        setText("");
-        setBottons(false);
+        product.getData(id)
+        setCurrValue(0)
+        setText('')
+        setBottons(false)
       })
       .catch((error) => {
-        console.log(error);
-        notifyError();
-      });
-    event.preventDefault();
-  };
+        console.log(error)
+        notifyError()
+      })
+    event.preventDefault()
+  }
 
-  const category = JSON.parse(localStorage.getItem("category"));
-  const viewProduct = JSON.parse(localStorage.getItem("viewProduct"));
+  const category = JSON.parse(localStorage.getItem('category'))
+  const viewProduct = JSON.parse(localStorage.getItem('viewProduct'))
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    mobile_menu();
+    window.scrollTo(0, 0)
+    mobile_menu()
     if (id) {
       history.push({
         search: `id=${id}`,
-      });
+      })
     } else {
       history.push({
         search: `id=${a}`,
-      });
+      })
     }
-    user.getWishlistData();
-    user.getReviews(id);
-    user.getUserData();
+    user.getWishlistData()
+    user.getReviews(id)
+    user.getUserData()
     product.getData(a).then(() => {
-      setLeftImages(product?.imagesUser[0]?.images ?? []);
-      setSelectedImage(product?.imagesUser[0]?.images[0] || "");
-      setImgTitle(product?.imagesUser[0]?.title || "");
-      setCount(product.size?.length || "");
-    });
-  }, [a]);
+      setLeftImages(product?.imagesUser[0]?.images ?? [])
+      setSelectedImage(product?.imagesUser[0]?.images[0] || '')
+      setImgTitle(product?.imagesUser[0]?.title || '')
+      setCount(product.size?.length || '')
+    })
+  }, [a])
 
-  const shareUrl = `${process.env.REACT_APP_BASE_URL}/product?id=${a}`;
+  const shareUrl = `${process.env.REACT_APP_BASE_URL}/product?id=${a}`
   return (
-    <div class="page-wrapper">
-      <main className="main">
+    <div class='page-wrapper'>
+      <main className='main'>
         <nav
-          aria-label="breadcrumb"
-          className="breadcrumb-nav border-0 mb-0 mt-3   "
+          aria-label='breadcrumb'
+          className='breadcrumb-nav border-0 mb-0 mt-3   '
         >
-          <div className="container d-flex align-items-center ">
-            <ul className="breadcrumb">
-              <li className="breadcrumb-item">
+          <div className='container d-flex align-items-center '>
+            <ul className='breadcrumb'>
+              <li className='breadcrumb-item'>
                 <Link
                   to={`${CATALOG_ROUTE}?products=products`}
-                  className="item"
+                  className='item'
                   style={{
-                    marginTop: "-3px",
-                    color: "#777",
+                    marginTop: '-3px',
+                    color: '#777',
                   }}
                 >
                   Каталог
@@ -242,103 +242,104 @@ const Product = observer((props) => {
 
               <>
                 {category ? (
-                  <li className="breadcrumb-item " aria-current="page">
+                  <li className='breadcrumb-item ' aria-current='page'>
                     <Link
-                      style={{ color: "#777" }}
+                      style={{ color: '#777' }}
                       to={`${CATALOG_ROUTE}?products=${
                         props.location.title
                           ? props.location.title
                           : props.location.produs
                       }`}
                     >
-                      {" "}
+                      {' '}
                       {category}
                     </Link>
                   </li>
                 ) : (
-                  ""
+                  ''
                 )}
                 {viewProduct ? (
-                  <li className="breadcrumb-item " aria-current="page">
+                  <li className='breadcrumb-item ' aria-current='page'>
                     <Link
-                      style={{ color: "#777" }}
+                      style={{ color: '#777' }}
                       to={`${CATALOG_ROUTE}?products=${
                         props.location.title
                           ? props.location.title
                           : props.location.produs
                       }`}
                     >
-                      {" "}
+                      {' '}
                       {viewProduct}
                     </Link>
                   </li>
                 ) : (
-                  ""
+                  ''
                 )}
               </>
               <li
-                className="breadcrumb-item "
-                style={{ color: "#777" }}
-                aria-current="page"
+                className='breadcrumb-item '
+                style={{ color: '#777' }}
+                aria-current='page'
               >
-                {" "}
+                {' '}
                 {product.product.title}
               </li>
             </ul>
 
-            <nav className="product-pager ml-auto" aria-label="Product">
+            <nav className='product-pager ml-auto' aria-label='Product'>
               {/*<RiShareLine style={{color: "#000000", marginLeft: "2px", fontSize: "30px", cursor: "pointer"}} onClick={handleShow}*/}
               {/*             />*/}
             </nav>
             <div
-              style={{ borderTop: "none" }}
-              className="product-details-footer d-flex"
+              style={{ borderTop: 'none' }}
+              className='product-details-footer d-flex'
             >
-              <div className="social-icons social-icons-sm">
+              <div className='social-icons social-icons-sm'>
                 <FacebookShareButton url={shareUrl}>
                   <a
-                    style={{ fontSize: "20px" }}
-                    href=""
-                    className="social-icon social-facebook"
-                    title="Facebook"
-                    target="_blank"
+                    style={{ fontSize: '20px' }}
+                    href=''
+                    className='social-icon social-facebook'
+                    title='Facebook'
+                    target='_blank'
                   >
-                    <i className="icon-facebook-f"></i>
+                    <i className='icon-facebook-f'></i>
                   </a>
                 </FacebookShareButton>
                 <VKShareButton url={shareUrl}>
-                  <a href="" className="social-icon ml-1">
-                    <img style={{ width: "20px" }} src={vk} />
+                  <a href='' className='social-icon ml-1'>
+                    <img style={{ width: '20px' }} src={vk} />
                   </a>
                 </VKShareButton>
                 <a
-                  style={{ fontSize: "20px" }}
-                  href="https://www.instagram.com/simacompany_kg/"
-                  className="social-icon social-instagram ml-1"
-                  title="Instagram"
-                  target="_blank"
+                  style={{ fontSize: '20px' }}
+                  href='https://www.instagram.com/simastore.ru/'
+                  className='social-icon social-instagram ml-1'
+                  title='Instagram'
+                  target='_blank'
+                  rel='noreferrer'
                 >
-                  <i className="icon-instagram"></i>
+                  <i className='icon-instagram'></i>
                 </a>
                 <OKShareButton url={shareUrl}>
                   <a
-                    style={{ fontSize: "20px" }}
-                    href=""
-                    className="social-icon ml-1"
+                    style={{ fontSize: '20px' }}
+                    href=''
+                    className='social-icon ml-1'
                   >
-                    {" "}
-                    <FaOdnoklassnikiSquare style={{ color: "#ee8208" }} />
+                    {' '}
+                    <FaOdnoklassnikiSquare style={{ color: '#ee8208' }} />
                   </a>
                 </OKShareButton>
                 <TwitterShareButton url={shareUrl}>
                   <a
-                    style={{ fontSize: "20px" }}
-                    href=""
-                    className="social-icon social-twitter ml-1"
-                    title="Twitter"
-                    target="_blank"
+                    style={{ fontSize: '20px' }}
+                    href=''
+                    className='social-icon social-twitter ml-1'
+                    title='Twitter'
+                    target='_blank'
                   >
-                    <i className="icon-twitter"></i>
+                    <i className='icon-twitter'></i>
                   </a>
                 </TwitterShareButton>
               </div>
@@ -350,92 +351,95 @@ const Product = observer((props) => {
               animation={true}
             >
               <Modal.Header closeButton>
-                <h3 className="s-title d-flex justify-content-center">
+                <h3 className='s-title d-flex justify-content-center'>
                   Поделиться
                 </h3>
               </Modal.Header>
               <Modal.Body centered={true}>
-                <div className="d-flex justify-content-center">
+                <div className='d-flex justify-content-center'>
                   <a
-                    style={{ fontSize: "25px" }}
-                    href="https://www.facebook.com/profile.php?id=100069533462465"
-                    className="social-icon social-facebook"
-                    title="Facebook"
-                    target="_blank"
+                    style={{ fontSize: '25px' }}
+                    href='https://www.facebook.com/profile.php?id=100069533462465'
+                    className='social-icon social-facebook'
+                    title='Facebook'
+                    target='_blank'
+                    rel='noreferrer'
                   >
-                    <i className="icon-facebook-f"></i>
+                    <i className='icon-facebook-f'></i>
                   </a>
                   <a
-                    style={{ fontSize: "25px" }}
-                    href="https://twitter.com/sima_company"
-                    className="social-icon social-twitter"
-                    title="Twitter"
-                    target="_blank"
+                    style={{ fontSize: '25px' }}
+                    href='https://twitter.com/sima_company'
+                    className='social-icon social-twitter'
+                    title='Twitter'
+                    target='_blank'
+                    rel='noreferrer'
                   >
-                    <i className="icon-twitter"></i>
+                    <i className='icon-twitter'></i>
                   </a>
                   <a
-                    style={{ fontSize: "25px" }}
-                    href="https://www.instagram.com/simacompany_kg/"
-                    className="social-icon social-instagram"
-                    title="Instagram"
-                    target="_blank"
+                    style={{ fontSize: '25px' }}
+                    href='https://www.instagram.com/simacompany_kg/'
+                    className='social-icon social-instagram'
+                    title='Instagram'
+                    target='_blank'
+                    rel='noreferrer'
                   >
-                    <i className="icon-instagram"></i>
+                    <i className='icon-instagram'></i>
                   </a>
                   <a
-                    style={{ fontSize: "25px" }}
-                    href="https://ok.ru/profile/584170543033"
-                    className="social-icon"
+                    style={{ fontSize: '25px' }}
+                    href='https://ok.ru/profile/584170543033'
+                    className='social-icon'
                   >
-                    {" "}
-                    <FaOdnoklassnikiSquare style={{ color: "#ee8208" }} />
+                    {' '}
+                    <FaOdnoklassnikiSquare style={{ color: '#ee8208' }} />
                   </a>
-                  <a href="https://vk.com/simastyle" className="social-icon">
-                    <img style={{ width: "25px" }} src={vk} />
+                  <a href='https://vk.com/simastyle' className='social-icon'>
+                    <img style={{ width: '25px' }} src={vk} />
                   </a>
                 </div>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant='secondary' onClick={handleClose}>
                   Закрывать
                 </Button>
               </Modal.Footer>
             </Modal>
           </div>
         </nav>
-        <div className="container">
-          <div className="product-details-top">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="product-gallery product-gallery-vertical">
-                  <div className="row">
-                    <figure className="product-main-image">
+        <div className='container'>
+          <div className='product-details-top'>
+            <div className='row'>
+              <div className='col-md-6'>
+                <div className='product-gallery product-gallery-vertical'>
+                  <div className='row'>
+                    <figure className='product-main-image'>
                       <img
                         src={process.env.REACT_APP_BASE_URL + selectedImage}
-                        alt="product image"
+                        alt='product image'
                       />
                     </figure>
 
                     <div
-                      id="product-zoom-gallery"
-                      className="product-image-gallery"
+                      id='product-zoom-gallery'
+                      className='product-image-gallery'
                     >
                       {leftImages.map((img, index) => (
                         <a
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: 'pointer' }}
                           onMouseOver={() => setSelectedImage(img)}
                           onClick={() => {
-                            setSelectedImage(`${img}`);
+                            setSelectedImage(`${img}`)
                           }}
-                          className="product-gallery-item active"
+                          className='product-gallery-item active'
                           key={index}
                           data-image={process.env.REACT_APP_BASE_URL + img}
                           data-zoom-image={process.env.REACT_APP_BASE_URL + img}
                         >
                           <img
                             src={process.env.REACT_APP_BASE_URL + img}
-                            alt="product side"
+                            alt='product side'
                           />
                         </a>
                       ))}
@@ -444,74 +448,74 @@ const Product = observer((props) => {
                 </div>
               </div>
 
-              <div className="col-md-6">
-                <div className="product-details">
-                  <h1 style={{ color: "#000000" }} className="product-title">
+              <div className='col-md-6'>
+                <div className='product-details'>
+                  <h1 style={{ color: '#000000' }} className='product-title'>
                     {product.product.title}
                   </h1>
                   <p>Артикул: {product.product.articul}</p>
                   {product.product.percent ? (
                     <div
-                      class="product-price"
-                      style={{ color: "rgb(238, 162, 135)" }}
+                      class='product-price'
+                      style={{ color: 'rgb(238, 162, 135)' }}
                     >
-                      <span className="new-price">
+                      <span className='new-price'>
                         {product.product.discount_price} ₽
                       </span>
-                      <span className="old-price">{`${product.product.price}  ₽`}</span>
+                      <span className='old-price'>{`${product.product.price}  ₽`}</span>
                     </div>
                   ) : (
-                    <div className="product-price">{`${product.product.price}  ₽`}</div>
+                    <div className='product-price'>{`${product.product.price}  ₽`}</div>
                   )}
                   <label
                     style={{
-                      color: "#9393a5",
-                      fontSize: "14px",
-                      fontWeight: "300",
-                      lineHeight: "20px",
-                      letterSpacing: "-.15px",
+                      color: '#9393a5',
+                      fontSize: '14px',
+                      fontWeight: '300',
+                      lineHeight: '20px',
+                      letterSpacing: '-.15px',
                     }}
                   >
-                    Цвет: <span style={{ color: "#000" }}>{imgTitle}</span>
+                    Цвет: <span style={{ color: '#000' }}>{imgTitle}</span>
                   </label>
-                  <div className="details-filter-row details-row-size">
+                  <div className='details-filter-row details-row-size'>
                     {product.imagesUser.map((img, index) => (
                       <div
                         key={index}
-                        class="testimonial testimonial-icon text-center "
+                        class='testimonial testimonial-icon text-center '
                       >
                         <a
                           onClick={() => {
-                            const d = [...img.images];
-                            setLeftImages(d);
-                            setSelectedImage(d[0]);
-                            setImgTitle([img.title]);
+                            const d = [...img.images]
+                            setLeftImages(d)
+                            setSelectedImage(d[0])
+                            setImgTitle([img.title])
                           }}
-                          className="active mt-3 mb-3"
+                          className='active mt-3 mb-3'
                         >
                           <img
                             style={{
-                              width: "100px",
-                              height: "100px",
-                              marginLeft: "10px",
-                              cursor: "pointer",
+                              width: '100px',
+                              height: '100px',
+                              marginLeft: '10px',
+                              cursor: 'pointer',
                             }}
                             src={`${process.env.REACT_APP_BASE_URL}${img.images[0]}`}
-                            alt="product desc"
+                            alt='product desc'
                           />
                         </a>
                       </div>
                     ))}
                   </div>
 
-                  <div className="details-filter-row details-row-size">
-                    <p style={{ fontSize: "16px", color: "#000000" }}>
-                      Размер:{" "}
+                  <div className='details-filter-row details-row-size'>
+                    <p style={{ fontSize: '16px', color: '#000000' }}>
+                      Размер:{' '}
                       <span
-                        style={{ cursor: "pointer", color: "#c96" }}
+                        style={{ cursor: 'pointer', color: '#c96' }}
                         onClick={handleShowRaz}
                       >
-                        {" "}
+                        {' '}
                         Таблица размеров
                       </span>
                     </p>
@@ -520,61 +524,61 @@ const Product = observer((props) => {
                       onHide={handleCloseRaz}
                       centered={true}
                       animation={true}
-                      size="lg"
-                      aria-labelledby="contained-modal-title-vcenter"
+                      size='lg'
+                      aria-labelledby='contained-modal-title-vcenter'
                     >
                       <Modal.Header closeButton>
                         <h3>Таблица размеров</h3>
                       </Modal.Header>
 
-                      <table style={{ margin: "20px" }}>
+                      <table style={{ margin: '20px' }}>
                         <tr
                           style={{
-                            backgroundColor: "#f6f6f6",
-                            padding: "10px",
-                            margin: "10px",
+                            backgroundColor: '#f6f6f6',
+                            padding: '10px',
+                            margin: '10px',
                           }}
                         >
                           <th>Российский размер</th>
                           <th>Размер производителя</th>
                           <th>Рост, см</th>
                         </tr>
-                        <tr className="table-tr">
+                        <tr className='table-tr'>
                           <td>110-116</td>
                           <td>110</td>
                           <td>110-116</td>
                         </tr>
-                        <tr className="table-tr">
+                        <tr className='table-tr'>
                           <td>116-122</td>
                           <td>116</td>
                           <td>116-122</td>
                         </tr>
-                        <tr className="table-tr">
+                        <tr className='table-tr'>
                           <td>122-128</td>
                           <td>122</td>
                           <td>122-128</td>
                         </tr>
-                        <tr className="table-tr">
+                        <tr className='table-tr'>
                           <td>128-134</td>
                           <td>128</td>
                           <td>128-134</td>
                         </tr>
-                        <tr className="table-tr">
+                        <tr className='table-tr'>
                           <td>134-140</td>
                           <td>134</td>
                           <td>134-140</td>
                         </tr>
-                        <tr className="table-tr">
+                        <tr className='table-tr'>
                           <td>140-146</td>
                           <td>140</td>
                           <td>140-146</td>
                         </tr>
-                        <tr className="table-tr">
+                        <tr className='table-tr'>
                           <td>146-152</td>
                           <td>146</td>
                           <td>146-152</td>
                         </tr>
-                        <tr className="table-tr">
+                        <tr className='table-tr'>
                           <td>152-158</td>
                           <td>152</td>
                           <td>152-158</td>
@@ -583,28 +587,28 @@ const Product = observer((props) => {
                     </Modal>
                   </div>
 
-                  <div className="d-flex">
+                  <div className='d-flex'>
                     {product.product?.size?.map((size) => (
-                      <div key={size} className="size ">
+                      <div key={size} className='size '>
                         {size}
                       </div>
                     ))}
                   </div>
                   <>
-                    <div className="details-filter-row details-row-size mt-1">
-                      <div className="count ">
+                    <div className='details-filter-row details-row-size mt-1'>
+                      <div className='count '>
                         <button
                           disabled={
                             isNaN(count) ||
                             count - product.product.size.length <= 0
                           }
                           style={{
-                            width: "30px",
-                            cursor: "pointer",
-                            fontSize: "20px",
-                            marginLeft: "7px",
-                            backgroundColor: "white",
-                            border: "none",
+                            width: '30px',
+                            cursor: 'pointer',
+                            fontSize: '20px',
+                            marginLeft: '7px',
+                            backgroundColor: 'white',
+                            border: 'none',
                           }}
                           onClick={() =>
                             setCount(count - product.product?.size?.length)
@@ -613,23 +617,23 @@ const Product = observer((props) => {
                           -
                         </button>
                         <span
-                          className="s-title"
+                          className='s-title'
                           style={{
-                            width: "30px",
-                            padding: "2px",
-                            fontSize: "18px",
+                            width: '30px',
+                            padding: '2px',
+                            fontSize: '18px',
                           }}
                         >
                           {count}
                         </span>
                         <a
                           style={{
-                            marginTop: "4px",
-                            marginLeft: "7px",
-                            width: "30px",
-                            cursor: "pointer",
-                            fontSize: "20px",
-                            color: "#000000",
+                            marginTop: '4px',
+                            marginLeft: '7px',
+                            width: '30px',
+                            cursor: 'pointer',
+                            fontSize: '20px',
+                            color: '#000000',
                           }}
                           onClick={() =>
                             setCount(count + product.product.size.length)
@@ -640,12 +644,12 @@ const Product = observer((props) => {
                       </div>
                     </div>
 
-                    <div className="product-details-action">
+                    <div className='product-details-action'>
                       {user._user?.username ? (
                         <a
                           onClick={(e) => addCart(e)}
-                          href=""
-                          className="btn-product btn-cart"
+                          href=''
+                          className='btn-product btn-cart'
                         >
                           В Корзину
                         </a>
@@ -660,76 +664,76 @@ const Product = observer((props) => {
                               product.product.title
                             )
                           }
-                          href=""
-                          className="btn-product btn-cart"
+                          href=''
+                          className='btn-product btn-cart'
                         >
                           В Корзину
                         </a>
                       )}
 
-                      <div className="details-action-wrapper">
+                      <div className='details-action-wrapper'>
                         {user._user?.username ? (
                           product.product.is_favorite ? (
                             <FcLike
                               onClick={deleteWish}
-                              style={{ fontSize: "30px", cursor: "pointer" }}
+                              style={{ fontSize: '30px', cursor: 'pointer' }}
                             />
                           ) : (
                             <a
-                              style={{ fontSize: "30px" }}
-                              href=""
+                              style={{ fontSize: '30px' }}
+                              href=''
                               onClick={addWishlist}
-                              className="btn-product btn-wishlist"
-                              title="Wishlist"
+                              className='btn-product btn-wishlist'
+                              title='Wishlist'
                             ></a>
                           )
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                     </div>
                   </>
 
-                  <div className="row">
-                    <div className="col-md-12">
-                      <ul className="nav nav-pills" id="tabs-5" role="tablist">
-                        <li className="nav-item">
+                  <div className='row'>
+                    <div className='col-md-12'>
+                      <ul className='nav nav-pills' id='tabs-5' role='tablist'>
+                        <li className='nav-item'>
                           <a
-                            className="nav-link active s-title"
-                            id="tab-17-tab"
-                            data-toggle="tab"
-                            href="#tab-17"
-                            role="tab"
-                            aria-controls="tab-17"
-                            aria-selected="true"
+                            className='nav-link active s-title'
+                            id='tab-17-tab'
+                            data-toggle='tab'
+                            href='#tab-17'
+                            role='tab'
+                            aria-controls='tab-17'
+                            aria-selected='true'
                           >
                             Описание
                           </a>
                         </li>
-                        <li className="nav-item">
+                        <li className='nav-item'>
                           <a
-                            className="nav-link s-title"
-                            id="tab-19-tab"
-                            data-toggle="tab"
-                            href="#tab-19"
-                            role="tab"
-                            aria-controls="tab-19"
-                            aria-selected="false"
+                            className='nav-link s-title'
+                            id='tab-19-tab'
+                            data-toggle='tab'
+                            href='#tab-19'
+                            role='tab'
+                            aria-controls='tab-19'
+                            aria-selected='false'
                           >
                             Отзывы ({product.reviews.length})
                           </a>
                         </li>
                       </ul>
-                      <div className="tab-content" id="tab-content-5">
+                      <div className='tab-content' id='tab-content-5'>
                         <div
-                          className="tab-pane fade show active"
-                          id="tab-17"
-                          role="tabpanel"
-                          aria-labelledby="tab-17-tab"
+                          className='tab-pane fade show active'
+                          id='tab-17'
+                          role='tabpanel'
+                          aria-labelledby='tab-17-tab'
                         >
-                          <p className="description s-title">
+                          <p className='description s-title'>
                             <p>
-                              Размер: {product.product.size[0]} -{" "}
+                              Размер: {product.product.size[0]} -{' '}
                               {
                                 product.product.size[
                                   product.product.size.length - 1
@@ -737,42 +741,42 @@ const Product = observer((props) => {
                               }
                             </p>
                           </p>
-                          <p className=" s-title">
+                          <p className=' s-title'>
                             <p>Ткань: {product.product.cloth} </p>
                           </p>
-                          <p className="description s-title">
+                          <p className='description s-title'>
                             <p>Описание: {product.product.description}</p>
                           </p>
                         </div>
                         <div
-                          className="tab-pane fade s-title"
-                          id="tab-18"
-                          role="tabpanel"
-                          aria-labelledby="tab-18-tab"
+                          className='tab-pane fade s-title'
+                          id='tab-18'
+                          role='tabpanel'
+                          aria-labelledby='tab-18-tab'
                         ></div>
                         <div
-                          className="tab-pane fade"
-                          id="tab-19"
-                          role="tabpanel"
-                          aria-labelledby="tab-19-tab"
+                          className='tab-pane fade'
+                          id='tab-19'
+                          role='tabpanel'
+                          aria-labelledby='tab-19-tab'
                         >
-                          <h5 className="s-title">
-                            Будту первым, кто оставил отзыв на{" "}
+                          <h5 className='s-title'>
+                            Будту первым, кто оставил отзыв на{' '}
                             {product.product.title}
                           </h5>
-                          <div class="reviews">
+                          <div class='reviews'>
                             {product.reviews.map((r, index) => (
                               <div
-                                style={{ marginTop: "10px" }}
+                                style={{ marginTop: '10px' }}
                                 key={index}
-                                class="review"
+                                class='review'
                               >
-                                <div class="row no-gutters">
-                                  <div class="col-auto">
+                                <div class='row no-gutters'>
+                                  <div class='col-auto'>
                                     <h4>
                                       <a>{r.author}</a>
                                     </h4>
-                                    <div class="ratings-container">
+                                    <div class='ratings-container'>
                                       {stars.map((_, index) => {
                                         return (
                                           <FaStar
@@ -787,16 +791,16 @@ const Product = observer((props) => {
                                                 : colors.grey
                                             }
                                           />
-                                        );
+                                        )
                                       })}
                                     </div>
-                                    <span class="review-date"></span>
+                                    <span class='review-date'></span>
                                   </div>
-                                  <div class="col">
+                                  <div class='col'>
                                     <h4></h4>
 
-                                    <div class="review-content">
-                                      <p style={{ fontSize: "16px" }}>
+                                    <div class='review-content'>
+                                      <p style={{ fontSize: '16px' }}>
                                         {r.text}
                                       </p>
                                     </div>
@@ -805,7 +809,7 @@ const Product = observer((props) => {
                               </div>
                             ))}
                           </div>
-                          <div className="ratings-container justify-content-between mt-4">
+                          <div className='ratings-container justify-content-between mt-4'>
                             <p>ВАШ ОТЗЫВ *</p>
                             <div>
                               {stars.map((_, index) => {
@@ -815,7 +819,7 @@ const Product = observer((props) => {
                                     size={18}
                                     style={{
                                       marginRight: 8,
-                                      cursor: "pointer",
+                                      cursor: 'pointer',
                                     }}
                                     color={
                                       (hoverValue || currValue) > index
@@ -832,22 +836,22 @@ const Product = observer((props) => {
                                     }
                                     value={currValue}
                                   />
-                                );
+                                )
                               })}
                             </div>
                           </div>
                           <textarea
-                            className="form-control"
+                            className='form-control'
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                           ></textarea>
 
-                          <div className="d-grid gap-2">
-                            <div className="dropdown">
+                          <div className='d-grid gap-2'>
+                            <div className='dropdown'>
                               <button
-                                style={{ fontSize: "18px" }}
+                                style={{ fontSize: '18px' }}
                                 onClick={(e) => sendRating(e)}
-                                className="btn btn-block btn-outline-primary-2 voiti"
+                                className='btn btn-block btn-outline-primary-2 voiti'
                               >
                                 Отправить
                               </button>
@@ -865,11 +869,11 @@ const Product = observer((props) => {
           </div>
         </div>
       </main>
-      <button id="scroll-top" title="Back to Top">
-        <i className="icon-arrow-up"></i>
+      <button id='scroll-top' title='Back to Top'>
+        <i className='icon-arrow-up'></i>
       </button>
     </div>
-  );
-});
+  )
+})
 
-export default Product;
+export default Product

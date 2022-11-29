@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import {
   ABOUT_ROUTE,
   PURCHASES_ROUTE,
@@ -13,216 +13,216 @@ import {
   LOGIN_ROUTE,
   MYACOUNT_ROUTE,
   CATALOG_ROUTE,
-} from "../utils/Const";
-import "../App.css";
-import { observer } from "mobx-react-lite";
-import { Context } from "../index";
-import { toast } from "react-toastify";
-import mobile_menu from "../Http/mobile_menu";
-import what from "../assets/WhatsApp.png";
+} from '../utils/Const'
+import '../App.css'
+import { observer } from 'mobx-react-lite'
+import { Context } from '../index'
+import { toast } from 'react-toastify'
+import mobile_menu from '../Http/mobile_menu'
+import what from '../assets/WhatsApp.png'
 
 const Header = observer(() => {
-  const { user } = useContext(Context);
-  const { product } = useContext(Context);
-  const [input, setInput] = useState("");
+  const { user } = useContext(Context)
+  const { product } = useContext(Context)
+  const [input, setInput] = useState('')
 
-  let sum = 0;
-  let data = JSON.parse(localStorage.getItem("order"));
-  let wish = JSON.parse(localStorage.getItem("wishlist"));
-  let authToken = JSON.parse(localStorage.getItem("value"));
+  let sum = 0
+  let data = JSON.parse(localStorage.getItem('order'))
+  let wish = JSON.parse(localStorage.getItem('wishlist'))
+  let authToken = JSON.parse(localStorage.getItem('value'))
 
   const search = (e) => {
-    window.location.href = `/catalog?name=${encodeURI(input)}`;
-    product.searchFilter(encodeURI(input));
-    e.preventDefault();
-  };
+    window.location.href = `/catalog?name=${encodeURI(input)}`
+    product.searchFilter(encodeURI(input))
+    e.preventDefault()
+  }
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      search();
-      e.preventDefault();
+    if (e.key === 'Enter') {
+      search()
+      e.preventDefault()
     }
-  };
+  }
 
   const errorClick = () => {
-    toast.warning("Минимальный заказ 5 размерных рядов");
-    alert("Минимальный заказ 5 размерных рядов");
-  };
+    toast.warning('Минимальный заказ 5 размерных рядов')
+    alert('Минимальный заказ 5 размерных рядов')
+  }
 
   useEffect(() => {
-    mobile_menu();
+    mobile_menu()
     if (authToken) {
-      user.getUserData();
-      user?.getCartData(authToken.user.id);
-      user.getWishlistData();
+      user.getUserData()
+      user?.getCartData(authToken.user.id)
+      user.getWishlistData()
     }
     user.getImageLogo().then(() => {
       const scripts = [
-        "/assets/js/jquery.elevateZoom.min.js",
-        "/assets/js/bootstrap-input-spinner.js",
-        "/assets/js/jquery.magnific-popup.min.js",
-        "/assets/js/main.js",
-        "/assets/js/bootstrap-input-spinner.js",
-        "/assets/js/owl.carousel.min.js",
-        "/assets/js/superfish.min.js",
-        "/assets/js/jquery.waypoints.min.js",
-        "/assets/js/jquery.hoverIntent.min.js",
-        "/assets/js/bootstrap.bundle.min.js",
-        "/assets/js/jquery.min.js",
-      ];
+        '/assets/js/jquery.elevateZoom.min.js',
+        '/assets/js/bootstrap-input-spinner.js',
+        '/assets/js/jquery.magnific-popup.min.js',
+        '/assets/js/main.js',
+        '/assets/js/bootstrap-input-spinner.js',
+        '/assets/js/owl.carousel.min.js',
+        '/assets/js/superfish.min.js',
+        '/assets/js/jquery.waypoints.min.js',
+        '/assets/js/jquery.hoverIntent.min.js',
+        '/assets/js/bootstrap.bundle.min.js',
+        '/assets/js/jquery.min.js',
+      ]
       scripts.forEach((i) => {
-        const s = document.createElement("script");
-        s.src = i;
-        document.body.appendChild(s);
-      });
-    });
-    product.getSubcategory();
-    const search = document.getElementById("demo");
+        const s = document.createElement('script')
+        s.src = i
+        document.body.appendChild(s)
+      })
+    })
+    product.getSubcategory()
+    const search = document.getElementById('demo')
 
     const outsideClick = function (e) {
-      if (search === e.target.closest("#demo")) {
-        user.setRoute(true);
-      } else user.setRoute(false);
-    };
-    document.addEventListener("click", outsideClick);
+      if (search === e.target.closest('#demo')) {
+        user.setRoute(true)
+      } else user.setRoute(false)
+    }
+    document.addEventListener('click', outsideClick)
     return () => {
-      document.removeEventListener("click", outsideClick);
-    };
-  }, []);
+      document.removeEventListener('click', outsideClick)
+    }
+  }, [])
 
   const handleClick = (event) => {
-    document.body.classList.add("mmenu-active");
-  };
+    document.body.classList.add('mmenu-active')
+  }
 
   return (
-    <div className="page-wrapper">
+    <div className='page-wrapper'>
       <header
         style={{
-          position: "fixed",
-          marginTop: "0px",
-          marginLeft: "0px",
-          zIndex: "999",
-          boxShadow: "0px 0px 36px rgba(0, 0, 0, 0.15)",
+          position: 'fixed',
+          marginTop: '0px',
+          marginLeft: '0px',
+          zIndex: '999',
+          boxShadow: '0px 0px 36px rgba(0, 0, 0, 0.15)',
         }}
-        className="header mt-30"
+        className='header mt-30'
       >
-        <div className="header-bottom ">
-          <div className="container">
-            <div className="header-left">
+        <div className='header-bottom '>
+          <div className='container'>
+            <div className='header-left'>
               <button
                 onClick={() => handleClick()}
-                className="mobile-menu-toggler"
+                className='mobile-menu-toggler'
               >
-                <span className="sr-only">Toggle mobile menu</span>
-                <i className="icon-bars"></i>
+                <span className='sr-only'>Toggle mobile menu</span>
+                <i className='icon-bars'></i>
               </button>
               {user.logo.map((img) => (
                 <NavLink
                   exact
                   to={HOME_ROUTE}
                   innerRef={(node) =>
-                    node?.addEventListener("click", () =>
-                      window.scrollTo({ top: "0px" })
+                    node?.addEventListener('click', () =>
+                      window.scrollTo({ top: '0px' })
                     )
                   }
                 >
-                  <img className="logo1" src={img.image} />
+                  <img className='logo1' src={img.image} />
                   {/*<h1 className="sima-logo ">SIMA</h1>*/}
                 </NavLink>
               ))}
             </div>
-            <div className="header-center">
-              <nav className="main-nav">
-                <ul className="menu sf-arrows  ">
-                  <li className="megamenu-container ">
+            <div className='header-center'>
+              <nav className='main-nav'>
+                <ul className='menu sf-arrows  '>
+                  <li className='megamenu-container '>
                     <NavLink
                       exact
-                      className="sf-with"
+                      className='sf-with'
                       to={HOME_ROUTE}
                       innerRef={(node) =>
-                        node?.addEventListener("click", () =>
-                          window.scrollTo({ top: "0px" })
+                        node?.addEventListener('click', () =>
+                          window.scrollTo({ top: '0px' })
                         )
                       }
                     >
-                      {" "}
+                      {' '}
                       <a
-                        style={{ fontSize: "20px", color: "#333" }}
-                        className="sf-with-ul"
+                        style={{ fontSize: '20px', color: '#333' }}
+                        className='sf-with-ul'
                       >
                         Главная
                       </a>
                     </NavLink>
                   </li>
-                  <li className="megamenu-container ">
+                  <li className='megamenu-container '>
                     <Link
                       onClick={(e) => product.getActualProducts(e)}
-                      className="sf-with"
+                      className='sf-with'
                       to={`${CATALOG_ROUTE}`}
                       innerRef={(node) =>
-                        node?.addEventListener("click", () =>
-                          window.scrollTo({ top: "0px" })
+                        node?.addEventListener('click', () =>
+                          window.scrollTo({ top: '0px' })
                         )
                       }
                     >
                       <a
-                        style={{ fontSize: "20px", color: "#333" }}
-                        className="sf-with-ul"
+                        style={{ fontSize: '20px', color: '#333' }}
+                        className='sf-with-ul'
                       >
-                        Каталог{" "}
+                        Каталог{' '}
                       </a>
                     </Link>
                   </li>
-                  <li className="megamenu-container">
+                  <li className='megamenu-container'>
                     <NavLink
                       exact
-                      className="sf-with"
+                      className='sf-with'
                       to={NEWS_ROUTE}
                       innerRef={(node) =>
-                        node?.addEventListener("click", () =>
-                          window.scrollTo({ top: "0px" })
+                        node?.addEventListener('click', () =>
+                          window.scrollTo({ top: '0px' })
                         )
                       }
                     >
                       <a
-                        style={{ fontSize: "18px", color: "#333" }}
-                        className="sf-with-ul"
+                        style={{ fontSize: '18px', color: '#333' }}
+                        className='sf-with-ul'
                       >
                         Новости
                       </a>
                     </NavLink>
                   </li>
-                  <li className="megamenu-container ">
+                  <li className='megamenu-container '>
                     <a
-                      style={{ fontSize: "20px", cursor: "pointer" }}
-                      className="sf-with-ul"
+                      style={{ fontSize: '20px', cursor: 'pointer' }}
+                      className='sf-with-ul'
                     >
                       Сотрудничество
                     </a>
                     <ul
-                      className="menu sf-arrows "
+                      className='menu sf-arrows '
                       style={{
-                        marginLeft: "570px",
-                        marginTop: "-10px",
-                        color: "white",
-                        width: "40px",
+                        marginLeft: '570px',
+                        marginTop: '-10px',
+                        color: 'white',
+                        width: '40px',
                       }}
                     >
                       <Link
                         to={ABOUT_ROUTE}
                         innerRef={(node) =>
-                          node?.addEventListener("click", () =>
-                            window.scrollTo({ top: "0px" })
+                          node?.addEventListener('click', () =>
+                            window.scrollTo({ top: '0px' })
                           )
                         }
                       >
-                        <li className="megamenu-container ">
+                        <li className='megamenu-container '>
                           <a
-                            className="sf-with  Uslovia"
+                            className='sf-with  Uslovia'
                             style={{
-                              cursor: "pointer",
-                              fontSize: "16px",
-                              color: "#333",
+                              cursor: 'pointer',
+                              fontSize: '16px',
+                              color: '#333',
                             }}
                           >
                             О нас
@@ -232,18 +232,18 @@ const Header = observer(() => {
                       <Link
                         to={CONTACT_ROUTE}
                         innerRef={(node) =>
-                          node?.addEventListener("click", () =>
-                            window.scrollTo({ top: "0px" })
+                          node?.addEventListener('click', () =>
+                            window.scrollTo({ top: '0px' })
                           )
                         }
                       >
-                        <li className="megamenu-container ">
+                        <li className='megamenu-container '>
                           <a
-                            className="sf-with  Uslovia"
+                            className='sf-with  Uslovia'
                             style={{
-                              cursor: "pointer",
-                              fontSize: "16px",
-                              color: "#333",
+                              cursor: 'pointer',
+                              fontSize: '16px',
+                              color: '#333',
                             }}
                           >
                             Контакты
@@ -253,18 +253,18 @@ const Header = observer(() => {
                       <Link
                         to={PURCHASES_ROUTE}
                         innerRef={(node) =>
-                          node?.addEventListener("click", () =>
-                            window.scrollTo({ top: "0px" })
+                          node?.addEventListener('click', () =>
+                            window.scrollTo({ top: '0px' })
                           )
                         }
                       >
-                        <li className="megamenu-container ">
+                        <li className='megamenu-container '>
                           <a
-                            className="sf-with Uslovia"
+                            className='sf-with Uslovia'
                             style={{
-                              cursor: "pointer",
-                              fontSize: "16px",
-                              color: "#333",
+                              cursor: 'pointer',
+                              fontSize: '16px',
+                              color: '#333',
                             }}
                           >
                             Условия покупки
@@ -274,18 +274,18 @@ const Header = observer(() => {
                       <Link
                         to={DELIVERY_ROUTE}
                         innerRef={(node) =>
-                          node?.addEventListener("click", () =>
-                            window.scrollTo({ top: "0px" })
+                          node?.addEventListener('click', () =>
+                            window.scrollTo({ top: '0px' })
                           )
                         }
                       >
-                        <li className="megamenu-container ">
+                        <li className='megamenu-container '>
                           <a
-                            className="sf-with  Uslovia"
+                            className='sf-with  Uslovia'
                             style={{
-                              cursor: "pointer",
-                              fontSize: "16px",
-                              color: "#333",
+                              cursor: 'pointer',
+                              fontSize: '16px',
+                              color: '#333',
                             }}
                           >
                             Условия доставки
@@ -298,31 +298,31 @@ const Header = observer(() => {
               </nav>
             </div>
 
-            <div className="divInput"></div>
+            <div className='divInput'></div>
 
-            <div className="header-right">
+            <div className='header-right'>
               <div
-                id="demo"
-                className={user.isRoute ? "search-box showed" : "search-box"}
+                id='demo'
+                className={user.isRoute ? 'search-box showed' : 'search-box'}
               >
                 <input
-                  className=""
-                  type="text"
+                  className=''
+                  type='text'
                   onKeyDown={handleKeyDown}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Search in..."
+                  placeholder='Search in...'
                 />
-                <div className="search-btn">
+                <div className='search-btn'>
                   {user.isRoute ? (
                     <i
                       onClick={(e) => search(e)}
-                      className="icon-search icons"
+                      className='icon-search icons'
                     ></i>
                   ) : (
                     <i
                       onClick={() => user.setRoute(false)}
-                      className="icon-search icons"
+                      className='icon-search icons'
                     ></i>
                   )}
                 </div>
@@ -332,120 +332,120 @@ const Header = observer(() => {
                 <NavLink
                   to={MYACOUNT_ROUTE}
                   innerRef={(node) =>
-                    node?.addEventListener("click", () =>
-                      window.scrollTo({ top: "0px" })
+                    node?.addEventListener('click', () =>
+                      window.scrollTo({ top: '0px' })
                     )
                   }
                 >
-                  <a style={{ fontSize: "30px" }} data-toggle="modal">
-                    <i style={{ color: "#666666" }} className="icon-user"></i>
+                  <a style={{ fontSize: '30px' }} data-toggle='modal'>
+                    <i style={{ color: '#666666' }} className='icon-user'></i>
                   </a>
                 </NavLink>
               ) : (
                 <NavLink
                   to={LOGIN_ROUTE}
                   innerRef={(node) =>
-                    node?.addEventListener("click", () =>
-                      window.scrollTo({ top: "0px" })
+                    node?.addEventListener('click', () =>
+                      window.scrollTo({ top: '0px' })
                     )
                   }
                 >
-                  <a style={{ fontSize: "30px" }} data-toggle="modal">
-                    <i style={{ color: "#666666" }} className="icon-user"></i>
+                  <a style={{ fontSize: '30px' }} data-toggle='modal'>
+                    <i style={{ color: '#666666' }} className='icon-user'></i>
                   </a>
                 </NavLink>
               )}
               <br />
 
               <NavLink
-                className="wishlist-link"
+                className='wishlist-link'
                 to={WISHLIST_ROUTE}
                 innerRef={(node) =>
-                  node?.addEventListener("click", () =>
-                    window.scrollTo({ top: "0px" })
+                  node?.addEventListener('click', () =>
+                    window.scrollTo({ top: '0px' })
                   )
                 }
               >
-                <i style={{ color: "#666666" }} className="icon-heart-o"></i>
-                <span className="wishlist-count flex justify-content-center align-center">
+                <i style={{ color: '#666666' }} className='icon-heart-o'></i>
+                <span className='wishlist-count flex justify-content-center align-center'>
                   {user._user?.username
-                    ? user.list?.length || "0"
+                    ? user.list?.length || '0'
                     : wish
                     ? wish?.length
-                    : "0"}
+                    : '0'}
                 </span>
               </NavLink>
-              <div className="dropdown cart-dropdown mr-10">
+              <div className='dropdown cart-dropdown mr-10'>
                 <NavLink
                   to={CART_ROUTE}
                   innerRef={(node) =>
-                    node?.addEventListener("click", () =>
-                      window.scrollTo({ top: "0px" })
+                    node?.addEventListener('click', () =>
+                      window.scrollTo({ top: '0px' })
                     )
                   }
                 >
-                  <a className="dropdown-toggle ">
+                  <a className='dropdown-toggle '>
                     <i
-                      style={{ color: "#666666" }}
-                      className="icon-shopping-cart"
+                      style={{ color: '#666666' }}
+                      className='icon-shopping-cart'
                     ></i>
-                    <span className="cart-count">
+                    <span className='cart-count'>
                       {user._user?.username
-                        ? user.items?.length || "0"
+                        ? user.items?.length || '0'
                         : data
                         ? data?.length
-                        : "0"}
+                        : '0'}
                     </span>
                     {user._user?.username
                       ? user.items?.map((item, index) => {
-                          sum = sum + item.product?.price * item.quantity;
+                          sum = sum + item.product?.price * item.quantity
                         })
                       : data?.map((item, index) => {
-                          sum = sum + item.price * item.quantity;
+                          sum = sum + item.price * item.quantity
                         })}
-                    <span className="cart-txt">
-                      {new Intl.NumberFormat("fr-CA", {
-                        style: "decimal",
-                      }).format(sum.toFixed(2))}{" "}
-                       ₽
+                    <span className='cart-txt'>
+                      {new Intl.NumberFormat('fr-CA', {
+                        style: 'decimal',
+                      }).format(sum.toFixed(2))}{' '}
+                      ₽
                     </span>
                   </a>
                 </NavLink>
 
-                <div className="dropdown-menu dropdown-menu-right">
-                  <div style={{ overflowY: "auto", maxHeight: "230px" }}>
-                    <div className="dropdown-cart-products">
+                <div className='dropdown-menu dropdown-menu-right'>
+                  <div style={{ overflowY: 'auto', maxHeight: '230px' }}>
+                    <div className='dropdown-cart-products'>
                       {user._user?.username
                         ? user.items?.map((c, index) => (
-                            <div key={index} className="product">
-                              <div className="product-cart-details">
-                                <h4 className="product-title">
+                            <div key={index} className='product'>
+                              <div className='product-cart-details'>
+                                <h4 className='product-title'>
                                   <a>{c.product?.title}</a>
                                 </h4>
 
                                 <span
                                   style={{
-                                    color: "#666666",
-                                    fontWeight: "normal",
+                                    color: '#666666',
+                                    fontWeight: 'normal',
                                   }}
-                                  className="cart-product-info"
+                                  className='cart-product-info'
                                 >
                                   {c.product?.price}
                                 </span>
                               </div>
 
-                              <figure className="product-image-container">
-                                <a className="product-image">
+                              <figure className='product-image-container'>
+                                <a className='product-image'>
                                   <img
                                     src={`${process.env.REACT_APP_BASE_URL}${c.product?.image.image}`}
-                                    alt="product"
+                                    alt='product'
                                   />
                                 </a>
                               </figure>
                               <a
-                                href=""
-                                className="btn-remove"
-                                title="Remove Product"
+                                href=''
+                                className='btn-remove'
+                                title='Remove Product'
                               ></a>
                             </div>
                           ))
@@ -454,71 +454,71 @@ const Header = observer(() => {
                               data?.map((d) => d.id).includes(i.id)
                             )
                             .map((c, index) => (
-                              <div key={index} className="product">
-                                <div className="product-cart-details">
-                                  <h4 className="product-title">
+                              <div key={index} className='product'>
+                                <div className='product-cart-details'>
+                                  <h4 className='product-title'>
                                     <a>{c.title}</a>
                                   </h4>
 
                                   <span
                                     style={{
-                                      color: "#666666",
-                                      fontWeight: "normal",
+                                      color: '#666666',
+                                      fontWeight: 'normal',
                                     }}
-                                    className="cart-product-info"
+                                    className='cart-product-info'
                                   >
                                     {/*<span className="cart-product-qty">1</span>*/}
-                                    {c.price}  ₽
+                                    {c.price} ₽
                                   </span>
                                 </div>
 
-                                <figure className="product-image-container">
-                                  <a className="product-image">
+                                <figure className='product-image-container'>
+                                  <a className='product-image'>
                                     <img
                                       src={`${process.env.REACT_APP_BASE_URL}${c.image.image}`}
-                                      alt="product"
+                                      alt='product'
                                     />
                                   </a>
                                 </figure>
                                 <a
-                                  href=""
-                                  className="btn-remove"
-                                  title="Remove Product"
+                                  href=''
+                                  className='btn-remove'
+                                  title='Remove Product'
                                 ></a>
                               </div>
                             ))}
                     </div>
                   </div>
 
-                  <div className="dropdown-cart-total">
-                    <span style={{ color: "#666666", fontWeight: "normal" }}>
+                  <div className='dropdown-cart-total'>
+                    <span style={{ color: '#666666', fontWeight: 'normal' }}>
                       ИТОГО:
                     </span>
 
                     <span
-                      style={{ color: "#666666", fontWeight: "normal" }}
-                      className="cart-total-price"
+                      style={{ color: '#666666', fontWeight: 'normal' }}
+                      className='cart-total-price'
                     >
-                      {new Intl.NumberFormat("fr-CA", {
-                        style: "decimal",
-                      }).format(sum?.toFixed(2))}{" "}
-                       ₽
+                      {new Intl.NumberFormat('fr-CA', {
+                        style: 'decimal',
+                      }).format(sum?.toFixed(2))}{' '}
+                      ₽
                     </span>
                   </div>
                   <p
                     style={{
-                      margin: "10px",
-                      fontSize: "14px",
-                      color: "#000000",
+                      margin: '10px',
+                      fontSize: '14px',
+                      color: '#000000',
                     }}
                   >
                     <NavLink to={PURCHASES_ROUTE}>
                       Условия Оформить заказ
                     </NavLink>
                   </p>
-                  <div className="dropdown-cart-action">
+                  <div className='dropdown-cart-action'>
                     <NavLink to={CART_ROUTE}>
-                      <a href="" className="btn btn-outline-primary-2">
+                      <a href='' className='btn btn-outline-primary-2'>
                         Просмотр корзины
                       </a>
                       <br />
@@ -528,12 +528,12 @@ const Header = observer(() => {
                   {user._user?.username ? (
                     user.items?.length >= 5 ? (
                       <NavLink to={CHECKOUT_ROUTE}>
-                        <div className="dropdown-cart-action">
-                          <a href="" className="btn btn-outline-primary-2">
+                        <div className='dropdown-cart-action'>
+                          <a href='' className='btn btn-outline-primary-2'>
                             Оформить заказ
                             <i
-                              style={{ marginRight: "-1px" }}
-                              className="icon-long-arrow-right"
+                              style={{ marginRight: '-1px' }}
+                              className='icon-long-arrow-right'
                             ></i>
                           </a>
                         </div>
@@ -541,44 +541,44 @@ const Header = observer(() => {
                     ) : (
                       <div
                         onClick={errorClick}
-                        className="dropdown-cart-action"
+                        className='dropdown-cart-action'
                       >
                         <a
                           href
-                          style={{ color: "#c96" }}
-                          className="btn btn-outline-primary-2"
+                          style={{ color: '#c96' }}
+                          className='btn btn-outline-primary-2'
                         >
                           Оформить заказ
                           <i
-                            style={{ marginRight: "-1px" }}
-                            className="icon-long-arrow-right"
+                            style={{ marginRight: '-1px' }}
+                            className='icon-long-arrow-right'
                           ></i>
                         </a>
                       </div>
                     )
                   ) : data?.length >= 5 ? (
                     <NavLink to={CHECKOUT_ROUTE}>
-                      <div className="dropdown-cart-action">
-                        <a href="" className="btn btn-outline-primary-2">
+                      <div className='dropdown-cart-action'>
+                        <a href='' className='btn btn-outline-primary-2'>
                           Оформить заказ
                           <i
-                            style={{ marginRight: "-1px" }}
-                            className="icon-long-arrow-right"
+                            style={{ marginRight: '-1px' }}
+                            className='icon-long-arrow-right'
                           ></i>
                         </a>
                       </div>
                     </NavLink>
                   ) : (
-                    <div onClick={errorClick} className="dropdown-cart-action">
+                    <div onClick={errorClick} className='dropdown-cart-action'>
                       <a
                         href
-                        style={{ color: "#c96" }}
-                        className="btn btn-outline-primary-2"
+                        style={{ color: '#c96' }}
+                        className='btn btn-outline-primary-2'
                       >
                         Оформить заказ
                         <i
-                          style={{ marginRight: "-1px" }}
-                          className="icon-long-arrow-right"
+                          style={{ marginRight: '-1px' }}
+                          className='icon-long-arrow-right'
                         ></i>
                       </a>
                     </div>
@@ -590,20 +590,20 @@ const Header = observer(() => {
         </div>
       </header>
       <a
-        href="whatsapp://send?text=Здравствуйте, я хочу стать частью команды Яндекс Такси Олимпик Парк&phone=+996501342534&abid=+996501342534"
-        className="btn-whatsapp-link"
+        href='whatsapp://send?text=Здравствуйте, я хочу стать частью команды Яндекс Такси Олимпик Парк&phone=+996501342534&abid=+996501342534'
+        className='btn-whatsapp-link'
       ></a>
       <Link
-        className="whatsapp"
-        to={{ pathname: "https://wa.me/996709999915" }}
-        target="_blank"
+        className='whatsapp'
+        to={{ pathname: 'https://wa.me/996705555829' }}
+        target='_blank'
       >
         <figure>
-          <img src={what} alt="" />
+          <img src={what} alt='' />
         </figure>
       </Link>
     </div>
-  );
-});
+  )
+})
 
-export default Header;
+export default Header
